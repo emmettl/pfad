@@ -10,6 +10,17 @@ button:focus-visible, select:focus-visible, a:focus-visible, summary:focus-visib
 .study { width: 100vw; height: 100svh; min-height: 520px; position: relative; }
 .study-header { position: absolute; left: 32px; right: 32px; top: 26px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 5; pointer-events: none; }
 .identity, .about { pointer-events: auto; }
+.header-tools { display: flex; flex-direction: column; align-items: flex-end; pointer-events: auto; }
+.sound-control { display: flex; flex-direction: column; align-items: flex-end; font-size: 10px; color: #9fb4a9; }
+.sound-row { display: flex; align-items: center; gap: 10px; }
+.sound-row button { display: flex; align-items: center; gap: 7px; border: 0; padding: 5px 0 5px 8px; font-size: 11px; }
+.sound-row input { width: 72px; height: 38px; margin: 0; appearance: none; background: transparent; cursor: pointer; }
+.sound-row input::-webkit-slider-runnable-track { height: 1px; background: #567564; }
+.sound-row input::-webkit-slider-thumb { appearance: none; width: 10px; height: 10px; margin-top: -4.5px; border-radius: 50%; background: #adcab9; }
+.sound-row input::-moz-range-track { height: 1px; background: #567564; }
+.sound-row input::-moz-range-thumb { width: 10px; height: 10px; border: 0; border-radius: 50%; background: #adcab9; }
+.sound-row input:focus-visible { outline: 2px solid #c7eee0; outline-offset: 4px; }
+.sound-note { min-height: 12px; max-width: 220px; font-size: 9px; color: #7e9b89; }
 .series { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: #849c8f; }
 h1 { font-size: 43px; font-weight: 400; letter-spacing: -.07em; line-height: 1; margin: 12px 0 7px; color: #d3eee2; }
 .identity p { font-size: 11px; color: #98b1a2; margin: 0; }
@@ -69,6 +80,7 @@ footer a { text-decoration: none; }
   .endpoint-control { flex: 1; min-width: 0; gap: 4px; padding-left: 6px; } .endpoint-control select { width: 100%; min-width: 65px; font-size: 11px; }
   .pick-button { padding: 5px; } .search-button { min-width: 58px; padding: 8px; font-size: 11px; }
   button, .endpoint-control select, .replay-controls select { min-height: 44px; }
+  .sound-row input { height: 44px; }
   .map { top: 185px; bottom: 210px; } .map-hint { top: 164px; font-size: 11px; }
   .playback-panel { left: 20px; right: 20px; bottom: 50px; } .search-readout { flex-direction: column; gap: 10px; padding-bottom: 12px; }
   .route-caption { font-size: 13px; gap: 10px; } .replay-controls { gap: 6px; } .replay-time { width: 61px; font-size: 11px; } .replay-time small { display: none; }

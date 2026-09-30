@@ -20,6 +20,8 @@
     "test": "node --test tests/*.test.mjs",
     "test:browser": "playwright test",
     "check": "npm run typecheck && npm run lint && npm run check:boundary && npm test && npm run build && npm run check:budget",
+    "music:compose": "node scripts/music/compose.mjs",
+    "music:render": "node scripts/music/render.mjs",
     "data:acquire": "python3 scripts/data/fetch-source.py",
     "data:measure": "python3 scripts/data/size-proof.py --source .cache/osm/switzerland-260929.osm.pbf --output .cache/sizing && python3 scripts/data/compact-proof.py --directory .cache/sizing",
     "data:browser": "node scripts/data/browser-proof.mjs .cache/sizing"
@@ -35,6 +37,7 @@
   },
   "devDependencies": {
     "@babel/parser": "7.29.8",
+    "@driftbox/rack": "0.1.0",
     "@motionstudies/data": "0.1.0-alpha.30",
     "@playwright/test": "1.63.0",
     "@types/react": "19.2.18",

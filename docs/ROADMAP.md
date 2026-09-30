@@ -38,6 +38,8 @@ promise. The wishlist is a pool of possibilities rather than committed scope.
 - [x] Town and map-point selection, pan/zoom, pause, seeking and replay duration.
 - [x] Reduced-motion behaviour, Chromium and mobile-viewport WebKit checks.
 - [x] Hardware rendering and replay measurements on an M4 Max.
+- [x] First opt-in soundtrack prototype: three original Driftbox sketches,
+  volume control, crossfades and playback independent of the visual replay.
 
 This is a shortest-distance **connectivity study**. Turn restrictions, barriers
 and conditional access are retained as evidence but are not yet enforced.
@@ -130,10 +132,13 @@ accompaniment and a coherent ambient experience.
 - [ ] Compose and audition a provisional repertoire of ambient synth pieces
   using Driftbox. Judge the music in context across varied searches, including
   transitions, quiet passages and extended listening.
+  Three original sketches are implemented; the author's listening review remains.
 - [ ] Implement opt-in music with volume/mute, gentle fades, continuous playback
   across journeys, bounded audio resources and clear pause/hidden-page behaviour.
   [The music brief](MUSIC.md) proposes composition, delivery and lifecycle choices;
   it keeps the eventual repertoire replaceable.
+  The initial manual-study player is implemented; whole-ambient-sequence pause
+  and physical-phone sustained-use measurements remain.
 - [ ] Check reverse seeking and paused frames as carefully as continuous playback.
 
 **Complete when:** a selected set of local, urban, plateau and Alpine searches

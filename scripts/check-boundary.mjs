@@ -11,8 +11,7 @@ if (manifest.workspaces) throw new Error('An edition must consume installed pack
 try { await access('packages'); throw new Error('Shared package source belongs in Motion Studies') }
 catch (error) { if (error.code !== 'ENOENT') throw error }
 const exported = new Map()
-for (const shortName of ['core', 'data', 'three', 'web']) {
-  const name = `@motionstudies/${shortName}`
+for (const name of ['core', 'data', 'three', 'web'].map(shortName => `@motionstudies/${shortName}`).concat('@driftbox/rack')) {
   const version = declared[name]
   if (!/^\d+\.\d+\.\d+(?:-(?:alpha|beta|rc)\.\d+)?$/.test(version ?? '')) throw new Error(`Expected an exact registry version: ${name}`)
   const locked = lock.packages[`node_modules/${name}`]
@@ -20,7 +19,7 @@ for (const shortName of ['core', 'data', 'three', 'web']) {
   const installed = resolve('node_modules', name)
   if ((await lstat(installed)).isSymbolicLink() || !(await realpath(installed)).startsWith(`${await realpath('node_modules')}${sep}`)) throw new Error(`Shared source link: ${name}`)
   const pkg = JSON.parse(await readFile(`${installed}/package.json`, 'utf8'))
-  if (pkg.version !== version || pkg.private !== false) throw new Error(`Installed release mismatch: ${name}`)
+  if (pkg.version !== version || pkg.private === true || (name.startsWith('@motionstudies/') && pkg.private !== false)) throw new Error(`Installed release mismatch: ${name}`)
   exported.set(name, pkg.exports)
 }
 

@@ -1,6 +1,6 @@
 # Music
 
-Design brief · 30 September 2026 · Planned, not implemented
+Design brief · 30 September 2026 · First listening prototype implemented
 
 Music selection and implementation are central to PFAD. The author's initial
 direction is to use the Driftbox rack to create ambient synth pieces as a
@@ -8,8 +8,19 @@ placeholder repertoire, taking inspiration from Luft. The first pieces should
 help establish the relationship between music and the visual study; they do not
 settle the final selection.
 
-The choices below are initial proposals for composition and playback. No music
-has yet been composed or added to PFAD.
+The first prototype includes three original two-minute Driftbox sketches:
+**Plateau**, **Contours** and **Afterglow**. Sound is opt-in; the pieces play in
+that order with eight-second crossfades and continue independently of visual
+pause, seeking and new searches. Volume is adjustable. The repertoire remains
+provisional and has not yet been selected through the author's listening review.
+
+The sketches total 3,473,623 encoded bytes and are fetched on demand. A 32 kHz
+audio context retains at most two decoded stereo pieces, approximately 61.4 MB
+within a 64 MiB cap. This is an initial resource limit, not a physical-phone
+performance claim. All three pieces cycle through the same player; national
+ambient journey sequencing and its whole-sequence pause are still planned.
+
+The remaining choices below describe the intended composition and playback.
 
 ## Musical direction
 
@@ -88,7 +99,8 @@ composition workflow.
   fade. Controls should make these different actions clear.
 - Next journey preserves musical continuity. Leaving ambient mode must not
   create a second player or restart the current piece.
-- Hiding or leaving the page fades and suspends sound. Returning does not resume
+- Hiding or leaving the page immediately silences and suspends sound, so hidden
+  page timer throttling cannot prolong a fade. Returning does not resume
   it automatically; an explicit sound action restores playback. Preserve the
   musical position where practical.
 - Use one audio owner and bounded preparation. Repeated toggles, pending decodes
@@ -114,3 +126,24 @@ composition workflow.
 Composition and auditioning can begin alongside R1 and R2. Playback belongs to
 R3, with physical-device checks as a release gate. See [the roadmap](ROADMAP.md)
 and [the ambient-mode brief](AMBIENT.md).
+
+## Reproducing the sketches
+
+`music/patches/` contains the actual rack documents and automation. The renderer
+uses public `RackRenderer` and `valueAt` exports from the pinned npm release
+`@driftbox/rack@0.1.0`; no Driftbox source is copied into PFAD and the synthesis
+package is a development dependency. There are no external samples or live inputs.
+
+`npm run music:compose` rebuilds the three documents from their original score in
+`scripts/music/compose.mjs`. `npm run music:render` renders stereo PCM, applies
+gentle endpoint ramps and balances each piece to 0.04 RMS with ample headroom,
+then encodes AAC-LC at 96 kbit/s. macOS uses `afconvert`; other systems need
+`ffmpeg`. Composition and rendering are deliberate development actions, separate
+from normal builds and deployments.
+
+Masters stay in ignored `.cache/music/`; selected delivery files live in
+`src/audio/` and Vite emits content-hashed assets. `music/manifest.json` retains
+package versions/integrities, module versions, patch/master/delivery hashes and
+level measurements. Encoder differences can change compressed bytes; a changed
+render requires updating and checking the manifest. The original patches and
+renders follow the repository's MIT licence.

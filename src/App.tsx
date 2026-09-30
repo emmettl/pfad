@@ -5,6 +5,7 @@ import { RoadScene } from './map/RoadScene.ts'
 import { PLACES } from './places.ts'
 import { countsAt } from './search/engine.ts'
 import type { Point, Reply, SearchResult, StudyManifest } from './search/contracts.ts'
+import { SoundControl } from './music/SoundControl.tsx'
 import './study.css'
 
 const number = new Intl.NumberFormat('en-CH')
@@ -97,15 +98,16 @@ export function App() {
   return <div className="study" data-state={error ? 'error' : result ? 'ready' : 'loading'} data-progress={progress}>
     <header className="study-header">
       <div className="identity"><a href="https://motionstudies.app/" className="series">Motion Studies</a><h1>PFAD</h1><p>The roads not taken</p></div>
-      <details className="about"><summary>About this study</summary><div className="about-panel">
+      <div className="header-tools"><details className="about"><summary>About this study</summary><div className="about-panel">
         <h2>A study of time, space, and the paths not taken.</h2>
         <p>A real shortest-distance search across Switzerland’s recorded road network. Every illuminated road was examined by the algorithm.</p>
         <p>The playback clock follows algorithm event order. It stretches the computation; it does not reproduce the timing of individual processor operations.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Its route describes this connectivity model.</p>
         <p>OpenStreetMap snapshot · 29 September 2026.<br />Road curves are simplified for drawing; search costs retain original lengths.</p>
+        <p>Original ambient sketches composed using Driftbox: Plateau, Contours and Afterglow. This is a provisional score, flowing independently of the search. Sound starts off and pauses when you leave the page.</p>
         <p><a href={manifestUrl || './data/pfad-manifest.json'}>Dataset and source record</a>{manifest && <> · <a href={new URL(manifest.evidence.path, manifestUrl).href}>Source evidence</a></>}</p>
         <a href="https://github.com/emmettl/pfad">PFAD repository ↗</a>
-      </div></details>
+      </div></details><SoundControl /></div>
     </header>
     <div className="route-panel" aria-label="Search endpoints">
       {queryControl(start, setStart, 'start')}

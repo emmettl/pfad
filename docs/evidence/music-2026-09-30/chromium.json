@@ -1,0 +1,49 @@
+{
+  "tracks": [
+    {
+      "url": "./assets/plateau-uRhqmTAo.m4a",
+      "seconds": 120,
+      "channels": 2,
+      "peak": 0.19707493484020233,
+      "rms": 0.039980654122894886,
+      "maxStep": 0.006013371050357819
+    },
+    {
+      "url": "./assets/contours-HlsvsgT6.m4a",
+      "seconds": 120,
+      "channels": 2,
+      "peak": 0.2640848457813263,
+      "rms": 0.03998487759926904,
+      "maxStep": 0.017452560365200043
+    },
+    {
+      "url": "./assets/afterglow-DgIsBdZU.m4a",
+      "seconds": 120,
+      "channels": 2,
+      "peak": 0.19475258886814117,
+      "rms": 0.039987307718940275,
+      "maxStep": 0.006324334070086479
+    }
+  ],
+  "joins": [
+    {
+      "from": 0,
+      "to": 1,
+      "peak": 0.08295556902885437,
+      "maxStep": 0.0021880106069147587
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "peak": 0.10417346656322479,
+      "maxStep": 0.0042663514614105225
+    },
+    {
+      "from": 2,
+      "to": 0,
+      "peak": 0.10989938676357269,
+      "maxStep": 0.004143215715885162
+    }
+  ],
+  "scope": "Encoded audio and offline crossfade measurements on an M4 Max; mobile WebKit is a viewport test, not a physical phone"
+}

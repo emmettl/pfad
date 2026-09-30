@@ -20,6 +20,14 @@ examinations in event order. Choose towns or points on the map, pan and zoom,
 pause, seek backwards, or change the replay duration. The visual direction
 is validated: a dark field and luminous roads, drawing on Gleislicht.
 
+Sound is optional: three original two-minute Driftbox sketches flow through
+eight-second crossfades on their own clock. Enable Sound to listen and adjust
+volume. Visual pause and seeking leave the music continuous; leaving the page
+silences it, and returning requires enabling sound again. This is a provisional
+repertoire for listening review. Its 3.47 MB of compressed audio is loaded on
+demand, with two decoded pieces retained at most. See the [music brief](docs/MUSIC.md)
+for composition sources, reproduction and remaining device checks.
+
 This is a **shortest-distance connectivity model**. One-way directions apply;
 turn restrictions, barriers and conditional access are preserved as evidence
 but are not enforced yet. It is not a validated driving route planner.
