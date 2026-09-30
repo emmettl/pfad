@@ -19,6 +19,9 @@ promise. The wishlist is a pool of possibilities rather than committed scope.
   A road absent from the final route is not automatically an algorithmic rejection.
 - The current cost is shortest distance. A future fastest-route profile would be
   separately declared; neither profile claims live traffic.
+- Ambient mode is planned: a curated pool of places produces a looping sequence
+  of origin/destination pairs. Journey length shapes both selection and replay
+  duration, with grid84 informing the run/hold/transition rhythm.
 - Data refreshes remain manual, versioned releases. The edition is unnumbered.
 
 ## Baseline delivered
@@ -113,6 +116,11 @@ across short local searches and long national ones.
   using a bounded, attributed place dataset.
 - [ ] Add a quiet viewing mode with reduced controls and an optional compact
   explanation of the active algorithm and its counters.
+- [ ] Build ambient mode from a reviewed place pool, selecting pairs by distance
+  and varying replay duration with actual route length. Include repetition
+  controls, a result hold, a clear transition, pause/next/exit and bounded memory.
+  [The ambient-mode brief](AMBIENT.md) records confirmed choices, proposed
+  heuristics and completion criteria.
 - [ ] Check reverse seeking and paused frames as carefully as continuous playback.
 
 **Complete when:** a selected set of local, urban, plateau and Alpine searches
@@ -188,7 +196,6 @@ its purpose, dependencies and completion criterion are clear.
 | Event inspector | Explain why a node was settled or a connection improved a cost | Additional trace evidence; optional so the main view stays quiet |
 | Search tree and cost view | Inspect the changing best-known predecessors and distance from the origin | Actual recorded cost/predecessor state; a separate inspection mode |
 | Counterfactual studies | Observe the effect of excluding a road, crossing or pass | Label the modified graph as hypothetical and retain its identity |
-| Ambient / exhibition mode | A curated succession of real searches with minimal controls | Stable replay, deliberate pacing and sustained-device testing |
 | BOOP / instant result | Make the contrast between computation and theatrical replay tangible | Honest measured timing; event replay must not imply per-operation timestamps |
 | Sound from search events | A second way to perceive rhythm and density | Opt-in, restrained and derived from real events |
 | Faint geographic context | Optional lakes, borders or relief for orientation | Separate sourced layer; keep emerging roads central |
