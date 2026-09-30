@@ -1,0 +1,74 @@
+{
+  "source": {
+    "url": "https://download.geofabrik.de/europe/switzerland-260929.osm.pbf",
+    "bytes": 547273092,
+    "data_timestamp": "2026-09-29T20:22:51Z"
+  },
+  "scope": "Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.",
+  "road_classes": {
+    "motorway_link": 5967,
+    "secondary": 37825,
+    "service": 425550,
+    "residential": 185672,
+    "tertiary": 51136,
+    "trunk_link": 1065,
+    "primary": 35315,
+    "unclassified": 67812,
+    "living_street": 6383,
+    "motorway": 8936,
+    "trunk": 2426,
+    "secondary_link": 716,
+    "tertiary_link": 409,
+    "primary_link": 1157,
+    "road": 37
+  },
+  "excluded": {
+    "no": 13217,
+    "private": 43699,
+    "agricultural": 1064,
+    "forestry": 227
+  },
+  "road_shape_nodes": 5963179,
+  "graph_nodes": 1258587,
+  "physical_edges": 1390206,
+  "directed_arcs": 2648785,
+  "profiles": 15523,
+  "restrictions": 12456,
+  "controls": 66888,
+  "graph": {
+    "json_bytes": 89418423,
+    "gzip_bytes": 28961119,
+    "brotli_q9_bytes": 27940585,
+    "sha256": "2c259e988bd4848e838877130848314167976bfabacef71df66aab6cbc794b36"
+  },
+  "variants": {
+    "0": {
+      "json_bytes": 37102280,
+      "gzip_bytes": 10280677,
+      "brotli_q9_bytes": 9608351,
+      "sha256": "13f8d32403424028e463e7bfb74a54905b57e6ecfb5ac0aeff219860a9958167",
+      "interior_vertices": 4704592,
+      "combined_gzip_bytes": 39241796,
+      "combined_brotli_bytes": 37548936
+    },
+    "5": {
+      "json_bytes": 14011105,
+      "gzip_bytes": 2377958,
+      "brotli_q9_bytes": 2165999,
+      "sha256": "1df4f75b1077359ce7c35da6871bb12acdb1357fc5dd6b340a94dd3b01c82f9d",
+      "interior_vertices": 669759,
+      "combined_gzip_bytes": 31339077,
+      "combined_brotli_bytes": 30106584
+    },
+    "15": {
+      "json_bytes": 10883000,
+      "gzip_bytes": 1006735,
+      "brotli_q9_bytes": 912539,
+      "sha256": "0b753c6591488e16229c1a85e7858c5b4d0592ba0b4809e3cc38fd1ded2b94a9",
+      "interior_vertices": 242463,
+      "combined_gzip_bytes": 29967854,
+      "combined_brotli_bytes": 28853124
+    }
+  },
+  "elapsed_seconds": 133.26578245899873
+}

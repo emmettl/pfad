@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.cache/
+.venv/
+.wrangler/
+.hosting-assets/
+test-results/
+playwright-report/
+*.tsbuildinfo
+__pycache__/
+.DS_Store
+.env*
+!.env.example
+.dev.vars*

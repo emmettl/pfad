@@ -1,0 +1,15 @@
+{
+  "coordinate_roundtrip": true,
+  "all_edges_costs_directions_profiles_roundtrip": true,
+  "geometry_roundtrip_all_variants": true,
+  "source_sha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+  "notes": [
+    "Compact and baseline exports have identical retained topology and edge costs.",
+    "Five-metre and fifteen-metre simplification affect visual polylines only. Coordinates rounded to 1e-5 degrees.",
+    "No graph pruning was used to achieve the measured compact-vs-baseline reduction.",
+    "This proof does not validate turn/access/conditional routing rules, visual quality, mobile memory or frame rate.",
+    "571 restriction members reference objects absent from the selected graph; the production compiler must classify these cases.",
+    "Benchmark endpoint selection requires a reachable destination; the closest Geneva node was on an unreachable directed fragment.",
+    "Memory byte counts are array capacities, not total browser peak memory."
+  ]
+}

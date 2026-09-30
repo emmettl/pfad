@@ -1,0 +1,25 @@
+{
+  "schema": "pfad-edition/1",
+  "edition": "pfad",
+  "status": "scaffold",
+  "title": "PFAD",
+  "description": "A study of time, space, and the paths not taken.",
+  "graph": null,
+  "refreshPolicy": "manual-versioned-snapshots",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-29T20:22:51Z",
+    "url": "https://download.geofabrik.de/europe/switzerland-260929.osm.pbf",
+    "sha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "evidence": {
+    "kind": "feasibility-measurement",
+    "graphNodes": 1258587,
+    "physicalEdges": 1390206,
+    "graphAnd5mGeometryGzipBytes": 16001724,
+    "productionRoutingValidated": false
+  }
+}

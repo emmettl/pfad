@@ -1,0 +1,32 @@
+{
+  "note": "Same nodes/edges as graph.json. Columnar arrays and deltas, OSM provenance IDs removed from delivery payload. Restriction references mapped to dense graph IDs; missing references explicitly retained for audit, not silently resolved. Restriction interpretation remains unimplemented.",
+  "unresolved_restriction_members": 571,
+  "graph": {
+    "json_bytes": 43222355,
+    "gzip_bytes": 14038235,
+    "brotli_q9_bytes": 13739535
+  },
+  "geometry": {
+    "0": {
+      "json_bytes": 29200431,
+      "gzip_bytes": 8903647,
+      "brotli_q9_bytes": 8528812,
+      "combined_gzip_bytes": 22941882,
+      "combined_brotli_bytes": 22268347
+    },
+    "5": {
+      "json_bytes": 7329140,
+      "gzip_bytes": 1963489,
+      "brotli_q9_bytes": 1930691,
+      "combined_gzip_bytes": 16001724,
+      "combined_brotli_bytes": 15670226
+    },
+    "15": {
+      "json_bytes": 4547705,
+      "gzip_bytes": 836533,
+      "brotli_q9_bytes": 830594,
+      "combined_gzip_bytes": 14874768,
+      "combined_brotli_bytes": 14570129
+    }
+  }
+}

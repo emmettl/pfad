@@ -1,0 +1,132 @@
+{
+  "machine": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "note": "Desktop headless browser, local HTTP gzip, straight distance costs, baseline connectivity only; routing restrictions retained in dataset but not enforced by benchmark; no rendering or mobile performance measured.",
+  "browsers": {
+    "chromium": {
+      "version": "153.0.8010.12",
+      "result": {
+        "nodes": 1258587,
+        "physicalEdges": 1390206,
+        "directedArcs": 2648785,
+        "fetchDecodeMs": 79.09999999403954,
+        "parseMs": 83.40000000596046,
+        "compileMs": 45,
+        "geometryFetchDecodeMs": 14,
+        "geometryParseMs": 12.600000008940697,
+        "reachabilityMs": 24.5,
+        "reachableNodes": 1224041,
+        "snapping": "Nearest node with both incoming and outgoing arcs on a residential/unclassified/tertiary-or-higher road; destination must be reachable from origin. Service/living streets excluded from endpoint selection only.",
+        "typedGraphBytes": 46888468,
+        "typedGeometryBytes": 10918900,
+        "origin": [
+          8.54186,
+          47.37689
+        ],
+        "destination": [
+          6.14362,
+          46.20389
+        ],
+        "runs": [
+          {
+            "searchMs": 104.90000000596046,
+            "visited": 1199535,
+            "examined": 2551408,
+            "improved": 1242870,
+            "routeMetres": 262733.98,
+            "routeNodes": 4040,
+            "traceEvents": 4993813,
+            "traceUsedBytes": 39950504,
+            "allocatedSearchBytes": 100596331
+          },
+          {
+            "searchMs": 106.29999999701977,
+            "visited": 1199535,
+            "examined": 2551408,
+            "improved": 1242870,
+            "routeMetres": 262733.98,
+            "routeNodes": 4040,
+            "traceEvents": 4993813,
+            "traceUsedBytes": 39950504,
+            "allocatedSearchBytes": 100596331
+          },
+          {
+            "searchMs": 108.8999999910593,
+            "visited": 1199535,
+            "examined": 2551408,
+            "improved": 1242870,
+            "routeMetres": 262733.98,
+            "routeNodes": 4040,
+            "traceEvents": 4993813,
+            "traceUsedBytes": 39950504,
+            "allocatedSearchBytes": 100596331
+          }
+        ]
+      }
+    },
+    "webkit": {
+      "version": "26.6",
+      "result": {
+        "nodes": 1258587,
+        "physicalEdges": 1390206,
+        "directedArcs": 2648785,
+        "fetchDecodeMs": 100,
+        "parseMs": 103,
+        "compileMs": 61,
+        "geometryFetchDecodeMs": 13,
+        "geometryParseMs": 24,
+        "reachabilityMs": 41,
+        "reachableNodes": 1224041,
+        "snapping": "Nearest node with both incoming and outgoing arcs on a residential/unclassified/tertiary-or-higher road; destination must be reachable from origin. Service/living streets excluded from endpoint selection only.",
+        "typedGraphBytes": 46888468,
+        "typedGeometryBytes": 10918900,
+        "origin": [
+          8.54186,
+          47.37689
+        ],
+        "destination": [
+          6.14362,
+          46.20389
+        ],
+        "runs": [
+          {
+            "searchMs": 135,
+            "visited": 1199535,
+            "examined": 2551408,
+            "improved": 1242870,
+            "routeMetres": 262733.98,
+            "routeNodes": 4040,
+            "traceEvents": 4993813,
+            "traceUsedBytes": 39950504,
+            "allocatedSearchBytes": 100596331
+          },
+          {
+            "searchMs": 139,
+            "visited": 1199535,
+            "examined": 2551408,
+            "improved": 1242870,
+            "routeMetres": 262733.98,
+            "routeNodes": 4040,
+            "traceEvents": 4993813,
+            "traceUsedBytes": 39950504,
+            "allocatedSearchBytes": 100596331
+          },
+          {
+            "searchMs": 107,
+            "visited": 1199535,
+            "examined": 2551408,
+            "improved": 1242870,
+            "routeMetres": 262733.98,
+            "routeNodes": 4040,
+            "traceEvents": 4993813,
+            "traceUsedBytes": 39950504,
+            "allocatedSearchBytes": 100596331
+          }
+        ]
+      }
+    }
+  }
+}

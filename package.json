@@ -1,0 +1,48 @@
+{
+  "name": "pfad",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PFAD — a study of time, space, and the paths not taken",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "npm@11.19.0",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4188",
+    "build": "tsc -p . && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4188",
+    "typecheck": "tsc -p .",
+    "lint": "oxlint src scripts tests",
+    "check:boundary": "node scripts/check-boundary.mjs",
+    "check:budget": "node scripts/check-budget.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test",
+    "check": "npm run typecheck && npm run lint && npm run check:boundary && npm test && npm run build && npm run check:budget",
+    "data:acquire": "python3 scripts/data/fetch-source.py",
+    "data:measure": "python3 scripts/data/size-proof.py --source .cache/osm/switzerland-260929.osm.pbf --output .cache/sizing && python3 scripts/data/compact-proof.py --directory .cache/sizing",
+    "data:browser": "node scripts/data/browser-proof.mjs .cache/sizing"
+  },
+  "dependencies": {
+    "@motionstudies/core": "0.1.0-alpha.30",
+    "@motionstudies/three": "0.1.0-alpha.30",
+    "@motionstudies/web": "0.1.0-alpha.30",
+    "@react-three/fiber": "9.7.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@babel/parser": "7.29.8",
+    "@motionstudies/data": "0.1.0-alpha.30",
+    "@playwright/test": "1.63.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "@types/three": "0.185.4",
+    "@vitejs/plugin-react": "6.1.1",
+    "oxlint": "1.82.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  }
+}
