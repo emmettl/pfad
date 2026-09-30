@@ -26,6 +26,8 @@ Pages artifact can be republished with the shared publisher without its
 `--require-latest` switch. Hosting tools and PFAD data admission rules live in
 the Motion Studies repository; advance the workflow’s pinned commit deliberately.
 
-Automatic Cloudflare publication is initially disabled (`CLOUDFLARE_ENABLED=false`)
-until the environment credential is explicitly provisioned. Initial Cloudflare
-publication uses the same verified artifact through the authenticated host.
+Automatic Cloudflare publication is enabled (`CLOUDFLARE_ENABLED=true`). The
+`cloudflare` environment credential was provisioned on 2026-09-30 with explicit
+author approval, using encryption for the destination environment. The temporary
+transfer workflow and encrypted artifact were removed. Both the environment and
+publishing workflow restrict deployment to `main`.
