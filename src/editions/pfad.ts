@@ -12,6 +12,6 @@ export const PFAD_EDITION = {
   id: 'pfad',
   identity: PFAD_IDENTITY,
   timezone: 'Europe/Zurich',
-  status: 'scaffold',
+  status: 'study',
   manifest: './data/pfad-manifest.json',
 } as const

@@ -1,0 +1,78 @@
+export interface Chunk {
+  kind: 'nodes' | 'edges' | 'geometry'
+  path: string
+  start: number
+  count: number
+  stride: number
+  bytes: number
+  decodedBytes: number
+  sha256: string
+}
+
+export interface StudyManifest {
+  schema: 'pfad-road-study/1'
+  encoding: 'le-columnar-deltas/1'
+  id: string
+  identity: string
+  compiler: string
+  profile: string
+  source: { dataTimestamp: string; attribution: string; licence: string; licenceUrl: string; url: string; sha256: string }
+  counts: { nodes: number; edges: number; directedArcs: number; vertices: number }
+  coordinateScale: number
+  projection: { centre: [number, number]; referenceLatitude: number; scaleMetres: number; quantisationMetres: number }
+  bounds: [number, number, number, number]
+  classes: string[]
+  chunks: Chunk[]
+  evidence: { path: string; bytes: number; sha256: string }
+  downloadBytes: number
+  limitations: string[]
+}
+
+export interface Graph {
+  xy: Int32Array
+  from: Uint32Array
+  to: Uint32Array
+  length: Uint32Array
+  direction: Uint8Array
+  category: Uint8Array
+  offsets: Uint32Array
+  arcTo: Uint32Array
+  arcEdge: Uint32Array
+  incoming: Uint32Array
+}
+
+export interface Point { name: string; lon: number; lat: number }
+export interface Endpoint extends Point { node: number; snapMetres: number }
+
+export interface SearchResult {
+  dataset?: { identity: string; compiler: string; profile: string; sourceSha256: string; sourceTimestamp: string }
+  algorithm: 'dijkstra/1'
+  tieBreak: 'distance, then ascending node id; neighbours in compiler edge order'
+  start: Endpoint
+  goal: Endpoint
+  searchMs: number
+  snapMs: number
+  routeMetres: number | null
+  routeNodes: Uint32Array
+  routeEdges: Uint32Array
+  trace: Uint32Array
+  checkpoints: Uint32Array
+  checkpointStride: number
+  edgeTimes: Float32Array
+  textureWidth: number
+  textureHeight: number
+  exploredNodes: number
+  examinedArcs: number
+  improvements: number
+  uniqueEdges: number
+  maxQueue: number
+}
+
+export type Request = { type: 'load'; manifestUrl: string } | { type: 'search'; requestId: number; start: Point; goal: Point }
+export type Reply =
+  | { type: 'progress'; loaded: number; total: number; stage: string }
+  | { type: 'manifest'; manifest: StudyManifest; manifestUrl: string }
+  | { type: 'geometry'; start: number; count: number; bytes: ArrayBuffer }
+  | { type: 'ready' }
+  | { type: 'result'; requestId: number; result: SearchResult }
+  | { type: 'error'; requestId?: number; message: string }

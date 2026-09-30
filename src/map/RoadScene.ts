@@ -1,0 +1,172 @@
+import * as THREE from 'three'
+import type { Point, SearchResult, StudyManifest } from '../search/contracts.ts'
+
+const vertexShader = `
+  attribute float roadId;
+  uniform sampler2D uTimes;
+  uniform vec2 uTextureSize;
+  varying vec2 vTimes;
+  void main() {
+    vec2 uv = (vec2(mod(roadId, uTextureSize.x), floor(roadId / uTextureSize.x)) + .5) / uTextureSize;
+    vTimes = texture2D(uTimes, uv).rg;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position.xy, 0., 1.);
+  }
+`
+const fragmentShader = `
+  uniform float uEvent;
+  uniform float uTotal;
+  varying vec2 vTimes;
+  void main() {
+    if (vTimes.x < 0. || uEvent < vTimes.x) discard;
+    float age = (uEvent - vTimes.x) / max(uTotal, 1.);
+    float pulse = exp(-age / .006);
+    float route = vTimes.y < -1.5 ? 1. : 0.;
+    float improvement = route > .5 ? -2. - vTimes.y : vTimes.y;
+    float tree = improvement >= 0. && uEvent >= improvement ? 1. : 0.;
+    float intensity = .12 + tree * .07 + pulse * .72;
+    vec3 colour = mix(vec3(.21, .48, .42), vec3(.52, .95, .78), pulse);
+    if (route * step(uTotal, uEvent) > .5) { colour = vec3(.81, 1., .81); intensity = .95; }
+    gl_FragColor = vec4(colour, intensity);
+  }
+`
+
+export class RoadScene {
+  renderer: THREE.WebGLRenderer
+  scene = new THREE.Scene()
+  camera = new THREE.OrthographicCamera(-1, 1, 1, -1, .1, 10)
+  material: THREE.ShaderMaterial
+  texture: THREE.DataTexture
+  manifest?: StudyManifest
+  events = 1
+  width = 1
+  height = 1
+  halfHeight = .8
+  observer: ResizeObserver
+  markers: HTMLDivElement
+  points: Point[] = []
+  picking = false
+  onPick?: (lon: number, lat: number) => void
+  pointers = new Map<number, { x: number; y: number }>()
+  lastPinch = 0
+  moved = 0
+  frame = 0
+  dirty = true
+
+  constructor(readonly host: HTMLElement) {
+    this.renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false, powerPreference: 'low-power' })
+    this.renderer.setClearColor('#080d10', 1)
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
+    this.renderer.outputColorSpace = THREE.SRGBColorSpace
+    this.camera.position.z = 2
+    this.texture = new THREE.DataTexture(new Float32Array([-1, -1]), 1, 1, THREE.RGFormat, THREE.FloatType)
+    this.texture.needsUpdate = true
+    this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader,
+      uniforms: { uTimes: { value: this.texture }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
+      transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
+    })
+    host.appendChild(this.renderer.domElement)
+    this.markers = document.createElement('div'); this.markers.className = 'map-markers'; host.appendChild(this.markers)
+    this.observer = new ResizeObserver(() => this.resize()); this.observer.observe(host)
+    const canvas = this.renderer.domElement
+    canvas.addEventListener('wheel', this.wheel, { passive: false })
+    canvas.addEventListener('pointerdown', this.pointerDown)
+    canvas.addEventListener('pointermove', this.pointerMove)
+    canvas.addEventListener('pointerup', this.pointerUp)
+    canvas.addEventListener('pointercancel', this.pointerCancel)
+    this.resize()
+    const draw = () => { if (this.dirty) { this.renderer.render(this.scene, this.camera); this.placeMarkers(); canvas.dataset.event = String(this.material.uniforms.uEvent.value); this.dirty = false }; this.frame = requestAnimationFrame(draw) }
+    draw()
+  }
+  setManifest(manifest: StudyManifest) { this.manifest = manifest; this.resetView() }
+  addGeometry(bytes: ArrayBuffer, count: number) {
+    const positions = new Int16Array(count * 2), roads = new Float32Array(count), view = new DataView(bytes)
+    for (let i = 0; i < count; i++) { positions[i * 2] = view.getInt16(i * 8, true); positions[i * 2 + 1] = view.getInt16(i * 8 + 2, true); roads[i] = view.getUint32(i * 8 + 4, true) }
+    const geometry = new THREE.BufferGeometry()
+    geometry.setAttribute('position', new THREE.Int16BufferAttribute(positions, 2, true))
+    geometry.setAttribute('roadId', new THREE.BufferAttribute(roads, 1))
+    // Drawing coordinates are deliberately two-dimensional and within [-1, 1].
+    // Three's automatic sphere calculation assumes a three-component position.
+    geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), Math.SQRT2)
+    const lines = new THREE.LineSegments(geometry, this.material); lines.frustumCulled = false
+    this.scene.add(lines); this.dirty = true
+  }
+  setResult(result: SearchResult) {
+    this.texture.dispose()
+    this.texture = new THREE.DataTexture(result.edgeTimes, result.textureWidth, result.textureHeight, THREE.RGFormat, THREE.FloatType)
+    this.texture.needsUpdate = true
+    this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uTextureSize.value.set(result.textureWidth, result.textureHeight)
+    this.events = result.trace.length; this.material.uniforms.uTotal.value = this.events
+    this.points = [result.start, result.goal]; this.markers.replaceChildren()
+    for (const [i, point] of this.points.entries()) {
+      const element = document.createElement('div'); element.className = `map-marker marker-${i}`
+      const dot = document.createElement('span'); dot.className = 'marker-dot'
+      const label = document.createElement('span'); label.textContent = point.name
+      element.append(dot, label); this.markers.appendChild(element)
+    }
+    this.setProgress(0)
+  }
+  setProgress(progress: number) { this.material.uniforms.uEvent.value = Math.floor(progress * this.events); this.dirty = true }
+  project(point: Pick<Point, 'lon' | 'lat'>) {
+    if (!this.manifest) return new THREE.Vector3()
+    const p = this.manifest.projection
+    return new THREE.Vector3((point.lon - p.centre[0]) * Math.cos(p.referenceLatitude * Math.PI / 180) * 111195.0802 / p.scaleMetres, (point.lat - p.centre[1]) * 111195.0802 / p.scaleMetres, 0)
+  }
+  placeMarkers() {
+    for (let i = 0; i < this.points.length; i++) {
+      const point = this.project(this.points[i]).project(this.camera), element = this.markers.children[i] as HTMLElement
+      element.style.left = `${(point.x + 1) * this.width / 2}px`; element.style.top = `${(1 - point.y) * this.height / 2}px`
+      element.hidden = Math.abs(point.x) > 1 || Math.abs(point.y) > 1
+    }
+  }
+  resize() {
+    this.width = Math.max(this.host.clientWidth, 1); this.height = Math.max(this.host.clientHeight, 1)
+    this.renderer.setSize(this.width, this.height)
+    const half = this.halfHeight, aspect = this.width / this.height
+    this.camera.left = -half * aspect; this.camera.right = half * aspect; this.camera.top = half; this.camera.bottom = -half
+    this.camera.updateProjectionMatrix(); this.dirty = true
+  }
+  resetView() {
+    if (!this.manifest) return
+    const [left, bottom, right, top] = this.manifest.bounds, aspect = this.width / this.height
+    this.halfHeight = Math.max((top - bottom) / 2, (right - left) / (2 * aspect)) * 1.12
+    this.camera.position.x = (right + left) / 2; this.camera.position.y = (top + bottom) / 2; this.camera.zoom = 1; this.resize()
+  }
+  screenPoint(x: number, y: number) {
+    const bounds = this.renderer.domElement.getBoundingClientRect()
+    return new THREE.Vector3((x - bounds.left) / this.width * 2 - 1, 1 - (y - bounds.top) / this.height * 2, 0).unproject(this.camera)
+  }
+  zoom(factor: number, x: number, y: number) {
+    const before = this.screenPoint(x, y)
+    this.camera.zoom = Math.min(24, Math.max(.6, this.camera.zoom * factor)); this.camera.updateProjectionMatrix()
+    const after = this.screenPoint(x, y)
+    this.camera.position.x += before.x - after.x; this.camera.position.y += before.y - after.y; this.dirty = true
+  }
+  wheel = (event: WheelEvent) => { event.preventDefault(); this.zoom(Math.exp(-event.deltaY * .001), event.clientX, event.clientY) }
+  pointerDown = (event: PointerEvent) => { this.renderer.domElement.setPointerCapture(event.pointerId); this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY }); if (this.pointers.size === 1) this.moved = 0; if (this.pointers.size === 2) this.lastPinch = this.pinchDistance() }
+  pinchDistance() { const [a, b] = [...this.pointers.values()]; return Math.hypot(a.x - b.x, a.y - b.y) }
+  pointerMove = (event: PointerEvent) => {
+    const previous = this.pointers.get(event.pointerId); if (!previous) return
+    this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY }); this.moved += Math.hypot(event.clientX - previous.x, event.clientY - previous.y)
+    if (this.pointers.size === 2) {
+      const distance = this.pinchDistance(), [a, b] = [...this.pointers.values()]
+      if (this.lastPinch > 0) this.zoom(distance / this.lastPinch, (a.x + b.x) / 2, (a.y + b.y) / 2)
+      this.lastPinch = distance
+    } else {
+      const before = this.screenPoint(previous.x, previous.y), after = this.screenPoint(event.clientX, event.clientY)
+      this.camera.position.x += before.x - after.x; this.camera.position.y += before.y - after.y; this.dirty = true
+    }
+  }
+  pointerUp = (event: PointerEvent) => {
+    if (this.picking && this.moved < 5 && this.pointers.size === 1 && this.manifest) {
+      const point = this.screenPoint(event.clientX, event.clientY), p = this.manifest.projection
+      this.onPick?.(point.x * p.scaleMetres / (Math.cos(p.referenceLatitude * Math.PI / 180) * 111195.0802) + p.centre[0], point.y * p.scaleMetres / 111195.0802 + p.centre[1])
+    }
+    this.pointerCancel(event)
+  }
+  pointerCancel = (event: PointerEvent) => { this.pointers.delete(event.pointerId); this.moved = 0; this.lastPinch = 0 }
+  dispose() {
+    cancelAnimationFrame(this.frame); this.observer.disconnect()
+    this.scene.traverse(object => { if (object instanceof THREE.LineSegments) object.geometry.dispose() })
+    this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.domElement.remove(); this.markers.remove()
+  }
+}

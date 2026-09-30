@@ -6,16 +6,21 @@
 [GitHub Pages](https://emmettl.github.io/pfad/) ·
 [Concept](docs/CONCEPT.md) · [Architecture](docs/ARCHITECTURE.md)
 
-PFAD will replay genuine pathfinding over Switzerland’s OpenStreetMap road
+PFAD replays genuine pathfinding over Switzerland’s OpenStreetMap road
 network. The computation runs normally; its recorded search becomes an event
 that can be watched, paused and inspected. The search is the subject.
 
 ## Current state
 
-Public scaffolding and a source-backed sizing proof. The published page is an
-edition introduction, not a functioning route planner or simulated search.
-The national graph has not been shipped. Visual direction leans towards
-Gleislicht, with grid84 remaining an influence to explore.
+A first working national study: a Web Worker runs deterministic Dijkstra on
+1,258,587 nodes and 1,390,206 physical road edges. A WebGL map reveals real
+examinations in event order. Choose towns or points on the map, pan and zoom,
+pause, seek backwards, or change the replay duration. The visual direction
+starts from Gleislicht’s dark field and luminous lines.
+
+This is a **shortest-distance connectivity model**. One-way directions apply;
+turn restrictions, barriers and conditional access are preserved as evidence
+but are not enforced yet. It is not a validated driving route planner.
 
 ## Development
 
@@ -27,15 +32,16 @@ to `0.1.0-alpha.30`; the repository remains private to npm (`private: true`).
 
 ## Evidence and data
 
-The 2026-09-30 proof measured 1,258,587 nodes and 1,390,206 road edges.
-The compact graph plus five-metre visual geometry is 16,001,724 gzip bytes;
-all original shape points at rounded coordinates total 22,941,882 gzip bytes.
-These are feasibility measurements, not a validated driving model.
+The selected 29 September 2026 snapshot ships as 27 content-verified chunks:
+**15,866,559 bytes** for topology and five-metre drawing geometry. An optional
+8,090,540-byte source evidence download is linked in About and is not loaded
+for playback. OSM-derived database files are published under ODbL.
 
 [Data policy and reproduction](docs/DATA.md) records the source checksum,
-refresh policy, limitations and commands. [Evidence](docs/evidence/sizing-2026-09-30/)
-includes the original measured results. The portable scripts preserve the proof
-for further investigation. Large source and generated files are not in Git.
+format, refresh policy and limitations. [Sizing evidence](docs/evidence/sizing-2026-09-30/)
+preserves the earlier JSON experiment; its figures describe that encoding,
+not this binary delivery format. Source PBFs and intermediate graphs stay in
+ignored `.cache/`; only the selected browser dataset is committed.
 
 ## Hosting
 

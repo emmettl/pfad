@@ -49,7 +49,54 @@ objects and need classification; endpoint selection must handle disconnected
 directed fragments. Source locations cover the Geofabrik extract, which is not
 a promise of every cross-border route. None of these are solved by compression.
 
-The delivery payload omits OSM object IDs after remapping restriction references
-to dense IDs. The baseline compiler output retains them for provenance. A
-production release must provide the OSM-derived database or a compliant way to
-obtain it and keep attribution accessible. MIT covers application code only.
+## Selected browser dataset
+
+`public/data/pfad-manifest.json` selects the immutable dataset
+`ch-20260929-6a17f71de78c`. Its manifest specifies source checksum and timestamp,
+compiler/profile version, lengths and SHA-256 for every chunk. Total opening
+road bytes: 15,866,559. The optional evidence file is 8,090,540 bytes and contains
+OSM node and way IDs, tag profiles, controls and original restriction relations.
+Both the delivered graph and that evidence are available in this public repo.
+
+After the sizing experiment, package the selected snapshot explicitly:
+
+```sh
+python3 scripts/data/build-study.py --source .cache/osm/switzerland-260929.osm.pbf \
+  --sizing .cache/sizing --output public/data/pfad
+```
+
+The compiler checks source and baseline graph hashes and refuses to replace an
+existing dataset with different bytes. gzip output is deterministic. CI only
+verifies and builds the committed record; it never fetches OSM.
+
+The `le-columnar-deltas/1` encoding uses little-endian values inside gzip files:
+
+- Node chunks: interleaved signed 32-bit longitude/latitude deltas at 1e-5 degree
+  resolution. Deltas restart from zero per chunk; dense IDs are `start + index`.
+- Edge chunks: signed 32-bit from-node deltas, signed 32-bit to-node relative to
+  from, unsigned 32-bit length in centimetres, unsigned 8-bit direction and road
+  class. Columns occupy 14 bytes per edge. Direction 0 is both, 1 forward, 2 reverse.
+- Geometry chunks: unsigned 16-bit interior-point count per physical edge, followed
+  by interleaved signed 32-bit coordinate deltas from that edge’s from-node.
+  Endpoints are implicit. Five-metre simplification affects drawing only.
+
+The worker checks all files, covers the complete graph, reconstructs directed
+adjacency and drawing geometry, and enables searching only after validation.
+A missing or corrupt chunk is an error, never a truncated routing network.
+Projection quantisation is approximately 6.1 metres for the drawing buffers;
+original edge costs and graph topology remain separate.
+
+The first study’s endpoint preparation selects nearby main/residential roads
+with incoming and outgoing connections. The destination must be reachable from
+the source within the recorded directed graph and within two kilometres of the
+requested point. Preparation time is separate from Dijkstra time. This keeps
+small disconnected fragments from making town-centre examples misleading;
+it does not establish turn-rule legality or solve cross-border coverage.
+
+MIT covers application code only. The OSM-derived files retain ODbL attribution
+and database obligations. The earlier compact JSON experiment remapped some
+restriction references; this delivery format instead publishes the original
+restriction evidence separately and does not claim to apply it.
+
+Files end in `.gz.bin` to keep the gzip container opaque to static servers.
+The worker explicitly unpacks gzip after verifying its stored-byte checksum.

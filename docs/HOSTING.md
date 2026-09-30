@@ -20,6 +20,11 @@ data paths, archive safety and static asset limits. It creates `_release.json`,
 checks release identity and cache headers, and skips superseded Pages releases.
 Content-hashed application assets are immutable; manifests and stable files
 revalidate. There is no live-data Worker, R2 bucket or periodic source download.
+The PFAD allowlist admits only its edition record and dated, content-identified
+graph directories containing the manifest, hashed topology/geometry chunks and
+optional source evidence. Raw PBFs and intermediate compiler files are excluded.
+The full artifact budget is 30 MiB, including optional evidence; each static file
+stays below 25 MiB. The initial road load is 15.9 MB, separate from that evidence.
 
 To pause Cloudflare publication, set `CLOUDFLARE_ENABLED=false`. An older verified
 Pages artifact can be republished with the shared publisher without its

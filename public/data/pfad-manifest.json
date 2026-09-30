@@ -1,10 +1,14 @@
 {
   "schema": "pfad-edition/1",
   "edition": "pfad",
-  "status": "scaffold",
+  "status": "study",
   "title": "PFAD",
   "description": "A study of time, space, and the paths not taken.",
-  "graph": null,
+  "graph": {
+    "manifest": "./pfad/ch-20260929-6a17f71de78c/manifest.json",
+    "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+    "profile": "road-connectivity-distance-v1"
+  },
   "refreshPolicy": "manual-versioned-snapshots",
   "source": {
     "provider": "OpenStreetMap via Geofabrik",

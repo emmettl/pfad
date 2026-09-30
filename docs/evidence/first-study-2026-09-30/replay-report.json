@@ -1,0 +1,82 @@
+{
+  "measuredAt": "2026-09-30T19:43:44.047Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "note": "Desktop-host browser measurements, local static serving. WebKit mobile viewport does not measure a physical phone. Frame intervals include rendering and main-thread UI. No total browser peak-memory claim.",
+  "browsers": [
+    {
+      "name": "chromium-default",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "readyMs": 1533.357167,
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "algorithm": "dijkstra/1",
+      "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+      "searchMs": 188.5,
+      "snapMs": 64.29999999701977,
+      "events": 4993816,
+      "traceBytes": 19975264,
+      "edgeTextureBytes": 11124736,
+      "nodesSettled": 1199535,
+      "arcsExamined": 2551408,
+      "routeMetres": 262733.98,
+      "frameIntervalMedianMs": 166.69999999999982,
+      "frameIntervalP95Ms": 266.60000000000036
+    },
+    {
+      "name": "chromium-metal",
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "readyMs": 575.4987079999992,
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "algorithm": "dijkstra/1",
+      "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+      "searchMs": 165.8999999910593,
+      "snapMs": 54.3999999910593,
+      "events": 4993816,
+      "traceBytes": 19975264,
+      "edgeTextureBytes": 11124736,
+      "nodesSettled": 1199535,
+      "arcsExamined": 2551408,
+      "routeMetres": 262733.98,
+      "frameIntervalMedianMs": 16.699999999999932,
+      "frameIntervalP95Ms": 16.700000000000273
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "renderer": "Apple GPU",
+      "readyMs": 946.7675420000014,
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "algorithm": "dijkstra/1",
+      "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+      "searchMs": 147,
+      "snapMs": 43,
+      "events": 4993816,
+      "traceBytes": 19975264,
+      "edgeTextureBytes": 11124736,
+      "nodesSettled": 1199535,
+      "arcsExamined": 2551408,
+      "routeMetres": 262733.98,
+      "frameIntervalMedianMs": 17,
+      "frameIntervalP95Ms": 18
+    }
+  ]
+}

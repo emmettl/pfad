@@ -20,7 +20,11 @@ jobs:
       - run: npm install --global npm@11.19.0 --ignore-scripts
       - run: npm ci
       - run: npm run check
-      - run: npx playwright install --with-deps chromium webkit
+      # Switch the slow Azure package mirror to Ubuntu's main mirror before
+      # installing WebKit runtime libraries. Keep both browser engines checked.
+      - run: |
+          sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
+          npx playwright install --with-deps chromium webkit
       - run: npm run test:browser -- --workers=1
       - uses: actions/upload-artifact@v7
         with:
