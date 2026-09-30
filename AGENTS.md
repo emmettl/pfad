@@ -11,8 +11,11 @@ over a real road graph, replayed at human scale. No invented search activity.
   Missing chunks must never silently remove roads from a search.
 - Preserve source date, checksum, compiler/profile version, algorithm version
   and deterministic tie-breaking for every reproducible search recording.
-- Visual direction starts from Gleislicht; grid84 remains a possible influence.
+- The visual baseline is validated: a dark field and luminous real road searches,
+  drawing on Gleislicht. Refine this language; grid84 may inform individual details.
   The edition is unnumbered. Do not assign a catalogue number.
+- Use `docs/ROADMAP.md` for staged priorities, completion criteria and the feature
+  wishlist. Wishlist items are possibilities, not committed implementation scope.
 - Data refreshes are manual, versioned releases. Do not add scheduled downloads
   or replace the graph behind an existing trace without an explicit request.
 - Source OSM and generated graphs belong in ignored `.cache/` until validated

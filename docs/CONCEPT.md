@@ -16,10 +16,11 @@ absent from the final route is not necessarily rejected by the algorithm. Event
 order and wall-clock execution timing are distinct; the interface must identify
 which clock is being replayed. Whole journeys are not exhaustively enumerated.
 
-Begin visually with Gleislicht’s luminous geography. Grid84 may inform framing,
-typography or computational readouts, but this remains an artistic decision.
-Let a real trace reveal what visual treatment it can carry. Avoid fabricated
-networks or a progress animation presented as genuine computation.
+The first national study has validated the aesthetic concept: Gleislicht’s
+luminous geography emerging from a dark field. Refine that established language.
+Grid84 may inform individual details of framing, typography or computational
+readouts. Avoid fabricated networks or a progress animation presented as
+genuine computation. [The roadmap](ROADMAP.md) sets out the next stages and wishlist.
 
 The initial proof concerns a country-scale Zürich–Geneva search. The edition
 remains unnumbered. Measured computation time must replace the provisional

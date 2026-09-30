@@ -4,7 +4,8 @@
 
 [Motion Studies edition](https://motionstudies.app/pfad/) ·
 [GitHub Pages](https://emmettl.github.io/pfad/) ·
-[Concept](docs/CONCEPT.md) · [Architecture](docs/ARCHITECTURE.md)
+[Concept](docs/CONCEPT.md) · [Roadmap and wishlist](docs/ROADMAP.md) ·
+[Architecture](docs/ARCHITECTURE.md)
 
 PFAD replays genuine pathfinding over Switzerland’s OpenStreetMap road
 network. The computation runs normally; its recorded search becomes an event
@@ -16,7 +17,7 @@ A first working national study: a Web Worker runs deterministic Dijkstra on
 1,258,587 nodes and 1,390,206 physical road edges. A WebGL map reveals real
 examinations in event order. Choose towns or points on the map, pan and zoom,
 pause, seek backwards, or change the replay duration. The visual direction
-starts from Gleislicht’s dark field and luminous lines.
+is validated: a dark field and luminous roads, drawing on Gleislicht.
 
 This is a **shortest-distance connectivity model**. One-way directions apply;
 turn restrictions, barriers and conditional access are preserved as evidence
