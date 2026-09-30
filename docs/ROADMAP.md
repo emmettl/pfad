@@ -22,6 +22,9 @@ promise. The wishlist is a pool of possibilities rather than committed scope.
 - Ambient mode is planned: a curated pool of places produces a looping sequence
   of origin/destination pairs. Journey length shapes both selection and replay
   duration, with grid84 informing the run/hold/transition rhythm.
+- Music selection and playback are core parts of the piece. Begin with original
+  ambient synth pieces made using the Driftbox rack as a provisional repertoire,
+  taking inspiration from Luft. The final musical selection remains open.
 - Data refreshes remain manual, versioned releases. The edition is unnumbered.
 
 ## Baseline delivered
@@ -93,6 +96,8 @@ devices the edition intends to support.
   drawing detail reduction must leave search topology and costs intact.
 - [ ] Check sustained use, viewport changes, touch interaction and WebGL recovery;
   provide a useful explanation where the complete study cannot run.
+- [ ] Measure sustained audiovisual playback and set separate audio download,
+  decoded-buffer and processing budgets before releasing the soundtrack.
 
 **Complete when:** the supported-device matrix meets published budgets, repeated
 queries do not continually grow memory, cold/warm behaviour is measured, and
@@ -101,7 +106,8 @@ missing data or rendering failure never produces a misleading success.
 ### R3 · Refine the experience of the search
 
 **Outcome:** the validated visual language communicates the computation clearly
-across short local searches and long national ones.
+across short local searches and long national ones, with a considered musical
+accompaniment and a coherent ambient experience.
 
 - [ ] Tune brightness, pulse decay and persistence of explored roads.
 - [ ] Distinguish examined roads, current search activity and the final route
@@ -121,11 +127,20 @@ across short local searches and long national ones.
   controls, a result hold, a clear transition, pause/next/exit and bounded memory.
   [The ambient-mode brief](AMBIENT.md) records confirmed choices, proposed
   heuristics and completion criteria.
+- [ ] Compose and audition a provisional repertoire of ambient synth pieces
+  using Driftbox. Judge the music in context across varied searches, including
+  transitions, quiet passages and extended listening.
+- [ ] Implement opt-in music with volume/mute, gentle fades, continuous playback
+  across journeys, bounded audio resources and clear pause/hidden-page behaviour.
+  [The music brief](MUSIC.md) proposes composition, delivery and lifecycle choices;
+  it keeps the eventual repertoire replaceable.
 - [ ] Check reverse seeking and paused frames as carefully as continuous playback.
 
 **Complete when:** a selected set of local, urban, plateau and Alpine searches
 remains readable while playing, paused and seeking; visual states have documented
 meanings; the dark-field/luminous-road composition remains the established baseline.
+The provisional music has been auditioned in context and its playback meets the
+music brief's lifecycle and device criteria.
 
 ### R4 · Compare genuinely different searches
 
@@ -173,6 +188,8 @@ Begin with **R1 and R2**. Device measurements and routing validation can progres
 alongside one another. Use their evidence to guide **R3**, then establish **R4**
 before completing **R5**. Small visual improvements can land earlier; additional
 algorithms should not multiply unresolved profile or performance problems.
+Music composition and auditions can begin alongside R1 and R2 so the sound helps
+shape the experience while its playback is developed within R3.
 
 The first implementation tasks should be:
 
@@ -197,7 +214,7 @@ its purpose, dependencies and completion criterion are clear.
 | Search tree and cost view | Inspect the changing best-known predecessors and distance from the origin | Actual recorded cost/predecessor state; a separate inspection mode |
 | Counterfactual studies | Observe the effect of excluding a road, crossing or pass | Label the modified graph as hypothetical and retain its identity |
 | BOOP / instant result | Make the contrast between computation and theatrical replay tangible | Honest measured timing; event replay must not imply per-operation timestamps |
-| Sound from search events | A second way to perceive rhythm and density | Opt-in, restrained and derived from real events |
+| Sound from search events | A second way to perceive rhythm and density, alongside the planned soundtrack | Opt-in, restrained and derived from real events; soundtrack composition is already R3 scope |
 | Faint geographic context | Optional lakes, borders or relief for orientation | Separate sourced layer; keep emerging roads central |
 | Large-format image / video export | Editions, prints and short films of a particular search | R5 provenance and export pipeline; appropriate credits |
 | Offline study | Revisit a selected graph and recordings without a connection | Explicit bounded storage, verified cache and an update/removal path |
@@ -218,5 +235,5 @@ when its behaviour is implemented and verified, not merely proposed. Record
 material changes to scope or priorities here; dates can be added when there is
 enough evidence to make them credible.
 
-Related: [Concept](CONCEPT.md) · [Architecture](ARCHITECTURE.md) ·
+Related: [Concept](CONCEPT.md) · [Music](MUSIC.md) · [Architecture](ARCHITECTURE.md) ·
 [Data and refresh policy](DATA.md) · [Current replay evidence](evidence/first-study-2026-09-30/replay-report.json).

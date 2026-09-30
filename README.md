@@ -5,7 +5,8 @@
 [Motion Studies edition](https://motionstudies.app/pfad/) ·
 [GitHub Pages](https://emmettl.github.io/pfad/) ·
 [Concept](docs/CONCEPT.md) · [Roadmap and wishlist](docs/ROADMAP.md) ·
-[Ambient-mode brief](docs/AMBIENT.md) · [Architecture](docs/ARCHITECTURE.md)
+[Ambient-mode brief](docs/AMBIENT.md) · [Music brief](docs/MUSIC.md) ·
+[Architecture](docs/ARCHITECTURE.md)
 
 PFAD replays genuine pathfinding over Switzerland’s OpenStreetMap road
 network. The computation runs normally; its recorded search becomes an event

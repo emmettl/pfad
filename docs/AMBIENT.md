@@ -104,6 +104,13 @@ neither change the algorithm nor claim to preserve individual operation timings.
 
 ## Framing and operation
 
+Music is a core part of the planned experience. Start with a provisional repertoire
+of ambient synth pieces made using Driftbox, drawing on Luft's listening experience.
+The proposed musical clock spans several journeys: distance-based replay pacing,
+result holds and next-journey actions do not restart or stretch the soundtrack.
+Sound remains opt-in, with clear volume, mute and sequence-pause behaviour.
+[The music brief](MUSIC.md) records the composition and playback proposals.
+
 - Keep the camera stable within a search. Begin with the national view; investigate
   fitting the actual explored extent for regional searches when needed. Fitting
   only the chosen route must not crop away the search that produced it.
@@ -130,6 +137,8 @@ neither change the algorithm nor claim to preserve individual operation timings.
 - The run/hold/transition rhythm is visually reviewed on regional and national
   examples, with final routes readable and no invented exploration.
 - Pause, next, exit, hidden-page and reduced-motion behaviour are verified.
+- With sound enabled, music continues across journeys and transitions; sequence
+  pause and hidden-page handling follow the music brief. Silent use is complete.
 - Sustained looping passes the supported-device checks without growing retained
   recordings, reloading the graph each time or continuing work in hidden tabs.
 
