@@ -21,11 +21,14 @@ export function App() {
   const [loading, setLoading] = useState({ loaded: 0, total: 0, stage: 'Opening the road record' })
   const [result, setResult] = useState<SearchResult | null>(null)
   const [progress, setProgress] = useState(0), [playing, setPlaying] = useState(false), [duration, setDuration] = useState(30)
+  const [revealing, setRevealing] = useState(false)
+  const revealingRef = useRef(false)
   const [error, setError] = useState(''), [mapError, setMapError] = useState('')
   const [pick, setPick] = useState<'start' | 'goal' | null>(null)
 
-  const seek = useCallback((value: number) => {
-    const p = Math.min(1, Math.max(0, value)); progressRef.current = p; setProgress(p); scene.current?.setProgress(p)
+  const seek = useCallback((value: number, animateRoute = false) => {
+    const p = Math.min(1, Math.max(0, value)); progressRef.current = p; setProgress(p)
+    return scene.current?.setProgress(p, animateRoute) ?? false
   }, [])
   const search = useCallback((a: Point, b: Point) => {
     if (!worker.current) return
@@ -37,7 +40,11 @@ export function App() {
     if (!host.current) return
     setReady(false); setError(''); setMapError(''); setResult(null); setPlaying(false); seek(0)
     let map: RoadScene | null = null
-    try { map = new RoadScene(host.current); scene.current = map }
+    try {
+      map = new RoadScene(host.current); scene.current = map
+      map.onRouteRevealChange = active => { revealingRef.current = active; setRevealing(active) }
+      map.onRouteRevealComplete = () => setPlaying(false)
+    }
     catch { setMapError('Map rendering is unavailable in this browser. The search record remains accessible.') }
     const engine = new Worker(new URL('./search/search.worker.ts', import.meta.url), { type: 'module' }); worker.current = engine
     const controller = new AbortController()
@@ -73,15 +80,17 @@ export function App() {
     }
   }, [pick])
   useEffect(() => {
-    if (!playing || !result) return
+    scene.current?.setRevealPlaying(playing)
+    if (!playing || !result || progressRef.current >= 1) return
     let frame = 0, previous = performance.now()
     const advance = (now: number) => {
       const next = Math.min(1, progressRef.current + Math.min(now - previous, 100) / (duration * 1000))
-      previous = now; seek(next)
-      if (next < 1) frame = requestAnimationFrame(advance); else setPlaying(false)
+      previous = now
+      const routeAnimating = seek(next, next >= 1)
+      if (next < 1) frame = requestAnimationFrame(advance); else if (!routeAnimating) setPlaying(false)
     }
     frame = requestAnimationFrame(advance); return () => cancelAnimationFrame(frame)
-  }, [playing, duration, result, seek])
+  }, [playing, duration, result, seek, revealing])
 
   const counts = result ? countsAt(result, progress) : [0, 0, 0]
   const completed = progress >= 1 && result !== null
@@ -102,6 +111,7 @@ export function App() {
         <h2>A study of time, space, and the paths not taken.</h2>
         <p>A real shortest-distance search across Switzerland’s recorded road network. Every illuminated road was examined by the algorithm.</p>
         <p>The playback clock follows algorithm event order. It stretches the computation; it does not reproduce the timing of individual processor operations.</p>
+        <p>Once the recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Its route describes this connectivity model.</p>
         <p>OpenStreetMap snapshot · 29 September 2026.<br />Road curves are simplified for drawing; search costs retain original lengths.</p>
         <p>Original ambient sketches composed using Driftbox: Plateau, Contours and Afterglow. This is a provisional score, flowing independently of the search. Sound starts off and pauses when you leave the page.</p>
@@ -127,13 +137,13 @@ export function App() {
         <div className="compute-readout">{result ? <><span>Dijkstra</span><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></> : <span>Road connectivity · Shortest distance</span>}</div>
       </div>
       <div className="replay-controls">
-        <button disabled={!result || busy} onClick={() => { if (progress >= 1) seek(0); setPlaying(value => !value) }}>{playing ? 'Pause' : 'Play'}</button>
+        <button disabled={!result || busy} onClick={() => { if (progress >= 1 && !revealingRef.current) seek(0); setPlaying(value => !value) }}>{playing ? 'Pause' : 'Play'}</button>
         <button disabled={!result || busy} onClick={() => { seek(0); setPlaying(true) }} aria-label="Replay search from the beginning">↺</button>
         <TimelineScrubber windowStart={0} windowEnd={duration} time={progress * duration} onSeek={time => { setPlaying(false); seek(time / duration) }} onScrubStart={() => setPlaying(false)} ariaLabel="Search replay" ariaValueText={`${(progress * duration).toFixed(1)} seconds of ${duration}; ${Math.floor(progress * (result?.trace.length ?? 0))} recorded events`} step={.01} disabled={!result || busy} />
         <span className="replay-time">{(progress * duration).toFixed(1)}<small> / {duration}s</small></span>
         <select aria-label="Replay duration" value={duration} onChange={event => setDuration(Number(event.target.value))}>{[15, 30, 60, 120].map(value => <option key={value} value={value}>{value}s</option>)}</select>
       </div>
-      <div className="event-readout"><span><strong data-testid="settled-count">{number.format(counts[0])}</strong> nodes settled</span><span><strong data-testid="examined-count">{number.format(counts[1])}</strong> connections examined</span><span className="replay-status">{busy ? 'Recording search' : completed ? result.routeMetres === null ? 'No route in this graph' : 'Route found' : playing ? 'Replaying recorded events' : result ? 'Replay paused' : 'Preparing the network'}</span></div>
+      <div className="event-readout"><span><strong data-testid="settled-count">{number.format(counts[0])}</strong> nodes settled</span><span><strong data-testid="examined-count">{number.format(counts[1])}</strong> connections examined</span><span className="replay-status">{busy ? 'Recording search' : revealing ? playing ? 'Revealing the route' : 'Route reveal paused' : completed ? result.routeMetres === null ? 'No route in this graph' : 'Route found' : playing ? 'Replaying recorded events' : result ? 'Replay paused' : 'Preparing the network'}</span></div>
     </div>
     <footer><a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors · ODbL</a><span>Switzerland · 29 Sep 2026 · Connectivity study</span></footer>
   </div>

@@ -100,7 +100,7 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
       const endpoints = snapEndpoints(graph, request.start, request.goal)
       const result = dijkstra(graph, endpoints.start, endpoints.goal, endpoints.snapMs)
       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }
-      reply({ type: 'result', requestId: request.requestId, result }, [result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer])
+      reply({ type: 'result', requestId: request.requestId, result }, [result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer, result.routeReversed.buffer, result.routeLengths.buffer])
     }
   } catch (error) {
     reply({ type: 'error', requestId: request.type === 'search' ? request.requestId : undefined, message: error instanceof Error ? error.message : 'The search could not be completed' })

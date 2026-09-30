@@ -42,6 +42,23 @@ the final route becomes bright only at completion. Later examinations of the
 same physical road remain in the trace and counters rather than creating a
 second road. The endpoint markers are separate from explored edges.
 
+Normal playback closes with a 2.6-second origin-to-destination route reveal and
+a 0.7-second glow settle. This presentation clock begins after the final recorded
+event; counters and the event cutoff remain fixed. The overlay uses the same
+actual road curves, ordered and oriented by the reconstructed route. Original
+road lengths weight its progress, distributed along each simplified curve.
+A screen-space ribbon keeps its fine core and soft travelling halo legible at
+different zoom levels. Drawing offsets add about 5.6 MB; the curve coordinates
+are shared with the existing drawing, and only the current route gets a ribbon.
+The preceding route ribbon is disposed when a new result arrives.
+
+Pause freezes the closing reveal; play resumes it. Seeking backwards removes
+the overlay, and seeking directly to completion shows the settled route without
+an animation. Restart clears both clocks. Reduced motion skips the flourish,
+including when the preference changes during it. Hidden pages do not advance
+the presentation clock. No vehicle, additional search activity or invented
+connections are implied by the travelling light.
+
 The whole national drawing is 4,119,930 line vertices. The renderer caps pixel
 ratio at 1.5, skips unchanged frames, and supports pan, wheel zoom and pinch.
 Reduced-motion preference starts at the completed trace with autoplay disabled.

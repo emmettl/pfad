@@ -1,5 +1,7 @@
 import * as THREE from 'three'
 import type { Point, SearchResult, StudyManifest } from '../search/contracts.ts'
+import { RouteDrawing, RouteReveal } from './routeReveal.ts'
+import { createRouteGeometry, createRouteMaterial } from './routeMaterial.ts'
 
 const vertexShader = `
   attribute float roadId;
@@ -25,7 +27,6 @@ const fragmentShader = `
     float tree = improvement >= 0. && uEvent >= improvement ? 1. : 0.;
     float intensity = .12 + tree * .07 + pulse * .72;
     vec3 colour = mix(vec3(.21, .48, .42), vec3(.52, .95, .78), pulse);
-    if (route * step(uTotal, uEvent) > .5) { colour = vec3(.81, 1., .81); intensity = .95; }
     gl_FragColor = vec4(colour, intensity);
   }
 `
@@ -50,7 +51,16 @@ export class RoadScene {
   lastPinch = 0
   moved = 0
   frame = 0
+  previousFrame = 0
   dirty = true
+  drawing = new RouteDrawing()
+  reveal = new RouteReveal()
+  routeMaterial = createRouteMaterial()
+  route?: THREE.Mesh
+  revealPlaying = false
+  onRouteRevealChange?: (active: boolean) => void
+  onRouteRevealComplete?: () => void
+  reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
   constructor(readonly host: HTMLElement) {
     this.renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false, powerPreference: 'low-power' })
@@ -74,8 +84,27 @@ export class RoadScene {
     canvas.addEventListener('pointerup', this.pointerUp)
     canvas.addEventListener('pointercancel', this.pointerCancel)
     this.resize()
-    const draw = () => { if (this.dirty) { this.renderer.render(this.scene, this.camera); this.placeMarkers(); canvas.dataset.event = String(this.material.uniforms.uEvent.value); this.dirty = false }; this.frame = requestAnimationFrame(draw) }
-    draw()
+    this.previousFrame = performance.now()
+    const draw = (now: number) => {
+      if (this.reveal.active && this.revealPlaying && !document.hidden) {
+        const finished = this.reveal.advance(Math.min(now - this.previousFrame, 100))
+        this.updateRoute()
+        if (finished) { this.onRouteRevealChange?.(false); this.onRouteRevealComplete?.() }
+      }
+      this.previousFrame = now
+      if (this.dirty) {
+        this.renderer.render(this.scene, this.camera); this.placeMarkers()
+        canvas.dataset.event = String(this.material.uniforms.uEvent.value)
+        canvas.dataset.routePhase = !this.reveal.visible ? 'hidden' : this.reveal.active ? 'revealing' : 'complete'
+        canvas.dataset.routeProgress = String(this.routeMaterial.uniforms.uProgress.value)
+        canvas.dataset.routeEnergy = String(this.routeMaterial.uniforms.uEnergy.value)
+        this.dirty = false
+      }
+      this.frame = requestAnimationFrame(draw)
+    }
+    this.reducedMotion.addEventListener('change', this.motionChange)
+    document.addEventListener('visibilitychange', this.visibilityChange)
+    draw(this.previousFrame)
   }
   setManifest(manifest: StudyManifest) { this.manifest = manifest; this.resetView() }
   addGeometry(bytes: ArrayBuffer, count: number) {
@@ -88,9 +117,15 @@ export class RoadScene {
     // Three's automatic sphere calculation assumes a three-component position.
     geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), Math.SQRT2)
     const lines = new THREE.LineSegments(geometry, this.material); lines.frustumCulled = false
+    this.drawing.add(positions, roads)
     this.scene.add(lines); this.dirty = true
   }
   setResult(result: SearchResult) {
+    if (this.route) { this.scene.remove(this.route); this.route.geometry.dispose(); this.route = undefined }
+    if (result.routeEdges.length) {
+      this.route = new THREE.Mesh(createRouteGeometry(this.drawing.build(result.routeEdges, result.routeReversed, result.routeLengths)), this.routeMaterial)
+      this.route.frustumCulled = false; this.route.renderOrder = 1; this.route.visible = false; this.scene.add(this.route)
+    }
     this.texture.dispose()
     this.texture = new THREE.DataTexture(result.edgeTimes, result.textureWidth, result.textureHeight, THREE.RGFormat, THREE.FloatType)
     this.texture.needsUpdate = true
@@ -105,7 +140,27 @@ export class RoadScene {
     }
     this.setProgress(0)
   }
-  setProgress(progress: number) { this.material.uniforms.uEvent.value = Math.floor(progress * this.events); this.dirty = true }
+  setProgress(progress: number, animateRoute = false) {
+    this.material.uniforms.uEvent.value = Math.floor(progress * this.events)
+    if (progress < 1 || !this.route) this.reveal.clear()
+    else if (animateRoute && !this.reducedMotion.matches) this.reveal.start()
+    else this.reveal.finish()
+    this.onRouteRevealChange?.(this.reveal.active); this.updateRoute()
+    return this.reveal.active
+  }
+  setRevealPlaying(playing: boolean) { this.revealPlaying = playing }
+  updateRoute() {
+    const sample = this.reveal.sample()
+    this.routeMaterial.uniforms.uProgress.value = sample.progress; this.routeMaterial.uniforms.uEnergy.value = sample.energy
+    if (this.route) this.route.visible = this.reveal.visible
+    this.dirty = true
+  }
+  motionChange = () => {
+    if (this.reducedMotion.matches && this.reveal.active) {
+      this.reveal.finish(); this.updateRoute(); this.onRouteRevealChange?.(false); this.onRouteRevealComplete?.()
+    }
+  }
+  visibilityChange = () => { this.previousFrame = performance.now() }
   project(point: Pick<Point, 'lon' | 'lat'>) {
     if (!this.manifest) return new THREE.Vector3()
     const p = this.manifest.projection
@@ -121,6 +176,7 @@ export class RoadScene {
   resize() {
     this.width = Math.max(this.host.clientWidth, 1); this.height = Math.max(this.host.clientHeight, 1)
     this.renderer.setSize(this.width, this.height)
+    this.routeMaterial.uniforms.uResolution.value.set(this.width, this.height)
     const half = this.halfHeight, aspect = this.width / this.height
     this.camera.left = -half * aspect; this.camera.right = half * aspect; this.camera.top = half; this.camera.bottom = -half
     this.camera.updateProjectionMatrix(); this.dirty = true
@@ -166,6 +222,9 @@ export class RoadScene {
   pointerCancel = (event: PointerEvent) => { this.pointers.delete(event.pointerId); this.moved = 0; this.lastPinch = 0 }
   dispose() {
     cancelAnimationFrame(this.frame); this.observer.disconnect()
+    this.reducedMotion.removeEventListener('change', this.motionChange)
+    document.removeEventListener('visibilitychange', this.visibilityChange)
+    this.route?.geometry.dispose(); this.routeMaterial.dispose(); this.drawing.chunks = []
     this.scene.traverse(object => { if (object instanceof THREE.LineSegments) object.geometry.dispose() })
     this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.domElement.remove(); this.markers.remove()
   }

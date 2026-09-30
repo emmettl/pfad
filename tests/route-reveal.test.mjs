@@ -1,0 +1,43 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import { RouteDrawing, RouteReveal, ROUTE_DRAW_MS, ROUTE_SETTLE_MS } from '../src/map/routeReveal.ts'
+
+test('route drawing follows actual curves, reverse traversal and original road-length weights', () => {
+  const drawing = new RouteDrawing()
+  const positions = Int16Array.from([0, 0, 10, 0, 10, 0, 10, 20, 30, 20, 10, 20])
+  drawing.add(positions, Float32Array.from([4, 4, 4, 4, 5, 5]))
+  const forward = drawing.build(Uint32Array.from([4, 5]), Uint8Array.from([0, 1]), Uint32Array.from([300, 100]))
+  const coordinates = values => [...values].filter((_, i) => i % 6 < 4).map(x => Math.round(x * 32767))
+  const distances = values => [...values].filter((_, i) => i % 6 >= 4)
+  assert.deepEqual(coordinates(forward), [0, 0, 10, 0, 10, 0, 10, 20, 10, 20, 30, 20])
+  assert.deepEqual(distances(forward), [0, .25, .25, .75, .75, 1])
+  const reverse = drawing.build(Uint32Array.from([5, 4]), Uint8Array.from([0, 1]), Uint32Array.from([100, 300]))
+  assert.deepEqual(coordinates(reverse), [30, 20, 10, 20, 10, 20, 10, 0, 10, 0, 0, 0])
+  assert.deepEqual(distances(reverse), [0, .25, .25, .75, .75, 1])
+})
+test('route drawing crosses chunks, omits collapsed segments and rejects missing geometry', () => {
+  const drawing = new RouteDrawing()
+  drawing.add(Int16Array.from([0, 0, 0, 0]), Float32Array.from([0, 0]))
+  drawing.add(Int16Array.from([0, 0, 10, 0]), Float32Array.from([1, 1]))
+  const segments = drawing.build(Uint32Array.from([0, 1]), Uint8Array.from([0, 0]), Uint32Array.from([20, 80]))
+  assert.equal(segments.length, 6)
+  assert.ok(Math.abs(segments[4] - .2) < 1e-6)
+  assert.equal(segments[5], 1)
+  assert.equal(drawing.build(new Uint32Array(), new Uint8Array(), new Uint32Array()).length, 0)
+  assert.throws(() => drawing.build(Uint32Array.from([2]), Uint8Array.from([0]), Uint32Array.from([1])), /missing/)
+})
+test('completion draws before settling, and clearing or seeking produces a deterministic frame', () => {
+  const reveal = new RouteReveal()
+  assert.deepEqual(reveal.sample(), { progress: 0, energy: 0 })
+  reveal.start(); assert.equal(reveal.advance(ROUTE_DRAW_MS / 2), false)
+  assert.deepEqual(reveal.sample(), { progress: .5, energy: 1 })
+  reveal.advance(ROUTE_DRAW_MS / 2 + ROUTE_SETTLE_MS / 2)
+  assert.deepEqual(reveal.sample(), { progress: 1, energy: .25 })
+  assert.equal(reveal.advance(ROUTE_SETTLE_MS), true)
+  assert.deepEqual(reveal.sample(), { progress: 1, energy: 0 })
+  assert.equal(reveal.advance(100), false)
+  reveal.clear(); assert.equal(reveal.visible, false)
+  reveal.finish(); assert.deepEqual(reveal.sample(), { progress: 1, energy: 0 })
+  assert.equal(reveal.active, false)
+  reveal.start(); assert.deepEqual(reveal.sample(), { progress: 0, energy: 1 })
+})

@@ -55,6 +55,8 @@ export interface SearchResult {
   routeMetres: number | null
   routeNodes: Uint32Array
   routeEdges: Uint32Array
+  routeReversed: Uint8Array
+  routeLengths: Uint32Array
   trace: Uint32Array
   checkpoints: Uint32Array
   checkpointStride: number

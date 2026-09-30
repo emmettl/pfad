@@ -117,6 +117,9 @@ accompaniment and a coherent ambient experience.
   must represent actual queue state rather than an invented wave.
 - [ ] Make the final route legible within dense urban exploration without
   overwhelming the wider field of considered roads.
+- [x] Give completion an origin-to-destination reveal with a travelling glow and
+  a gentle settle, drawn from the actual route curves. Keep this closing clock
+  separate from search events; support pause, restart, seeking and reduced motion.
 - [ ] Refine playback pacing and duration choices for searches of very different
   sizes. State any nonlinear event-time treatment clearly.
 - [ ] Improve endpoint editing, snap feedback, keyboard use and touch controls.

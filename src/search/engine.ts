@@ -152,6 +152,8 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
     algorithm: 'dijkstra/1', tieBreak: 'distance, then ascending node id; neighbours in compiler edge order',
     start, goal, searchMs, snapMs, routeMetres: Number.isFinite(distance[goal.node]) ? distance[goal.node] / 100 : null,
     routeNodes: Uint32Array.from(routeNodes), routeEdges: Uint32Array.from(routeEdges),
+    routeReversed: Uint8Array.from(routeEdges, (edge, i) => Number(graph.from[edge] !== routeNodes[i])),
+    routeLengths: Uint32Array.from(routeEdges, edge => graph.length[edge]),
     trace: events.slice(0, used), checkpoints: Uint32Array.from(checkpoints), checkpointStride,
     edgeTimes, textureWidth, textureHeight, exploredNodes, examinedArcs, improvements, uniqueEdges, maxQueue: heap.maximum,
   }

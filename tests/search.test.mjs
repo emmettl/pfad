@@ -19,6 +19,8 @@ test('Dijkstra agrees with independent relaxation, including disconnected endpoi
       const r = dijkstra(g, endpoint(0), endpoint(t))
       assert.equal(r.routeMetres, reference(g, 0, t))
       if (r.routeMetres !== null) assert.equal([...r.routeEdges].reduce((sum, e) => sum + g.length[e], 0) / 100, r.routeMetres)
+      assert.deepEqual([...r.routeLengths], [...r.routeEdges].map(e => g.length[e]))
+      assert.deepEqual([...r.routeReversed], [...r.routeEdges].map((e, i) => Number(g.from[e] !== r.routeNodes[i])))
     }
   }
 })
