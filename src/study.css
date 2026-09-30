@@ -9,12 +9,14 @@ a { color: inherit; text-underline-offset: 4px; }
 button:focus-visible, select:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid #c7eee0; outline-offset: 4px; }
 .study { width: 100vw; height: 100svh; min-height: 520px; position: relative; }
 .study-header { position: absolute; left: 32px; right: 32px; top: 26px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 5; pointer-events: none; }
-.identity, .about { pointer-events: auto; }
-.header-tools { display: flex; flex-direction: column; align-items: flex-end; pointer-events: auto; }
+.identity { pointer-events: none; }
+.identity a, .about { pointer-events: auto; }
+.header-tools { display: flex; flex-direction: column; align-items: flex-end; pointer-events: none; }
+.study-header, .playback-panel, footer { text-shadow: 0 1px 6px #080d10, 0 0 3px #080d10; }
 .sound-control { display: flex; flex-direction: column; align-items: flex-end; font-size: 10px; color: #9fb4a9; }
 .sound-row { display: flex; align-items: center; gap: 10px; }
-.sound-row button { display: flex; align-items: center; gap: 7px; border: 0; padding: 5px 0 5px 8px; font-size: 11px; }
-.sound-row input { width: 72px; height: 38px; margin: 0; appearance: none; background: transparent; cursor: pointer; }
+.sound-row button { display: flex; align-items: center; gap: 7px; border: 0; padding: 5px 0 5px 8px; font-size: 11px; pointer-events: auto; }
+.sound-row input { width: 72px; height: 38px; margin: 0; appearance: none; background: transparent; cursor: pointer; pointer-events: auto; }
 .sound-row input::-webkit-slider-runnable-track { height: 1px; background: #567564; }
 .sound-row input::-webkit-slider-thumb { appearance: none; width: 10px; height: 10px; margin-top: -4.5px; border-radius: 50%; background: #adcab9; }
 .sound-row input::-moz-range-track { height: 1px; background: #567564; }
@@ -30,7 +32,8 @@ h1 { font-size: 43px; font-weight: 400; letter-spacing: -.07em; line-height: 1; 
 .about[open] summary::after { content: ' −'; }
 .about-panel { position: absolute; right: 0; top: 40px; width: min(370px, calc(100vw - 40px)); padding: 25px; background: #0d1715f5; border: 1px solid #2a4136; line-height: 1.7; font-size: 12px; box-shadow: 0 20px 50px #0008; }
 .about-panel h2 { font-size: 17px; color: #d3e7dc; font-weight: 400; line-height: 1.5; margin-top: 0; }
-.route-panel { position: absolute; z-index: 3; top: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; padding: 8px; background: #0a1310e8; border: 1px solid #243b2f; border-radius: 5px; }
+.route-panel { position: absolute; z-index: 3; top: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; padding: 8px; background: transparent; border: 1px solid #243b2f; border-radius: 5px; pointer-events: none; }
+.route-panel :is(button, select) { pointer-events: auto; }
 .endpoint-control { display: flex; align-items: center; gap: 7px; padding-left: 9px; border: 1px solid #283b33; border-radius: 3px; }
 .point-letter { font-family: 'DM Mono', monospace; color: #7aaf95; font-size: 10px; }
 .endpoint-control select { border: 0; width: 112px; padding: 9px 5px; font-size: 12px; min-height: 38px; }
@@ -38,7 +41,7 @@ h1 { font-size: 43px; font-weight: 400; letter-spacing: -.07em; line-height: 1; 
 .pick-button { border: 0; border-left: 1px solid #283b33; font-size: 20px; padding: 5px 9px; }
 .swap-button { border: 0; font-size: 19px; padding: 6px; }
 .search-button { font-size: 12px; background: #14281f; border-color: #365d49; min-width: 75px; }
-.map { position: absolute; inset: 150px 0 155px; touch-action: none; cursor: grab; }
+.map { position: absolute; inset: 0; touch-action: none; cursor: grab; }
 .map canvas { display: block; touch-action: none; }
 .map:active { cursor: grabbing; }
 .map.pick-mode { cursor: crosshair; }
@@ -56,7 +59,8 @@ h1 { font-size: 43px; font-weight: 400; letter-spacing: -.07em; line-height: 1; 
 .loading-panel progress::-webkit-progress-value { background: #83b798; }
 .loading-panel progress::-moz-progress-bar { background: #83b798; }
 .mono { font-family: 'DM Mono', monospace; font-size: 11px; }
-.playback-panel { position: absolute; z-index: 3; left: 32px; right: 32px; bottom: 44px; max-width: 1100px; margin: auto; padding-top: 15px; border-top: 1px solid #24372c; background: #080d10; }
+.playback-panel { position: absolute; z-index: 3; left: 32px; right: 32px; bottom: 44px; max-width: 1100px; margin: auto; padding-top: 15px; background: transparent; pointer-events: none; }
+.playback-panel :is(button, select, .ms-timeline-scrubber) { pointer-events: auto; }
 .search-readout { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding-bottom: 15px; }
 .route-caption { display: flex; gap: 16px; align-items: baseline; font-size: 15px; font-weight: 300; color: #d1e4d7; }
 .route-caption > span { color: #739781; }
@@ -72,8 +76,8 @@ h1 { font-size: 43px; font-weight: 400; letter-spacing: -.07em; line-height: 1; 
 .event-readout { display: flex; gap: 24px; margin-top: 10px; font-size: 10px; color: #718d7b; }
 .event-readout strong { font-family: 'DM Mono', monospace; font-weight: 400; color: #9fbba9; }
 .replay-status { margin-left: auto; }
-footer { position: absolute; bottom: 13px; left: 32px; right: 32px; display: flex; justify-content: space-between; gap: 10px; font-size: 9px; color: #657d6d; z-index: 2; }
-footer a { text-decoration: none; }
+footer { position: absolute; bottom: 13px; left: 32px; right: 32px; display: flex; justify-content: space-between; gap: 10px; font-size: 9px; color: #657d6d; z-index: 2; pointer-events: none; }
+footer a { text-decoration: none; pointer-events: auto; }
 @media (max-width: 800px) {
   .study-header { left: 20px; right: 20px; top: 18px; } h1 { font-size: 33px; } .identity p { display: none; }
   .route-panel { top: 104px; width: calc(100% - 40px); max-width: 490px; gap: 5px; padding: 6px; }
@@ -81,7 +85,7 @@ footer a { text-decoration: none; }
   .pick-button { padding: 5px; } .search-button { min-width: 58px; padding: 8px; font-size: 11px; }
   button, .endpoint-control select, .replay-controls select { min-height: 44px; }
   .sound-row input { height: 44px; }
-  .map { top: 185px; bottom: 210px; } .map-hint { top: 164px; font-size: 11px; }
+  .map-hint { top: 164px; font-size: 11px; }
   .playback-panel { left: 20px; right: 20px; bottom: 50px; } .search-readout { flex-direction: column; gap: 10px; padding-bottom: 12px; }
   .route-caption { font-size: 13px; gap: 10px; } .replay-controls { gap: 6px; } .replay-time { width: 61px; font-size: 11px; } .replay-time small { display: none; }
   .event-readout { gap: 12px; font-size: 9px; flex-wrap: wrap; } .replay-status { margin-left: 0; flex: 0 0 100%; }

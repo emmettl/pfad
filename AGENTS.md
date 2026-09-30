@@ -13,6 +13,8 @@ over a real road graph, replayed at human scale. No invented search activity.
   and deterministic tie-breaking for every reproducible search recording.
 - The visual baseline is validated: a dark field and luminous real road searches,
   drawing on Gleislicht. Refine this language; grid84 may inform individual details.
+  The map fills the viewport behind transparent header/footer overlays; controls
+  must not reserve vertical map bands or block gestures in their empty space.
   The edition is unnumbered. Do not assign a catalogue number.
 - Use `docs/ROADMAP.md` for staged priorities, completion criteria and the feature
   wishlist. Wishlist items are possibilities, not committed implementation scope.

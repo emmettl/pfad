@@ -45,6 +45,10 @@ second road. The endpoint markers are separate from explored edges.
 The whole national drawing is 4,119,930 line vertices. The renderer caps pixel
 ratio at 1.5, skips unchanged frames, and supports pan, wheel zoom and pinch.
 Reduced-motion preference starts at the completed trace with autoplay disabled.
+The canvas fills the viewport behind transparent header, playback and footer
+overlays. Empty overlay space passes map gestures through; buttons, selectors,
+links and the timeline keep their own interaction areas. Subtle text shadows
+preserve label contrast without reserving or obscuring bands of the map.
 
 ## Verification and remaining gates
 
