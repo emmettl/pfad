@@ -141,7 +141,7 @@ export function App() {
         <button disabled={!result || busy} onClick={() => { seek(0); setPlaying(true) }} aria-label="Replay search from the beginning">↺</button>
         <TimelineScrubber windowStart={0} windowEnd={duration} time={progress * duration} onSeek={time => { setPlaying(false); seek(time / duration) }} onScrubStart={() => setPlaying(false)} ariaLabel="Search replay" ariaValueText={`${(progress * duration).toFixed(1)} seconds of ${duration}; ${Math.floor(progress * (result?.trace.length ?? 0))} recorded events`} step={.01} disabled={!result || busy} />
         <span className="replay-time">{(progress * duration).toFixed(1)}<small> / {duration}s</small></span>
-        <select aria-label="Replay duration" value={duration} onChange={event => setDuration(Number(event.target.value))}>{[15, 30, 60, 120].map(value => <option key={value} value={value}>{value}s</option>)}</select>
+        <select aria-label="Replay duration" value={duration} onChange={event => setDuration(Number(event.target.value))}>{[5, 15, 30, 60, 120].map(value => <option key={value} value={value}>{value}s</option>)}</select>
       </div>
       <div className="event-readout"><span><strong data-testid="settled-count">{number.format(counts[0])}</strong> nodes settled</span><span><strong data-testid="examined-count">{number.format(counts[1])}</strong> connections examined</span><span className="replay-status">{busy ? 'Recording search' : revealing ? playing ? 'Revealing the route' : 'Route reveal paused' : completed ? result.routeMetres === null ? 'No route in this graph' : 'Route found' : playing ? 'Replaying recorded events' : result ? 'Replay paused' : 'Preparing the network'}</span></div>
     </div>
