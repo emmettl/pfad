@@ -14,8 +14,8 @@ that can be watched, paused and inspected. The search is the subject.
 
 ## Current state
 
-A first working national study: a Web Worker runs deterministic Dijkstra or
-bidirectional Dijkstra on
+A first working national study: a Web Worker runs deterministic Dijkstra,
+bidirectional Dijkstra or A* on
 1,258,587 nodes and 1,390,206 physical road edges. A WebGL map reveals real
 examinations in event order. Choose towns or points on the map, pan and zoom,
 pause, seek backwards, or change the replay duration. The visual direction
@@ -26,6 +26,12 @@ two genuine fronts, mint from the origin and amber from the destination. A small
 light marks their first recorded connection; the algorithm continues to confirm
 the shortest distance. Completion reveals the actual route with a travelling
 glow. Very faint border and lake outlines can be toggled beside Sound.
+
+A* explores using a checked lower bound on the remaining distance. Its cooler
+blue search shades towards ice-white as that estimate falls, with quieter older
+branches. The bound is prepared separately from the timed query; it respects the
+actual directed road costs, including their rounding. Every visible road still
+comes from a real examination.
 
 Sound is optional: three original two-minute Driftbox sketches flow through
 eight-second crossfades on their own clock. Enable Sound to listen and adjust
@@ -63,6 +69,8 @@ ignored `.cache/`; only the selected browser dataset is committed.
 [Bidirectional review](docs/evidence/bidirectional-2026-10-01/review.json) records
 algorithm/source identities and equal-cost national comparisons, together with
 desktop Chromium and mobile-viewport WebKit visual/lifecycle checks.
+[A* review](docs/evidence/astar-2026-10-01/review.json) adds representative cost
+comparisons and an independent check of every directed arc's heuristic bound.
 
 ## Hosting
 

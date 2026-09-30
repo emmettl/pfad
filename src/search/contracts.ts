@@ -43,12 +43,20 @@ export interface Graph {
 
 export interface Point { name: string; lon: number; lat: number }
 export interface Endpoint extends Point { node: number; snapMetres: number }
-export type SearchAlgorithm = 'dijkstra' | 'bidirectional'
+export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar'
 export interface Meeting { event: number; node: number; lon: number; lat: number; candidateMetres: number }
+export interface HeuristicRecord {
+  version: 'feasible-planar-distance/1'
+  preparationMs: number
+  correctedNodes: number
+  longitudeScale: number
+  initialStartCm: number
+  startLowerBoundCm: number
+}
 
 export interface SearchResult {
   dataset?: { identity: string; compiler: string; profile: string; sourceSha256: string; sourceTimestamp: string }
-  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1'
+  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1' | 'astar/1'
   tieBreak: string
   start: Endpoint
   goal: Endpoint
@@ -64,6 +72,8 @@ export interface SearchResult {
   checkpointStride: number
   edgeTimes: Float32Array
   backwardTimes?: Float32Array
+  goalProximity?: Uint8Array
+  heuristic?: HeuristicRecord
   meeting?: Meeting
   textureWidth: number
   textureHeight: number

@@ -37,6 +37,8 @@ promise. The wishlist is a pool of possibilities rather than committed scope.
 - [x] Deterministic Dijkstra in a worker, with genuine recorded events and counters.
 - [x] Alternate bidirectional Dijkstra: two real fronts, an event-tied meeting
   light, shortest-distance verification and selection on the same dataset.
+- [x] A* with a checked remaining-distance bound and a blue-to-ice visual
+  treatment driven by its genuine goal-directed trace.
 - [x] Town and map-point selection, pan/zoom, pause, seeking and replay duration.
 - [x] Reduced-motion behaviour, Chromium and mobile-viewport WebKit checks.
 - [x] Hardware rendering and replay measurements on an M4 Max.
@@ -159,21 +161,21 @@ music brief's lifecycle and device criteria.
 **Outcome:** the same geographical question reveals how algorithm choice changes
 the field of possibilities explored.
 
-- [ ] Add A* with a heuristic valid for the declared cost model.
-- [ ] Verify A* against Dijkstra for optimal cost on the same graph and profile.
+- [x] Add A* with a heuristic valid for the declared cost model.
+- [x] Verify A* against Dijkstra for optimal cost on the same graph and profile.
   Equal-cost routes may differ; do not require identical geometry unnecessarily.
 - [x] Offer algorithm selection while retaining the same endpoints and dataset.
 - [x] Add bidirectional Dijkstra with independent cost checks, directed reverse
   adjacency, separate front events and a light at their first real connection.
-- [ ] Record algorithm and heuristic versions, tie-breaking, explored work,
+- [x] Record algorithm and heuristic versions, tie-breaking, explored work,
   computation time and final cost consistently.
 - [ ] Develop a comparison view: first simple switching, then paired playback
   if it helps. Define whether clocks compare event progress or elapsed replay time.
 
 **Complete when:** comparisons are reproducible, costs are independently checked,
 and each visible search has its own genuine trace. Search speed and replay duration
-remain separate. Bidirectional Dijkstra is delivered as an alternate mode;
-A*, paired comparison and more specialised methods remain open.
+remain separate. Bidirectional Dijkstra and A* are delivered as alternate modes;
+paired comparison and more specialised methods remain open.
 
 ### R5 · Make studies reproducible and shareable
 
@@ -251,4 +253,5 @@ enough evidence to make them credible.
 
 Related: [Concept](CONCEPT.md) · [Music](MUSIC.md) · [Architecture](ARCHITECTURE.md) ·
 [Data and refresh policy](DATA.md) · [Initial replay evidence](evidence/first-study-2026-09-30/replay-report.json) ·
-[Bidirectional review](evidence/bidirectional-2026-10-01/review.json).
+[Bidirectional review](evidence/bidirectional-2026-10-01/review.json) ·
+[A* review](evidence/astar-2026-10-01/review.json).

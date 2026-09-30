@@ -72,10 +72,15 @@ h1 { font-size: 43px; font-weight: 400; letter-spacing: -.07em; line-height: 1; 
 .route-caption em { font-family: 'DM Mono', monospace; font-style: normal; font-size: 11px; color: #9eb5a7; }
 .compute-readout { display: flex; gap: 9px; font-size: 10px; color: #829d8c; align-items: baseline; font-family: 'DM Mono', monospace; }
 .compute-readout strong { font-size: 13px; color: #b4d0bf; font-weight: 400; }
-.compute-readout select { border: 0; padding: 5px 0; min-height: 38px; font: inherit; color: #a6c5b3; background: transparent; }
+.compute-readout select { border: 0; padding: 5px 0; height: 38px; min-height: 38px; width: 160px; font: inherit; color: #a6c5b3; background: transparent; }
+.study[data-algorithm='astar/1'] .compute-readout select { width: 50px; }
+.study[data-algorithm='dijkstra/1'] .compute-readout select { width: 85px; }
 .front-key { display: inline-flex; gap: 5px; align-items: center; white-space: nowrap; }
 .front-key i { display: inline-block; width: 4px; height: 4px; border-radius: 50%; }
 .front-a { background: #85f2c7; } .front-b { background: #ffc26e; }
+.front-key .goal-gradient { width: 16px; height: 2px; border-radius: 0; background: linear-gradient(90deg, #6bb8ff, #c7f7ff); }
+.astar .marker-0 { color: #abccec; } .astar .marker-0 .marker-dot { border-color: #abccec; background: #183247; }
+.astar .marker-1 { color: #d9edf1; } .astar .marker-1 .marker-dot { border-color: #d9edf1; background: #2f4549; }
 .bidirectional .marker-1 { color: #dbb98a; } .bidirectional .marker-1 .marker-dot { background: #eac28e; box-shadow: 0 0 14px #edb36155; }
 .replay-controls { display: flex; align-items: center; gap: 10px; }
 .replay-controls > button { font-size: 11px; padding: 7px 10px; min-width: 40px; }
@@ -96,7 +101,7 @@ footer a { text-decoration: none; pointer-events: auto; }
   button, .endpoint-control select, .replay-controls select { min-height: 44px; }
   .sound-row input { height: 44px; }
   .outline-control { min-height: 44px; }
-  .compute-readout { gap: 7px; flex-wrap: wrap; } .compute-readout select { min-height: 44px; }
+  .compute-readout { gap: 7px; flex-wrap: wrap; } .compute-readout select { height: 44px; min-height: 44px; }
   .map-hint { top: 164px; font-size: 11px; }
   .playback-panel { left: 20px; right: 20px; bottom: 50px; } .search-readout { flex-direction: column; gap: 10px; padding-bottom: 12px; }
   .route-caption { font-size: 13px; gap: 10px; } .replay-controls { gap: 6px; } .replay-time { width: 61px; font-size: 11px; } .replay-time small { display: none; }

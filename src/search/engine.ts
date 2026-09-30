@@ -1,4 +1,4 @@
-import type { Endpoint, Graph, Point, SearchResult } from './contracts.ts'
+import type { Endpoint, Graph, HeuristicRecord, Point, SearchResult } from './contracts.ts'
 
 export function compileGraph(graph: Omit<Graph, 'offsets' | 'arcTo' | 'arcEdge' | 'incoming'>): Graph {
   const n = graph.xy.length / 2
@@ -47,7 +47,7 @@ export function snapEndpoints(graph: Graph, start: Point, goal: Point): { start:
   const queue = new Uint32Array(reachable.length)
   reachable[source.node] = 1; queue[0] = source.node
   let end = 1
-  // Endpoint preparation is recorded separately from the Dijkstra replay.
+  // Endpoint preparation is recorded separately from the selected search replay.
   for (let q = 0; q < end; q++) {
     const u = queue[q]
     for (let a = graph.offsets[u]; a < graph.offsets[u + 1]; a++) {
@@ -99,6 +99,10 @@ export class Heap {
 }
 
 export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0): SearchResult {
+  return singleFrontSearch(graph, start, goal, snapMs)
+}
+
+export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0, estimate?: { potential: Float64Array; record: HeuristicRecord }): SearchResult {
   const begun = performance.now()
   const n = graph.xy.length / 2, e = graph.from.length
   const distance = new Float64Array(n).fill(Infinity)
@@ -108,6 +112,10 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
   // One settled event per node; at most one examination and improvement per arc.
   const events = new Uint32Array(n + 2 * graph.arcTo.length)
   const firstSeen = new Uint32Array(e), firstImproved = new Uint32Array(e)
+  const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
+  const goalProximity = estimate ? new Uint8Array(textureWidth * textureHeight) : undefined
+  const potential = estimate?.potential
+  const originEstimate = Math.max(1, potential?.[start.node] ?? 0)
   const checkpointStride = 4096
   const checkpoints: number[] = [0, 0, 0]
   let used = 0, exploredNodes = 0, examinedArcs = 0, improvements = 0, uniqueEdges = 0
@@ -115,7 +123,7 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
     events[used++] = id * 4 + kind
     if (used % checkpointStride === 0) checkpoints.push(exploredNodes, examinedArcs, improvements)
   }
-  distance[start.node] = 0; heap.push(start.node, 0)
+  distance[start.node] = 0; heap.push(start.node, potential?.[start.node] ?? 0)
   while (heap.size) {
     const u = heap.pop()
     if (settled[u]) continue
@@ -124,11 +132,14 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
     for (let a = graph.offsets[u]; a < graph.offsets[u + 1]; a++) {
       const v = graph.arcTo[a], road = graph.arcEdge[a]
       examinedArcs++; record(1, a)
-      if (!firstSeen[road]) { firstSeen[road] = used; uniqueEdges++ }
+      if (!firstSeen[road]) {
+        firstSeen[road] = used; uniqueEdges++
+        if (goalProximity && potential) goalProximity[road] = Math.round(255 * (1 - Math.min(1, potential[v] / originEstimate)))
+      }
       const candidate = distance[u] + graph.length[road]
       if (candidate < distance[v]) {
         distance[v] = candidate; predecessor[v] = u; previousEdge[v] = road
-        heap.push(v, candidate); improvements++; record(2, a)
+        heap.push(v, candidate + (potential?.[v] ?? 0)); improvements++; record(2, a)
         if (!firstImproved[road]) firstImproved[road] = used
       }
     }
@@ -145,7 +156,6 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
     }
     routeNodes.reverse(); routeEdges.reverse()
   }
-  const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.ceil(e / textureWidth)
   const edgeTimes = new Float32Array(textureWidth * textureHeight * 2).fill(-1)
   for (let i = 0; i < e; i++) {
     if (firstSeen[i]) edgeTimes[i * 2] = firstSeen[i]
@@ -153,13 +163,14 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
   }
   for (const road of routeEdges) edgeTimes[road * 2 + 1] = -2 - edgeTimes[road * 2 + 1]
   return {
-    algorithm: 'dijkstra/1', tieBreak: 'distance, then ascending node id; neighbours in compiler edge order',
+    algorithm: estimate ? 'astar/1' : 'dijkstra/1',
+    tieBreak: estimate ? 'cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order' : 'distance, then ascending node id; neighbours in compiler edge order',
     start, goal, searchMs, snapMs, routeMetres: Number.isFinite(distance[goal.node]) ? distance[goal.node] / 100 : null,
     routeNodes: Uint32Array.from(routeNodes), routeEdges: Uint32Array.from(routeEdges),
     routeReversed: Uint8Array.from(routeEdges, (edge, i) => Number(graph.from[edge] !== routeNodes[i])),
     routeLengths: Uint32Array.from(routeEdges, edge => graph.length[edge]),
     trace: events.slice(0, used), checkpoints: Uint32Array.from(checkpoints), checkpointStride,
-    edgeTimes, textureWidth, textureHeight, exploredNodes, examinedArcs, improvements, uniqueEdges, maxQueue: heap.maximum,
+    edgeTimes, goalProximity, heuristic: estimate?.record, textureWidth, textureHeight, exploredNodes, examinedArcs, improvements, uniqueEdges, maxQueue: heap.maximum,
   }
 }
 

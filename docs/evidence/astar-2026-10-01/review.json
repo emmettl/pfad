@@ -1,0 +1,379 @@
+{
+  "measuredAt": "2026-09-30T23:23:55.779Z",
+  "host": "Apple M4 Max",
+  "note": "Local Node algorithm audit and desktop-host Chromium Metal / mobile-viewport WebKit review. These are not physical-phone or peak-memory measurements. Search timers exclude snapping, reverse-index preparation and the separately recorded heuristic preparation. Independent consistency audit runs outside those measurements.",
+  "dataset": {
+    "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+    "compiler": "pfad-study-compiler/1",
+    "profile": "road-connectivity-distance-v1",
+    "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+    "sourceTimestamp": "2026-09-29T20:22:51Z"
+  },
+  "views": [
+    {
+      "name": "desktop",
+      "records": [
+        {
+          "algorithm": "dijkstra/1",
+          "dataset": {
+            "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "compiler": "pfad-study-compiler/1",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "routeMetres": 262733.98,
+          "events": 4993816,
+          "settlements": 1199535,
+          "examinations": 2551408,
+          "searchMs": 152.90000000596046,
+          "traceBytes": 19975264,
+          "textureBytes": 11124736
+        },
+        {
+          "algorithm": "astar/1",
+          "dataset": {
+            "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "compiler": "pfad-study-compiler/1",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 44.3999999910593,
+            "correctedNodes": 30175,
+            "longitudeScale": 0.6716286555533376,
+            "initialStartCm": 22156493,
+            "startLowerBoundCm": 22156493
+          },
+          "routeMetres": 262733.98,
+          "events": 2816028,
+          "settlements": 674004,
+          "examinations": 1434006,
+          "searchMs": 116.5,
+          "traceBytes": 11264112,
+          "textureBytes": 12515328
+        }
+      ],
+      "errors": [],
+      "selectorHeight": 38
+    },
+    {
+      "name": "mobile",
+      "records": [
+        {
+          "algorithm": "dijkstra/1",
+          "dataset": {
+            "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "compiler": "pfad-study-compiler/1",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "routeMetres": 262733.98,
+          "events": 4993816,
+          "settlements": 1199535,
+          "examinations": 2551408,
+          "searchMs": 137,
+          "traceBytes": 19975264,
+          "textureBytes": 11124736
+        },
+        {
+          "algorithm": "astar/1",
+          "dataset": {
+            "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "compiler": "pfad-study-compiler/1",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 49,
+            "correctedNodes": 30175,
+            "longitudeScale": 0.6716286555533376,
+            "initialStartCm": 22156493,
+            "startLowerBoundCm": 22156493
+          },
+          "routeMetres": 262733.98,
+          "events": 2816028,
+          "settlements": 674004,
+          "examinations": 1434006,
+          "searchMs": 107,
+          "traceBytes": 11264112,
+          "textureBytes": 12515328
+        }
+      ],
+      "errors": [],
+      "selectorHeight": 44
+    }
+  ],
+  "comparisons": [
+    {
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "routeMetres": 262733.98,
+      "checkedDirectedArcs": 2648785,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 147.62595800000003,
+          "settlements": 1199535,
+          "examinations": 2551408,
+          "events": 4993816
+        },
+        {
+          "algorithm": "astar/1",
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 49.499333000000036,
+            "correctedNodes": 30175,
+            "longitudeScale": 0.6716286555533376,
+            "initialStartCm": 22156493,
+            "startLowerBoundCm": 22156493
+          },
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 104.68579200000005,
+          "settlements": 674004,
+          "examinations": 1434006,
+          "events": 2816028
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Basel",
+        "lon": 7.58856,
+        "lat": 47.55963,
+        "node": 1230603,
+        "snapMetres": 4.487403547768706
+      },
+      "goal": {
+        "name": "Lugano",
+        "lon": 8.95178,
+        "lat": 46.00321,
+        "node": 219598,
+        "snapMetres": 75.67814902710364
+      },
+      "routeMetres": 261207.21,
+      "checkedDirectedArcs": 2648785,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 156.99654099999998,
+          "settlements": 1186739,
+          "examinations": 2523331,
+          "events": 4940207
+        },
+        {
+          "algorithm": "astar/1",
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 68.012833,
+            "correctedNodes": 40376,
+            "longitudeScale": 0.6716286555533376,
+            "initialStartCm": 20079028,
+            "startLowerBoundCm": 20079028
+          },
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 91.93499999999995,
+          "settlements": 553314,
+          "examinations": 1177743,
+          "events": 2313001
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Chur",
+        "lon": 9.53166,
+        "lat": 46.85065,
+        "node": 68286,
+        "snapMetres": 30.768790193585208
+      },
+      "goal": {
+        "name": "Sion",
+        "lon": 7.35799,
+        "lat": 46.23226,
+        "node": 426843,
+        "snapMetres": 155.11139538375946
+      },
+      "routeMetres": 222934.27,
+      "checkedDirectedArcs": 2648785,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 116.62370899999996,
+          "settlements": 885886,
+          "examinations": 1888234,
+          "events": 3692471
+        },
+        {
+          "algorithm": "astar/1",
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 42.63287500000001,
+            "correctedNodes": 37426,
+            "longitudeScale": 0.6716286555533376,
+            "initialStartCm": 17629633,
+            "startLowerBoundCm": 17629633
+          },
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 8.832417000000078,
+          "settlements": 63869,
+          "examinations": 135465,
+          "events": 266291
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Luzern",
+        "lon": 8.30934,
+        "lat": 47.05019,
+        "node": 251950,
+        "snapMetres": 3.228099609842852
+      },
+      "routeMetres": 49303.39,
+      "checkedDirectedArcs": 2648785,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 40.81495800000016,
+          "settlements": 294418,
+          "examinations": 625585,
+          "events": 1225934
+        },
+        {
+          "algorithm": "astar/1",
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 46.77587500000004,
+            "correctedNodes": 30551,
+            "longitudeScale": 0.6716286555533376,
+            "initialStartCm": 4026445,
+            "startLowerBoundCm": 4026445
+          },
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 8.728458000000046,
+          "settlements": 51530,
+          "examinations": 106366,
+          "events": 212371
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "St. Moritz",
+        "lon": 9.83552,
+        "lat": 46.49081,
+        "node": 37092,
+        "snapMetres": 1.8922676458176662
+      },
+      "goal": {
+        "name": "Andermatt",
+        "lon": 8.59479,
+        "lat": 46.63565,
+        "node": 70921,
+        "snapMetres": 38.92576672115776
+      },
+      "routeMetres": 155195.81,
+      "checkedDirectedArcs": 2648785,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 14.028375000000096,
+          "settlements": 125564,
+          "examinations": 266456,
+          "events": 521634
+        },
+        {
+          "algorithm": "astar/1",
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 41.239750000000186,
+            "correctedNodes": 35323,
+            "longitudeScale": 0.6716286555533376,
+            "initialStartCm": 9404920,
+            "startLowerBoundCm": 9404920
+          },
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 4.365625000000136,
+          "settlements": 28250,
+          "examinations": 60128,
+          "events": 117818
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "routeMetres": 0,
+      "checkedDirectedArcs": 2648785,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 0.716707999999926,
+          "settlements": 1,
+          "examinations": 0,
+          "events": 1
+        },
+        {
+          "algorithm": "astar/1",
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 43.54808400000002,
+            "correctedNodes": 31396,
+            "longitudeScale": 0.6716286555533376,
+            "initialStartCm": 0,
+            "startLowerBoundCm": 0
+          },
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "searchMs": 0.6952080000000933,
+          "settlements": 1,
+          "examinations": 0,
+          "events": 1
+        }
+      ]
+    }
+  ],
+  "independentFixtures": "35 directed geographic graphs × 81 endpoint pairs checked against independent relaxation, including zero costs, disconnected pairs and misleading coordinate shortcuts; deterministic trace, tone and checkpoint fixtures."
+}

@@ -35,6 +35,29 @@ The reconstructed route follows original permitted directions even though the
 destination search reads the reverse graph. Independent relaxation tests cover
 directed, disconnected, zero-cost and first-contact-suboptimal cases.
 
+`astar/1` uses the same single-front recording loop as Dijkstra, ordering its
+heap by cost so far plus a remaining-distance bound, then ascending node ID.
+The heuristic is `feasible-planar-distance/1`. It starts with integer-centimetre
+planar distances to the destination, using the graph's maximum absolute latitude
+for the longitude scale. Independent coordinate and cost rounding means this
+initial estimate is not assumed admissible.
+
+Preparation lowers any estimate that violates `h(u) <= cost(u,v) + h(v)` on an
+original directed arc, propagating reductions through the reverse CSR until all
+constraints hold. Estimates remain nonnegative and the destination stays zero.
+Telescoping the inequality along any permitted path establishes a lower bound
+on its cost. The consistent potential permits permanent settlement and stopping
+when the destination is settled. See [Goldberg's survey, sections 2–3](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/goldberg-sofsem07.pdf).
+Zero-cost arcs and geographically misleading shortcuts are included in fixtures.
+This preparation is separate from the replayed A* query and is measured in the
+heuristic record; it is not presented as extra search activity.
+
+The A* result retains the heuristic version, preparation time, number of corrected
+nodes, longitude scale and initial/final origin estimate alongside the existing
+source identity, search time, work counters, tie-breaking and final cost.
+The reverse CSR is shared with bidirectional mode. Heuristic potentials add
+10,068,696 working bytes on the national graph and are released after each query.
+
 The first profile is road connectivity, not complete driving legality. Turn,
 barrier and conditional restrictions are not applied; their source records
 remain available. No timetable or vehicle contracts are repurposed for routing.
@@ -48,8 +71,8 @@ graph ID. Original arc IDs are retained even for reverse examinations. Checkpoin
 at every 4,096 events permit exact counters during arbitrary seeking.
 
 Computation time is measured around allocation and the selected recording loop;
-endpoint preparation is measured separately. Lazy reverse-CSR preparation,
-route reconstruction and GPU texture
+endpoint preparation is measured separately. Lazy reverse-CSR and A* heuristic
+preparation, route reconstruction and GPU texture
 preparation are outside that timer. The playback clock follows **event order**,
 not measured per-instruction timing. It stretches a real trace without inventing
 algorithm activity or pretending the processor is still searching.
@@ -61,6 +84,17 @@ authored decay from that recorded event. Reverse seeking changes the event cutof
 the final route becomes bright only at completion. Later examinations of the
 same physical road remain in the trace and counters rather than creating a
 second road. The endpoint markers are separate from explored edges.
+
+A* uses a cool blue-to-ice palette and dimmer historical branches. Each road's
+tone records the remaining-distance bound at the target of its first examined
+arc, normalised against the origin's bound. This is an estimate of remaining
+cost, not proof that a road belongs to the final route. Successful improvements
+retain their distinct emphasis, and recent examination pulses follow real event
+orders. No unexamined corridor or invented attraction to the goal is drawn.
+The tone texture uses one byte per padded physical edge: 1,390,592 bytes for the
+national graph, plus GPU storage. It is disposed when changing results. Pause
+and reverse seeking restore the same recorded colours and counters. All modes
+share the separate final-route presentation and reduced-motion behaviour.
 
 In bidirectional mode, each front has its own real first-examination/improvement
 texture: mint from the origin and amber from the destination. Where both have
@@ -130,8 +164,9 @@ missing chunks and inspect reduced-motion behaviour.
 
 Mobile WebKit here runs on a desktop host with an emulated viewport. Actual phone
 memory, thermal behaviour and frame pacing still require device measurements.
-Turn-rule validation is the next routing gate. A* and alternative visual styles
-can then be compared against the same declared graph and trace contracts.
+Turn-rule validation remains the next routing gate. Dijkstra, bidirectional
+Dijkstra and A* currently compare the same declared connectivity graph; their
+agreement does not establish driving legality.
 
 [The first-study replay measurement](evidence/first-study-2026-09-30/replay-report.json)
 records about 60 fps with Chromium Metal and WebKit on an M4 Max. Chromium’s

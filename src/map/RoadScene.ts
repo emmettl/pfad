@@ -10,31 +10,39 @@ const vertexShader = `
   uniform sampler2D uTimes;
   uniform sampler2D uBackwardTimes;
   uniform float uBidirectional;
+  uniform sampler2D uGoalProximity;
+  uniform float uAstar;
   uniform vec2 uTextureSize;
   varying vec2 vTimes;
   varying vec2 vBackwardTimes;
+  varying float vGoalProximity;
   void main() {
     vec2 uv = (vec2(mod(roadId, uTextureSize.x), floor(roadId / uTextureSize.x)) + .5) / uTextureSize;
     vTimes = texture2D(uTimes, uv).rg;
     vBackwardTimes = uBidirectional > .5 ? texture2D(uBackwardTimes, uv).rg : vec2(-1.);
+    vGoalProximity = uAstar > .5 ? texture2D(uGoalProximity, uv).r : 0.;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position.xy, 0., 1.);
   }
 `
 const fragmentShader = `
   uniform float uEvent;
   uniform float uTotal;
+  uniform float uAstar;
   varying vec2 vTimes;
   varying vec2 vBackwardTimes;
+  varying float vGoalProximity;
   vec4 front(vec2 times, vec3 quiet, vec3 bright) {
     if (times.x < 0. || uEvent < times.x) return vec4(0.);
     float age = (uEvent - times.x) / max(uTotal, 1.);
     float pulse = exp(-age / .006);
     float improvement = times.y < -1.5 ? -2. - times.y : times.y;
     float tree = improvement >= 0. && uEvent >= improvement ? 1. : 0.;
-    return vec4(mix(quiet, bright, pulse), .12 + tree * .07 + pulse * .72);
+    return vec4(mix(quiet, bright, pulse), mix(.12, .045, uAstar) + tree * mix(.07, .10, uAstar) + pulse * .72);
   }
   void main() {
-    vec4 a = front(vTimes, vec3(.21, .48, .42), vec3(.52, .95, .78));
+    vec3 quiet = mix(vec3(.21, .48, .42), mix(vec3(.16, .35, .65), vec3(.30, .55, .60), vGoalProximity), uAstar);
+    vec3 bright = mix(vec3(.52, .95, .78), mix(vec3(.42, .72, 1.), vec3(.78, .97, 1.), vGoalProximity), uAstar);
+    vec4 a = front(vTimes, quiet, bright);
     vec4 b = front(vBackwardTimes, vec3(.55, .38, .19), vec3(1., .76, .43));
     float total = a.a + b.a;
     if (total <= 0.) discard;
@@ -49,6 +57,7 @@ export class RoadScene {
   material: THREE.ShaderMaterial
   texture: THREE.DataTexture
   backwardTexture: THREE.DataTexture
+  proximityTexture: THREE.DataTexture
   manifest?: StudyManifest
   events = 1
   width = 1
@@ -90,9 +99,11 @@ export class RoadScene {
     this.texture.needsUpdate = true
     this.backwardTexture = new THREE.DataTexture(new Float32Array([-1, -1]), 1, 1, THREE.RGFormat, THREE.FloatType)
     this.backwardTexture.needsUpdate = true
+    this.proximityTexture = new THREE.DataTexture(new Uint8Array([0]), 1, 1, THREE.RedFormat, THREE.UnsignedByteType)
+    this.proximityTexture.needsUpdate = true
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader,
-      uniforms: { uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
+      uniforms: { uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
       transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     })
     host.appendChild(this.renderer.domElement)
@@ -125,6 +136,7 @@ export class RoadScene {
         canvas.dataset.totalEvents = String(this.events)
         canvas.dataset.flashPhase = this.flash.active ? 'flashing' : 'hidden'
         canvas.dataset.flashProgress = String(this.flash.progress)
+        canvas.dataset.goalDirected = this.material.uniforms.uAstar.value ? 'true' : 'false'
         this.dirty = false
       }
       this.frame = requestAnimationFrame(draw)
@@ -178,10 +190,15 @@ export class RoadScene {
     this.backwardTexture = new THREE.DataTexture(result.backwardTimes ?? new Float32Array([-1, -1]), result.backwardTimes ? result.textureWidth : 1, result.backwardTimes ? result.textureHeight : 1, THREE.RGFormat, THREE.FloatType)
     this.backwardTexture.needsUpdate = true
     this.material.uniforms.uBackwardTimes.value = this.backwardTexture; this.material.uniforms.uBidirectional.value = result.backwardTimes ? 1 : 0
+    this.proximityTexture.dispose()
+    this.proximityTexture = new THREE.DataTexture(result.goalProximity ?? new Uint8Array([0]), result.goalProximity ? result.textureWidth : 1, result.goalProximity ? result.textureHeight : 1, THREE.RedFormat, THREE.UnsignedByteType)
+    this.proximityTexture.needsUpdate = true
+    this.material.uniforms.uGoalProximity.value = this.proximityTexture; this.material.uniforms.uAstar.value = result.goalProximity ? 1 : 0
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uTextureSize.value.set(result.textureWidth, result.textureHeight)
     this.events = result.trace.length; this.material.uniforms.uTotal.value = this.events
     this.points = [result.start, result.goal]; this.markers.replaceChildren()
     this.markers.classList.toggle('bidirectional', !!result.backwardTimes)
+    this.markers.classList.toggle('astar', !!result.goalProximity)
     for (const [i, point] of this.points.entries()) {
       const element = document.createElement('div'); element.className = `map-marker marker-${i}`
       const dot = document.createElement('span'); dot.className = 'marker-dot'
@@ -284,6 +301,7 @@ export class RoadScene {
     document.removeEventListener('visibilitychange', this.visibilityChange)
     this.route?.geometry.dispose(); this.routeMaterial.dispose(); this.drawing.chunks = []
     this.flashPoint?.geometry.dispose(); this.flashMaterial.dispose(); this.backwardTexture.dispose()
+    this.proximityTexture.dispose()
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.scene.traverse(object => { if (object instanceof THREE.LineSegments) object.geometry.dispose() })
     this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.domElement.remove(); this.markers.remove()

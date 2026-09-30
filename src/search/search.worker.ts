@@ -1,6 +1,7 @@
 import type { Graph, Reply, Request, StudyManifest } from './contracts.ts'
 import { compileGraph, dijkstra, snapEndpoints } from './engine.ts'
 import { bidirectional, compileReverse, type ReverseGraph } from './bidirectional.ts'
+import { astar } from './astar.ts'
 import { validateManifest } from './manifest.ts'
 
 let graph: Graph | undefined
@@ -88,6 +89,7 @@ async function load(url: string) {
     }
   }
   graph = compileGraph({ xy, from, to, length, direction, category })
+  reverse = undefined
   if (vertices !== data.counts.vertices) throw new Error('Drawing geometry mismatch')
   if (graph.arcTo.length !== data.counts.directedArcs) throw new Error('Road connectivity mismatch')
   reply({ type: 'ready' })
@@ -100,12 +102,13 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
     else {
       if (!graph || !manifest) throw new Error('The national graph has not finished loading')
       const endpoints = snapEndpoints(graph, request.start, request.goal)
-      if (request.algorithm === 'bidirectional') reverse ??= compileReverse(graph)
+      if (request.algorithm === 'bidirectional' || request.algorithm === 'astar') reverse ??= compileReverse(graph)
       const result = request.algorithm === 'bidirectional' && reverse
         ? bidirectional(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
-        : dijkstra(graph, endpoints.start, endpoints.goal, endpoints.snapMs)
+        : request.algorithm === 'astar' && reverse ? astar(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
+          : dijkstra(graph, endpoints.start, endpoints.goal, endpoints.snapMs)
       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }
-      reply({ type: 'result', requestId: request.requestId, result }, [result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer, result.routeReversed.buffer, result.routeLengths.buffer, ...(result.backwardTimes ? [result.backwardTimes.buffer] : [])])
+      reply({ type: 'result', requestId: request.requestId, result }, [result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer, result.routeReversed.buffer, result.routeLengths.buffer, ...(result.backwardTimes ? [result.backwardTimes.buffer] : []), ...(result.goalProximity ? [result.goalProximity.buffer] : [])])
     }
   } catch (error) {
     reply({ type: 'error', requestId: request.type === 'search' ? request.requestId : undefined, message: error instanceof Error ? error.message : 'The search could not be completed' })
