@@ -3,15 +3,20 @@ import type { Point, SearchResult, StudyManifest } from '../search/contracts.ts'
 import { RouteDrawing, RouteReveal } from './routeReveal.ts'
 import { createRouteGeometry, createRouteMaterial } from './routeMaterial.ts'
 import { createGeography, disposeGeography } from './geography.ts'
+import { MeetingFlash, createMeetingMaterial } from './meetingFlash.ts'
 
 const vertexShader = `
   attribute float roadId;
   uniform sampler2D uTimes;
+  uniform sampler2D uBackwardTimes;
+  uniform float uBidirectional;
   uniform vec2 uTextureSize;
   varying vec2 vTimes;
+  varying vec2 vBackwardTimes;
   void main() {
     vec2 uv = (vec2(mod(roadId, uTextureSize.x), floor(roadId / uTextureSize.x)) + .5) / uTextureSize;
     vTimes = texture2D(uTimes, uv).rg;
+    vBackwardTimes = uBidirectional > .5 ? texture2D(uBackwardTimes, uv).rg : vec2(-1.);
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position.xy, 0., 1.);
   }
 `
@@ -19,16 +24,21 @@ const fragmentShader = `
   uniform float uEvent;
   uniform float uTotal;
   varying vec2 vTimes;
-  void main() {
-    if (vTimes.x < 0. || uEvent < vTimes.x) discard;
-    float age = (uEvent - vTimes.x) / max(uTotal, 1.);
+  varying vec2 vBackwardTimes;
+  vec4 front(vec2 times, vec3 quiet, vec3 bright) {
+    if (times.x < 0. || uEvent < times.x) return vec4(0.);
+    float age = (uEvent - times.x) / max(uTotal, 1.);
     float pulse = exp(-age / .006);
-    float route = vTimes.y < -1.5 ? 1. : 0.;
-    float improvement = route > .5 ? -2. - vTimes.y : vTimes.y;
+    float improvement = times.y < -1.5 ? -2. - times.y : times.y;
     float tree = improvement >= 0. && uEvent >= improvement ? 1. : 0.;
-    float intensity = .12 + tree * .07 + pulse * .72;
-    vec3 colour = mix(vec3(.21, .48, .42), vec3(.52, .95, .78), pulse);
-    gl_FragColor = vec4(colour, intensity);
+    return vec4(mix(quiet, bright, pulse), .12 + tree * .07 + pulse * .72);
+  }
+  void main() {
+    vec4 a = front(vTimes, vec3(.21, .48, .42), vec3(.52, .95, .78));
+    vec4 b = front(vBackwardTimes, vec3(.55, .38, .19), vec3(1., .76, .43));
+    float total = a.a + b.a;
+    if (total <= 0.) discard;
+    gl_FragColor = vec4((a.rgb * a.a + b.rgb * b.a) / total, min(total, 1.));
   }
 `
 
@@ -38,6 +48,7 @@ export class RoadScene {
   camera = new THREE.OrthographicCamera(-1, 1, 1, -1, .1, 10)
   material: THREE.ShaderMaterial
   texture: THREE.DataTexture
+  backwardTexture: THREE.DataTexture
   manifest?: StudyManifest
   events = 1
   width = 1
@@ -58,6 +69,10 @@ export class RoadScene {
   geographyVisible = true
   drawing = new RouteDrawing()
   reveal = new RouteReveal()
+  flash = new MeetingFlash()
+  flashMaterial = createMeetingMaterial()
+  flashPoint?: THREE.Points
+  meetingEvent?: number
   routeMaterial = createRouteMaterial()
   route?: THREE.Mesh
   revealPlaying = false
@@ -73,8 +88,11 @@ export class RoadScene {
     this.camera.position.z = 2
     this.texture = new THREE.DataTexture(new Float32Array([-1, -1]), 1, 1, THREE.RGFormat, THREE.FloatType)
     this.texture.needsUpdate = true
+    this.backwardTexture = new THREE.DataTexture(new Float32Array([-1, -1]), 1, 1, THREE.RGFormat, THREE.FloatType)
+    this.backwardTexture.needsUpdate = true
+    this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader,
-      uniforms: { uTimes: { value: this.texture }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
+      uniforms: { uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
       transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     })
     host.appendChild(this.renderer.domElement)
@@ -89,6 +107,7 @@ export class RoadScene {
     this.resize()
     this.previousFrame = performance.now()
     const draw = (now: number) => {
+      if (this.flash.active && this.revealPlaying && !document.hidden) { this.flash.advance(Math.min(now - this.previousFrame, 100)); this.updateFlash() }
       if (this.reveal.active && this.revealPlaying && !document.hidden) {
         const finished = this.reveal.advance(Math.min(now - this.previousFrame, 100))
         this.updateRoute()
@@ -102,6 +121,10 @@ export class RoadScene {
         canvas.dataset.routeProgress = String(this.routeMaterial.uniforms.uProgress.value)
         canvas.dataset.routeEnergy = String(this.routeMaterial.uniforms.uEnergy.value)
         canvas.dataset.outlines = this.geography?.visible ? 'visible' : 'hidden'
+        canvas.dataset.meetingEvent = String(this.meetingEvent ?? 0)
+        canvas.dataset.totalEvents = String(this.events)
+        canvas.dataset.flashPhase = this.flash.active ? 'flashing' : 'hidden'
+        canvas.dataset.flashProgress = String(this.flash.progress)
         this.dirty = false
       }
       this.frame = requestAnimationFrame(draw)
@@ -135,6 +158,14 @@ export class RoadScene {
     this.scene.add(lines); this.dirty = true
   }
   setResult(result: SearchResult) {
+    if (this.flashPoint) { this.scene.remove(this.flashPoint); this.flashPoint.geometry.dispose(); this.flashPoint = undefined }
+    this.flash.clear(); this.meetingEvent = result.meeting?.event
+    if (result.meeting) {
+      const position = this.project(result.meeting)
+      const geometry = new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute([position.x, position.y, 0], 3))
+      this.flashPoint = new THREE.Points(geometry, this.flashMaterial)
+      this.flashPoint.visible = false; this.flashPoint.frustumCulled = false; this.flashPoint.renderOrder = 2; this.scene.add(this.flashPoint)
+    }
     if (this.route) { this.scene.remove(this.route); this.route.geometry.dispose(); this.route = undefined }
     if (result.routeEdges.length) {
       this.route = new THREE.Mesh(createRouteGeometry(this.drawing.build(result.routeEdges, result.routeReversed, result.routeLengths)), this.routeMaterial)
@@ -143,9 +174,14 @@ export class RoadScene {
     this.texture.dispose()
     this.texture = new THREE.DataTexture(result.edgeTimes, result.textureWidth, result.textureHeight, THREE.RGFormat, THREE.FloatType)
     this.texture.needsUpdate = true
+    this.backwardTexture.dispose()
+    this.backwardTexture = new THREE.DataTexture(result.backwardTimes ?? new Float32Array([-1, -1]), result.backwardTimes ? result.textureWidth : 1, result.backwardTimes ? result.textureHeight : 1, THREE.RGFormat, THREE.FloatType)
+    this.backwardTexture.needsUpdate = true
+    this.material.uniforms.uBackwardTimes.value = this.backwardTexture; this.material.uniforms.uBidirectional.value = result.backwardTimes ? 1 : 0
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uTextureSize.value.set(result.textureWidth, result.textureHeight)
     this.events = result.trace.length; this.material.uniforms.uTotal.value = this.events
     this.points = [result.start, result.goal]; this.markers.replaceChildren()
+    this.markers.classList.toggle('bidirectional', !!result.backwardTimes)
     for (const [i, point] of this.points.entries()) {
       const element = document.createElement('div'); element.className = `map-marker marker-${i}`
       const dot = document.createElement('span'); dot.className = 'marker-dot'
@@ -154,15 +190,22 @@ export class RoadScene {
     }
     this.setProgress(0)
   }
-  setProgress(progress: number, animateRoute = false) {
-    this.material.uniforms.uEvent.value = Math.floor(progress * this.events)
+  setProgress(progress: number, animate = false) {
+    const next = Math.floor(progress * this.events)
+    this.flash.cross(this.material.uniforms.uEvent.value, next, this.meetingEvent, animate, this.reducedMotion.matches); this.updateFlash()
+    this.material.uniforms.uEvent.value = next
     if (progress < 1 || !this.route) this.reveal.clear()
-    else if (animateRoute && !this.reducedMotion.matches) this.reveal.start()
+    else if (animate && !this.reducedMotion.matches) this.reveal.start()
     else this.reveal.finish()
     this.onRouteRevealChange?.(this.reveal.active); this.updateRoute()
     return this.reveal.active
   }
   setRevealPlaying(playing: boolean) { this.revealPlaying = playing }
+  updateFlash() {
+    this.flashMaterial.uniforms.uAge.value = this.flash.progress
+    if (this.flashPoint) this.flashPoint.visible = this.flash.active
+    this.dirty = true
+  }
   updateRoute() {
     const sample = this.reveal.sample()
     this.routeMaterial.uniforms.uProgress.value = sample.progress; this.routeMaterial.uniforms.uEnergy.value = sample.energy
@@ -170,6 +213,7 @@ export class RoadScene {
     this.dirty = true
   }
   motionChange = () => {
+    if (this.reducedMotion.matches) { this.flash.clear(); this.updateFlash() }
     if (this.reducedMotion.matches && this.reveal.active) {
       this.reveal.finish(); this.updateRoute(); this.onRouteRevealChange?.(false); this.onRouteRevealComplete?.()
     }
@@ -239,6 +283,7 @@ export class RoadScene {
     this.reducedMotion.removeEventListener('change', this.motionChange)
     document.removeEventListener('visibilitychange', this.visibilityChange)
     this.route?.geometry.dispose(); this.routeMaterial.dispose(); this.drawing.chunks = []
+    this.flashPoint?.geometry.dispose(); this.flashMaterial.dispose(); this.backwardTexture.dispose()
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.scene.traverse(object => { if (object instanceof THREE.LineSegments) object.geometry.dispose() })
     this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.domElement.remove(); this.markers.remove()

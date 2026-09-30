@@ -4,12 +4,12 @@ import '@motionstudies/web/timeline-scrubber.css'
 import { RoadScene } from './map/RoadScene.ts'
 import { PLACES } from './places.ts'
 import { countsAt } from './search/engine.ts'
-import type { Point, Reply, SearchResult, StudyManifest } from './search/contracts.ts'
+import type { Point, Reply, SearchAlgorithm, SearchResult, StudyManifest } from './search/contracts.ts'
 import { SoundControl } from './music/SoundControl.tsx'
 import './study.css'
 
 const number = new Intl.NumberFormat('en-CH')
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export function App() {
   const host = useRef<HTMLDivElement>(null), scene = useRef<RoadScene | null>(null), worker = useRef<Worker | null>(null)
@@ -20,6 +20,8 @@ export function App() {
   const [ready, setReady] = useState(false), [busy, setBusy] = useState(false)
   const [loading, setLoading] = useState({ loaded: 0, total: 0, stage: 'Opening the road record' })
   const [result, setResult] = useState<SearchResult | null>(null)
+  const [algorithm, setAlgorithm] = useState<SearchAlgorithm>('dijkstra')
+  const algorithmRef = useRef<SearchAlgorithm>('dijkstra')
   const [progress, setProgress] = useState(0), [playing, setPlaying] = useState(false), [duration, setDuration] = useState(30)
   const [revealing, setRevealing] = useState(false)
   const revealingRef = useRef(false)
@@ -28,14 +30,14 @@ export function App() {
   const [error, setError] = useState(''), [mapError, setMapError] = useState('')
   const [pick, setPick] = useState<'start' | 'goal' | null>(null)
 
-  const seek = useCallback((value: number, animateRoute = false) => {
+  const seek = useCallback((value: number, animate = false) => {
     const p = Math.min(1, Math.max(0, value)); progressRef.current = p; setProgress(p)
-    return scene.current?.setProgress(p, animateRoute) ?? false
+    return scene.current?.setProgress(p, animate) ?? false
   }, [])
   const search = useCallback((a: Point, b: Point) => {
     if (!worker.current) return
     setError(''); setBusy(true); setPlaying(false); setPick(null)
-    worker.current.postMessage({ type: 'search', requestId: ++currentRequest.current, start: a, goal: b })
+    worker.current.postMessage({ type: 'search', requestId: ++currentRequest.current, start: a, goal: b, algorithm: algorithmRef.current })
   }, [])
 
   useEffect(() => {
@@ -58,6 +60,7 @@ export function App() {
       if (reply.type === 'geometry') map?.addGeometry(reply.bytes, reply.count)
       if (reply.type === 'ready') { setReady(true); search(initialQuery.current.start, initialQuery.current.goal) }
       if (reply.type === 'result' && reply.requestId === currentRequest.current) {
+        const reducedMotion = prefersReducedMotion()
         setResult(reply.result); map?.setResult(reply.result); setBusy(false); seek(reducedMotion ? 1 : 0); setPlaying(!reducedMotion)
       }
       if (reply.type === 'error' && (reply.requestId === undefined || reply.requestId === currentRequest.current)) { setError(reply.message); setBusy(false) }
@@ -89,7 +92,7 @@ export function App() {
     const advance = (now: number) => {
       const next = Math.min(1, progressRef.current + Math.min(now - previous, 100) / (duration * 1000))
       previous = now
-      const routeAnimating = seek(next, next >= 1)
+      const routeAnimating = seek(next, true)
       if (next < 1) frame = requestAnimationFrame(advance); else if (!routeAnimating) setPlaying(false)
     }
     frame = requestAnimationFrame(advance); return () => cancelAnimationFrame(frame)
@@ -107,13 +110,14 @@ export function App() {
       <button className="pick-button" disabled={!ready || busy || !!mapError} onClick={() => setPick(pick === end ? null : end)} aria-label={`Choose ${end === 'start' ? 'start' : 'destination'} on map`} aria-pressed={pick === end} title="Choose on map">⌖</button>
     </div>
   )
-  return <div className="study" data-state={error ? 'error' : result ? 'ready' : 'loading'} data-progress={progress}>
+  return <div className="study" data-state={error ? 'error' : result ? 'ready' : 'loading'} data-progress={progress} data-algorithm={result?.algorithm ?? algorithm}>
     <header className="study-header">
       <div className="identity"><a href="https://motionstudies.app/" className="series">Motion Studies</a><h1>PFAD</h1><p>The roads not taken</p></div>
       <div className="header-tools"><details className="about"><summary>About this study</summary><div className="about-panel">
         <h2>A study of time, space, and the paths not taken.</h2>
         <p>A real shortest-distance search across Switzerland’s recorded road network. Every illuminated road was examined by the algorithm.</p>
         <p>The playback clock follows algorithm event order. It stretches the computation; it does not reproduce the timing of individual processor operations.</p>
+        <p>Bidirectional Dijkstra searches from both ends: mint from A, amber from B. A small light marks their first real connection. The algorithm continues until it has confirmed the shortest distance.</p>
         <p>Once the recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Its route describes this connectivity model.</p>
         <p>OpenStreetMap snapshot · 29 September 2026.<br />Road curves are simplified for drawing; search costs retain original lengths.</p>
@@ -138,7 +142,7 @@ export function App() {
     <div className="playback-panel">
       <div className="search-readout">
         <div className="route-caption">{result ? <>{result.start.name}<span>→</span>{result.goal.name}{completed && result.routeMetres !== null && <em>{(result.routeMetres / 1000).toFixed(1)} km</em>}</> : <span>A real search. A slower clock.</span>}</div>
-        <div className="compute-readout">{result ? <><span>Dijkstra</span><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></> : <span>Road connectivity · Shortest distance</span>}</div>
+        <div className="compute-readout"><select aria-label="Search algorithm" value={algorithm} disabled={!ready || busy} onChange={event => { const mode = event.target.value as SearchAlgorithm; algorithmRef.current = mode; setAlgorithm(mode); search(start, goal) }}><option value="dijkstra">Dijkstra</option><option value="bidirectional">Bidirectional Dijkstra</option></select>{result && <><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></>}{result?.backwardTimes && <span className="front-key"><i className="front-a" />A<i className="front-b" />B</span>}</div>
       </div>
       <div className="replay-controls">
         <button disabled={!result || busy} onClick={() => { if (progress >= 1 && !revealingRef.current) seek(0); setPlaying(value => !value) }}>{playing ? 'Pause' : 'Play'}</button>
@@ -147,7 +151,7 @@ export function App() {
         <span className="replay-time">{(progress * duration).toFixed(1)}<small> / {duration}s</small></span>
         <select aria-label="Replay duration" value={duration} onChange={event => setDuration(Number(event.target.value))}>{[5, 15, 30, 60, 120].map(value => <option key={value} value={value}>{value}s</option>)}</select>
       </div>
-      <div className="event-readout"><span><strong data-testid="settled-count">{number.format(counts[0])}</strong> nodes settled</span><span><strong data-testid="examined-count">{number.format(counts[1])}</strong> connections examined</span><span className="replay-status">{busy ? 'Recording search' : revealing ? playing ? 'Revealing the route' : 'Route reveal paused' : completed ? result.routeMetres === null ? 'No route in this graph' : 'Route found' : playing ? 'Replaying recorded events' : result ? 'Replay paused' : 'Preparing the network'}</span></div>
+      <div className="event-readout"><span><strong data-testid="settled-count">{number.format(counts[0])}</strong> node settlements</span><span><strong data-testid="examined-count">{number.format(counts[1])}</strong> connections examined</span><span className="replay-status">{busy ? 'Recording search' : revealing ? playing ? 'Revealing the route' : 'Route reveal paused' : completed ? result.routeMetres === null ? 'No route in this graph' : 'Route found' : playing ? 'Replaying recorded events' : result ? 'Replay paused' : 'Preparing the network'}</span></div>
     </div>
     <footer><div className="map-credits"><a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors · ODbL</a><a href="https://www.swisstopo.admin.ch/en/terms-of-use-free-geodata-and-geoservices">Outlines: © swisstopo, FOEN</a></div><span>Switzerland · 29 Sep 2026 · Connectivity study</span></footer>
   </div>

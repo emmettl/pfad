@@ -18,6 +18,23 @@ event, each outgoing arc examination, and each successful cost improvement.
 The event record carries dataset identity, compiler/profile version and source
 checksum/timestamp, together with algorithm and tie-breaking version.
 
+`bidirectional-dijkstra/1` is an alternate shortest-distance search on the same
+graph and snapped endpoints. Its forward front follows outgoing arcs; its
+destination front follows the transpose of those same directed arcs. The reverse
+CSR is built lazily in the worker, in ascending source-node/original-arc order,
+and retained for subsequent queries. No additional geographic download is needed.
+The smaller queue distance advances next; equal distances alternate fronts,
+starting forward. Each heap breaks ties by ascending node ID. Strict improvements
+retain the first equal-cost predecessor and connection.
+
+The algorithm keeps the best known complete cost and continues until the sum
+of both unsettled queue minima cannot improve it. First contact alone is not
+a stopping rule. This follows the criterion in [Goldberg's shortest-path survey,
+section 2](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/goldberg-sofsem07.pdf).
+The reconstructed route follows original permitted directions even though the
+destination search reads the reverse graph. Independent relaxation tests cover
+directed, disconnected, zero-cost and first-contact-suboptimal cases.
+
 The first profile is road connectivity, not complete driving legality. Turn,
 barrier and conditional restrictions are not applied; their source records
 remain available. No timetable or vehicle contracts are repurposed for routing.
@@ -25,11 +42,14 @@ remain available. No timetable or vehicle contracts are repurposed for routing.
 ## Replay and drawing
 
 Packed Uint32 events use the low two bits for kind (0 settled, 1 examined,
-2 improved); upper bits identify the node or directed adjacency arc. Checkpoints
+2 improved); upper bits identify the node or directed adjacency arc. Bidirectional
+traces reserve bit 31 for the destination front, leaving bits 2–30 for the original
+graph ID. Original arc IDs are retained even for reverse examinations. Checkpoints
 at every 4,096 events permit exact counters during arbitrary seeking.
 
-Computation time is measured around allocation and Dijkstra’s recording loop;
-endpoint preparation is measured separately. Route reconstruction and GPU texture
+Computation time is measured around allocation and the selected recording loop;
+endpoint preparation is measured separately. Lazy reverse-CSR preparation,
+route reconstruction and GPU texture
 preparation are outside that timer. The playback clock follows **event order**,
 not measured per-instruction timing. It stretches a real trace without inventing
 algorithm activity or pretending the processor is still searching.
@@ -41,6 +61,30 @@ authored decay from that recorded event. Reverse seeking changes the event cutof
 the final route becomes bright only at completion. Later examinations of the
 same physical road remain in the trace and counters rather than creating a
 second road. The endpoint markers are separate from explored edges.
+
+In bidirectional mode, each front has its own real first-examination/improvement
+texture: mint from the origin and amber from the destination. Where both have
+examined a physical road their contributions blend. Counters count node
+settlements and arc examinations across both fronts, including a node settled
+by each front; the count does not claim distinct nodes.
+
+The record also identifies the first node with finite labels from both fronts,
+the exact event that established the connection, and that candidate's cost.
+Natural forward playback across this event triggers one small 800-ms light at
+the actual node. This is a presentation effect; it does not change the search
+or mark the first candidate as optimal. Its soft halo and ring keep a fixed
+40-pixel envelope through zoom changes. Pause freezes it, reverse seeking
+re-arms it, manual seeking suppresses it, and new results dispose its geometry.
+Reduced motion skips it, including live preference changes. Hidden pages freeze
+this clock. The closing route reveal remains separate and starts only when the
+recorded search ends.
+
+On the pinned national graph the retained reverse CSR adds 26,224,632 bytes in
+the worker, and the second padded event texture adds 11,124,736 bytes in the
+main thread (plus GPU storage). Bidirectional working labels and the trace
+allocation also grow; these figures are not total or peak browser memory.
+The normal Dijkstra startup does not build the reverse CSR. Device-budget work
+and physical-phone measurements remain open in R2.
 
 Normal playback closes with a 2.6-second origin-to-destination route reveal and
 a 0.7-second glow settle. This presentation clock begins after the final recorded

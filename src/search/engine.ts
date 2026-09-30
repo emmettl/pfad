@@ -58,11 +58,15 @@ export function snapEndpoints(graph: Graph, start: Point, goal: Point): { start:
   return { start: source, goal: nearest(graph, goal, reachable), snapMs: performance.now() - begun }
 }
 
-class Heap {
+export class Heap {
   nodes = new Uint32Array(4096)
   scores = new Float64Array(4096)
   size = 0
   maximum = 0
+  minimum(settled: Uint8Array) {
+    while (this.size && settled[this.nodes[1]]) this.pop()
+    return this.size ? this.scores[1] : Infinity
+  }
   less(a: number, b: number, node: number, score: number) {
     return a < score || (a === score && b < node)
   }

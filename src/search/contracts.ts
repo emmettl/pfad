@@ -43,11 +43,13 @@ export interface Graph {
 
 export interface Point { name: string; lon: number; lat: number }
 export interface Endpoint extends Point { node: number; snapMetres: number }
+export type SearchAlgorithm = 'dijkstra' | 'bidirectional'
+export interface Meeting { event: number; node: number; lon: number; lat: number; candidateMetres: number }
 
 export interface SearchResult {
   dataset?: { identity: string; compiler: string; profile: string; sourceSha256: string; sourceTimestamp: string }
-  algorithm: 'dijkstra/1'
-  tieBreak: 'distance, then ascending node id; neighbours in compiler edge order'
+  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1'
+  tieBreak: string
   start: Endpoint
   goal: Endpoint
   searchMs: number
@@ -61,6 +63,8 @@ export interface SearchResult {
   checkpoints: Uint32Array
   checkpointStride: number
   edgeTimes: Float32Array
+  backwardTimes?: Float32Array
+  meeting?: Meeting
   textureWidth: number
   textureHeight: number
   exploredNodes: number
@@ -70,7 +74,7 @@ export interface SearchResult {
   maxQueue: number
 }
 
-export type Request = { type: 'load'; manifestUrl: string } | { type: 'search'; requestId: number; start: Point; goal: Point }
+export type Request = { type: 'load'; manifestUrl: string } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm }
 export type Reply =
   | { type: 'progress'; loaded: number; total: number; stage: string }
   | { type: 'manifest'; manifest: StudyManifest; manifestUrl: string }

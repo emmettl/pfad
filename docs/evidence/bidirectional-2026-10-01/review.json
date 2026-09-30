@@ -1,0 +1,422 @@
+{
+  "measuredAt": "2026-09-30T22:48:07.422Z",
+  "host": "Apple M4 Max / macOS",
+  "note": "Local static serving. Chromium with Metal rendering and WebKit mobile viewport on desktop hardware; not physical-phone performance or peak-memory measurements. Search timer excludes endpoint snapping, reverse-CSR preparation, route reconstruction and drawing preparation.",
+  "views": [
+    {
+      "name": "desktop",
+      "results": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 262733.98,
+          "events": 4993816,
+          "settlements": 1199535,
+          "examinations": 2551408,
+          "searchMs": 158.3999999910593,
+          "textureBytes": 11124736
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 262733.98,
+          "events": 4342526,
+          "settlements": 1043165,
+          "examinations": 2217686,
+          "searchMs": 210.09999999403954,
+          "meeting": {
+            "event": 4341097,
+            "node": 220571,
+            "lon": 7.19663,
+            "lat": 46.97783,
+            "candidateMetres": 262733.98
+          },
+          "textureBytes": 22249472
+        }
+      ],
+      "flashPauseResume": true,
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "results": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 262733.98,
+          "events": 4993816,
+          "settlements": 1199535,
+          "examinations": 2551408,
+          "searchMs": 142,
+          "textureBytes": 11124736
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 262733.98,
+          "events": 4342526,
+          "settlements": 1043165,
+          "examinations": 2217686,
+          "searchMs": 180,
+          "meeting": {
+            "event": 4341097,
+            "node": 220571,
+            "lon": 7.19663,
+            "lat": 46.97783,
+            "candidateMetres": 262733.98
+          },
+          "textureBytes": 22249472
+        }
+      ],
+      "flashPauseResume": true,
+      "errors": []
+    }
+  ],
+  "comparisons": [
+    {
+      "algorithm": "dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "routeMetres": 262733.98,
+      "events": 4993816,
+      "settlements": 1199535,
+      "examinations": 2551408,
+      "searchMs": 154.30000001192093,
+      "traceBytes": 19975264,
+      "textureBytes": 11124736
+    },
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "routeMetres": 262733.98,
+      "events": 4342526,
+      "settlements": 1043165,
+      "examinations": 2217686,
+      "searchMs": 212.3999999910593,
+      "meeting": {
+        "event": 4341097,
+        "node": 220571,
+        "lon": 7.19663,
+        "lat": 46.97783,
+        "candidateMetres": 262733.98
+      },
+      "traceBytes": 17370104,
+      "textureBytes": 22249472
+    },
+    {
+      "algorithm": "dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+      "start": {
+        "name": "Basel",
+        "lon": 7.58856,
+        "lat": 47.55963,
+        "node": 1230603,
+        "snapMetres": 4.487403547768706
+      },
+      "goal": {
+        "name": "Lugano",
+        "lon": 8.95178,
+        "lat": 46.00321,
+        "node": 219598,
+        "snapMetres": 75.67814902710364
+      },
+      "routeMetres": 261207.21,
+      "events": 4940207,
+      "settlements": 1186739,
+      "examinations": 2523331,
+      "searchMs": 156.59999999403954,
+      "traceBytes": 19760828,
+      "textureBytes": 11124736
+    },
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+      "start": {
+        "name": "Basel",
+        "lon": 7.58856,
+        "lat": 47.55963,
+        "node": 1230603,
+        "snapMetres": 4.487403547768706
+      },
+      "goal": {
+        "name": "Lugano",
+        "lon": 8.95178,
+        "lat": 46.00321,
+        "node": 219598,
+        "snapMetres": 75.67814902710364
+      },
+      "routeMetres": 261207.21,
+      "events": 3062893,
+      "settlements": 733765,
+      "examinations": 1566635,
+      "searchMs": 149.90000000596046,
+      "meeting": {
+        "event": 3049502,
+        "node": 396116,
+        "lon": 8.61448,
+        "lat": 46.89084,
+        "candidateMetres": 261207.21
+      },
+      "traceBytes": 12251572,
+      "textureBytes": 22249472
+    },
+    {
+      "algorithm": "dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+      "start": {
+        "name": "Chur",
+        "lon": 9.53166,
+        "lat": 46.85065,
+        "node": 68286,
+        "snapMetres": 30.768790193585208
+      },
+      "goal": {
+        "name": "Sion",
+        "lon": 7.35799,
+        "lat": 46.23226,
+        "node": 426843,
+        "snapMetres": 155.11139538375946
+      },
+      "routeMetres": 222934.27,
+      "events": 3692471,
+      "settlements": 885886,
+      "examinations": 1888234,
+      "searchMs": 130.29999999701977,
+      "traceBytes": 14769884,
+      "textureBytes": 11124736
+    },
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+      "start": {
+        "name": "Chur",
+        "lon": 9.53166,
+        "lat": 46.85065,
+        "node": 68286,
+        "snapMetres": 30.768790193585208
+      },
+      "goal": {
+        "name": "Sion",
+        "lon": 7.35799,
+        "lat": 46.23226,
+        "node": 426843,
+        "snapMetres": 155.11139538375946
+      },
+      "routeMetres": 222934.27,
+      "events": 1938915,
+      "settlements": 467079,
+      "examinations": 989120,
+      "searchMs": 108.59999999403954,
+      "meeting": {
+        "event": 1937786,
+        "node": 947064,
+        "lon": 8.42486,
+        "lat": 46.57895,
+        "candidateMetres": 222934.27
+      },
+      "traceBytes": 7755660,
+      "textureBytes": 22249472
+    },
+    {
+      "algorithm": "dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Luzern",
+        "lon": 8.30934,
+        "lat": 47.05019,
+        "node": 251950,
+        "snapMetres": 3.228099609842852
+      },
+      "routeMetres": 49303.39,
+      "events": 1225934,
+      "settlements": 294418,
+      "examinations": 625585,
+      "searchMs": 44.400000005960464,
+      "traceBytes": 4903736,
+      "textureBytes": 11124736
+    },
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Luzern",
+        "lon": 8.30934,
+        "lat": 47.05019,
+        "node": 251950,
+        "snapMetres": 3.228099609842852
+      },
+      "routeMetres": 49303.39,
+      "events": 752599,
+      "settlements": 182577,
+      "examinations": 380761,
+      "searchMs": 49.1000000089407,
+      "meeting": {
+        "event": 740427,
+        "node": 65368,
+        "lon": 8.4168,
+        "lat": 47.23372,
+        "candidateMetres": 49303.39
+      },
+      "traceBytes": 3010396,
+      "textureBytes": 22249472
+    },
+    {
+      "algorithm": "dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "routeMetres": 0,
+      "events": 1,
+      "settlements": 1,
+      "examinations": 0,
+      "searchMs": 1.5,
+      "traceBytes": 4,
+      "textureBytes": 11124736
+    },
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "dataset": {
+        "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+        "compiler": "pfad-study-compiler/1",
+        "profile": "road-connectivity-distance-v1",
+        "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+        "sourceTimestamp": "2026-09-29T20:22:51Z"
+      },
+      "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "routeMetres": 0,
+      "events": 0,
+      "settlements": 0,
+      "examinations": 0,
+      "searchMs": 2.7999999970197678,
+      "traceBytes": 0,
+      "textureBytes": 22249472
+    }
+  ],
+  "independentFixtures": "35 directed graphs × 81 endpoint pairs, with nonnegative and zero costs, compared with independent relaxation; explicit suboptimal first contact, one-way and trace/checkpoint fixtures."
+}

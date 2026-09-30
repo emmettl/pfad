@@ -14,11 +14,18 @@ that can be watched, paused and inspected. The search is the subject.
 
 ## Current state
 
-A first working national study: a Web Worker runs deterministic Dijkstra on
+A first working national study: a Web Worker runs deterministic Dijkstra or
+bidirectional Dijkstra on
 1,258,587 nodes and 1,390,206 physical road edges. A WebGL map reveals real
 examinations in event order. Choose towns or points on the map, pan and zoom,
 pause, seek backwards, or change the replay duration. The visual direction
 is validated: a dark field and luminous roads, drawing on Gleislicht.
+
+Choose the algorithm beside the computation readout. Bidirectional mode grows
+two genuine fronts, mint from the origin and amber from the destination. A small
+light marks their first recorded connection; the algorithm continues to confirm
+the shortest distance. Completion reveals the actual route with a travelling
+glow. Very faint border and lake outlines can be toggled beside Sound.
 
 Sound is optional: three original two-minute Driftbox sketches flow through
 eight-second crossfades on their own clock. Enable Sound to listen and adjust
@@ -34,11 +41,11 @@ but are not enforced yet. It is not a validated driving route planner.
 
 ## Development
 
-Use Node 24 and npm 11.19.0. Data tools require Python 3.11 or newer. `npm ci`, then `npm run dev`.
+Use Node 24 and npm 11.21.0. Data tools require Python 3.11 or newer. `npm ci`, then `npm run dev`.
 `npm run check` runs type, lint, dependency-boundary, contract, build and
 payload checks. `npx playwright install chromium webkit` installs browsers;
 `npm run test:browser` checks the built site. Public shared packages are pinned
-to `0.1.0-alpha.30`; the repository remains private to npm (`private: true`).
+to `0.1.0-alpha.31`; the repository remains private to npm (`private: true`).
 
 ## Evidence and data
 
@@ -52,6 +59,10 @@ format, refresh policy and limitations. [Sizing evidence](docs/evidence/sizing-2
 preserves the earlier JSON experiment; its figures describe that encoding,
 not this binary delivery format. Source PBFs and intermediate graphs stay in
 ignored `.cache/`; only the selected browser dataset is committed.
+
+[Bidirectional review](docs/evidence/bidirectional-2026-10-01/review.json) records
+algorithm/source identities and equal-cost national comparisons, together with
+desktop Chromium and mobile-viewport WebKit visual/lifecycle checks.
 
 ## Hosting
 

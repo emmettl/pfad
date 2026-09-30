@@ -1,6 +1,6 @@
 # PFAD roadmap and wishlist
 
-Working plan · 30 September 2026
+Working plan · updated 1 October 2026
 
 PFAD makes genuine route-finding visible at human scale. The search is the
 subject. Features should deepen that experience, make its claims more dependable,
@@ -35,6 +35,8 @@ promise. The wishlist is a pool of possibilities rather than committed scope.
 - [x] A complete national graph: 1,258,587 nodes and 1,390,206 physical road edges.
 - [x] Verified chunks: 15,866,559 opening road bytes; source evidence is optional.
 - [x] Deterministic Dijkstra in a worker, with genuine recorded events and counters.
+- [x] Alternate bidirectional Dijkstra: two real fronts, an event-tied meeting
+  light, shortest-distance verification and selection on the same dataset.
 - [x] Town and map-point selection, pan/zoom, pause, seeking and replay duration.
 - [x] Reduced-motion behaviour, Chromium and mobile-viewport WebKit checks.
 - [x] Hardware rendering and replay measurements on an M4 Max.
@@ -160,7 +162,9 @@ the field of possibilities explored.
 - [ ] Add A* with a heuristic valid for the declared cost model.
 - [ ] Verify A* against Dijkstra for optimal cost on the same graph and profile.
   Equal-cost routes may differ; do not require identical geometry unnecessarily.
-- [ ] Offer algorithm selection while retaining the same endpoints and dataset.
+- [x] Offer algorithm selection while retaining the same endpoints and dataset.
+- [x] Add bidirectional Dijkstra with independent cost checks, directed reverse
+  adjacency, separate front events and a light at their first real connection.
 - [ ] Record algorithm and heuristic versions, tie-breaking, explored work,
   computation time and final cost consistently.
 - [ ] Develop a comparison view: first simple switching, then paired playback
@@ -168,8 +172,8 @@ the field of possibilities explored.
 
 **Complete when:** comparisons are reproducible, costs are independently checked,
 and each visible search has its own genuine trace. Search speed and replay duration
-remain separate. Bidirectional search and more specialised methods stay on the
-wishlist until this comparison is useful.
+remain separate. Bidirectional Dijkstra is delivered as an alternate mode;
+A*, paired comparison and more specialised methods remain open.
 
 ### R5 · Make studies reproducible and shareable
 
@@ -216,7 +220,7 @@ its purpose, dependencies and completion criterion are clear.
 
 | Feature | What it could add | Dependency or constraint |
 | --- | --- | --- |
-| Bidirectional Dijkstra / A* | Two genuine searches meeting across the landscape | R1–R4; record and explain both fronts |
+| Bidirectional A* | Extend the delivered two-front Dijkstra mode with goal-directed search | R1–R4; a valid heuristic and bidirectional stopping rule |
 | Fastest-route profile | Compare distance with estimated travel time | Declared speed assumptions and access rules; no live-traffic claim |
 | Waypoints and alternative routes | Explore different answers to the same journey | Genuine routing method with explicit constraints |
 | Reachability / distance contours | Show the territory reachable within a distance or modelled time | Real single-source computation; separate from destination search |
@@ -246,4 +250,5 @@ material changes to scope or priorities here; dates can be added when there is
 enough evidence to make them credible.
 
 Related: [Concept](CONCEPT.md) · [Music](MUSIC.md) · [Architecture](ARCHITECTURE.md) ·
-[Data and refresh policy](DATA.md) · [Current replay evidence](evidence/first-study-2026-09-30/replay-report.json).
+[Data and refresh policy](DATA.md) · [Initial replay evidence](evidence/first-study-2026-09-30/replay-report.json) ·
+[Bidirectional review](evidence/bidirectional-2026-10-01/review.json).
