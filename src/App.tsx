@@ -23,6 +23,8 @@ export function App() {
   const [progress, setProgress] = useState(0), [playing, setPlaying] = useState(false), [duration, setDuration] = useState(30)
   const [revealing, setRevealing] = useState(false)
   const revealingRef = useRef(false)
+  const [outlines, setOutlines] = useState(true)
+  const outlinePreference = useRef(true)
   const [error, setError] = useState(''), [mapError, setMapError] = useState('')
   const [pick, setPick] = useState<'start' | 'goal' | null>(null)
 
@@ -42,6 +44,7 @@ export function App() {
     let map: RoadScene | null = null
     try {
       map = new RoadScene(host.current); scene.current = map
+      map.setGeographyVisible(outlinePreference.current)
       map.onRouteRevealChange = active => { revealingRef.current = active; setRevealing(active) }
       map.onRouteRevealComplete = () => setPlaying(false)
     }
@@ -114,10 +117,11 @@ export function App() {
         <p>Once the recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Its route describes this connectivity model.</p>
         <p>OpenStreetMap snapshot · 29 September 2026.<br />Road curves are simplified for drawing; search costs retain original lengths.</p>
+        <p>The optional outlines provide quiet geographic context: Switzerland’s border from swissBOUNDARIES3D (2026-01), and lake shorelines from the FOEN Vector25 reference network (2007). They stay visible independently of the search.</p>
         <p>Original ambient sketches composed using Driftbox: Plateau, Contours and Afterglow. This is a provisional score, flowing independently of the search. Sound starts off and pauses when you leave the page.</p>
         <p><a href={manifestUrl || './data/pfad-manifest.json'}>Dataset and source record</a>{manifest && <> · <a href={new URL(manifest.evidence.path, manifestUrl).href}>Source evidence</a></>}</p>
         <a href="https://github.com/emmettl/pfad">PFAD repository ↗</a>
-      </div></details><SoundControl /></div>
+      </div></details><div className="map-tools"><SoundControl /><button className="outline-control" aria-label="Show border and lake outlines" aria-pressed={outlines} disabled={!!mapError} onClick={() => { const visible = !outlines; setOutlines(visible); outlinePreference.current = visible; scene.current?.setGeographyVisible(visible) }}><span aria-hidden="true">◇</span> Outlines</button></div></div>
     </header>
     <div className="route-panel" aria-label="Search endpoints">
       {queryControl(start, setStart, 'start')}
@@ -145,6 +149,6 @@ export function App() {
       </div>
       <div className="event-readout"><span><strong data-testid="settled-count">{number.format(counts[0])}</strong> nodes settled</span><span><strong data-testid="examined-count">{number.format(counts[1])}</strong> connections examined</span><span className="replay-status">{busy ? 'Recording search' : revealing ? playing ? 'Revealing the route' : 'Route reveal paused' : completed ? result.routeMetres === null ? 'No route in this graph' : 'Route found' : playing ? 'Replaying recorded events' : result ? 'Replay paused' : 'Preparing the network'}</span></div>
     </div>
-    <footer><a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors · ODbL</a><span>Switzerland · 29 Sep 2026 · Connectivity study</span></footer>
+    <footer><div className="map-credits"><a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors · ODbL</a><a href="https://www.swisstopo.admin.ch/en/terms-of-use-free-geodata-and-geoservices">Outlines: © swisstopo, FOEN</a></div><span>Switzerland · 29 Sep 2026 · Connectivity study</span></footer>
   </div>
 }

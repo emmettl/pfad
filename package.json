@@ -23,6 +23,7 @@
     "music:compose": "node scripts/music/compose.mjs",
     "music:render": "node scripts/music/render.mjs",
     "data:acquire": "python3 scripts/data/fetch-source.py",
+    "data:geography": "node scripts/data/acquire-geography.mjs",
     "data:measure": "python3 scripts/data/size-proof.py --source .cache/osm/switzerland-260929.osm.pbf --output .cache/sizing && python3 scripts/data/compact-proof.py --directory .cache/sizing",
     "data:browser": "node scripts/data/browser-proof.mjs .cache/sizing"
   },

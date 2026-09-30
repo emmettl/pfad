@@ -12,6 +12,11 @@ button:focus-visible, select:focus-visible, a:focus-visible, summary:focus-visib
 .identity { pointer-events: none; }
 .identity a, .about { pointer-events: auto; }
 .header-tools { display: flex; flex-direction: column; align-items: flex-end; pointer-events: none; }
+.map-tools { display: flex; align-items: flex-start; gap: 14px; pointer-events: none; }
+.outline-control { display: flex; align-items: center; gap: 7px; padding: 3px 0 3px 8px; border: 0; min-height: 38px; font-size: 11px; color: #79968a; pointer-events: auto; }
+.outline-control[aria-pressed="true"] { color: #9fb4a9; }
+.outline-control:hover:not(:disabled) { background: transparent; color: #c4dfd0; }
+.map-credits { display: flex; gap: 12px; flex-wrap: wrap; }
 .study-header, .playback-panel, footer { text-shadow: 0 1px 6px #080d10, 0 0 3px #080d10; }
 .sound-control { display: flex; flex-direction: column; align-items: flex-end; font-size: 10px; color: #9fb4a9; }
 .sound-row { display: flex; align-items: center; gap: 10px; }
@@ -85,6 +90,7 @@ footer a { text-decoration: none; pointer-events: auto; }
   .pick-button { padding: 5px; } .search-button { min-width: 58px; padding: 8px; font-size: 11px; }
   button, .endpoint-control select, .replay-controls select { min-height: 44px; }
   .sound-row input { height: 44px; }
+  .outline-control { min-height: 44px; }
   .map-hint { top: 164px; font-size: 11px; }
   .playback-panel { left: 20px; right: 20px; bottom: 50px; } .search-readout { flex-direction: column; gap: 10px; padding-bottom: 12px; }
   .route-caption { font-size: 13px; gap: 10px; } .replay-controls { gap: 6px; } .replay-time { width: 61px; font-size: 11px; } .replay-time small { display: none; }

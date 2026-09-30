@@ -1,0 +1,30 @@
+{
+  "schema": "pfad-geography-sources/1",
+  "role": "Independent geographic context; never input to routing or search events",
+  "refreshPolicy": "manual-versioned-snapshots",
+  "preparedBy": "Gleislicht's reviewed geographic data preparation",
+  "termsUrl": "https://www.swisstopo.admin.ch/en/terms-of-use-free-geodata-and-geoservices",
+  "assets": [
+    {
+      "path": "src/map/data/switzerland-border.json",
+      "publishedUrl": "https://raw.githubusercontent.com/emmettl/gleislicht/5910d68b2eb4c78376007b42639d1c4a17986b7b/public/data/swiss-boundary.json",
+      "bytes": 9435,
+      "sha256": "38fd890c6bc78415c8b2fef3047f210846d7660340977361afed9d40cc384599",
+      "source": "swissBOUNDARIES3D 2026-01",
+      "attribution": "© swisstopo",
+      "simplificationToleranceMetres": 700,
+      "preparationCommit": "c7096bd37b7db30f3817f13bcb4941c833fba8dd"
+    },
+    {
+      "path": "src/map/data/switzerland-lakes.json",
+      "publishedUrl": "https://raw.githubusercontent.com/emmettl/gleislicht/5910d68b2eb4c78376007b42639d1c4a17986b7b/public/data/swiss-lakes.json",
+      "bytes": 114150,
+      "sha256": "2ed8ae2942bb9fff570c0266bd1d0da11a7b6c99530e05761934b258594e58b7",
+      "source": "FOEN Vector25 lakes; 2007 reference shorelines",
+      "attribution": "© FOEN, swisstopo",
+      "simplificationToleranceMetres": 60,
+      "preparationCommit": "5a2ae742874568d1e6fa0c5fe467929e73a86cc9"
+    }
+  ],
+  "publishedCommit": "5910d68b2eb4c78376007b42639d1c4a17986b7b"
+}

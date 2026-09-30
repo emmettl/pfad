@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import type { Point, SearchResult, StudyManifest } from '../search/contracts.ts'
 import { RouteDrawing, RouteReveal } from './routeReveal.ts'
 import { createRouteGeometry, createRouteMaterial } from './routeMaterial.ts'
+import { createGeography, disposeGeography } from './geography.ts'
 
 const vertexShader = `
   attribute float roadId;
@@ -53,6 +54,8 @@ export class RoadScene {
   frame = 0
   previousFrame = 0
   dirty = true
+  geography?: THREE.Group
+  geographyVisible = true
   drawing = new RouteDrawing()
   reveal = new RouteReveal()
   routeMaterial = createRouteMaterial()
@@ -98,6 +101,7 @@ export class RoadScene {
         canvas.dataset.routePhase = !this.reveal.visible ? 'hidden' : this.reveal.active ? 'revealing' : 'complete'
         canvas.dataset.routeProgress = String(this.routeMaterial.uniforms.uProgress.value)
         canvas.dataset.routeEnergy = String(this.routeMaterial.uniforms.uEnergy.value)
+        canvas.dataset.outlines = this.geography?.visible ? 'visible' : 'hidden'
         this.dirty = false
       }
       this.frame = requestAnimationFrame(draw)
@@ -106,7 +110,17 @@ export class RoadScene {
     document.addEventListener('visibilitychange', this.visibilityChange)
     draw(this.previousFrame)
   }
-  setManifest(manifest: StudyManifest) { this.manifest = manifest; this.resetView() }
+  setManifest(manifest: StudyManifest) {
+    this.manifest = manifest
+    if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
+    this.geography = createGeography(point => this.project(point)); this.geography.visible = this.geographyVisible
+    this.scene.add(this.geography); this.resetView()
+  }
+  setGeographyVisible(visible: boolean) {
+    this.geographyVisible = visible
+    if (this.geography) this.geography.visible = visible
+    this.dirty = true
+  }
   addGeometry(bytes: ArrayBuffer, count: number) {
     const positions = new Int16Array(count * 2), roads = new Float32Array(count), view = new DataView(bytes)
     for (let i = 0; i < count; i++) { positions[i * 2] = view.getInt16(i * 8, true); positions[i * 2 + 1] = view.getInt16(i * 8 + 2, true); roads[i] = view.getUint32(i * 8 + 4, true) }
@@ -225,6 +239,7 @@ export class RoadScene {
     this.reducedMotion.removeEventListener('change', this.motionChange)
     document.removeEventListener('visibilitychange', this.visibilityChange)
     this.route?.geometry.dispose(); this.routeMaterial.dispose(); this.drawing.chunks = []
+    if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.scene.traverse(object => { if (object instanceof THREE.LineSegments) object.geometry.dispose() })
     this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.domElement.remove(); this.markers.remove()
   }

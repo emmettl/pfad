@@ -120,6 +120,8 @@ accompaniment and a coherent ambient experience.
 - [x] Give completion an origin-to-destination reveal with a travelling glow and
   a gentle settle, drawn from the actual route curves. Keep this closing clock
   separate from search events; support pause, restart, seeking and reduced motion.
+- [x] Add very faint national-border and lake outlines, with an on/off comparison
+  control. Use a separate, attributed reference layer and preserve search state.
 - [ ] Refine playback pacing and duration choices for searches of very different
   sizes. State any nonlinear event-time treatment clearly.
 - [ ] Improve endpoint editing, snap feedback, keyboard use and touch controls.
@@ -223,7 +225,7 @@ its purpose, dependencies and completion criterion are clear.
 | Counterfactual studies | Observe the effect of excluding a road, crossing or pass | Label the modified graph as hypothetical and retain its identity |
 | BOOP / instant result | Make the contrast between computation and theatrical replay tangible | Honest measured timing; event replay must not imply per-operation timestamps |
 | Sound from search events | A second way to perceive rhythm and density, alongside the planned soundtrack | Opt-in, restrained and derived from real events; soundtrack composition is already R3 scope |
-| Faint geographic context | Optional lakes, borders or relief for orientation | Separate sourced layer; keep emerging roads central |
+| Faint geographic context | Border/lake outlines delivered; optional relief remains | Separate sourced layer; keep emerging roads central |
 | Large-format image / video export | Editions, prints and short films of a particular search | R5 provenance and export pipeline; appropriate credits |
 | Offline study | Revisit a selected graph and recordings without a connection | Explicit bounded storage, verified cache and an update/removal path |
 | Other countries | Compare the influence of geography and infrastructure | Swiss profile, device and publication process established first |

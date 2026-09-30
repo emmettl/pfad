@@ -100,3 +100,31 @@ restriction evidence separately and does not claim to apply it.
 
 Files end in `.gz.bin` to keep the gzip container opaque to static servers.
 The worker explicitly unpacks gzip after verifying its stored-byte checksum.
+
+## Geographic reference outlines
+
+The optional outlines use reviewed geographic reference assets prepared for
+Gleislicht, pinned to its published commit `5910d68b2eb4c78376007b42639d1c4a17986b7b`.
+PFAD contains the exact data bytes and consumes public npm contracts; it does
+not import sibling application code. [The source record](../data/geography-sources.json)
+retains the published URLs, byte lengths, SHA-256 and preparation commits.
+Run `npm run data:geography` to verify or manually reacquire those exact assets.
+The build and CI do not download or refresh them.
+
+- National border: swissBOUNDARIES3D, January 2026; three closed rings, 476
+  coordinates, generalised to 700 metres. Original source and CRS are retained
+  in the asset metadata. This is a faint national-scale reference, not a cadastral boundary.
+- Lakes: FOEN Vector25 reference shorelines (2007); 160 lakes with 190 rings,
+  5,357 coordinates, generalised to 60 metres and minimum area 0.1 km².
+  Outer shores and island rings are preserved, including complete cross-border
+  lake outlines present in the source. No polygon fills, labels or river overlay.
+
+Together they occupy 123,585 JSON bytes, bundled and compressed with the app.
+They use the same projection as the roads but are independent of graph topology,
+search costs and events. The renderer adds 11,280 static line vertices.
+
+Border attribution is © swisstopo; lake attribution is © FOEN, swisstopo.
+These geographic references are supplied under
+[swisstopo's free-geodata terms](https://www.swisstopo.admin.ch/en/terms-of-use-free-geodata-and-geoservices),
+with source attribution in the study footer and asset metadata. They are not
+relicensed under the code's MIT licence or the road graph's ODbL licence.

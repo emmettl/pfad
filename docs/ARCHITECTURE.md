@@ -67,6 +67,15 @@ overlays. Empty overlay space passes map gestures through; buttons, selectors,
 links and the timeline keep their own interaction areas. Subtle text shadows
 preserve label contrast without reserving or obscuring bands of the map.
 
+An optional static layer draws faint, unfilled national-border and lake-shoreline
+rings below all road drawing. The reviewed geographic assets are bundled with
+the application, projected with the road manifest's projection and consume two
+additional draw calls (11,280 vertices). The Outlines button changes visibility
+without changing the event cutoff, route, replay clock or counters. Its preference
+survives a dataset retry within the page. Outline geometries and materials are
+disposed with the scene. These reference lines have no search-event semantics;
+their dates, generalisation and attribution are separate from OSM. See [DATA.md](DATA.md).
+
 ## Verification and remaining gates
 
 Unit tests compare Dijkstra with independent relaxation and check direction,
