@@ -37,15 +37,19 @@ h1 { font-size: 43px; font-weight: 400; letter-spacing: -.07em; line-height: 1; 
 .about[open] summary::after { content: ' −'; }
 .about-panel { position: absolute; right: 0; top: 40px; width: min(370px, calc(100vw - 40px)); padding: 25px; background: #0d1715f5; border: 1px solid #2a4136; line-height: 1.7; font-size: 12px; box-shadow: 0 20px 50px #0008; }
 .about-panel h2 { font-size: 17px; color: #d3e7dc; font-weight: 400; line-height: 1.5; margin-top: 0; }
-.route-panel { position: absolute; z-index: 3; top: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; padding: 8px; background: transparent; border: 1px solid #243b2f; border-radius: 5px; pointer-events: none; }
+.route-panel { position: absolute; z-index: 3; top: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; padding: 8px; background: linear-gradient(180deg, #c7eee00a, #c7eee000 65%), #0a1514e6; border: 1px solid #b7dcc52e; border-radius: 10px; box-shadow: inset 0 1px 0 #e0fff00a, 0 6px 24px #0004; pointer-events: none; }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .route-panel { background-color: #0a1514bf; -webkit-backdrop-filter: blur(18px) saturate(120%); backdrop-filter: blur(18px) saturate(120%); }
+}
 .route-panel :is(button, select) { pointer-events: auto; }
-.endpoint-control { display: flex; align-items: center; gap: 7px; padding-left: 9px; border: 1px solid #283b33; border-radius: 3px; }
+.endpoint-control { display: flex; align-items: center; gap: 7px; padding-left: 9px; background: #10201a40; border: 1px solid #b7dcc52e; border-radius: 6px; }
 .point-letter { font-family: 'DM Mono', monospace; color: #7aaf95; font-size: 10px; }
 .endpoint-control select { border: 0; width: 112px; padding: 9px 5px; font-size: 12px; min-height: 38px; }
-.endpoint-control.picking { border-color: #b4ddc9; }
-.pick-button { border: 0; border-left: 1px solid #283b33; font-size: 20px; padding: 5px 9px; }
+.endpoint-control select option { color: #d2e4db; background: #10201a; }
+.endpoint-control:focus-within, .endpoint-control.picking { border-color: #b4ddc9; }
+.pick-button { border: 0; border-left: 1px solid #b7dcc52e; border-radius: 0 5px 5px 0; font-size: 20px; padding: 5px 9px; }
 .swap-button { border: 0; font-size: 19px; padding: 6px; }
-.search-button { font-size: 12px; background: #14281f; border-color: #365d49; min-width: 75px; }
+.search-button { font-size: 12px; background: #14281f; border-color: #365d49; border-radius: 6px; min-width: 75px; }
 .map { position: absolute; inset: 0; touch-action: none; cursor: grab; }
 .map canvas { display: block; touch-action: none; }
 .map:active { cursor: grabbing; }
