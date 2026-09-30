@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "score": "pfad-driftbox-sketches-v1",
+  "provisional": true,
+  "credit": "Original provisional music for PFAD · Composed using Driftbox",
+  "render": {
+    "sampleRate": 32000,
+    "duration": 120,
+    "frames": 128,
+    "targetRms": 0.04,
+    "automation": "public valueAt at each render block; linear lanes; no external samples",
+    "encoding": "AAC-LC 96 kbit/s; afconvert on macOS or ffmpeg elsewhere; encoded output may vary by encoder"
+  },
+  "packages": {
+    "@driftbox/rack": {
+      "version": "0.1.0",
+      "integrity": "sha512-F4/BsYYFlYx4VVHRlV7I5srBLUN5DFdw+BzmwdNL8qFZuwxIi6jUrOu9goMYvTZsrgsE+5Ovd+7yKf14988CYg=="
+    },
+    "@driftbox/engine": {
+      "version": "0.6.0",
+      "integrity": "sha512-RYHS9S+CY/ype4br/KyvdZX2hXdS/pjKJcdDYAFvYJa4eZQODPTX8g+qzlyD58ITuUhAsQ9Gjw8Z8poMemw0NQ=="
+    }
+  },
+  "tracks": [
+    {
+      "id": "plateau",
+      "title": "Plateau",
+      "seconds": 120,
+      "bytes": 1099536,
+      "sha256": "d448bc8899b2a053082c90d0ac97c72f6b37ef61da7d2293ee73425ad3bf77b6",
+      "patchSha256": "ec6818ab58774d72d2a66d8b2aad8fe5236113e1be43c597fd272a32333a75f9",
+      "masterSha256": "cf7b6be11e68b8bc15ee1a7cf9cb5fc3626e8b31e4e72d4cd4c88350dbc05228",
+      "peak": 0.19694004580385854,
+      "rms": 0.04,
+      "maxStep": 0.0060058424622389745,
+      "stereoRms": 0.021428746662813178,
+      "moduleVersions": {
+        "offset": 1,
+        "vco": 1,
+        "svf": 1,
+        "vca": 1,
+        "reverb": 1,
+        "out": 1
+      }
+    },
+    {
+      "id": "contours",
+      "title": "Contours",
+      "seconds": 120,
+      "bytes": 1206820,
+      "sha256": "791148a272aec68cbc96827d729bf29c0bf2ad22db9e31076df730ca747d3a01",
+      "patchSha256": "3437fe278f2f63550db13a04adf144191f3d5af458b769ec394300e4855feb9f",
+      "masterSha256": "ea59e27928cbfdc7cd71c8c34538cf3a75c61668ae522c0a28b260b4ba7254fa",
+      "peak": 0.2629343875310787,
+      "rms": 0.04,
+      "maxStep": 0.01749430210096566,
+      "stereoRms": 0.025339333983114373,
+      "moduleVersions": {
+        "offset": 1,
+        "vco": 1,
+        "svf": 1,
+        "vca": 1,
+        "reverb": 1,
+        "out": 1
+      }
+    },
+    {
+      "id": "afterglow",
+      "title": "Afterglow",
+      "seconds": 120,
+      "bytes": 1167267,
+      "sha256": "b02957f1966e68ca58ee58400635ac6de8a924d0878380e18d91d805263eb0a5",
+      "patchSha256": "a3fec39419a149bf308010f9eb67c09a261bbb7b638a73aff4069f8035b69ba3",
+      "masterSha256": "3d1fed493be3d0b70f144ca4c84ac6f8d11a549318231adcc34e1aa177b7f428",
+      "peak": 0.19464784107816582,
+      "rms": 0.04,
+      "maxStep": 0.0063148711834861045,
+      "stereoRms": 0.030769349114081974,
+      "moduleVersions": {
+        "offset": 1,
+        "vco": 1,
+        "svf": 1,
+        "vca": 1,
+        "reverb": 1,
+        "out": 1
+      }
+    }
+  ],
+  "totalBytes": 3473623
+}
