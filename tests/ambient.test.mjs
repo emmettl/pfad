@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { JourneySelector, AMBIENT_PLACES, distanceBand, replaySeconds, straightLineKm } from '../src/ambient/selector.ts'
-import { AmbientSequence } from '../src/ambient/sequence.ts'
+import { AmbientSequence, ALGORITHM_CYCLE_VERSION } from '../src/ambient/sequence.ts'
 
 test('seeded, balanced selection preserves six undirected pairs and uses all curated places', () => {
   const first = new JourneySelector(12345), second = new JourneySelector(12345), recent = [], seen = new Set(), bands = new Set()
@@ -36,16 +36,28 @@ test('replay duration follows road distance with bounded ends, independently of 
 })
 function harness(t) {
   const originalRAF = globalThis.requestAnimationFrame, originalCancel = globalThis.cancelAnimationFrame, originalPerformance = globalThis.performance
-  const frames = new Map(), pairs = []; let now = 0, id = 0
+  const frames = new Map(), pairs = [], algorithms = []; let now = 0, id = 0
   globalThis.performance = { now: () => now }
   globalThis.requestAnimationFrame = fn => { frames.set(++id, fn); return id }
   globalThis.cancelAnimationFrame = id => frames.delete(id)
   t.after(() => { globalThis.requestAnimationFrame = originalRAF; globalThis.cancelAnimationFrame = originalCancel; globalThis.performance = originalPerformance })
-  const sequence = new AmbientSequence(() => {}, pair => pairs.push(pair))
+  const sequence = new AmbientSequence(() => {}, (pair, algorithm) => { pairs.push(pair); algorithms.push(algorithm) })
   const step = ms => { for (let i = 0; i < ms; i += 100) { now += 100; const due = [...frames.values()]; frames.clear(); due.forEach(fn => fn(now)) } }
-  const result = (km = pairs.at(-1).estimateKm) => ({ routeMetres: km === null ? null : km * 1000, algorithm: 'dijkstra/1', searchMs: 10, trace: new Uint32Array(10), dataset: { identity: 'verified' } })
-  return { sequence, pairs, step, result, frames }
+  const result = (km = pairs.at(-1).estimateKm) => ({ routeMetres: km === null ? null : km * 1000, algorithm: algorithms.at(-1) === 'bidirectional' ? 'bidirectional-dijkstra/1' : `${algorithms.at(-1)}/1`, searchMs: 10, trace: new Uint32Array(10), dataset: { identity: 'verified' } })
+  return { sequence, pairs, algorithms, step, result, frames }
 }
+test('ambient rotates from the selected algorithm once per journey and keeps retries in the same mode', t => {
+  const { sequence, algorithms, result, step } = harness(t)
+  sequence.start(42, false, 'astar'); sequence.receive(result(null))
+  assert.deepEqual(algorithms, ['astar', 'astar'])
+  assert.equal(sequence.receive(result()), true); sequence.complete(); step(8000)
+  assert.deepEqual(algorithms, ['astar', 'astar', 'dijkstra'])
+  sequence.receive(result()); sequence.next(); sequence.receive(result()); sequence.next(); sequence.receive(result())
+  assert.deepEqual(algorithms, ['astar', 'astar', 'dijkstra', 'bidirectional', 'astar'])
+  assert.deepEqual(sequence.records.map(record => record.journey), [1, 1, 2, 3, 4])
+  assert.ok(sequence.records.every(record => record.cycle === ALGORITHM_CYCLE_VERSION))
+  sequence.exit(); sequence.start(99, true, 'bidirectional'); assert.equal(algorithms.at(-1), 'bidirectional')
+})
 test('hold, fade, pause, next and exit preserve a single sequence clock', t => {
   const { sequence, pairs, step, result, frames } = harness(t)
   sequence.start(42, false); assert.equal(sequence.receive(result()), true)

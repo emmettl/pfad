@@ -155,7 +155,13 @@ and weights candidates inversely by one plus both endpoints’ accumulated use.
 A seeded xorshift32 generator makes the sequence reproducible. No precomputed
 route list is retained.
 
-Every candidate runs the selected real algorithm. Its actual road distance must
+`three-algorithm-rotation/1` cycles Dijkstra → bidirectional Dijkstra → A* →
+Dijkstra, beginning with the manually selected algorithm. Automatic advancement
+and deliberate Next each advance one slot; retries within that journey keep its
+algorithm. Pause/resume leaves the slot unchanged. The quiet status identifies
+the current mode; exiting restores that mode alongside the current trace.
+
+Every candidate runs its journey's real algorithm. Its actual road distance must
 match the target band; a mismatch or no route is recorded and retried, up to five
 candidates. Exhaustion stops honestly and offers Next for a new band. Accepted
 road distance sets the proposed square-root duration exactly, within 25–65 s.
@@ -171,7 +177,7 @@ explicit listening without camera or fade choreography.
 
 Only the active trace and twelve metadata records are retained, with six recent
 pairs and one sequence animation frame. Exported records include selector/pool
-versions, seed, selection number, actual distance and rejected attempts. See
+versions, algorithm-cycle version, journey number, seed, selection number, actual distance and rejected attempts. See
 [RECORDS.md](RECORDS.md). The initial pool currently covers Switzerland.
 
 The [60-journey audit](evidence/ambient-2026-10-01/review.json) accepts all sixty

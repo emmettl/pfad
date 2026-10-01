@@ -1,10 +1,19 @@
 # Sharing and exporting a study
 
-In About this study, **Copy study link** captures requested endpoints, exact graph
-identity and profile, algorithm, replay duration, event progress, outlines and
-camera position/zoom. Opening it recomputes the genuine search and displays that
+The address bar follows requested endpoints, exact graph identity and profile,
+algorithm, replay duration, event progress, outlines and camera position/zoom.
+Copy the URL directly, or use **Copy study link** in About this study to flush and
+copy the latest frame. Updates replace the current browser-history entry at most
+twice a second; they do not reload the graph or add an entry per frame. Opening a
+URL recomputes the genuine search and displays that
 frame paused. It does not autoplay ambient mode or enable music. Computation
 timing is measured anew; a URL does not preserve the original processor time.
+
+Endpoint edits before Search are included, with progress reset to zero because
+the existing trace belongs to the previous question. An ambient link captures
+the currently accepted journey and its algorithm, not an automatically started
+sequence. Candidate retries leave the previous accepted link intact. Exports
+continue to describe the actual recorded search, even when picker edits are pending.
 
 Links use `pfad-study-link/1` JSON in the URL fragment. Coordinates and settings
 are bounded and validated. The edition accepts only a selected, pinned country
@@ -32,7 +41,7 @@ Metadata includes the full graph manifest and source checksums, profile, compile
 algorithm and tie-break versions, requested and snapped endpoints/displacements,
 cost, work counters, measured timings, heuristic and meeting records when present,
 presentation settings and up to twelve ambient attempt records. Ambient metadata
-retains pool/selector versions, seed, selection number, estimated and actual road
+retains pool/selector/cycle versions, journey number, seed, selection number, estimated and actual road
 distances, acceptance and replay duration. No previous event buffers are retained.
 
 Buffer descriptors give name, type (`uint32-le` or `uint8`), element count, byte

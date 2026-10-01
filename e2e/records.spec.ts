@@ -5,6 +5,56 @@ import { COUNTRIES } from '../src/countries.ts'
 import { studyUrl } from '../src/records/link.ts'
 test.setTimeout(120000)
 
+test('the address bar follows edits, replay and camera without Copy, and reload restores it paused', async ({ page, isMobile }) => {
+  const errors: string[] = []
+  page.on('pageerror', error => errors.push(error.message))
+  let release!: () => void
+  const loadingGate = new Promise<void>(resolve => { release = resolve })
+  await page.route('**/nodes-000-*', async route => { await loadingGate; await route.continue() })
+  await page.goto('./')
+  const parameters = () => page.evaluate(() => JSON.parse(new URLSearchParams(location.hash.slice(1)).get('study')!))
+  await expect.poll(parameters).toMatchObject({ country: 'ch', dataset: COUNTRIES[0].identity, progress: 0 })
+  await expect(page.locator('.study')).toHaveAttribute('data-state', 'loading')
+  release()
+  await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+  const historyLength = await page.evaluate(() => history.length)
+  await expect.poll(async () => (await parameters()).progress).toBeGreaterThan(0)
+  const playingFrame = (await parameters()).progress
+  await expect.poll(async () => (await parameters()).progress).toBeGreaterThan(playingFrame)
+  await page.getByRole('combobox', { name: 'Start place' }).selectOption('Basel')
+  await expect.poll(async () => (await parameters()).start.name).toBe('Basel')
+  expect((await parameters()).progress).toBe(0)
+  await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('astar')
+  await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'astar/1', { timeout: 45000 })
+  await page.getByRole('button', { name: 'Pause', exact: true }).click()
+  await page.getByRole('combobox', { name: 'Replay duration' }).selectOption('15')
+  await page.getByRole('slider', { name: 'Search replay' }).fill('7.5')
+  await page.getByRole('button', { name: 'Show border and lake outlines' }).click()
+  await expect.poll(parameters).toMatchObject({ algorithm: 'astar', duration: 15, progress: .5, outlines: false, start: { name: 'Basel' }, dataset: COUNTRIES[0].identity })
+  const beforeView = (await parameters()).view
+  const bounds = (await page.locator('canvas').boundingBox())!
+  await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height * .45)
+  // Playwright cannot send a native wheel in mobile WebKit; exercise the same
+  // DOM handler there, then use real pointer input for the pan in both engines.
+  if (isMobile) await page.locator('canvas').dispatchEvent('wheel', { deltaY: -300, clientX: bounds.x + bounds.width / 2, clientY: bounds.y + bounds.height * .45 })
+  else await page.mouse.wheel(0, -300)
+  await page.mouse.down(); await page.mouse.move(bounds.x + bounds.width / 2 + 40, bounds.y + bounds.height * .45 + 20); await page.mouse.up()
+  await expect.poll(async () => (await parameters()).view.zoom).toBeGreaterThan(1)
+  await expect.poll(async () => (await parameters()).view.x).not.toBe(beforeView.x)
+  const shared = await parameters()
+  expect(await page.evaluate(() => history.length)).toBe(historyLength)
+  await page.reload()
+  await expect(page.locator('.study')).toHaveAttribute('data-progress', '0.5', { timeout: 45000 })
+  await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
+  await expect(page.locator('canvas')).toHaveAttribute('data-view', JSON.stringify(shared.view))
+  await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'astar/1')
+  await expect(page.getByRole('combobox', { name: 'Start place' })).toHaveValue('Basel')
+  await expect(page.getByRole('button', { name: 'Show border and lake outlines' })).toHaveAttribute('aria-pressed', 'false')
+  await page.getByRole('button', { name: 'Show whole network' }).click()
+  await expect.poll(async () => (await parameters()).view.zoom).toBe(1)
+  expect(errors).toEqual([])
+})
+
 test('a share link restores the exact paused study, and export contains its genuine events', async ({ page }) => {
   await page.goto('./'); await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
   await page.getByRole('button', { name: 'Pause', exact: true }).click()

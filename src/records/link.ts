@@ -21,6 +21,36 @@ export function readStudyLink(hash: string): { study?: StudyLink; error?: string
 }
 export function studyUrl(base: string, study: StudyLink) {
   const url = new URL(base)
-  url.hash = new URLSearchParams({ study: JSON.stringify(study) }).toString()
+  const parameters = new URLSearchParams(url.hash.slice(1))
+  parameters.set('study', JSON.stringify(study)); url.hash = parameters.toString()
   return url.href
+}
+
+/** Replace one history entry, at most twice a second, with the latest frame/view. */
+export class StudyUrlBinding {
+  private study: StudyLink | null = null
+  private timer?: ReturnType<typeof setTimeout>
+  private writtenAt = -Infinity
+  private disposed = false
+  private read: () => string
+  private write: (url: string) => void
+  constructor(read: () => string, write: (url: string) => void) { this.read = read; this.write = write }
+  update(study: StudyLink | null) {
+    if (this.disposed) return
+    this.study = study
+    if (!study) { this.cancel(); return }
+    if (this.timer !== undefined) return
+    const wait = 500 - (performance.now() - this.writtenAt)
+    if (wait <= 0) this.flush()
+    else this.timer = setTimeout(() => this.flush(), wait)
+  }
+  flush() {
+    this.cancel()
+    if (!this.study) return
+    const current = this.read(), url = studyUrl(current, this.study)
+    if (url !== current) { this.write(url); this.writtenAt = performance.now() }
+    return url
+  }
+  private cancel() { if (this.timer !== undefined) clearTimeout(this.timer); this.timer = undefined }
+  dispose() { this.cancel(); this.study = null; this.disposed = true }
 }

@@ -69,6 +69,7 @@ export class RoadScene {
   points: Point[] = []
   picking = false
   onPick?: (lon: number, lat: number) => void
+  onViewChange?: (view: { x: number; y: number; zoom: number }) => void
   pointers = new Map<number, { x: number; y: number }>()
   lastPinch = 0
   moved = 0
@@ -142,6 +143,7 @@ export class RoadScene {
         canvas.dataset.flashPhase = this.flash.active ? 'flashing' : 'hidden'
         canvas.dataset.flashProgress = String(this.flash.progress)
         canvas.dataset.goalDirected = this.material.uniforms.uAstar.value ? 'true' : 'false'
+        canvas.dataset.view = JSON.stringify(this.getView())
         this.dirty = false
       }
       this.frame = requestAnimationFrame(draw)
@@ -289,11 +291,13 @@ export class RoadScene {
     const [left, bottom, right, top] = this.manifest.bounds, aspect = this.width / this.height
     this.halfHeight = Math.max((top - bottom) / 2, (right - left) / (2 * aspect)) * 1.12
     this.camera.position.x = (right + left) / 2; this.camera.position.y = (top + bottom) / 2; this.camera.zoom = 1; this.resize()
+    this.onViewChange?.(this.getView())
   }
   getView() { return { x: this.camera.position.x, y: this.camera.position.y, zoom: this.camera.zoom } }
   setView(view: { x: number; y: number; zoom: number }) {
     this.camera.position.x = view.x; this.camera.position.y = view.y; this.camera.zoom = view.zoom
     this.camera.updateProjectionMatrix(); this.dirty = true
+    this.onViewChange?.(this.getView())
   }
   screenPoint(x: number, y: number) {
     const bounds = this.renderer.domElement.getBoundingClientRect()
@@ -304,6 +308,7 @@ export class RoadScene {
     this.camera.zoom = Math.min(24, Math.max(.6, this.camera.zoom * factor)); this.camera.updateProjectionMatrix()
     const after = this.screenPoint(x, y)
     this.camera.position.x += before.x - after.x; this.camera.position.y += before.y - after.y; this.dirty = true
+    this.onViewChange?.(this.getView())
   }
   wheel = (event: WheelEvent) => { event.preventDefault(); this.zoom(Math.exp(-event.deltaY * .001), event.clientX, event.clientY) }
   pointerDown = (event: PointerEvent) => { this.renderer.domElement.setPointerCapture(event.pointerId); this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY }); if (this.pointers.size === 1) this.moved = 0; if (this.pointers.size === 2) this.lastPinch = this.pinchDistance() }
@@ -318,6 +323,7 @@ export class RoadScene {
     } else {
       const before = this.screenPoint(previous.x, previous.y), after = this.screenPoint(event.clientX, event.clientY)
       this.camera.position.x += before.x - after.x; this.camera.position.y += before.y - after.y; this.dirty = true
+      this.onViewChange?.(this.getView())
     }
   }
   pointerUp = (event: PointerEvent) => {

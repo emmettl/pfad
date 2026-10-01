@@ -9,12 +9,15 @@ import { SoundControl, type SoundHandle } from './music/SoundControl.tsx'
 import { AmbientSequence, type AmbientState } from './ambient/sequence.ts'
 import type { JourneyPair } from './ambient/selector.ts'
 import { ROAD_CACHE_NAME, type LoadMeasurements } from './search/chunks.ts'
-import { readStudyLink, studyUrl, type StudyLink } from './records/link.ts'
+import { readStudyLink, studyUrl, StudyUrlBinding, type StudyLink } from './records/link.ts'
 import { exportRecord, downloadBlob } from './records/export.ts'
 import './study.css'
 
 const number = new Intl.NumberFormat('en-CH')
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const samePoint = (a: Point, b: Point) => a.name === b.name && a.lon === b.lon && a.lat === b.lat
+const resultAlgorithm = (result: SearchResult): SearchAlgorithm => result.algorithm === 'bidirectional-dijkstra/1' ? 'bidirectional' : result.algorithm.split('/')[0] as SearchAlgorithm
+const algorithmName = (algorithm: SearchAlgorithm) => ({ dijkstra: 'Dijkstra', bidirectional: 'Bidirectional Dijkstra', astar: 'A*' }[algorithm])
 
 export function App() {
   const [shared, setShared] = useState(() => {
@@ -26,6 +29,8 @@ export function App() {
   const [country, setCountry] = useState(selectedCountry.large ? COUNTRIES[0] : selectedCountry)
   const [pendingCountry, setPendingCountry] = useState<string | null>(selectedCountry.large ? selectedCountry.id : null)
   const sharedFrame = useRef(shared.study)
+  const urlBinding = useRef<StudyUrlBinding | null>(null)
+  const [view, setView] = useState<StudyLink['view']>(shared.study?.view)
   const [recordStatus, setRecordStatus] = useState(''), [exporting, setExporting] = useState(false)
   const [copiedLink, setCopiedLink] = useState('')
   const places = country.places
@@ -36,8 +41,8 @@ export function App() {
   const cacheOwner = useRef<Promise<Cache | undefined> | null>(null)
   const manualDuration = useRef(30)
   const [ambientState, setAmbientState] = useState<AmbientState>({ active: false, running: false, phase: 'off', opacity: 1, message: '' })
-  const ambient = useRef<AmbientSequence | null>(null), ambientSearch = useRef<(pair: JourneyPair) => void>(() => {})
-  ambient.current ??= new AmbientSequence(setAmbientState, pair => ambientSearch.current(pair))
+  const ambient = useRef<AmbientSequence | null>(null), ambientSearch = useRef<(pair: JourneyPair, algorithm: SearchAlgorithm) => void>(() => {})
+  ambient.current ??= new AmbientSequence(setAmbientState, (pair, mode) => ambientSearch.current(pair, mode))
   const [measurements, setMeasurements] = useState<LoadMeasurements | null>(null)
   const [attempt, setAttempt] = useState(0)
   const [start, setStart] = useState<Point>(shared.study?.start ?? COUNTRIES[0].places[0]), [goal, setGoal] = useState<Point>(shared.study?.goal ?? COUNTRIES[0].places[1])
@@ -70,26 +75,31 @@ export function App() {
     if (progressRef.current >= 1 && !revealingRef.current) seek(0)
     setPlaying(value => !value)
   }, [result, busy, seek])
-  const search = useCallback((a: Point, b: Point) => {
+  const search = useCallback((a: Point, b: Point, mode = algorithmRef.current) => {
     if (!worker.current) return
     setError(''); setBusy(true); setPlaying(false); setPick(null)
     if (country.large) { setResult(null); scene.current?.clearResult() }
-    worker.current.postMessage({ type: 'search', requestId: ++currentRequest.current, start: a, goal: b, algorithm: algorithmRef.current })
+    worker.current.postMessage({ type: 'search', requestId: ++currentRequest.current, start: a, goal: b, algorithm: mode })
   }, [country.large])
 
   useEffect(() => {
+    const binding = new StudyUrlBinding(() => location.href, url => history.replaceState(history.state, '', url))
+    urlBinding.current = binding
     const navigate = (event: HashChangeEvent) => {
-      if ([event.oldURL, event.newURL].some(url => new URLSearchParams(new URL(url).hash.slice(1)).has('study'))) location.reload()
+      if ([event.oldURL, event.newURL].some(url => new URLSearchParams(new URL(url).hash.slice(1)).has('study'))) { binding.dispose(); location.reload() }
     }
+    const flush = () => binding.flush()
     window.addEventListener('hashchange', navigate)
-    return () => window.removeEventListener('hashchange', navigate)
+    window.addEventListener('pagehide', flush)
+    document.addEventListener('visibilitychange', flush)
+    return () => { binding.dispose(); urlBinding.current = null; window.removeEventListener('hashchange', navigate); window.removeEventListener('pagehide', flush); document.removeEventListener('visibilitychange', flush) }
   }, [])
 
-  ambientSearch.current = pair => { setStart(pair.start); setGoal(pair.goal); search(pair.start, pair.goal) }
+  ambientSearch.current = (pair, mode) => { algorithmRef.current = mode; setAlgorithm(mode); setStart(pair.start); setGoal(pair.goal); search(pair.start, pair.goal, mode) }
   const exitAmbient = () => {
     if (!ambient.current!.state.active) return
     ambient.current!.exit(); ++currentRequest.current; setBusy(false); setPlaying(false); setDuration(manualDuration.current); sound.current?.resumeSequence()
-    if (result) { setStart(result.snapping?.requestedStart ?? result.start); setGoal(result.snapping?.requestedGoal ?? result.goal) }
+    if (result) { const mode = resultAlgorithm(result); algorithmRef.current = mode; setAlgorithm(mode); setStart(result.snapping?.requestedStart ?? result.start); setGoal(result.snapping?.requestedGoal ?? result.goal) }
   }
 
   useEffect(() => {
@@ -110,6 +120,7 @@ export function App() {
     let map: RoadScene | null = null
     try {
       map = new RoadScene(host.current); scene.current = map
+      map.onViewChange = setView
       map.setGeographyVisible(outlinePreference.current)
       map.onRouteRevealChange = active => { revealingRef.current = active; setRevealing(active) }
       map.onRouteRevealComplete = () => { setPlaying(false); ambient.current!.complete() }
@@ -200,7 +211,18 @@ export function App() {
   }, [result, busy, error, pick, pendingCountry, duration, seek, togglePlayback])
 
   const currentStudy = (): StudyLink | null => result?.dataset ? ({ schema: 'pfad-study-link/1', country: country.id, dataset: result.dataset.identity, profile: result.dataset.profile,
-    start: result.snapping?.requestedStart ?? result.start, goal: result.snapping?.requestedGoal ?? result.goal, algorithm, duration, progress: progressRef.current, outlines, view: scene.current?.getView() }) : null
+    start: result.snapping?.requestedStart ?? result.start, goal: result.snapping?.requestedGoal ?? result.goal, algorithm: resultAlgorithm(result), duration, progress: progressRef.current, outlines, view: scene.current?.getView() }) : null
+  const currentParameters = (): StudyLink | null => {
+    const study = currentStudy()
+    if (shared.error || error || pendingCountry || ambientState.phase === 'preparing') return null
+    const sameSearch = study?.dataset === country.identity && samePoint(start, study.start) && samePoint(goal, study.goal) && algorithm === study.algorithm
+    const frame = sharedFrame.current
+    const restoring = frame?.country === country.id && samePoint(start, frame.start) && samePoint(goal, frame.goal) && algorithm === frame.algorithm
+    return { schema: 'pfad-study-link/1', country: country.id, dataset: country.identity, profile: manifest?.profile ?? 'road-connectivity-distance-v1',
+      start, goal, algorithm, duration, progress: restoring ? frame.progress : !busy && sameSearch ? progressRef.current : 0, outlines,
+      view: restoring ? frame.view : manifest?.identity === country.identity ? view : undefined }
+  }
+  useEffect(() => { urlBinding.current?.update(currentParameters()) })
   const clearShared = () => {
     history.replaceState(null, '', location.pathname + location.search); sharedFrame.current = undefined; setShared({}); setPendingCountry(null); setError('')
     initialQuery.current = { start: COUNTRIES[0].places[0], goal: COUNTRIES[0].places[1] }; setStart(initialQuery.current.start); setGoal(initialQuery.current.goal); setCountry(COUNTRIES[0])
@@ -229,7 +251,7 @@ export function App() {
         <p>The A* distance bound is prepared separately from the timed search, with corrections for the graph’s rounded coordinates and road lengths. All three algorithms solve the same shortest-distance question.</p>
         <p>Once the recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
         <p id="playback-shortcuts">Keyboard: Space plays or pauses the search replay; in ambient it pauses the whole sequence. Left/Right moves one second; hold Shift to move five seconds. Home/End jumps to the beginning or end. These shortcuts work on the map and timeline; place pickers and sound controls keep their own keys.</p>
-        <p>Ambient chooses journeys from twelve curated Swiss places. Road distance sets both the selection band and replay duration (25–65 seconds), followed by a six-second hold and two seconds to darkness. Pause sequence pauses the score too; Next keeps it continuous. Reduced motion shows stills with deliberate Next. The sequence pauses when the page is hidden.</p>
+        <p>Ambient chooses journeys from twelve curated Swiss places and cycles Dijkstra, bidirectional Dijkstra and A*, beginning with the selected algorithm. Road distance sets both the selection band and replay duration (25–65 seconds), followed by a six-second hold and two seconds to darkness. Pause sequence pauses the score too; Next keeps it continuous. Reduced motion shows stills with deliberate Next. The sequence pauses when the page is hidden.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Ferries are excluded, so islands and Northern Ireland can form separate components. Its route describes this connectivity model.</p>
         <p>Endpoints snap to nearby main or residential road nodes, within two kilometres. Where possible, both ends use the same road component with the smallest combined displacement. The search still checks one-way reachability; disconnected journeys can return no route.</p>
         {result && <p>Current endpoint displacement: A {result.start.snapMetres.toFixed(0)} m · B {result.goal.snapMetres.toFixed(0)} m from the requested coordinates.</p>}
@@ -238,10 +260,11 @@ export function App() {
         <p>Original ambient sketches composed using Driftbox: Plateau, Contours and Afterglow. This is a provisional score, flowing independently of the search. Sound starts off and pauses when you leave the page.</p>
         <p><a href={manifestUrl || './data/pfad-manifest.json'}>Dataset and source record</a>{manifest && <> · <a href={new URL(manifest.evidence.path, manifestUrl).href}>Source evidence</a></>} · <a href="./profiles/road-connectivity-distance-v1.json">Declared routing profile</a></p>
         {measurements && <p>Opening record: {(measurements.networkBytes / 1000000).toFixed(1)} MB downloaded, {(measurements.cachedBytes / 1000000).toFixed(1)} MB from verified cache · {measurements.totalMs.toFixed(0)} ms to complete graph. {measurements.cacheAvailable ? 'Up to two releases are cached within 128 MiB.' : 'Persistent storage unavailable; verified network loading remains available.'}</p>}
+        <p>The address bar follows the current settings, replay frame and map view. Share its URL to open that study paused; sound stays off.</p>
         <div className="record-actions">
           <button disabled={!result || busy} onClick={async () => {
-            const study = currentStudy(); if (!study) return
-            const url = studyUrl(location.href, study); setCopiedLink(url); history.replaceState(null, '', url)
+            const study = currentParameters(); if (!study) return
+            urlBinding.current?.update(study); const url = urlBinding.current?.flush() ?? studyUrl(location.href, study); setCopiedLink(url)
             try { await navigator.clipboard.writeText(url); setRecordStatus('Study link copied. Opens paused at this frame.') }
             catch { setRecordStatus('Select the link below to copy it.') }
           }}>Copy study link</button>
@@ -274,13 +297,13 @@ export function App() {
     <div className="playback-panel">
       <div className="search-readout">
         <div className="route-caption">{result ? <>{result.start.name}<span>→</span>{result.goal.name}{completed && result.routeMetres !== null && <em>{(result.routeMetres / 1000).toFixed(1)} km</em>}</> : <span>A real search. A slower clock.</span>}</div>
-        <div className="compute-readout"><button className="ambient-start" disabled={!ready || busy || country.id !== 'ch' || pendingCountry !== null || !!mapError} title={country.id !== 'ch' ? 'The curated ambient pool currently covers Switzerland' : 'A looping series of distance-selected journeys'} onClick={() => { manualDuration.current = duration; setPick(null); scene.current?.resetView(); ambient.current!.start(crypto.getRandomValues(new Uint32Array(1))[0], prefersReducedMotion()) }}>Ambient</button><select aria-label="Search algorithm" value={algorithm} disabled={!ready || busy} onChange={event => { const mode = event.target.value as SearchAlgorithm; algorithmRef.current = mode; setAlgorithm(mode); search(start, goal) }}><option value="dijkstra">Dijkstra</option><option value="bidirectional">Bidirectional Dijkstra</option><option value="astar">A*</option></select>{result && <><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></>}{result?.backwardTimes && <span className="front-key"><i className="front-a" />A<i className="front-b" />B</span>}{result?.goalProximity && <span className="front-key"><i className="goal-gradient" />Towards B</span>}</div>
+        <div className="compute-readout"><button className="ambient-start" disabled={!ready || busy || country.id !== 'ch' || pendingCountry !== null || !!mapError} title={country.id !== 'ch' ? 'The curated ambient pool currently covers Switzerland' : 'A looping series of distance-selected journeys'} onClick={() => { manualDuration.current = duration; setPick(null); scene.current?.resetView(); ambient.current!.start(crypto.getRandomValues(new Uint32Array(1))[0], prefersReducedMotion(), algorithm) }}>Ambient</button><select aria-label="Search algorithm" value={algorithm} disabled={!ready || busy} onChange={event => { const mode = event.target.value as SearchAlgorithm; algorithmRef.current = mode; setAlgorithm(mode); search(start, goal) }}><option value="dijkstra">Dijkstra</option><option value="bidirectional">Bidirectional Dijkstra</option><option value="astar">A*</option></select>{result && <><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></>}{result?.backwardTimes && <span className="front-key"><i className="front-a" />A<i className="front-b" />B</span>}{result?.goalProximity && <span className="front-key"><i className="goal-gradient" />Towards B</span>}</div>
       </div>
       {ambientState.active && <div className="ambient-controls" aria-label="Ambient sequence">
         <button onClick={togglePlayback} disabled={ambientState.phase === 'stopped'}>{ambientState.running ? 'Pause sequence' : 'Resume sequence'}</button>
         <button disabled={busy} onClick={() => ambient.current!.next()}>Next journey</button>
         <button onClick={exitAmbient}>Exit ambient</button>
-        <span role="status">{ambientState.message || (!ambientState.running && ambientState.phase !== 'still' ? 'Sequence paused' : ({ preparing: 'Finding a journey', replay: 'The search', hold: 'The road taken', fade: 'Between journeys', still: 'Choose Next for another still' }[ambientState.phase as string] ?? 'Sequence paused'))}</span>
+        <span role="status">{algorithmName(algorithm)} · {ambientState.message || (!ambientState.running && ambientState.phase !== 'still' ? 'Sequence paused' : ({ preparing: 'Finding a journey', replay: 'The search', hold: 'The road taken', fade: 'Between journeys', still: 'Choose Next for another still' }[ambientState.phase as string] ?? 'Sequence paused'))}</span>
       </div>}
       <div className="replay-controls">
         <button disabled={!result || busy} onClick={togglePlayback} title="Play / pause (Space)" aria-keyshortcuts="Space">{playing ? 'Pause' : 'Play'}</button>

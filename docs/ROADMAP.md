@@ -145,6 +145,8 @@ accompaniment and a coherent ambient experience.
 - [x] Build the initial ambient mode from the twelve-place Swiss pool, selecting pairs by distance
   and varying replay duration with actual route length. Include repetition
   controls, a result hold, a clear transition, pause/next/exit and bounded memory.
+  Journeys cycle all three algorithms from the current selection; candidate
+  retries retain the same algorithm and exports identify the cycle and journey.
   [The ambient-mode brief](AMBIENT.md) records confirmed choices, proposed
   implemented heuristics and remaining author/device review. The
   [60-journey audit](evidence/ambient-2026-10-01/review.json) checks actual costs,
@@ -196,6 +198,8 @@ and communicated without losing its source identity.
 
 - [x] Add shareable links containing endpoints, graph/profile identity, algorithm
   and meaningful replay/view settings.
+  Bind these parameters automatically to the address bar, with throttled history
+  replacement and paused restoration on opening or reloading a link.
 - [x] Preserve graph, compiler, profile and algorithm versions with exported
   recordings; provide clear behaviour when an older dataset is unavailable.
 - [x] Export an exact packed trace and its provenance in the documented
@@ -291,6 +295,8 @@ Related: [Concept](CONCEPT.md) · [Music](MUSIC.md) · [Architecture](ARCHITECTU
 The current pass adds verified chunk caching/retries, the curated ambient loop,
 whole-sequence music lifecycle, shareable paused studies and exact binary search
 exports. [RECORDS.md](RECORDS.md) documents identities and the export envelope.
+Sharing now follows settings, playback and camera changes in the URL automatically;
+ambient journeys rotate through the three algorithms, starting with the current mode.
 
 Author review: the ambient 25–65 s pacing, 6 s result hold and 2 s transition;
 regional versus national balance; final-route brightness; and the three sketches

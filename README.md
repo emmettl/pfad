@@ -43,13 +43,15 @@ demand, with two decoded pieces retained at most. See the [music brief](docs/MUS
 for composition sources, reproduction and remaining device checks.
 
 Ambient loops distance-selected journeys from the twelve curated Swiss places,
+cycling Dijkstra, bidirectional Dijkstra and A* from the selected algorithm,
 with distance-based duration, a result hold and a transition to darkness. Pause
 sequence pauses the score too; Next and Exit preserve its player. Reduced motion
 provides completed stills and deliberate Next. Pacing and musical selection are
 ready for author review.
 
-About also offers a share link opening the exact pinned study paused at its
-current frame, and a binary export of the genuine trace with provenance. Verified
+The URL follows settings, the replay frame and map view automatically, opening
+the exact pinned study paused when shared. About also offers Copy study link
+and a binary export of the genuine trace with provenance. Verified
 chunk caching retains at most two releases within 128 MiB and supports warm
 opening and retries without downloading intact stored chunks again.
 
