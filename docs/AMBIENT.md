@@ -28,6 +28,13 @@ Controls retreat to a small pause/resume, next journey and exit affordance.
 Attribution, profile identity and source information remain accessible. Leaving
 ambient mode restores deliberate exploration of the current journey.
 
+During a running loop, the controls, About and sound fade after four seconds of
+inactivity. Pointer movement, a tap, wheel input or keyboard activity restores
+them. Keyboard-focused controls and an open About panel stay visible; pause,
+reduced-motion stills and search errors also keep controls available. Escape exits
+ambient. A small PFAD mark, journey names, current algorithm and geographic
+credits remain on screen.
+
 ## Curated place pool
 
 Use a versioned list of places, with stable IDs, names, coordinates and optional

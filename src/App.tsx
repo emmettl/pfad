@@ -7,6 +7,7 @@ import { countsAt } from './search/engine.ts'
 import type { Point, Reply, SearchAlgorithm, SearchResult, StudyManifest } from './search/contracts.ts'
 import { SoundControl, type SoundHandle } from './music/SoundControl.tsx'
 import { AmbientSequence, type AmbientState } from './ambient/sequence.ts'
+import { useAmbientChrome } from './ambient/useChrome.ts'
 import type { JourneyPair } from './ambient/selector.ts'
 import { ROAD_CACHE_NAME, type LoadMeasurements } from './search/chunks.ts'
 import { readStudyLink, studyUrl, StudyUrlBinding, type StudyLink } from './records/link.ts'
@@ -59,6 +60,7 @@ export function App() {
   const outlinePreference = useRef(shared.study?.outlines ?? true)
   const [error, setError] = useState(shared.error ?? ''), [mapError, setMapError] = useState('')
   const [pick, setPick] = useState<'start' | 'goal' | null>(null)
+  const chrome = useAmbientChrome(ambientState.active && ambientState.running && ambientState.phase !== 'still' && !error && !mapError)
 
   const seek = useCallback((value: number, animate = false) => {
     const p = Math.min(1, Math.max(0, value)); progressRef.current = p; setProgress(p)
@@ -106,6 +108,7 @@ export function App() {
     if (!ambient.current!.state.active) return
     ambient.current!.exit(); ++currentRequest.current; setBusy(false); setPlaying(false); setDuration(manualDuration.current); sound.current?.resumeSequence()
     if (result) { const mode = resultAlgorithm(result); algorithmRef.current = mode; setAlgorithm(mode); setStart(result.snapping?.requestedStart ?? result.start); setGoal(result.snapping?.requestedGoal ?? result.goal) }
+    host.current?.focus()
   }
 
   useEffect(() => {
@@ -245,10 +248,17 @@ export function App() {
       <button className="pick-button" disabled={!ready || busy || !!mapError} onClick={() => setPick(pick === end ? null : end)} aria-label={`Choose ${end === 'start' ? 'start' : 'destination'} on map`} aria-pressed={pick === end} title="Choose on map">⌖</button>
     </div>
   )
-  return <div className="study" data-state={error ? 'error' : result ? 'ready' : 'loading'} data-progress={progress} data-algorithm={result?.algorithm ?? algorithm} data-ambient-phase={ambientState.phase} data-ambient-running={ambientState.running}>
+  return <div className="study" data-state={error ? 'error' : result ? 'ready' : 'loading'} data-progress={progress} data-algorithm={result?.algorithm ?? algorithm} data-ambient-phase={ambientState.phase} data-ambient-running={ambientState.running} data-ambient-chrome={ambientState.active ? chrome.visible ? 'visible' : 'quiet' : 'off'}
+    onPointerMoveCapture={chrome.wake} onPointerDownCapture={chrome.wake} onWheelCapture={chrome.wake} onFocusCapture={chrome.wake} onBlurCapture={chrome.wake}
+    onKeyDownCapture={event => {
+      chrome.wake()
+      if (ambientState.active && event.key === 'Escape' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.nativeEvent.isComposing) {
+        event.preventDefault(); exitAmbient()
+      }
+    }}>
     <header className="study-header">
       <div className="identity"><a href="https://motionstudies.app/" className="series">Motion Studies</a><h1>PFAD</h1><p>The roads not taken</p></div>
-      <div className="header-tools"><select className="country-control" aria-label="Country" disabled={!!shared.error} value={pendingCountry ?? country.id} onChange={event => chooseCountry(event.target.value)}>{COUNTRIES.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}</select><details className="about"><summary>About this study</summary><div className="about-panel">
+      <div className="header-tools"><select className="country-control" aria-label="Country" disabled={!!shared.error} value={pendingCountry ?? country.id} onChange={event => chooseCountry(event.target.value)}>{COUNTRIES.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}</select><details className="about"><summary>{ambientState.active ? 'About' : 'About this study'}</summary><div className="about-panel">
         <h2>A study of time, space, and the paths not taken.</h2>
         <p>A real shortest-distance search across {country.name}’s recorded road network. Every illuminated road was examined by the algorithm.</p>
         <p>The playback clock follows algorithm event order. It stretches the computation; it does not reproduce the timing of individual processor operations.</p>
@@ -256,7 +266,7 @@ export function App() {
         <p>A* directs the search using a checked lower bound on the remaining distance. Cool blue roads shade towards ice-white as that estimate falls; recent examinations glow while earlier branches recede. Only roads actually examined are revealed.</p>
         <p>The A* distance bound is prepared separately from the timed search, with corrections for the graph’s rounded coordinates and road lengths. All three algorithms solve the same shortest-distance question.</p>
         <p>Once the recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
-        <p id="playback-shortcuts">Keyboard: Space plays or pauses the search replay; in ambient it pauses the whole sequence. Left/Right moves one second; hold Shift to move five seconds. Home/End jumps to the beginning or end. These shortcuts work on the map and timeline; place pickers and sound controls keep their own keys.</p>
+        <p id="playback-shortcuts">Keyboard: Space plays or pauses the search replay; in ambient it pauses the whole sequence and Escape leaves ambient. Left/Right moves one second; hold Shift to move five seconds. Home/End jumps to the beginning or end. These shortcuts work on the map and timeline; place pickers and sound controls keep their own keys.</p>
         <p>Ambient chooses journeys from twelve curated Swiss places and cycles Dijkstra, bidirectional Dijkstra and A*, beginning with the selected algorithm. Road distance sets both the selection band and replay duration (25–65 seconds), followed by a six-second hold and two seconds to darkness. Pause sequence pauses the score too; Next keeps it continuous. Reduced motion shows stills with deliberate Next. The sequence pauses when the page is hidden.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Ferries are excluded, so islands and Northern Ireland can form separate components. Its route describes this connectivity model.</p>
         <p>Endpoints snap to nearby main or residential road nodes, within two kilometres. Where possible, both ends use the same road component with the smallest combined displacement. The search still checks one-way reachability; disconnected journeys can return no route.</p>
@@ -293,7 +303,7 @@ export function App() {
       {queryControl(goal, setGoal, 'goal')}
       <button className="search-button" disabled={!ready || busy} onClick={() => search(start, goal)}>{busy ? 'Computing…' : 'Search'}</button>
     </div>
-    <main className={`map ${pick ? 'pick-mode' : ''}`} ref={host} style={{ opacity: ambientState.opacity }} tabIndex={0} aria-label={`Recorded pathfinding across ${country.name}`} aria-describedby="playback-shortcuts" aria-keyshortcuts="Space ArrowLeft ArrowRight Shift+ArrowLeft Shift+ArrowRight Home End" />
+    <main className={`map ${pick ? 'pick-mode' : ''}`} ref={host} style={{ opacity: ambientState.opacity }} tabIndex={0} aria-label={`Recorded pathfinding across ${country.name}`} aria-describedby="playback-shortcuts" aria-keyshortcuts="Space ArrowLeft ArrowRight Shift+ArrowLeft Shift+ArrowRight Home End Escape" />
     {pending && <div className="country-confirm" role="dialog" aria-label="Open a large road dataset"><p>{pending.name} · {pending.downloadMB} MB download</p><p>{pending.deviceNote}</p><button onClick={() => chooseCountry(pending.id)}>Open {pending.name}</button><button onClick={() => shared.study ? clearShared() : setPendingCountry(null)}>Cancel</button></div>}
     {pick && <div className="map-hint">Choose point {pick === 'start' ? 'A' : 'B'} on the map <button onClick={() => setPick(null)}>Cancel</button></div>}
     {!ready && !error && <div className="loading-panel" role="status"><span className="loading-title">Opening {country.name}</span><p>{loading.stage}</p>{loading.total > 0 && <><progress value={loading.loaded} max={loading.total} aria-label="Road data download" /><span className="mono">{(loading.loaded / 1000000).toFixed(1)} / {(loading.total / 1000000).toFixed(1)} MB</span></>}</div>}
@@ -302,14 +312,14 @@ export function App() {
     <button className="reset-view" aria-label="Show whole network" title="Show whole network" onClick={() => scene.current?.resetView()}>↗↙</button>
     <div className="playback-panel">
       <div className="search-readout">
-        <div className="route-caption">{result ? <>{result.start.name}<span>→</span>{result.goal.name}{completed && result.routeMetres !== null && <em>{(result.routeMetres / 1000).toFixed(1)} km</em>}</> : <span>A real search. A slower clock.</span>}</div>
-        <div className="compute-readout"><button className="ambient-start" disabled={!ready || busy || pendingCountry !== null || !!mapError} title="A looping series of distance-selected journeys" onClick={() => { manualDuration.current = duration; setPick(null); scene.current?.resetView(); ambient.current!.start(crypto.getRandomValues(new Uint32Array(1))[0], prefersReducedMotion(), algorithm, country.ambient) }}>Ambient</button><select aria-label="Search algorithm" value={algorithm} disabled={!ready || busy} onChange={event => { const mode = event.target.value as SearchAlgorithm; algorithmRef.current = mode; setAlgorithm(mode); search(start, goal) }}><option value="dijkstra">Dijkstra</option><option value="bidirectional">Bidirectional Dijkstra</option><option value="astar">A*</option></select>{result && <><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></>}{result?.backwardTimes && <span className="front-key"><i className="front-a" />A<i className="front-b" />B</span>}{result?.goalProximity && <span className="front-key"><i className="goal-gradient" />Towards B</span>}</div>
+        <div className="route-caption">{result ? <>{result.start.name}<span>→</span>{result.goal.name}{completed && result.routeMetres !== null && <em>{(result.routeMetres / 1000).toFixed(1)} km</em>}</> : <span>A real search. A slower clock.</span>}{ambientState.active && <span className="ambient-algorithm">{algorithmName(algorithm)}</span>}</div>
+        <div className="compute-readout"><button className="ambient-start" disabled={!ready || busy || pendingCountry !== null || !!mapError} title="A looping series of distance-selected journeys" onClick={() => { manualDuration.current = duration; setPick(null); scene.current?.resetView(); ambient.current!.start(crypto.getRandomValues(new Uint32Array(1))[0], prefersReducedMotion(), algorithm, country.ambient); host.current?.focus() }}>Ambient</button><select aria-label="Search algorithm" value={algorithm} disabled={!ready || busy} onChange={event => { const mode = event.target.value as SearchAlgorithm; algorithmRef.current = mode; setAlgorithm(mode); search(start, goal) }}><option value="dijkstra">Dijkstra</option><option value="bidirectional">Bidirectional Dijkstra</option><option value="astar">A*</option></select>{result && <><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></>}{result?.backwardTimes && <span className="front-key"><i className="front-a" />A<i className="front-b" />B</span>}{result?.goalProximity && <span className="front-key"><i className="goal-gradient" />Towards B</span>}</div>
       </div>
       {ambientState.active && <div className="ambient-controls" aria-label="Ambient sequence">
-        <button onClick={togglePlayback} disabled={ambientState.phase === 'stopped'}>{ambientState.running ? 'Pause sequence' : 'Resume sequence'}</button>
-        <button disabled={busy} onClick={() => ambient.current!.next()}>Next journey</button>
-        <button onClick={exitAmbient}>Exit ambient</button>
-        <span role="status">{algorithmName(algorithm)} · {ambientState.message || (!ambientState.running && ambientState.phase !== 'still' ? 'Sequence paused' : ({ preparing: 'Finding a journey', replay: 'The search', hold: 'The road taken', fade: 'Between journeys', still: 'Choose Next for another still' }[ambientState.phase as string] ?? 'Sequence paused'))}</span>
+        <button aria-label={ambientState.running ? 'Pause sequence' : 'Resume sequence'} onClick={togglePlayback} disabled={ambientState.phase === 'stopped'}>{ambientState.running ? 'Pause' : 'Resume'}</button>
+        <button aria-label="Next journey" disabled={busy} onClick={() => ambient.current!.next()}>Next</button>
+        <button aria-label="Exit ambient" title="Exit ambient (Escape)" onClick={exitAmbient}>Exit</button>
+        <span role="status">{ambientState.message || (!ambientState.running && ambientState.phase !== 'still' ? 'Sequence paused' : ({ preparing: 'Finding a journey', replay: 'The search', hold: 'The road taken', fade: 'Between journeys', still: 'Choose Next for another still' }[ambientState.phase as string] ?? 'Sequence paused'))}</span>
       </div>}
       <div className="replay-controls">
         <button disabled={!result || busy} onClick={togglePlayback} title="Play / pause (Space)" aria-keyshortcuts="Space">{playing ? 'Pause' : 'Play'}</button>

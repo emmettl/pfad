@@ -140,7 +140,9 @@ accompaniment and a coherent ambient experience.
 - [ ] Add Swiss place-name search and coordinate entry beyond the initial town list,
   using a bounded, attributed place dataset.
 - [x] Add quiet ambient viewing with reduced controls; About keeps the profile,
-  source and algorithm explanations accessible.
+  source and algorithm explanations accessible. Running loops fade controls
+  after four seconds of inactivity; input reveals them, pause and keyboard focus
+  keep them available, and Escape restores the manual study.
 - [ ] Add a compact inspectable algorithm/counter overlay within quiet viewing.
 - [x] Build the initial ambient mode from the twelve-place Swiss pool, selecting pairs by distance
   and varying replay duration with actual route length. Include repetition
