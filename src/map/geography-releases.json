@@ -33,5 +33,10 @@
     "url": "https://motionstudies.app/pfad-data/geo-ie-20261001-9b19a91c7ddb/manifest.json",
     "bytes": 494,
     "sha256": "605889b1fc14e0ff9ec84fe2532aa396847bad541718726759bb87203d625a57"
+  },
+  "sc": {
+    "url": "https://motionstudies.app/pfad-data/geo-sc-20261001-23b17eadf16e/manifest.json",
+    "bytes": 496,
+    "sha256": "fbd68d154b46516b6b08383c9de462cb70f56dd09e6e634f6b3a0b4337c5a1f7"
   }
 }

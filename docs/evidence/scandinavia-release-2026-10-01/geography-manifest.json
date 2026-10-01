@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "sc",
+  "border": {
+    "path": "border-593f704ac68b.json",
+    "bytes": 229849,
+    "sha256": "593f704ac68bc4a018e3a640e12491ecdcafc20ccbb15febd353234f05899a84"
+  },
+  "lakes": {
+    "path": "lakes-037ab40ef69f.json",
+    "bytes": 184755,
+    "sha256": "037ab40ef69f24cce18dec1fd8bb65ebd0b14c447b10d433ed51d26b1de0e2b2"
+  },
+  "id": "geo-sc-20261001-23b17eadf16e",
+  "identity": "23b17eadf16e6132f3a5d14e5c43a927a2ace409aafe00840b2c9361ec228354"
+}

@@ -35,6 +35,8 @@ if not args.experiment:
     assert SOURCE_HASH == '95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd' and args.dataset_prefix == 'ch-20260929' and args.projection is None, 'Another national dataset must be packaged as an experiment until explicitly selected for publication'
 if country:
     assert SOURCE_HASH == country['source']['sha256'] and source['url'] == country['source']['url'], 'Country source differs from the pinned release'
+    if country['source'].get('inputs'):
+        assert source == country['source'], 'Composite input provenance differs from the pinned release'
 with args.source.open('rb') as handle:
     assert hashlib.file_digest(handle, 'sha256').hexdigest() == SOURCE_HASH, 'Wrong source snapshot'
 assert args.source.stat().st_size == source['bytes'], 'Wrong source byte length'
@@ -158,6 +160,9 @@ for name, data in files.items():
     target = out / name
     if target.exists(): assert target.read_bytes() == data, 'Refusing to change immutable data'
     else: target.write_bytes(data)
+if source.get('inputs'):
+    manifest['source'].update(inputs=source['inputs'], composition=source['composition'])
+    manifest['coverage'] = country['coverage']
 manifest_bytes = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').encode()
 target = out / 'manifest.json'
 if target.exists(): assert target.read_bytes() == manifest_bytes, 'Refusing to change immutable manifest'

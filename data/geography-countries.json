@@ -3,5 +3,6 @@
   "nl": {"admin": "Netherlands", "bounds": [3, 50, 8, 54], "referenceLatitude": 52.2},
   "nz": {"admin": "New Zealand", "bounds": [160, -56, 190, -28], "referenceLatitude": -40.5, "longitudeCentre": 175},
   "lu": {"admin": "Luxembourg", "bounds": [5, 49, 7, 51], "referenceLatitude": 49.8, "borderToleranceMetres": 100},
-  "ie": {"admin": "Ireland", "bounds": [-11, 51, -5, 56], "referenceLatitude": 53.4, "additionalComponents": [{"admin": "United Kingdom", "bounds": [-9, 54, -5.3, 55.5], "completePolygons": true}], "dissolve": true}
+  "ie": {"admin": "Ireland", "bounds": [-11, 51, -5, 56], "referenceLatitude": 53.4, "additionalComponents": [{"admin": "United Kingdom", "bounds": [-9, 54, -5.3, 55.5], "completePolygons": true}], "dissolve": true},
+  "sc": {"admin": "Norway", "bounds": [3, 54, 33, 72], "referenceLatitude": 63, "additionalComponents": [{"admin": "Sweden", "bounds": [3, 54, 33, 72]}, {"admin": "Denmark", "bounds": [3, 54, 33, 72]}], "dissolve": true}
 }

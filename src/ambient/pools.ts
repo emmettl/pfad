@@ -114,4 +114,36 @@ export const IE_POOL: AmbientPool = { version: 'ie-places/1', places: [
   { id: 'dingle', name: 'Dingle', lon: -10.2689, lat: 52.1409 },
 ] }
 
-export const AMBIENT_POOLS: Record<string, AmbientPool> = { ch: SWISS_POOL, uk: UK_POOL, is: IS_POOL, nl: NL_POOL, nz: NZ_POOL, lu: LU_POOL, ie: IE_POOL }
+export const SC_POOL: AmbientPool = { version: 'sc-places/1', places: [
+  { id: 'oslo', name: 'Oslo', lon: 10.7522, lat: 59.9139 },
+  { id: 'stockholm', name: 'Stockholm', lon: 18.0686, lat: 59.3293 },
+  { id: 'copenhagen', name: 'Copenhagen', lon: 12.5683, lat: 55.6761 },
+  { id: 'bergen', name: 'Bergen', lon: 5.3221, lat: 60.3929 },
+  { id: 'trondheim', name: 'Trondheim', lon: 10.3951, lat: 63.4305 },
+  { id: 'lillehammer', name: 'Lillehammer', lon: 10.4663, lat: 61.1153 },
+  { id: 'kristiansand', name: 'Kristiansand', lon: 7.9956, lat: 58.1467 },
+  { id: 'stavanger', name: 'Stavanger', lon: 5.7331, lat: 58.9701 },
+  { id: 'gothenburg', name: 'Gothenburg', lon: 11.9746, lat: 57.7089 },
+  { id: 'malmo', name: 'Malmö', lon: 13.0038, lat: 55.605 },
+  { id: 'uppsala', name: 'Uppsala', lon: 17.6389, lat: 59.8586 },
+  { id: 'vasteras', name: 'Västerås', lon: 16.5448, lat: 59.6099 },
+  { id: 'orebro', name: 'Örebro', lon: 15.2134, lat: 59.2753 },
+  { id: 'karlstad', name: 'Karlstad', lon: 13.5036, lat: 59.4022 },
+  { id: 'jonkoping', name: 'Jönköping', lon: 14.1618, lat: 57.7826 },
+  { id: 'ostersund', name: 'Östersund', lon: 14.6357, lat: 63.1792 },
+  { id: 'umea', name: 'Umeå', lon: 20.263, lat: 63.8258 },
+  { id: 'lulea', name: 'Luleå', lon: 22.1567, lat: 65.5848 },
+  { id: 'aarhus', name: 'Aarhus', lon: 10.2039, lat: 56.1629 },
+  { id: 'odense', name: 'Odense', lon: 10.3883, lat: 55.4038 },
+  { id: 'aalborg', name: 'Aalborg', lon: 9.9217, lat: 57.0488 },
+  { id: 'roskilde', name: 'Roskilde', lon: 12.0803, lat: 55.6419 },
+  { id: 'randers', name: 'Randers', lon: 10.0364, lat: 56.4607 },
+  { id: 'silkeborg', name: 'Silkeborg', lon: 9.5451, lat: 56.1697 },
+  { id: 'horsens', name: 'Horsens', lon: 9.8503, lat: 55.8607 },
+  { id: 'vejle', name: 'Vejle', lon: 9.5361, lat: 55.7113 },
+  { id: 'drammen', name: 'Drammen', lon: 10.2045, lat: 59.7439 },
+  { id: 'moss', name: 'Moss', lon: 10.6577, lat: 59.434 },
+  { id: 'fredrikstad', name: 'Fredrikstad', lon: 10.939, lat: 59.2181 },
+].map(place => ({ ...place, region: 'scandinavian-mainland' })) }
+
+export const AMBIENT_POOLS: Record<string, AmbientPool> = { ch: SWISS_POOL, uk: UK_POOL, is: IS_POOL, nl: NL_POOL, nz: NZ_POOL, lu: LU_POOL, ie: IE_POOL, sc: SC_POOL }

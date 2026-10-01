@@ -10,8 +10,10 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--country', type=Path, help='Pinned country configuration')
 args = parser.parse_args()
 source = json.loads((args.country or root / 'public/data/pfad-manifest.json').read_text())['source']
-target = root / '.cache/osm' / source['url'].rsplit('/', 1)[-1]
+target = root / '.cache/osm' / source.get('filename', source['url'].rsplit('/', 1)[-1])
 target.parent.mkdir(parents=True, exist_ok=True)
+if source.get('inputs') and not target.exists():
+    raise SystemExit('Composite source must first be prepared with prepare-composite-source.py')
 if not target.exists():
     temporary = target.with_suffix('.partial')
     with urllib.request.urlopen(source['url'], timeout=180) as response, temporary.open('wb') as output:

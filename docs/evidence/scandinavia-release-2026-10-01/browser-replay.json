@@ -1,0 +1,581 @@
+{
+  "measuredAt": "2026-10-01T12:03:11.055Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "sc-20260930-0718a55b5352",
+    "counts": {
+      "nodes": 5547443,
+      "edges": 6144949,
+      "directedArcs": 11920666,
+      "vertices": 22790620
+    },
+    "downloadBytes": 77858993,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe.html",
+      "sha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright",
+      "inputs": [
+        {
+          "country": "norway",
+          "url": "https://download.geofabrik.de/europe/norway-260930.osm.pbf",
+          "bytes": 1376505247,
+          "sha256": "e0ef574201ad63d936b1867149a23cb71979d1362c0aeeb4b17fd8d42c2d96f2",
+          "md5": "60b6d200f7d66c8c201e9bf277b3537e",
+          "dataTimestamp": "2026-09-30T20:22:42Z"
+        },
+        {
+          "country": "sweden",
+          "url": "https://download.geofabrik.de/europe/sweden-260930.osm.pbf",
+          "bytes": 839447705,
+          "sha256": "4b64b0987efcecc5c57625566ebb5ab0bddba2482f803ab878c656cfc524c3fb",
+          "md5": "d9831b5f290d9e0fa6cd6b5b77ab3e36",
+          "dataTimestamp": "2026-09-30T20:22:42Z"
+        },
+        {
+          "country": "denmark",
+          "url": "https://download.geofabrik.de/europe/denmark-260930.osm.pbf",
+          "bytes": 495094198,
+          "sha256": "7e3f21f36a4a8d6bfff4d31b707d48aca54e41e6c86febb723e36a85185abf83",
+          "md5": "ba5b1ed10f6ee92f901d88f51c362d69",
+          "dataTimestamp": "2026-09-30T20:22:42Z"
+        }
+      ],
+      "composition": {
+        "version": "pfad-composite-source/1",
+        "tool": "osmium-tool/1.19.1",
+        "libosmium": "2.23.1",
+        "generator": "pfad-composite-source/1",
+        "operation": "merge-same-snapshot-then-complete-ways-extract",
+        "bounds": [
+          3,
+          54,
+          33,
+          72
+        ],
+        "strategy": "complete_ways",
+        "deduplication": "OSM object type, ID and version",
+        "excludedTerritories": [
+          "Svalbard",
+          "Jan Mayen"
+        ]
+      }
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 946,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0718a55b53520565a42cc38cb99c0183e75a6da4c36b2423c5b1496541d6a6b6",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Aarhus",
+            "lon": 10.2042,
+            "lat": 56.16343,
+            "node": 2697944,
+            "snapMetres": 61.79142990407094
+          },
+          "goal": {
+            "name": "Luleå",
+            "lon": 22.15675,
+            "lat": 65.58489,
+            "node": 2135978,
+            "snapMetres": 10.268031696337706
+          },
+          "searchMs": 749.4000000059605,
+          "snapMs": 285.60000002384186,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Aarhus",
+              "lon": 10.2039,
+              "lat": 56.1629
+            },
+            "requestedGoal": {
+              "name": "Luleå",
+              "lon": 22.1567,
+              "lat": 65.5848
+            }
+          },
+          "events": 21449141,
+          "traceBytes": 85796564,
+          "edgeTextureBytes": 49168384,
+          "nodesSettled": 5113204,
+          "arcsExamined": 11040411,
+          "routeMetres": 1742059.23,
+          "maxQueue": 1152,
+          "traceSha256": "0b5cad04be41b8677f1f71efae7d983ce092528db7d753140c122bc931787901",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 22790620,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 85796564
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0718a55b53520565a42cc38cb99c0183e75a6da4c36b2423c5b1496541d6a6b6",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Aarhus",
+            "lon": 10.2042,
+            "lat": 56.16343,
+            "node": 2697944,
+            "snapMetres": 61.79142990407094
+          },
+          "goal": {
+            "name": "Luleå",
+            "lon": 22.15675,
+            "lat": 65.58489,
+            "node": 2135978,
+            "snapMetres": 10.268031696337706
+          },
+          "searchMs": 752.6000000238419,
+          "snapMs": 49.400000005960464,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Aarhus",
+              "lon": 10.2039,
+              "lat": 56.1629
+            },
+            "requestedGoal": {
+              "name": "Luleå",
+              "lon": 22.1567,
+              "lat": 65.5848
+            }
+          },
+          "events": 21449141,
+          "traceBytes": 85796564,
+          "edgeTextureBytes": 49168384,
+          "nodesSettled": 5113204,
+          "arcsExamined": 11040411,
+          "routeMetres": 1742059.23,
+          "maxQueue": 1152,
+          "traceSha256": "0b5cad04be41b8677f1f71efae7d983ce092528db7d753140c122bc931787901",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 22790620,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 85796564
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "0718a55b53520565a42cc38cb99c0183e75a6da4c36b2423c5b1496541d6a6b6",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Aarhus",
+            "lon": 10.2042,
+            "lat": 56.16343,
+            "node": 2697944,
+            "snapMetres": 61.79142990407094
+          },
+          "goal": {
+            "name": "Luleå",
+            "lon": 22.15675,
+            "lat": 65.58489,
+            "node": 2135978,
+            "snapMetres": 10.268031696337706
+          },
+          "searchMs": 816.4000000059605,
+          "snapMs": 49.5,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Aarhus",
+              "lon": 10.2039,
+              "lat": 56.1629
+            },
+            "requestedGoal": {
+              "name": "Luleå",
+              "lon": 22.1567,
+              "lat": 65.5848
+            }
+          },
+          "events": 15783033,
+          "traceBytes": 63132132,
+          "edgeTextureBytes": 98336768,
+          "nodesSettled": 3745857,
+          "arcsExamined": 8144524,
+          "routeMetres": 1742059.23,
+          "maxQueue": 1300,
+          "traceSha256": "40b882a142ffa096a92167a6fbd1fee9f2d1e45f69dbff8cfcb5e5dc5a7e3a52",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 22790620,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 63132132
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0718a55b53520565a42cc38cb99c0183e75a6da4c36b2423c5b1496541d6a6b6",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Aarhus",
+            "lon": 10.2042,
+            "lat": 56.16343,
+            "node": 2697944,
+            "snapMetres": 61.79142990407094
+          },
+          "goal": {
+            "name": "Luleå",
+            "lon": 22.15675,
+            "lat": 65.58489,
+            "node": 2135978,
+            "snapMetres": 10.268031696337706
+          },
+          "searchMs": 726.2999999821186,
+          "snapMs": 45.5,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Aarhus",
+              "lon": 10.2039,
+              "lat": 56.1629
+            },
+            "requestedGoal": {
+              "name": "Luleå",
+              "lon": 22.1567,
+              "lat": 65.5848
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 212.09999999403954,
+            "correctedNodes": 36430,
+            "longitudeScale": 0.32277453075375684,
+            "initialStartCm": 113205061,
+            "startLowerBoundCm": 113205061
+          },
+          "events": 17061205,
+          "traceBytes": 68244820,
+          "edgeTextureBytes": 49168384,
+          "nodesSettled": 4044317,
+          "arcsExamined": 8777230,
+          "routeMetres": 1742059.23,
+          "maxQueue": 2984,
+          "traceSha256": "4cac56abf7531769e31ed72452474ea0bb1c823b330f34ee99938e5c4b326e55",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 22790620,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 68244820
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 919,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0718a55b53520565a42cc38cb99c0183e75a6da4c36b2423c5b1496541d6a6b6",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Aarhus",
+            "lon": 10.2042,
+            "lat": 56.16343,
+            "node": 2697944,
+            "snapMetres": 61.79142990407094
+          },
+          "goal": {
+            "name": "Luleå",
+            "lon": 22.15675,
+            "lat": 65.58489,
+            "node": 2135978,
+            "snapMetres": 10.268031696337706
+          },
+          "searchMs": 631,
+          "snapMs": 234,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Aarhus",
+              "lon": 10.2039,
+              "lat": 56.1629
+            },
+            "requestedGoal": {
+              "name": "Luleå",
+              "lon": 22.1567,
+              "lat": 65.5848
+            }
+          },
+          "events": 21449141,
+          "traceBytes": 85796564,
+          "edgeTextureBytes": 49168384,
+          "nodesSettled": 5113204,
+          "arcsExamined": 11040411,
+          "routeMetres": 1742059.23,
+          "maxQueue": 1152,
+          "traceSha256": "0b5cad04be41b8677f1f71efae7d983ce092528db7d753140c122bc931787901",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 22790620,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 85796564
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0718a55b53520565a42cc38cb99c0183e75a6da4c36b2423c5b1496541d6a6b6",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Aarhus",
+            "lon": 10.2042,
+            "lat": 56.16343,
+            "node": 2697944,
+            "snapMetres": 61.79142990407094
+          },
+          "goal": {
+            "name": "Luleå",
+            "lon": 22.15675,
+            "lat": 65.58489,
+            "node": 2135978,
+            "snapMetres": 10.268031696337706
+          },
+          "searchMs": 635,
+          "snapMs": 46,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Aarhus",
+              "lon": 10.2039,
+              "lat": 56.1629
+            },
+            "requestedGoal": {
+              "name": "Luleå",
+              "lon": 22.1567,
+              "lat": 65.5848
+            }
+          },
+          "events": 21449141,
+          "traceBytes": 85796564,
+          "edgeTextureBytes": 49168384,
+          "nodesSettled": 5113204,
+          "arcsExamined": 11040411,
+          "routeMetres": 1742059.23,
+          "maxQueue": 1152,
+          "traceSha256": "0b5cad04be41b8677f1f71efae7d983ce092528db7d753140c122bc931787901",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 22790620,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 85796564
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "0718a55b53520565a42cc38cb99c0183e75a6da4c36b2423c5b1496541d6a6b6",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Aarhus",
+            "lon": 10.2042,
+            "lat": 56.16343,
+            "node": 2697944,
+            "snapMetres": 61.79142990407094
+          },
+          "goal": {
+            "name": "Luleå",
+            "lon": 22.15675,
+            "lat": 65.58489,
+            "node": 2135978,
+            "snapMetres": 10.268031696337706
+          },
+          "searchMs": 654,
+          "snapMs": 46,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Aarhus",
+              "lon": 10.2039,
+              "lat": 56.1629
+            },
+            "requestedGoal": {
+              "name": "Luleå",
+              "lon": 22.1567,
+              "lat": 65.5848
+            }
+          },
+          "events": 15783033,
+          "traceBytes": 63132132,
+          "edgeTextureBytes": 98336768,
+          "nodesSettled": 3745857,
+          "arcsExamined": 8144524,
+          "routeMetres": 1742059.23,
+          "maxQueue": 1300,
+          "traceSha256": "40b882a142ffa096a92167a6fbd1fee9f2d1e45f69dbff8cfcb5e5dc5a7e3a52",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 22790620,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 63132132
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0718a55b53520565a42cc38cb99c0183e75a6da4c36b2423c5b1496541d6a6b6",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Aarhus",
+            "lon": 10.2042,
+            "lat": 56.16343,
+            "node": 2697944,
+            "snapMetres": 61.79142990407094
+          },
+          "goal": {
+            "name": "Luleå",
+            "lon": 22.15675,
+            "lat": 65.58489,
+            "node": 2135978,
+            "snapMetres": 10.268031696337706
+          },
+          "searchMs": 652,
+          "snapMs": 47,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Aarhus",
+              "lon": 10.2039,
+              "lat": 56.1629
+            },
+            "requestedGoal": {
+              "name": "Luleå",
+              "lon": 22.1567,
+              "lat": 65.5848
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 231,
+            "correctedNodes": 36430,
+            "longitudeScale": 0.32277453075375684,
+            "initialStartCm": 113205061,
+            "startLowerBoundCm": 113205061
+          },
+          "events": 17061205,
+          "traceBytes": 68244820,
+          "edgeTextureBytes": 49168384,
+          "nodesSettled": 4044317,
+          "arcsExamined": 8777230,
+          "routeMetres": 1742059.23,
+          "maxQueue": 2984,
+          "traceSha256": "4cac56abf7531769e31ed72452474ea0bb1c823b330f34ee99938e5c4b326e55",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 22790620,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 68244820
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 270153706,
+    "reverseCsrBytes": 117555104,
+    "uploadedRoadAttributeBytes": 273487440,
+    "drawingCoordinateAndOffsetBytes": 206905004,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe.html",
+    "filename": "scandinavia-260930.osm.pbf",
+    "sha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+    "bytes": 2708601710,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "inputs": [
+      {
+        "country": "norway",
+        "url": "https://download.geofabrik.de/europe/norway-260930.osm.pbf",
+        "bytes": 1376505247,
+        "sha256": "e0ef574201ad63d936b1867149a23cb71979d1362c0aeeb4b17fd8d42c2d96f2",
+        "md5": "60b6d200f7d66c8c201e9bf277b3537e",
+        "dataTimestamp": "2026-09-30T20:22:42Z"
+      },
+      {
+        "country": "sweden",
+        "url": "https://download.geofabrik.de/europe/sweden-260930.osm.pbf",
+        "bytes": 839447705,
+        "sha256": "4b64b0987efcecc5c57625566ebb5ab0bddba2482f803ab878c656cfc524c3fb",
+        "md5": "d9831b5f290d9e0fa6cd6b5b77ab3e36",
+        "dataTimestamp": "2026-09-30T20:22:42Z"
+      },
+      {
+        "country": "denmark",
+        "url": "https://download.geofabrik.de/europe/denmark-260930.osm.pbf",
+        "bytes": 495094198,
+        "sha256": "7e3f21f36a4a8d6bfff4d31b707d48aca54e41e6c86febb723e36a85185abf83",
+        "md5": "ba5b1ed10f6ee92f901d88f51c362d69",
+        "dataTimestamp": "2026-09-30T20:22:42Z"
+      }
+    ],
+    "composition": {
+      "version": "pfad-composite-source/1",
+      "tool": "osmium-tool/1.19.1",
+      "libosmium": "2.23.1",
+      "generator": "pfad-composite-source/1",
+      "operation": "merge-same-snapshot-then-complete-ways-extract",
+      "bounds": [
+        3,
+        54,
+        33,
+        72
+      ],
+      "strategy": "complete_ways",
+      "deduplication": "OSM object type, ID and version",
+      "excludedTerritories": [
+        "Svalbard",
+        "Jan Mayen"
+      ]
+    }
+  },
+  "scope": "Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.",
+  "road_classes": {
+    "primary": 62656,
+    "unclassified": 330647,
+    "residential": 549763,
+    "tertiary": 173137,
+    "trunk_link": 7113,
+    "service": 2016475,
+    "secondary": 109504,
+    "motorway": 14502,
+    "living_street": 12856,
+    "motorway_link": 9869,
+    "trunk": 42644,
+    "tertiary_link": 1744,
+    "primary_link": 3271,
+    "secondary_link": 2568,
+    "road": 946
+  },
+  "excluded": {
+    "private": 47764,
+    "no": 19409,
+    "agricultural": 108,
+    "forestry": 165
+  },
+  "road_shape_nodes": 32549031,
+  "graph_nodes": 5547443,
+  "physical_edges": 6144949,
+  "directed_arcs": 11920666,
+  "profiles": 25550,
+  "restrictions": 13697,
+  "controls": 192178,
+  "graph": {
+    "json_bytes": 396071835,
+    "gzip_bytes": 122499155,
+    "brotli_q9_bytes": 118542085,
+    "sha256": "be4aeb7c2652b17127da3dae0fdf2368e2d76fe86125b69eb5c1b39e131d6d8c"
+  },
+  "variants": {
+    "0": {
+      "json_bytes": 214203644,
+      "gzip_bytes": 64361218,
+      "brotli_q9_bytes": 60789432,
+      "sha256": "29166343446eb2d467336afa68c46d0a24caa1f7e8734fdaf839a80d0ca96220",
+      "interior_vertices": 27001588,
+      "combined_gzip_bytes": 186860373,
+      "combined_brotli_bytes": 179331517
+    },
+    "5": {
+      "json_bytes": 84501707,
+      "gzip_bytes": 18515439,
+      "brotli_q9_bytes": 17202192,
+      "sha256": "315c9f11f07b9c51c4c920b8aeeb646e3fadd8c95cb3a313b767085a0c8b0b16",
+      "interior_vertices": 5250361,
+      "combined_gzip_bytes": 141014594,
+      "combined_brotli_bytes": 135744277
+    },
+    "15": {
+      "json_bytes": 62429080,
+      "gzip_bytes": 8969577,
+      "brotli_q9_bytes": 8226901,
+      "sha256": "b75b24fc6a9efc073e1e17e52ff01a656a5c1f0e49721d9ba0cebd06d5f7d7af",
+      "interior_vertices": 2184898,
+      "combined_gzip_bytes": 131468732,
+      "combined_brotli_bytes": 126768986
+    }
+  },
+  "elapsed_seconds": 845.0033378750086
+}

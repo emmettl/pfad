@@ -1,0 +1,26 @@
+{
+  "sourceSha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+  "bytes": 2708601710,
+  "repeatedExtractionMatches": true,
+  "checkReferences": "There are 370819497 nodes, 28595194 ways, and 1112485 relations in this file.\nNodes in ways missing: 0\n",
+  "mergeDiagnostics": "",
+  "composition": {
+    "version": "pfad-composite-source/1",
+    "tool": "osmium-tool/1.19.1",
+    "libosmium": "2.23.1",
+    "generator": "pfad-composite-source/1",
+    "operation": "merge-same-snapshot-then-complete-ways-extract",
+    "bounds": [
+      3,
+      54,
+      33,
+      72
+    ],
+    "strategy": "complete_ways",
+    "deduplication": "OSM object type, ID and version",
+    "excludedTerritories": [
+      "Svalbard",
+      "Jan Mayen"
+    ]
+  }
+}

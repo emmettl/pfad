@@ -1,7 +1,7 @@
 # Manual country releases
 
-Switzerland remains bundled and selected by default. United Kingdom, Iceland, Netherlands, New Zealand and Luxembourg are additional
-immutable releases hosted independently on Cloudflare R2. The UK requires an
+Switzerland remains bundled and selected by default. United Kingdom, Iceland, Netherlands, New Zealand, Luxembourg, Ireland and Scandinavia are additional
+immutable releases hosted independently on Cloudflare R2. The UK and Scandinavia require an
 explicit large-download acknowledgement; the smaller releases open on selection.
 No country source is acquired by ordinary builds, CI or browser page requests.
 
@@ -200,3 +200,47 @@ polygons with pinned Shapely 2.1.2 before simplification, so the internal border
 is removed from the coastline. The geographic config explicitly selects component
 coverage bounds. Lakes include Lough Neagh and both Upper and Lower Lough Erne.
 The package tool now discovers countries from reviewed border-source records.
+
+## Composite regional sources
+
+Scandinavia uses the internal study ID `sc` for Norway, Sweden and Denmark.
+Its configuration pins three Geofabrik snapshots at exactly the same replication
+timestamp, including each input's URL, byte length and SHA-256. The streaming
+Osmium merge deduplicates objects by type, ID and version before road compilation;
+concatenating compiled country graphs would disconnect shared border nodes.
+
+The explicit extent is `[3, 54, 33, 72]` (west, south, east, north): mainland
+Scandinavia and coastal islands, excluding Svalbard and Jan Mayen. Osmium's
+`complete_ways` strategy retains complete ways and their referenced nodes instead
+of clipping roads at the extent. Finland is not part of this selected study.
+The existing motor-road profile excludes ferries, so ferry-only islands remain
+separate connected components rather than receiving invented connecting edges.
+
+After acquiring the exact input files named in the config into `.cache/osm/`,
+reproduce the pinned union with Osmium 1.19.1 / libosmium 2.23.1:
+
+```sh
+python scripts/data/prepare-composite-source.py sc
+python scripts/data/build-country.py sc
+```
+
+The preparation command verifies all input pins, matching snapshot dates, tool
+versions, merge diagnostics, complete way references and the final source hash.
+Normal acquisition refuses to download a composite source from its informational
+landing-page URL. Road manifests retain every upstream input checksum and the
+composition settings. The merged PBF remains ignored; browser downloads still
+use bounded, independently verified chunks of one complete graph.
+
+The selected Scandinavia road release is `sc-20260930-0718a55b5352`:
+77,858,993 opening bytes across 116 verified chunks, 5,547,443 routing nodes,
+6,144,949 edges and 22,790,620 drawing vertices. Its 29-place ambient pool
+passed sixty real accepted journeys, including all places and all three distance
+bands. Five cross-border studies agree on exact cost across Dijkstra,
+bidirectional Dijkstra and A*. The long browser proof covers Aarhus–Luleå
+(1,742.05923 km), repeated deterministic traces, all drawing vertices and zero
+WebGL errors in Chrome and touch WebKit. Physical iPhone stability is unverified.
+
+The independent outline release is `geo-sc-20261001-23b17eadf16e`: 414,604
+layer bytes, with 151 joined coastline rings and major lakes. Source polygons
+from the three countries are dissolved before simplification. This data remains
+outside the app artifact. See [release evidence](evidence/scandinavia-release-2026-10-01/README.md).

@@ -6,7 +6,7 @@ import { test } from 'vitest'
 test('geographic references retain reviewed source identities, attribution and closed rings', () => {
   const record = JSON.parse(readFileSync('data/geography-sources.json', 'utf8'))
   assert.equal(record.refreshPolicy, 'manual-versioned-snapshots')
-  assert.equal(record.assets.length, 14)
+  assert.equal(record.assets.length, 16)
   for (const asset of record.assets) {
     const bytes = readFileSync(asset.path), layer = JSON.parse(bytes)
     assert.equal(bytes.length, asset.bytes)
@@ -39,4 +39,12 @@ test('Ireland context covers the whole island with a dissolved coastline and Nor
   assert.ok(border.rings.some(ring => ring.some(([lon, lat]) => lon > -6 && lat > 54.5)))
   assert.ok(border.rings.some(ring => ring.some(([lon, lat]) => lon < -10 && lat < 52)))
   for (const name of ['Lough Neagh', 'Upper Lough Erne', 'Lower Lough Erne', 'Lough Corrib']) assert.ok(water.lakes.some(lake => lake.name === name))
+})
+
+test('Scandinavia outlines join three countries and retain major lakes', () => {
+  const border = JSON.parse(readFileSync('src/map/data/sc-border.json'))
+  const water = JSON.parse(readFileSync('src/map/data/sc-lakes.json'))
+  assert.deepEqual(border.metadata.components.map(c => c.admin), ['Norway', 'Sweden', 'Denmark'])
+  assert.equal(border.metadata.operation, 'polygon-union-before-simplification')
+  for (const name of ['Vänern', 'Vättern', 'Mjøsa', 'Arresø']) assert.ok(water.lakes.some(lake => lake.name === name))
 })

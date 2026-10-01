@@ -1,0 +1,10 @@
+{
+  "workingTreeChecks": {
+    "unitTests": 92,
+    "browserTests": 52,
+    "buildFiles": 57,
+    "artifactBytes": 28888346
+  },
+  "note": "The shared working tree includes a separate in-progress ambient-territories change. These results validate integration with it. The final selected commit is checked separately before publication.",
+  "physicalPhoneTested": false
+}

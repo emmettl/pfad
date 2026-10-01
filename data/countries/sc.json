@@ -1,0 +1,73 @@
+{
+  "id": "sc",
+  "name": "Scandinavia",
+  "datasetPrefix": "sc-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe.html",
+    "filename": "scandinavia-260930.osm.pbf",
+    "sha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+    "bytes": 2708601710,
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "inputs": [
+      {
+        "country": "norway",
+        "url": "https://download.geofabrik.de/europe/norway-260930.osm.pbf",
+        "bytes": 1376505247,
+        "sha256": "e0ef574201ad63d936b1867149a23cb71979d1362c0aeeb4b17fd8d42c2d96f2",
+        "md5": "60b6d200f7d66c8c201e9bf277b3537e",
+        "dataTimestamp": "2026-09-30T20:22:42Z"
+      },
+      {
+        "country": "sweden",
+        "url": "https://download.geofabrik.de/europe/sweden-260930.osm.pbf",
+        "bytes": 839447705,
+        "sha256": "4b64b0987efcecc5c57625566ebb5ab0bddba2482f803ab878c656cfc524c3fb",
+        "md5": "d9831b5f290d9e0fa6cd6b5b77ab3e36",
+        "dataTimestamp": "2026-09-30T20:22:42Z"
+      },
+      {
+        "country": "denmark",
+        "url": "https://download.geofabrik.de/europe/denmark-260930.osm.pbf",
+        "bytes": 495094198,
+        "sha256": "7e3f21f36a4a8d6bfff4d31b707d48aca54e41e6c86febb723e36a85185abf83",
+        "md5": "ba5b1ed10f6ee92f901d88f51c362d69",
+        "dataTimestamp": "2026-09-30T20:22:42Z"
+      }
+    ],
+    "composition": {
+      "version": "pfad-composite-source/1",
+      "tool": "osmium-tool/1.19.1",
+      "libosmium": "2.23.1",
+      "generator": "pfad-composite-source/1",
+      "operation": "merge-same-snapshot-then-complete-ways-extract",
+      "bounds": [
+        3,
+        54,
+        33,
+        72
+      ],
+      "strategy": "complete_ways",
+      "deduplication": "OSM object type, ID and version",
+      "excludedTerritories": [
+        "Svalbard",
+        "Jan Mayen"
+      ]
+    }
+  },
+  "projection": {
+    "centre": [
+      18,
+      63
+    ],
+    "referenceLatitude": 63,
+    "scaleMetres": 2000000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  },
+  "coverage": "Norway, Sweden and Denmark within [3,54,33,72], with complete ways and coastal islands. Excludes Svalbard and Jan Mayen; no Finland or ferry edges. Country extract overlap is deduplicated by OSM object identity before compilation."
+}

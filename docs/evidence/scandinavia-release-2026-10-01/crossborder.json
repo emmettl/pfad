@@ -1,0 +1,446 @@
+{
+  "dataset": "0718a55b53520565a42cc38cb99c0183e75a6da4c36b2423c5b1496541d6a6b6",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe.html",
+    "sha256": "232b13b33f2e5cd0a1d5197a54903c80585f09bb76cfcc339386ed644a6b3e3c",
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "inputs": [
+      {
+        "country": "norway",
+        "url": "https://download.geofabrik.de/europe/norway-260930.osm.pbf",
+        "bytes": 1376505247,
+        "sha256": "e0ef574201ad63d936b1867149a23cb71979d1362c0aeeb4b17fd8d42c2d96f2",
+        "md5": "60b6d200f7d66c8c201e9bf277b3537e",
+        "dataTimestamp": "2026-09-30T20:22:42Z"
+      },
+      {
+        "country": "sweden",
+        "url": "https://download.geofabrik.de/europe/sweden-260930.osm.pbf",
+        "bytes": 839447705,
+        "sha256": "4b64b0987efcecc5c57625566ebb5ab0bddba2482f803ab878c656cfc524c3fb",
+        "md5": "d9831b5f290d9e0fa6cd6b5b77ab3e36",
+        "dataTimestamp": "2026-09-30T20:22:42Z"
+      },
+      {
+        "country": "denmark",
+        "url": "https://download.geofabrik.de/europe/denmark-260930.osm.pbf",
+        "bytes": 495094198,
+        "sha256": "7e3f21f36a4a8d6bfff4d31b707d48aca54e41e6c86febb723e36a85185abf83",
+        "md5": "ba5b1ed10f6ee92f901d88f51c362d69",
+        "dataTimestamp": "2026-09-30T20:22:42Z"
+      }
+    ],
+    "composition": {
+      "version": "pfad-composite-source/1",
+      "tool": "osmium-tool/1.19.1",
+      "libosmium": "2.23.1",
+      "generator": "pfad-composite-source/1",
+      "operation": "merge-same-snapshot-then-complete-ways-extract",
+      "bounds": [
+        3,
+        54,
+        33,
+        72
+      ],
+      "strategy": "complete_ways",
+      "deduplication": "OSM object type, ID and version",
+      "excludedTerritories": [
+        "Svalbard",
+        "Jan Mayen"
+      ]
+    }
+  },
+  "profile": "road-connectivity-distance-v1",
+  "note": "Five real cross-border road journeys. All three algorithms agree on exact cost, with route adjacency and one-way direction checked. No ferry or synthetic connecting edge.",
+  "routes": [
+    {
+      "start": {
+        "id": "oslo",
+        "name": "Oslo",
+        "lon": 10.7522,
+        "lat": 59.9139,
+        "region": "scandinavian-mainland"
+      },
+      "goal": {
+        "id": "stockholm",
+        "name": "Stockholm",
+        "lon": 18.0686,
+        "lat": 59.3293,
+        "region": "scandinavian-mainland"
+      },
+      "snapping": {
+        "start": {
+          "id": "oslo",
+          "name": "Oslo",
+          "lon": 10.75175,
+          "lat": 59.91424,
+          "region": "scandinavian-mainland",
+          "node": 103672,
+          "snapMetres": 45.37096687046221
+        },
+        "goal": {
+          "id": "stockholm",
+          "name": "Stockholm",
+          "lon": 18.06838,
+          "lat": 59.32917,
+          "region": "scandinavian-mainland",
+          "node": 891659,
+          "snapMetres": 19.096417970923838
+        },
+        "snapMs": 286.1887079999999,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "oslo",
+            "name": "Oslo",
+            "lon": 10.7522,
+            "lat": 59.9139,
+            "region": "scandinavian-mainland"
+          },
+          "requestedGoal": {
+            "id": "stockholm",
+            "name": "Stockholm",
+            "lon": 18.0686,
+            "lat": 59.3293,
+            "region": "scandinavian-mainland"
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 499833.37,
+          "routeEdges": 2146,
+          "events": 11387797,
+          "searchMs": 417.9508749999999
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 499833.37,
+          "routeEdges": 2146,
+          "events": 7049969,
+          "searchMs": 380.7778340000002
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 499833.37,
+          "routeEdges": 2146,
+          "events": 4686483,
+          "searchMs": 183.57504099999983
+        }
+      ]
+    },
+    {
+      "start": {
+        "id": "oslo",
+        "name": "Oslo",
+        "lon": 10.7522,
+        "lat": 59.9139,
+        "region": "scandinavian-mainland"
+      },
+      "goal": {
+        "id": "copenhagen",
+        "name": "Copenhagen",
+        "lon": 12.5683,
+        "lat": 55.6761,
+        "region": "scandinavian-mainland"
+      },
+      "snapping": {
+        "start": {
+          "id": "oslo",
+          "name": "Oslo",
+          "lon": 10.75175,
+          "lat": 59.91424,
+          "region": "scandinavian-mainland",
+          "node": 103672,
+          "snapMetres": 45.37096687046221
+        },
+        "goal": {
+          "id": "copenhagen",
+          "name": "Copenhagen",
+          "lon": 12.56796,
+          "lat": 55.67593,
+          "region": "scandinavian-mainland",
+          "node": 4059923,
+          "snapMetres": 28.491778472827825
+        },
+        "snapMs": 50.45479099999966,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "oslo",
+            "name": "Oslo",
+            "lon": 10.7522,
+            "lat": 59.9139,
+            "region": "scandinavian-mainland"
+          },
+          "requestedGoal": {
+            "id": "copenhagen",
+            "name": "Copenhagen",
+            "lon": 12.5683,
+            "lat": 55.6761,
+            "region": "scandinavian-mainland"
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 591390.78,
+          "routeEdges": 2278,
+          "events": 13901905,
+          "searchMs": 541.3550419999997
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 591390.78,
+          "routeEdges": 2278,
+          "events": 11241508,
+          "searchMs": 648.8782919999999
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 591390.78,
+          "routeEdges": 2278,
+          "events": 4700205,
+          "searchMs": 209.6489999999999
+        }
+      ]
+    },
+    {
+      "start": {
+        "id": "malmo",
+        "name": "Malmö",
+        "lon": 13.0038,
+        "lat": 55.605,
+        "region": "scandinavian-mainland"
+      },
+      "goal": {
+        "id": "copenhagen",
+        "name": "Copenhagen",
+        "lon": 12.5683,
+        "lat": 55.6761,
+        "region": "scandinavian-mainland"
+      },
+      "snapping": {
+        "start": {
+          "id": "malmo",
+          "name": "Malmö",
+          "lon": 13.0031,
+          "lat": 55.60472,
+          "region": "scandinavian-mainland",
+          "node": 4586091,
+          "snapMetres": 53.876525357919014
+        },
+        "goal": {
+          "id": "copenhagen",
+          "name": "Copenhagen",
+          "lon": 12.56796,
+          "lat": 55.67593,
+          "region": "scandinavian-mainland",
+          "node": 4059923,
+          "snapMetres": 28.491778472827825
+        },
+        "snapMs": 62.63308400000005,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "malmo",
+            "name": "Malmö",
+            "lon": 13.0038,
+            "lat": 55.605,
+            "region": "scandinavian-mainland"
+          },
+          "requestedGoal": {
+            "id": "copenhagen",
+            "name": "Copenhagen",
+            "lon": 12.5683,
+            "lat": 55.6761,
+            "region": "scandinavian-mainland"
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 35645.45,
+          "routeEdges": 339,
+          "events": 315907,
+          "searchMs": 19.966499999999996
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 35645.45,
+          "routeEdges": 339,
+          "events": 539828,
+          "searchMs": 49.184999999999945
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 35645.45,
+          "routeEdges": 339,
+          "events": 121760,
+          "searchMs": 8.32183299999997
+        }
+      ]
+    },
+    {
+      "start": {
+        "id": "trondheim",
+        "name": "Trondheim",
+        "lon": 10.3951,
+        "lat": 63.4305,
+        "region": "scandinavian-mainland"
+      },
+      "goal": {
+        "id": "ostersund",
+        "name": "Östersund",
+        "lon": 14.6357,
+        "lat": 63.1792,
+        "region": "scandinavian-mainland"
+      },
+      "snapping": {
+        "start": {
+          "id": "trondheim",
+          "name": "Trondheim",
+          "lon": 10.39487,
+          "lat": 63.43089,
+          "region": "scandinavian-mainland",
+          "node": 148880,
+          "snapMetres": 44.849441649122646
+        },
+        "goal": {
+          "id": "ostersund",
+          "name": "Östersund",
+          "lon": 14.63495,
+          "lat": 63.17953,
+          "region": "scandinavian-mainland",
+          "node": 2150078,
+          "snapMetres": 52.55839216623071
+        },
+        "snapMs": 47.03241700000035,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "trondheim",
+            "name": "Trondheim",
+            "lon": 10.3951,
+            "lat": 63.4305,
+            "region": "scandinavian-mainland"
+          },
+          "requestedGoal": {
+            "id": "ostersund",
+            "name": "Östersund",
+            "lon": 14.6357,
+            "lat": 63.1792,
+            "region": "scandinavian-mainland"
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 259157.93,
+          "routeEdges": 1224,
+          "events": 1080187,
+          "searchMs": 36.37145800000053
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 259157.93,
+          "routeEdges": 1224,
+          "events": 764041,
+          "searchMs": 43.82916699999987
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 259157.93,
+          "routeEdges": 1224,
+          "events": 488151,
+          "searchMs": 19.06904200000008
+        }
+      ]
+    },
+    {
+      "start": {
+        "id": "aarhus",
+        "name": "Aarhus",
+        "lon": 10.2039,
+        "lat": 56.1629,
+        "region": "scandinavian-mainland"
+      },
+      "goal": {
+        "id": "stockholm",
+        "name": "Stockholm",
+        "lon": 18.0686,
+        "lat": 59.3293,
+        "region": "scandinavian-mainland"
+      },
+      "snapping": {
+        "start": {
+          "id": "aarhus",
+          "name": "Aarhus",
+          "lon": 10.2042,
+          "lat": 56.16343,
+          "region": "scandinavian-mainland",
+          "node": 2697944,
+          "snapMetres": 61.79142990407094
+        },
+        "goal": {
+          "id": "stockholm",
+          "name": "Stockholm",
+          "lon": 18.06838,
+          "lat": 59.32917,
+          "region": "scandinavian-mainland",
+          "node": 891659,
+          "snapMetres": 19.096417970923838
+        },
+        "snapMs": 46.881374999999935,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "aarhus",
+            "name": "Aarhus",
+            "lon": 10.2039,
+            "lat": 56.1629,
+            "region": "scandinavian-mainland"
+          },
+          "requestedGoal": {
+            "id": "stockholm",
+            "name": "Stockholm",
+            "lon": 18.0686,
+            "lat": 59.3293,
+            "region": "scandinavian-mainland"
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 923501.31,
+          "routeEdges": 3766,
+          "events": 13491146,
+          "searchMs": 489.2188329999999
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 923501.31,
+          "routeEdges": 3766,
+          "events": 13189705,
+          "searchMs": 709.5658750000002
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 923501.31,
+          "routeEdges": 3766,
+          "events": 10809569,
+          "searchMs": 436.09650000000056
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import { preview } from 'vite'
 import { webkit, expect } from '@playwright/test'
 import { writeFile } from 'node:fs/promises'
 const [country='uk',...urls]=process.argv.slice(2)
-const names={uk:'United Kingdom',is:'Iceland',nl:'Netherlands',nz:'New Zealand',lu:'Luxembourg',ie:'Ireland'}
+const names={uk:'United Kingdom',is:'Iceland',nl:'Netherlands',nz:'New Zealand',lu:'Luxembourg',ie:'Ireland',sc:'Scandinavia'}
 if(!names[country])throw Error('Unknown country')
 const server=urls.length?null:await preview({preview:{host:'127.0.0.1',port:4197,strictPort:true}})
 const browser=await webkit.launch(), reports=[]
@@ -25,14 +25,16 @@ try {
    await page.getByRole('slider',{name:'Search replay'}).fill('30')
    await expect(page.locator('.route-caption em')).toBeVisible()
    await page.getByRole('slider',{name:'Search replay'}).fill('15')
-   if(country==='uk')await expect(page.locator('canvas')).toHaveAttribute('data-max-fps','30')
+   if(['uk','sc'].includes(country))await expect(page.locator('canvas')).toHaveAttribute('data-max-fps','30')
    const renderedEvent=(await page.getByRole('slider',{name:'Search replay'}).getAttribute('aria-valuetext')).match(/; (\d+) recorded events/)[1]
    await expect(page.locator('canvas')).toHaveAttribute('data-event',renderedEvent)
    runs.push({mode,caption:await page.locator('.route-caption').textContent(),canvas:await page.locator('canvas').evaluate(c=>({width:c.width,height:c.height,cssWidth:c.clientWidth,cssHeight:c.clientHeight,maxFps:c.dataset.maxFps,event:c.dataset.event}))})
   }
   await expect.poll(async()=>{const url=new URL(await page.url());return {country:url.searchParams.get('country'),algorithm:url.searchParams.get('algorithm')}}).toEqual({country,algorithm:'astar'})
   await page.reload({waitUntil:'domcontentloaded'})
-  if(country==='uk')await page.getByRole('button',{name:'Open '+names[country],exact:true}).click()
+  await expect(page.getByRole('combobox',{name:'Country',exact:true})).toHaveValue(country)
+  const reopen=page.getByRole('button',{name:'Open '+names[country],exact:true})
+  if(await reopen.isVisible())await reopen.click()
   await page.locator('.study[data-state="ready"], .study[data-state="error"]').waitFor({timeout:180000})
   await expect(page.getByRole('combobox',{name:'Country',exact:true})).toHaveValue(country)
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm','astar/1',{timeout:60000})

@@ -17,7 +17,7 @@ args = parser.parse_args()
 config = root / 'data/countries' / (args.country + '.json')
 assert config.parent == root / 'data/countries' and config.exists(), 'Unknown country'
 country = json.loads(config.read_text())
-source = root / '.cache/osm' / country['source']['url'].rsplit('/', 1)[-1]
+source = root / '.cache/osm' / country['source'].get('filename', country['source']['url'].rsplit('/', 1)[-1])
 sizing = args.reuse_sizing or root / '.cache/countries-sizing' / country['datasetPrefix']
 def run(script, *arguments):
     subprocess.run([sys.executable, str(root / 'scripts/data' / script), *map(str, arguments)], check=True, cwd=root)
