@@ -100,11 +100,11 @@ export interface SearchResult {
   maxQueue: number
 }
 
-export type Request = { type: 'load'; manifestUrl: string; expectedIdentity?: string; topologyOnly?: boolean } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm; sources?: [Point, Point, Point] }
+export type Request = { type: 'load'; manifestUrl: string; expectedIdentity?: string; topologyOnly?: boolean; compactDrawing?: boolean } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm; sources?: [Point, Point, Point] }
 export type Reply =
   | { type: 'progress'; loaded: number; total: number; stage: string }
   | { type: 'manifest'; manifest: StudyManifest; manifestUrl: string }
-  | { type: 'geometry'; start: number; count: number; bytes: ArrayBuffer }
+  | { type: 'geometry'; start: number; count: number; bytes: ArrayBuffer; drawingEncoding?: 'float32-delta-gzip/1' }
   | { type: 'ready'; measurements: LoadMeasurements }
   | { type: 'result'; requestId: number; result: SearchResult }
   | { type: 'error'; requestId?: number; message: string }

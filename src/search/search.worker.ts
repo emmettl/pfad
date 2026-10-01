@@ -1,3 +1,4 @@
+import { packDrawing } from '../map/drawing-codec.ts'
 import { longitudeOffset } from './projection.ts'
 import type { Graph, Reply, Request, StudyManifest } from './contracts.ts'
 import { compileGraph, dijkstra, snapEndpoints } from './engine.ts'
@@ -14,7 +15,7 @@ let manifest: StudyManifest | undefined
 let reverse: ReverseGraph | undefined
 function reply(message: Reply, transfer: Transferable[] = []) { self.postMessage(message, { transfer }) }
 
-async function load(url: string, expectedIdentity?: string, topologyOnly = false) {
+async function load(url: string, expectedIdentity?: string, topologyOnly = false, compactDrawing = false) {
   const opened = performance.now()
   const response = await fetch(url)
   if (!response.ok) throw new Error('The road manifest could not be loaded. Try again.')
@@ -30,7 +31,7 @@ async function load(url: string, expectedIdentity?: string, topologyOnly = false
   let vertices = 0
   const measurements = await loadChunks(data, url,
     (loaded, stage) => reply({ type: 'progress', loaded, total: data.downloadBytes, stage }),
-    (chunk, decoded) => {
+    async (chunk, decoded) => {
       if (chunk.kind === 'nodes') {
         if (chunk.start + chunk.count > nodes || chunk.stride !== 8) throw new Error('Invalid node chunk')
         const view = new DataView(decoded)
@@ -77,7 +78,8 @@ async function load(url: string, expectedIdentity?: string, topologyOnly = false
           }
           append(x, y, e); append(xy[to[e] * 2], xy[to[e] * 2 + 1], e)
         }
-        reply({ type: 'geometry', start: vertices, count, bytes }, [bytes]); vertices += count
+        const drawing = compactDrawing ? await packDrawing(bytes, count) : bytes
+        reply({ type: 'geometry', start: vertices, count, bytes: drawing, drawingEncoding: compactDrawing ? 'float32-delta-gzip/1' : undefined }, [drawing]); vertices += count
       }
   }, topologyOnly)
   reply({ type: 'progress', loaded: data.downloadBytes, total: data.downloadBytes, stage: 'Preparing road connections' })
@@ -95,7 +97,7 @@ async function load(url: string, expectedIdentity?: string, topologyOnly = false
 self.addEventListener('message', async (event: MessageEvent<Request>) => {
   const request = event.data
   try {
-    if (request.type === 'load') await load(request.manifestUrl, request.expectedIdentity, request.topologyOnly)
+    if (request.type === 'load') await load(request.manifestUrl, request.expectedIdentity, request.topologyOnly, request.compactDrawing)
     else {
       if (!graph || !manifest) throw new Error('The national graph has not finished loading')
       if (request.algorithm === 'multisource' && !request.sources) throw new Error('Three sources are required for a territory study')

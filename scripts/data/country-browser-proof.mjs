@@ -55,7 +55,10 @@ try {
   const waitAmbient=async phase=>{
    for(let retry=0;retry<=4;retry++) {
     await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase',new RegExp(`^(${phase}|stopped)$`),{timeout:60000})
-    if(await page.locator('.study').getAttribute('data-ambient-phase')===phase)return
+    if(await page.locator('.study').getAttribute('data-ambient-phase')===phase) {
+     await expect(page.locator('.search-button')).toBeEnabled({timeout:60000})
+     return
+    }
     const message=await page.locator('.ambient-controls [role="status"]').textContent()
     if(!/^No (journey in this distance band|separated three-source study) after bounded attempts\./.test(message))throw Error(message)
     await expect(page.locator('.study')).toHaveAttribute('data-ambient-running','false')

@@ -51,3 +51,5 @@ that time; its older counts and algorithm sets are not current feature limits.
 | [Data](DATA.md) | Swiss source, encoding, snapping, geographic references and cache policy |
 | [Countries](COUNTRIES.md) | Catalogue, country compilation, validation, publication and refreshes |
 | [Hosting](HOSTING.md) | Dual app hosting, artifact provenance and independent R2 data delivery |
+
+- [Germany phone drawing follow-up](evidence/mobile-drawing-2026-10-01/README.md): lossless compressed CPU drawing, phased uploads and physical-phone retest limitation.

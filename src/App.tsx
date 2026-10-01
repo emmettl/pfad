@@ -153,6 +153,7 @@ export function App() {
     try {
       map = new RoadScene(host.current); scene.current = map
       map.onViewChange = setView
+      map.onDrawingError = setMapError
       map.setGeographyVisible(outlinePreference.current)
       map.onRouteRevealChange = active => { revealingRef.current = active; setRevealing(active) }
       map.onRouteRevealComplete = () => { setPlaying(false); ambient.current!.complete() }
@@ -163,13 +164,13 @@ export function App() {
     let pendingSearch: Extract<Request, { type: 'search' }> | undefined
     const createEngine = (topologyOnly: boolean) => {
       const engine = new Worker(new URL('./search/search.worker.ts', import.meta.url), { type: 'module' }); worker.current = engine; activeEngine = engine
-      engine.onmessage = (event: MessageEvent<Reply>) => {
+      engine.onmessage = async (event: MessageEvent<Reply>) => {
         const reply = event.data
         if (reply.type === 'progress') setLoading(reply)
         if (reply.type === 'manifest' && !topologyOnly) {
           setManifest(reply.manifest); setManifestUrl(reply.manifestUrl); map?.setManifest(reply.manifest)
         }
-        if (reply.type === 'geometry') map?.addGeometry(reply.bytes, reply.count)
+        if (reply.type === 'geometry') map?.addGeometry(reply.bytes, reply.count, reply.drawingEncoding === 'float32-delta-gzip/1')
         if (reply.type === 'ready') {
           if (pendingSearch) { const request = pendingSearch; pendingSearch = undefined; engine.postMessage(request) }
           else { setReady(true); setMeasurements(reply.measurements); search(initialQuery.current.start, initialQuery.current.goal) }
@@ -183,6 +184,9 @@ export function App() {
           if (sequence.state.active) setDuration(sequence.duration)
           const frame = sharedFrame.current; sharedFrame.current = undefined
           const opening = openingReplay(frame, reducedMotion)
+          try { await map?.prepareResult(reply.result) }
+          catch { setMapError('The road drawing could not be prepared. Please reload the study.'); setBusy(false); return }
+          if (disposed || reply.requestId !== currentRequest.current) return
           setResult(reply.result); map?.setResult(reply.result); setBusy(false); seek(opening.progress); if (frame?.view) map?.setView(frame.view); setPlaying(opening.playing && (!sequence.state.active || sequence.state.running))
         }
         if (reply.type === 'error' && (reply.requestId === undefined || reply.requestId === currentRequest.current)) { setError(reply.message); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail(reply.message) }
@@ -191,7 +195,7 @@ export function App() {
       // Keep a window connection: WebKit private contexts otherwise drop their
       // worker-only cache when retry terminates the sole cache owner.
       cacheOwner.current ??= (async () => { try { return await globalThis.caches?.open(ROAD_CACHE_NAME) } catch { return undefined } })()
-      void cacheOwner.current.then(() => { if (!disposed && worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity, topologyOnly }) })
+      void cacheOwner.current.then(() => { if (!disposed && worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity, topologyOnly, compactDrawing: releaseAfterSearch }) })
     }
     submitSearch.current = request => {
       if (worker.current) worker.current.postMessage(request)

@@ -1,6 +1,8 @@
+import { unpackDrawing } from '../src/map/drawing-codec.ts'
 import { test, expect, vi } from 'vitest'
 import { readFile } from 'node:fs/promises'
 import { resolve, sep } from 'node:path'
+import { createHash } from 'node:crypto'
 import { COUNTRIES } from '../src/countries.ts'
 
 test('the production worker opens the pinned Swiss graph and routes both directions in all three algorithms', async () => {
@@ -8,9 +10,19 @@ test('the production worker opens the pinned Swiss graph and routes both directi
   // transport is replaced; decoding, snapping, searches and recordings are real.
   const root = resolve('public'), country = COUNTRIES[0]
   let receive, reply, vertices = 0
+  const drawingHashes = new Map(), compressedChecks = []
   vi.stubGlobal('self', {
     addEventListener(type, handler) { expect(type).toBe('message'); receive = handler },
-    postMessage(message) { if (message.type === 'geometry') vertices += message.count; else reply = message },
+    postMessage(message) {
+      if (message.type !== 'geometry') { reply = message; return }
+      vertices += message.count
+      const hash = bytes => createHash('sha256').update(new Uint8Array(bytes)).digest('hex')
+      if (!message.drawingEncoding) drawingHashes.set(message.start, hash(message.bytes))
+      else compressedChecks.push(unpackDrawing(message.bytes, message.count).then(bytes => {
+        expect(bytes.byteLength).toBe(message.count * 12)
+        expect(hash(bytes)).toBe(drawingHashes.get(message.start))
+      }))
+    },
   })
   vi.stubGlobal('fetch', async url => {
     const path = resolve(root, '.' + new URL(url).pathname)
@@ -58,4 +70,8 @@ test('the production worker opens the pinned Swiss graph and routes both directi
   const { result: reopened } = await send({ type: 'search', requestId: 3, start, goal, algorithm: 'bidirectional' })
   expect(reopened.trace).toEqual(bidirectionalTrace)
   expect(reopened.routeMetres).toBe(262733.98)
+  vi.stubGlobal('fetch', fetchChunks)
+  await send({ type: 'load', manifestUrl: new URL(country.manifest, 'https://pfad.test/').href, expectedIdentity: country.identity, compactDrawing: true })
+  expect(compressedChecks.length).toBe(drawingHashes.size)
+  await Promise.all(compressedChecks)
 })

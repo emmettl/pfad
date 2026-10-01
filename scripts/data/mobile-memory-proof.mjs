@@ -19,10 +19,10 @@ await page.addInitScript(() => {
   window.Worker = class extends NativeWorker {
     constructor(...args) {
       super(...args)
-      const record = { terminated: false, requests: [], geometryChunks: 0 }
+      const record = { terminated: false, requests: [], geometryChunks: 0, drawingBytes: 0, compressedChunks: 0 }
       this.record = record; window.memoryProof.workers.push(record)
       this.addEventListener('message', ({ data }) => {
-        if (data.type === 'geometry') record.geometryChunks++
+        if (data.type === 'geometry') { record.geometryChunks++; record.drawingBytes += data.bytes.byteLength; if (data.drawingEncoding) record.compressedChunks++ }
         if (data.type === 'ready') record.loading = data.measurements
         if (data.type === 'result') {
           const r = data.result
@@ -43,6 +43,7 @@ try {
     await expect(page.getByRole('button', { name: 'Search', exact: true })).toBeEnabled({ timeout: 180000 })
     await expect(page.locator('canvas')).toHaveAttribute('data-road-vertices', '32951556')
     await expect(page.locator('canvas')).toHaveAttribute('data-road-uploads', 'resident')
+    await expect(page.locator('canvas')).toHaveAttribute('data-road-cpu-bytes', '0')
     const workers = await page.evaluate(() => window.memoryProof.workers)
     if (workers.some(worker => !worker.terminated)) throw Error('A national routing worker remains alive during replay')
     const pause = page.getByRole('button', { name: 'Pause', exact: true })
@@ -60,7 +61,18 @@ try {
   await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('bidirectional')
   await ready('bidirectional-dijkstra/1')
   await expect.poll(() => page.evaluate(() => window.memoryProof.results.every(result => result.traceSha256))).toBe(true)
+  // Rebuild from lossless compressed copies after a real WebGL context loss.
+  await page.evaluate(() => {
+    const extension = document.querySelector('canvas').getContext('webgl2').getExtension('WEBGL_lose_context')
+    if (!extension) throw Error('Context-loss extension unavailable')
+    extension.loseContext(); setTimeout(() => extension.restoreContext(), 500)
+  })
+  await expect.poll(() => page.evaluate(() => document.querySelector('canvas').getContext('webgl2').isContextLost())).toBe(false)
+  await expect(page.locator('canvas')).toHaveAttribute('data-road-uploads', 'resident', { timeout: 180000 })
+  await page.getByRole('slider', { name: 'Search replay' }).fill('7.5')
+  await page.getByRole('slider', { name: 'Search replay' }).fill('15')
   const proof = await page.evaluate(() => window.memoryProof)
+  if (proof.workers[0].compressedChunks !== 120 || proof.workers[0].drawingBytes >= 395418672) throw Error('National drawing remained expanded')
   if (proof.results[0].traceSha256 !== proof.results[2].traceSha256) throw Error('Repeated bidirectional trace changed')
   if (proof.results.some(result => result.routeMetres !== proof.results[0].routeMetres)) throw Error('Route costs differ')
   if (proof.workers.length !== 3 || proof.workers[0].requests[0].topologyOnly || proof.workers.slice(1).some(worker => !worker.requests[0].topologyOnly)) throw Error('Worker reload did not preserve the existing drawing')

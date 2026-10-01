@@ -102,7 +102,7 @@ export async function decodeChunk(bytes: Uint8Array<ArrayBuffer>, chunk: Chunk) 
 export async function loadChunks(
   manifest: StudyManifest, url: string,
   progress: (loaded: number, stage: string) => void,
-  consume: (chunk: Chunk, bytes: ArrayBuffer) => void,
+  consume: (chunk: Chunk, bytes: ArrayBuffer) => void | Promise<void>,
   topologyOnly = false,
 ) {
   const measurements: LoadMeasurements = { version: 'verified-chunk-loader/1', networkBytes: 0, cachedBytes: 0, cacheAvailable: false, verificationMs: 0, decodeMs: 0, compileMs: 0, totalMs: 0 }
@@ -177,7 +177,7 @@ export async function loadChunks(
       for (let i = 0; i < Math.min(CONCURRENCY, group.length); i++) launch(i)
       for (let i = 0; i < group.length; i++) {
         const bytes = await pending.get(i)!; pending.delete(i)
-        consume(group[i], bytes); launch(i + CONCURRENCY)
+        await consume(group[i], bytes); launch(i + CONCURRENCY)
       }
     }
     return measurements
