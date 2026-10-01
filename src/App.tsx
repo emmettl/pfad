@@ -86,7 +86,13 @@ export function App() {
     const binding = new StudyUrlBinding(() => location.href, url => history.replaceState(history.state, '', url))
     urlBinding.current = binding
     const navigate = (event: HashChangeEvent) => {
-      if ([event.oldURL, event.newURL].some(url => new URLSearchParams(new URL(url).hash.slice(1)).has('study'))) { binding.dispose(); location.reload() }
+      if ([event.oldURL, event.newURL].some(url => new URLSearchParams(new URL(url).hash.slice(1)).has('study'))) {
+        binding.dispose()
+        // A pending replay write can run between fragment navigation and this
+        // event. Restore the requested URL before reloading its paused study.
+        if (location.href !== event.newURL) history.replaceState(history.state, '', event.newURL)
+        location.reload()
+      }
     }
     const flush = () => binding.flush()
     window.addEventListener('hashchange', navigate)

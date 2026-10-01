@@ -72,7 +72,12 @@ test('a share link restores the exact paused study, and export contains its genu
   expect(record.search.dataset.identity).toBe(COUNTRIES[0].identity); expect(record.search.routeMetres).toBe(262733.98)
   expect(record.buffers.trace.count).toBe(4993816); expect(record.presentation.progress).toBe(.5); expect(record.licence).toBe('ODbL-1.0')
   await page.goto(link.split('#')[0]); await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
-  await page.goto(link)
+  await page.evaluate(url => {
+    const previous = location.href
+    location.hash = new URL(url).hash
+    // Reproduce a pending replay URL write before the hashchange is delivered.
+    history.replaceState(history.state, '', previous)
+  }, link)
   await expect(page.locator('.study')).toHaveAttribute('data-progress', '0.5', { timeout: 45000 })
   await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Show border and lake outlines' })).toHaveAttribute('aria-pressed', 'false')
