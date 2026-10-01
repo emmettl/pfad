@@ -2,13 +2,21 @@
 
 - GitHub Pages: https://emmettl.github.io/pfad/
 - Cloudflare Static Assets: https://motionstudies.app/pfad/
-- Worker: `pfad-hosting`; route: `motionstudies.app/pfad*`.
+- Alternate address: https://pfad.motionstudies.app/
+- Worker: `pfad-hosting`; route: `motionstudies.app/pfad*`, plus the Custom Domain
+  `pfad.motionstudies.app`.
 
 `pages.yml` runs reusable checks, uploads the tested build as `github-pages`,
 and deploys it. `cloudflare.yml` follows successful main-branch Pages runs and
 publishes exactly that artifact using a pinned commit of Motion Studies hosting
 tools. Cloudflare failures cannot undo a successful Pages release. The relative
-Vite base supports both hosts without a second build.
+Vite base supports all addresses without a second build. The subdomain maps its
+root to the same `/pfad/` assets through a small Worker handler; matching assets
+on the existing path route continue to be served directly. Asset redirects stay
+at the subdomain root. Both Cloudflare addresses are checked for matching release
+identity and cache policies after each publication. Requests invoking the
+subdomain handler follow Worker request billing. The canonical edition remains
+`https://motionstudies.app/pfad/`.
 
 Cloudflare publishing requires the `cloudflare` environment, restricted to
 `main`, its `CLOUDFLARE_API_TOKEN` secret and `CLOUDFLARE_ENABLED=true` repository

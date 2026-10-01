@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: emmettl/motionstudies
-          ref: add644f80563f26aadef5dc2abdfce6fdd086dc3
+          ref: 35bebf5e844b27f185a7d6fd814e617b06d0011e
           path: hosting-tools
           persist-credentials: false
       - name: Set up Node
@@ -49,7 +49,9 @@ jobs:
         with:
           node-version-file: hosting-tools/.nvmrc
       - name: Verify publishing gates
-        run: python3 hosting-tools/scripts/test-edition-hosting.py
+        run: |
+          python3 hosting-tools/scripts/test-edition-hosting.py
+          node --test hosting-tools/hosting/pfad-subdomain.test.mjs
       - name: Publish verified Pages artifact and check live headers
         env:
           GH_TOKEN: ${{ github.token }}
@@ -66,5 +68,6 @@ jobs:
         run: |
           printf '%s\n' \
             '[Open edition](https://motionstudies.app/pfad/)' \
+            '[Open subdomain](https://pfad.motionstudies.app/)' \
             '[Inspect live release metadata](https://motionstudies.app/pfad/_release.json)' \
             >> "$GITHUB_STEP_SUMMARY"
