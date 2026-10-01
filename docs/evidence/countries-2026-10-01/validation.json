@@ -1,7 +1,7 @@
 {
-  "measuredAt": "2026-10-01T09:31:57.120108+00:00",
-  "unitTests": 61,
-  "browserTests": 46,
+  "measuredAt": "2026-10-01T09:43:20.934870+00:00",
+  "unitTests": 65,
+  "browserTests": 42,
   "targetedSharingLoadingTests": 8,
   "ambientJourneys": 240,
   "countryUiProofs": [
@@ -12,9 +12,9 @@
   ],
   "artifact": {
     "files": 57,
-    "bytes": 29225995
+    "bytes": 29226265
   },
-  "note": "Local npm run check and complete Chromium/touch-WebKit Playwright suite passed on combined country/ambient-controls app; country UI proofs used live immutable R2 data. No physical phone assertion.",
+  "note": "Integrated Vitest and complete Chromium/touch-WebKit Playwright suite passed after bounded test-toolchain integration. Real country UI and graph proofs retained; no physical phone assertion.",
   "scoreWakeTests": {
     "chromium": true,
     "webkit": true,

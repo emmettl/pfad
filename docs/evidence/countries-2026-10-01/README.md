@@ -64,3 +64,8 @@ unchanged by this test-only correction.
 
 CI stops on the first browser failure; a successful run still requires all 46
 checks across both engines before uploading the publication artifact.
+
+Final testing-toolchain integration: `npm run check` passed 65 Vitest cases and
+the complete 42-case Chromium/WebKit browser suite passed. Pure checks moved
+from browsers into Vitest; both engines retain real worker, renderer, storage,
+controls and audio integration. The app artifact is 57 files / 29,226,265 bytes.
