@@ -1,0 +1,20 @@
+{
+  "verifiedAt": "2026-10-01T14:22:11.190185+00:00",
+  "sourceCommit": "c8144c5ab9e29593420b7832cd4ec4d0184c87c5",
+  "pages": {
+    "url": "https://emmettl.github.io/pfad/",
+    "run": 36872661298,
+    "conclusion": "success"
+  },
+  "cloudflare": {
+    "url": "https://motionstudies.app/pfad/",
+    "run": 36873902968,
+    "conclusion": "success",
+    "contentSha256": "4759f3923d32ea18d1a2166f3b2a16f8401146c495861cd263ac22a08ef5d7e5"
+  },
+  "liveCountryChecks": 10,
+  "liveAmbientStudies": 80,
+  "byteIdenticalFilesPerHost": 57,
+  "artifactBytes": 28928681,
+  "physicalPhoneValidated": false
+}

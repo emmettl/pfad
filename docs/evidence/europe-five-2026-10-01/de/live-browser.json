@@ -1,0 +1,216 @@
+[
+  {
+    "country": "de",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "17714912"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "11738319"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3957850"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Karlsruhe→Berlin607.5 kmA*",
+        "events": "11693353"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Würzburg→Augsburg196.1 kmBidirectional A*",
+        "events": "833343"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Cologne→Wuppertal45.9 kmDijkstra",
+        "events": "1710893"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Düsseldorf→Wiesbaden190.2 kmBidirectional Dijkstra",
+        "events": "8431472"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Halle · Hanover · FrankfurtThree-source Dijkstra",
+        "events": "43675305"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Stuttgart→Bonn310.0 kmA*",
+        "events": "4729794"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Erfurt→Dortmund293.5 kmBidirectional A*",
+        "events": "3224927"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Hamburg→Hanover147.0 kmDijkstra",
+        "events": "4139983"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Heidelberg→WürzburgBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  },
+  {
+    "country": "de",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "17714912"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "11738319"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3957850"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Wiesbaden→Cologne154.4 kmA*",
+        "events": "1229594"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Mainz→Regensburg344.3 kmBidirectional A*",
+        "events": "4496752"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Weimar→Rostock404.4 kmDijkstra",
+        "events": "37459919"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Wiesbaden→Wuppertal184.7 kmBidirectional Dijkstra",
+        "events": "8457341"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Karlsruhe · Essen · ErfurtThree-source Dijkstra",
+        "events": "43675009"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Nuremberg→Jena205.2 kmA*",
+        "events": "1493711"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Munich→Erfurt368.8 kmBidirectional A*",
+        "events": "3347067"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Leipzig→Berlin164.4 kmDijkstra",
+        "events": "6226230"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Heidelberg→StuttgartBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

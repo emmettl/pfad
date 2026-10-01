@@ -47,3 +47,21 @@ sixty-journey audit includes all thirty Spanish places.
 | Spain | 59.008 | 3,885,623 | 4,989,358 | 17,261,400 |
 | France | 151.882 | 10,506,139 | 12,357,600 | 42,305,096 |
 | Germany | 140.876 | 10,488,625 | 11,974,914 | 32,951,556 |
+
+## Published release
+
+The source release is `c8144c5ab9e29593420b7832cd4ec4d0184c87c5`.
+[Pages run 36872661298](https://github.com/emmettl/pfad/actions/runs/36872661298)
+passed the build and both browser gates. [Cloudflare run 36873902968](https://github.com/emmettl/pfad/actions/runs/36873902968)
+mirrored that exact artifact. The public receipt records 57 source files,
+28,928,681 source bytes and content SHA-256
+`4759f3923d32ea18d1a2166f3b2a16f8401146c495861cd263ac22a08ef5d7e5`.
+
+Every published static file on both hosts matches the tested local artifact
+byte-for-byte, including the bundled Swiss graph, fonts, code and music.
+`live-artifact-verification.json` records each file's size and digest.
+Every country has a `live-browser.json` covering both hosts: ten complete UI
+runs and eighty real ambient studies, including territories, with no app errors.
+Known Cloudflare analytics CORS failures are recorded separately by the harness.
+All transferred source PBFs on External Stick also pass fresh SHA-256 checks.
+The data/source dates and physical-phone caveat remain unchanged.

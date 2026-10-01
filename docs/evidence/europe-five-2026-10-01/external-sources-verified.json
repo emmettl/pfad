@@ -1,0 +1,32 @@
+[
+  {
+    "country": "pl",
+    "sourceTimestamp": "2026-09-30T20:22:42Z",
+    "bytes": 2102684575,
+    "sha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9"
+  },
+  {
+    "country": "it",
+    "sourceTimestamp": "2026-09-30T20:22:42Z",
+    "bytes": 2235725279,
+    "sha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b"
+  },
+  {
+    "country": "es",
+    "sourceTimestamp": "2026-09-30T20:22:42Z",
+    "bytes": 1487249803,
+    "sha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9"
+  },
+  {
+    "country": "fr",
+    "sourceTimestamp": "2026-09-30T20:22:42Z",
+    "bytes": 5091610602,
+    "sha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2"
+  },
+  {
+    "country": "de",
+    "sourceTimestamp": "2026-09-29T20:22:51Z",
+    "bytes": 4850520508,
+    "sha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e"
+  }
+]

@@ -1,8 +1,8 @@
 # Using PFAD
 
 Open [PFAD](https://motionstudies.app/pfad/). Switzerland opens by default.
-The country selector loads other complete, pinned studies on demand. UK and
-Scandinavia ask for a large-download acknowledgement on first use. Acceptance is
+The country selector loads other complete, pinned studies on demand. Large
+studies ask for a download acknowledgement on first use. Acceptance is
 remembered per country in local storage for that browser and site; cancelling
 saves nothing. Storage refusal permits the study but cannot persist acceptance.
 See [country coverage and resource limits](COUNTRIES.md).

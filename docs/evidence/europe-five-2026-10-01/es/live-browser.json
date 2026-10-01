@@ -1,0 +1,214 @@
+[
+  {
+    "country": "es",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Madrid→Barcelona",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "7198269"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Madrid→Barcelona",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3226241"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Madrid→Barcelona",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "1267232"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Manacor→Alcúdia40.3 kmA*",
+        "events": "27321"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Murcia→Alicante75.3 kmBidirectional A*",
+        "events": "215650"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Córdoba→Granada160.1 kmDijkstra",
+        "events": "1075459"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Salamanca→Valladolid113.0 kmBidirectional Dijkstra",
+        "events": "417555"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Salamanca · Burgos · MurciaThree-source Dijkstra",
+        "events": "15559248"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Burgos→León169.1 kmA*",
+        "events": "142666"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Ávila→Valladolid119.2 kmBidirectional A*",
+        "events": "107935"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Reus→Segovia542.6 kmDijkstra",
+        "events": "8135616"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Murcia→MadridBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  },
+  {
+    "country": "es",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Madrid→Barcelona",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "7198269"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Madrid→Barcelona",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3226241"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Madrid→Barcelona",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "1267232"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Seville→Málaga194.9 kmA*",
+        "events": "485659"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Aranjuez→Toledo44.7 kmBidirectional A*",
+        "events": "38233"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Salamanca→Segovia147.0 kmDijkstra",
+        "events": "957484"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Valladolid→Burgos123.5 kmBidirectional Dijkstra",
+        "events": "464326"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Córdoba · Castellón · OviedoThree-source Dijkstra",
+        "events": "15558818"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Granada→Bilbao790.6 kmA*",
+        "events": "3221882"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Ávila→Valladolid119.2 kmBidirectional A*",
+        "events": "107935"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Reus→Bilbao493.2 kmDijkstra",
+        "events": "6836793"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Guadalajara→ValladolidBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

@@ -1,0 +1,215 @@
+[
+  {
+    "country": "pl",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Warsaw→Kraków",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "4618686"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Warsaw→Kraków",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3960535"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Warsaw→Kraków",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "820003"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Katowice→Olsztyn453.0 kmA*",
+        "events": "2761767"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Częstochowa→Kraków116.2 kmBidirectional A*",
+        "events": "708185"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Gdańsk→Bydgoszcz159.6 kmDijkstra",
+        "events": "1908476"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Bielsko-Biała→Elbląg546.7 kmBidirectional Dijkstra",
+        "events": "13351175"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Kraków · Bydgoszcz · OlsztynThree-source Dijkstra",
+        "events": "18930364"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Kielce→Lublin164.9 kmA*",
+        "events": "568911"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Radom→Rzeszów186.7 kmBidirectional A*",
+        "events": "673721"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Wrocław→Poznań162.8 kmDijkstra",
+        "events": "3103293"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Opole→ŁódźBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  },
+  {
+    "country": "pl",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Warsaw→Kraków",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "4618686"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Warsaw→Kraków",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3960535"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Warsaw→Kraków",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "820003"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Warsaw→Rzeszów281.8 kmA*",
+        "events": "1818997"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Łódź→Lublin243.6 kmBidirectional A*",
+        "events": "1284203"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Elbląg→Białystok309.4 kmDijkstra",
+        "events": "6978076"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Tarnów→Kraków81.8 kmBidirectional Dijkstra",
+        "events": "1547621"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Płock · Poznań · BydgoszczThree-source Dijkstra",
+        "events": "18930376"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Częstochowa→Kielce119.6 kmA*",
+        "events": "163522"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Szczecin→Gliwice507.8 kmBidirectional A*",
+        "events": "3019592"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Poznań→Warsaw297.8 kmDijkstra",
+        "events": "8861838"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Opole→TarnówBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

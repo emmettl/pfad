@@ -6,7 +6,8 @@ PFAD is live on [Motion Studies](https://motionstudies.app/pfad/) and
 [GitHub Pages](https://emmettl.github.io/pfad/), using the same checked application
 artifact. Switzerland is the default; the catalogue also offers United Kingdom,
 Iceland, New Zealand, Luxembourg, Netherlands, whole-island Ireland and Scandinavia
-(Norway, Sweden and Denmark). [COUNTRIES.md](COUNTRIES.md) records coverage,
+(Norway, Sweden and Denmark), Poland, Italy, Spain, metropolitan France with
+Corsica, and Germany. [COUNTRIES.md](COUNTRIES.md) records coverage,
 downloads and immutable releases.
 
 Manual journeys offer Dijkstra, bidirectional Dijkstra, A* and bidirectional A*.

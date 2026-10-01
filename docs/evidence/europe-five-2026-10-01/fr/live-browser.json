@@ -1,0 +1,214 @@
+[
+  {
+    "country": "fr",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Paris→Lyon",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "12709085"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Paris→Lyon",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "8962671"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Paris→Lyon",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2446982"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Saint-Étienne→Annecy177.7 kmA*",
+        "events": "1674016"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Metz→Reims175.7 kmBidirectional A*",
+        "events": "492966"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Mulhouse→Nancy166.2 kmDijkstra",
+        "events": "2362851"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Annecy→Toulouse552.5 kmBidirectional Dijkstra",
+        "events": "16607140"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Annecy · Avignon · MontpellierThree-source Dijkstra",
+        "events": "43372035"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Ajaccio→Bastia144.6 kmA*",
+        "events": "92489"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Marseille→Nîmes115.5 kmBidirectional A*",
+        "events": "615071"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Mulhouse→Colmar39.8 kmDijkstra",
+        "events": "355781"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Bastia→CorteBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  },
+  {
+    "country": "fr",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Paris→Lyon",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "12709085"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Paris→Lyon",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "8962671"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Paris→Lyon",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2446982"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Nîmes→Marseille116.2 kmA*",
+        "events": "494736"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Colmar→Lille488.4 kmBidirectional A*",
+        "events": "3347842"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Reims→Lille188.4 kmDijkstra",
+        "events": "6069983"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Grenoble→Avignon212.5 kmBidirectional Dijkstra",
+        "events": "5208693"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Annecy · Orléans · MontpellierThree-source Dijkstra",
+        "events": "43372135"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Orléans→Nantes295.6 kmA*",
+        "events": "1833743"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Orléans→Rennes281.6 kmBidirectional A*",
+        "events": "1068800"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Rennes→Annecy718.8 kmDijkstra",
+        "events": "35854052"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Chambéry→RennesBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

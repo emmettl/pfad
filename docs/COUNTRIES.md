@@ -1,8 +1,9 @@
 # Manual country releases
 
 Switzerland remains bundled and selected by default. The other selected immutable
-releases are hosted independently on Cloudflare R2. UK and Scandinavia require a
-large-download acknowledgement on first use, remembered per country/browser/site;
+releases are hosted independently on Cloudflare R2. The UK, Scandinavia, Poland,
+Italy, Spain, France and Germany require a large-download acknowledgement on
+first use, remembered per country/browser/site;
 the smaller releases open on selection.
 No country source is acquired by ordinary builds, CI or browser page requests.
 
@@ -22,6 +23,11 @@ coverage are retained in each immutable manifest.
 | `nl` | Netherlands | 22.158 | 30 Sep 2026 | European Netherlands extract |
 | `ie` | Ireland | 20.411 | 30 Sep 2026 | Whole island, including Northern Ireland |
 | `sc` | Scandinavia | 77.859 | 30 Sep 2026 | Norway, Sweden and Denmark; mainland and coastal islands |
+| `pl` | Poland | 59.626 | 30 Sep 2026 | Polish Geofabrik extract |
+| `it` | Italy | 85.323 | 30 Sep 2026 | Italy including Sicily and Sardinia |
+| `es` | Spain | 59.008 | 30 Sep 2026 | European Spain including Balearic Islands; no Canary Islands |
+| `fr` | France | 151.882 | 30 Sep 2026 | Metropolitan France including Corsica |
+| `de` | Germany | 140.876 | 29 Sep 2026 | German Geofabrik extract |
 
 Each study has a versioned ambient pool and independently pinned geographic
 references. Iceland and Luxembourg's selected lake source has no features;
@@ -72,7 +78,7 @@ national bounds, close zoom, default endpoint pairs, disconnected islands and
 source coverage separately. Ferries, turn restrictions and conditional rules
 retain the current connectivity-profile limitations.
 
-Current limits are 10m nodes, 16m edges, 32m directed arcs, 64m drawing vertices
+Current limits are 11m nodes, 16m edges, 32m directed arcs, 64m drawing vertices
 and 256 MiB downloaded road chunks, with bounded individual decoded chunks.
 These are allocation guards, not a guarantee that every device can load them.
 The UK selector requires explicit confirmation on first use of its 93 MB download

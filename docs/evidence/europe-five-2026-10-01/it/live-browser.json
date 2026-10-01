@@ -1,0 +1,217 @@
+[
+  {
+    "country": "it",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Rome→Milan",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "7360139"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Rome→Milan",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "8004824"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Rome→Milan",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2176814"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Sassari→Oristano119.5 kmA*",
+        "events": "159239"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Padua→Verona82.5 kmBidirectional A*",
+        "events": "318934"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Lecce→Parma886.8 kmDijkstra",
+        "events": "11537562"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Bergamo→Bari856.5 kmBidirectional Dijkstra",
+        "events": "19285775"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Siena · Venice · VeronaThree-source Dijkstra",
+        "events": "20458049"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Bolzano→Verona148.2 kmA*",
+        "events": "371944"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Catania→Palermo206.8 kmBidirectional A*",
+        "events": "738198"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Bergamo→Naples771.2 kmDijkstra",
+        "events": "17549938"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Siena→PisaBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  },
+  {
+    "country": "it",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Rome→Milan",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "7360139"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Rome→Milan",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "8004824"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Rome→Milan",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2176814"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Bari→Parma739.3 kmA*",
+        "events": "3399121"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Genoa→Modena211.5 kmBidirectional A*",
+        "events": "1091021"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Modena→Rome397.4 kmDijkstra",
+        "events": "15034921"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Bolzano→Trento57.2 kmBidirectional Dijkstra",
+        "events": "259601"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Lecce · Rome · BolognaThree-source Dijkstra",
+        "events": "20457429"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Verona→Milan150.2 kmA*",
+        "events": "612157"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Bologna→Trieste291.2 kmBidirectional A*",
+        "events": "1672223"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Parma→Venice203.4 kmDijkstra",
+        "events": "8626116"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Bari→BolzanoBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]
