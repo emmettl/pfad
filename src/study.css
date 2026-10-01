@@ -168,3 +168,15 @@ footer a { text-decoration: none; pointer-events: auto; }
 .route-caption .greedy-note { flex-basis: 100%; font-family: 'DM Mono', monospace; font-size: 9px; color: #b79484; }
 
 .search-tip { position: absolute; width: 6px; height: 6px; transform: translate(-50%, -50%); border-radius: 50%; background: #ffe6c9; box-shadow: 0 0 5px 2px #ffb68d, 0 0 15px 5px #ff806055; pointer-events: none; }
+
+.watch-toggle { display: flex; align-items: center; gap: 7px; border: 0; padding: 5px 8px; font-size: 11px; color: #9fb4a9; pointer-events: auto; }
+.study[data-watch] { height: 100dvh; min-height: 0; background: #080d10; outline: none; }
+.study[data-watch] :is(.study-header, .route-panel, .playback-panel, .reset-view, footer, .map-hint, .map-markers) { display: none; }
+.study[data-watch]:not([data-watch-awake]) :is(.map, canvas) { cursor: none; }
+.watch-exit { position: absolute; z-index: 6; bottom: max(24px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); display: grid; justify-items: center; gap: 9px; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.study[data-watch-awake] .watch-exit, .watch-exit:focus-within { opacity: 1; pointer-events: auto; }
+.watch-actions { display: flex; gap: 8px; }
+.watch-actions button { background: #0a1514e8; font-size: 11px; min-height: 44px; white-space: nowrap; }
+.watch-actions button span { margin-left: 12px; }
+.watch-exit > span { font-size: 10px; color: #839b8d; white-space: nowrap; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .watch-exit { transition: none; } }

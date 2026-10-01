@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test'
+
+test.setTimeout(90000)
+for (const fallback of [false, true]) {
+  test(`watch mode hides controls and restores focus${fallback ? ' without browser fullscreen' : ''}`, async ({ page, isMobile }) => {
+    if (fallback) await page.addInitScript(() => { Element.prototype.requestFullscreen = () => Promise.reject(new Error('Unavailable')) })
+    await page.goto('./')
+    const study = page.locator('.study')
+    await expect(study).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+    const enter = page.getByRole('button', { name: 'Enter watch mode' })
+    await enter.click()
+    await expect(study).toHaveAttribute('data-watch', 'true')
+    await expect(page.locator('.study-header')).toBeHidden()
+    await expect(page.locator('.playback-panel')).toBeHidden()
+    await expect(page.locator('canvas')).toBeVisible()
+    if (!fallback && !isMobile) await expect.poll(() => page.evaluate(() => document.fullscreenElement?.className)).toBe('study')
+    if (fallback) expect(await page.evaluate(() => document.fullscreenElement)).toBeNull()
+    await expect(page.locator('.watch-exit')).toHaveCSS('opacity', '0', { timeout: 6000 })
+    if (isMobile) await page.locator('main.map').tap({ position: { x: 100, y: 200 } })
+    else await page.mouse.move(100, 200)
+    await expect(page.locator('.watch-exit')).toHaveCSS('opacity', '1')
+    await page.getByRole('button', { name: 'Exit watch mode' }).focus()
+    await page.screenshot({ path: `test-results/watch-${test.info().project.name}-${fallback}.png` })
+    await page.getByRole('button', { name: 'Exit watch mode' }).click()
+    await expect(study).not.toHaveAttribute('data-watch')
+    await expect(enter).toBeFocused()
+    await expect(page.locator('.playback-panel')).toBeVisible()
+    await enter.click()
+    await page.keyboard.press('Escape')
+    await expect(study).not.toHaveAttribute('data-watch')
+    await expect(enter).toBeFocused()
+  })
+}

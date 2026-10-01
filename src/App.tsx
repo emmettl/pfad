@@ -16,6 +16,7 @@ import { ROAD_CACHE_NAME, type LoadMeasurements } from './search/chunks.ts'
 import { clearStudyUrl, readStudyLink, shareView, studyUrl, StudyUrlBinding, type StudyLink } from './records/link.ts'
 import { openingReplay } from './records/opening.ts'
 import { exportRecord, downloadBlob } from './records/export.ts'
+import { useWatchMode } from './useWatchMode.ts'
 import './study.css'
 
 const number = new Intl.NumberFormat('en-CH')
@@ -25,6 +26,8 @@ const resultAlgorithm = (result: SearchResult): SearchAlgorithm => result.algori
 const algorithmName = (algorithm: SearchAlgorithm) => ({ dijkstra: 'Dijkstra', bidirectional: 'Bidirectional Dijkstra', astar: 'A*', 'bidirectional-astar': 'Bidirectional A*', multisource: 'Three-source Dijkstra', greedy: 'Greedy best-first' }[algorithm])
 
 export function App() {
+  const surface = useRef<HTMLDivElement>(null)
+  const watch = useWatchMode(surface)
   const [shared, setShared] = useState(() => {
     const parsed = readStudyLink(location.href)
     if (parsed.study && COUNTRIES.find(c => c.id === parsed.study!.country)?.identity !== parsed.study.dataset) return { error: 'The exact road release in this link is not available in this edition. Its graph has not been substituted.' }
@@ -284,10 +287,11 @@ export function App() {
       <button className="pick-button" disabled={!ready || busy || !!mapError} onClick={() => setPick(pick === end ? null : end)} aria-label={`Choose ${end === 'start' ? 'start' : 'destination'} on map`} aria-pressed={pick === end} title="Choose on map">⌖</button>
     </div>
   )
-  return <div className="study" data-state={error ? 'error' : result ? 'ready' : 'loading'} data-progress={progress} data-algorithm={result?.algorithm ?? algorithm} data-ambient-phase={ambientState.phase} data-ambient-running={ambientState.running} data-ambient-chrome={ambientState.active ? chrome.visible ? 'visible' : 'quiet' : 'off'}
-    onPointerMoveCapture={chrome.wake} onPointerDownCapture={chrome.wake} onWheelCapture={chrome.wake} onFocusCapture={chrome.wake} onBlurCapture={chrome.wake}
+  return <div ref={surface} tabIndex={-1} className="study" data-watch={watch.active || undefined} data-watch-awake={watch.awake || undefined} data-state={error ? 'error' : result ? 'ready' : 'loading'} data-progress={progress} data-algorithm={result?.algorithm ?? algorithm} data-ambient-phase={ambientState.phase} data-ambient-running={ambientState.running} data-ambient-chrome={ambientState.active ? chrome.visible ? 'visible' : 'quiet' : 'off'}
+    onPointerMoveCapture={() => { chrome.wake(); watch.reveal() }} onPointerDownCapture={() => { chrome.wake(); watch.reveal() }} onWheelCapture={chrome.wake} onFocusCapture={chrome.wake} onBlurCapture={chrome.wake}
     onKeyDownCapture={event => {
-      chrome.wake()
+      chrome.wake(); watch.reveal()
+      if (watch.active && event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); watch.exit(); return }
       if (ambientState.active && event.key === 'Escape' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.nativeEvent.isComposing) {
         event.preventDefault(); exitAmbient()
       }
@@ -334,7 +338,7 @@ export function App() {
           <span role="status">{recordStatus}</span>
         </div>
         <a href="https://github.com/emmettl/pfad">PFAD repository ↗</a>
-      </div></details><div className="map-tools"><SoundControl ref={sound} sequencePaused={ambientState.active && !ambientState.running} /><button className="outline-control" aria-label="Show border and lake outlines" aria-pressed={outlines} disabled={!outlineReady || !!mapError || !country.outlines} onClick={() => { const visible = !outlines; setOutlines(visible); outlinePreference.current = visible; scene.current?.setGeographyVisible(visible) }}><span aria-hidden="true">◇</span> Outlines</button></div></div>
+      </div></details><div className="map-tools"><button className="watch-toggle" aria-label="Enter watch mode" title="Watch fullscreen" disabled={!ready || !!mapError || pendingCountry !== null} onClick={event => { setPick(null); watch.enter(event.currentTarget) }}><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M6 2H2v4m8-4h4v4M2 10v4h4m8-4v4h-4" /></svg><span>Watch</span></button><SoundControl ref={sound} sequencePaused={ambientState.active && !ambientState.running} /><button className="outline-control" aria-label="Show border and lake outlines" aria-pressed={outlines} disabled={!outlineReady || !!mapError || !country.outlines} onClick={() => { const visible = !outlines; setOutlines(visible); outlinePreference.current = visible; scene.current?.setGeographyVisible(visible) }}><span aria-hidden="true">◇</span> Outlines</button></div></div>
     </header>
     {algorithm !== 'multisource' && <div className="route-panel" aria-label="Search endpoints">
       {queryControl(start, setStart, 'start')}
@@ -370,6 +374,10 @@ export function App() {
       </div>
       <div className="event-readout"><span><strong data-testid="settled-count">{number.format(counts[0])}</strong> node settlements</span><span><strong data-testid="examined-count">{number.format(counts[1])}</strong> connections examined</span><span className="replay-status">{busy ? 'Recording search' : revealing ? playing ? 'Revealing the route' : 'Route reveal paused' : completed ? result.sources ? 'Territories complete' : result.routeMetres === null ? 'No route in this graph' : result.routeGuarantee === 'first-found' ? 'Greedy route found' : 'Route found' : playing ? 'Replaying recorded events' : result ? 'Replay paused' : 'Preparing the network'}</span></div>
     </div>
+    {watch.active && <div className="watch-exit" onFocus={watch.reveal}>
+      <div className="watch-actions"><button disabled={!result || busy || ambientState.phase === 'stopped'} onClick={togglePlayback}>{ambientState.active ? ambientState.running ? 'Pause sequence' : 'Resume sequence' : playing ? 'Pause' : 'Play'}</button><button onClick={watch.exit} aria-label="Exit watch mode">Exit watch mode <span aria-hidden="true">↙</span></button></div>
+      <span>Move or tap for controls · Escape to exit</span>
+    </div>}
     <footer><div className="map-credits"><a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors · ODbL</a>{country.outlines && <a href={country.outlineCreditUrl}>Outlines: {country.outlineCredit}</a>}</div><span>{country.name} · {country.snapshot} · Connectivity study</span></footer>
   </div>
 }

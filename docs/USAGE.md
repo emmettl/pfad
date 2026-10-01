@@ -83,3 +83,13 @@ Copy the address bar or use Copy study link in About. New links replay from the
 beginning, or show a completed still under reduced motion; sound and automatic
 ambient sequencing require deliberate actions. About also exports the genuine
 search record. [RECORDS.md](RECORDS.md) documents URLs, previews and exports.
+
+## Watch fullscreen
+
+Choose **Watch** beside the sound control for an unobstructed road view. PFAD
+requests browser fullscreen where available; the same view works when fullscreen
+is unsupported or denied. The current journey or ambient sequence and music
+continue. Move the pointer or tap to reveal play/pause and **Exit watch mode**;
+the controls fade after a few seconds and stay visible while keyboard-focused.
+Press Escape or choose Exit to restore the interface and focus to Watch. Map
+pan, zoom and playback keyboard shortcuts remain available.
