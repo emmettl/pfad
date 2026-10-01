@@ -1,0 +1,45 @@
+{
+  "measuredAt": "2026-10-01T14:41:03.243Z",
+  "url": "http://127.0.0.1:4199/?country=de&from=berlin&to=munich&algorithm=bidirectional&duration=15",
+  "note": "Desktop WebKit touch viewport, not a physical iPhone or a measurement of process peak memory.",
+  "workers": [
+    {
+      "terminated": false,
+      "requests": [
+        {
+          "type": "load"
+        },
+        {
+          "type": "search"
+        },
+        {
+          "type": "search"
+        },
+        {
+          "type": "search"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "routeMetres": 578359.82,
+      "events": 23476639,
+      "traceSha256": "9499d05ebe4ecde78a6948c66cdd4727e5666b110d7dc5fe84898f94c4b8b022"
+    },
+    {
+      "algorithm": "astar/1",
+      "routeMetres": 578359.82,
+      "events": 7915701,
+      "traceSha256": "aac2f4bebd041d9fd1a6e625cad918049daf28e41d80ac616b75406a4f1c8e29"
+    },
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "routeMetres": 578359.82,
+      "events": 23476639,
+      "traceSha256": "9499d05ebe4ecde78a6948c66cdd4727e5666b110d7dc5fe84898f94c4b8b022"
+    }
+  ],
+  "errors": []
+}

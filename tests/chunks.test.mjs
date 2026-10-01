@@ -85,7 +85,7 @@ test('versioned storage retains at most two releases and stays within the compre
   const { manifest, bodies } = fixture(), { cache } = install(t, path => new Response(bodies.get(path)))
   let clock = 0; vi.spyOn(Date, 'now').mockImplementation(() => ++clock)
   const run = (id, bytes) => loadChunks({ ...manifest, identity: id.repeat(64), downloadBytes: bytes }, 'https://example.org/manifest', () => {}, () => {})
-  await run('a', 80 * 1024 * 1024); await run('b', 50 * 1024 * 1024)
+  await run('a', 210 * 1024 * 1024); await run('b', 50 * 1024 * 1024)
   let keys = await cache.keys(); assert.equal(keys.some(k => k.url.includes('a'.repeat(64))), false)
   await run('c', 16 * 1024 * 1024); await run('d', 16 * 1024 * 1024)
   keys = await cache.keys()
@@ -101,4 +101,13 @@ test('an IndexedDB permission refusal uses verified network instead of creating 
   const result = await loadChunks(manifest, 'https://example.org/manifest', () => {}, () => {})
   assert.equal(result.cacheAvailable, false); assert.equal(result.networkBytes, manifest.downloadBytes)
   assert.equal((await cache.keys()).length, 0)
+})
+
+test('topology reload verifies every node and edge chunk without fetching drawing again', async t => {
+  const { manifest, bodies } = fixture(), { requests } = install(t, path => new Response(bodies.get(path)))
+  const consumed = []
+  const result = await loadChunks(manifest, 'https://example.org/manifest', () => {}, chunk => consumed.push(chunk.kind), true)
+  assert.deepEqual(consumed, ['nodes', 'nodes', 'nodes', 'edges', 'edges', 'edges'])
+  assert.equal(requests.some(path => path.startsWith('geometry')), false)
+  assert.equal(result.networkBytes, manifest.chunks.filter(c => c.kind !== 'geometry').reduce((sum, c) => sum + c.bytes, 0))
 })

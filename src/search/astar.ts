@@ -1,5 +1,5 @@
 import type { Endpoint, Graph, HeuristicRecord } from './contracts.ts'
-import type { ReverseGraph } from './bidirectional.ts'
+import { arcSource, type ReverseGraph } from './bidirectional.ts'
 import { Heap, singleFrontSearch } from './engine.ts'
 
 // Coordinates and costs have independent rounding. Enforce h(u) <= c(u,v)+h(v)
@@ -30,7 +30,7 @@ export function prepareHeuristic(graph: Graph, reverse: ReverseGraph, start: num
     if (backwards) {
       for (let a = graph.offsets[u]; a < graph.offsets[u + 1]; a++) lower(graph.arcTo[a], score + graph.length[graph.arcEdge[a]])
     } else {
-      for (let i = reverse.offsets[u]; i < reverse.offsets[u + 1]; i++) lower(reverse.from[i], score + graph.length[graph.arcEdge[reverse.arc[i]]])
+      for (let i = reverse.offsets[u]; i < reverse.offsets[u + 1]; i++) lower(arcSource(graph, reverse.arc[i]), score + graph.length[graph.arcEdge[reverse.arc[i]]])
     }
   }
   return { potential, record: { version: 'feasible-planar-distance/1', preparationMs: performance.now() - begun, correctedNodes, longitudeScale, initialStartCm, startLowerBoundCm: potential[start] } }

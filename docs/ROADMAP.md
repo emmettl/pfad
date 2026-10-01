@@ -106,7 +106,7 @@ devices the edition intends to support.
 - [x] Reduce sequential-download latency with bounded concurrent fetching and
   version-aware caching. Retry failed chunks without redownloading valid ones.
   An incomplete topology still prevents searching. Two in-flight chunks, versioned
-  IndexedDB storage (Cache Storage fallback), at most two releases / 128 MiB,
+  IndexedDB storage (Cache Storage fallback), at most two releases / 256 MiB,
   reverified reads and one automatic retry are covered by unit and browser checks.
 - [x] Separate deterministic logic and national search regressions into Vitest;
   retain browser API, input and rendering integration checks. Browser engines

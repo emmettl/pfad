@@ -176,7 +176,7 @@ remaining failure prevents readiness and searching.
 Verified compressed bytes are stored in versioned IndexedDB records. Cache
 Storage is a best-effort fallback when the IndexedDB API is absent; a window owner
 keeps that fallback alive across worker replacement in private WebKit contexts.
-At most two graph identities are retained within a 128 MiB declared compressed
+At most two graph identities are retained within a 256 MiB declared compressed
 payload cap, pruning least recently opened releases. An IndexedDB-capable browser
 retires the alternate store to avoid retaining two separate budgets. The cache is optional and
 subject to browser quota or eviction. Storage refusal still permits verified

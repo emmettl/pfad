@@ -11,7 +11,7 @@ export interface LoadMeasurements {
   totalMs: number
 }
 export const ROAD_CACHE_NAME = 'pfad-road-chunks-v1'
-const CACHE_BUDGET = 128 * 1024 * 1024
+const CACHE_BUDGET = 256 * 1024 * 1024
 const CONCURRENCY = 2
 interface ChunkCache {
   keys(): Promise<readonly Request[]>
@@ -103,6 +103,7 @@ export async function loadChunks(
   manifest: StudyManifest, url: string,
   progress: (loaded: number, stage: string) => void,
   consume: (chunk: Chunk, bytes: ArrayBuffer) => void,
+  topologyOnly = false,
 ) {
   const measurements: LoadMeasurements = { version: 'verified-chunk-loader/1', networkBytes: 0, cachedBytes: 0, cacheAvailable: false, verificationMs: 0, decodeMs: 0, compileMs: 0, totalMs: 0 }
   const storage = await openCache(manifest, url)
@@ -164,6 +165,7 @@ export async function loadChunks(
   }
   try {
     for (const kind of ['nodes', 'edges', 'geometry'] as const) {
+      if (topologyOnly && kind === 'geometry') continue
       const group = manifest.chunks.filter(chunk => chunk.kind === kind)
       const pending = new Map<number, Promise<ArrayBuffer>>()
       const launch = (i: number) => {

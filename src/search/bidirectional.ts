@@ -5,15 +5,24 @@ import { Heap } from './engine.ts'
 
 // Bit 31 records the front; the remaining bits retain the original graph ID.
 export const BACKWARD = 0x80000000
-export interface ReverseGraph { offsets: Uint32Array; from: Uint32Array; arc: Uint32Array }
+export interface ReverseGraph { offsets: Uint32Array; arc: Uint32Array }
 export function compileReverse(graph: Graph): ReverseGraph {
   const n = graph.xy.length / 2, offsets = new Uint32Array(n + 1)
   for (let i = 0; i < n; i++) offsets[i + 1] = offsets[i] + graph.incoming[i]
-  const from = new Uint32Array(graph.arcTo.length), arc = new Uint32Array(from.length), cursor = offsets.slice()
+  const arc = new Uint32Array(graph.arcTo.length)
   for (let u = 0; u < n; u++) for (let a = graph.offsets[u]; a < graph.offsets[u + 1]; a++) {
-    const i = cursor[graph.arcTo[a]]++; from[i] = u; arc[i] = a
+    arc[offsets[graph.arcTo[a]]++] = a
   }
-  return { offsets, from, arc }
+  // Restore starts after using the offsets themselves as write cursors.
+  for (let u = n; u > 0; u--) offsets[u] = offsets[u - 1]
+  offsets[0] = 0
+  return { offsets, arc }
+}
+
+// The opposite endpoint is already present in the physical road table.
+export function arcSource(graph: Graph, a: number): number {
+  const edge = graph.arcEdge[a]
+  return graph.arcTo[a] === graph.to[edge] ? graph.from[edge] : graph.to[edge]
 }
 
 export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoint, goal: Endpoint, snapMs = 0, guided = false): SearchResult {
@@ -26,7 +35,6 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
   const begun = performance.now(), n = graph.xy.length / 2, e = graph.from.length
   if (n >= 2 ** 29 || graph.arcTo.length >= 2 ** 29) throw new Error('Graph IDs exceed the bidirectional trace format')
   const distance = [new Float64Array(n).fill(Infinity), new Float64Array(n).fill(Infinity)]
-  const parent = [new Int32Array(n).fill(-1), new Int32Array(n).fill(-1)]
   const parentEdge = [new Int32Array(n).fill(-1), new Int32Array(n).fill(-1)]
   const settled = [new Uint8Array(n), new Uint8Array(n)], heap = [new Heap(), new Heap()]
   const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
@@ -64,12 +72,12 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
     const u = heap[side].pop(); settled[side][u] = 1; exploredNodes++; record(side, 0, u); connect(u)
     const offsets = side ? reverse.offsets : graph.offsets
     for (let i = offsets[u]; i < offsets[u + 1]; i++) {
-      const a = side ? reverse.arc[i] : i, v = side ? reverse.from[i] : graph.arcTo[a], road = graph.arcEdge[a]
+      const a = side ? reverse.arc[i] : i, v = side ? arcSource(graph, a) : graph.arcTo[a], road = graph.arcEdge[a]
       examinedArcs++; record(side, 1, a)
       if (!times[side][road * 2]) { if (!times[1 - side][road * 2]) uniqueEdges++; times[side][road * 2] = used }
       const candidate = distance[side][u] + graph.length[road]
       if (candidate < distance[side][v]) {
-        distance[side][v] = candidate; parent[side][v] = u; parentEdge[side][v] = road
+        distance[side][v] = candidate; parentEdge[side][v] = road
         heap[side].push(v, priority(side, v, candidate)); improvements++; record(side, 2, a)
         if (!times[side][road * 2 + 1]) times[side][road * 2 + 1] = used
         connect(v)
@@ -83,12 +91,14 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
     while (u !== -1) {
       routeNodes.push(u)
       if (parentEdge[0][u] !== -1) routeEdges.push(parentEdge[0][u])
-      u = parent[0][u]
+      const edge = parentEdge[0][u]
+      u = edge === -1 ? -1 : graph.from[edge] === u ? graph.to[edge] : graph.from[edge]
       if (routeNodes.length > n) throw new Error('Invalid forward predecessor cycle')
     }
     routeNodes.reverse(); routeEdges.reverse(); u = join
-    while (parent[1][u] !== -1) {
-      routeEdges.push(parentEdge[1][u]); u = parent[1][u]; routeNodes.push(u)
+    while (parentEdge[1][u] !== -1) {
+      const edge = parentEdge[1][u]
+      routeEdges.push(edge); u = graph.from[edge] === u ? graph.to[edge] : graph.from[edge]; routeNodes.push(u)
       if (routeNodes.length > n) throw new Error('Invalid backward predecessor cycle')
     }
   }

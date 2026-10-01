@@ -100,7 +100,7 @@ export interface SearchResult {
   maxQueue: number
 }
 
-export type Request = { type: 'load'; manifestUrl: string; expectedIdentity?: string } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm; sources?: [Point, Point, Point] }
+export type Request = { type: 'load'; manifestUrl: string; expectedIdentity?: string; topologyOnly?: boolean } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm; sources?: [Point, Point, Point] }
 export type Reply =
   | { type: 'progress'; loaded: number; total: number; stage: string }
   | { type: 'manifest'; manifest: StudyManifest; manifestUrl: string }

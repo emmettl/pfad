@@ -18,3 +18,14 @@ test('older-browser trace fallback preserves words, exact length and event bound
   assert.deepEqual([...trace.finish(2)], [16777217, 0xffffffff])
   assert.throws(() => trace.set(20, 3), /event bound/)
 })
+
+test('fallback allocates for recorded events rather than a national worst-case bound', () => {
+  const trace = new EventTrace(120000000, false)
+  assert.equal(trace.buffer.byteLength, 1024 * 1024)
+  for (let i = 0; i < 270001; i++) trace.set(i, (i + 16777217) | 0x80000000)
+  const result = trace.finish(270001)
+  assert.equal(result.length, 270001)
+  assert.equal(result[262144], (262144 + 16777217 + 0x80000000) >>> 0)
+  assert.equal(result.at(-1), (270000 + 16777217 + 0x80000000) >>> 0)
+  assert.equal(trace.buffer.byteLength, 0)
+})

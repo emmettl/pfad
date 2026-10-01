@@ -102,7 +102,7 @@ const server = await createServer({ configFile: false, server: { host: phone ? '
 const report = { measuredAt: new Date().toISOString(), host: { cpu: cpus()[0].model, platform: platform() }, manifest: { id: manifest.id, counts: manifest.counts, downloadBytes: manifest.downloadBytes, source: manifest.source }, note: 'Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.', browsers: [] }
 report.bufferAccounting = {
   workerGraphBytes: 16 * manifest.counts.nodes + 14 * manifest.counts.edges + 8 * manifest.counts.directedArcs + 4,
-  reverseCsrBytes: 4 * (manifest.counts.nodes + 1) + 8 * manifest.counts.directedArcs,
+  reverseCsrBytes: 4 * (manifest.counts.nodes + 1) + 4 * manifest.counts.directedArcs,
   uploadedRoadAttributeBytes: 12 * manifest.counts.vertices,
   drawingCoordinateAndOffsetBytes: 8 * manifest.counts.vertices + 4 * manifest.counts.edges + 4 * manifest.chunks.filter(c => c.kind === 'geometry').length,
   note: 'Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music.',

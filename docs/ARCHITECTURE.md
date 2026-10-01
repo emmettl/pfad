@@ -20,6 +20,16 @@ simplified drawing geometry into versioned, hashed chunks. The worker loads
 all chunks, verifies SHA-256, checks layouts and builds directed CSR adjacency.
 It does not search a partial graph. See [the data format](DATA.md).
 
+On large datasets with coarse-pointer input, the app defers road GPU uploads
+until the search finishes, then terminates the routing worker before replay.
+Starting another search disposes the road GPU buffers, creates a new worker and
+reopens all verified topology chunks for the same immutable release. Existing
+drawing geometry stays in the scene and is uploaded again for the result; it is
+not downloaded or duplicated. A bounded 256 MiB compressed cache now accommodates
+Germany and France, subject to storage availability. Rebuilding adjacency costs
+additional preparation time on subsequent phone searches. See the
+[Germany memory investigation](evidence/mobile-memory-2026-10-01/README.md).
+
 Queries snap both endpoints symmetrically using `nearby-shared-component/1`;
 requested coordinates and the snapping version accompany each worker result.
 A cached weak-component index helps avoid nearby isolated fragments without
@@ -37,7 +47,9 @@ checksum/timestamp, together with algorithm and tie-breaking version.
 graph and snapped endpoints. Its forward front follows outgoing arcs; its
 destination front follows the transpose of those same directed arcs. The reverse
 CSR is built lazily in the worker, in ascending source-node/original-arc order,
-and retained for subsequent queries. No additional geographic download is needed.
+and retained for subsequent queries on desktops and smaller graphs. Its source
+nodes are derived from original road endpoints rather than duplicated. No
+additional geographic download is needed.
 The smaller queue distance advances next; equal distances alternate fronts,
 starting forward. Each heap breaks ties by ascending node ID. Strict improvements
 retain the first equal-cost predecessor and connection.

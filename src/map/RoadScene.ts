@@ -83,6 +83,7 @@ export class RoadScene {
   sourceTexture: THREE.DataTexture
   proximityTexture: THREE.DataTexture
   manifest?: StudyManifest
+  private releaseRoadUploads = false
   events = 1
   width = 1
   height = 1
@@ -196,6 +197,7 @@ export class RoadScene {
   setManifest(manifest: StudyManifest) {
     this.manifest = manifest
     const phoneNetwork = manifest.counts.nodes > 2000000 && window.matchMedia('(pointer: coarse)').matches
+    this.releaseRoadUploads = phoneNetwork
     this.renderInterval = phoneNetwork ? 1000 / 30 : 0
     this.renderer.setPixelRatio(phoneNetwork ? 1 : Math.min(window.devicePixelRatio, 1.5))
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
@@ -242,10 +244,17 @@ export class RoadScene {
     // Three's automatic sphere calculation assumes a three-component position.
     geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), Math.SQRT2)
     const lines = new THREE.LineSegments(geometry, this.material); lines.frustumCulled = false
+    lines.visible = !this.releaseRoadUploads
     this.drawing.add(positions, roads)
+    this.renderer.domElement.dataset.roadVertices = String(Number(this.renderer.domElement.dataset.roadVertices ?? 0) + count)
+    this.renderer.domElement.dataset.roadUploads = this.releaseRoadUploads ? 'deferred' : 'resident'
     this.scene.add(lines); this.dirty = true
   }
   clearResult() {
+    if (this.releaseRoadUploads) for (const object of this.scene.children) if (object instanceof THREE.LineSegments && object.material === this.material) {
+      object.visible = false; object.geometry.dispose()
+    }
+    if (this.releaseRoadUploads) this.renderer.domElement.dataset.roadUploads = 'deferred'
     this.route?.geometry.dispose(); if (this.route) this.scene.remove(this.route); this.route = undefined
     this.flashPoint?.geometry.dispose(); if (this.flashPoint) this.scene.remove(this.flashPoint); this.flashPoint = undefined
     this.flash.clear(); this.meetingEvent = undefined; this.reveal.clear()
@@ -265,6 +274,8 @@ export class RoadScene {
     this.onRouteRevealChange?.(false)
   }
   setResult(result: SearchResult) {
+    this.renderer.domElement.dataset.roadUploads = 'resident'
+    for (const object of this.scene.children) if (object instanceof THREE.LineSegments && object.material === this.material) object.visible = true
     if (this.flashPoint) { this.scene.remove(this.flashPoint); this.flashPoint.geometry.dispose(); this.flashPoint = undefined }
     this.flash.clear(); this.meetingEvent = result.meeting?.event
     const greedy = result.algorithm === 'greedy-best-first/1'

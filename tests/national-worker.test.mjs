@@ -24,7 +24,7 @@ test('the production worker opens the pinned Swiss graph and routes both directi
   const manifest = JSON.parse(await readFile(resolve(root, country.manifest), 'utf8'))
   expect(vertices).toBe(manifest.counts.vertices)
   const start = country.places.find(p => p.name === 'Zürich'), goal = country.places.find(p => p.name === 'Genève')
-  let dijkstraNodes, startNode, goalNode
+  let dijkstraNodes, startNode, goalNode, bidirectionalTrace
   for (const [algorithm, settlements, events] of [
     ['dijkstra', 805590, 3352313],
     ['bidirectional', 1044442, 4347569],
@@ -38,6 +38,7 @@ test('the production worker opens the pinned Swiss graph and routes both directi
       expect(forward.trace.length).toBe(4993816)
       dijkstraNodes = forward.exploredNodes; startNode = forward.start.node; goalNode = forward.goal.node
     }
+    if (algorithm === 'bidirectional') bidirectionalTrace = forward.trace
     if (algorithm === 'astar') expect(forward.exploredNodes).toBeLessThan(dijkstraNodes)
     const { result: reverse } = await send({ type: 'search', requestId: 2, start: goal, goal: start, algorithm })
     // The graph is directed: the reverse journey has a slightly different cost.
@@ -45,4 +46,16 @@ test('the production worker opens the pinned Swiss graph and routes both directi
     expect(reverse.start.node).toBe(goalNode); expect(reverse.goal.node).toBe(startNode)
     expect(reverse.exploredNodes).toBe(settlements); expect(reverse.trace.length).toBe(events)
   }
+  const drawingVertices = vertices
+  const geometryPaths = new Set(manifest.chunks.filter(chunk => chunk.kind === 'geometry').map(chunk => chunk.path))
+  const fetchChunks = globalThis.fetch
+  vi.stubGlobal('fetch', url => {
+    expect(geometryPaths.has(new URL(url).pathname.split('/').at(-1))).toBe(false)
+    return fetchChunks(url)
+  })
+  await send({ type: 'load', manifestUrl: new URL(country.manifest, 'https://pfad.test/').href, expectedIdentity: country.identity, topologyOnly: true })
+  expect(vertices).toBe(drawingVertices)
+  const { result: reopened } = await send({ type: 'search', requestId: 3, start, goal, algorithm: 'bidirectional' })
+  expect(reopened.trace).toEqual(bidirectionalTrace)
+  expect(reopened.routeMetres).toBe(262733.98)
 })

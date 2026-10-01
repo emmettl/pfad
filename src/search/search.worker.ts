@@ -14,7 +14,7 @@ let manifest: StudyManifest | undefined
 let reverse: ReverseGraph | undefined
 function reply(message: Reply, transfer: Transferable[] = []) { self.postMessage(message, { transfer }) }
 
-async function load(url: string, expectedIdentity?: string) {
+async function load(url: string, expectedIdentity?: string, topologyOnly = false) {
   const opened = performance.now()
   const response = await fetch(url)
   if (!response.ok) throw new Error('The road manifest could not be loaded. Try again.')
@@ -79,12 +79,12 @@ async function load(url: string, expectedIdentity?: string) {
         }
         reply({ type: 'geometry', start: vertices, count, bytes }, [bytes]); vertices += count
       }
-  })
+  }, topologyOnly)
   reply({ type: 'progress', loaded: data.downloadBytes, total: data.downloadBytes, stage: 'Preparing road connections' })
   const compiling = performance.now()
   const complete = compileGraph({ xy, from, to, length, direction, category })
   reverse = undefined
-  if (vertices !== data.counts.vertices) throw new Error('Drawing geometry mismatch')
+  if (!topologyOnly && vertices !== data.counts.vertices) throw new Error('Drawing geometry mismatch')
   if (complete.arcTo.length !== data.counts.directedArcs) throw new Error('Road connectivity mismatch')
   graph = complete
   measurements.compileMs = performance.now() - compiling
@@ -95,7 +95,7 @@ async function load(url: string, expectedIdentity?: string) {
 self.addEventListener('message', async (event: MessageEvent<Request>) => {
   const request = event.data
   try {
-    if (request.type === 'load') await load(request.manifestUrl, request.expectedIdentity)
+    if (request.type === 'load') await load(request.manifestUrl, request.expectedIdentity, request.topologyOnly)
     else {
       if (!graph || !manifest) throw new Error('The national graph has not finished loading')
       if (request.algorithm === 'multisource' && !request.sources) throw new Error('Three sources are required for a territory study')

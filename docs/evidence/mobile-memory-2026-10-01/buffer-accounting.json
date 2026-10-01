@@ -1,0 +1,26 @@
+{
+  "note": "Deterministic byte accounting from explicit typed arrays and one GPU copy of each road attribute/texture. Not measured process peak memory. Excludes decoding, heaps, heuristic preparation, route ribbons, outlines, checkpoints, framebuffer, browser/JS overhead, driver allocation and score/result lifetimes. Worker termination schedules reclamation; operating-system reclamation timing is not measured.",
+  "dataset": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+  "counts": {
+    "nodes": 10488625,
+    "edges": 11974914,
+    "directedArcs": 22891751,
+    "vertices": 32951556
+  },
+  "routeEvents": 23476639,
+  "routingGraphBytes": 518600808,
+  "oldReverseBytes": 225088512,
+  "newReverseBytes": 133521508,
+  "endpointIndexBytes": 52443125,
+  "roadAttributeBytes": 395418672,
+  "routeOffsetsBytes": 47900136,
+  "bidirectionalTimestampBytes": 191627264,
+  "traceBytes": 93906556,
+  "oldReplayAccountedBytes": 2112031009,
+  "newReplayAccountedBytes": 1315898564,
+  "replayReductionBytes": 796132445,
+  "removedBidirectionalPredecessorBytes": 83909000,
+  "removedReverseCompilationCursorBytes": 41954504,
+  "oldSearchAccountedBytes": 2277016995,
+  "newSearchAccountedBytes": 1706122319
+}

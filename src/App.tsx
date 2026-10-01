@@ -6,7 +6,7 @@ import { RoadScene } from './map/RoadScene.ts'
 import { COUNTRIES } from './countries.ts'
 import { countryWarningAcknowledged, rememberCountryWarning } from './country-warning.ts'
 import { countsAt } from './search/engine.ts'
-import type { Point, Reply, SearchAlgorithm, SearchResult, StudyManifest } from './search/contracts.ts'
+import type { Point, Reply, Request, SearchAlgorithm, SearchResult, StudyManifest } from './search/contracts.ts'
 import { SoundControl, type SoundHandle } from './music/SoundControl.tsx'
 import { AmbientSequence, type AmbientState } from './ambient/sequence.ts'
 import { useAmbientChrome } from './ambient/useChrome.ts'
@@ -46,6 +46,7 @@ export function App() {
   const places = country.places
   const pending = COUNTRIES.find(c => c.id === pendingCountry)
   const host = useRef<HTMLDivElement>(null), scene = useRef<RoadScene | null>(null), worker = useRef<Worker | null>(null)
+  const submitSearch = useRef<((request: Extract<Request, { type: 'search' }>) => void) | null>(null)
   const currentRequest = useRef(0), progressRef = useRef(0), initialQuery = useRef({ start: shared.study?.start ?? COUNTRIES[0].places[0], goal: shared.study?.goal ?? COUNTRIES[0].places[1] })
   const sound = useRef<SoundHandle | null>(null)
   const cacheOwner = useRef<Promise<Cache | undefined> | null>(null)
@@ -90,10 +91,10 @@ export function App() {
     setPlaying(value => !value)
   }, [result, busy, seek])
   const search = useCallback((a: Point, b: Point, mode = algorithmRef.current) => {
-    if (!worker.current) return
+    if (!submitSearch.current) return
     setError(''); setBusy(true); setPlaying(false); setPick(null)
     if (country.large) { setResult(null); scene.current?.clearResult() }
-    worker.current.postMessage({ type: 'search', requestId: ++currentRequest.current, start: a, goal: b, algorithm: mode, sources: mode === 'multisource' ? activeSources.current : undefined })
+    submitSearch.current({ type: 'search', requestId: ++currentRequest.current, start: a, goal: b, algorithm: mode, sources: mode === 'multisource' ? activeSources.current : undefined })
   }, [country.large])
 
   useEffect(() => {
@@ -157,32 +158,47 @@ export function App() {
       map.onRouteRevealComplete = () => { setPlaying(false); ambient.current!.complete() }
     }
     catch { setMapError('Map rendering is unavailable in this browser. The search record remains accessible.') }
-    const engine = new Worker(new URL('./search/search.worker.ts', import.meta.url), { type: 'module' }); worker.current = engine
-    engine.onmessage = (event: MessageEvent<Reply>) => {
-      const reply = event.data
-      if (reply.type === 'progress') setLoading(reply)
-      if (reply.type === 'manifest') {
-        setManifest(reply.manifest); setManifestUrl(reply.manifestUrl); map?.setManifest(reply.manifest)
+    const releaseAfterSearch = country.large && window.matchMedia('(pointer: coarse)').matches
+    let activeEngine: Worker | null = null, disposed = false
+    let pendingSearch: Extract<Request, { type: 'search' }> | undefined
+    const createEngine = (topologyOnly: boolean) => {
+      const engine = new Worker(new URL('./search/search.worker.ts', import.meta.url), { type: 'module' }); worker.current = engine; activeEngine = engine
+      engine.onmessage = (event: MessageEvent<Reply>) => {
+        const reply = event.data
+        if (reply.type === 'progress') setLoading(reply)
+        if (reply.type === 'manifest' && !topologyOnly) {
+          setManifest(reply.manifest); setManifestUrl(reply.manifestUrl); map?.setManifest(reply.manifest)
+        }
+        if (reply.type === 'geometry') map?.addGeometry(reply.bytes, reply.count)
+        if (reply.type === 'ready') {
+          if (pendingSearch) { const request = pendingSearch; pendingSearch = undefined; engine.postMessage(request) }
+          else { setReady(true); setMeasurements(reply.measurements); search(initialQuery.current.start, initialQuery.current.goal) }
+        }
+        if (reply.type === 'result' && reply.requestId === currentRequest.current) {
+          // End the routing worker before replay texture uploads on large phones.
+          if (releaseAfterSearch) { engine.terminate(); activeEngine = null; worker.current = null }
+          const sequence = ambient.current!
+          if (sequence.state.active && !sequence.receive(reply.result)) { if (sequence.state.phase === 'stopped') setBusy(false); return }
+          const reducedMotion = prefersReducedMotion()
+          if (sequence.state.active) setDuration(sequence.duration)
+          const frame = sharedFrame.current; sharedFrame.current = undefined
+          const opening = openingReplay(frame, reducedMotion)
+          setResult(reply.result); map?.setResult(reply.result); setBusy(false); seek(opening.progress); if (frame?.view) map?.setView(frame.view); setPlaying(opening.playing && (!sequence.state.active || sequence.state.running))
+        }
+        if (reply.type === 'error' && (reply.requestId === undefined || reply.requestId === currentRequest.current)) { setError(reply.message); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail(reply.message) }
       }
-      if (reply.type === 'geometry') map?.addGeometry(reply.bytes, reply.count)
-      if (reply.type === 'ready') { setReady(true); setMeasurements(reply.measurements); search(initialQuery.current.start, initialQuery.current.goal) }
-      if (reply.type === 'result' && reply.requestId === currentRequest.current) {
-        const sequence = ambient.current!
-        if (sequence.state.active && !sequence.receive(reply.result)) { if (sequence.state.phase === 'stopped') setBusy(false); return }
-        const reducedMotion = prefersReducedMotion()
-        if (sequence.state.active) setDuration(sequence.duration)
-        const frame = sharedFrame.current; sharedFrame.current = undefined
-        const opening = openingReplay(frame, reducedMotion)
-        setResult(reply.result); map?.setResult(reply.result); setBusy(false); seek(opening.progress); if (frame?.view) map?.setView(frame.view); setPlaying(opening.playing && (!sequence.state.active || sequence.state.running))
-      }
-      if (reply.type === 'error' && (reply.requestId === undefined || reply.requestId === currentRequest.current)) { setError(reply.message); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail(reply.message) }
+      engine.onerror = () => { setError('The road search could not be started. Please try again.'); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail('The road search could not be started.') }
+      // Keep a window connection: WebKit private contexts otherwise drop their
+      // worker-only cache when retry terminates the sole cache owner.
+      cacheOwner.current ??= (async () => { try { return await globalThis.caches?.open(ROAD_CACHE_NAME) } catch { return undefined } })()
+      void cacheOwner.current.then(() => { if (!disposed && worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity, topologyOnly }) })
     }
-    engine.onerror = () => { setError('The road search could not be started. Please try again.'); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail('The road search could not be started.') }
-    // Keep a window connection: WebKit private contexts otherwise drop their
-    // worker-only cache when retry terminates the sole cache owner.
-    cacheOwner.current ??= (async () => { try { return await globalThis.caches?.open(ROAD_CACHE_NAME) } catch { return undefined } })()
-    void cacheOwner.current.then(() => { if (worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity }) })
-    return () => { engine.terminate(); map?.dispose(); scene.current = null; worker.current = null }
+    submitSearch.current = request => {
+      if (worker.current) worker.current.postMessage(request)
+      else { pendingSearch = request; createEngine(true) }
+    }
+    createEngine(false)
+    return () => { disposed = true; submitSearch.current = null; activeEngine?.terminate(); map?.dispose(); scene.current = null; worker.current = null }
   }, [attempt, country, shared, search, seek])
 
   useEffect(() => {
@@ -318,7 +334,7 @@ export function App() {
         {country.outlines && <p>The optional outlines provide quiet geographic context: {country.outlineDescription} They stay visible independently of the search.</p>}
         <p>Original ambient sketches composed using Driftbox: Plateau, Contours and Afterglow. This is a provisional score, flowing independently of the search. Sound starts off and pauses when you leave the page.</p>
         <p><a href={manifestUrl || './data/pfad-manifest.json'}>Dataset and source record</a>{manifest && <> · <a href={new URL(manifest.evidence.path, manifestUrl).href}>Source evidence</a></>} · <a href="./profiles/road-connectivity-distance-v1.json">Declared routing profile</a></p>
-        {measurements && <p>Opening record: {(measurements.networkBytes / 1000000).toFixed(1)} MB downloaded, {(measurements.cachedBytes / 1000000).toFixed(1)} MB from verified cache · {measurements.totalMs.toFixed(0)} ms to complete graph. {measurements.cacheAvailable ? 'Up to two releases are cached within 128 MiB.' : 'Persistent storage unavailable; verified network loading remains available.'}</p>}
+        {measurements && <p>Opening record: {(measurements.networkBytes / 1000000).toFixed(1)} MB downloaded, {(measurements.cachedBytes / 1000000).toFixed(1)} MB from verified cache · {measurements.totalMs.toFixed(0)} ms to complete graph. {measurements.cacheAvailable ? 'Up to two releases are cached within 256 MiB.' : 'Persistent storage unavailable; verified network loading remains available.'}</p>}
         <p>The address bar follows the current journey, settings and map view. Shared links start the replay automatically; reduced motion shows the completed route. Sound stays off.</p>
         <div className="record-actions">
           <button disabled={!result || busy} onClick={async () => {
