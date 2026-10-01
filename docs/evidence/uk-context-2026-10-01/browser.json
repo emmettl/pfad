@@ -1,0 +1,95 @@
+[
+  {
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "London→Edinburgh",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "12809398"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "London→Edinburgh",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "12294627"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "London→Edinburgh",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "7672551"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Edinburgh→Newcastle165.3 km",
+        "events": "503793"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Bristol→London186.9 km",
+        "events": "10535271"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Exeter→Manchester370.5 km",
+        "events": "15043072"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Plymouth→Leeds489.2 km",
+        "events": "6868187"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Manchester→Leeds63.9 km",
+        "events": "3315984"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Belfast→Armagh59.4 km",
+        "events": "769714"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Plymouth→York511.3 km",
+        "events": "6826654"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Cambridge→Manchester239.1 km",
+        "events": "16744759"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Exeter→Bristol"
+    },
+    "outlinesToggle": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

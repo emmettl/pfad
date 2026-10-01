@@ -2,6 +2,24 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { JourneySelector, AMBIENT_PLACES, distanceBand, replaySeconds, straightLineKm } from '../src/ambient/selector.ts'
 import { AmbientSequence, ALGORITHM_CYCLE_VERSION } from '../src/ambient/sequence.ts'
+import { UK_POOL } from '../src/ambient/pools.ts'
+
+test('UK selection spans all road regions without proposing sea crossings and exports its pool identity', t => {
+  const selector = new JourneySelector(20261001, UK_POOL.places), seen = new Set(), bands = new Set()
+  for (let i = 0; i < 500; i++) {
+    selector.beginJourney(); const pair = selector.choose(); assert.ok(pair)
+    assert.equal(pair.start.region, pair.goal.region)
+    seen.add(pair.start.id); seen.add(pair.goal.id); bands.add(pair.band)
+    selector.record(pair, pair.estimateKm)
+  }
+  assert.equal(seen.size, UK_POOL.places.length); assert.equal(bands.size, 3)
+  const { sequence, pairs, result } = harness(t)
+  sequence.start(20261001, true, 'astar', UK_POOL); sequence.receive(result())
+  assert.equal(sequence.records.at(-1).pool, UK_POOL.version)
+  assert.ok(UK_POOL.places.includes(pairs.at(-1).start))
+  sequence.start(1, true); sequence.receive(result())
+  assert.equal(sequence.records.at(-1).pool, 'swiss-places/1')
+})
 
 test('seeded, balanced selection preserves six undirected pairs and uses all curated places', () => {
   const first = new JourneySelector(12345), second = new JourneySelector(12345), recent = [], seen = new Set(), bands = new Set()

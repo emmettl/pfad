@@ -86,3 +86,9 @@ Rollback selects an earlier immutable catalogue entry/app artifact. Retain every
 release needed by published recordings; remove obsolete, unreferenced releases
 only after explicit review. No automatic lifecycle deletion or data refresh is
 configured. Swiss migration to R2 is deliberately deferred.
+
+## UK geographic context and ambient journeys
+
+UK uses the same optional faint outline styling as Switzerland. Its pinned Natural Earth 1:10m country and global/European lakes references supply 57 coastline/border rings and 14 lake polygons (including unnamed features). This is a generalized reference layer, not a comprehensive inventory of UK lakes or a routing input. Sources, SHA-256 identities and preparation tolerances are recorded in `data/geography-sources.json`. `npm run data:geography` verifies existing assets or manually prepares missing ones from pinned sources; the raw inputs stay in ignored `.cache/`. UK outline assets total 93,543 bytes.
+
+Ambient uses `uk-places/1`, with 18 Great Britain and four Northern Ireland places. It retains the country’s complete published road graph, actual-distance acceptance, algorithm rotation and phone rendering budget. Candidates never cross the sea between the two road regions. Island studies remain available manually; no ferry connectivity is invented. Switzerland’s original geographic assets and pool remain unchanged.

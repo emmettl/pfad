@@ -6,9 +6,9 @@ import assert from 'node:assert/strict'
 import { compileGraph } from '../../src/search/engine.ts'
 import { validateManifest } from '../../src/search/manifest.ts'
 
-export async function readStudyGraph() {
+export async function readStudyGraph(manifestPath) {
   const edition = JSON.parse(await readFile('public/data/pfad-manifest.json', 'utf8'))
-  const path = join('public/data', edition.graph.manifest), base = dirname(path)
+  const path = manifestPath ?? join('public/data', edition.graph.manifest), base = dirname(path)
   const manifest = JSON.parse(await readFile(path, 'utf8')); validateManifest(manifest)
   const n = manifest.counts.nodes, e = manifest.counts.edges
   const xy = new Int32Array(n * 2), from = new Uint32Array(e), to = new Uint32Array(e), length = new Uint32Array(e)

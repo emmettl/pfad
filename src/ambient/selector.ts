@@ -1,6 +1,6 @@
 import type { Point } from '../search/contracts.ts'
 
-export const SELECTOR_VERSION = 'distance-balanced-pairs/1'
+export const SELECTOR_VERSION = 'distance-balanced-pairs/2'
 export const POOL_VERSION = 'swiss-places/1'
 // A versioned authored pool, independent of future additions to the manual picker.
 export const AMBIENT_PLACES: AmbientPlace[] = [
@@ -17,7 +17,7 @@ export const AMBIENT_PLACES: AmbientPlace[] = [
   { id: 'sion', name: 'Sion', lon: 7.3596, lat: 46.2331 },
   { id: 'andermatt', name: 'Andermatt', lon: 8.5948, lat: 46.6353 },
 ]
-export type AmbientPlace = Point & { id: string }
+export type AmbientPlace = Point & { id: string; region?: string }
 export type DistanceBand = 'regional' | 'interregional' | 'national'
 export interface JourneyPair { start: AmbientPlace; goal: AmbientPlace; band: DistanceBand; estimateKm: number }
 export interface JourneyRecord {
@@ -61,7 +61,7 @@ export class JourneySelector {
     if (!this.band) this.beginJourney()
     const candidates: { pair: JourneyPair; key: string; weight: number }[] = []
     for (const start of this.places) for (const goal of this.places) {
-      if (start.id === goal.id) continue
+      if (start.id === goal.id || start.region !== goal.region) continue
       const key = pairKey(start.id, goal.id)
       if (this.history.includes(key) || this.attempted.has(key)) continue
       const direct = straightLineKm(start, goal), estimateKm = direct * 1.25

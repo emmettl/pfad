@@ -161,7 +161,7 @@ export class RoadScene {
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.geography = undefined
     if (outlines) {
-      this.geography = createGeography(point => this.project(point)); this.geography.visible = this.geographyVisible
+      this.geography = createGeography(point => this.project(point), manifest.id.startsWith('uk-') ? 'uk' : 'ch'); this.geography.visible = this.geographyVisible
       this.scene.add(this.geography)
     }
     this.resetView()

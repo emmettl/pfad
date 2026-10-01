@@ -16,7 +16,7 @@ test('Switzerland stays bundled and default; external releases are pinned and ha
   }
   assert.equal(createHash('sha256').update(manifestIdentityPayload(uk)).digest('hex'), COUNTRIES[1].identity)
   validateManifest(uk)
-  assert.equal(COUNTRIES[1].outlines, false); assert.equal(COUNTRIES[1].large, true)
+  assert.equal(COUNTRIES[1].outlines, true); assert.equal(COUNTRIES[1].large, true)
 })
 test('national manifests reject unsafe paths, resource excess and malformed decoded layouts', () => {
   validateManifest(swiss)

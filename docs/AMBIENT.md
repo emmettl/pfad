@@ -148,7 +148,7 @@ release gates. See [the roadmap](ROADMAP.md).
 ## Implemented prototype
 
 `swiss-places/1` uses the twelve named places above with stable IDs.
-`distance-balanced-pairs/1` selects a target band with weights 1:3:3 (regional,
+`distance-balanced-pairs/2` selects a target band with weights 1:3:3 (regional,
 interregional, national), shortlists pairs using straight-line distance × 1.25,
 excludes direct distances below 30 km and the last six undirected accepted pairs,
 and weights candidates inversely by one plus both endpoints’ accumulated use.
@@ -178,7 +178,7 @@ explicit listening without camera or fade choreography.
 Only the active trace and twelve metadata records are retained, with six recent
 pairs and one sequence animation frame. Exported records include selector/pool
 versions, algorithm-cycle version, journey number, seed, selection number, actual distance and rejected attempts. See
-[RECORDS.md](RECORDS.md). The initial pool currently covers Switzerland.
+[RECORDS.md](RECORDS.md). The pools cover Switzerland and the United Kingdom. `uk-places/1` contains 22 authored places across Great Britain and Northern Ireland; candidates remain within their authored road region to avoid sea crossings. Actual graph connectivity and road distance still decide acceptance.
 
 The [60-journey audit](evidence/ambient-2026-10-01/review.json) accepts all sixty
 journeys within bounded attempts (four distance mismatches, 64 actual searches),
@@ -203,3 +203,5 @@ another host URL. The committed [browser review](evidence/ambient-2026-10-01/bro
 shows zero chunk-download bytes on warm opening and stable live WebGL object
 counts (seven textures, 34 buffers) across the eight complete frames in each
 browser. These counts do not measure GPU bytes, process memory or phone budgets.
+
+The UK audit can be repeated with `node scripts/data/audit-ambient.mjs .cache/uk-ambient-audit.json --uk` against the cached immutable UK release. Seed 20261001 accepted sixty journeys in 67 attempts, spanning all 22 places and all three distance bands.

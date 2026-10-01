@@ -2,7 +2,7 @@
   "schema": "pfad-geography-sources/1",
   "role": "Independent geographic context; never input to routing or search events",
   "refreshPolicy": "manual-versioned-snapshots",
-  "preparedBy": "Gleislicht's reviewed geographic data preparation",
+  "preparedBy": "PFAD country reference preparation; Swiss assets retain Gleislicht provenance",
   "termsUrl": "https://www.swisstopo.admin.ch/en/terms-of-use-free-geodata-and-geoservices",
   "assets": [
     {
@@ -24,7 +24,51 @@
       "attribution": "© FOEN, swisstopo",
       "simplificationToleranceMetres": 60,
       "preparationCommit": "5a2ae742874568d1e6fa0c5fe467929e73a86cc9"
+    },
+    {
+      "path": "src/map/data/uk-border.json",
+      "bytes": 84117,
+      "sha256": "e9ed6f5f39e66b98a0b9551ef75a472bfdf6aaaf7594ca6d89430701839af437",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth · public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-uk-geography.py",
+      "bounds": [
+        -14,
+        49,
+        2,
+        62
+      ]
+    },
+    {
+      "path": "src/map/data/uk-lakes.json",
+      "bytes": 9426,
+      "sha256": "0e2257538e7a74e354ad47fed9a621022880c814eaf11a1a07ba5cd38c1eaec9",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth · public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-uk-geography.py",
+      "bounds": [
+        -14,
+        49,
+        2,
+        62
+      ]
     }
   ],
-  "publishedCommit": "5910d68b2eb4c78376007b42639d1c4a17986b7b"
+  "publishedCommit": "5910d68b2eb4c78376007b42639d1c4a17986b7b",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_0_countries.geojson",
+      "sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_lakes.geojson",
+      "sha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_lakes_europe.geojson",
+      "sha256": "b4dd9e7a5edd0d07b54768b5404d1ebe77f80b9d579c85fff65f90cf50369769"
+    }
+  ]
 }

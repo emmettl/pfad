@@ -246,6 +246,7 @@ complete.
 - [x] Add a country catalogue, places, optional geographic references and switching.
 - [x] Preserve exact replay timestamps beyond 2^24 events and source drawing precision.
 - [x] Validate the complete UK graph on desktop Chromium and WebKit; retain evidence.
+- [x] Add UK coastline/border and major-lake context, plus audited country ambient journeys.
 - [ ] Establish physical-phone memory and frame-pacing support for UK.
 - [ ] Add further countries only when explicitly selected and individually validated.
 
