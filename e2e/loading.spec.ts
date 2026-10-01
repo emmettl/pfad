@@ -16,6 +16,8 @@ test('verified chunks survive a failed opening and reload without chunk requests
   await expect(page.locator('.route-caption')).toContainText('262.7 km')
   downloads.length = 0; await page.reload()
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+  await expect(page.locator('.study')).toHaveAttribute('data-progress', '0')
+  await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
   expect(downloads).toEqual([])
   await page.getByText('About this study', { exact: true }).click()
   await expect(page.locator('.about-panel')).toContainText('0.0 MB downloaded, 15.9 MB from verified cache')
@@ -28,5 +30,9 @@ test('verified chunks survive a failed opening and reload without chunk requests
   downloads.length = 0; await page.reload()
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
   expect(downloads).toHaveLength(1)
+  // Reloaded journey links start at the beginning. Inspect the result explicitly
+  // before checking its cost; cache integrity must not depend on a saved offset.
+  await expect(page.locator('.study')).toHaveAttribute('data-progress', '0')
+  await page.getByRole('slider', { name: 'Search replay' }).fill('30')
   await expect(page.locator('.route-caption')).toContainText('262.7 km')
 })
