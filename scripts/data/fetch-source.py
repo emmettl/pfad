@@ -1,11 +1,15 @@
 """Acquire and verify the pinned sizing source; never called by build or CI."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
 import urllib.request
 
 root = Path(__file__).resolve().parents[2]
-source = json.loads((root / 'public/data/pfad-manifest.json').read_text())['source']
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--country', type=Path, help='Pinned country configuration')
+args = parser.parse_args()
+source = json.loads((args.country or root / 'public/data/pfad-manifest.json').read_text())['source']
 target = root / '.cache/osm' / source['url'].rsplit('/', 1)[-1]
 target.parent.mkdir(parents=True, exist_ok=True)
 if not target.exists():

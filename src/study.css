@@ -114,3 +114,9 @@ footer a { text-decoration: none; pointer-events: auto; }
   .reset-view { right: 20px; bottom: 215px; } footer { left: 20px; right: 20px; bottom: 12px; flex-direction: column; gap: 5px; font-size: 8px; }
   .about-panel { max-height: calc(100svh - 110px); overflow: auto; }
 }
+
+.country-control { color: var(--text, #c9ddd4); background: #080d10cc; border: 1px solid #b4d4c02b; border-radius: 3px; padding: .45rem .55rem; font: inherit; pointer-events: auto; max-width: 13rem; }
+.country-confirm { position: absolute; z-index: 8; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(24rem, calc(100vw - 3rem)); padding: 1.3rem; background: #0b1519f5; border: 1px solid #b4d4c040; color: #c9ddd4; }
+.country-confirm p { line-height: 1.5; }
+.country-confirm button { margin-right: .8rem; padding: .5rem .8rem; }
+@media (max-width: 600px) { .country-control { max-width: 10rem; font-size: .7rem; } }

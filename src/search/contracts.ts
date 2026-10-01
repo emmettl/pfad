@@ -72,8 +72,8 @@ export interface SearchResult {
   trace: Uint32Array
   checkpoints: Uint32Array
   checkpointStride: number
-  edgeTimes: Float32Array
-  backwardTimes?: Float32Array
+  edgeTimes: Uint32Array
+  backwardTimes?: Uint32Array
   goalProximity?: Uint8Array
   heuristic?: HeuristicRecord
   meeting?: Meeting
@@ -86,7 +86,7 @@ export interface SearchResult {
   maxQueue: number
 }
 
-export type Request = { type: 'load'; manifestUrl: string } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm }
+export type Request = { type: 'load'; manifestUrl: string; expectedIdentity?: string } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm }
 export type Reply =
   | { type: 'progress'; loaded: number; total: number; stage: string }
   | { type: 'manifest'; manifest: StudyManifest; manifestUrl: string }

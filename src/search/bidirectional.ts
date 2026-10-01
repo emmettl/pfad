@@ -78,7 +78,7 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
   }
   const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
   const times = seen.map((front, side) => {
-    const texture = new Float32Array(textureWidth * textureHeight * 2).fill(-1)
+    const texture = new Uint32Array(textureWidth * textureHeight * 2)
     for (let i = 0; i < e; i++) {
       if (front[i]) texture[i * 2] = front[i]
       if (improved[side][i]) texture[i * 2 + 1] = improved[side][i]

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "chromium",
+    "state": "ready",
+    "caption": "London→Edinburgh",
+    "events": "25618797",
+    "outlines": "hidden",
+    "errors": [],
+    "restoredSwiss": "Zürich→Genève262.7 km",
+    "canvases": 1
+  },
+  {
+    "name": "webkit",
+    "state": "ready",
+    "caption": "London→Edinburgh",
+    "events": "25618797",
+    "outlines": "hidden",
+    "errors": [],
+    "restoredSwiss": "Zürich→Genève262.7 km",
+    "canvases": 1
+  }
+]

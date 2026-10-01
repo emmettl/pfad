@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test'
+import { readFile } from 'node:fs/promises'
+const swiss = await readFile('public/data/pfad/ch-20260929-6a17f71de78c/manifest.json', 'utf8')
+test('country downloads are opt-in, pinned, and switching back restores the bundled Swiss study', async ({ page }) => {
+  test.setTimeout(90000)
+  const requests: string[] = []
+  await page.route('https://motionstudies.app/pfad-data/**', route => {
+    requests.push(route.request().url())
+    // An obsolete or mismatched release must fail before any graph chunks load.
+    return route.fulfill({ contentType: 'application/json', body: swiss, headers: { 'Access-Control-Allow-Origin': '*' } })
+  })
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('./')
+  await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+  await expect(page.getByRole('combobox', { name: 'Country', exact: true })).toHaveValue('ch')
+  expect(requests).toEqual([])
+  await page.getByRole('combobox', { name: 'Country', exact: true }).selectOption('uk')
+  await expect(page.getByRole('dialog')).toContainText('93 MB')
+  expect(requests).toEqual([])
+  await page.getByRole('button', { name: 'Cancel', exact: true }).click()
+  await expect(page.getByRole('combobox', { name: 'Country', exact: true })).toHaveValue('ch')
+  await page.getByRole('combobox', { name: 'Country', exact: true }).selectOption('uk')
+  await page.getByRole('button', { name: 'Open United Kingdom', exact: true }).click()
+  await expect(page.getByRole('alert')).toContainText('differs from the selected release')
+  expect(requests.length).toBe(1)
+  await expect(page.getByRole('button', { name: 'Search', exact: true })).toBeDisabled()
+  await expect(page.getByRole('combobox', { name: 'Start place', exact: true })).toHaveValue('London')
+  await expect(page.getByRole('button', { name: 'Show border and lake outlines' })).toBeDisabled()
+  await page.getByRole('combobox', { name: 'Country', exact: true }).selectOption('ch')
+  await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+  await expect(page.locator('.route-caption')).toContainText('Zürich')
+  await expect(page.locator('canvas')).toHaveCount(1)
+  await expect(page.locator('canvas')).toHaveAttribute('data-outlines', 'visible')
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+})

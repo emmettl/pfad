@@ -1,0 +1,26 @@
+{
+  "id": "ch",
+  "name": "Switzerland",
+  "datasetPrefix": "ch-20260929",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-29T20:22:51Z",
+    "url": "https://download.geofabrik.de/europe/switzerland-260929.osm.pbf",
+    "sha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "bytes": 547273092,
+    "data_timestamp": "2026-09-29T20:22:51Z"
+  },
+  "projection": {
+    "centre": [
+      8.23,
+      46.82
+    ],
+    "referenceLatitude": 46.82,
+    "scaleMetres": 200000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

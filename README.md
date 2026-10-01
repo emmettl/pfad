@@ -8,7 +8,7 @@
 [Ambient-mode brief](docs/AMBIENT.md) · [Music brief](docs/MUSIC.md) ·
 [Architecture](docs/ARCHITECTURE.md)
 
-PFAD replays genuine pathfinding over Switzerland’s OpenStreetMap road
+PFAD replays genuine pathfinding over recorded OpenStreetMap road
 network. The computation runs normally; its recorded search becomes an event
 that can be watched, paused and inspected. The search is the subject.
 
@@ -64,7 +64,8 @@ for playback. OSM-derived database files are published under ODbL.
 format, refresh policy and limitations. [Sizing evidence](docs/evidence/sizing-2026-09-30/)
 preserves the earlier JSON experiment; its figures describe that encoding,
 not this binary delivery format. Source PBFs and intermediate graphs stay in
-ignored `.cache/`; only the selected browser dataset is committed.
+ignored `.cache/`; Switzerland stays bundled, while additional country releases
+are delivered independently from R2. See [country releases](docs/COUNTRIES.md).
 
 [Bidirectional review](docs/evidence/bidirectional-2026-10-01/review.json) records
 algorithm/source identities and equal-cost national comparisons, together with

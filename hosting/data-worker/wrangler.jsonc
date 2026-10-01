@@ -1,0 +1,9 @@
+{
+  "name": "pfad-data",
+  "main": "index.mjs",
+  "compatibility_date": "2026-09-30",
+  "account_id": "8cac82a07417990e553f88793670f361",
+  "workers_dev": false,
+  "routes": [{ "pattern": "motionstudies.app/pfad-data/*", "zone_name": "motionstudies.app" }],
+  "r2_buckets": [{ "binding": "DATA", "bucket_name": "pfad-data" }]
+}

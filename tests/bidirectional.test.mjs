@@ -63,7 +63,7 @@ test('both fronts record only genuine directed arcs, texture timestamps and chec
   for (const side of [0, 1]) {
     assert.ok(seen[side].size > 0)
     const times = side ? r.backwardTimes : r.edgeTimes
-    for (let e = 0; e < g.from.length; e++) { assert.equal(times[e * 2], firstSeen[side].get(e) ?? -1); assert.equal(times[e * 2 + 1], firstImproved[side].get(e) ?? -1) }
+    for (let e = 0; e < g.from.length; e++) { assert.equal(times[e * 2], firstSeen[side].get(e) ?? 0); assert.equal(times[e * 2 + 1], firstImproved[side].get(e) ?? 0) }
   }
   const meetingKind = r.trace[r.meeting.event - 1] & 3
   assert.equal(meetingKind, 2)

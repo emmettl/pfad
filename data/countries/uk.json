@@ -1,0 +1,26 @@
+{
+  "id": "uk",
+  "name": "United Kingdom",
+  "datasetPrefix": "uk-20260929",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-29T20:22:51Z",
+    "url": "https://download.geofabrik.de/europe/united-kingdom-260929.osm.pbf",
+    "sha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "bytes": 2263470677,
+    "data_timestamp": "2026-09-29T20:22:51Z"
+  },
+  "projection": {
+    "centre": [
+      -3,
+      54.8
+    ],
+    "referenceLatitude": 54.8,
+    "scaleMetres": 750000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

@@ -18,16 +18,41 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', type=Path, required=True)
 parser.add_argument('--sizing', type=Path, required=True)
 parser.add_argument('--output', type=Path, required=True)
+parser.add_argument('--country', type=Path, help='Pinned country release configuration; does not replace the bundled edition')
+parser.add_argument('--experiment', action='store_true', help='Package without selecting the dataset for publication')
+parser.add_argument('--dataset-prefix', default='ch-20260929')
+parser.add_argument('--projection', type=Path, help='Explicit drawing projection for another national extent')
 args = parser.parse_args()
-SOURCE_HASH = '95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd'
+country = json.loads(args.country.read_text()) if args.country else None
+if country:
+    args.dataset_prefix = country['datasetPrefix']
+    args.experiment = True
+report = json.loads((args.sizing / 'report.json').read_text())
+source = report['source']
+SOURCE_HASH = source.get('sha256', '95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd')
+if not args.experiment:
+    assert SOURCE_HASH == '95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd' and args.dataset_prefix == 'ch-20260929' and args.projection is None, 'Another national dataset must be packaged as an experiment until explicitly selected for publication'
+if country:
+    assert SOURCE_HASH == country['source']['sha256'] and source['url'] == country['source']['url'], 'Country source differs from the pinned release'
 with args.source.open('rb') as handle:
     assert hashlib.file_digest(handle, 'sha256').hexdigest() == SOURCE_HASH, 'Wrong source snapshot'
-report = json.loads((args.sizing / 'report.json').read_text())
+assert args.source.stat().st_size == source['bytes'], 'Wrong source byte length'
 raw = (args.sizing / 'graph.json').read_bytes()
 assert hashlib.sha256(raw).hexdigest() == report['graph']['sha256'], 'Sizing graph checksum mismatch'
 graph = json.loads(raw)
 del raw
-geometry = json.loads((args.sizing / 'runtime-geometry-5m.json').read_bytes())
+runtime_geometry = args.sizing / 'runtime-geometry-5m.json'
+if runtime_geometry.exists():
+    geometry = json.loads(runtime_geometry.read_bytes())
+else:
+    # The columnar packaging does not need the separate compact-JSON proof.
+    geometry_raw = (args.sizing / 'geometry-5m.json').read_bytes()
+    assert hashlib.sha256(geometry_raw).hexdigest() == report['variants']['5']['sha256'], 'Drawing geometry checksum mismatch'
+    geometry = json.loads(geometry_raw)
+    del geometry_raw
+    source_offsets = geometry.pop('offsets')
+    geometry['counts'] = [b - a for a, b in zip(source_offsets, source_offsets[1:])]
+    del source_offsets
 offsets = [0]
 for count in geometry['counts']: offsets.append(offsets[-1] + count)
 original_geometry = {'toleranceMetres': 5, 'coordinateScale': 100000, 'offsets': offsets, 'deltas': geometry['deltas']}
@@ -38,7 +63,7 @@ classes = 'motorway motorway_link trunk trunk_link primary primary_link secondar
 node_count = len(graph['nodes']) // 3
 edge_count = len(graph['edges'])
 assert len(geometry['counts']) == edge_count
-projection = {'centre': [8.23, 46.82], 'referenceLatitude': 46.82, 'scaleMetres': 200000, 'quantisationMetres': 200000 / 32767}
+projection = country['projection'] if country else json.loads(args.projection.read_text()) if args.projection else {'centre': [8.23, 46.82], 'referenceLatitude': 46.82, 'scaleMetres': 200000, 'quantisationMetres': 200000 / 32767}
 chunks = []
 files = {}
 
@@ -108,11 +133,11 @@ evidence_sha = hashlib.sha256(evidence_gz).hexdigest()
 evidence_name = f'evidence-{evidence_sha[:12]}.json.gz.bin'
 files[evidence_name] = evidence_gz
 identity = hashlib.sha256(json.dumps({'chunks': chunks, 'projection': projection, 'profile': 'road-connectivity-distance-v1'}, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
-dataset = f'ch-20260929-{identity[:12]}'
+dataset = f'{args.dataset_prefix}-{identity[:12]}'
 manifest = {
     'schema': 'pfad-road-study/1', 'encoding': 'le-columnar-deltas/1', 'id': dataset, 'identity': identity,
-    'compiler': 'pfad-study-compiler/1', 'profile': 'road-connectivity-distance-v1',
-    'source': {'provider': 'OpenStreetMap via Geofabrik', 'dataTimestamp': '2026-09-29T20:22:51Z', 'url': 'https://download.geofabrik.de/europe/switzerland-260929.osm.pbf', 'sha256': SOURCE_HASH, 'attribution': '© OpenStreetMap contributors', 'licence': 'ODbL-1.0', 'licenceUrl': 'https://www.openstreetmap.org/copyright'},
+    'compiler': 'pfad-study-compiler/2' if country else 'pfad-study-compiler/1', 'profile': 'road-connectivity-distance-v1',
+    'source': {'provider': 'OpenStreetMap via Geofabrik', 'dataTimestamp': source['data_timestamp'], 'url': source['url'], 'sha256': SOURCE_HASH, 'attribution': '© OpenStreetMap contributors', 'licence': 'ODbL-1.0', 'licenceUrl': 'https://www.openstreetmap.org/copyright'},
     'cost': 'Original road length in integer centimetres; shortest distance, not estimated travel time.',
     'limitations': ['Turn restrictions, barriers and conditional access are retained as source evidence but are not applied by this first connectivity profile.', 'Ferries and non-motor-road classes are excluded. This is a computation study, not navigation advice.'],
     'counts': {'nodes': node_count, 'edges': edge_count, 'directedArcs': report['directed_arcs'], 'vertices': vertex_count},
@@ -131,10 +156,11 @@ manifest_bytes = (json.dumps(manifest, indent=2, ensure_ascii=False) + '\n').enc
 target = out / 'manifest.json'
 if target.exists(): assert target.read_bytes() == manifest_bytes, 'Refusing to change immutable manifest'
 else: target.write_bytes(manifest_bytes)
-edition_path = args.output.parents[0] / 'pfad-manifest.json'
-edition = json.loads(edition_path.read_text())
-edition['status'] = 'study'
-edition['graph'] = {'manifest': f'./pfad/{dataset}/manifest.json', 'identity': identity, 'profile': manifest['profile']}
-edition['evidence']['productionRoutingValidated'] = False
-edition_path.write_text(json.dumps(edition, indent=2, ensure_ascii=False) + '\n')
+if not args.experiment:
+    edition_path = args.output.parents[0] / 'pfad-manifest.json'
+    edition = json.loads(edition_path.read_text())
+    edition['status'] = 'study'
+    edition['graph'] = {'manifest': f'./pfad/{dataset}/manifest.json', 'identity': identity, 'profile': manifest['profile']}
+    edition['evidence']['productionRoutingValidated'] = False
+    edition_path.write_text(json.dumps(edition, indent=2, ensure_ascii=False) + '\n')
 print(json.dumps({'dataset': dataset, 'downloadBytes': manifest['downloadBytes'], 'sourceEvidenceBytes': len(evidence_gz), 'chunks': len(chunks), 'nodes': node_count, 'edges': edge_count, 'vertices': vertex_count}, indent=2))

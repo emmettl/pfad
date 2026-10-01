@@ -6,37 +6,38 @@ import { createGeography, disposeGeography } from './geography.ts'
 import { MeetingFlash, createMeetingMaterial } from './meetingFlash.ts'
 
 const vertexShader = `
-  attribute float roadId;
-  uniform sampler2D uTimes;
-  uniform sampler2D uBackwardTimes;
+  in float roadId;
+  uniform highp usampler2D uTimes;
+  uniform highp usampler2D uBackwardTimes;
   uniform float uBidirectional;
   uniform sampler2D uGoalProximity;
   uniform float uAstar;
   uniform vec2 uTextureSize;
-  varying vec2 vTimes;
-  varying vec2 vBackwardTimes;
-  varying float vGoalProximity;
+  flat out uvec2 vTimes;
+  flat out uvec2 vBackwardTimes;
+  out float vGoalProximity;
   void main() {
     vec2 uv = (vec2(mod(roadId, uTextureSize.x), floor(roadId / uTextureSize.x)) + .5) / uTextureSize;
-    vTimes = texture2D(uTimes, uv).rg;
-    vBackwardTimes = uBidirectional > .5 ? texture2D(uBackwardTimes, uv).rg : vec2(-1.);
-    vGoalProximity = uAstar > .5 ? texture2D(uGoalProximity, uv).r : 0.;
+    vTimes = texture(uTimes, uv).rg;
+    vBackwardTimes = uBidirectional > .5 ? texture(uBackwardTimes, uv).rg : uvec2(0u);
+    vGoalProximity = uAstar > .5 ? texture(uGoalProximity, uv).r : 0.;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position.xy, 0., 1.);
   }
 `
 const fragmentShader = `
-  uniform float uEvent;
+  uniform highp uint uEvent;
   uniform float uTotal;
   uniform float uAstar;
-  varying vec2 vTimes;
-  varying vec2 vBackwardTimes;
-  varying float vGoalProximity;
-  vec4 front(vec2 times, vec3 quiet, vec3 bright) {
-    if (times.x < 0. || uEvent < times.x) return vec4(0.);
-    float age = (uEvent - times.x) / max(uTotal, 1.);
+  flat in uvec2 vTimes;
+  flat in uvec2 vBackwardTimes;
+  in float vGoalProximity;
+  out vec4 outColor;
+  vec4 front(uvec2 times, vec3 quiet, vec3 bright) {
+    if (times.x == 0u || uEvent < times.x) return vec4(0.);
+    float age = float(uEvent - times.x) / max(uTotal, 1.);
     float pulse = exp(-age / .006);
-    float improvement = times.y < -1.5 ? -2. - times.y : times.y;
-    float tree = improvement >= 0. && uEvent >= improvement ? 1. : 0.;
+    uint improvement = times.y;
+    float tree = improvement != 0u && uEvent >= improvement ? 1. : 0.;
     return vec4(mix(quiet, bright, pulse), mix(.12, .045, uAstar) + tree * mix(.07, .10, uAstar) + pulse * .72);
   }
   void main() {
@@ -46,7 +47,7 @@ const fragmentShader = `
     vec4 b = front(vBackwardTimes, vec3(.55, .38, .19), vec3(1., .76, .43));
     float total = a.a + b.a;
     if (total <= 0.) discard;
-    gl_FragColor = vec4((a.rgb * a.a + b.rgb * b.a) / total, min(total, 1.));
+    outColor = vec4((a.rgb * a.a + b.rgb * b.a) / total, min(total, 1.));
   }
 `
 
@@ -95,14 +96,14 @@ export class RoadScene {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
     this.renderer.outputColorSpace = THREE.SRGBColorSpace
     this.camera.position.z = 2
-    this.texture = new THREE.DataTexture(new Float32Array([-1, -1]), 1, 1, THREE.RGFormat, THREE.FloatType)
+    this.texture = new THREE.DataTexture(new Uint32Array([0, 0]), 1, 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
     this.texture.needsUpdate = true
-    this.backwardTexture = new THREE.DataTexture(new Float32Array([-1, -1]), 1, 1, THREE.RGFormat, THREE.FloatType)
+    this.backwardTexture = new THREE.DataTexture(new Uint32Array([0, 0]), 1, 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
     this.backwardTexture.needsUpdate = true
     this.proximityTexture = new THREE.DataTexture(new Uint8Array([0]), 1, 1, THREE.RedFormat, THREE.UnsignedByteType)
     this.proximityTexture.needsUpdate = true
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
-    this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader,
+    this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, glslVersion: THREE.GLSL3,
       uniforms: { uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
       transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     })
@@ -145,11 +146,15 @@ export class RoadScene {
     document.addEventListener('visibilitychange', this.visibilityChange)
     draw(this.previousFrame)
   }
-  setManifest(manifest: StudyManifest) {
+  setManifest(manifest: StudyManifest, outlines = manifest.id.startsWith('ch-')) {
     this.manifest = manifest
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
-    this.geography = createGeography(point => this.project(point)); this.geography.visible = this.geographyVisible
-    this.scene.add(this.geography); this.resetView()
+    this.geography = undefined
+    if (outlines) {
+      this.geography = createGeography(point => this.project(point)); this.geography.visible = this.geographyVisible
+      this.scene.add(this.geography)
+    }
+    this.resetView()
   }
   setGeographyVisible(visible: boolean) {
     this.geographyVisible = visible
@@ -157,10 +162,10 @@ export class RoadScene {
     this.dirty = true
   }
   addGeometry(bytes: ArrayBuffer, count: number) {
-    const positions = new Int16Array(count * 2), roads = new Float32Array(count), view = new DataView(bytes)
-    for (let i = 0; i < count; i++) { positions[i * 2] = view.getInt16(i * 8, true); positions[i * 2 + 1] = view.getInt16(i * 8 + 2, true); roads[i] = view.getUint32(i * 8 + 4, true) }
+    const positions = new Float32Array(count * 2), roads = new Float32Array(count), view = new DataView(bytes)
+    for (let i = 0; i < count; i++) { positions[i * 2] = view.getFloat32(i * 12, true); positions[i * 2 + 1] = view.getFloat32(i * 12 + 4, true); roads[i] = view.getUint32(i * 12 + 8, true) }
     const geometry = new THREE.BufferGeometry()
-    geometry.setAttribute('position', new THREE.Int16BufferAttribute(positions, 2, true))
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 2))
     geometry.setAttribute('roadId', new THREE.BufferAttribute(roads, 1))
     // Drawing coordinates are deliberately two-dimensional and within [-1, 1].
     // Three's automatic sphere calculation assumes a three-component position.
@@ -184,10 +189,10 @@ export class RoadScene {
       this.route.frustumCulled = false; this.route.renderOrder = 1; this.route.visible = false; this.scene.add(this.route)
     }
     this.texture.dispose()
-    this.texture = new THREE.DataTexture(result.edgeTimes, result.textureWidth, result.textureHeight, THREE.RGFormat, THREE.FloatType)
+    this.texture = new THREE.DataTexture(result.edgeTimes, result.textureWidth, result.textureHeight, THREE.RGIntegerFormat, THREE.UnsignedIntType)
     this.texture.needsUpdate = true
     this.backwardTexture.dispose()
-    this.backwardTexture = new THREE.DataTexture(result.backwardTimes ?? new Float32Array([-1, -1]), result.backwardTimes ? result.textureWidth : 1, result.backwardTimes ? result.textureHeight : 1, THREE.RGFormat, THREE.FloatType)
+    this.backwardTexture = new THREE.DataTexture(result.backwardTimes ?? new Uint32Array([0, 0]), result.backwardTimes ? result.textureWidth : 1, result.backwardTimes ? result.textureHeight : 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
     this.backwardTexture.needsUpdate = true
     this.material.uniforms.uBackwardTimes.value = this.backwardTexture; this.material.uniforms.uBidirectional.value = result.backwardTimes ? 1 : 0
     this.proximityTexture.dispose()

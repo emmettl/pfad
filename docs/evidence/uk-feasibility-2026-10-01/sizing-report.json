@@ -1,0 +1,77 @@
+{
+  "source": {
+    "url": "https://download.geofabrik.de/europe/united-kingdom-260929.osm.pbf",
+    "bytes": 2263470677,
+    "data_timestamp": "2026-09-29T20:22:51Z",
+    "sha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+    "publisher_md5": "8386aaaceca016b30cda15ba17ebece5"
+  },
+  "scope": "Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.",
+  "road_classes": {
+    "residential": 1300281,
+    "service": 2187940,
+    "primary": 161676,
+    "tertiary": 229774,
+    "secondary": 113318,
+    "unclassified": 339407,
+    "trunk": 116558,
+    "motorway_link": 6973,
+    "motorway": 11434,
+    "trunk_link": 16067,
+    "primary_link": 5642,
+    "living_street": 11117,
+    "tertiary_link": 3192,
+    "secondary_link": 1859,
+    "road": 218
+  },
+  "excluded": {
+    "private": 454079,
+    "no": 26715,
+    "agricultural": 351,
+    "forestry": 68,
+    "discouraged": 1
+  },
+  "road_shape_nodes": 26687144,
+  "graph_nodes": 7366915,
+  "physical_edges": 8209041,
+  "directed_arcs": 15613192,
+  "profiles": 35172,
+  "restrictions": 37911,
+  "controls": 426384,
+  "graph": {
+    "json_bytes": 529728937,
+    "gzip_bytes": 165881304,
+    "brotli_q9_bytes": 160177336,
+    "sha256": "c5e0a5d70a972d3b5a093e98470a87fbfd0ef64b6eefdd63de9b4d878c4b4fa8"
+  },
+  "variants": {
+    "0": {
+      "json_bytes": 182305669,
+      "gzip_bytes": 49142498,
+      "brotli_q9_bytes": 45828214,
+      "sha256": "b60bc21d7e71e47e09f516382b6d7dd40ca771b935f57f49d29a6e1dcbd02ded",
+      "interior_vertices": 19320229,
+      "combined_gzip_bytes": 215023802,
+      "combined_brotli_bytes": 206005550
+    },
+    "5": {
+      "json_bytes": 87954658,
+      "gzip_bytes": 13524197,
+      "brotli_q9_bytes": 12318189,
+      "sha256": "d5f3ed6e278fe0904ef6f53dc736fa1d3a284fc83934961f803b1dfa8b000238",
+      "interior_vertices": 3630453,
+      "combined_gzip_bytes": 179405501,
+      "combined_brotli_bytes": 172495525
+    },
+    "15": {
+      "json_bytes": 69020400,
+      "gzip_bytes": 5791923,
+      "brotli_q9_bytes": 5217783,
+      "sha256": "a67ab3a8a2b838aed105a31e90aeb4d26e75036da9c5f96b82c889cd68cc8e98",
+      "interior_vertices": 1332800,
+      "combined_gzip_bytes": 171673227,
+      "combined_brotli_bytes": 165395119
+    }
+  },
+  "elapsed_seconds": 745.1779044169962
+}

@@ -20,10 +20,10 @@ export class RouteReveal {
   }
 }
 
-interface DrawingChunk { positions: Int16Array; first: number; offsets: Uint32Array }
+interface DrawingChunk { positions: Int16Array | Float32Array; first: number; offsets: Uint32Array }
 export class RouteDrawing {
   chunks: DrawingChunk[] = []
-  add(positions: Int16Array, roads: Float32Array) {
+  add(positions: Int16Array | Float32Array, roads: Float32Array) {
     if (!roads.length) return
     const first = roads[0], last = roads[roads.length - 1]
     const offsets = new Uint32Array(last - first + 2)
@@ -41,6 +41,7 @@ export class RouteDrawing {
       const edge = edges[i], chunk = this.chunks.find(c => edge >= c.first && edge < c.first + c.offsets.length - 1)
       if (!chunk) throw new Error('The chosen route is missing its drawing geometry')
       const begin = chunk.offsets[edge - chunk.first], end = chunk.offsets[edge - chunk.first + 1], p = chunk.positions
+      const scale = p instanceof Int16Array ? 32767 : 1
       let shapeLength = 0
       for (let v = begin; v < end; v += 2) shapeLength += Math.hypot(p[v * 2 + 2] - p[v * 2], p[v * 2 + 3] - p[v * 2 + 1])
       let along = 0
@@ -51,7 +52,7 @@ export class RouteDrawing {
         const from = total > 0 ? (travelled + lengths[i] * (shapeLength > 0 ? along / shapeLength : 0)) / total : 0
         along += distance
         const to = total > 0 ? (travelled + lengths[i] * (shapeLength > 0 ? along / shapeLength : 1)) / total : 1
-        if (distance > 0) segments.push(p[a * 2] / 32767, p[a * 2 + 1] / 32767, p[b * 2] / 32767, p[b * 2 + 1] / 32767, from, to)
+        if (distance > 0) segments.push(p[a * 2] / scale, p[a * 2 + 1] / scale, p[b * 2] / scale, p[b * 2 + 1] / scale, from, to)
       }
       travelled += lengths[i]
     }

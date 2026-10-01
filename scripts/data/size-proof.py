@@ -21,14 +21,16 @@ import osmium
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', type=pathlib.Path, required=True)
 parser.add_argument('--output', type=pathlib.Path, required=True)
+parser.add_argument('--provenance', type=pathlib.Path, help='Explicit source URL, timestamp, bytes and SHA-256 for another dated experiment')
 args = parser.parse_args()
 OUT = args.output
 OUT.mkdir(exist_ok=True)
 SOURCE = args.source
 with SOURCE.open('rb') as handle:
     source_sha = hashlib.file_digest(handle, 'sha256').hexdigest()
-if source_sha != '95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd':
-    raise SystemExit('This proof requires the pinned 2026-09-29 source; update provenance explicitly for a new release')
+provenance = json.loads(args.provenance.read_text()) if args.provenance else {'url': 'https://download.geofabrik.de/europe/switzerland-260929.osm.pbf', 'data_timestamp': '2026-09-29T20:22:51Z', 'bytes': 547273092, 'sha256': '95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd'}
+if SOURCE.stat().st_size != provenance['bytes'] or source_sha != provenance['sha256']:
+    raise SystemExit('Source does not match the declared byte length and SHA-256; provide explicit provenance for another dated experiment')
 CLASSES = 'motorway motorway_link trunk trunk_link primary primary_link secondary secondary_link tertiary tertiary_link unclassified residential living_street service road'.split()
 DENY = {'no', 'private', 'agricultural', 'forestry'}
 KEYS = {'highway', 'oneway', 'junction', 'access', 'vehicle', 'motor_vehicle', 'motorcar', 'maxspeed', 'maxheight', 'maxwidth', 'maxweight', 'toll', 'bridge', 'tunnel', 'surface', 'service', 'impassable', 'ford'}
@@ -155,7 +157,7 @@ def save(name, obj):
     return result
 
 graph={'coordinateScale':100000,'nodeStride':3,'nodeFields':['lon','lat','osmId'],'nodes':nodes,'edgeFields':['from','to','lengthCentimetres','direction_0both_1forward_2reverse','profile','osmWayId'],'edges':edges,'profiles':e.profiles,'controls':controls,'restrictions':restrictions}
-report={'source':{'url':'https://download.geofabrik.de/europe/switzerland-260929.osm.pbf','bytes':SOURCE.stat().st_size,'data_timestamp':'2026-09-29T20:22:51Z'},'scope':'Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.','road_classes':dict(e.classes),'excluded':dict(e.excluded),'road_shape_nodes':len(e.uses),'graph_nodes':len(nodes)//3,'physical_edges':len(edges),'directed_arcs':sum(2 if x[3]==0 else 1 for x in edges),'profiles':len(e.profiles),'restrictions':len(restrictions),'controls':len(controls),'graph':save('graph',graph),'variants':{}}
+report={'source':provenance,'scope':'Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.','road_classes':dict(e.classes),'excluded':dict(e.excluded),'road_shape_nodes':len(e.uses),'graph_nodes':len(nodes)//3,'physical_edges':len(edges),'directed_arcs':sum(2 if x[3]==0 else 1 for x in edges),'profiles':len(e.profiles),'restrictions':len(restrictions),'controls':len(controls),'graph':save('graph',graph),'variants':{}}
 for tolerance in (0,5,15):
     geometry=[]
     offsets=[0]

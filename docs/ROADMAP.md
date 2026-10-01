@@ -218,6 +218,23 @@ The first implementation tasks should be:
 4. Improve chunk fetching/caching and endpoint feedback against those findings.
 5. Tune exploration persistence and final-route emphasis on the validated examples.
 
+## Country releases — scope added 1 October 2026
+
+The author selected a parallel country-publication task while retaining the
+Swiss default. This does not mark R1 routing legality or R2 phone validation
+complete.
+
+- [x] Generalise pinned source acquisition, sizing and packaging through country configs.
+- [x] Keep Swiss data bundled and its selected identity unchanged.
+- [x] Deliver additional immutable graph releases from a separate R2 bucket/Worker.
+- [x] Add a country catalogue, places, optional geographic references and switching.
+- [x] Preserve exact replay timestamps beyond 2^24 events and source drawing precision.
+- [x] Validate the complete UK graph on desktop Chromium and WebKit; retain evidence.
+- [ ] Establish physical-phone memory and frame-pacing support for UK.
+- [ ] Add further countries only when explicitly selected and individually validated.
+
+[Country release procedure](COUNTRIES.md) · [UK release evidence](evidence/uk-release-2026-10-01/README.md).
+
 ## Wishlist
 
 These are deliberately uncommitted. Promote an item into a milestone only when
@@ -237,7 +254,7 @@ its purpose, dependencies and completion criterion are clear.
 | Faint geographic context | Border/lake outlines delivered; optional relief remains | Separate sourced layer; keep emerging roads central |
 | Large-format image / video export | Editions, prints and short films of a particular search | R5 provenance and export pipeline; appropriate credits |
 | Offline study | Revisit a selected graph and recordings without a connection | Explicit bounded storage, verified cache and an update/removal path |
-| Other countries | Compare the influence of geography and infrastructure | Swiss profile, device and publication process established first |
+| Further countries | Compare geography and infrastructure beyond CH/UK | Explicit selection, source/projection config and measured device budget |
 | Walking or cycling | Reveal other possible networks of movement | Separate access/cost profiles and relevant source data |
 
 ## Outside the initial scope

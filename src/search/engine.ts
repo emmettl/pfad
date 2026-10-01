@@ -120,12 +120,11 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
     }
     routeNodes.reverse(); routeEdges.reverse()
   }
-  const edgeTimes = new Float32Array(textureWidth * textureHeight * 2).fill(-1)
+  const edgeTimes = new Uint32Array(textureWidth * textureHeight * 2)
   for (let i = 0; i < e; i++) {
     if (firstSeen[i]) edgeTimes[i * 2] = firstSeen[i]
     if (firstImproved[i]) edgeTimes[i * 2 + 1] = firstImproved[i]
   }
-  for (const road of routeEdges) edgeTimes[road * 2 + 1] = -2 - edgeTimes[road * 2 + 1]
   return {
     algorithm: estimate ? 'astar/1' : 'dijkstra/1',
     tieBreak: estimate ? 'cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order' : 'distance, then ascending node id; neighbours in compiler edge order',

@@ -56,7 +56,8 @@ a promise of every cross-border route. None of these are solved by compression.
 compiler/profile version, lengths and SHA-256 for every chunk. Total opening
 road bytes: 15,866,559. The optional evidence file is 8,090,540 bytes and contains
 OSM node and way IDs, tag profiles, controls and original restriction relations.
-Both the delivered graph and that evidence are available in this public repo.
+Both the Swiss graph and its evidence remain available in this public repo.
+The additional UK release is served from R2; see [Countries](COUNTRIES.md).
 
 After the sizing experiment, package the selected snapshot explicitly:
 
@@ -83,8 +84,11 @@ The `le-columnar-deltas/1` encoding uses little-endian values inside gzip files:
 The worker checks all files, covers the complete graph, reconstructs directed
 adjacency and drawing geometry, and enables searching only after validation.
 A missing or corrupt chunk is an error, never a truncated routing network.
-Projection quantisation is approximately 6.1 metres for the drawing buffers;
-original edge costs and graph topology remain separate.
+The Swiss manifest retains its original approximately 6.1 m projection-grid
+metadata. The renderer now reconstructs Float32 drawing coordinates from the
+1e-5 degree source coordinates, avoiding additional national-grid rounding.
+The shipped Swiss files and their identity are unchanged; costs and topology
+remain separate.
 
 Endpoint preparation `nearby-shared-component/1` selects main/residential road
 nodes with incoming and outgoing connections, within two kilometres of each

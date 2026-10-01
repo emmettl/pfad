@@ -1,0 +1,9 @@
+{
+  "dataset": "uk-20260929-479355fe91f9",
+  "downloadBytes": 92374715,
+  "sourceEvidenceBytes": 42873492,
+  "chunks": 155,
+  "nodes": 7366915,
+  "edges": 8209041,
+  "vertices": 23678988
+}
