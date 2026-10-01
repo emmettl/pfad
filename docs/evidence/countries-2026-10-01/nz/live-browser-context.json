@@ -1,0 +1,208 @@
+[
+  {
+    "country": "nz",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Auckland\u2192Wellington",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "852153"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Auckland\u2192Wellington",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "828648"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Auckland\u2192Wellington",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "621468"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Ashburton\u2192Queenstown391.2 kmA*",
+        "events": "182793"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Christchurch\u2192Timaru162.2 kmDijkstra",
+        "events": "407558"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "New Plymouth\u2192Whanganui158.4 kmBidirectional Dijkstra",
+        "events": "118765"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Auckland\u2192Taup\u014d270.0 kmA*",
+        "events": "808092"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Timaru\u2192Ashburton77.0 kmDijkstra",
+        "events": "44086"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Rotorua\u2192New Plymouth293.3 kmBidirectional Dijkstra",
+        "events": "460585"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Christchurch\u2192Queenstown476.4 kmA*",
+        "events": "497044"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Hamilton\u2192Taup\u014d149.2 kmDijkstra",
+        "events": "1004870"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Whanganui\u2192WellingtonBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  },
+  {
+    "country": "nz",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Auckland\u2192Wellington",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "852153"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Auckland\u2192Wellington",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "828648"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Auckland\u2192Wellington",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "621468"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Auckland\u2192Hamilton122.4 kmA*",
+        "events": "384722"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "New Plymouth\u2192Taup\u014d268.2 kmDijkstra",
+        "events": "362286"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Napier\u2192Rotorua214.2 kmBidirectional Dijkstra",
+        "events": "394161"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Queenstown\u2192Timaru323.4 kmA*",
+        "events": "92637"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Dunedin\u2192Blenheim660.2 kmDijkstra",
+        "events": "732828"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Rotorua\u2192Tauranga61.0 kmBidirectional Dijkstra",
+        "events": "135353"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Christchurch\u2192Nelson408.7 kmA*",
+        "events": "444022"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Queenstown\u2192Ashburton391.2 kmDijkstra",
+        "events": "307068"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Queenstown\u2192InvercargillBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

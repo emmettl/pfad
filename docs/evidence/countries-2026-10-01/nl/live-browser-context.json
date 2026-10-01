@@ -1,0 +1,211 @@
+[
+  {
+    "country": "nl",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Amsterdam\u2192Rotterdam",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "1116888"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Amsterdam\u2192Rotterdam",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "873962"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Amsterdam\u2192Rotterdam",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "259275"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Groningen\u2192Arnhem162.5 kmA*",
+        "events": "834813"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Middelburg\u2192Groningen327.9 kmDijkstra",
+        "events": "7193045"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Leeuwarden\u2192Eindhoven232.7 kmBidirectional Dijkstra",
+        "events": "5674023"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Utrecht\u2192Leeuwarden155.7 kmA*",
+        "events": "1095523"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Eindhoven\u2192Enschede159.2 kmDijkstra",
+        "events": "5706528"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Maastricht\u2192Leeuwarden301.0 kmBidirectional Dijkstra",
+        "events": "5077207"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Amsterdam\u2192Utrecht38.5 kmA*",
+        "events": "125350"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Zwolle\u2192Middelburg235.7 kmDijkstra",
+        "events": "7299541"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Zwolle\u2192RotterdamBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  },
+  {
+    "country": "nl",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Amsterdam\u2192Rotterdam",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "1116888"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Amsterdam\u2192Rotterdam",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "873962"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Amsterdam\u2192Rotterdam",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "259275"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Rotterdam\u2192Groningen235.9 kmA*",
+        "events": "3172785"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Leeuwarden\u2192Maastricht302.8 kmDijkstra",
+        "events": "7273779"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Eindhoven\u2192Leeuwarden232.3 kmBidirectional Dijkstra",
+        "events": "5646907"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Groningen\u2192Maastricht310.0 kmA*",
+        "events": "3265203"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Groningen\u2192Eindhoven240.8 kmDijkstra",
+        "events": "5869716"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Middelburg\u2192Eindhoven153.9 kmBidirectional Dijkstra",
+        "events": "2166331"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Enschede\u2192Rotterdam189.5 kmA*",
+        "events": "1729948"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Den Haag\u2192Arnhem118.2 kmDijkstra",
+        "events": "3834559"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Maastricht\u2192LeeuwardenBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

@@ -30,7 +30,7 @@ try {
    await expect(page.locator('canvas')).toHaveAttribute('data-event',renderedEvent)
    runs.push({mode,caption:await page.locator('.route-caption').textContent(),canvas:await page.locator('canvas').evaluate(c=>({width:c.width,height:c.height,cssWidth:c.clientWidth,cssHeight:c.clientHeight,maxFps:c.dataset.maxFps,event:c.dataset.event}))})
   }
-  await expect.poll(async()=>{const hash=new URL(await page.url()).hash;const raw=new URLSearchParams(hash.slice(1)).get('study');return raw?JSON.parse(raw).progress:null}).toBe(.5)
+  await expect.poll(async()=>{const hash=new URL(await page.url()).hash;const raw=new URLSearchParams(hash.slice(1)).get('study');if(!raw)return null;const study=JSON.parse(raw);return {country:study.country,algorithm:study.algorithm,progress:study.progress}}).toEqual({country,algorithm:'astar',progress:.5})
   const sharedEvent=await page.locator('canvas').getAttribute('data-event')
   await page.reload({waitUntil:'domcontentloaded'})
   if(country==='uk')await page.getByRole('button',{name:'Open '+names[country],exact:true}).click()

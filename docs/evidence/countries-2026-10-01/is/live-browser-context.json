@@ -1,0 +1,208 @@
+[
+  {
+    "country": "is",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Reykjav\u00edk\u2192Keflav\u00edk",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "72287"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Reykjav\u00edk\u2192Keflav\u00edk",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "70635"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Reykjav\u00edk\u2192Keflav\u00edk",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "53554"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Reykjav\u00edk\u2192Keflav\u00edk47.6 kmA*",
+        "events": "107108"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "V\u00edk\u2192Reykjav\u00edk186.4 kmDijkstra",
+        "events": "188471"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Borgarnes\u2192Bl\u00f6ndu\u00f3s170.3 kmBidirectional Dijkstra",
+        "events": "183558"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Egilssta\u00f0ir\u2192H\u00fasav\u00edk217.5 kmA*",
+        "events": "17243"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "V\u00edk\u2192Akureyri375.7 kmDijkstra",
+        "events": "313041"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Stykkish\u00f3lmur\u2192Selfoss212.5 kmBidirectional Dijkstra",
+        "events": "263020"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Akureyri\u2192\u00cdsafj\u00f6r\u00f0ur524.9 kmA*",
+        "events": "117486"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Bl\u00f6ndu\u00f3s\u2192Stykkish\u00f3lmur194.3 kmDijkstra",
+        "events": "88806"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Keflav\u00edk\u2192SelfossBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  },
+  {
+    "country": "is",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Reykjav\u00edk\u2192Keflav\u00edk",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "72287"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Reykjav\u00edk\u2192Keflav\u00edk",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "70635"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Reykjav\u00edk\u2192Keflav\u00edk",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "53554"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Egilssta\u00f0ir\u2192H\u00fasav\u00edk217.5 kmA*",
+        "events": "17243"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Keflav\u00edk\u2192Selfoss95.5 kmDijkstra",
+        "events": "169131"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "H\u00f6fn\u2192Borgarnes494.3 kmBidirectional Dijkstra",
+        "events": "337540"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "V\u00edk\u2192Selfoss129.1 kmA*",
+        "events": "16223"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Bl\u00f6ndu\u00f3s\u2192Borgarnes170.3 kmDijkstra",
+        "events": "69926"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Borgarnes\u2192Selfoss115.5 kmBidirectional Dijkstra",
+        "events": "198102"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Reykjav\u00edk\u2192Egilssta\u00f0ir556.9 kmA*",
+        "events": "334938"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "V\u00edk\u2192Reykjav\u00edk186.4 kmDijkstra",
+        "events": "188471"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "H\u00fasav\u00edk\u2192Egilssta\u00f0irBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

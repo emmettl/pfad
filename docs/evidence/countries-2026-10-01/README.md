@@ -46,26 +46,23 @@ because these pinned Natural Earth lake references supply no features there.
 Netherlands geography matches its European extract. Swiss and UK data identities
 and their geographic assets are unchanged.
 
-Validation: `npm run check` (61 unit tests and a 29,225,995-byte app artifact),
-plus all 46 Chromium/WebKit browser regression checks. A cache-reload timing failure
-in the first browser pass prompted a lifecycle flush correction: page hide now
-reads current study parameters before committing the final URL. The final
-combined browser run passed all 46 checks; the targeted sharing/loading run
-also passed all eight checks. Four final country UI proofs passed after merging
-the ambient-controls improvement, including keyboard Escape exit.
+Validation: `npm run check` passed 65 Vitest cases; all 42 Chromium/touch-WebKit
+browser regression checks passed. Both engines exercise real workers, rendering,
+storage, controls and audio. The app artifact is 57 files / 29,226,265 bytes.
+CI stops on the first browser failure and publishes only after both engines pass.
 
-The preceding ambient-controls CI release exposed a score-test interaction issue:
-its Pause click could occur after controls retreated on a slow renderer. The
-score test now waits for retreat, then focuses Pause and activates it with a
-trusted Space key. The complete eight-test ambient group passed locally;
-software Chromium also passed the score check.
-The app artifact remains
-unchanged by this test-only correction.
+The score check waits for ambient controls to retreat, then focuses the control
+and activates it with a trusted Space key. The complete eight-case ambient group
+passed; software Chromium also passed the score check.
 
-CI stops on the first browser failure; a successful run still requires all 46
-checks across both engines before uploading the publication artifact.
+The shared-study proof waits for country, algorithm and progress together before
+reloading. Waiting for progress alone can match an earlier algorithm's URL while
+the current result is still being written to the hash.
 
-Final testing-toolchain integration: `npm run check` passed 65 Vitest cases and
-the complete 42-case Chromium/WebKit browser suite passed. Pure checks moved
-from browsers into Vitest; both engines retain real worker, renderer, storage,
-controls and audio integration. The app artifact is 57 files / 29,226,265 bytes.
+`live-browser-context.json` repeats every country UI proof on both GitHub Pages
+and Cloudflare. All eight host/country combinations passed, including shared
+paused replay, outlines, eight ambient journeys and an automatic transition.
+`deployment.json` records the successful Pages artifact and Cloudflare delivery
+receipt. Cloudflare analytics CORS errors on Pages are listed separately from
+application errors; no application errors occurred. Physical iPhone testing
+remains separate. This evidence-only update does not change the published app.
