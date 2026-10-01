@@ -56,9 +56,10 @@ the ambient-controls improvement, including keyboard Escape exit.
 
 The preceding ambient-controls CI release exposed a score-test interaction issue:
 its Pause click could occur after controls retreated on a slow renderer. The
-score test now waits for retreat, then focuses Pause itself before clicking.
-Both
-engine runs and a Chromium software-graphics run passed; the app artifact remains
+score test now waits for retreat, then focuses Pause and activates it with a
+trusted Space key. The complete eight-test ambient group passed locally;
+software Chromium also passed the score check.
+The app artifact remains
 unchanged by this test-only correction.
 
 CI stops on the first browser failure; a successful run still requires all 46
