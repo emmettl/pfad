@@ -43,6 +43,7 @@ export interface Graph {
 
 export interface Point { name: string; lon: number; lat: number }
 export interface Endpoint extends Point { node: number; snapMetres: number }
+export interface SnappingRecord { version: 'nearby-shared-component/1'; requestedStart: Point; requestedGoal: Point }
 export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar'
 export interface Meeting { event: number; node: number; lon: number; lat: number; candidateMetres: number }
 export interface HeuristicRecord {
@@ -62,6 +63,7 @@ export interface SearchResult {
   goal: Endpoint
   searchMs: number
   snapMs: number
+  snapping?: SnappingRecord
   routeMetres: number | null
   routeNodes: Uint32Array
   routeEdges: Uint32Array

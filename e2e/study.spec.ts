@@ -52,6 +52,31 @@ test('national search, reverse seeking and another pair of endpoints', async ({ 
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   expect(errors).toEqual([])
 })
+test('Genève to Zürich works after swapping endpoints in every search mode', async ({ page }) => {
+  test.setTimeout(120000)
+  const errors: string[] = []
+  page.on('pageerror', e => errors.push(e.message))
+  await page.emulateMedia({ reducedMotion: 'reduce' }); await page.goto('./')
+  await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+  await page.getByRole('button', { name: 'Swap start and destination' }).click()
+  await expect(page.getByRole('combobox', { name: 'Start place' })).toHaveValue('Genève')
+  await expect(page.getByRole('combobox', { name: 'Destination place' })).toHaveValue('Zürich')
+  for (const [mode, algorithm, settlements, events] of [
+    ['dijkstra', 'dijkstra/1', 805590, 3352313],
+    ['bidirectional', 'bidirectional-dijkstra/1', 1044442, 4347569],
+    ['astar', 'astar/1', 473066, 1978942],
+  ] as const) {
+    if (mode === 'dijkstra') await page.getByRole('button', { name: 'Search', exact: true }).click()
+    else await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption(mode)
+    await expect(page.locator('.study')).toHaveAttribute('data-algorithm', algorithm, { timeout: 20000 })
+    await expect(page.locator('.route-caption')).toHaveText('Genève→Zürich262.7 km', { timeout: 20000 })
+    await expect.poll(async () => Number((await page.getByTestId('settled-count').textContent())!.replace(/[^0-9]/g, ''))).toBe(settlements)
+    await expect(page.locator('canvas')).toHaveAttribute('data-event', String(events), { timeout: 20000 })
+    await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'complete')
+    await expect(page.getByRole('alert')).toHaveCount(0)
+  }
+  expect(errors).toEqual([])
+})
 test('a missing chunk prevents searching and retry loads the complete record', async ({ page }) => {
   await page.route('**/nodes-000-*.bin.gz.bin', route => route.fulfill({ status: 503, body: 'Unavailable' }))
   await page.goto('./')

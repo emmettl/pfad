@@ -108,6 +108,7 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
         : request.algorithm === 'astar' && reverse ? astar(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
           : dijkstra(graph, endpoints.start, endpoints.goal, endpoints.snapMs)
       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }
+      result.snapping = endpoints.snapping
       reply({ type: 'result', requestId: request.requestId, result }, [result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer, result.routeReversed.buffer, result.routeLengths.buffer, ...(result.backwardTimes ? [result.backwardTimes.buffer] : []), ...(result.goalProximity ? [result.goalProximity.buffer] : [])])
     }
   } catch (error) {

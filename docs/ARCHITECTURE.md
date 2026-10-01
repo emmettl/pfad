@@ -11,7 +11,13 @@ simplified drawing geometry into versioned, hashed chunks. The worker loads
 all chunks, verifies SHA-256, checks layouts and builds directed CSR adjacency.
 It does not search a partial graph. See [the data format](DATA.md).
 
-Queries snap endpoints before deterministic Dijkstra. Costs are integer road
+Queries snap both endpoints symmetrically using `nearby-shared-component/1`;
+requested coordinates and the snapping version accompany each worker result.
+A cached weak-component index helps avoid nearby isolated fragments without
+inventing roads or preselecting a destination for directed reachability. The
+selected algorithm still decides whether a route exists. See [snapping](DATA.md).
+
+Costs are integer road
 lengths in centimetres. The heap orders by distance, then ascending dense node
 ID; neighbours follow compiler edge order. `dijkstra/1` records a settled-node
 event, each outgoing arc examination, and each successful cost improvement.

@@ -86,12 +86,34 @@ A missing or corrupt chunk is an error, never a truncated routing network.
 Projection quantisation is approximately 6.1 metres for the drawing buffers;
 original edge costs and graph topology remain separate.
 
-The first study’s endpoint preparation selects nearby main/residential roads
-with incoming and outgoing connections. The destination must be reachable from
-the source within the recorded directed graph and within two kilometres of the
-requested point. Preparation time is separate from Dijkstra time. This keeps
-small disconnected fragments from making town-centre examples misleading;
-it does not establish turn-rule legality or solve cross-border coverage.
+Endpoint preparation `nearby-shared-component/1` selects main/residential road
+nodes with incoming and outgoing connections, within two kilometres of each
+requested point. A cached union-find index groups the unmodified graph into weak
+components. For each endpoint, retain its closest eligible node in each nearby
+component. Prefer the shared component with the smallest sum of snap distances;
+equal sums use the ascending pair of node IDs, sorted independently of journey
+direction. Equal node distances prefer the lower node ID. Reversing a journey
+therefore preserves its snapped pair.
+
+When no component is shared, use the closest eligible nodes independently and
+let the selected algorithm report no route. Weak connectivity does not imply
+one-way reachability: snapping no longer pre-searches from one end to force a
+reachable destination. No graph connections are added, no small components are
+removed, and no endpoint can move beyond the distance cap. Every worker result
+retains requested coordinates, snapping version, actual nodes and displacement.
+Index preparation and snapping time remain separate from the recorded search.
+This does not establish turn-rule legality or solve cross-border coverage.
+
+The [endpoint regression audit](evidence/endpoints-2026-10-01/review.json) checks
+all 144 curated pairs for directed reachability and reversal-stable snapping.
+It compares ten directed journeys across all three algorithms, including Genève
+→ Zürich, whose previously selected origin was trapped in a four-node directed
+fragment. Its corrected endpoint lies 65.3 metres from the requested city point.
+Reproduce without downloading or changing the dataset:
+
+```sh
+npm run data:audit-endpoints -- .cache/endpoint-audit.json
+```
 
 MIT covers application code only. The OSM-derived files retain ODbL attribution
 and database obligations. The earlier compact JSON experiment remapped some

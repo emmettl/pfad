@@ -122,6 +122,7 @@ export function App() {
         <p>The A* distance bound is prepared separately from the timed search, with corrections for the graph’s rounded coordinates and road lengths. All three algorithms solve the same shortest-distance question.</p>
         <p>Once the recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Its route describes this connectivity model.</p>
+        <p>Endpoints snap to nearby main or residential road nodes, within two kilometres. Where possible, both ends use the same road component with the smallest combined displacement. The search still checks one-way reachability; disconnected journeys can return no route.</p>
         <p>OpenStreetMap snapshot · 29 September 2026.<br />Road curves are simplified for drawing; search costs retain original lengths.</p>
         <p>The optional outlines provide quiet geographic context: Switzerland’s border from swissBOUNDARIES3D (2026-01), and lake shorelines from the FOEN Vector25 reference network (2007). They stay visible independently of the search.</p>
         <p>Original ambient sketches composed using Driftbox: Plateau, Contours and Afterglow. This is a provisional score, flowing independently of the search. Sound starts off and pauses when you leave the page.</p>

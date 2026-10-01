@@ -1,4 +1,5 @@
-import type { Endpoint, Graph, HeuristicRecord, Point, SearchResult } from './contracts.ts'
+import type { Endpoint, Graph, HeuristicRecord, SearchResult } from './contracts.ts'
+export { snapEndpoints } from './endpoints.ts'
 
 export function compileGraph(graph: Omit<Graph, 'offsets' | 'arcTo' | 'arcEdge' | 'incoming'>): Graph {
   const n = graph.xy.length / 2
@@ -19,43 +20,6 @@ export function compileGraph(graph: Omit<Graph, 'offsets' | 'arcTo' | 'arcEdge' 
     if (d !== 1) { const a = cursor[v]++; arcTo[a] = u; arcEdge[a] = e }
   }
   return { ...graph, offsets, incoming, arcTo, arcEdge }
-}
-
-function nearest(graph: Graph, point: Point, reachable?: Uint8Array): Endpoint {
-  const eligible = new Uint8Array(graph.xy.length / 2)
-  for (let e = 0; e < graph.from.length; e++) if (graph.category[e] <= 11) {
-    eligible[graph.from[e]] = 1; eligible[graph.to[e]] = 1
-  }
-  let best = Infinity, node = -1
-  const longitudeScale = Math.cos(point.lat * Math.PI / 180)
-  for (let i = 0; i < eligible.length; i++) {
-    if (!eligible[i] || !graph.incoming[i] || graph.offsets[i] === graph.offsets[i + 1] || (reachable && !reachable[i])) continue
-    const dx = (graph.xy[i * 2] / 100000 - point.lon) * longitudeScale
-    const dy = graph.xy[i * 2 + 1] / 100000 - point.lat
-    const d = dx * dx + dy * dy
-    if (d < best) { best = d; node = i }
-  }
-  const snapMetres = Math.sqrt(best) * 111195.0802
-  if (node < 0 || snapMetres > 2000) throw new Error(`No connected road within 2 km of ${point.name}. Choose a point closer to the network.`)
-  return { ...point, node, lon: graph.xy[node * 2] / 100000, lat: graph.xy[node * 2 + 1] / 100000, snapMetres }
-}
-
-export function snapEndpoints(graph: Graph, start: Point, goal: Point): { start: Endpoint; goal: Endpoint; snapMs: number } {
-  const begun = performance.now()
-  const source = nearest(graph, start)
-  const reachable = new Uint8Array(graph.xy.length / 2)
-  const queue = new Uint32Array(reachable.length)
-  reachable[source.node] = 1; queue[0] = source.node
-  let end = 1
-  // Endpoint preparation is recorded separately from the selected search replay.
-  for (let q = 0; q < end; q++) {
-    const u = queue[q]
-    for (let a = graph.offsets[u]; a < graph.offsets[u + 1]; a++) {
-      const v = graph.arcTo[a]
-      if (!reachable[v]) { reachable[v] = 1; queue[end++] = v }
-    }
-  }
-  return { start: source, goal: nearest(graph, goal, reachable), snapMs: performance.now() - begun }
 }
 
 export class Heap {

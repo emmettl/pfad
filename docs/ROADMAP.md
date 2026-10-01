@@ -68,8 +68,11 @@ edition clearly states what that model can and cannot answer.
   proof, distinguishing excluded roads, extract boundaries and compiler defects.
 - [ ] Improve endpoint snapping, including points along road segments. Show any
   meaningful displacement and explain inaccessible or disconnected selections.
-  Revisit the current reachable-destination filter so it does not hide a failed
-  journey by silently choosing a different road.
+- [x] Replace the asymmetric reachable-destination filter with symmetric,
+  distance-bounded snapping to a shared nearby road component. Preserve genuine
+  directed no-route outcomes and requested coordinates in the search record.
+  Genève → Zürich, all 144 curated pairs and ten three-algorithm comparisons
+  are covered by the [endpoint audit](evidence/endpoints-2026-10-01/review.json).
 - [ ] Define the graph’s coverage near borders and its treatment of ferries,
   tunnels, passes and disconnected fragments.
 - [ ] Validate representative national journeys and focused rule fixtures.

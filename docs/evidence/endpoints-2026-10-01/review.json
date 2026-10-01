@@ -1,0 +1,2016 @@
+{
+  "measuredAt": "2026-10-01T00:06:18.403Z",
+  "snappingVersion": "nearby-shared-component/1",
+  "dataset": {
+    "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+    "compiler": "pfad-study-compiler/1",
+    "profile": "road-connectivity-distance-v1",
+    "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+    "sourceTimestamp": "2026-09-29T20:22:51Z"
+  },
+  "note": "Checked the committed node/edge chunks against their hashes. Directed reachability and reversal-stable snaps checked for all 12 × 12 curated pairs. Ten directed journeys compared across all three production algorithms; every chosen edge checked for adjacency, allowed direction and exact cost sum. Snap preparation is separate from algorithm replay.",
+  "checks": [
+    {
+      "start": "Zürich",
+      "goal": "Zürich",
+      "startNode": 3128,
+      "goalNode": 3128,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 62.96837499999998,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "Genève",
+      "startNode": 3128,
+      "goalNode": 511979,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 11.514332999999965,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "Basel",
+      "startNode": 3128,
+      "goalNode": 1230603,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 11.547875000000033,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "Bern",
+      "startNode": 3128,
+      "goalNode": 17468,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 11.13345899999996,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "Lausanne",
+      "startNode": 3128,
+      "goalNode": 14197,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 11.266500000000008,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "Luzern",
+      "startNode": 3128,
+      "goalNode": 251950,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 11.400417000000004,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "Lugano",
+      "startNode": 3128,
+      "goalNode": 219598,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 10.985375000000033,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "Chur",
+      "startNode": 3128,
+      "goalNode": 68286,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 11.543834000000004,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "St. Gallen",
+      "startNode": 3128,
+      "goalNode": 20828,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 11.415665999999987,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "St. Moritz",
+      "startNode": 3128,
+      "goalNode": 37092,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 10.966625000000022,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "Sion",
+      "startNode": 3128,
+      "goalNode": 426843,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 11.502167000000043,
+      "reachable": true
+    },
+    {
+      "start": "Zürich",
+      "goal": "Andermatt",
+      "startNode": 3128,
+      "goalNode": 70921,
+      "startSnapMetres": 12.09892862903552,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 11.488416999999913,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Zürich",
+      "startNode": 511979,
+      "goalNode": 3128,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 11.431040999999937,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Genève",
+      "startNode": 408603,
+      "goalNode": 408603,
+      "startSnapMetres": 34.511983455632866,
+      "goalSnapMetres": 34.511983455632866,
+      "snapMs": 11.479082999999946,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Basel",
+      "startNode": 511979,
+      "goalNode": 1230603,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 11.251125000000002,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Bern",
+      "startNode": 511979,
+      "goalNode": 17468,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 11.142665999999963,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Lausanne",
+      "startNode": 511979,
+      "goalNode": 14197,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 11.446249999999964,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Luzern",
+      "startNode": 511979,
+      "goalNode": 251950,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 11.492792000000009,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Lugano",
+      "startNode": 511979,
+      "goalNode": 219598,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 11.30433400000004,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Chur",
+      "startNode": 511979,
+      "goalNode": 68286,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 11.506667000000107,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "St. Gallen",
+      "startNode": 511979,
+      "goalNode": 20828,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 11.465750000000071,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "St. Moritz",
+      "startNode": 511979,
+      "goalNode": 37092,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 11.421166000000085,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Sion",
+      "startNode": 511979,
+      "goalNode": 426843,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 11.58887500000003,
+      "reachable": true
+    },
+    {
+      "start": "Genève",
+      "goal": "Andermatt",
+      "startNode": 511979,
+      "goalNode": 70921,
+      "startSnapMetres": 65.27378828986983,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 11.18508399999996,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Zürich",
+      "startNode": 1230603,
+      "goalNode": 3128,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 11.685124999999971,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Genève",
+      "startNode": 1230603,
+      "goalNode": 511979,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 11.331874999999968,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Basel",
+      "startNode": 1230603,
+      "goalNode": 1230603,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 11.033792000000062,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Bern",
+      "startNode": 1230603,
+      "goalNode": 17468,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 11.481207999999924,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Lausanne",
+      "startNode": 1230603,
+      "goalNode": 14197,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 11.424540999999977,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Luzern",
+      "startNode": 1230603,
+      "goalNode": 251950,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 11.448541999999975,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Lugano",
+      "startNode": 1230603,
+      "goalNode": 219598,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 11.828249999999912,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Chur",
+      "startNode": 1230603,
+      "goalNode": 68286,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 11.063458000000082,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "St. Gallen",
+      "startNode": 1230603,
+      "goalNode": 20828,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 11.52062500000011,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "St. Moritz",
+      "startNode": 1230603,
+      "goalNode": 37092,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 11.470334000000094,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Sion",
+      "startNode": 1230603,
+      "goalNode": 426843,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 11.02800000000002,
+      "reachable": true
+    },
+    {
+      "start": "Basel",
+      "goal": "Andermatt",
+      "startNode": 1230603,
+      "goalNode": 70921,
+      "startSnapMetres": 4.487403547768706,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 11.33829199999991,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Zürich",
+      "startNode": 17468,
+      "goalNode": 3128,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 11.727125000000115,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Genève",
+      "startNode": 17468,
+      "goalNode": 511979,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 11.103458000000046,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Basel",
+      "startNode": 17468,
+      "goalNode": 1230603,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 11.422458000000006,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Bern",
+      "startNode": 17468,
+      "goalNode": 17468,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 11.134499999999889,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Lausanne",
+      "startNode": 17468,
+      "goalNode": 14197,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 11.324708999999984,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Luzern",
+      "startNode": 17468,
+      "goalNode": 251950,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 10.924249999999802,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Lugano",
+      "startNode": 17468,
+      "goalNode": 219598,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 11.430499999999938,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Chur",
+      "startNode": 17468,
+      "goalNode": 68286,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 11.455584000000044,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "St. Gallen",
+      "startNode": 17468,
+      "goalNode": 20828,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 11.753124999999955,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "St. Moritz",
+      "startNode": 17468,
+      "goalNode": 37092,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 11.449917000000141,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Sion",
+      "startNode": 17468,
+      "goalNode": 426843,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 11.571916999999985,
+      "reachable": true
+    },
+    {
+      "start": "Bern",
+      "goal": "Andermatt",
+      "startNode": 17468,
+      "goalNode": 70921,
+      "startSnapMetres": 74.3869569260605,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 11.255832999999939,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Zürich",
+      "startNode": 14197,
+      "goalNode": 3128,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 11.145332999999937,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Genève",
+      "startNode": 14197,
+      "goalNode": 511979,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 11.363207999999986,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Basel",
+      "startNode": 14197,
+      "goalNode": 1230603,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 11.295082999999977,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Bern",
+      "startNode": 14197,
+      "goalNode": 17468,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 11.244249999999965,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Lausanne",
+      "startNode": 14197,
+      "goalNode": 14197,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 10.95637499999998,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Luzern",
+      "startNode": 14197,
+      "goalNode": 251950,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 11.079750000000104,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Lugano",
+      "startNode": 14197,
+      "goalNode": 219598,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 11.104832999999871,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Chur",
+      "startNode": 14197,
+      "goalNode": 68286,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 10.962167000000136,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "St. Gallen",
+      "startNode": 14197,
+      "goalNode": 20828,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 11.088666999999987,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "St. Moritz",
+      "startNode": 14197,
+      "goalNode": 37092,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 11.343458000000055,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Sion",
+      "startNode": 14197,
+      "goalNode": 426843,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 11.14608300000009,
+      "reachable": true
+    },
+    {
+      "start": "Lausanne",
+      "goal": "Andermatt",
+      "startNode": 14197,
+      "goalNode": 70921,
+      "startSnapMetres": 8.489664563138765,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 11.068042000000105,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Zürich",
+      "startNode": 251950,
+      "goalNode": 3128,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 11.280332999999928,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Genève",
+      "startNode": 251950,
+      "goalNode": 511979,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 11.563791000000037,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Basel",
+      "startNode": 251950,
+      "goalNode": 1230603,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 11.392291999999998,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Bern",
+      "startNode": 251950,
+      "goalNode": 17468,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 12.839791999999989,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Lausanne",
+      "startNode": 251950,
+      "goalNode": 14197,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 11.001208000000133,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Luzern",
+      "startNode": 251950,
+      "goalNode": 251950,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 10.721915999999965,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Lugano",
+      "startNode": 251950,
+      "goalNode": 219598,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 10.811540999999806,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Chur",
+      "startNode": 251950,
+      "goalNode": 68286,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 10.710917000000109,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "St. Gallen",
+      "startNode": 251950,
+      "goalNode": 20828,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 10.900916999999936,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "St. Moritz",
+      "startNode": 251950,
+      "goalNode": 37092,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 10.76299999999992,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Sion",
+      "startNode": 251950,
+      "goalNode": 426843,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 11.128917000000001,
+      "reachable": true
+    },
+    {
+      "start": "Luzern",
+      "goal": "Andermatt",
+      "startNode": 251950,
+      "goalNode": 70921,
+      "startSnapMetres": 3.228099609842852,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 10.799417000000176,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Zürich",
+      "startNode": 219598,
+      "goalNode": 3128,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 10.505083000000013,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Genève",
+      "startNode": 219598,
+      "goalNode": 511979,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 10.21679099999983,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Basel",
+      "startNode": 219598,
+      "goalNode": 1230603,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 10.853125000000091,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Bern",
+      "startNode": 219598,
+      "goalNode": 17468,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 10.640374999999949,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Lausanne",
+      "startNode": 219598,
+      "goalNode": 14197,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 10.790250000000015,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Luzern",
+      "startNode": 219598,
+      "goalNode": 251950,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 10.82229099999995,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Lugano",
+      "startNode": 219598,
+      "goalNode": 219598,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 10.710915999999997,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Chur",
+      "startNode": 219598,
+      "goalNode": 68286,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 10.604583000000275,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "St. Gallen",
+      "startNode": 219598,
+      "goalNode": 20828,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 10.856874999999945,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "St. Moritz",
+      "startNode": 219598,
+      "goalNode": 37092,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 10.74791600000026,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Sion",
+      "startNode": 219598,
+      "goalNode": 426843,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 10.602124999999887,
+      "reachable": true
+    },
+    {
+      "start": "Lugano",
+      "goal": "Andermatt",
+      "startNode": 219598,
+      "goalNode": 70921,
+      "startSnapMetres": 75.67814902710364,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 10.900042000000212,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Zürich",
+      "startNode": 68286,
+      "goalNode": 3128,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 10.634375000000091,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Genève",
+      "startNode": 68286,
+      "goalNode": 511979,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 10.958000000000084,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Basel",
+      "startNode": 68286,
+      "goalNode": 1230603,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 10.866875000000164,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Bern",
+      "startNode": 68286,
+      "goalNode": 17468,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 10.89529100000027,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Lausanne",
+      "startNode": 68286,
+      "goalNode": 14197,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 10.914416999999958,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Luzern",
+      "startNode": 68286,
+      "goalNode": 251950,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 10.79950000000008,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Lugano",
+      "startNode": 68286,
+      "goalNode": 219598,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 11.540667000000212,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Chur",
+      "startNode": 68286,
+      "goalNode": 68286,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 11.575792000000092,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "St. Gallen",
+      "startNode": 68286,
+      "goalNode": 20828,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 11.022915999999896,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "St. Moritz",
+      "startNode": 68286,
+      "goalNode": 37092,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 11.248583000000053,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Sion",
+      "startNode": 68286,
+      "goalNode": 426843,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 10.667625000000044,
+      "reachable": true
+    },
+    {
+      "start": "Chur",
+      "goal": "Andermatt",
+      "startNode": 68286,
+      "goalNode": 70921,
+      "startSnapMetres": 30.768790193585208,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 10.502874999999676,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Zürich",
+      "startNode": 20828,
+      "goalNode": 3128,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 10.692583999999897,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Genève",
+      "startNode": 20828,
+      "goalNode": 511979,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 10.752457999999933,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Basel",
+      "startNode": 20828,
+      "goalNode": 1230603,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 11.058125000000018,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Bern",
+      "startNode": 20828,
+      "goalNode": 17468,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 10.793375000000196,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Lausanne",
+      "startNode": 20828,
+      "goalNode": 14197,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 10.425333000000137,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Luzern",
+      "startNode": 20828,
+      "goalNode": 251950,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 11.358166999999867,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Lugano",
+      "startNode": 20828,
+      "goalNode": 219598,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 10.847541000000092,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Chur",
+      "startNode": 20828,
+      "goalNode": 68286,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 10.436125000000175,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "St. Gallen",
+      "startNode": 20828,
+      "goalNode": 20828,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 10.826958999999988,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "St. Moritz",
+      "startNode": 20828,
+      "goalNode": 37092,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 11.321042000000034,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Sion",
+      "startNode": 20828,
+      "goalNode": 426843,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 10.67120900000009,
+      "reachable": true
+    },
+    {
+      "start": "St. Gallen",
+      "goal": "Andermatt",
+      "startNode": 20828,
+      "goalNode": 70921,
+      "startSnapMetres": 190.86489673484422,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 10.65774999999985,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Zürich",
+      "startNode": 37092,
+      "goalNode": 3128,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 10.611750000000029,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Genève",
+      "startNode": 37092,
+      "goalNode": 511979,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 10.7334579999997,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Basel",
+      "startNode": 37092,
+      "goalNode": 1230603,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 10.877332999999908,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Bern",
+      "startNode": 37092,
+      "goalNode": 17468,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 10.774709000000257,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Lausanne",
+      "startNode": 37092,
+      "goalNode": 14197,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 10.971082999999908,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Luzern",
+      "startNode": 37092,
+      "goalNode": 251950,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 11.024666000000252,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Lugano",
+      "startNode": 37092,
+      "goalNode": 219598,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 11.045582999999624,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Chur",
+      "startNode": 37092,
+      "goalNode": 68286,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 11.664208000000144,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "St. Gallen",
+      "startNode": 37092,
+      "goalNode": 20828,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 10.968541000000187,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "St. Moritz",
+      "startNode": 37092,
+      "goalNode": 37092,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 10.677749999999833,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Sion",
+      "startNode": 37092,
+      "goalNode": 426843,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 10.904333999999835,
+      "reachable": true
+    },
+    {
+      "start": "St. Moritz",
+      "goal": "Andermatt",
+      "startNode": 37092,
+      "goalNode": 70921,
+      "startSnapMetres": 1.8922676458176662,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 10.81362500000023,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Zürich",
+      "startNode": 426843,
+      "goalNode": 3128,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 11.031083000000308,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Genève",
+      "startNode": 426843,
+      "goalNode": 511979,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 11.084749999999985,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Basel",
+      "startNode": 426843,
+      "goalNode": 1230603,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 10.383249999999862,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Bern",
+      "startNode": 426843,
+      "goalNode": 17468,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 10.806624999999713,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Lausanne",
+      "startNode": 426843,
+      "goalNode": 14197,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 10.706167000000278,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Luzern",
+      "startNode": 426843,
+      "goalNode": 251950,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 10.861292000000049,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Lugano",
+      "startNode": 426843,
+      "goalNode": 219598,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 10.894792000000052,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Chur",
+      "startNode": 426843,
+      "goalNode": 68286,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 10.574583000000075,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "St. Gallen",
+      "startNode": 426843,
+      "goalNode": 20828,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 10.77520800000002,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "St. Moritz",
+      "startNode": 426843,
+      "goalNode": 37092,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 10.578874999999698,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Sion",
+      "startNode": 426843,
+      "goalNode": 426843,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 10.528249999999844,
+      "reachable": true
+    },
+    {
+      "start": "Sion",
+      "goal": "Andermatt",
+      "startNode": 426843,
+      "goalNode": 70921,
+      "startSnapMetres": 155.11139538375946,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 10.729749999999967,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Zürich",
+      "startNode": 70921,
+      "goalNode": 3128,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 12.09892862903552,
+      "snapMs": 10.764458000000104,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Genève",
+      "startNode": 70921,
+      "goalNode": 511979,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 65.27378828986983,
+      "snapMs": 11.434291999999914,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Basel",
+      "startNode": 70921,
+      "goalNode": 1230603,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 4.487403547768706,
+      "snapMs": 10.943709000000126,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Bern",
+      "startNode": 70921,
+      "goalNode": 17468,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 74.3869569260605,
+      "snapMs": 11.076500000000124,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Lausanne",
+      "startNode": 70921,
+      "goalNode": 14197,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 8.489664563138765,
+      "snapMs": 10.538874999999734,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Luzern",
+      "startNode": 70921,
+      "goalNode": 251950,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 3.228099609842852,
+      "snapMs": 10.583541999999852,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Lugano",
+      "startNode": 70921,
+      "goalNode": 219598,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 75.67814902710364,
+      "snapMs": 10.763249999999971,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Chur",
+      "startNode": 70921,
+      "goalNode": 68286,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 30.768790193585208,
+      "snapMs": 10.896124999999756,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "St. Gallen",
+      "startNode": 70921,
+      "goalNode": 20828,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 190.86489673484422,
+      "snapMs": 10.914458000000195,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "St. Moritz",
+      "startNode": 70921,
+      "goalNode": 37092,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 1.8922676458176662,
+      "snapMs": 10.882958000000144,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Sion",
+      "startNode": 70921,
+      "goalNode": 426843,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 155.11139538375946,
+      "snapMs": 10.908166999999594,
+      "reachable": true
+    },
+    {
+      "start": "Andermatt",
+      "goal": "Andermatt",
+      "startNode": 70921,
+      "goalNode": 70921,
+      "startSnapMetres": 38.92576672115776,
+      "goalSnapMetres": 38.92576672115776,
+      "snapMs": 10.603665999999976,
+      "reachable": true
+    }
+  ],
+  "comparisons": [
+    {
+      "start": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "goal": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Genève",
+          "lon": 6.1432,
+          "lat": 46.2044
+        },
+        "requestedGoal": {
+          "name": "Zürich",
+          "lon": 8.5417,
+          "lat": 47.3769
+        }
+      },
+      "routeMetres": 262724.45,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 98.22179199999982,
+          "events": 3352313,
+          "settlements": 805590,
+          "examinedArcs": 1711256,
+          "routeEdges": 4013
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 204.70366700000022,
+          "events": 4347569,
+          "settlements": 1044442,
+          "examinedArcs": 2220354,
+          "routeEdges": 4013
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 69.84812500000044,
+          "events": 1978942,
+          "settlements": 473066,
+          "examinedArcs": 1008092,
+          "routeEdges": 4013
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Zürich",
+          "lon": 8.5417,
+          "lat": 47.3769
+        },
+        "requestedGoal": {
+          "name": "Genève",
+          "lon": 6.1432,
+          "lat": 46.2044
+        }
+      },
+      "routeMetres": 262733.98,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 155.74524999999994,
+          "events": 4993816,
+          "settlements": 1199535,
+          "examinedArcs": 2551408,
+          "routeEdges": 4039
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 191.8844170000002,
+          "events": 4342526,
+          "settlements": 1043165,
+          "examinedArcs": 2217686,
+          "routeEdges": 4039
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 122.11549999999988,
+          "events": 2816028,
+          "settlements": 674004,
+          "examinedArcs": 1434006,
+          "routeEdges": 4039
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Lugano",
+        "lon": 8.95178,
+        "lat": 46.00321,
+        "node": 219598,
+        "snapMetres": 75.67814902710364
+      },
+      "goal": {
+        "name": "Basel",
+        "lon": 7.58856,
+        "lat": 47.55963,
+        "node": 1230603,
+        "snapMetres": 4.487403547768706
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Lugano",
+          "lon": 8.9511,
+          "lat": 46.0037
+        },
+        "requestedGoal": {
+          "name": "Basel",
+          "lon": 7.5886,
+          "lat": 47.5596
+        }
+      },
+      "routeMetres": 261530.25,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 129.94524999999976,
+          "events": 4005902,
+          "settlements": 961418,
+          "examinedArcs": 2047954,
+          "routeEdges": 2093
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 154.82016699999986,
+          "events": 3070895,
+          "settlements": 735731,
+          "examinedArcs": 1570827,
+          "routeEdges": 2093
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 41.49108400000023,
+          "events": 1102754,
+          "settlements": 264349,
+          "examinedArcs": 560644,
+          "routeEdges": 2093
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Basel",
+        "lon": 7.58856,
+        "lat": 47.55963,
+        "node": 1230603,
+        "snapMetres": 4.487403547768706
+      },
+      "goal": {
+        "name": "Lugano",
+        "lon": 8.95178,
+        "lat": 46.00321,
+        "node": 219598,
+        "snapMetres": 75.67814902710364
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Basel",
+          "lon": 7.5886,
+          "lat": 47.5596
+        },
+        "requestedGoal": {
+          "name": "Lugano",
+          "lon": 8.9511,
+          "lat": 46.0037
+        }
+      },
+      "routeMetres": 261207.21,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 164.34383399999933,
+          "events": 4940207,
+          "settlements": 1186739,
+          "examinedArcs": 2523331,
+          "routeEdges": 1957
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 145.64516699999967,
+          "events": 3062893,
+          "settlements": 733765,
+          "examinedArcs": 1566635,
+          "routeEdges": 1957
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 78.75095899999997,
+          "events": 2313001,
+          "settlements": 553314,
+          "examinedArcs": 1177743,
+          "routeEdges": 1957
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Sion",
+        "lon": 7.35799,
+        "lat": 46.23226,
+        "node": 426843,
+        "snapMetres": 155.11139538375946
+      },
+      "goal": {
+        "name": "Chur",
+        "lon": 9.53166,
+        "lat": 46.85065,
+        "node": 68286,
+        "snapMetres": 30.768790193585208
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Sion",
+          "lon": 7.3596,
+          "lat": 46.2331
+        },
+        "requestedGoal": {
+          "name": "Chur",
+          "lon": 9.532,
+          "lat": 46.8508
+        }
+      },
+      "routeMetres": 222982.85,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 93.18679199999951,
+          "events": 3160341,
+          "settlements": 760079,
+          "examinedArcs": 1612593,
+          "routeEdges": 1547
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 80.86183299999993,
+          "events": 1930218,
+          "settlements": 464995,
+          "examinedArcs": 984683,
+          "routeEdges": 1547
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 8.930916000000252,
+          "events": 275994,
+          "settlements": 66342,
+          "examinedArcs": 140209,
+          "routeEdges": 1547
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Chur",
+        "lon": 9.53166,
+        "lat": 46.85065,
+        "node": 68286,
+        "snapMetres": 30.768790193585208
+      },
+      "goal": {
+        "name": "Sion",
+        "lon": 7.35799,
+        "lat": 46.23226,
+        "node": 426843,
+        "snapMetres": 155.11139538375946
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Chur",
+          "lon": 9.532,
+          "lat": 46.8508
+        },
+        "requestedGoal": {
+          "name": "Sion",
+          "lon": 7.3596,
+          "lat": 46.2331
+        }
+      },
+      "routeMetres": 222934.27,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 109.23962500000016,
+          "events": 3692471,
+          "settlements": 885886,
+          "examinedArcs": 1888234,
+          "routeEdges": 1594
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 75.24837499999921,
+          "events": 1938915,
+          "settlements": 467079,
+          "examinedArcs": 989120,
+          "routeEdges": 1594
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 8.373125000000073,
+          "events": 266291,
+          "settlements": 63869,
+          "examinedArcs": 135465,
+          "routeEdges": 1594
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Andermatt",
+        "lon": 8.59479,
+        "lat": 46.63565,
+        "node": 70921,
+        "snapMetres": 38.92576672115776
+      },
+      "goal": {
+        "name": "St. Moritz",
+        "lon": 9.83552,
+        "lat": 46.49081,
+        "node": 37092,
+        "snapMetres": 1.8922676458176662
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Andermatt",
+          "lon": 8.5948,
+          "lat": 46.6353
+        },
+        "requestedGoal": {
+          "name": "St. Moritz",
+          "lon": 9.8355,
+          "lat": 46.4908
+        }
+      },
+      "routeMetres": 155281.62,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 108.41229199999998,
+          "events": 3481425,
+          "settlements": 835330,
+          "examinedArcs": 1779959,
+          "routeEdges": 933
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 17.72283299999981,
+          "events": 420985,
+          "settlements": 101802,
+          "examinedArcs": 213920,
+          "routeEdges": 933
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 6.397625000000517,
+          "events": 199816,
+          "settlements": 47990,
+          "examinedArcs": 101597,
+          "routeEdges": 933
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "St. Moritz",
+        "lon": 9.83552,
+        "lat": 46.49081,
+        "node": 37092,
+        "snapMetres": 1.8922676458176662
+      },
+      "goal": {
+        "name": "Andermatt",
+        "lon": 8.59479,
+        "lat": 46.63565,
+        "node": 70921,
+        "snapMetres": 38.92576672115776
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "St. Moritz",
+          "lon": 9.8355,
+          "lat": 46.4908
+        },
+        "requestedGoal": {
+          "name": "Andermatt",
+          "lon": 8.5948,
+          "lat": 46.6353
+        }
+      },
+      "routeMetres": 155195.81,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 13.934625000000779,
+          "events": 521634,
+          "settlements": 125564,
+          "examinedArcs": 266456,
+          "routeEdges": 936
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 17.804415999999947,
+          "events": 415809,
+          "settlements": 100562,
+          "examinedArcs": 211301,
+          "routeEdges": 936
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 4.105290999999852,
+          "events": 117818,
+          "settlements": 28250,
+          "examinedArcs": 60128,
+          "routeEdges": 936
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "goal": {
+        "name": "Lausanne",
+        "lon": 6.63219,
+        "lat": 46.51969,
+        "node": 14197,
+        "snapMetres": 8.489664563138765
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Genève",
+          "lon": 6.1432,
+          "lat": 46.2044
+        },
+        "requestedGoal": {
+          "name": "Lausanne",
+          "lon": 6.6323,
+          "lat": 46.5197
+        }
+      },
+      "routeMetres": 60909.29,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 9.045874999999796,
+          "events": 308841,
+          "settlements": 75618,
+          "examinedArcs": 154779,
+          "routeEdges": 1144
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 21.30029100000047,
+          "events": 511835,
+          "settlements": 124478,
+          "examinedArcs": 258261,
+          "routeEdges": 1144
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 6.310124999999971,
+          "events": 179459,
+          "settlements": 44160,
+          "examinedArcs": 88873,
+          "routeEdges": 1144
+        }
+      ]
+    },
+    {
+      "start": {
+        "name": "Lausanne",
+        "lon": 6.63219,
+        "lat": 46.51969,
+        "node": 14197,
+        "snapMetres": 8.489664563138765
+      },
+      "goal": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Lausanne",
+          "lon": 6.6323,
+          "lat": 46.5197
+        },
+        "requestedGoal": {
+          "name": "Genève",
+          "lon": 6.1432,
+          "lat": 46.2044
+        }
+      },
+      "routeMetres": 61055.51,
+      "algorithms": [
+        {
+          "algorithm": "dijkstra/1",
+          "searchMs": 24.227499999999964,
+          "events": 842190,
+          "settlements": 203603,
+          "examinedArcs": 427763,
+          "routeEdges": 1176
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "searchMs": 21.771999999999935,
+          "events": 512383,
+          "settlements": 124622,
+          "examinedArcs": 258527,
+          "routeEdges": 1176
+        },
+        {
+          "algorithm": "astar/1",
+          "searchMs": 7.128249999999753,
+          "events": 204216,
+          "settlements": 49934,
+          "examinedArcs": 102076,
+          "routeEdges": 1176
+        }
+      ]
+    }
+  ]
+}
