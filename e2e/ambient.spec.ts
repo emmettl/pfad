@@ -126,10 +126,13 @@ test('sequence pause suspends one continuous score; hidden return needs explicit
   await expect.poll(() => page.evaluate(() => (window as any).ambientAudio.starts)).toBe(2)
   await page.getByRole('button', { name: 'Ambient', exact: true }).click()
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'replay', { timeout: 45000 })
-  // The score test can reach replay after the controls have retreated on slow GPUs.
-  await page.locator('main.map').focus()
-  await expect(page.locator('.study')).toHaveAttribute('data-ambient-chrome', 'visible')
-  await page.getByRole('button', { name: 'Pause sequence' }).click()
+  // Exercise the score pause after retreat, including focus protection on slow GPUs.
+  await expect(page.locator('.study')).toHaveAttribute('data-ambient-chrome', 'quiet', { timeout: 8000 })
+  const pause = page.getByRole('button', { name: 'Pause sequence' })
+  await pause.focus()
+  await expect(pause).toBeFocused()
+  await expect(page.locator('.ambient-controls')).toHaveCSS('opacity', '1')
+  await pause.click()
   await expect(page.locator('.sound-control')).toHaveAttribute('data-sound', 'paused')
   await expect.poll(() => page.evaluate(() => (window as any).ambientAudio.contexts[0].state)).toBe('suspended')
   await page.getByRole('button', { name: 'Resume sequence' }).click()

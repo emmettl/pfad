@@ -56,6 +56,10 @@ the ambient-controls improvement, including keyboard Escape exit.
 
 The preceding ambient-controls CI release exposed a score-test interaction issue:
 its Pause click could occur after controls retreated on a slow renderer. The
-score test now focuses the actual map to wake the controls before clicking. Both
+score test now waits for retreat, then focuses Pause itself before clicking.
+Both
 engine runs and a Chromium software-graphics run passed; the app artifact remains
 unchanged by this test-only correction.
+
+CI stops on the first browser failure; a successful run still requires all 46
+checks across both engines before uploading the publication artifact.
