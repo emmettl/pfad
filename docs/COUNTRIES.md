@@ -51,8 +51,10 @@ retain the current connectivity-profile limitations.
 Current limits are 10m nodes, 16m edges, 32m directed arcs, 64m drawing vertices
 and 256 MiB downloaded road chunks, with bounded individual decoded chunks.
 These are allocation guards, not a guarantee that every device can load them.
-The UK selector requires explicit confirmation of its 93 MB download and
-approximately 1–2 GB browser-memory requirement, plus graphics memory. Graphs
+The UK selector requires explicit confirmation on first use of its 93 MB download
+and approximately 1–2 GB browser-memory requirement, plus graphics memory.
+Acceptance is remembered in local storage for this site; later selections and
+shared links open directly. Cancelling does not save acceptance. Graphs
 remain complete: missing chunks prevent searching. Switching countries terminates
 the old worker and disposes its map, drawing arrays and GPU resources.
 

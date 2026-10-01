@@ -39,8 +39,10 @@ Existing `pfad-study-link/1` JSON fragments resume playback from their recorded 
 completed frames stay complete. Reduced motion shows the completed result.
 An unavailable legacy identity gives an explicit error instead of silently
 substituting today's graph. Successful legacy links are rewritten to the concise
-format in the address bar. A linked UK study still requires the existing
-93 MB confirmation before downloading. Swiss and UK releases remain available
+format in the address bar. A linked UK study asks for confirmation of its
+93 MB download on first use. Acceptance is remembered in local storage for this
+site, so later links and reloads open directly. Cancelling saves no acceptance.
+Swiss and UK releases remain available
 under their immutable published keys; preserving them is a deliberate, bounded
 archive policy, not a guarantee of indefinite retention of every future release.
 
