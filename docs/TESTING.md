@@ -77,5 +77,6 @@ The responsibility changes reduce serial browser wall time by approximately
 CI software-rendering performance is measured separately; this table is not a
 CI projection. [Timing evidence](evidence/testing-2026-10-01/timings.json) preserves
 the successful run counts and timings. The final audio integration check also
-retains keyboard focus during slow clicks, matching the concurrent country
-validation fix.
+uses native keyboard activation for score controls, matching the concurrent
+country validation fix. The chrome check retains real pointer/touch wake and
+checks that the country picker is hidden in ambient mode.
