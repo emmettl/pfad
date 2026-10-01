@@ -2,7 +2,7 @@ import * as THREE from 'three'
 
 export function createRouteMaterial() {
   return new THREE.ShaderMaterial({
-    uniforms: { uProgress: { value: 0 }, uEnergy: { value: 0 }, uWidth: { value: 5 }, uResolution: { value: new THREE.Vector2(1, 1) } },
+    uniforms: { uColour: { value: new THREE.Color(.76, .98, .81) }, uHeadColour: { value: new THREE.Color(1, 1, .88) }, uProgress: { value: 0 }, uEnergy: { value: 0 }, uWidth: { value: 5 }, uResolution: { value: new THREE.Vector2(1, 1) } },
     vertexShader: `
       attribute vec2 tangent;
       attribute float across;
@@ -24,6 +24,8 @@ export function createRouteMaterial() {
     fragmentShader: `
       uniform float uProgress;
       uniform float uEnergy;
+      uniform vec3 uColour;
+      uniform vec3 uHeadColour;
       uniform float uWidth;
       varying float vAcross;
       varying float vDistance;
@@ -34,7 +36,7 @@ export function createRouteMaterial() {
         float halo = exp(-transverse * transverse / 7.);
         float head = uProgress < 1. ? exp(-(uProgress - vDistance) / .025) : 0.;
         float light = core * (.88 + uEnergy * (.16 + head * .5)) + halo * (.06 + uEnergy * (.14 + head * .28));
-        vec3 colour = mix(vec3(.76, .98, .81), vec3(1., 1., .88), head * uEnergy);
+        vec3 colour = mix(uColour, uHeadColour, head * uEnergy);
         gl_FragColor = vec4(colour, light);
       }
     `,

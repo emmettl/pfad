@@ -159,3 +159,20 @@ Review still open: place balance, geographical variety, pacing, road persistence
 territory colour/brightness and extended listening. Physical-phone memory, frames,
 thermal behaviour and sustained audiovisual budgets remain R2 work. Driving-rule
 enforcement remains R1. Browser checks do not complete those gates.
+
+## Greedy addition · 1 October 2026
+
+`five-algorithms-with-territories/1` rotates Dijkstra → bidirectional Dijkstra →
+A* → bidirectional A* → greedy best-first, starting from the selected journey
+mode. After every four accepted journey slots, the existing territory slot is
+inserted without advancing the journey algorithm. For a Dijkstra start the
+first slots are Dijkstra, bidirectional Dijkstra, A*, bidirectional A*, territories,
+greedy, Dijkstra, bidirectional Dijkstra, A*, territories. Explicit Next also
+advances a slot; retries keep its algorithm. Earlier exported cycle versions
+retain their original meaning.
+
+Greedy uses the same actual chosen-route distance for band acceptance and replay
+pacing, even though that route is not guaranteed shortest. Its quiet caption
+keeps that distinction visible. The coral/peach exploration and recorded focus
+glow follow the normal pause/seek, reduced-motion and route-reveal lifecycle.
+[Validation](evidence/greedy-2026-10-01/README.md).

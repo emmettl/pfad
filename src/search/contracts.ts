@@ -45,7 +45,7 @@ export interface Graph {
 export interface Point { name: string; lon: number; lat: number }
 export interface Endpoint extends Point { node: number; snapMetres: number }
 export interface SnappingRecord { version: 'nearby-shared-component/1'; requestedStart: Point; requestedGoal: Point }
-export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar' | 'bidirectional-astar' | 'multisource'
+export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar' | 'bidirectional-astar' | 'multisource' | 'greedy'
 export interface Meeting { event: number; node: number; lon: number; lat: number; candidateMetres: number }
 export interface HeuristicRecord {
   version: 'feasible-planar-distance/1'
@@ -56,9 +56,11 @@ export interface HeuristicRecord {
   startLowerBoundCm: number
 }
 
+export interface ProximityHeuristicRecord { version: 'great-circle-proximity/1'; preparationMs: number; startEstimateCm: number }
+
 export interface SearchResult {
   dataset?: { identity: string; compiler: string; profile: string; sourceSha256: string; sourceTimestamp: string }
-  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1' | 'astar/1' | 'bidirectional-astar/1' | 'multisource-dijkstra/1'
+  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1' | 'astar/1' | 'bidirectional-astar/1' | 'multisource-dijkstra/1' | 'greedy-best-first/1'
   tieBreak: string
   start: Endpoint
   goal: Endpoint
@@ -82,6 +84,11 @@ export interface SearchResult {
   backwardTimes?: Uint32Array
   goalProximity?: Uint8Array
   balancedHeuristic?: { version: 'balanced-feasible-planar-distance/1'; preparationMs: number; forward: HeuristicRecord; backward: HeuristicRecord }
+  proximityHeuristic?: ProximityHeuristicRecord
+  routeGuarantee?: 'first-found'
+  focusVersion?: 'expanded-node-focus/1'
+  focusEvents?: Uint32Array
+  focusCoordinates?: Int32Array
   heuristic?: HeuristicRecord
   meeting?: Meeting
   textureWidth: number

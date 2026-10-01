@@ -4,8 +4,8 @@ import type { AmbientRecord } from '../ambient/sequence.ts'
 
 /** A gzip container with small JSON metadata and exact packed little-endian buffers. */
 export async function exportRecord(result: SearchResult, manifest: StudyManifest, presentation: StudyLink, ambient: AmbientRecord[]) {
-  const { trace, checkpoints, edgeTimes, edgeSources, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths, ...search } = result
-  const arrays = { trace, checkpoints, edgeTimes, edgeSources, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths }
+  const { trace, checkpoints, edgeTimes, edgeSources, focusEvents, focusCoordinates, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths, ...search } = result
+  const arrays = { trace, checkpoints, edgeTimes, edgeSources, focusEvents, focusCoordinates, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths }
   const parts: BlobPart[] = [], buffers: Record<string, { type: string; offset: number; count: number; bytes: number }> = {}
   const littleEndian = new Uint8Array(new Uint32Array([1]).buffer)[0] === 1
   let offset = 0
@@ -13,12 +13,14 @@ export async function exportRecord(result: SearchResult, manifest: StudyManifest
     if (!array) continue
     const padding = (4 - offset % 4) % 4
     if (padding) { parts.push(new Uint8Array(padding)); offset += padding }
-    const wide = array instanceof Uint32Array
-    buffers[name] = { type: wide ? 'uint32-le' : 'uint8', offset, count: array.length, bytes: array.byteLength }
+    const signed = array instanceof Int32Array, wide = array instanceof Uint32Array || signed
+    buffers[name] = { type: signed ? 'int32-le' : wide ? 'uint32-le' : 'uint8', offset, count: array.length, bytes: array.byteLength }
     if (!wide || littleEndian) parts.push(new Uint8Array(array.buffer as ArrayBuffer, array.byteOffset, array.byteLength))
     else {
       const bytes = new Uint8Array(array.byteLength), view = new DataView(bytes.buffer)
-      for (let i = 0; i < array.length; i++) view.setUint32(i * 4, array[i], true)
+      for (let i = 0; i < array.length; i++) {
+        if (signed) view.setInt32(i * 4, array[i], true); else view.setUint32(i * 4, array[i], true)
+      }
       parts.push(bytes)
     }
     offset += array.byteLength

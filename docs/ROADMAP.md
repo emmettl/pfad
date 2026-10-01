@@ -349,6 +349,17 @@ search cancellation, WebGL recovery, richer place/coordinate entry, paired
 comparison, still-image export and a deliberate future graph-refresh audit.
 No physical-device or driving-legality completion is implied by browser tests.
 
+## Greedy study · 1 October 2026
+
+Added greedy best-first to manual and ambient journeys. Proximity-only ordering
+and a first-discovery tree produce a genuine first-found road route. Coral
+history, recorded expanded-node focus and a peach route reveal distinguish it;
+the interface clearly states that the route is not guaranteed shortest.
+Shared links and exact exports preserve algorithm/heuristic/focus versions.
+Territories retain their after-four-journeys cadence. This does not complete
+routing legality or physical-phone budgets.
+[Validation evidence](evidence/greedy-2026-10-01/README.md).
+
 ## Five European studies · 1 October 2026
 
 Added Poland, Italy, Spain, metropolitan France with Corsica, and Germany as

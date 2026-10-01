@@ -11,8 +11,8 @@ interface AmbientEvidence {
   cycle: string; journey: number; distanceProfile: DistanceProfile
 }
 export type AmbientRecord = AmbientEvidence & (JourneyRecord | { kind: 'territories'; sources: string[]; accepted: boolean; maximumMetres: number; sourceNodes: number[] })
-export const ALGORITHM_CYCLE_VERSION = 'four-journeys-one-territory/1'
-const ALGORITHMS: SearchAlgorithm[] = ['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar']
+export const ALGORITHM_CYCLE_VERSION = 'five-algorithms-with-territories/1'
+const ALGORITHMS: SearchAlgorithm[] = ['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar', 'greedy']
 const HOLD_MS = 6000, FADE_MS = 2000, ATTEMPTS = 5
 const off = (): AmbientState => ({ active: false, running: false, phase: 'off', opacity: 1, message: '' })
 

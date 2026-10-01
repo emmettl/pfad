@@ -72,7 +72,7 @@ test('ambient rotates from the selected algorithm once per journey and keeps ret
   assert.equal(sequence.receive(result()), true); sequence.complete(); step(8000)
   assert.deepEqual(algorithms, ['astar', 'astar', 'bidirectional-astar'])
   sequence.receive(result()); sequence.next(); sequence.receive(result()); sequence.next(); sequence.receive(result())
-  assert.deepEqual(algorithms, ['astar', 'astar', 'bidirectional-astar', 'dijkstra', 'bidirectional'])
+  assert.deepEqual(algorithms, ['astar', 'astar', 'bidirectional-astar', 'greedy', 'dijkstra'])
   assert.deepEqual(sequence.records.map(record => record.journey), [1, 1, 2, 3, 4])
   assert.ok(sequence.records.every(record => record.cycle === ALGORITHM_CYCLE_VERSION))
   sequence.exit(); sequence.start(99, true, 'bidirectional'); assert.equal(algorithms.at(-1), 'bidirectional')
@@ -145,7 +145,7 @@ test('ambient inserts territories after four journeys, records their sources and
   const { sequence, algorithms, pairs, result, step } = harness(t)
   sequence.start(42, false, 'astar')
   for (let i = 0; i < 4; i++) { sequence.receive(result()); sequence.next() }
-  assert.deepEqual(algorithms, ['astar', 'bidirectional-astar', 'dijkstra', 'bidirectional', 'multisource'])
+  assert.deepEqual(algorithms, ['astar', 'bidirectional-astar', 'greedy', 'dijkstra', 'multisource'])
   const sources = pairs.at(-1).sources; assert.equal(sources.length, 3)
   const territory = { ...result(), algorithm: 'multisource-dijkstra/1', sources, territories: { maximumMetres: 150000, sourceNodes: [10, 11, 12] }, routeMetres: null }
   assert.equal(sequence.receive(territory), true)
@@ -153,5 +153,5 @@ test('ambient inserts territories after four journeys, records their sources and
   assert.equal(sequence.records.at(-1).kind, 'territories')
   assert.deepEqual(sequence.records.at(-1).sources, sources.map(source => source.id))
   sequence.complete(); assert.equal(sequence.state.phase, 'hold'); step(8000)
-  assert.equal(algorithms.at(-1), 'astar'); sequence.receive(result()); sequence.exit()
+  assert.equal(algorithms.at(-1), 'bidirectional'); sequence.receive(result()); sequence.exit()
 })

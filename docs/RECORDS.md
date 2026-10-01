@@ -145,3 +145,12 @@ packed `edgeSources` byte array. Its source-tagged trace follows the
 [three-source contract](ARCHITECTURE.md#three-source-territory-study). Ambient
 records use `kind: territories` and source IDs/coverage statistics rather than
 journey distance bands; existing journey records remain readable.
+
+Greedy links use `algorithm=greedy`. Exact exports include
+`algorithm: greedy-best-first/1`, `routeGuarantee: first-found`, the
+`great-circle-proximity/1` preparation record and `expanded-node-focus/1` identity.
+`focusEvents` is `uint32-le`; `focusCoordinates` is `int32-le`, retaining signed
+longitude and latitude coordinates in the graph's 1e-5 degree units. Together
+these give one coordinate pair for each exact expansion event. Negative
+coordinates and seek reversal are preserved; the completed route remains an
+actual road path, with no optimality claim.

@@ -152,3 +152,17 @@ test('territory links retain three sources and exact exports retain examination 
   assert.deepEqual(record.search.sources, sources); assert.equal(record.buffers.edgeSources.type, 'uint8'); assert.equal(record.buffers.edgeSources.count, 3)
   assert.equal('edgeSources' in record.search, false)
 })
+
+test('greedy links and exports preserve the first-found guarantee and geographic heuristic', async () => {
+  const presentation = { ...study, algorithm: 'greedy', progress: 0 }
+  assert.equal(readStudyLink(studyUrl('https://example.org/', presentation)).study.algorithm, 'greedy')
+  assert.deepEqual(readStudyLink(legacy(presentation)).study, presentation)
+  const result = { algorithm: 'greedy-best-first/1', routeGuarantee: 'first-found', proximityHeuristic: { version: 'great-circle-proximity/1', preparationMs: 2, startEstimateCm: 10000 }, trace: new Uint32Array([5]), goalProximity: new Uint8Array([255]), focusEvents: new Uint32Array([1]), focusCoordinates: new Int32Array([-17990000, 4700000]) }
+  const bytes = gunzipSync(Buffer.from(await (await exportRecord(result, { source: {} }, presentation, [])).arrayBuffer()))
+  const record = JSON.parse(bytes.subarray(12, 12 + bytes.readUInt32LE(8)))
+  assert.equal(record.search.routeGuarantee, 'first-found'); assert.deepEqual(record.search.proximityHeuristic, result.proximityHeuristic)
+  assert.equal(record.buffers.goalProximity.count, 1)
+  assert.equal(record.buffers.focusCoordinates.type, 'int32-le')
+  const at = 12 + bytes.readUInt32LE(8) + record.buffers.focusCoordinates.offset
+  assert.equal(bytes.readInt32LE(at), -17990000); assert.equal(bytes.readInt32LE(at + 4), 4700000)
+})

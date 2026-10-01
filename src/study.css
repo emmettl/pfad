@@ -158,3 +158,13 @@ footer a { text-decoration: none; pointer-events: auto; }
 .front-key .front-c { background: #bbb3ff; }
 .territory-mode { font-family: 'DM Mono', monospace; font-size: 10px; color: #b9b2e5; }
 .territory-mode button { margin-left: 8px; }
+
+.greedy .marker-0 { color: #e7a291; }
+.greedy .marker-0 .marker-dot { background: #ff9a80; box-shadow: 0 0 14px #ff806055; }
+.greedy .marker-1 { color: #efd0b2; }
+.greedy .marker-1 .marker-dot { background: #ffdbb8; box-shadow: 0 0 14px #ffdbb855; }
+.study[data-algorithm='greedy-best-first/1'] .goal-gradient { background: linear-gradient(90deg, #ff8060, #ffdbb8); }
+.route-caption:has(.greedy-note) { flex-wrap: wrap; }
+.route-caption .greedy-note { flex-basis: 100%; font-family: 'DM Mono', monospace; font-size: 9px; color: #b79484; }
+
+.search-tip { position: absolute; width: 6px; height: 6px; transform: translate(-50%, -50%); border-radius: 50%; background: #ffe6c9; box-shadow: 0 0 5px 2px #ffb68d, 0 0 15px 5px #ff806055; pointer-events: none; }

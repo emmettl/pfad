@@ -279,3 +279,37 @@ are exportable. Per-query workspace is one distance array, one settled array,
 one node-source array and one queue; the source texture adds one byte per padded
 road. Full reachable coverage may examine more roads than a destination search;
 physical-phone budgets remain unvalidated.
+
+## Greedy best-first
+
+`greedy-best-first/1` orders the frontier solely by great-circle proximity to the
+destination, then ascending node ID. `great-circle-proximity/1` uses the recorded
+node coordinates and the same 6,371,008.8 m spherical radius as the distance
+selector, including longitude wrapping; estimates are rounded to centimetres.
+Unlike the A* bound, this estimate is not corrected against graph edge costs.
+It is only a priority, and makes no shortest-route guarantee. Preparation is
+measured separately from the search.
+
+The shared single-front recorder retains a first-discovery predecessor tree:
+only undiscovered nodes are enqueued, neighbours follow compiler arc order,
+and search stops when the goal is expanded. It never rewrites an expanded
+node's parent. Consequently the returned route cost equals the sum of its
+actual predecessor edges, even when a cheaper approach was examined later.
+All nonterminal expansions and outgoing-arc examinations are real. No-route,
+zero-cost and coincident endpoints remain valid cases. Exports identify the
+route guarantee as `first-found` and keep the proximity heuristic version.
+
+Coral history remains dimly visible. First examination/discovery timestamps
+produce short bright pulses, shading towards pale peach as proximity improves.
+`expanded-node-focus/1` records one exact event index and integer coordinate pair
+per expansion in `focusEvents` and `focusCoordinates`. Replay finds the most
+recent expansion at or before its event cursor, places a small stationary glow
+there, and hides it when the search ends. It does not interpolate between nodes,
+add connectors, pulse on a fabricated clock or invent examinations. The focus
+stream is reversible and is retained in exact exports. Route reveal uses peach
+and remains a separate presentation of the completed first-found route.
+
+Worst-case recorder workspace gains twelve packed bytes per expanded node for
+focus events and coordinates, plus the temporary number arrays before packing.
+Greedy may explore extensively on awkward graphs; national examples do not
+establish physical-phone budgets or routing legality.

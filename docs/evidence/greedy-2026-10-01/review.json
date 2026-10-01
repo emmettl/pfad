@@ -1,0 +1,503 @@
+{
+  "measuredAt": "2026-10-01T13:32:23.651Z",
+  "dataset": {
+    "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+    "compiler": "pfad-study-compiler/1",
+    "profile": "road-connectivity-distance-v1",
+    "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+    "sourceTimestamp": "2026-09-29T20:22:51Z"
+  },
+  "note": "Ten directed Swiss greedy studies: route adjacency, allowed directions and exact cost sums checked; every settlement follows proximity priority and every trace examination is a real outgoing arc. First-discovery and deterministic trace checks pass. Dijkstra provides shortest-distance comparison, not greedy event activity. Geographic preparation is outside the search timer. Host evidence does not establish driving legality or physical-phone budgets.",
+  "comparisons": [
+    {
+      "start": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "goal": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Genève",
+          "lon": 6.1432,
+          "lat": 46.2044
+        },
+        "requestedGoal": {
+          "name": "Zürich",
+          "lon": 8.5417,
+          "lat": 47.3769
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 19.536292000000003,
+        "startEstimateCm": 22436826
+      },
+      "routeMetres": 374334.03,
+      "shortestMetres": 262724.45,
+      "excessMetres": 111609.58000000002,
+      "excessPercent": 42.481611437382405,
+      "exploredNodes": 11886,
+      "examinedArcs": 25950,
+      "events": 51587,
+      "searchMs": 7.322041000000013,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "f0775cb8dfb32f9114c296bd9230f1b4fcb38e55235404d1ce3b48dd73d3850b",
+      "focusCoordinatesSha256": "8f6b22eee13cf4a7952efef62ceeb70850f7dbbc535ceb0e4614523176df6b5e",
+      "traceSha256": "33583fe0a4fbf9d8eac06ab0dc3cdbeecbdb47ac5c78f583a03bca7ac85230c4"
+    },
+    {
+      "start": {
+        "name": "Zürich",
+        "lon": 8.54186,
+        "lat": 47.37689,
+        "node": 3128,
+        "snapMetres": 12.09892862903552
+      },
+      "goal": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Zürich",
+          "lon": 8.5417,
+          "lat": 47.3769
+        },
+        "requestedGoal": {
+          "name": "Genève",
+          "lon": 6.1432,
+          "lat": 46.2044
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 19.626374999999996,
+        "startEstimateCm": 22436826
+      },
+      "routeMetres": 335293.7,
+      "shortestMetres": 262733.98,
+      "excessMetres": 72559.72000000003,
+      "excessPercent": 27.617181454793194,
+      "exploredNodes": 5382,
+      "examinedArcs": 11861,
+      "events": 24441,
+      "searchMs": 2.292665999999997,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "470fe19908a4d82c9e8524963785e64adae072938aaef52991572fea451fc0e0",
+      "focusCoordinatesSha256": "43fe0931bcd48164e8265a70e3779402a336ee226dc27e53a1abb87cc0dab099",
+      "traceSha256": "c781ec6cdc7348ffc1e5eb4b4cf0b76c9a25efb8088a23cbe658fef097c79d5b"
+    },
+    {
+      "start": {
+        "name": "Lugano",
+        "lon": 8.95178,
+        "lat": 46.00321,
+        "node": 219598,
+        "snapMetres": 75.67814902710364
+      },
+      "goal": {
+        "name": "Basel",
+        "lon": 7.58856,
+        "lat": 47.55963,
+        "node": 1230603,
+        "snapMetres": 4.487403547768706
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Lugano",
+          "lon": 8.9511,
+          "lat": 46.0037
+        },
+        "requestedGoal": {
+          "name": "Basel",
+          "lon": 7.5886,
+          "lat": 47.5596
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 19.360250000000065,
+        "startEstimateCm": 20180077
+      },
+      "routeMetres": 416273.75,
+      "shortestMetres": 261530.25,
+      "excessMetres": 154743.5,
+      "excessPercent": 59.1684900695044,
+      "exploredNodes": 17251,
+      "examinedArcs": 37362,
+      "events": 73275,
+      "searchMs": 4.243208999999979,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "5a8419df83f6e6f920284661bffafa40b48e9c544d06b148cf0e3b284034cbb0",
+      "focusCoordinatesSha256": "0809e975fca8ebee494eb43489683f906e7976f64f3cf38555d4f93deb6decb0",
+      "traceSha256": "297410e8cf386d6ac1ca9d02d20e256d82826dfa08b9ecf8839fcea0c67670e7"
+    },
+    {
+      "start": {
+        "name": "Basel",
+        "lon": 7.58856,
+        "lat": 47.55963,
+        "node": 1230603,
+        "snapMetres": 4.487403547768706
+      },
+      "goal": {
+        "name": "Lugano",
+        "lon": 8.95178,
+        "lat": 46.00321,
+        "node": 219598,
+        "snapMetres": 75.67814902710364
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Basel",
+          "lon": 7.5886,
+          "lat": 47.5596
+        },
+        "requestedGoal": {
+          "name": "Lugano",
+          "lon": 8.9511,
+          "lat": 46.0037
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 17.595125000000053,
+        "startEstimateCm": 20180077
+      },
+      "routeMetres": 375199.23,
+      "shortestMetres": 261207.21,
+      "excessMetres": 113992.01999999999,
+      "excessPercent": 43.640456938382364,
+      "exploredNodes": 3643,
+      "examinedArcs": 8288,
+      "events": 16681,
+      "searchMs": 3.2200000000000273,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "e9d4f7acf50c1c036515645f778a4e0f1b15e580c1d9199b73bff2fc9abec3c1",
+      "focusCoordinatesSha256": "d269ca9e18fe0c9b2e4b67d310b5a47d31aefcfb9ad3fe95555fd342fabfd03a",
+      "traceSha256": "8206338b10e657c44bbf2f1682ac4b474ef4374f93c849bae718291553b3dc51"
+    },
+    {
+      "start": {
+        "name": "Sion",
+        "lon": 7.35799,
+        "lat": 46.23226,
+        "node": 426843,
+        "snapMetres": 155.11139538375946
+      },
+      "goal": {
+        "name": "Chur",
+        "lon": 9.53166,
+        "lat": 46.85065,
+        "node": 68286,
+        "snapMetres": 30.768790193585208
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Sion",
+          "lon": 7.3596,
+          "lat": 46.2331
+        },
+        "requestedGoal": {
+          "name": "Chur",
+          "lon": 9.532,
+          "lat": 46.8508
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 17.539708999999903,
+        "startEstimateCm": 17990038
+      },
+      "routeMetres": 247920.37,
+      "shortestMetres": 222982.85,
+      "excessMetres": 24937.51999999999,
+      "excessPercent": 11.183604478999154,
+      "exploredNodes": 4400,
+      "examinedArcs": 9814,
+      "events": 19452,
+      "searchMs": 1.953499999999849,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "f00f242ac525f58436a5c5acb9a3b5b7071967f1ba24b235f528349764994f02",
+      "focusCoordinatesSha256": "4009de13abc97ce697c5706573fecb2397068c722107f665ca6b15d1a5772b1f",
+      "traceSha256": "173eaa4464216ab290c2b386ccc74dfd6453c65bd93d95741a3b6abda622d474"
+    },
+    {
+      "start": {
+        "name": "Chur",
+        "lon": 9.53166,
+        "lat": 46.85065,
+        "node": 68286,
+        "snapMetres": 30.768790193585208
+      },
+      "goal": {
+        "name": "Sion",
+        "lon": 7.35799,
+        "lat": 46.23226,
+        "node": 426843,
+        "snapMetres": 155.11139538375946
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Chur",
+          "lon": 9.532,
+          "lat": 46.8508
+        },
+        "requestedGoal": {
+          "name": "Sion",
+          "lon": 7.3596,
+          "lat": 46.2331
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 17.69337500000006,
+        "startEstimateCm": 17990038
+      },
+      "routeMetres": 249779.82,
+      "shortestMetres": 222934.27,
+      "excessMetres": 26845.550000000017,
+      "excessPercent": 12.041912622944873,
+      "exploredNodes": 3077,
+      "examinedArcs": 7073,
+      "events": 14184,
+      "searchMs": 1.2899159999999483,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "d3472a7a19be04335da54065098db5e53abc8a15f58ac312fce39146854f5d87",
+      "focusCoordinatesSha256": "31111f92c0a45897d550004e03636673227082c85ecf4a3bf52cb301e0d50801",
+      "traceSha256": "375a21fb088383589901d2171dce9a4446d9078c2e21e75ac499363f2d2a2402"
+    },
+    {
+      "start": {
+        "name": "Andermatt",
+        "lon": 8.59479,
+        "lat": 46.63565,
+        "node": 70921,
+        "snapMetres": 38.92576672115776
+      },
+      "goal": {
+        "name": "St. Moritz",
+        "lon": 9.83552,
+        "lat": 46.49081,
+        "node": 37092,
+        "snapMetres": 1.8922676458176662
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Andermatt",
+          "lon": 8.5948,
+          "lat": 46.6353
+        },
+        "requestedGoal": {
+          "name": "St. Moritz",
+          "lon": 9.8355,
+          "lat": 46.4908
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 17.569958000000042,
+        "startEstimateCm": 9621348
+      },
+      "routeMetres": 168193.04,
+      "shortestMetres": 155281.62,
+      "excessMetres": 12911.420000000013,
+      "excessPercent": 8.314841125433903,
+      "exploredNodes": 1722,
+      "examinedArcs": 3835,
+      "events": 7639,
+      "searchMs": 0.9511660000000575,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "bad5018a8e994c7cdb643c146f9fb7dd5769e705506ed26b0df74be93f19aed3",
+      "focusCoordinatesSha256": "7832a72f726c7deb7a94d99a7a2f9816ae50817f39d33358930fa924d123e85d",
+      "traceSha256": "00a8d0362489c8528a30da0aa09611b5d5f18873aa6ef62d136b2e26d7fe81bd"
+    },
+    {
+      "start": {
+        "name": "St. Moritz",
+        "lon": 9.83552,
+        "lat": 46.49081,
+        "node": 37092,
+        "snapMetres": 1.8922676458176662
+      },
+      "goal": {
+        "name": "Andermatt",
+        "lon": 8.59479,
+        "lat": 46.63565,
+        "node": 70921,
+        "snapMetres": 38.92576672115776
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "St. Moritz",
+          "lon": 9.8355,
+          "lat": 46.4908
+        },
+        "requestedGoal": {
+          "name": "Andermatt",
+          "lon": 8.5948,
+          "lat": 46.6353
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 17.47854200000006,
+        "startEstimateCm": 9621348
+      },
+      "routeMetres": 165309.14,
+      "shortestMetres": 155195.81,
+      "excessMetres": 10113.330000000016,
+      "excessPercent": 6.516496804907312,
+      "exploredNodes": 2498,
+      "examinedArcs": 5746,
+      "events": 11204,
+      "searchMs": 1.5977920000000267,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "deb5cc00ea9f1b8f3ce498d0045da3153be88b7f8a08f0c44baadb1c3009b3f2",
+      "focusCoordinatesSha256": "8f160f56e3a13cbbe5dfa86c88a3b63dc5a1012a32c3568bd6d489be9cffbfa5",
+      "traceSha256": "583f3bea419a76977dc4f0727fd9d05a9820c2d30f375da5d4fb61edc83f7241"
+    },
+    {
+      "start": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "goal": {
+        "name": "Lausanne",
+        "lon": 6.63219,
+        "lat": 46.51969,
+        "node": 14197,
+        "snapMetres": 8.489664563138765
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Genève",
+          "lon": 6.1432,
+          "lat": 46.2044
+        },
+        "requestedGoal": {
+          "name": "Lausanne",
+          "lon": 6.6323,
+          "lat": 46.5197
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 17.348541999999952,
+        "startEstimateCm": 5136769
+      },
+      "routeMetres": 80279.16,
+      "shortestMetres": 60909.29,
+      "excessMetres": 19369.870000000003,
+      "excessPercent": 31.80117515735286,
+      "exploredNodes": 7755,
+      "examinedArcs": 16232,
+      "events": 32135,
+      "searchMs": 1.666582999999946,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "315efde0d88666703fed8c29807a18b6d7d50581ec6d55a73a40907dfd489b16",
+      "focusCoordinatesSha256": "a509072a48a09cfc35c5fb26e1de701438e079e79f2f36804c73082206071f8e",
+      "traceSha256": "17bc7242de705b78b421027e85d2c6001ea8e20e00ed3ede2383f900113c6e8b"
+    },
+    {
+      "start": {
+        "name": "Lausanne",
+        "lon": 6.63219,
+        "lat": 46.51969,
+        "node": 14197,
+        "snapMetres": 8.489664563138765
+      },
+      "goal": {
+        "name": "Genève",
+        "lon": 6.14362,
+        "lat": 46.20389,
+        "node": 511979,
+        "snapMetres": 65.27378828986983
+      },
+      "snapping": {
+        "version": "nearby-shared-component/1",
+        "requestedStart": {
+          "name": "Lausanne",
+          "lon": 6.6323,
+          "lat": 46.5197
+        },
+        "requestedGoal": {
+          "name": "Genève",
+          "lon": 6.1432,
+          "lat": 46.2044
+        }
+      },
+      "algorithm": "greedy-best-first/1",
+      "routeGuarantee": "first-found",
+      "tieBreak": "great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded",
+      "proximityHeuristic": {
+        "version": "great-circle-proximity/1",
+        "preparationMs": 17.74495899999988,
+        "startEstimateCm": 5136769
+      },
+      "routeMetres": 69107.37,
+      "shortestMetres": 61055.51,
+      "excessMetres": 8051.859999999993,
+      "excessPercent": 13.187769621447742,
+      "exploredNodes": 1537,
+      "examinedArcs": 2634,
+      "events": 5875,
+      "searchMs": 1.7314170000004196,
+      "focusVersion": "expanded-node-focus/1",
+      "focusEventsSha256": "0306ec78f7cefbbc9f6b20ad39614ae20dd82b33740fa5a383caad9676bdfc40",
+      "focusCoordinatesSha256": "3482e29aec6a5f0917719e7bd738ca9409e110f03bb0a2b89bbb4be3dd0f758f",
+      "traceSha256": "d407ef8685800b1333bdf7e6b2cc5f53bac4fefe076c8412328b86f8c04bb2d4"
+    }
+  ]
+}

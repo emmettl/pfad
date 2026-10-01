@@ -38,3 +38,9 @@ npm run dev
 Code: [MIT](LICENSE). Road data: © OpenStreetMap contributors,
 [ODbL](https://www.openstreetmap.org/copyright). Geographic references and fonts
 retain their own source terms and attribution; see [data policy](docs/DATA.md).
+
+Greedy best-first is a proximity-only study with coral exploration, a recorded
+expanded-node focus glow and a pale-peach route reveal. It stops at its first
+found route, which may be longer than the shortest route; that distinction is
+labelled in the study. It joins the ambient journey rotation while territory
+studies remain after every four journeys. [Greedy evidence](docs/evidence/greedy-2026-10-01/README.md).

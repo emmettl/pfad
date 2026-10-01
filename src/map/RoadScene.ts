@@ -35,6 +35,7 @@ const fragmentShader = `
   uniform float uTotal;
   uniform float uTerritories;
   uniform float uTerritoryComplete;
+  uniform float uGreedy;
   flat in float vSource;
   uniform float uAstar;
   flat in uvec2 vTimes;
@@ -43,15 +44,21 @@ const fragmentShader = `
   out vec4 outColor;
   vec4 front(uvec2 times, vec3 quiet, vec3 bright) {
     if (times.x == 0u || uEvent < times.x) return vec4(0.);
-    float age = float(uEvent - times.x) / max(uTotal, 1.);
-    float pulse = exp(-age / .006);
+    uint recent = uGreedy > .5 && times.y != 0u && uEvent >= times.y ? max(times.x, times.y) : times.x;
+    float age = float(uEvent - recent) / max(uTotal, 1.);
+    float pulse = exp(-age / mix(.006, .0035, uGreedy));
     uint improvement = times.y;
     float tree = improvement != 0u && uEvent >= improvement ? 1. : 0.;
-    return vec4(mix(quiet, bright, pulse), mix(.12, .045, uAstar) + tree * mix(.07, .10, uAstar) + pulse * .72);
+    float memory = mix(mix(.12, .045, uAstar) + tree * mix(.07, .10, uAstar), .10 + tree * .04, uGreedy);
+    return vec4(mix(quiet, bright, pulse), memory + pulse * mix(.72, .92, uGreedy));
   }
   void main() {
     vec3 quiet = mix(vec3(.21, .48, .42), mix(vec3(.16, .35, .65), vec3(.30, .55, .60), vGoalProximity), uAstar);
     vec3 bright = mix(vec3(.52, .95, .78), mix(vec3(.42, .72, 1.), vec3(.78, .97, 1.), vGoalProximity), uAstar);
+    if (uGreedy > .5) {
+      quiet = vec3(.60, .24, .19);
+      bright = mix(vec3(1., .40, .32), vec3(1., .87, .72), vGoalProximity);
+    }
     if (uTerritories > .5) {
       if (vSource > 1.5) { quiet = vec3(.38, .35, .60); bright = vec3(.73, .70, 1.); }
       else if (vSource > .5) { quiet = vec3(.55, .38, .19); bright = vec3(1., .76, .43); }
@@ -81,6 +88,10 @@ export class RoadScene {
   height = 1
   halfHeight = .8
   observer: ResizeObserver
+  tip: HTMLDivElement
+  focusEvents?: Uint32Array
+  focusCoordinates?: Int32Array
+  focusPoint?: Point
   markers: HTMLDivElement
   points: Point[] = []
   private pickingEnabled = false
@@ -129,10 +140,11 @@ export class RoadScene {
     this.proximityTexture.needsUpdate = true
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, glslVersion: THREE.GLSL3,
-      uniforms: { uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
+      uniforms: { uGreedy: { value: 0 }, uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
       transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     })
     host.appendChild(this.renderer.domElement)
+    this.tip = document.createElement('div'); this.tip.className = 'search-tip'; this.tip.setAttribute('aria-hidden', 'true'); this.tip.hidden = true; host.appendChild(this.tip)
     this.markers = document.createElement('div'); this.markers.className = 'map-markers'; host.appendChild(this.markers)
     this.observer = new ResizeObserver(() => this.resize()); this.observer.observe(host)
     const canvas = this.renderer.domElement
@@ -167,6 +179,8 @@ export class RoadScene {
         canvas.dataset.totalEvents = String(this.events)
         canvas.dataset.flashPhase = this.flash.active ? 'flashing' : 'hidden'
         canvas.dataset.flashProgress = String(this.flash.progress)
+        canvas.dataset.focusEvent = this.tip.dataset.event ?? '0'
+        canvas.dataset.greedy = this.material.uniforms.uGreedy.value ? 'true' : 'false'
         canvas.dataset.sourceCount = String(this.material.uniforms.uTerritories.value ? 3 : 0)
         canvas.dataset.territoryComplete = this.material.uniforms.uTerritoryComplete.value ? 'true' : 'false'
         canvas.dataset.goalDirected = this.material.uniforms.uAstar.value ? 'true' : 'false'
@@ -244,14 +258,20 @@ export class RoadScene {
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uBackwardTimes.value = this.backwardTexture
     this.material.uniforms.uGoalProximity.value = this.proximityTexture
     this.material.uniforms.uSources.value = this.sourceTexture; this.material.uniforms.uTerritories.value = 0; this.material.uniforms.uTerritoryComplete.value = 0
-    this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0
+    this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0; this.material.uniforms.uGreedy.value = 0
     this.material.uniforms.uTextureSize.value.set(1, 1); this.material.uniforms.uEvent.value = 0
+    this.focusEvents = undefined; this.focusCoordinates = undefined; this.focusPoint = undefined; this.tip.hidden = true; this.tip.dataset.event = '0'
     this.points = []; this.markers.replaceChildren(); this.dirty = true
     this.onRouteRevealChange?.(false)
   }
   setResult(result: SearchResult) {
     if (this.flashPoint) { this.scene.remove(this.flashPoint); this.flashPoint.geometry.dispose(); this.flashPoint = undefined }
     this.flash.clear(); this.meetingEvent = result.meeting?.event
+    const greedy = result.algorithm === 'greedy-best-first/1'
+    this.focusEvents = result.focusEvents; this.focusCoordinates = result.focusCoordinates
+    this.material.uniforms.uGreedy.value = greedy ? 1 : 0
+    this.routeMaterial.uniforms.uColour.value.setRGB(...(greedy ? [1, .76, .60] as const : [.76, .98, .81] as const))
+    this.routeMaterial.uniforms.uHeadColour.value.setRGB(...(greedy ? [1, .95, .83] as const : [1, 1, .88] as const))
     if (result.meeting) {
       const position = this.project(result.meeting)
       const geometry = new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute([position.x, position.y, 0], 3))
@@ -284,6 +304,7 @@ export class RoadScene {
     this.markers.classList.toggle('bidirectional', !!result.backwardTimes)
     this.markers.classList.toggle('astar', !!result.goalProximity)
     this.markers.classList.toggle('territories', !!result.sources)
+    this.markers.classList.toggle('greedy', greedy)
     for (const [i, point] of this.points.entries()) {
       const element = document.createElement('div'); element.className = `map-marker marker-${i}`
       const dot = document.createElement('span'); dot.className = 'marker-dot'
@@ -297,6 +318,15 @@ export class RoadScene {
     this.material.uniforms.uTerritoryComplete.value = this.material.uniforms.uTerritories.value && progress >= 1 ? 1 : 0
     this.flash.cross(this.material.uniforms.uEvent.value, next, this.meetingEvent, animate, this.reducedMotion.matches); this.updateFlash()
     this.material.uniforms.uEvent.value = next
+    this.focusPoint = undefined; this.tip.dataset.event = '0'; this.tip.hidden = true
+    if (progress < 1 && this.focusEvents && this.focusCoordinates) {
+      let low = 0, high = this.focusEvents.length
+      while (low < high) { const middle = (low + high) >>> 1; if (this.focusEvents[middle] <= next) low = middle + 1; else high = middle }
+      if (low > 0) {
+        const i = low - 1; this.focusPoint = { name: '', lon: this.focusCoordinates[i * 2] / 100000, lat: this.focusCoordinates[i * 2 + 1] / 100000 }
+        this.tip.dataset.event = String(this.focusEvents[i])
+      }
+    }
     if (progress < 1 || !this.route) this.reveal.clear()
     else if (animate && !this.reducedMotion.matches) this.reveal.start()
     else this.reveal.finish()
@@ -328,6 +358,11 @@ export class RoadScene {
     return new THREE.Vector3(longitudeOffset(point.lon, p.centre[0], p.longitudeWrapping === 'centre/1') * Math.cos(p.referenceLatitude * Math.PI / 180) * 111195.0802 / p.scaleMetres, (point.lat - p.centre[1]) * 111195.0802 / p.scaleMetres, 0)
   }
   placeMarkers() {
+    if (this.focusPoint) {
+      const point = this.project(this.focusPoint).project(this.camera)
+      this.tip.style.left = `${(point.x + 1) * this.width / 2}px`; this.tip.style.top = `${(1 - point.y) * this.height / 2}px`
+      this.tip.hidden = Math.abs(point.x) > 1 || Math.abs(point.y) > 1
+    }
     for (let i = 0; i < this.points.length; i++) {
       const point = this.project(this.points[i]).project(this.camera), element = this.markers.children[i] as HTMLElement
       element.style.left = `${(point.x + 1) * this.width / 2}px`; element.style.top = `${(1 - point.y) * this.height / 2}px`
@@ -400,6 +435,6 @@ export class RoadScene {
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.clearSelectionFill(); this.geographyContext = undefined
     this.scene.traverse(object => { if (object instanceof THREE.LineSegments) object.geometry.dispose() })
-    this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.forceContextLoss(); this.renderer.domElement.remove(); this.markers.remove()
+    this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.forceContextLoss(); this.renderer.domElement.remove(); this.markers.remove(); this.tip.remove()
   }
 }
