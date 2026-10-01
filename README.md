@@ -110,3 +110,8 @@ Code: [MIT](LICENSE). Road data: © OpenStreetMap contributors, under the
 [Open Database Licence](https://www.openstreetmap.org/copyright). The code
 licence does not relicense OSM-derived databases. Bundled shared-package fonts
 retain their upstream licences.
+
+Ambient adds a three-source Dijkstra study after every four journeys. Seeded,
+separated curated places grow mint, amber and periwinkle road territories; the
+completed field holds without a final-route reveal. Shared territory links and
+exact exports retain all three sources. [Territory evidence](docs/evidence/territories-2026-10-01/README.md).

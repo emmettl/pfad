@@ -1,0 +1,412 @@
+{
+  "measuredAt": "2026-10-01T11:35:39.903Z",
+  "seed": 20261001,
+  "selector": "separated-three-sources/1",
+  "pool": "swiss-places/1",
+  "dataset": {
+    "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+    "compiler": "pfad-study-compiler/1",
+    "profile": "road-connectivity-distance-v1",
+    "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+    "sourceTimestamp": "2026-09-29T20:22:51Z"
+  },
+  "note": "Six seeded Swiss triples; every settled node owner checked against three separate full single-source distance runs, and every recorded arc and first road colour checked. No route reveal or invented road boundaries. Host timings do not establish physical-phone memory or routing legality.",
+  "studies": [
+    {
+      "requestedSources": [
+        {
+          "id": "bern",
+          "name": "Bern",
+          "lon": 7.4474,
+          "lat": 46.948
+        },
+        {
+          "id": "andermatt",
+          "name": "Andermatt",
+          "lon": 8.5948,
+          "lat": 46.6353
+        },
+        {
+          "id": "st-moritz",
+          "name": "St. Moritz",
+          "lon": 9.8355,
+          "lat": 46.4908
+        }
+      ],
+      "sources": [
+        {
+          "id": "bern",
+          "name": "Bern",
+          "lon": 7.44724,
+          "lat": 46.94734,
+          "node": 17468,
+          "snapMetres": 74.3869569260605
+        },
+        {
+          "id": "andermatt",
+          "name": "Andermatt",
+          "lon": 8.59479,
+          "lat": 46.63565,
+          "node": 70921,
+          "snapMetres": 38.92576672115776
+        },
+        {
+          "id": "st-moritz",
+          "name": "St. Moritz",
+          "lon": 9.83552,
+          "lat": 46.49081,
+          "node": 37092,
+          "snapMetres": 1.8922676458176662
+        }
+      ],
+      "snappingVersion": "nearby-shared-three-source-component/1",
+      "algorithm": "multisource-dijkstra/1",
+      "tieBreak": "distance then ascending node id; sources seeded in recorded order; neighbours in compiler edge order; retain first equal-cost discovery",
+      "territories": {
+        "version": "three-source-first-examination/1",
+        "sourceNodes": [
+          673796,
+          467125,
+          83120
+        ],
+        "maximumMetres": 170700.19
+      },
+      "events": 5093554,
+      "examinedArcs": 2601389,
+      "uniqueEdges": 1365458,
+      "searchMs": 193.600041,
+      "snapMs": 68.28508300000001,
+      "traceSha256": "e58a6146a8c82c77fe2e0b97fd8981e8354929c1e6968b6e10334b56106c4fb6"
+    },
+    {
+      "requestedSources": [
+        {
+          "id": "andermatt",
+          "name": "Andermatt",
+          "lon": 8.5948,
+          "lat": 46.6353
+        },
+        {
+          "id": "basel",
+          "name": "Basel",
+          "lon": 7.5886,
+          "lat": 47.5596
+        },
+        {
+          "id": "lugano",
+          "name": "Lugano",
+          "lon": 8.9511,
+          "lat": 46.0037
+        }
+      ],
+      "sources": [
+        {
+          "id": "andermatt",
+          "name": "Andermatt",
+          "lon": 8.59479,
+          "lat": 46.63565,
+          "node": 70921,
+          "snapMetres": 38.92576672115776
+        },
+        {
+          "id": "basel",
+          "name": "Basel",
+          "lon": 7.58856,
+          "lat": 47.55963,
+          "node": 1230603,
+          "snapMetres": 4.487403547768706
+        },
+        {
+          "id": "lugano",
+          "name": "Lugano",
+          "lon": 8.95178,
+          "lat": 46.00321,
+          "node": 219598,
+          "snapMetres": 75.67814902710364
+        }
+      ],
+      "snappingVersion": "nearby-shared-three-source-component/1",
+      "algorithm": "multisource-dijkstra/1",
+      "tieBreak": "distance then ascending node id; sources seeded in recorded order; neighbours in compiler edge order; retain first equal-cost discovery",
+      "territories": {
+        "version": "three-source-first-examination/1",
+        "sourceNodes": [
+          430895,
+          739278,
+          53868
+        ],
+        "maximumMetres": 241668.5
+      },
+      "events": 5093656,
+      "examinedArcs": 2601389,
+      "uniqueEdges": 1365458,
+      "searchMs": 184.87187499999993,
+      "snapMs": 20.080542000000037,
+      "traceSha256": "85c198fff0d339e09181b3c38bb0afb653efbddc6c33ed714258578a61e03dbe"
+    },
+    {
+      "requestedSources": [
+        {
+          "id": "lausanne",
+          "name": "Lausanne",
+          "lon": 6.6323,
+          "lat": 46.5197
+        },
+        {
+          "id": "basel",
+          "name": "Basel",
+          "lon": 7.5886,
+          "lat": 47.5596
+        },
+        {
+          "id": "zurich",
+          "name": "Zürich",
+          "lon": 8.5417,
+          "lat": 47.3769
+        }
+      ],
+      "sources": [
+        {
+          "id": "lausanne",
+          "name": "Lausanne",
+          "lon": 6.63219,
+          "lat": 46.51969,
+          "node": 14197,
+          "snapMetres": 8.489664563138765
+        },
+        {
+          "id": "basel",
+          "name": "Basel",
+          "lon": 7.58856,
+          "lat": 47.55963,
+          "node": 1230603,
+          "snapMetres": 4.487403547768706
+        },
+        {
+          "id": "zurich",
+          "name": "Zürich",
+          "lon": 8.54186,
+          "lat": 47.37689,
+          "node": 3128,
+          "snapMetres": 12.09892862903552
+        }
+      ],
+      "snappingVersion": "nearby-shared-three-source-component/1",
+      "algorithm": "multisource-dijkstra/1",
+      "tieBreak": "distance then ascending node id; sources seeded in recorded order; neighbours in compiler edge order; retain first equal-cost discovery",
+      "territories": {
+        "version": "three-source-first-examination/1",
+        "sourceNodes": [
+          399281,
+          189946,
+          634814
+        ],
+        "maximumMetres": 248663.34
+      },
+      "events": 5093737,
+      "examinedArcs": 2601389,
+      "uniqueEdges": 1365458,
+      "searchMs": 192.38933300000008,
+      "snapMs": 18.44529199999988,
+      "traceSha256": "f9d3f700c894fdeea0ce620f55a55c31e10952346d491f5aed6476fed7f466f8"
+    },
+    {
+      "requestedSources": [
+        {
+          "id": "basel",
+          "name": "Basel",
+          "lon": 7.5886,
+          "lat": 47.5596
+        },
+        {
+          "id": "bern",
+          "name": "Bern",
+          "lon": 7.4474,
+          "lat": 46.948
+        },
+        {
+          "id": "lausanne",
+          "name": "Lausanne",
+          "lon": 6.6323,
+          "lat": 46.5197
+        }
+      ],
+      "sources": [
+        {
+          "id": "basel",
+          "name": "Basel",
+          "lon": 7.58856,
+          "lat": 47.55963,
+          "node": 1230603,
+          "snapMetres": 4.487403547768706
+        },
+        {
+          "id": "bern",
+          "name": "Bern",
+          "lon": 7.44724,
+          "lat": 46.94734,
+          "node": 17468,
+          "snapMetres": 74.3869569260605
+        },
+        {
+          "id": "lausanne",
+          "name": "Lausanne",
+          "lon": 6.63219,
+          "lat": 46.51969,
+          "node": 14197,
+          "snapMetres": 8.489664563138765
+        }
+      ],
+      "snappingVersion": "nearby-shared-three-source-component/1",
+      "algorithm": "multisource-dijkstra/1",
+      "tieBreak": "distance then ascending node id; sources seeded in recorded order; neighbours in compiler edge order; retain first equal-cost discovery",
+      "territories": {
+        "version": "three-source-first-examination/1",
+        "sourceNodes": [
+          565743,
+          387408,
+          270890
+        ],
+        "maximumMetres": 329670.97
+      },
+      "events": 5093828,
+      "examinedArcs": 2601389,
+      "uniqueEdges": 1365458,
+      "searchMs": 200.05037500000026,
+      "snapMs": 16.06883400000015,
+      "traceSha256": "5c7419a4fb43d058d454da5ca6e4328e4b6d3a429cd5f099deb0649e9e3f5ba5"
+    },
+    {
+      "requestedSources": [
+        {
+          "id": "basel",
+          "name": "Basel",
+          "lon": 7.5886,
+          "lat": 47.5596
+        },
+        {
+          "id": "chur",
+          "name": "Chur",
+          "lon": 9.532,
+          "lat": 46.8508
+        },
+        {
+          "id": "bern",
+          "name": "Bern",
+          "lon": 7.4474,
+          "lat": 46.948
+        }
+      ],
+      "sources": [
+        {
+          "id": "basel",
+          "name": "Basel",
+          "lon": 7.58856,
+          "lat": 47.55963,
+          "node": 1230603,
+          "snapMetres": 4.487403547768706
+        },
+        {
+          "id": "chur",
+          "name": "Chur",
+          "lon": 9.53166,
+          "lat": 46.85065,
+          "node": 68286,
+          "snapMetres": 30.768790193585208
+        },
+        {
+          "id": "bern",
+          "name": "Bern",
+          "lon": 7.44724,
+          "lat": 46.94734,
+          "node": 17468,
+          "snapMetres": 74.3869569260605
+        }
+      ],
+      "snappingVersion": "nearby-shared-three-source-component/1",
+      "algorithm": "multisource-dijkstra/1",
+      "tieBreak": "distance then ascending node id; sources seeded in recorded order; neighbours in compiler edge order; retain first equal-cost discovery",
+      "territories": {
+        "version": "three-source-first-examination/1",
+        "sourceNodes": [
+          314524,
+          323659,
+          585858
+        ],
+        "maximumMetres": 216469.34
+      },
+      "events": 5093665,
+      "examinedArcs": 2601389,
+      "uniqueEdges": 1365458,
+      "searchMs": 188.349334,
+      "snapMs": 16.033624999999574,
+      "traceSha256": "738369d7c2e1479fa6e9872f69fa4a59d4c9322deb11b92f1191cca2d9628ca6"
+    },
+    {
+      "requestedSources": [
+        {
+          "id": "st-gallen",
+          "name": "St. Gallen",
+          "lon": 9.3767,
+          "lat": 47.4245
+        },
+        {
+          "id": "st-moritz",
+          "name": "St. Moritz",
+          "lon": 9.8355,
+          "lat": 46.4908
+        },
+        {
+          "id": "lausanne",
+          "name": "Lausanne",
+          "lon": 6.6323,
+          "lat": 46.5197
+        }
+      ],
+      "sources": [
+        {
+          "id": "st-gallen",
+          "name": "St. Gallen",
+          "lon": 9.37444,
+          "lat": 47.42528,
+          "node": 20828,
+          "snapMetres": 190.86489673484422
+        },
+        {
+          "id": "st-moritz",
+          "name": "St. Moritz",
+          "lon": 9.83552,
+          "lat": 46.49081,
+          "node": 37092,
+          "snapMetres": 1.8922676458176662
+        },
+        {
+          "id": "lausanne",
+          "name": "Lausanne",
+          "lon": 6.63219,
+          "lat": 46.51969,
+          "node": 14197,
+          "snapMetres": 8.489664563138765
+        }
+      ],
+      "snappingVersion": "nearby-shared-three-source-component/1",
+      "algorithm": "multisource-dijkstra/1",
+      "tieBreak": "distance then ascending node id; sources seeded in recorded order; neighbours in compiler edge order; retain first equal-cost discovery",
+      "territories": {
+        "version": "three-source-first-examination/1",
+        "sourceNodes": [
+          591512,
+          91792,
+          540737
+        ],
+        "maximumMetres": 227151.04
+      },
+      "events": 5093713,
+      "examinedArcs": 2601389,
+      "uniqueEdges": 1365458,
+      "searchMs": 200.3755000000001,
+      "snapMs": 16.94112499999983,
+      "traceSha256": "4b43d21d481921a3f4caa84f1705d070280a1bdf462060bd7e4ae3f0e83c4bcb"
+    }
+  ]
+}

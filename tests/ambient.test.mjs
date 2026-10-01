@@ -2,6 +2,7 @@ import { test } from 'vitest'
 import assert from 'node:assert/strict'
 import { JourneySelector, AMBIENT_PLACES, distanceBand, replaySeconds, straightLineKm } from '../src/ambient/selector.ts'
 import { AmbientSequence, ALGORITHM_CYCLE_VERSION } from '../src/ambient/sequence.ts'
+import { TerritorySelector } from '../src/ambient/territories.ts'
 import { UK_POOL, AMBIENT_POOLS, LU_POOL } from '../src/ambient/pools.ts'
 
 test('UK selection spans all road regions without proposing sea crossings and exports its pool identity', t => {
@@ -122,4 +123,35 @@ test('every country pool supplies all distance bands without crossing road regio
   }
   assert.equal(distanceBand(55, LU_POOL.distance), 'national')
   assert.equal(distanceBand(55), 'regional')
+})
+
+test('seeded territories select three separated places from one region across every pool', () => {
+  for (const pool of Object.values(AMBIENT_POOLS)) {
+    const first = new TerritorySelector(20261001, pool), second = new TerritorySelector(20261001, pool), recent = []
+    for (let i = 0; i < 50; i++) {
+      first.beginStudy(); second.beginStudy()
+      const a = first.choose(), b = second.choose(); assert.ok(a); assert.deepEqual(a, b)
+      const key = a.sources.map(source => source.id).sort().join('/')
+      assert.equal(recent.includes(key), false)
+      assert.equal(new Set(a.sources.map(source => source.id)).size, 3)
+      assert.ok(a.sources.every(source => source.region === a.sources[0].region))
+      for (let j = 0; j < 3; j++) for (let k = j + 1; k < 3; k++) assert.ok(straightLineKm(a.sources[j], a.sources[k]) >= (pool.distance?.minimumKm ?? 30))
+      first.accept(a); second.accept(b); recent.push(key); if (recent.length > 3) recent.shift()
+    }
+  }
+  assert.equal(new TerritorySelector(1, { version: 'fixture/1', places: AMBIENT_PLACES.slice(0, 2) }).choose(), null)
+})
+test('ambient inserts territories after four journeys, records their sources and holds without a final route', t => {
+  const { sequence, algorithms, pairs, result, step } = harness(t)
+  sequence.start(42, false, 'astar')
+  for (let i = 0; i < 4; i++) { sequence.receive(result()); sequence.next() }
+  assert.deepEqual(algorithms, ['astar', 'bidirectional-astar', 'dijkstra', 'bidirectional', 'multisource'])
+  const sources = pairs.at(-1).sources; assert.equal(sources.length, 3)
+  const territory = { ...result(), algorithm: 'multisource-dijkstra/1', sources, territories: { maximumMetres: 150000, sourceNodes: [10, 11, 12] }, routeMetres: null }
+  assert.equal(sequence.receive(territory), true)
+  assert.equal(sequence.duration, replaySeconds(150))
+  assert.equal(sequence.records.at(-1).kind, 'territories')
+  assert.deepEqual(sequence.records.at(-1).sources, sources.map(source => source.id))
+  sequence.complete(); assert.equal(sequence.state.phase, 'hold'); step(8000)
+  assert.equal(algorithms.at(-1), 'astar'); sequence.receive(result()); sequence.exit()
 })

@@ -45,7 +45,7 @@ export interface Graph {
 export interface Point { name: string; lon: number; lat: number }
 export interface Endpoint extends Point { node: number; snapMetres: number }
 export interface SnappingRecord { version: 'nearby-shared-component/1'; requestedStart: Point; requestedGoal: Point }
-export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar' | 'bidirectional-astar'
+export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar' | 'bidirectional-astar' | 'multisource'
 export interface Meeting { event: number; node: number; lon: number; lat: number; candidateMetres: number }
 export interface HeuristicRecord {
   version: 'feasible-planar-distance/1'
@@ -58,7 +58,7 @@ export interface HeuristicRecord {
 
 export interface SearchResult {
   dataset?: { identity: string; compiler: string; profile: string; sourceSha256: string; sourceTimestamp: string }
-  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1' | 'astar/1' | 'bidirectional-astar/1'
+  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1' | 'astar/1' | 'bidirectional-astar/1' | 'multisource-dijkstra/1'
   tieBreak: string
   start: Endpoint
   goal: Endpoint
@@ -74,6 +74,11 @@ export interface SearchResult {
   checkpoints: Uint32Array
   checkpointStride: number
   edgeTimes: Uint32Array
+  sources?: [Endpoint, Endpoint, Endpoint]
+  requestedSources?: [Point, Point, Point]
+  sourceSnappingVersion?: 'nearby-shared-three-source-component/1'
+  territories?: { version: 'three-source-first-examination/1'; sourceNodes: number[]; maximumMetres: number }
+  edgeSources?: Uint8Array
   backwardTimes?: Uint32Array
   goalProximity?: Uint8Array
   balancedHeuristic?: { version: 'balanced-feasible-planar-distance/1'; preparationMs: number; forward: HeuristicRecord; backward: HeuristicRecord }
@@ -88,7 +93,7 @@ export interface SearchResult {
   maxQueue: number
 }
 
-export type Request = { type: 'load'; manifestUrl: string; expectedIdentity?: string } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm }
+export type Request = { type: 'load'; manifestUrl: string; expectedIdentity?: string } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm; sources?: [Point, Point, Point] }
 export type Reply =
   | { type: 'progress'; loaded: number; total: number; stage: string }
   | { type: 'manifest'; manifest: StudyManifest; manifestUrl: string }

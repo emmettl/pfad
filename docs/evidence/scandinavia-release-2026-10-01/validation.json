@@ -6,5 +6,27 @@
     "artifactBytes": 28888346
   },
   "note": "The shared working tree includes a separate in-progress ambient-territories change. These results validate integration with it. The final selected commit is checked separately before publication.",
-  "physicalPhoneTested": false
+  "physicalPhoneTested": false,
+  "selectedRelease": {
+    "commit": "bb5db74e2d2df4033c9f2fbf9f27add98b2a1c26",
+    "unitTests": 86,
+    "buildFiles": 57,
+    "artifactBytes": 28878885,
+    "scandinaviaBrowserProof": "browser-context-selected.json",
+    "browserTests": 48
+  },
+  "deployment": {
+    "pagesRun": 36860447102,
+    "cloudflareRun": 36861070792,
+    "sourceCommit": "bb5db74e2d2df4033c9f2fbf9f27add98b2a1c26",
+    "contentSha256": "ee174b18761fcf6687805fd2a99a007f304fec81df467ab038ebecca3f0776f7",
+    "liveHosts": [
+      "https://emmettl.github.io/pfad/",
+      "https://motionstudies.app/pfad/"
+    ],
+    "liveProofs": [
+      "browser-context-live-pages.json",
+      "browser-context-live-cloudflare.json"
+    ]
+  }
 }

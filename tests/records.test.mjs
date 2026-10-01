@@ -137,3 +137,18 @@ test('bidirectional A* survives native and legacy links and exports its balanced
   assert.deepEqual(record.search.balancedHeuristic, balancedHeuristic)
   assert.equal(record.buffers.backwardTimes.count, 2)
 })
+
+test('territory links retain three sources and exact exports retain examination colours', async () => {
+  const sources = [study.start, study.goal, { name: 'Basel', lon: 7.5886, lat: 47.5596 }]
+  const presentation = { ...study, algorithm: 'multisource', sources, progress: 0 }
+  const decoded = readStudyLink(studyUrl('https://example.org/', presentation)).study
+  assert.deepEqual(decoded.sources, sources); assert.equal(decoded.algorithm, 'multisource')
+  assert.deepEqual(readStudyLink(legacy(presentation)).study, presentation)
+  assert.ok(readStudyLink('?algorithm=multisource').error)
+  assert.ok(readStudyLink('?algorithm=dijkstra&source-c=basel').error)
+  const result = { algorithm: 'multisource-dijkstra/1', sources, trace: new Uint32Array([0x80000005]), edgeSources: new Uint8Array([0, 1, 2]) }
+  const bytes = gunzipSync(Buffer.from(await (await exportRecord(result, { source: {} }, presentation, [])).arrayBuffer()))
+  const record = JSON.parse(bytes.subarray(12, 12 + bytes.readUInt32LE(8)))
+  assert.deepEqual(record.search.sources, sources); assert.equal(record.buffers.edgeSources.type, 'uint8'); assert.equal(record.buffers.edgeSources.count, 3)
+  assert.equal('edgeSources' in record.search, false)
+})

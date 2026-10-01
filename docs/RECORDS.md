@@ -132,3 +132,12 @@ balanced-potential version, total preparation time and each directed estimate's
 version and correction measurements. The ambient cycle is now
 `four-algorithm-rotation/1`; older exported three-algorithm cycles retain their
 original metadata.
+
+Territory studies use `algorithm=multisource`, `from` and `to` for the first two
+sources, plus `source-c` (and optional `source-c-name`) for the third. These are
+sources, not origin/destination roles. The exact record includes requested and
+snapped source triples, source-snapping version, territory statistics and a
+packed `edgeSources` byte array. Its source-tagged trace follows the
+[three-source contract](ARCHITECTURE.md#three-source-territory-study). Ambient
+records use `kind: territories` and source IDs/coverage statistics rather than
+journey distance bands; existing journey records remain readable.

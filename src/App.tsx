@@ -10,6 +10,7 @@ import type { Point, Reply, SearchAlgorithm, SearchResult, StudyManifest } from 
 import { SoundControl, type SoundHandle } from './music/SoundControl.tsx'
 import { AmbientSequence, type AmbientState } from './ambient/sequence.ts'
 import { useAmbientChrome } from './ambient/useChrome.ts'
+import type { TerritoryStudy } from './ambient/territories.ts'
 import type { JourneyPair } from './ambient/selector.ts'
 import { ROAD_CACHE_NAME, type LoadMeasurements } from './search/chunks.ts'
 import { clearStudyUrl, readStudyLink, shareView, studyUrl, StudyUrlBinding, type StudyLink } from './records/link.ts'
@@ -20,8 +21,8 @@ import './study.css'
 const number = new Intl.NumberFormat('en-CH')
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const samePoint = (a: Point, b: Point) => a.name === b.name && a.lon === b.lon && a.lat === b.lat
-const resultAlgorithm = (result: SearchResult): SearchAlgorithm => result.algorithm === 'bidirectional-dijkstra/1' ? 'bidirectional' : result.algorithm.split('/')[0] as SearchAlgorithm
-const algorithmName = (algorithm: SearchAlgorithm) => ({ dijkstra: 'Dijkstra', bidirectional: 'Bidirectional Dijkstra', astar: 'A*', 'bidirectional-astar': 'Bidirectional A*' }[algorithm])
+const resultAlgorithm = (result: SearchResult): SearchAlgorithm => result.algorithm === 'multisource-dijkstra/1' ? 'multisource' : result.algorithm === 'bidirectional-dijkstra/1' ? 'bidirectional' : result.algorithm.split('/')[0] as SearchAlgorithm
+const algorithmName = (algorithm: SearchAlgorithm) => ({ dijkstra: 'Dijkstra', bidirectional: 'Bidirectional Dijkstra', astar: 'A*', 'bidirectional-astar': 'Bidirectional A*', multisource: 'Three-source Dijkstra' }[algorithm])
 
 export function App() {
   const [shared, setShared] = useState(() => {
@@ -46,8 +47,9 @@ export function App() {
   const sound = useRef<SoundHandle | null>(null)
   const cacheOwner = useRef<Promise<Cache | undefined> | null>(null)
   const manualDuration = useRef(30)
+  const activeSources = useRef<[Point, Point, Point] | undefined>(shared.study?.sources)
   const [ambientState, setAmbientState] = useState<AmbientState>({ active: false, running: false, phase: 'off', opacity: 1, message: '' })
-  const ambient = useRef<AmbientSequence | null>(null), ambientSearch = useRef<(pair: JourneyPair, algorithm: SearchAlgorithm) => void>(() => {})
+  const ambient = useRef<AmbientSequence | null>(null), ambientSearch = useRef<(pair: JourneyPair | TerritoryStudy, algorithm: SearchAlgorithm) => void>(() => {})
   ambient.current ??= new AmbientSequence(setAmbientState, (pair, mode) => ambientSearch.current(pair, mode))
   const [measurements, setMeasurements] = useState<LoadMeasurements | null>(null)
   const [outlineAttempt, setOutlineAttempt] = useState(0)
@@ -88,7 +90,7 @@ export function App() {
     if (!worker.current) return
     setError(''); setBusy(true); setPlaying(false); setPick(null)
     if (country.large) { setResult(null); scene.current?.clearResult() }
-    worker.current.postMessage({ type: 'search', requestId: ++currentRequest.current, start: a, goal: b, algorithm: mode })
+    worker.current.postMessage({ type: 'search', requestId: ++currentRequest.current, start: a, goal: b, algorithm: mode, sources: mode === 'multisource' ? activeSources.current : undefined })
   }, [country.large])
 
   useEffect(() => {
@@ -116,12 +118,15 @@ export function App() {
     return () => { binding.dispose(); urlBinding.current = null; window.removeEventListener('hashchange', navigate); window.removeEventListener('popstate', navigate); window.removeEventListener('pagehide', flush); document.removeEventListener('visibilitychange', flush) }
   }, [])
 
-  ambientSearch.current = (pair, mode) => { algorithmRef.current = mode; setAlgorithm(mode); setStart(pair.start); setGoal(pair.goal); search(pair.start, pair.goal, mode) }
+  ambientSearch.current = (pair, mode) => { activeSources.current = 'sources' in pair ? pair.sources : undefined; algorithmRef.current = mode; setAlgorithm(mode); setStart(pair.start); setGoal(pair.goal); search(pair.start, pair.goal, mode) }
   const exitAmbient = () => {
     if (!ambient.current!.state.active) return
     ambient.current!.exit(); ++currentRequest.current; setBusy(false); setPlaying(false); setDuration(manualDuration.current); sound.current?.resumeSequence()
-    if (result) { const mode = resultAlgorithm(result); algorithmRef.current = mode; setAlgorithm(mode); setStart(result.snapping?.requestedStart ?? result.start); setGoal(result.snapping?.requestedGoal ?? result.goal) }
+    if (result) { const mode = resultAlgorithm(result); algorithmRef.current = mode; setAlgorithm(mode); activeSources.current = result.requestedSources; setStart(result.requestedSources?.[0] ?? result.snapping?.requestedStart ?? result.start); setGoal(result.requestedSources?.[1] ?? result.snapping?.requestedGoal ?? result.goal) }
     host.current?.focus()
+  }
+  const returnToJourney = () => {
+    activeSources.current = undefined; algorithmRef.current = 'dijkstra'; setAlgorithm('dijkstra'); search(start, goal, 'dijkstra')
   }
 
   useEffect(() => {
@@ -216,6 +221,7 @@ export function App() {
     if (next.id === country.id) { if (shared.study && shared.study.country !== next.id) clearShared(); else setPendingCountry(null); return }
     if (next.large && !acknowledgedWarnings.current.has(id) && !countryWarningAcknowledged(id)) { setPendingCountry(id); return }
     exitAmbient()
+    if (algorithmRef.current === 'multisource') { activeSources.current = undefined; algorithmRef.current = 'dijkstra'; setAlgorithm('dijkstra') }
     if (shared.study && shared.study.country !== next.id) { sharedFrame.current = undefined; setShared({}); history.replaceState(history.state, '', clearStudyUrl(location.href)) }
     const a = shared.study?.country === next.id ? shared.study.start : next.places[0], b = shared.study?.country === next.id ? shared.study.goal : next.places[1]
     initialQuery.current = { start: a, goal: b }
@@ -248,7 +254,7 @@ export function App() {
   }, [result, busy, error, pick, pendingCountry, duration, seek, togglePlayback])
 
   const currentStudy = (): StudyLink | null => result?.dataset ? ({ schema: 'pfad-study-link/1', country: country.id, dataset: result.dataset.identity, profile: result.dataset.profile,
-    start: result.snapping?.requestedStart ?? result.start, goal: result.snapping?.requestedGoal ?? result.goal, algorithm: resultAlgorithm(result), duration, progress: progressRef.current, outlines, view: scene.current?.getView() }) : null
+    start: result.requestedSources?.[0] ?? result.snapping?.requestedStart ?? result.start, goal: result.requestedSources?.[1] ?? result.snapping?.requestedGoal ?? result.goal, algorithm: resultAlgorithm(result), ...(result.requestedSources ? { sources: result.requestedSources } : {}), duration, progress: progressRef.current, outlines, view: scene.current?.getView() }) : null
   const currentParameters = (): StudyLink | null => {
     const study = currentStudy()
     if (shared.error || error || pendingCountry || ambientState.phase === 'preparing') return null
@@ -256,13 +262,14 @@ export function App() {
     const frame = sharedFrame.current
     const restoring = frame?.country === country.id && samePoint(start, frame.start) && samePoint(goal, frame.goal) && algorithm === frame.algorithm
     return { schema: 'pfad-study-link/1', country: country.id, dataset: country.identity, profile: manifest?.profile ?? 'road-connectivity-distance-v1',
-      start, goal, algorithm, duration, progress: restoring ? frame.progress : !busy && sameSearch ? progressRef.current : 0, outlines,
+      start, goal, algorithm, ...(algorithm === 'multisource' && activeSources.current ? { sources: activeSources.current } : {}), duration, progress: restoring ? frame.progress : !busy && sameSearch ? progressRef.current : 0, outlines,
       view: restoring ? frame.view : manifest?.identity === country.identity ? shareView(view, manifest.bounds) : undefined }
   }
   currentParametersRef.current = currentParameters
   useEffect(() => { urlBinding.current?.update(currentParameters()) })
   const clearShared = () => {
     history.replaceState(history.state, '', clearStudyUrl(location.href)); sharedFrame.current = undefined; setShared({}); setPendingCountry(null); setError('')
+    activeSources.current = undefined; algorithmRef.current = 'dijkstra'; setAlgorithm('dijkstra')
     initialQuery.current = { start: COUNTRIES[0].places[0], goal: COUNTRIES[0].places[1] }; setStart(initialQuery.current.start); setGoal(initialQuery.current.goal); setCountry(COUNTRIES[0])
   }
   const counts = result ? countsAt(result, progress) : [0, 0, 0]
@@ -295,12 +302,13 @@ export function App() {
         <p>Bidirectional A* directs both fronts using balanced, checked distance estimates. Mint grows from A and amber from B; their first connection is followed by confirmation of the shortest distance. Estimate preparation is separate from the timed search.</p>
         <p>A* directs the search using a checked lower bound on the remaining distance. Cool blue roads shade towards ice-white as that estimate falls; recent examinations glow while earlier branches recede. Only roads actually examined are revealed.</p>
         <p>The A* distance bound is prepared separately from the timed search, with corrections for the graph’s rounded coordinates and road lengths. All four algorithms solve the same shortest-distance question.</p>
-        <p>Once the recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
+        <p>Three-source Dijkstra is an ambient territory study. It runs until no reachable nodes remain, using the recorded one-way directions. It measures distance outwards from the sources, and does not calculate a route connecting them.</p>
+        <p>Once a journey’s recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
         <p id="playback-shortcuts">Keyboard: Space plays or pauses the search replay; in ambient it pauses the whole sequence and Escape leaves ambient. Left/Right moves one second; hold Shift to move five seconds. Home/End jumps to the beginning or end. These shortcuts work on the map and timeline; place pickers and sound controls keep their own keys.</p>
-        <p>Ambient chooses journeys from {country.ambient.places.length} curated places in {country.name} and cycles Dijkstra, bidirectional Dijkstra, A* and bidirectional A*, beginning with the selected algorithm. Road distance sets both the selection band and replay duration (25–65 seconds), followed by a six-second hold and two seconds to darkness. Pause sequence pauses the score too; Next keeps it continuous. Reduced motion shows stills with deliberate Next. The sequence pauses when the page is hidden.</p>
+        <p>Ambient chooses journeys from {country.ambient.places.length} curated places in {country.name} and cycles Dijkstra, bidirectional Dijkstra, A* and bidirectional A*, beginning with the selected algorithm. After four journeys, three separated places seed a territory study in mint, amber and periwinkle. Every reached node has the shortest road distance from its nearest source; road colours identify the source of their first recorded examination. The completed territories hold without a route reveal. Their replay duration follows the furthest reached node’s nearest-source distance. Road distance sets both the selection band and replay duration (25–65 seconds), followed by a six-second hold and two seconds to darkness. Pause sequence pauses the score too; Next keeps it continuous. Reduced motion shows stills with deliberate Next. The sequence pauses when the page is hidden.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Ferries are excluded, so land areas without road connections form separate components. Its route describes this connectivity model.</p>
         <p>Endpoints snap to nearby main or residential road nodes, within two kilometres. Where possible, both ends use the same road component with the smallest combined displacement. The search still checks one-way reachability; disconnected journeys can return no route.</p>
-        {result && <p>Current endpoint displacement: A {result.start.snapMetres.toFixed(0)} m · B {result.goal.snapMetres.toFixed(0)} m from the requested coordinates.</p>}
+        {result?.sources ? <p>Source displacement: {result.sources.map((source, i) => `${String.fromCharCode(65 + i)} ${source.snapMetres.toFixed(0)} m`).join(' · ')} from the requested coordinates.</p> : result && <p>Current endpoint displacement: A {result.start.snapMetres.toFixed(0)} m · B {result.goal.snapMetres.toFixed(0)} m from the requested coordinates.</p>}
         <p>OpenStreetMap snapshot · {country.snapshot}.<br />Road curves are simplified for drawing; search costs retain original lengths.</p>
         {country.outlines && <p>The optional outlines provide quiet geographic context: {country.outlineDescription} They stay visible independently of the search.</p>}
         <p>Original ambient sketches composed using Driftbox: Plateau, Contours and Afterglow. This is a provisional score, flowing independently of the search. Sound starts off and pauses when you leave the page.</p>
@@ -327,12 +335,12 @@ export function App() {
         <a href="https://github.com/emmettl/pfad">PFAD repository ↗</a>
       </div></details><div className="map-tools"><SoundControl ref={sound} sequencePaused={ambientState.active && !ambientState.running} /><button className="outline-control" aria-label="Show border and lake outlines" aria-pressed={outlines} disabled={!outlineReady || !!mapError || !country.outlines} onClick={() => { const visible = !outlines; setOutlines(visible); outlinePreference.current = visible; scene.current?.setGeographyVisible(visible) }}><span aria-hidden="true">◇</span> Outlines</button></div></div>
     </header>
-    <div className="route-panel" aria-label="Search endpoints">
+    {algorithm !== 'multisource' && <div className="route-panel" aria-label="Search endpoints">
       {queryControl(start, setStart, 'start')}
       <button className="swap-button" aria-label="Swap start and destination" disabled={busy} onClick={() => { setStart(goal); setGoal(start) }}>⇄</button>
       {queryControl(goal, setGoal, 'goal')}
       <button className="search-button" disabled={!ready || busy} onClick={() => search(start, goal)}>{busy ? 'Computing…' : 'Search'}</button>
-    </div>
+    </div>}
     <main className={`map ${pick ? 'pick-mode' : ''}`} ref={host} style={{ opacity: ambientState.opacity }} tabIndex={0} aria-label={`Recorded pathfinding across ${country.name}`} aria-describedby="playback-shortcuts" aria-keyshortcuts="Space ArrowLeft ArrowRight Shift+ArrowLeft Shift+ArrowRight Home End Escape" />
     {pending && <div className="country-confirm" role="dialog" aria-label="Open a large road dataset"><p>{pending.name} · {pending.downloadMB} MB download</p><p>{pending.deviceNote}</p><button onClick={() => { acknowledgedWarnings.current.add(pending.id); rememberCountryWarning(pending.id); chooseCountry(pending.id) }}>Open {pending.name}</button><button onClick={() => shared.study ? clearShared() : setPendingCountry(null)}>Cancel</button></div>}
     {pick && <div className="map-hint">Choose point {pick === 'start' ? 'A' : 'B'} on the map <button onClick={() => setPick(null)}>Cancel</button></div>}
@@ -343,14 +351,14 @@ export function App() {
     <button className="reset-view" aria-label="Show whole network" title="Show whole network" onClick={() => scene.current?.resetView()}>↗↙</button>
     <div className="playback-panel">
       <div className="search-readout">
-        <div className="route-caption">{result ? <>{result.start.name}<span>→</span>{result.goal.name}{completed && result.routeMetres !== null && <em>{(result.routeMetres / 1000).toFixed(1)} km</em>}</> : <span>A real search. A slower clock.</span>}{ambientState.active && <span className="ambient-algorithm">{algorithmName(algorithm)}</span>}</div>
-        <div className="compute-readout"><button className="ambient-start" disabled={!ready || busy || pendingCountry !== null || !!mapError} title="A looping series of distance-selected journeys" onClick={() => { manualDuration.current = duration; setPick(null); scene.current?.resetView(); ambient.current!.start(crypto.getRandomValues(new Uint32Array(1))[0], prefersReducedMotion(), algorithm, country.ambient); host.current?.focus() }}>Ambient</button><select aria-label="Search algorithm" value={algorithm} disabled={!ready || busy} onChange={event => { const mode = event.target.value as SearchAlgorithm; algorithmRef.current = mode; setAlgorithm(mode); search(start, goal) }}><option value="dijkstra">Dijkstra</option><option value="bidirectional">Bidirectional Dijkstra</option><option value="astar">A*</option><option value="bidirectional-astar">Bidirectional A*</option></select>{result && <><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></>}{result?.backwardTimes && <span className="front-key"><i className="front-a" />A<i className="front-b" />B</span>}{result?.goalProximity && <span className="front-key"><i className="goal-gradient" />Towards B</span>}</div>
+        <div className="route-caption">{result?.sources ? <>{result.sources.map(source => source.name).join(' · ')}</> : result ? <>{result.start.name}<span>→</span>{result.goal.name}{completed && result.routeMetres !== null && <em>{(result.routeMetres / 1000).toFixed(1)} km</em>}</> : <span>A real search. A slower clock.</span>}{ambientState.active && <span className="ambient-algorithm">{algorithmName(algorithm)}</span>}</div>
+        <div className="compute-readout"><button className="ambient-start" disabled={!ready || busy || pendingCountry !== null || !!mapError} title="A looping series of distance-selected journeys" onClick={() => { manualDuration.current = duration; setPick(null); scene.current?.resetView(); ambient.current!.start(crypto.getRandomValues(new Uint32Array(1))[0], prefersReducedMotion(), algorithm === 'multisource' ? 'dijkstra' : algorithm, country.ambient); host.current?.focus() }}>Ambient</button>{algorithm === 'multisource' ? <span className="territory-mode">Three-source Dijkstra{!ambientState.active && <button onClick={returnToJourney}>Journey</button>}</span> : <select aria-label="Search algorithm" value={algorithm} disabled={!ready || busy} onChange={event => { const mode = event.target.value as SearchAlgorithm; algorithmRef.current = mode; setAlgorithm(mode); search(start, goal) }}><option value="dijkstra">Dijkstra</option><option value="bidirectional">Bidirectional Dijkstra</option><option value="astar">A*</option><option value="bidirectional-astar">Bidirectional A*</option></select>}{result && <><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></>}{result?.backwardTimes && <span className="front-key"><i className="front-a" />A<i className="front-b" />B</span>}{result?.sources && <span className="front-key"><i className="front-a" />A<i className="front-b" />B<i className="front-c" />C</span>}{result?.goalProximity && <span className="front-key"><i className="goal-gradient" />Towards B</span>}</div>
       </div>
       {ambientState.active && <div className="ambient-controls" aria-label="Ambient sequence">
         <button aria-label={ambientState.running ? 'Pause sequence' : 'Resume sequence'} onClick={togglePlayback} disabled={ambientState.phase === 'stopped'}>{ambientState.running ? 'Pause' : 'Resume'}</button>
         <button aria-label="Next journey" disabled={busy} onClick={() => ambient.current!.next()}>Next</button>
         <button aria-label="Exit ambient" title="Exit ambient (Escape)" onClick={exitAmbient}>Exit</button>
-        <span role="status">{ambientState.message || (!ambientState.running && ambientState.phase !== 'still' ? 'Sequence paused' : ({ preparing: 'Finding a journey', replay: 'The search', hold: 'The road taken', fade: 'Between journeys', still: 'Choose Next for another still' }[ambientState.phase as string] ?? 'Sequence paused'))}</span>
+        <span role="status">{ambientState.message || (!ambientState.running && ambientState.phase !== 'still' ? 'Sequence paused' : ({ preparing: 'Finding a journey', replay: 'The search', hold: result?.sources ? 'Three territories' : 'The road taken', fade: 'Between journeys', still: 'Choose Next for another still' }[ambientState.phase as string] ?? 'Sequence paused'))}</span>
       </div>}
       <div className="replay-controls">
         <button disabled={!result || busy} onClick={togglePlayback} title="Play / pause (Space)" aria-keyshortcuts="Space">{playing ? 'Pause' : 'Play'}</button>
@@ -359,7 +367,7 @@ export function App() {
         <span className="replay-time">{(progress * duration).toFixed(1)}<small> / {Number(duration.toFixed(1))}s</small></span>
         <select aria-label="Replay duration" value={duration} onChange={event => setDuration(Number(event.target.value))}>{![5, 15, 30, 60, 120].includes(duration) && <option value={duration}>{duration.toFixed(1)}s</option>}{[5, 15, 30, 60, 120].map(value => <option key={value} value={value}>{value}s</option>)}</select>
       </div>
-      <div className="event-readout"><span><strong data-testid="settled-count">{number.format(counts[0])}</strong> node settlements</span><span><strong data-testid="examined-count">{number.format(counts[1])}</strong> connections examined</span><span className="replay-status">{busy ? 'Recording search' : revealing ? playing ? 'Revealing the route' : 'Route reveal paused' : completed ? result.routeMetres === null ? 'No route in this graph' : 'Route found' : playing ? 'Replaying recorded events' : result ? 'Replay paused' : 'Preparing the network'}</span></div>
+      <div className="event-readout"><span><strong data-testid="settled-count">{number.format(counts[0])}</strong> node settlements</span><span><strong data-testid="examined-count">{number.format(counts[1])}</strong> connections examined</span><span className="replay-status">{busy ? 'Recording search' : revealing ? playing ? 'Revealing the route' : 'Route reveal paused' : completed ? result.sources ? 'Territories complete' : result.routeMetres === null ? 'No route in this graph' : 'Route found' : playing ? 'Replaying recorded events' : result ? 'Replay paused' : 'Preparing the network'}</span></div>
     </div>
     <footer><div className="map-credits"><a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors · ODbL</a>{country.outlines && <a href={country.outlineCreditUrl}>Outlines: {country.outlineCredit}</a>}</div><span>{country.name} · {country.snapshot} · Connectivity study</span></footer>
   </div>

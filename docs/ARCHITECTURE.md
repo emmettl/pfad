@@ -231,3 +231,34 @@ preparation time and the two original heuristic records. Preparation temporarily
 adds two Float64 node arrays and the existing correction workspace; physical
 phone memory validation remains open. The replay retains mint/amber fronts and
 the existing first-connection light.
+
+## Three-source territory study
+
+`multisource-dijkstra/1` seeds three distinct road nodes with distance zero and
+runs a single Dijkstra queue to exhaustion. Each settled node has the minimum
+outward directed road distance from any source. Queue ties use ascending node
+ID; equal-cost discoveries retain the first source under the recorded source
+order and compiler arc order. Unreachable nodes and roads remain unlit.
+
+`nearby-shared-three-source-component/1` chooses eligible roads within two
+kilometres, preferring a common weak component with minimum summed displacement.
+When no shared nearby component exists, each source retains its nearest eligible
+road; the actual directed search decides coverage. Snapped IDs must be distinct.
+
+The trace uses two high bits for source index 0–2 and two low bits for settle,
+examine and improvement kinds. Decode source with `word >>> 30` and graph ID with
+`(word & 0x3fffffff) >>> 2`. IDs must remain below 2^28. Existing checkpoint counts
+still use only the low kind bits. A single RG integer timestamp texture and a
+one-byte source texture colour each road by its first real examination from a
+settled node. This is an examination colour, not an interpolated boundary within
+a road or an all-pairs route. No meeting flash, final path or route reveal is
+constructed. Completed territories brighten for the hold.
+
+Only the ambient sequence selects triples; manual endpoint pickers stay at two.
+A shared territory can be inspected and switched back with Journey. Exiting
+ambient preserves the territory frame. All requested/snapped sources, versions,
+source node counts, maximum nearest-source distance and exact source-tagged trace
+are exportable. Per-query workspace is one distance array, one settled array,
+one node-source array and one queue; the source texture adds one byte per padded
+road. Full reachable coverage may examine more roads than a destination search;
+physical-phone budgets remain unvalidated.

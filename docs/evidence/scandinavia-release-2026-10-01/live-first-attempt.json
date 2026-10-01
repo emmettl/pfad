@@ -1,0 +1,7 @@
+{
+  "host": "https://motionstudies.app/pfad/",
+  "phase": "stopped",
+  "algorithm": "bidirectional-astar",
+  "message": "No journey in this distance band after bounded attempts. Choose Next to try another band.",
+  "result": "Initial proof expected still unconditionally and failed on the documented bounded-attempt stop. Country proof now records that outcome, verifies Next is enabled, and allows at most four new-band recovery requests. Other stopped/error messages remain failures. The successful fresh-seed retry completed eight studies with no bounded stop; existing unit tests cover stopping and Next after exhausted attempts. No graph or app change was needed."
+}

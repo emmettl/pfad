@@ -12,6 +12,9 @@ const vertexShader = `
   uniform highp usampler2D uTimes;
   uniform highp usampler2D uBackwardTimes;
   uniform float uBidirectional;
+  uniform sampler2D uSources;
+  uniform float uTerritories;
+  flat out float vSource;
   uniform sampler2D uGoalProximity;
   uniform float uAstar;
   uniform vec2 uTextureSize;
@@ -21,6 +24,7 @@ const vertexShader = `
   void main() {
     vec2 uv = (vec2(mod(roadId, uTextureSize.x), floor(roadId / uTextureSize.x)) + .5) / uTextureSize;
     vTimes = texture(uTimes, uv).rg;
+    vSource = uTerritories > .5 ? floor(texture(uSources, uv).r * 255. + .5) : 0.;
     vBackwardTimes = uBidirectional > .5 ? texture(uBackwardTimes, uv).rg : uvec2(0u);
     vGoalProximity = uAstar > .5 ? texture(uGoalProximity, uv).r : 0.;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position.xy, 0., 1.);
@@ -29,6 +33,9 @@ const vertexShader = `
 const fragmentShader = `
   uniform highp uint uEvent;
   uniform float uTotal;
+  uniform float uTerritories;
+  uniform float uTerritoryComplete;
+  flat in float vSource;
   uniform float uAstar;
   flat in uvec2 vTimes;
   flat in uvec2 vBackwardTimes;
@@ -45,7 +52,13 @@ const fragmentShader = `
   void main() {
     vec3 quiet = mix(vec3(.21, .48, .42), mix(vec3(.16, .35, .65), vec3(.30, .55, .60), vGoalProximity), uAstar);
     vec3 bright = mix(vec3(.52, .95, .78), mix(vec3(.42, .72, 1.), vec3(.78, .97, 1.), vGoalProximity), uAstar);
+    if (uTerritories > .5) {
+      if (vSource > 1.5) { quiet = vec3(.38, .35, .60); bright = vec3(.73, .70, 1.); }
+      else if (vSource > .5) { quiet = vec3(.55, .38, .19); bright = vec3(1., .76, .43); }
+      quiet = mix(quiet, bright * .7, uTerritoryComplete);
+    }
     vec4 a = front(vTimes, quiet, bright);
+    if (uTerritories > .5 && a.a > 0.) a.a += .10 * uTerritoryComplete;
     vec4 b = front(vBackwardTimes, vec3(.55, .38, .19), vec3(1., .76, .43));
     float total = a.a + b.a;
     if (total <= 0.) discard;
@@ -60,6 +73,7 @@ export class RoadScene {
   material: THREE.ShaderMaterial
   texture: THREE.DataTexture
   backwardTexture: THREE.DataTexture
+  sourceTexture: THREE.DataTexture
   proximityTexture: THREE.DataTexture
   manifest?: StudyManifest
   events = 1
@@ -105,11 +119,13 @@ export class RoadScene {
     this.texture.needsUpdate = true
     this.backwardTexture = new THREE.DataTexture(new Uint32Array([0, 0]), 1, 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
     this.backwardTexture.needsUpdate = true
+    this.sourceTexture = new THREE.DataTexture(new Uint8Array([0]), 1, 1, THREE.RedFormat, THREE.UnsignedByteType)
+    this.sourceTexture.needsUpdate = true
     this.proximityTexture = new THREE.DataTexture(new Uint8Array([0]), 1, 1, THREE.RedFormat, THREE.UnsignedByteType)
     this.proximityTexture.needsUpdate = true
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, glslVersion: THREE.GLSL3,
-      uniforms: { uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
+      uniforms: { uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
       transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     })
     host.appendChild(this.renderer.domElement)
@@ -146,6 +162,8 @@ export class RoadScene {
         canvas.dataset.totalEvents = String(this.events)
         canvas.dataset.flashPhase = this.flash.active ? 'flashing' : 'hidden'
         canvas.dataset.flashProgress = String(this.flash.progress)
+        canvas.dataset.sourceCount = String(this.material.uniforms.uTerritories.value ? 3 : 0)
+        canvas.dataset.territoryComplete = this.material.uniforms.uTerritoryComplete.value ? 'true' : 'false'
         canvas.dataset.goalDirected = this.material.uniforms.uAstar.value ? 'true' : 'false'
         canvas.dataset.view = JSON.stringify(this.getView())
         this.dirty = false
@@ -194,13 +212,15 @@ export class RoadScene {
     this.route?.geometry.dispose(); if (this.route) this.scene.remove(this.route); this.route = undefined
     this.flashPoint?.geometry.dispose(); if (this.flashPoint) this.scene.remove(this.flashPoint); this.flashPoint = undefined
     this.flash.clear(); this.meetingEvent = undefined; this.reveal.clear()
-    this.texture.dispose(); this.backwardTexture.dispose(); this.proximityTexture.dispose()
+    this.texture.dispose(); this.backwardTexture.dispose(); this.proximityTexture.dispose(); this.sourceTexture.dispose()
     this.texture = new THREE.DataTexture(new Uint32Array(2), 1, 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
     this.backwardTexture = new THREE.DataTexture(new Uint32Array(2), 1, 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
+    this.sourceTexture = new THREE.DataTexture(new Uint8Array(1), 1, 1, THREE.RedFormat, THREE.UnsignedByteType)
     this.proximityTexture = new THREE.DataTexture(new Uint8Array(1), 1, 1, THREE.RedFormat, THREE.UnsignedByteType)
-    this.texture.needsUpdate = this.backwardTexture.needsUpdate = this.proximityTexture.needsUpdate = true
+    this.texture.needsUpdate = this.backwardTexture.needsUpdate = this.proximityTexture.needsUpdate = this.sourceTexture.needsUpdate = true
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uBackwardTimes.value = this.backwardTexture
     this.material.uniforms.uGoalProximity.value = this.proximityTexture
+    this.material.uniforms.uSources.value = this.sourceTexture; this.material.uniforms.uTerritories.value = 0; this.material.uniforms.uTerritoryComplete.value = 0
     this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0
     this.material.uniforms.uTextureSize.value.set(1, 1); this.material.uniforms.uEvent.value = 0
     this.points = []; this.markers.replaceChildren(); this.dirty = true
@@ -220,6 +240,10 @@ export class RoadScene {
       this.route = new THREE.Mesh(createRouteGeometry(this.drawing.build(result.routeEdges, result.routeReversed, result.routeLengths)), this.routeMaterial)
       this.route.frustumCulled = false; this.route.renderOrder = 1; this.route.visible = false; this.scene.add(this.route)
     }
+    this.sourceTexture.dispose()
+    this.sourceTexture = new THREE.DataTexture(result.edgeSources ?? new Uint8Array([0]), result.edgeSources ? result.textureWidth : 1, result.edgeSources ? result.textureHeight : 1, THREE.RedFormat, THREE.UnsignedByteType)
+    this.sourceTexture.needsUpdate = true
+    this.material.uniforms.uSources.value = this.sourceTexture; this.material.uniforms.uTerritories.value = result.sources ? 1 : 0
     this.texture.dispose()
     this.texture = new THREE.DataTexture(result.edgeTimes, result.textureWidth, result.textureHeight, THREE.RGIntegerFormat, THREE.UnsignedIntType)
     this.texture.needsUpdate = true
@@ -233,9 +257,10 @@ export class RoadScene {
     this.material.uniforms.uGoalProximity.value = this.proximityTexture; this.material.uniforms.uAstar.value = result.goalProximity ? 1 : 0
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uTextureSize.value.set(result.textureWidth, result.textureHeight)
     this.events = result.trace.length; this.material.uniforms.uTotal.value = this.events
-    this.points = [result.start, result.goal]; this.markers.replaceChildren()
+    this.points = result.sources ?? [result.start, result.goal]; this.markers.replaceChildren()
     this.markers.classList.toggle('bidirectional', !!result.backwardTimes)
     this.markers.classList.toggle('astar', !!result.goalProximity)
+    this.markers.classList.toggle('territories', !!result.sources)
     for (const [i, point] of this.points.entries()) {
       const element = document.createElement('div'); element.className = `map-marker marker-${i}`
       const dot = document.createElement('span'); dot.className = 'marker-dot'
@@ -246,6 +271,7 @@ export class RoadScene {
   }
   setProgress(progress: number, animate = false) {
     const next = Math.floor(progress * this.events)
+    this.material.uniforms.uTerritoryComplete.value = this.material.uniforms.uTerritories.value && progress >= 1 ? 1 : 0
     this.flash.cross(this.material.uniforms.uEvent.value, next, this.meetingEvent, animate, this.reducedMotion.matches); this.updateFlash()
     this.material.uniforms.uEvent.value = next
     if (progress < 1 || !this.route) this.reveal.clear()
@@ -347,7 +373,7 @@ export class RoadScene {
     document.removeEventListener('visibilitychange', this.visibilityChange)
     this.route?.geometry.dispose(); this.routeMaterial.dispose(); this.drawing.chunks = []
     this.flashPoint?.geometry.dispose(); this.flashMaterial.dispose(); this.backwardTexture.dispose()
-    this.proximityTexture.dispose()
+    this.proximityTexture.dispose(); this.sourceTexture.dispose()
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.scene.traverse(object => { if (object instanceof THREE.LineSegments) object.geometry.dispose() })
     this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.forceContextLoss(); this.renderer.domElement.remove(); this.markers.remove()

@@ -2,6 +2,8 @@ import { longitudeOffset } from './projection.ts'
 import type { Graph, Reply, Request, StudyManifest } from './contracts.ts'
 import { compileGraph, dijkstra, snapEndpoints } from './engine.ts'
 import { bidirectional, compileReverse, type ReverseGraph } from './bidirectional.ts'
+import { multisource } from './multisource.ts'
+import { snapSources } from './endpoints.ts'
 import { astar } from './astar.ts'
 import { validateManifest, manifestIdentityPayload } from './manifest.ts'
 import { loadChunks, sha256 } from './chunks.ts'
@@ -95,15 +97,18 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
     if (request.type === 'load') await load(request.manifestUrl, request.expectedIdentity)
     else {
       if (!graph || !manifest) throw new Error('The national graph has not finished loading')
-      const endpoints = snapEndpoints(graph, request.start, request.goal)
+      if (request.algorithm === 'multisource' && !request.sources) throw new Error('Three sources are required for a territory study')
+      const sourceEndpoints = request.sources ? snapSources(graph, request.sources) : undefined
+      const endpoints = sourceEndpoints ? { start: sourceEndpoints.sources[0], goal: sourceEndpoints.sources[1], snapMs: sourceEndpoints.snapMs, snapping: undefined } : snapEndpoints(graph, request.start, request.goal)
       if (request.algorithm === 'bidirectional' || request.algorithm === 'astar' || request.algorithm === 'bidirectional-astar') reverse ??= compileReverse(graph)
-      const result = (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar') && reverse
+      const result = request.algorithm === 'multisource' && sourceEndpoints ? multisource(graph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar') && reverse
         ? bidirectional(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs, request.algorithm === 'bidirectional-astar')
         : request.algorithm === 'astar' && reverse ? astar(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
           : dijkstra(graph, endpoints.start, endpoints.goal, endpoints.snapMs)
       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }
       result.snapping = endpoints.snapping
-      reply({ type: 'result', requestId: request.requestId, result }, [result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer, result.routeReversed.buffer, result.routeLengths.buffer, ...(result.backwardTimes ? [result.backwardTimes.buffer] : []), ...(result.goalProximity ? [result.goalProximity.buffer] : [])])
+      if (sourceEndpoints) { result.requestedSources = request.sources; result.sourceSnappingVersion = 'nearby-shared-three-source-component/1' }
+      reply({ type: 'result', requestId: request.requestId, result }, [result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer, result.routeReversed.buffer, result.routeLengths.buffer, ...(result.backwardTimes ? [result.backwardTimes.buffer] : []), ...(result.edgeSources ? [result.edgeSources.buffer] : []), ...(result.goalProximity ? [result.goalProximity.buffer] : [])])
     }
   } catch (error) {
     reply({ type: 'error', requestId: request.type === 'search' ? request.requestId : undefined, message: error instanceof Error ? error.message : 'The search could not be completed' })

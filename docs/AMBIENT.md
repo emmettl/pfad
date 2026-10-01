@@ -212,3 +212,28 @@ counts (seven textures, 34 buffers) across the eight complete frames in each
 browser. These counts do not measure GPU bytes, process memory or phone budgets.
 
 The UK audit can be repeated with `node scripts/data/audit-ambient.mjs .cache/uk-ambient-audit.json --uk` against the cached immutable UK release. Seed 20261001 accepted sixty journeys in 67 attempts, spanning all 22 places and all three distance bands.
+
+## Three-source studies · 1 October 2026
+
+`four-journeys-one-territory/1` keeps the four journey algorithms in their existing
+order, beginning with the selected mode, and inserts a three-source Dijkstra
+study after every fourth journey. The territory slot does not advance the
+journey algorithm. Retry stays within the slot; Next advances a slot.
+
+`separated-three-sources/1` uses a separate xorshift32 stream seeded with
+`ambientSeed XOR 0x74657272`. It selects triples in one authored road region,
+requiring each pair to meet that pool's minimum separation and at least 20% of
+the triple's largest separation. Candidate weights equal minimum pair separation;
+source order is seeded and shuffled to vary colour placement. The last three
+accepted triples are excluded; retries exclude previously attempted triples and
+stop after five attempts. The exact stream seed, selector and pool are recorded.
+
+Territories compute to exhaustion and replay for 25–65 seconds, using the normal
+square-root pacing function on the maximum recorded nearest-source road distance.
+This coverage distance is not a journey distance or distance-band acceptance.
+The completed mint/amber/periwinkle field holds for six seconds, then fades for
+two. There is no final-route reveal. Reduced motion presents completed stills
+with deliberate Next. Pause, visibility, music and quiet chrome use the same
+sequence lifecycle. The manual picker gains no third endpoint control.
+
+[Validation](evidence/territories-2026-10-01/README.md).

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'vitest'
+import { snapSources } from '../src/search/endpoints.ts'
 import { compileGraph, dijkstra, snapEndpoints } from '../src/search/engine.ts'
 
 function graph(longitudes, edges, categories = new Uint8Array(edges.length)) {
@@ -53,4 +54,16 @@ test('equal-distance choices use reproducible node ties in both orientations', (
   assert.deepEqual([forward.start.node, forward.goal.node], [0, 1])
   const again = snapEndpoints(g, a, b)
   assert.deepEqual([again.start, again.goal, again.snapping], [forward.start, forward.goal, forward.snapping])
+})
+
+test('three sources choose one shared nearby component over closer fragments', () => {
+  const c = { name: 'C', lon: 8.1, lat: 47 }
+  const g = graph([800010, 805010, 809990, 800000, 800001, 805000, 805001, 810000, 810001], [[0, 1], [1, 2], [3, 4], [5, 6], [7, 8]])
+  const result = snapSources(g, [a, b, c])
+  assert.deepEqual(result.sources.map(source => source.node), [0, 1, 2])
+  assert.ok(result.sources.every(source => source.snapMetres <= 2000))
+  assert.deepEqual(snapSources(g, [a, b, c]).sources, result.sources)
+  const separated = graph([800000, 800001, 805000, 805001, 810000, 810001], [[0, 1], [2, 3], [4, 5]])
+  assert.deepEqual(snapSources(separated, [a, b, c]).sources.map(source => source.node), [0, 2, 4])
+  assert.throws(() => snapSources(g, [a, b, { ...c, lon: 9 }]), /No road within 2 km/)
 })

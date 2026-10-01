@@ -105,6 +105,8 @@ test('reduced-motion ambient presents completed stills and requires explicit Nex
   await page.getByRole('button', { name: 'Next journey' }).press('Space')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'bidirectional-dijkstra/1', { timeout: 45000 })
   await page.getByRole('button', { name: 'Next journey' }).press('Space')
+  await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'multisource-dijkstra/1', { timeout: 45000 })
+  await page.getByRole('button', { name: 'Next journey' }).press('Space')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'astar/1', { timeout: 45000 })
   await page.getByRole('button', { name: 'Exit ambient' }).click()
   await expect(page.locator('.study')).toHaveAttribute('data-progress', '1')

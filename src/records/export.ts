@@ -4,8 +4,8 @@ import type { AmbientRecord } from '../ambient/sequence.ts'
 
 /** A gzip container with small JSON metadata and exact packed little-endian buffers. */
 export async function exportRecord(result: SearchResult, manifest: StudyManifest, presentation: StudyLink, ambient: AmbientRecord[]) {
-  const { trace, checkpoints, edgeTimes, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths, ...search } = result
-  const arrays = { trace, checkpoints, edgeTimes, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths }
+  const { trace, checkpoints, edgeTimes, edgeSources, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths, ...search } = result
+  const arrays = { trace, checkpoints, edgeTimes, edgeSources, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths }
   const parts: BlobPart[] = [], buffers: Record<string, { type: string; offset: number; count: number; bytes: number }> = {}
   const littleEndian = new Uint8Array(new Uint32Array([1]).buffer)[0] === 1
   let offset = 0

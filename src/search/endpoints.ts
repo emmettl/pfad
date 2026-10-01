@@ -68,3 +68,15 @@ export function snapEndpoints(graph: Graph, start: Point, goal: Point): { start:
   return { start: source, goal: target, snapMs: performance.now() - begun,
     snapping: { version: 'nearby-shared-component/1', requestedStart: { ...start }, requestedGoal: { ...goal } } }
 }
+
+export function snapSources(graph: Graph, points: [Point, Point, Point]) {
+  const begun = performance.now(), lookup = index(graph), choices = points.map(point => candidates(graph, point, lookup))
+  let sources = choices.map(nearest), best = Infinity
+  for (const [group, first] of choices[0]) {
+    const second = choices[1].get(group), third = choices[2].get(group)
+    if (!second || !third) continue
+    const total = first.snapMetres + second.snapMetres + third.snapMetres
+    if (total < best || (total === best && first.node < sources[0].node)) { best = total; sources = [first, second, third] }
+  }
+  return { sources: sources as [Endpoint, Endpoint, Endpoint], snapMs: performance.now() - begun }
+}

@@ -1,0 +1,97 @@
+[
+  {
+    "country": "sc",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Oslo→Stockholm",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "5693898"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Oslo→Stockholm",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3524984"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Oslo→Stockholm",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2343241"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Oslo→Odense745.8 kmA*",
+        "events": "8903860"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Trondheim→Moss534.5 kmBidirectional A*",
+        "events": "2433213"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Roskilde→Vejle198.0 kmDijkstra",
+        "events": "3831112"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Odense→Malmö192.4 kmBidirectional Dijkstra",
+        "events": "3267424"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Gothenburg→Kristiansand569.1 kmA*",
+        "events": "5782423"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Örebro→Uppsala168.9 kmBidirectional A*",
+        "events": "624145"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Aalborg→Randers74.3 kmDijkstra",
+        "events": "884850"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Jönköping→Horsens559.8 kmBidirectional Dijkstra",
+        "events": "11320107"
+      }
+    ],
+    "automaticTransition": {
+      "before": "bidirectional-dijkstra/1",
+      "after": "astar/1",
+      "caption": "Moss→KarlstadA*"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

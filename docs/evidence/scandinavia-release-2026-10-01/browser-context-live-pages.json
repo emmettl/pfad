@@ -1,0 +1,115 @@
+[
+  {
+    "country": "sc",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Oslo→Stockholm",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "5693898"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Oslo→Stockholm",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3524984"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Oslo→Stockholm",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2343241"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Odense→Vejle72.5 kmA*",
+        "events": "399587"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Karlstad→Fredrikstad209.0 kmBidirectional A*",
+        "events": "1007334"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Västerås→Uppsala76.0 kmDijkstra",
+        "events": "450785"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Roskilde→Vejle198.0 kmBidirectional Dijkstra",
+        "events": "4778170"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Luleå→Silkeborg1726.3 kmA*",
+        "events": "16071872"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Odense→Malmö192.4 kmBidirectional A*",
+        "events": "2119009"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Bergen→Jönköping814.6 kmDijkstra",
+        "events": "9729693"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Karlstad→Oslo204.4 kmBidirectional Dijkstra",
+        "events": "2302005"
+      }
+    ],
+    "automaticTransition": {
+      "before": "bidirectional-dijkstra/1",
+      "after": "astar/1",
+      "caption": "Silkeborg→RandersA*"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  }
+]

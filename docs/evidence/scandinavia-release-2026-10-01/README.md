@@ -13,7 +13,7 @@ unverified physical-phone stability.
 | Routing nodes / physical edges | 5,547,443 / 6,144,949 |
 | Directed arcs / drawing vertices | 11,920,666 / 22,790,620 |
 | Outline release | `geo-sc-20261001-23b17eadf16e` |
-| Outline layers | 414,604 bytes; 151 coastline rings |
+| Outline layers | 414,604 bytes; 151 coastline rings and 229 lakes |
 | Snapshot | 30 September 2026, 20:22:42 UTC |
 
 `source-config.json` pins three same-time Geofabrik PBFs (2,711,047,150 bytes
@@ -61,3 +61,37 @@ The accompanying screenshots show the selected context and ambient presentation.
 Code remains MIT; OSM-derived graph/evidence retains ODbL attribution.
 Natural Earth geographic context is public domain and prepared with pinned
 Shapely 2.1.2 before simplification to remove the Norway–Sweden internal border.
+
+The integration checks in the shared working tree passed 92 unit tests and 52
+browser tests, including separate ambient-territories work in progress.
+`browser-context-selected.json` separately checks the exact committed Scandinavia
+release, with eight real journeys and the same outline/reload/Swiss restoration
+checks. Its isolated build passes 86 unit tests and all 48 browser regression checks, and stays within the artifact
+budget at 57 files / 28,878,885 bytes. The selected screenshots are prefixed
+`selected-`; physical-phone support remains unverified.
+
+## Published artifact and live checks
+
+Source commit `bb5db74e2d2df4033c9f2fbf9f27add98b2a1c26` passed GitHub's
+build and both browser gates in [Pages run 36860447102](https://github.com/emmettl/pfad/actions/runs/36860447102).
+[Cloudflare run 36861070792](https://github.com/emmettl/pfad/actions/runs/36861070792)
+then published that same successful artifact through the pinned hosting tools.
+`live-receipt.json` confirms its source commit, Pages run, 57 source files,
+28,878,885 bytes and content SHA-256
+`ee174b18761fcf6687805fd2a99a007f304fec81df467ab038ebecca3f0776f7`.
+
+The two live browser reports separately pass selection, three route algorithms,
+integer replay, native query reload, outlines, eight real ambient journeys,
+automatic hold/fade, exit and Swiss restoration on
+[GitHub Pages](https://emmettl.github.io/pfad/?country=sc) and
+[Cloudflare](https://motionstudies.app/pfad/?country=sc).
+Pages' report retains nonfatal Cloudflare analytics CORS messages separately;
+application errors are empty on both hosts.
+
+`live-first-attempt.json` records the initial Cloudflare proof's encounter with
+the documented five-attempt ambient stop. The app offered Next; the proof's
+unconditional expectation of a completed still was incorrect. The harness now
+records and verifies that stop/Next path with a four-new-band recovery bound;
+it still fails on other stop messages. A fresh-seed live retry completed all eight
+studies without a stop. The production app, complete graph and profile did not
+change. Existing sequence unit tests verify exhaustion and subsequent Next.

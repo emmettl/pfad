@@ -1,0 +1,99 @@
+[
+  {
+    "country": "sc",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Oslo→Stockholm",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "5693898"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Oslo→Stockholm",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3524984"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Oslo→Stockholm",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2343241"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Oslo→Moss58.7 kmA*",
+        "events": "170292"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Copenhagen→Trondheim1055.8 kmBidirectional A*",
+        "events": "7452973"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Horsens→Silkeborg45.5 kmDijkstra",
+        "events": "602918"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Odense→Roskilde127.4 kmBidirectional Dijkstra",
+        "events": "2504232"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Drammen→Moss70.6 kmA*",
+        "events": "316591"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Copenhagen→Drammen605.3 kmBidirectional A*",
+        "events": "5355704"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Lillehammer→Oslo166.2 kmDijkstra",
+        "events": "1705232"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Aalborg→Moss931.1 kmBidirectional Dijkstra",
+        "events": "16359373"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "bidirectional-dijkstra/1",
+      "recoveredStops": 0,
+      "after": "astar/1",
+      "caption": "Odense→RandersA*"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

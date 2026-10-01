@@ -330,3 +330,13 @@ Manual selection, shared links, exported provenance and ambient rotation include
 it. This does not complete routing legality or physical-phone validation.
 See [architecture](ARCHITECTURE.md#bidirectional-a) and
 [validation evidence](evidence/bidirectional-astar-2026-10-01/README.md).
+
+## Ambient territories · 1 October 2026
+
+Added an occasional three-source Dijkstra study after four ambient journeys,
+using seeded separated curated places and mint/amber/periwinkle road colours.
+Exact source-tagged events drive replay and the completed field holds without a
+route reveal. Existing manual controls remain two-point journey controls; shared
+territory links and exports preserve all sources and identities. This does not
+complete physical-phone budgets or routing legality.
+[Validation evidence](evidence/territories-2026-10-01/README.md).
