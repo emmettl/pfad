@@ -42,8 +42,17 @@ try {
   const view = JSON.parse(await page.locator('canvas').getAttribute('data-view'))
   if (record.dataset.identity !== country.identity || record.routeMetres === null || errors.length) throw new Error('A verified completed study is required for the share artwork')
 
-  const inter = (await readFile('node_modules/@motionstudies/web/fonts/inter-latin-400-600.woff2')).toString('base64')
-  const mono = (await readFile('node_modules/@motionstudies/web/fonts/dm-mono-latin-400.woff2')).toString('base64')
+  // Resolve the public stylesheet and its declared assets rather than reaching
+  // into unexported package paths. The same Latin faces produce the card text.
+  const fontsUrl = new URL(import.meta.resolve('@motionstudies/web/fonts.css'))
+  const fontFaces = [...(await readFile(fontsUrl, 'utf8')).matchAll(/@font-face\s*\{([^}]+)\}/g)].map(match => match[1])
+  async function fontData(family, weight) {
+    const face = fontFaces.find(css => css.includes(`font-family: '${family}'`) && css.includes(`font-weight: ${weight};`) && css.includes('unicode-range: U+0000-00FF'))
+    const asset = face?.match(/src:\s*url\(['"]([^'"]+)['"]\)/)?.[1]
+    if (!asset) throw new Error(`Public Latin font face unavailable: ${family} ${weight}`)
+    return (await readFile(new URL(asset, fontsUrl))).toString('base64')
+  }
+  const inter = await fontData('Inter', '400 600'), mono = await fontData('DM Mono', '400')
   await page.setViewportSize({ width: 1200, height: 630 })
   await page.setContent(`<!doctype html><html lang="en"><head><meta charset="utf-8"><style>
     @font-face { font-family: Inter; src: url(data:font/woff2;base64,${inter}) format('woff2'); font-weight: 400 600 }
