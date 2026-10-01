@@ -93,4 +93,25 @@ export const LU_POOL: AmbientPool = { version: 'lu-places/1', distance: { minimu
   { id: 'remich', name: 'Remich', lon: 6.3669, lat: 49.545 },
 ] }
 
-export const AMBIENT_POOLS: Record<string, AmbientPool> = { ch: SWISS_POOL, uk: UK_POOL, is: IS_POOL, nl: NL_POOL, nz: NZ_POOL, lu: LU_POOL }
+export const IE_POOL: AmbientPool = { version: 'ie-places/1', places: [
+  { id: 'dublin', name: 'Dublin', lon: -6.2603, lat: 53.3498 },
+  { id: 'belfast', name: 'Belfast', lon: -5.9301, lat: 54.5973 },
+  { id: 'cork', name: 'Cork', lon: -8.4756, lat: 51.8985 },
+  { id: 'galway', name: 'Galway', lon: -9.0568, lat: 53.2707 },
+  { id: 'limerick', name: 'Limerick', lon: -8.6267, lat: 52.6638 },
+  { id: 'waterford', name: 'Waterford', lon: -7.1101, lat: 52.2593 },
+  { id: 'kilkenny', name: 'Kilkenny', lon: -7.2522, lat: 52.6541 },
+  { id: 'athlone', name: 'Athlone', lon: -7.9407, lat: 53.4239 },
+  { id: 'sligo', name: 'Sligo', lon: -8.4761, lat: 54.2766 },
+  { id: 'derry', name: 'Derry', lon: -7.3092, lat: 54.9966 },
+  { id: 'letterkenny', name: 'Letterkenny', lon: -7.733, lat: 54.95 },
+  { id: 'enniskillen', name: 'Enniskillen', lon: -7.6389, lat: 54.3438 },
+  { id: 'armagh', name: 'Armagh', lon: -6.6528, lat: 54.3503 },
+  { id: 'newry', name: 'Newry', lon: -6.337, lat: 54.1751 },
+  { id: 'tralee', name: 'Tralee', lon: -9.7026, lat: 52.2713 },
+  { id: 'westport', name: 'Westport', lon: -9.5227, lat: 53.8008 },
+  { id: 'wexford', name: 'Wexford', lon: -6.4633, lat: 52.3369 },
+  { id: 'dingle', name: 'Dingle', lon: -10.2689, lat: 52.1409 },
+] }
+
+export const AMBIENT_POOLS: Record<string, AmbientPool> = { ch: SWISS_POOL, uk: UK_POOL, is: IS_POOL, nl: NL_POOL, nz: NZ_POOL, lu: LU_POOL, ie: IE_POOL }

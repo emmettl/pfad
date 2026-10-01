@@ -21,7 +21,7 @@ async function serve(country, edit = () => {}) {
   vi.stubGlobal('fetch', vi.fn(async (url, options) => { options.signal?.throwIfAborted(); return new Response(files.get(url), { status: files.has(url) ? 200 : 404 }) }))
   return reference
 }
-test('all six outline releases are independently pinned and verified, including empty lake layers', async () => {
+test('all selected outline releases are independently pinned and verified, including empty lake layers', async () => {
   for (const country of Object.keys(releases)) {
     await serve(country)
     const context = await loadGeography(country)

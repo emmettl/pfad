@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "ie",
+  "border": {
+    "path": "border-b5c403743bc6.json",
+    "bytes": 29371,
+    "sha256": "b5c403743bc68becae751bedf589ed8a692d38373034b2d75d53e1c0e64024e8"
+  },
+  "lakes": {
+    "path": "lakes-0fe1ce3feb75.json",
+    "bytes": 10942,
+    "sha256": "0fe1ce3feb75bf0f19b2c25896dcb1baeafb234fd9e32c1a588e5fc3d4c6c814"
+  },
+  "id": "geo-ie-20261001-9b19a91c7ddb",
+  "identity": "9b19a91c7ddbb16eee32e83fe2e85a2359c0f08791efa5d9ce47c5f0b8446a34"
+}

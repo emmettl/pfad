@@ -1,0 +1,97 @@
+[
+  {
+    "country": "ie",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Dublin→Belfast",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "1788970"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Dublin→Belfast",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "1449251"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Dublin→Belfast",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "511185"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Enniskillen→Limerick227.9 kmA*",
+        "events": "531958"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Derry→Galway255.0 kmDijkstra",
+        "events": "4479488"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Newry→Dingle392.8 kmBidirectional Dijkstra",
+        "events": "5746778"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Cork→Dingle140.2 kmA*",
+        "events": "565269"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Kilkenny→Belfast261.2 kmDijkstra",
+        "events": "5851343"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Letterkenny→Belfast139.3 kmBidirectional Dijkstra",
+        "events": "1564697"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Tralee→Sligo302.4 kmA*",
+        "events": "828611"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Wexford→Limerick170.7 kmDijkstra",
+        "events": "2639739"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Kilkenny→DerryBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

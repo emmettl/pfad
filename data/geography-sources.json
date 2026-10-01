@@ -174,6 +174,36 @@
         190,
         -28
       ]
+    },
+    {
+      "path": "src/map/data/ie-border.json",
+      "bytes": 29371,
+      "sha256": "b5c403743bc68becae751bedf589ed8a692d38373034b2d75d53e1c0e64024e8",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-country-geography.py ie",
+      "bounds": [
+        -11,
+        51,
+        -5,
+        56
+      ]
+    },
+    {
+      "path": "src/map/data/ie-lakes.json",
+      "bytes": 10942,
+      "sha256": "0fe1ce3feb75bf0f19b2c25896dcb1baeafb234fd9e32c1a588e5fc3d4c6c814",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py ie",
+      "bounds": [
+        -11,
+        51,
+        -5,
+        56
+      ]
     }
   ],
   "publishedCommit": "5910d68b2eb4c78376007b42639d1c4a17986b7b",

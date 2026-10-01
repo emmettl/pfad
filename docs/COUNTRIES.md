@@ -181,3 +181,20 @@ The 1 October 2026 outline releases contain 18 objects in total. Border and lake
 bytes per country are: CH 123,585; UK 93,543; IS 40,507; NL 16,112; NZ 83,798;
 LU 4,767, plus approximately 494 bytes for each manifest. Reviewed geometry is
 unchanged; Iceland and Luxembourg's pinned lake references contain no features.
+
+## Whole-island Ireland
+
+Ireland (`ie`) uses Geofabrik's combined Ireland and Northern Ireland extract,
+with Dublin–Belfast as its opening journey. Its immutable road release is
+`ie-20260930-ec1382418ea4`: 20,410,943 opening bytes, 1,683,205 nodes and
+1,810,914 edges. No routing border is inserted. Eighteen authored places across
+the island form one ambient pool; the sixty-journey audit includes every place.
+Five explicit cross-border studies agree on exact route cost across all three
+algorithms. See [release evidence](evidence/ireland-release-2026-10-01/README.md).
+
+Its independent outline release is `geo-ie-20261001-9b19a91c7ddb` (40,313 layer
+bytes). Natural Earth's Irish polygons are joined to complete Northern Irish
+polygons with pinned Shapely 2.1.2 before simplification, so the internal border
+is removed from the coastline. The geographic config explicitly selects component
+coverage bounds. Lakes include Lough Neagh and both Upper and Lower Lough Erne.
+The package tool now discovers countries from reviewed border-source records.

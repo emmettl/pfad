@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T10:24:56.298Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "ie-20260930-ec1382418ea4",
+    "counts": {
+      "nodes": 1683205,
+      "edges": 1810914,
+      "directedArcs": 3532646,
+      "vertices": 5901368
+    },
+    "downloadBytes": 20410943,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe/ireland-and-northern-ireland-260930.osm.pbf",
+      "sha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 296.90000000596046,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ec1382418ea473b3c8908b102e0f2db3f3fb9493d83270db87213fcd8135c7dd",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Cork",
+            "lon": -8.4756,
+            "lat": 51.89849,
+            "node": 1060309,
+            "snapMetres": 1.1119508015628599
+          },
+          "goal": {
+            "name": "Derry",
+            "lon": -7.30919,
+            "lat": 54.99663,
+            "node": 389347,
+            "snapMetres": 3.3962854341756405
+          },
+          "searchMs": 208,
+          "snapMs": 79.09999999403954,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Cork",
+              "lon": -8.4756,
+              "lat": 51.8985
+            },
+            "requestedGoal": {
+              "name": "Derry",
+              "lon": -7.3092,
+              "lat": 54.9966
+            }
+          },
+          "events": 6326317,
+          "traceBytes": 25305268,
+          "edgeTextureBytes": 14499840,
+          "nodesSettled": 1531452,
+          "arcsExamined": 3223341,
+          "routeMetres": 395505.96,
+          "maxQueue": 947,
+          "traceSha256": "0753bd4a520d577d4b48807715e36e5dc95808e6f884d1c62e480ba0a584c22d",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000273,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5901368,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 25305268
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ec1382418ea473b3c8908b102e0f2db3f3fb9493d83270db87213fcd8135c7dd",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Cork",
+            "lon": -8.4756,
+            "lat": 51.89849,
+            "node": 1060309,
+            "snapMetres": 1.1119508015628599
+          },
+          "goal": {
+            "name": "Derry",
+            "lon": -7.30919,
+            "lat": 54.99663,
+            "node": 389347,
+            "snapMetres": 3.3962854341756405
+          },
+          "searchMs": 201.29999999701977,
+          "snapMs": 14.700000002980232,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Cork",
+              "lon": -8.4756,
+              "lat": 51.8985
+            },
+            "requestedGoal": {
+              "name": "Derry",
+              "lon": -7.3092,
+              "lat": 54.9966
+            }
+          },
+          "events": 6326317,
+          "traceBytes": 25305268,
+          "edgeTextureBytes": 14499840,
+          "nodesSettled": 1531452,
+          "arcsExamined": 3223341,
+          "routeMetres": 395505.96,
+          "maxQueue": 947,
+          "traceSha256": "0753bd4a520d577d4b48807715e36e5dc95808e6f884d1c62e480ba0a584c22d",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5901368,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 25305268
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "ec1382418ea473b3c8908b102e0f2db3f3fb9493d83270db87213fcd8135c7dd",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Cork",
+            "lon": -8.4756,
+            "lat": 51.89849,
+            "node": 1060309,
+            "snapMetres": 1.1119508015628599
+          },
+          "goal": {
+            "name": "Derry",
+            "lon": -7.30919,
+            "lat": 54.99663,
+            "node": 389347,
+            "snapMetres": 3.3962854341756405
+          },
+          "searchMs": 255.09999999403954,
+          "snapMs": 29,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Cork",
+              "lon": -8.4756,
+              "lat": 51.8985
+            },
+            "requestedGoal": {
+              "name": "Derry",
+              "lon": -7.3092,
+              "lat": 54.9966
+            }
+          },
+          "events": 5362310,
+          "traceBytes": 21449240,
+          "edgeTextureBytes": 28999680,
+          "nodesSettled": 1294240,
+          "arcsExamined": 2737380,
+          "routeMetres": 395505.96,
+          "maxQueue": 1244,
+          "traceSha256": "bd95c8b6c3824f6072836fcdd012ece90bfa4f2c53a98c34f2367fceaa6d9e8e",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5901368,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 21449240
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ec1382418ea473b3c8908b102e0f2db3f3fb9493d83270db87213fcd8135c7dd",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Cork",
+            "lon": -8.4756,
+            "lat": 51.89849,
+            "node": 1060309,
+            "snapMetres": 1.1119508015628599
+          },
+          "goal": {
+            "name": "Derry",
+            "lon": -7.30919,
+            "lat": 54.99663,
+            "node": 389347,
+            "snapMetres": 3.3962854341756405
+          },
+          "searchMs": 70.6000000089407,
+          "snapMs": 27.200000002980232,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Cork",
+              "lon": -8.4756,
+              "lat": 51.8985
+            },
+            "requestedGoal": {
+              "name": "Derry",
+              "lon": -7.3092,
+              "lat": 54.9966
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 69.29999999701977,
+            "correctedNodes": 55572,
+            "longitudeScale": 0.568116388919662,
+            "initialStartCm": 35228990,
+            "startLowerBoundCm": 35228990
+          },
+          "events": 1784897,
+          "traceBytes": 7139588,
+          "edgeTextureBytes": 14499840,
+          "nodesSettled": 429995,
+          "arcsExamined": 908741,
+          "routeMetres": 395505.96,
+          "maxQueue": 2255,
+          "traceSha256": "d0954a91a2a7602b89d25321b9e4080b2fa6b63d2446fa8ce498df240ece7f83",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5901368,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 7139588
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 277,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ec1382418ea473b3c8908b102e0f2db3f3fb9493d83270db87213fcd8135c7dd",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Cork",
+            "lon": -8.4756,
+            "lat": 51.89849,
+            "node": 1060309,
+            "snapMetres": 1.1119508015628599
+          },
+          "goal": {
+            "name": "Derry",
+            "lon": -7.30919,
+            "lat": 54.99663,
+            "node": 389347,
+            "snapMetres": 3.3962854341756405
+          },
+          "searchMs": 168,
+          "snapMs": 76,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Cork",
+              "lon": -8.4756,
+              "lat": 51.8985
+            },
+            "requestedGoal": {
+              "name": "Derry",
+              "lon": -7.3092,
+              "lat": 54.9966
+            }
+          },
+          "events": 6326317,
+          "traceBytes": 25305268,
+          "edgeTextureBytes": 14499840,
+          "nodesSettled": 1531452,
+          "arcsExamined": 3223341,
+          "routeMetres": 395505.96,
+          "maxQueue": 947,
+          "traceSha256": "0753bd4a520d577d4b48807715e36e5dc95808e6f884d1c62e480ba0a584c22d",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5901368,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 25305268
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ec1382418ea473b3c8908b102e0f2db3f3fb9493d83270db87213fcd8135c7dd",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Cork",
+            "lon": -8.4756,
+            "lat": 51.89849,
+            "node": 1060309,
+            "snapMetres": 1.1119508015628599
+          },
+          "goal": {
+            "name": "Derry",
+            "lon": -7.30919,
+            "lat": 54.99663,
+            "node": 389347,
+            "snapMetres": 3.3962854341756405
+          },
+          "searchMs": 193,
+          "snapMs": 17,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Cork",
+              "lon": -8.4756,
+              "lat": 51.8985
+            },
+            "requestedGoal": {
+              "name": "Derry",
+              "lon": -7.3092,
+              "lat": 54.9966
+            }
+          },
+          "events": 6326317,
+          "traceBytes": 25305268,
+          "edgeTextureBytes": 14499840,
+          "nodesSettled": 1531452,
+          "arcsExamined": 3223341,
+          "routeMetres": 395505.96,
+          "maxQueue": 947,
+          "traceSha256": "0753bd4a520d577d4b48807715e36e5dc95808e6f884d1c62e480ba0a584c22d",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5901368,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 25305268
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "ec1382418ea473b3c8908b102e0f2db3f3fb9493d83270db87213fcd8135c7dd",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Cork",
+            "lon": -8.4756,
+            "lat": 51.89849,
+            "node": 1060309,
+            "snapMetres": 1.1119508015628599
+          },
+          "goal": {
+            "name": "Derry",
+            "lon": -7.30919,
+            "lat": 54.99663,
+            "node": 389347,
+            "snapMetres": 3.3962854341756405
+          },
+          "searchMs": 238,
+          "snapMs": 8,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Cork",
+              "lon": -8.4756,
+              "lat": 51.8985
+            },
+            "requestedGoal": {
+              "name": "Derry",
+              "lon": -7.3092,
+              "lat": 54.9966
+            }
+          },
+          "events": 5362310,
+          "traceBytes": 21449240,
+          "edgeTextureBytes": 28999680,
+          "nodesSettled": 1294240,
+          "arcsExamined": 2737380,
+          "routeMetres": 395505.96,
+          "maxQueue": 1244,
+          "traceSha256": "bd95c8b6c3824f6072836fcdd012ece90bfa4f2c53a98c34f2367fceaa6d9e8e",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5901368,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 21449240
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ec1382418ea473b3c8908b102e0f2db3f3fb9493d83270db87213fcd8135c7dd",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Cork",
+            "lon": -8.4756,
+            "lat": 51.89849,
+            "node": 1060309,
+            "snapMetres": 1.1119508015628599
+          },
+          "goal": {
+            "name": "Derry",
+            "lon": -7.30919,
+            "lat": 54.99663,
+            "node": 389347,
+            "snapMetres": 3.3962854341756405
+          },
+          "searchMs": 73,
+          "snapMs": 16,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Cork",
+              "lon": -8.4756,
+              "lat": 51.8985
+            },
+            "requestedGoal": {
+              "name": "Derry",
+              "lon": -7.3092,
+              "lat": 54.9966
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 80,
+            "correctedNodes": 55572,
+            "longitudeScale": 0.568116388919662,
+            "initialStartCm": 35228990,
+            "startLowerBoundCm": 35228990
+          },
+          "events": 1784897,
+          "traceBytes": 7139588,
+          "edgeTextureBytes": 14499840,
+          "nodesSettled": 429995,
+          "arcsExamined": 908741,
+          "routeMetres": 395505.96,
+          "maxQueue": 2255,
+          "traceSha256": "d0954a91a2a7602b89d25321b9e4080b2fa6b63d2446fa8ce498df240ece7f83",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5901368,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 7139588
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 80545248,
+    "reverseCsrBytes": 34993992,
+    "uploadedRoadAttributeBytes": 70816416,
+    "drawingCoordinateAndOffsetBytes": 54454676,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

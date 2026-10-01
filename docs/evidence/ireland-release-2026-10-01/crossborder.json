@@ -1,0 +1,371 @@
+{
+  "dataset": "ec1382418ea473b3c8908b102e0f2db3f3fb9493d83270db87213fcd8135c7dd",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/ireland-and-northern-ireland-260930.osm.pbf",
+    "sha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "profile": "road-connectivity-distance-v1",
+  "note": "Five genuine road journeys between Ireland and Northern Ireland. All three production algorithms agree on exact cost; route adjacency and one-way direction checked. No ferry or synthetic cross-border edge is added.",
+  "routes": [
+    {
+      "start": {
+        "id": "dublin",
+        "name": "Dublin",
+        "lon": -6.2603,
+        "lat": 53.3498
+      },
+      "goal": {
+        "id": "belfast",
+        "name": "Belfast",
+        "lon": -5.9301,
+        "lat": 54.5973
+      },
+      "snapping": {
+        "start": {
+          "id": "dublin",
+          "name": "Dublin",
+          "lon": -6.2604,
+          "lat": 53.34979,
+          "node": 1501498,
+          "snapMetres": 6.7300410855555155
+        },
+        "goal": {
+          "id": "belfast",
+          "name": "Belfast",
+          "lon": -5.93002,
+          "lat": 54.59729,
+          "node": 1021794,
+          "snapMetres": 5.271997334635621
+        },
+        "snapMs": 77.20399999999998,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "dublin",
+            "name": "Dublin",
+            "lon": -6.2603,
+            "lat": 53.3498
+          },
+          "requestedGoal": {
+            "id": "belfast",
+            "name": "Belfast",
+            "lon": -5.9301,
+            "lat": 54.5973
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 160577.56,
+          "routeEdges": 1970,
+          "events": 3577940,
+          "searchMs": 114.73387499999995
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 160577.56,
+          "routeEdges": 1970,
+          "events": 2898502,
+          "searchMs": 130.20270799999997
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 160577.56,
+          "routeEdges": 1970,
+          "events": 1022371,
+          "searchMs": 38.16779200000008
+        }
+      ]
+    },
+    {
+      "start": {
+        "id": "cork",
+        "name": "Cork",
+        "lon": -8.4756,
+        "lat": 51.8985
+      },
+      "goal": {
+        "id": "belfast",
+        "name": "Belfast",
+        "lon": -5.9301,
+        "lat": 54.5973
+      },
+      "snapping": {
+        "start": {
+          "id": "cork",
+          "name": "Cork",
+          "lon": -8.4756,
+          "lat": 51.89849,
+          "node": 1060309,
+          "snapMetres": 1.1119508015628599
+        },
+        "goal": {
+          "id": "belfast",
+          "name": "Belfast",
+          "lon": -5.93002,
+          "lat": 54.59729,
+          "node": 1021794,
+          "snapMetres": 5.271997334635621
+        },
+        "snapMs": 14.727040999999986,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cork",
+            "name": "Cork",
+            "lon": -8.4756,
+            "lat": 51.8985
+          },
+          "requestedGoal": {
+            "id": "belfast",
+            "name": "Belfast",
+            "lon": -5.9301,
+            "lat": 54.5973
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 381995.68,
+          "routeEdges": 2964,
+          "events": 5994211,
+          "searchMs": 186.91533300000003
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 381995.68,
+          "routeEdges": 2964,
+          "events": 5995981,
+          "searchMs": 269.03720799999996
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 381995.68,
+          "routeEdges": 2964,
+          "events": 2526968,
+          "searchMs": 94.49620800000002
+        }
+      ]
+    },
+    {
+      "start": {
+        "id": "dublin",
+        "name": "Dublin",
+        "lon": -6.2603,
+        "lat": 53.3498
+      },
+      "goal": {
+        "id": "derry",
+        "name": "Derry",
+        "lon": -7.3092,
+        "lat": 54.9966
+      },
+      "snapping": {
+        "start": {
+          "id": "dublin",
+          "name": "Dublin",
+          "lon": -6.2604,
+          "lat": 53.34979,
+          "node": 1501498,
+          "snapMetres": 6.7300410855555155
+        },
+        "goal": {
+          "id": "derry",
+          "name": "Derry",
+          "lon": -7.30919,
+          "lat": 54.99663,
+          "node": 389347,
+          "snapMetres": 3.3962854341756405
+        },
+        "snapMs": 17.330584000000044,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "dublin",
+            "name": "Dublin",
+            "lon": -6.2603,
+            "lat": 53.3498
+          },
+          "requestedGoal": {
+            "id": "derry",
+            "name": "Derry",
+            "lon": -7.3092,
+            "lat": 54.9966
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 218365.05,
+          "routeEdges": 1737,
+          "events": 5282352,
+          "searchMs": 172.72695900000008
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 218365.05,
+          "routeEdges": 1737,
+          "events": 3364556,
+          "searchMs": 158.99916699999994
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 218365.05,
+          "routeEdges": 1737,
+          "events": 1657147,
+          "searchMs": 65.05333399999995
+        }
+      ]
+    },
+    {
+      "start": {
+        "id": "letterkenny",
+        "name": "Letterkenny",
+        "lon": -7.733,
+        "lat": 54.95
+      },
+      "goal": {
+        "id": "derry",
+        "name": "Derry",
+        "lon": -7.3092,
+        "lat": 54.9966
+      },
+      "snapping": {
+        "start": {
+          "id": "letterkenny",
+          "name": "Letterkenny",
+          "lon": -7.73323,
+          "lat": 54.94979,
+          "node": 408818,
+          "snapMetres": 27.586009338381068
+        },
+        "goal": {
+          "id": "derry",
+          "name": "Derry",
+          "lon": -7.30919,
+          "lat": 54.99663,
+          "node": 389347,
+          "snapMetres": 3.3962854341756405
+        },
+        "snapMs": 12.808250000000044,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "letterkenny",
+            "name": "Letterkenny",
+            "lon": -7.733,
+            "lat": 54.95
+          },
+          "requestedGoal": {
+            "id": "derry",
+            "name": "Derry",
+            "lon": -7.3092,
+            "lat": 54.9966
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 32084.81,
+          "routeEdges": 245,
+          "events": 137969,
+          "searchMs": 4.765374999999949
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 32084.81,
+          "routeEdges": 245,
+          "events": 129320,
+          "searchMs": 11.204250000000002
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 32084.81,
+          "routeEdges": 245,
+          "events": 39910,
+          "searchMs": 2.108208999999988
+        }
+      ]
+    },
+    {
+      "start": {
+        "id": "sligo",
+        "name": "Sligo",
+        "lon": -8.4761,
+        "lat": 54.2766
+      },
+      "goal": {
+        "id": "enniskillen",
+        "name": "Enniskillen",
+        "lon": -7.6389,
+        "lat": 54.3438
+      },
+      "snapping": {
+        "start": {
+          "id": "sligo",
+          "name": "Sligo",
+          "lon": -8.47659,
+          "lat": 54.27626,
+          "node": 75406,
+          "snapMetres": 49.41015472877962
+        },
+        "goal": {
+          "id": "enniskillen",
+          "name": "Enniskillen",
+          "lon": -7.63899,
+          "lat": 54.34381,
+          "node": 389035,
+          "snapMetres": 5.938637292263472
+        },
+        "snapMs": 12.610125000000153,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "sligo",
+            "name": "Sligo",
+            "lon": -8.4761,
+            "lat": 54.2766
+          },
+          "requestedGoal": {
+            "id": "enniskillen",
+            "name": "Enniskillen",
+            "lon": -7.6389,
+            "lat": 54.3438
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 63429.18,
+          "routeEdges": 437,
+          "events": 265746,
+          "searchMs": 8.475124999999935
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 63429.18,
+          "routeEdges": 437,
+          "events": 165126,
+          "searchMs": 11.086874999999964
+        },
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 63429.18,
+          "routeEdges": 437,
+          "events": 41502,
+          "searchMs": 2.4317080000000715
+        }
+      ]
+    }
+  ]
+}

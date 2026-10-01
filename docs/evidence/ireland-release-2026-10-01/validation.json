@@ -1,0 +1,13 @@
+{
+  "unitTests": 75,
+  "browserTests": 44,
+  "ambientJourneys": 60,
+  "crossBorderPairs": 5,
+  "crossBorderAlgorithmRuns": 15,
+  "fullGraphReplayRuns": 8,
+  "outlineObjects": 3,
+  "roadObjects": 38,
+  "artifactFiles": 57,
+  "artifactBytes": 28874669,
+  "note": "Complete local check, Chromium/touch-WebKit regression suite, real complete-graph replay and Ireland UI proof passed. No physical iPhone assertion."
+}

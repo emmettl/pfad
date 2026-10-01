@@ -6,7 +6,7 @@ import { test } from 'vitest'
 test('geographic references retain reviewed source identities, attribution and closed rings', () => {
   const record = JSON.parse(readFileSync('data/geography-sources.json', 'utf8'))
   assert.equal(record.refreshPolicy, 'manual-versioned-snapshots')
-  assert.equal(record.assets.length, 12)
+  assert.equal(record.assets.length, 14)
   for (const asset of record.assets) {
     const bytes = readFileSync(asset.path), layer = JSON.parse(bytes)
     assert.equal(bytes.length, asset.bytes)
@@ -27,4 +27,16 @@ test('geographic references retain reviewed source identities, attribution and c
       for (const name of uk ? ['Lough Neagh', 'Loch Ness', 'Loch Lomond North Basin'] : ['Le Léman', 'Zürichsee', 'Bodensee']) assert.ok(layer.lakes.some(lake => lake.name === name))
     }
   }
+})
+
+
+test('Ireland context covers the whole island with a dissolved coastline and Northern Irish lakes', () => {
+  const border = JSON.parse(readFileSync('src/map/data/ie-border.json', 'utf8'))
+  const water = JSON.parse(readFileSync('src/map/data/ie-lakes.json', 'utf8'))
+  assert.equal(border.metadata.operation, 'polygon-union-before-simplification')
+  assert.equal(border.rings.length, 8)
+  assert.equal(border.metadata.components[1].admin, 'United Kingdom')
+  assert.ok(border.rings.some(ring => ring.some(([lon, lat]) => lon > -6 && lat > 54.5)))
+  assert.ok(border.rings.some(ring => ring.some(([lon, lat]) => lon < -10 && lat < 52)))
+  for (const name of ['Lough Neagh', 'Upper Lough Erne', 'Lower Lough Erne', 'Lough Corrib']) assert.ok(water.lakes.some(lake => lake.name === name))
 })

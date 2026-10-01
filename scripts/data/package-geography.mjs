@@ -6,7 +6,8 @@ if (!/^\d{8}$/.test(date ?? '')) throw Error('Usage: node scripts/data/package-g
 const digest = bytes => createHash('sha256').update(bytes).digest('hex')
 const sources = JSON.parse(await readFile('data/geography-sources.json', 'utf8'))
 const registry = {}
-for (const country of ['ch', 'uk', 'is', 'nl', 'nz', 'lu']) {
+const countries = [...new Set(sources.assets.filter(a => a.path.endsWith('-border.json')).map(a => a.path.split('/').at(-1).replace('-border.json', '').replace('switzerland', 'ch')))]
+for (const country of countries) {
   const prefix = country === 'ch' ? 'switzerland' : country
   const assets = []
   for (const kind of ['border', 'lakes']) {

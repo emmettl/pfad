@@ -65,11 +65,30 @@ def metadata(name, tolerance):
                 attribution='Natural Earth · public domain', sourceCrs='EPSG:4326', outputCrs='EPSG:4326',
                 simplificationToleranceMetres=tolerance, preparation='pfad-country-geography/1')
 
-country = next(f for f in read('ne_10m_admin_0_countries') if f['properties']['ADMIN'] == config['admin'])
-land = [unwrap(p) for p in polygons(country['geometry']) if any(covered(point) for point in p[0])]
+features = read('ne_10m_admin_0_countries')
+components = [{'admin': config['admin'], 'bounds': config['bounds']}] + config.get('additionalComponents', [])
+land = []
+for component in components:
+    country = next(f for f in features if f['properties']['ADMIN'] == component['admin'])
+    west, south, east, north = component['bounds']
+    for polygon in polygons(country['geometry']):
+        points = polygon[0]
+        included = [west <= longitude(x) <= east and south <= y <= north for x, y in points]
+        if (all(included) if component.get('completePolygons') else any(included)):
+            land.append(unwrap(polygon))
+if config.get('dissolve'):
+    import shapely
+    from shapely.geometry import Polygon, mapping
+    from shapely.ops import unary_union
+    assert shapely.__version__ == '2.1.2', 'Use the pinned geographic preparation dependency'
+    union = unary_union([Polygon(p[0], p[1:]) for p in land])
+    assert union.is_valid and not union.is_empty
+    land = polygons(mapping(union))
 assert land, 'No country polygons within coverage'
 tolerance = config.get('borderToleranceMetres', 300)
 border = dict(metadata=metadata('ne_10m_admin_0_countries', tolerance), rings=[ring(p[0], tolerance) for p in land])
+if config.get('dissolve'):
+    border['metadata'].update(components=components, operation='polygon-union-before-simplification', shapelyVersion=shapely.__version__, geosVersion=shapely.geos_version_string)
 lakes = []; seen = set()
 for feature in read('ne_10m_lakes') + read('ne_10m_lakes_europe'):
     shapes = [unwrap(s) for s in polygons(feature['geometry'])]

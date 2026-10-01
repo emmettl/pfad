@@ -1,0 +1,28 @@
+{
+  "id": "ie",
+  "name": "Ireland",
+  "datasetPrefix": "ie-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/ireland-and-northern-ireland-260930.osm.pbf",
+    "sha256": "d9fd87a83a0d646a61756f25f5c8c0be798aa535f491a141e665ee7271477a1f",
+    "md5": "46a3723a387e1bac4872ae0941295a66",
+    "bytes": 414098470,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      -8,
+      53.4
+    ],
+    "referenceLatitude": 53.4,
+    "scaleMetres": 550000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  },
+  "coverage": "Whole island of Ireland, including Northern Ireland; Geofabrik combined extract"
+}

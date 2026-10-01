@@ -257,6 +257,7 @@ complete.
 - [x] Add UK coastline/border and major-lake context, plus audited country ambient journeys.
 - [ ] Establish physical-phone memory and frame-pacing support for UK.
 - [x] Add the selected Iceland, Netherlands, New Zealand and Luxembourg releases, with outlines and 60-journey ambient audits for each.
+- [x] Add whole-island Ireland, including Northern Ireland, with joined coastline, cross-border routing checks and a 60-journey ambient audit.
 - [ ] Add further countries only when explicitly selected and individually validated.
 
 [Country release procedure](COUNTRIES.md) · [UK release evidence](evidence/uk-release-2026-10-01/README.md).

@@ -105,7 +105,7 @@ test('record export retains exact binary events including IDs above Float32 prec
   }
 })
 
-test('all curated manual and ambient places round-trip as unique slugs across all six countries', () => {
+test('all curated manual and ambient places round-trip as unique slugs across every selected country', () => {
   for (const country of COUNTRIES) {
     for (const place of [...country.places, ...country.ambient.places]) {
       const clean = p => ({ name: p.name, lon: p.lon, lat: p.lat })
