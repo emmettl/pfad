@@ -59,6 +59,9 @@ test('territories replay genuine events forward and backward, then hold without 
   await expect(canvas).toHaveAttribute('data-route-phase', 'hidden')
   await slider.fill('2.5')
   await expect(page.getByTestId('examined-count')).toHaveText(count!)
+  // Check the play-to-completion transition without depending on how quickly
+  // a software-rendered CI browser can draw half of the national trace.
+  await slider.fill('4.97')
   await page.getByRole('button', { name: 'Play', exact: true }).click()
   await expect(page.locator('.study')).toHaveAttribute('data-progress', '1', { timeout: 15000 })
   await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
