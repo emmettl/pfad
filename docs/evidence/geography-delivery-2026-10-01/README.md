@@ -25,3 +25,9 @@ the build. Outline releases are manual; no mutable aliases or scheduled refreshe
 Validation: `npm run check` passed 69 unit tests; all 44 Chromium/touch-WebKit
 browser tests passed. The app artifact is 57 files / 28,869,865 bytes, saving
 356,400 bytes against the preceding release.
+
+Publication: Pages run 36846977621 passed both hosted browser engines and
+deployed. Cloudflare run 36847569792 published that exact successful artifact,
+recorded in `deployment.json`. `live-browser-context.json` confirms correct
+outline country, nonzero drawn segments and working toggles for all six countries
+on both live hosts. The hosted artifact is 28,869,866 bytes.

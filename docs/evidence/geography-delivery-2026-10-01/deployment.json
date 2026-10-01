@@ -1,0 +1,10 @@
+{
+  "repository": "emmettl/pfad",
+  "pagesRun": 36846977621,
+  "cloudflareRun": 36847569792,
+  "sourceCommit": "e70078ef90ada2dc517f020f3cc08b99eea0edcc",
+  "sourceFiles": 57,
+  "sourceBytes": 28869866,
+  "contentSha256": "0b5d533e130bb3c8a2ba2586e54230805096025f84d6ab6a7b31a7bf0f977d61",
+  "note": "Both hosted browser engines and Pages deploy succeeded. Cloudflare receipt identifies the same successful Pages artifact. Subsequent concurrent URL work is separate."
+}

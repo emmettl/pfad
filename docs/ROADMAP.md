@@ -250,6 +250,7 @@ complete.
 - [x] Generalise pinned source acquisition, sizing and packaging through country configs.
 - [x] Keep Swiss data bundled and its selected identity unchanged.
 - [x] Deliver additional immutable graph releases from a separate R2 bucket/Worker.
+- [x] Fetch separately pinned border/lake releases on country selection; keep outline coordinates out of the app bundle and preserve road searches on context failure.
 - [x] Add a country catalogue, places, optional geographic references and switching.
 - [x] Preserve exact replay timestamps beyond 2^24 events and source drawing precision.
 - [x] Validate the complete UK graph on desktop Chromium and WebKit; retain evidence.
