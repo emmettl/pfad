@@ -8,9 +8,9 @@ on:
 permissions:
   contents: read
 jobs:
-  check:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -20,14 +20,46 @@ jobs:
       - run: npm install --global npm@11.21.0 --ignore-scripts
       - run: npm ci
       - run: npm run check
-      # Switch the slow Azure package mirror to Ubuntu's main mirror before
-      # installing WebKit runtime libraries. Keep both browser engines checked.
-      - run: |
-          sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
-          npx playwright install --with-deps chromium webkit
-      - run: npm run test:browser -- --workers=1 --reporter=line
       - uses: actions/upload-artifact@v7
         with:
           name: pfad-preview
           path: dist
+          retention-days: 7
+  browser:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit-mobile]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm install --global npm@11.21.0 --ignore-scripts
+      - run: npm ci
+      - uses: actions/download-artifact@v8
+        with:
+          name: pfad-preview
+          path: dist
+      # Switch the slow Azure package mirror to Ubuntu's main mirror before
+      # installing WebKit runtime libraries. Keep both browser engines checked.
+      - run: |
+          sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
+          if [ "${{ matrix.browser }}" = chromium ]; then
+            npx playwright install --with-deps chromium
+          else
+            npx playwright install --with-deps webkit
+          fi
+      # Separate hosts give each engine its own CPU/RAM budget. National WebGL
+      # scenes stay serial within a runner; both engines run at the same time.
+      - run: npm run test:browser -- --project=${{ matrix.browser }} --workers=1 --max-failures=1
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: pfad-browser-${{ matrix.browser }}
+          path: test-results
           retention-days: 7

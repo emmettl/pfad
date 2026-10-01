@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test from 'node:test'
+import { test } from 'vitest'
 import { MeetingFlash, MEETING_FLASH_MS } from '../src/map/meetingFlash.ts'
 
 test('meeting light requires a recorded forward crossing and supports replay, seeking and reduced motion', () => {

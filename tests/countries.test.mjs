@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test from 'node:test'
+import { test } from 'vitest'
 import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { COUNTRIES } from '../src/countries.ts'

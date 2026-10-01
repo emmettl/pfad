@@ -13,7 +13,7 @@ async function time(page: Page, seconds: number) {
   await expect(page.locator('canvas')).toHaveAttribute('data-event', event)
 }
 
-test('map shortcuts play once, scrub real events, respect duration and pause the route flourish', async ({ page }) => {
+test('map shortcuts play once, scrub real events and respect duration', async ({ page }) => {
   const errors: string[] = [], musicRequests: string[] = []
   page.on('pageerror', error => errors.push(error.message))
   page.on('request', request => { if (request.url().endsWith('.m4a')) musicRequests.push(request.url()) })
@@ -47,20 +47,6 @@ test('map shortcuts play once, scrub real events, respect duration and pause the
     await page.keyboard.press('ArrowRight'); await time(page, 1)
     await page.keyboard.press('Shift+ArrowRight'); await time(page, Math.min(6, duration))
   }
-  await slider.fill('4.97'); await map.focus(); await page.keyboard.press('Space')
-  await expect(page.getByText('Revealing the route', { exact: true })).toBeVisible({ timeout: 30000 })
-  await page.keyboard.press('Space')
-  await expect(page.getByText('Route reveal paused', { exact: true })).toBeVisible()
-  await expect(page.locator('.study')).toHaveAttribute('data-progress', '1')
-  const reveal = await page.locator('canvas').getAttribute('data-route-progress')
-  await page.waitForTimeout(150)
-  await expect(page.locator('canvas')).toHaveAttribute('data-route-progress', reveal!)
-  await page.keyboard.press('Space')
-  await expect(page.getByText('Route found', { exact: true })).toBeVisible({ timeout: 30000 })
-  await page.keyboard.press('Space')
-  await expect(page.getByRole('button', { name: 'Pause', exact: true })).toBeVisible()
-  expect(Number(await slider.inputValue())).toBeLessThan(1)
-  await page.keyboard.press('Space')
   expect(musicRequests).toEqual([]); expect(errors).toEqual([])
 })
 

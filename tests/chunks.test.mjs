@@ -1,4 +1,4 @@
-import test from 'node:test'
+import { test, vi } from 'vitest'
 import assert from 'node:assert/strict'
 import { gzipSync } from 'node:zlib'
 import { createHash } from 'node:crypto'
@@ -25,7 +25,7 @@ function install(t, body) {
   const cache = new MemoryCache(), requests = []
   globalThis.caches = { open: async () => cache }
   globalThis.fetch = async url => { const path = new URL(url).pathname.split('/').at(-1); requests.push(path); return body(path) }
-  t.after(() => { globalThis.fetch = originalFetch; globalThis.caches = originalCaches })
+  t.onTestFinished(() => { globalThis.fetch = originalFetch; globalThis.caches = originalCaches })
   return { cache, requests }
 }
 test('cold and warm records have identical ordered bytes; warm chunks are reverified without network', async t => {
@@ -83,7 +83,7 @@ test('gzip expansion and truncated layouts cannot exceed the declared allocation
 })
 test('versioned storage retains at most two releases and stays within the compressed budget', async t => {
   const { manifest, bodies } = fixture(), { cache } = install(t, path => new Response(bodies.get(path)))
-  let clock = 0; t.mock.method(Date, 'now', () => ++clock)
+  let clock = 0; vi.spyOn(Date, 'now').mockImplementation(() => ++clock)
   const run = (id, bytes) => loadChunks({ ...manifest, identity: id.repeat(64), downloadBytes: bytes }, 'https://example.org/manifest', () => {}, () => {})
   await run('a', 80 * 1024 * 1024); await run('b', 50 * 1024 * 1024)
   let keys = await cache.keys(); assert.equal(keys.some(k => k.url.includes('a'.repeat(64))), false)
@@ -97,7 +97,7 @@ test('an IndexedDB permission refusal uses verified network instead of creating 
   const { manifest, bodies } = fixture(), { cache } = install(t, path => new Response(bodies.get(path)))
   const previous = globalThis.indexedDB
   globalThis.indexedDB = { open() { throw new Error('Permission refused') } }
-  t.after(() => { globalThis.indexedDB = previous })
+  t.onTestFinished(() => { globalThis.indexedDB = previous })
   const result = await loadChunks(manifest, 'https://example.org/manifest', () => {}, () => {})
   assert.equal(result.cacheAvailable, false); assert.equal(result.networkBytes, manifest.downloadBytes)
   assert.equal((await cache.keys()).length, 0)

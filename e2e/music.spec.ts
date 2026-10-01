@@ -5,7 +5,7 @@ test.setTimeout(90000)
 async function instrument(page: import('@playwright/test').Page) {
   await page.addInitScript(() => {
     const Native = window.AudioContext
-    const probe = { contexts: [] as AudioContext[], starts: [] as number[], decoded: [] as { seconds: number; channels: number; sampleRate: number; length: number; peak: number; rms: number; edge: number }[] }
+    const probe = { contexts: [] as AudioContext[], starts: [] as number[], decoded: [] as { seconds: number; channels: number; sampleRate: number; length: number }[] }
     Object.assign(window, { musicProbe: probe })
     window.AudioContext = class extends Native {
       constructor(options?: AudioContextOptions) { super(options); probe.contexts.push(this) }
@@ -16,16 +16,7 @@ async function instrument(page: import('@playwright/test').Page) {
       }
       async decodeAudioData(bytes: ArrayBuffer) {
         const buffer = await super.decodeAudioData(bytes)
-        let peak = 0, energy = 0, edge = 0
-        for (let c = 0; c < buffer.numberOfChannels; c++) {
-          const data = buffer.getChannelData(c)
-          for (let i = 0; i < data.length; i++) {
-            if (!Number.isFinite(data[i])) throw new Error('Non-finite decoded music')
-            peak = Math.max(peak, Math.abs(data[i])); energy += data[i] ** 2
-            if (i < 20 || i >= data.length - 20) edge = Math.max(edge, Math.abs(data[i]))
-          }
-        }
-        probe.decoded.push({ seconds: buffer.duration, channels: buffer.numberOfChannels, sampleRate: buffer.sampleRate, length: buffer.length, peak, rms: Math.sqrt(energy / (buffer.length * buffer.numberOfChannels)), edge })
+        probe.decoded.push({ seconds: buffer.duration, channels: buffer.numberOfChannels, sampleRate: buffer.sampleRate, length: buffer.length })
         return buffer
       }
     }
@@ -36,6 +27,7 @@ test('real audio is opt-in, bounded and independent of search replay', async ({ 
   const errors: string[] = [], requests: string[] = []
   page.on('pageerror', error => errors.push(error.message))
   page.on('request', request => { if (request.url().endsWith('.m4a')) requests.push(request.url()) })
+  await page.emulateMedia({ reducedMotion: 'reduce' })
   await instrument(page); await page.goto('./')
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
   expect(requests).toEqual([])
@@ -54,13 +46,11 @@ test('real audio is opt-in, bounded and independent of search replay', async ({ 
   for (const buffer of music.decoded) {
     expect(buffer.channels).toBe(2); expect(buffer.sampleRate).toBe(32000)
     expect(buffer.seconds).toBeCloseTo(120, 1)
-    expect(buffer.peak).toBeLessThan(.5); expect(buffer.rms).toBeGreaterThan(.025)
-    expect(buffer.edge).toBeLessThan(.002)
     retained += buffer.length * 8
   }
   expect(retained).toBeLessThan(64 * 1024 * 1024)
   await page.screenshot({ path: `test-results/music-on-${test.info().project.name}.png` })
-  await page.getByRole('button', { name: 'Pause', exact: true }).click()
+  await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
   await page.getByRole('slider', { name: 'Search replay' }).fill('15')
   await expect(page.locator('.sound-control')).toHaveAttribute('data-sound', 'on')
   await page.getByRole('slider', { name: 'Music volume' }).fill('0')
@@ -93,6 +83,7 @@ test('real audio is opt-in, bounded and independent of search replay', async ({ 
 })
 
 test('failed music can be retried while the real map remains usable', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.route('**/*.m4a', route => route.fulfill({ status: 503, body: 'Unavailable' }))
   await page.goto('./'); await page.getByRole('button', { name: 'Sound', exact: true }).click()
   await expect(page.locator('.sound-control')).toHaveAttribute('data-sound', 'error')
@@ -105,7 +96,10 @@ test('failed music can be retried while the real map remains usable', async ({ p
 })
 
 test('all encoded sketches and the three musical joins have headroom and no cut at the seam', async ({ page }) => {
-  await page.goto('./')
+  // Codec decoding and OfflineAudioContext are browser responsibilities, but
+  // audio quality needs no React app, national graph or WebGL scene.
+  await page.route('**/__audio-quality', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><title>Audio QA</title>' }))
+  await page.goto('./__audio-quality')
   const ids = ['plateau', 'contours', 'afterglow']
   const urls = ids.map(id => `./assets/${readdirSync('dist/assets').find(name => name.startsWith(id + '-') && name.endsWith('.m4a'))}`)
   const quality = await page.evaluate(async urls => {
@@ -114,18 +108,20 @@ test('all encoded sketches and the three musical joins have headroom and no cut 
       const context = new OfflineAudioContext(2, 1, 32000)
       return context.decodeAudioData(await (await fetch(url)).arrayBuffer())
     }
+    let current = await decode(urls[0])
     for (let i = 0; i < urls.length; i++) {
-      const current = await decode(urls[i]), next = await decode(urls[(i + 1) % urls.length])
-      let peak = 0, energy = 0, maxStep = 0
+      const next = await decode(urls[(i + 1) % urls.length])
+      let peak = 0, energy = 0, maxStep = 0, edge = 0
       for (let channel = 0; channel < current.numberOfChannels; channel++) {
         const samples = current.getChannelData(channel)
         for (let sample = 0; sample < samples.length; sample++) {
           if (!Number.isFinite(samples[sample])) throw new Error('Non-finite encoded score')
           peak = Math.max(peak, Math.abs(samples[sample])); energy += samples[sample] ** 2
+          if (sample < 20 || sample >= samples.length - 20) edge = Math.max(edge, Math.abs(samples[sample]))
           if (sample) maxStep = Math.max(maxStep, Math.abs(samples[sample] - samples[sample - 1]))
         }
       }
-      tracks.push({ url: urls[i], seconds: current.duration, channels: current.numberOfChannels, peak, rms: Math.sqrt(energy / (current.length * current.numberOfChannels)), maxStep })
+      tracks.push({ url: urls[i], seconds: current.duration, channels: current.numberOfChannels, peak, rms: Math.sqrt(energy / (current.length * current.numberOfChannels)), maxStep, edge })
       const mix = new OfflineAudioContext(2, 8 * 32000, 32000)
       for (const [buffer, entering] of [[current, false], [next, true]] as const) {
         const source = mix.createBufferSource(), gain = mix.createGain()
@@ -144,6 +140,7 @@ test('all encoded sketches and the three musical joins have headroom and no cut 
         }
       }
       joins.push({ from: i, to: (i + 1) % urls.length, peak: joinPeak, maxStep: joinStep })
+      current = next
     }
     return { tracks, joins }
   }, urls)
@@ -151,6 +148,7 @@ test('all encoded sketches and the three musical joins have headroom and no cut 
     expect(track.channels).toBe(2); expect(track.seconds).toBeCloseTo(120, 1)
     expect(track.peak).toBeLessThan(.5); expect(track.rms).toBeGreaterThan(.025)
     expect(track.maxStep).toBeLessThan(.04)
+    expect(track.edge).toBeLessThan(.002)
   }
   for (const join of quality.joins) { expect(join.peak).toBeLessThan(.5); expect(join.maxStep).toBeLessThan(.04) }
   writeFileSync(`test-results/music-quality-${test.info().project.name}.json`, JSON.stringify(quality, null, 2) + '\n')

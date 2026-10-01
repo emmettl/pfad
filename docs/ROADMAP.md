@@ -99,6 +99,10 @@ devices the edition intends to support.
   An incomplete topology still prevents searching. Two in-flight chunks, versioned
   IndexedDB storage (Cache Storage fallback), at most two releases / 128 MiB,
   reverified reads and one automatic retry are covered by unit and browser checks.
+- [x] Separate deterministic logic and national search regressions into Vitest;
+  retain browser API, input and rendering integration checks. Browser engines
+  run on concurrent CI runners; local workers are bounded and benchmarked. See
+  [test responsibilities and timings](TESTING.md).
 - [ ] Keep loading, decoding, endpoint preparation, search recording and first
   usable drawing separately measurable.
 - [ ] Add cancellation and replacement of pending searches, with clear behaviour

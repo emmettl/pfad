@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test from 'node:test'
+import { test } from 'vitest'
 import { compileGraph, countsAt, dijkstra } from '../src/search/engine.ts'
 import { compileReverse } from '../src/search/bidirectional.ts'
 import { astar, prepareHeuristic } from '../src/search/astar.ts'

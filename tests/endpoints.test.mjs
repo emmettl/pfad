@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test from 'node:test'
+import { test } from 'vitest'
 import { compileGraph, dijkstra, snapEndpoints } from '../src/search/engine.ts'
 
 function graph(longitudes, edges, categories = new Uint8Array(edges.length)) {

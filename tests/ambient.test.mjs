@@ -1,4 +1,4 @@
-import test from 'node:test'
+import { test } from 'vitest'
 import assert from 'node:assert/strict'
 import { JourneySelector, AMBIENT_PLACES, distanceBand, replaySeconds, straightLineKm } from '../src/ambient/selector.ts'
 import { AmbientSequence, ALGORITHM_CYCLE_VERSION } from '../src/ambient/sequence.ts'
@@ -58,7 +58,7 @@ function harness(t) {
   globalThis.performance = { now: () => now }
   globalThis.requestAnimationFrame = fn => { frames.set(++id, fn); return id }
   globalThis.cancelAnimationFrame = id => frames.delete(id)
-  t.after(() => { globalThis.requestAnimationFrame = originalRAF; globalThis.cancelAnimationFrame = originalCancel; globalThis.performance = originalPerformance })
+  t.onTestFinished(() => { globalThis.requestAnimationFrame = originalRAF; globalThis.cancelAnimationFrame = originalCancel; globalThis.performance = originalPerformance })
   const sequence = new AmbientSequence(() => {}, (pair, algorithm) => { pairs.push(pair); algorithms.push(algorithm) })
   const step = ms => { for (let i = 0; i < ms; i += 100) { now += 100; const due = [...frames.values()]; frames.clear(); due.forEach(fn => fn(now)) } }
   const result = (km = pairs.at(-1).estimateKm) => ({ routeMetres: km === null ? null : km * 1000, algorithm: algorithms.at(-1) === 'bidirectional' ? 'bidirectional-dijkstra/1' : `${algorithms.at(-1)}/1`, searchMs: 10, trace: new Uint32Array(10), dataset: { identity: 'verified' } })

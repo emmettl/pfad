@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "PFAD \u2014 a study of time, space, and the paths not taken",
+  "description": "PFAD — a study of time, space, and the paths not taken",
   "license": "MIT",
   "engines": {
     "node": ">=24.0.0"
@@ -17,7 +17,8 @@
     "lint": "oxlint src scripts tests",
     "check:boundary": "node scripts/check-boundary.mjs",
     "check:budget": "node scripts/check-budget.mjs",
-    "test": "node --test tests/*.test.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:browser": "playwright test",
     "check": "npm run typecheck && npm run lint && npm run check:boundary && npm test && npm run build && npm run check:budget",
     "share:render": "node scripts/social-card.mjs",
@@ -51,6 +52,7 @@
     "@vitejs/plugin-react": "6.1.1",
     "oxlint": "1.86.0",
     "typescript": "7.0.2",
-    "vite": "8.3.1"
+    "vite": "8.3.1",
+    "vitest": "5.0.3"
   }
 }

@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test'
-test.setTimeout(150000)
+test.setTimeout(90000)
 
 test('ambient retreats without trapping touch or keyboard controls, and Escape restores the study', async ({ page, isMobile }) => {
+  await page.clock.install()
   await page.goto('./'); await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
   await page.getByRole('button', { name: 'Ambient', exact: true }).click()
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'replay', { timeout: 45000 })
   const controls = page.locator('.ambient-controls'), header = page.locator('.header-tools'), map = page.locator('main.map')
-  await expect(controls).toHaveCSS('opacity', '0', { timeout: 8000 })
+  await page.clock.fastForward(4100)
+  await expect(controls).toHaveCSS('opacity', '0')
   await expect(header).toHaveCSS('opacity', '0')
   await expect(page.locator('.route-caption')).toBeVisible()
   await expect(page.locator('.ambient-algorithm')).toHaveText('Dijkstra')
@@ -15,23 +17,25 @@ test('ambient retreats without trapping touch or keyboard controls, and Escape r
   else await page.mouse.move(100, 200)
   await expect(controls).toHaveCSS('opacity', '1')
   await map.focus()
-  await expect(controls).toHaveCSS('opacity', '0', { timeout: 8000 })
+  await page.clock.fastForward(4100)
+  await expect(controls).toHaveCSS('opacity', '0')
   await page.keyboard.press('Tab')
   // Check focus protection directly in the touch project as well as the
   // desktop project's native Tab traversal.
   if (isMobile) await page.getByRole('button', { name: 'Pause sequence' }).focus()
   await expect(page.getByRole('button', { name: 'Pause sequence' })).toBeFocused()
   await expect(controls).toHaveCSS('opacity', '1')
-  await page.waitForTimeout(4500)
+  await page.clock.fastForward(4500)
   await expect(controls).toHaveCSS('opacity', '1')
   await page.keyboard.press('Space')
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-running', 'false')
-  await map.focus(); await page.waitForTimeout(4500)
+  await map.focus(); await page.clock.fastForward(4500)
   await expect(controls).toHaveCSS('opacity', '1')
   await page.getByRole('button', { name: 'Resume sequence' }).click()
   await page.getByText('About', { exact: true }).click()
   await map.focus()
-  await expect(controls).toHaveCSS('opacity', '0', { timeout: 8000 })
+  await page.clock.fastForward(4100)
+  await expect(controls).toHaveCSS('opacity', '0')
   await expect(header).toHaveCSS('opacity', '1')
   await expect(page.locator('.about')).toHaveAttribute('open', '')
   await page.keyboard.press('Escape')
@@ -43,7 +47,7 @@ test('ambient retreats without trapping touch or keyboard controls, and Escape r
   await expect(page.locator('.sound-control')).toHaveAttribute('data-sound', 'off')
 })
 
-test('ambient plays genuine distance-paced journeys, freezes transitions and exits into the current study', async ({ page }) => {
+test('ambient binds genuine journeys, reuses loaded chunks, and exits into the current study', async ({ page }) => {
   const errors: string[] = [], music: string[] = [], chunks: string[] = []
   page.on('pageerror', error => errors.push(error.message))
   page.on('request', request => { if (request.url().endsWith('.m4a')) music.push(request.url()); if (request.url().endsWith('.bin.gz.bin')) chunks.push(request.url()) })
@@ -63,15 +67,8 @@ test('ambient plays genuine distance-paced journeys, freezes transitions and exi
   await page.keyboard.press('End'); await page.keyboard.press('Space')
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'hold')
   const first = await page.locator('.route-caption').textContent()
-  const km = Number(first!.match(/([\d.]+) km/)![1])
-  expect(Math.abs(duration - Math.min(65, Math.max(25, 30 * Math.sqrt(km / 100))))).toBeLessThan(.02)
-  await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'fade', { timeout: 10000 })
-  await page.keyboard.press('Shift') // Reveal the idle interface before clicking.
-  await page.getByRole('button', { name: 'Pause sequence', exact: true }).click()
-  const opacity = await page.locator('main.map').evaluate(el => el.style.opacity)
-  await page.waitForTimeout(250); expect(await page.locator('main.map').evaluate(el => el.style.opacity)).toBe(opacity)
   chunks.length = 0
-  await page.getByRole('button', { name: 'Resume sequence', exact: true }).click()
+  await page.getByRole('button', { name: 'Next journey' }).click()
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'replay', { timeout: 45000 })
   expect(await page.locator('.route-caption').textContent()).not.toBe(first)
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'bidirectional-dijkstra/1')
@@ -112,6 +109,7 @@ test('reduced-motion ambient presents completed stills and requires explicit Nex
 })
 
 test('sequence pause suspends one continuous score; hidden return needs explicit actions', async ({ page }) => {
+  await page.clock.install()
   await page.addInitScript(() => {
     const Native = AudioContext, contexts: AudioContext[] = []; let starts = 0
     Object.assign(window, { ambientAudio: { contexts, get starts() { return starts } } })
@@ -126,10 +124,14 @@ test('sequence pause suspends one continuous score; hidden return needs explicit
   await expect.poll(() => page.evaluate(() => (window as any).ambientAudio.starts)).toBe(2)
   await page.getByRole('button', { name: 'Ambient', exact: true }).click()
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'replay', { timeout: 45000 })
-  // The score test can reach replay after the controls have retreated on slow GPUs.
-  await page.locator('main.map').focus()
-  await expect(page.locator('.study')).toHaveAttribute('data-ambient-chrome', 'visible')
-  await page.getByRole('button', { name: 'Pause sequence' }).click()
+  await page.clock.fastForward(4100)
+  await expect(page.locator('.ambient-controls')).toHaveCSS('opacity', '0')
+  await expect(page.locator('.sound-control')).toHaveAttribute('data-sound', 'on')
+  // Focus protects the controls through a slow software-rendering click.
+  const pause = page.getByRole('button', { name: 'Pause sequence' })
+  await pause.focus(); await expect(pause).toBeFocused()
+  await expect(page.locator('.ambient-controls')).toHaveCSS('opacity', '1')
+  await pause.click()
   await expect(page.locator('.sound-control')).toHaveAttribute('data-sound', 'paused')
   await expect.poll(() => page.evaluate(() => (window as any).ambientAudio.contexts[0].state)).toBe('suspended')
   await page.getByRole('button', { name: 'Resume sequence' }).click()
@@ -146,6 +148,7 @@ test('sequence pause suspends one continuous score; hidden return needs explicit
   await expect(page.locator('.sound-control')).toHaveAttribute('data-sound', 'off')
   await page.getByRole('button', { name: 'Sound', exact: true }).click()
   await expect(page.locator('.sound-control')).toHaveAttribute('data-sound', 'on')
+  await page.keyboard.press('Shift')
   await page.getByRole('button', { name: 'Exit ambient' }).click()
   expect(await page.evaluate(() => (window as any).ambientAudio.contexts.length)).toBe(1)
   expect(await page.evaluate(() => (window as any).ambientAudio.starts)).toBe(2)

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test from 'node:test'
+import { test } from 'vitest'
 import { compileGraph, dijkstra, countsAt } from '../src/search/engine.ts'
 function graph(n, edges) {
   return compileGraph({ xy: new Int32Array(n * 2), from: Uint32Array.from(edges, e => e[0]), to: Uint32Array.from(edges, e => e[1]), length: Uint32Array.from(edges, e => e[2]), direction: Uint8Array.from(edges, e => e[3] ?? 0), category: new Uint8Array(edges.length) })

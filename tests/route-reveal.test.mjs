@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test from 'node:test'
+import { test } from 'vitest'
 import { RouteDrawing, RouteReveal, ROUTE_DRAW_MS, ROUTE_SETTLE_MS } from '../src/map/routeReveal.ts'
 
 test('route drawing follows actual curves, reverse traversal and original road-length weights', () => {

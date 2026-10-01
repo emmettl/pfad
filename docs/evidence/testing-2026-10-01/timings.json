@@ -1,0 +1,60 @@
+{
+  "schema": "pfad-test-timings/1",
+  "measuredAt": "2026-10-01T09:17:31.525Z",
+  "host": {
+    "platform": "darwin",
+    "cpu": "Apple M4 Max",
+    "node": "v26.10.0"
+  },
+  "baseline": {
+    "sourceCommit": "dc0eb6bd9ff31fb7b11c762e35c4147b6d2747a3",
+    "tests": 46,
+    "workers": 1,
+    "passed": 46,
+    "durationMs": 288000,
+    "precision": "Playwright rounded 4.8m summary; not a timeout-inclusive CI run"
+  },
+  "revised": {
+    "sourceBase": "bda9b1fc6c726d1a07d49a9ae1b27b1cce7f5682",
+    "sameBuild": true,
+    "realNationalGraph": true,
+    "projects": [
+      "chromium",
+      "webkit-mobile"
+    ],
+    "runs": [
+      {
+        "name": "serial",
+        "workers": 1,
+        "startTime": "2026-10-01T09:09:17.915Z",
+        "duration": 156393.634,
+        "expected": 42,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      {
+        "name": "parallel",
+        "workers": 2,
+        "startTime": "2026-10-01T09:13:24.916Z",
+        "duration": 89090.85900000001,
+        "expected": 42,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    ]
+  },
+  "vitest": {
+    "files": 18,
+    "passed": 65,
+    "workers": 2,
+    "durationMs": 2270,
+    "nationalSearches": 6
+  },
+  "notes": [
+    "Local timings, not CI projections or physical-phone measurements.",
+    "No retries, failures or skips in either revised browser run.",
+    "Final audio pause check additionally retains focus through slow clicks; benchmark timings precede that interaction refinement."
+  ]
+}

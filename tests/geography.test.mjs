@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import test from 'node:test'
+import { test } from 'vitest'
 
 test('geographic references retain reviewed source identities, attribution and closed rings', () => {
   const record = JSON.parse(readFileSync('data/geography-sources.json', 'utf8'))

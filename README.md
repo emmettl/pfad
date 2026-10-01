@@ -65,10 +65,13 @@ but are not enforced yet. It is not a validated driving route planner.
 ## Development
 
 Use Node 24 and npm 11.21.0. Data tools require Python 3.11 or newer. `npm ci`, then `npm run dev`.
-`npm run check` runs type, lint, dependency-boundary, contract, build and
+`npm run check` runs type, lint, dependency-boundary, Vitest, build and
 payload checks. `npx playwright install chromium webkit` installs browsers;
 `npm run test:browser` checks the built site. Public shared packages are pinned
 to `0.1.0-alpha.31`; the repository remains private to npm (`private: true`).
+`npm run test:watch` watches logic tests. Browser checks use two bounded workers
+locally; CI runs desktop Chromium and touch WebKit on separate runners, with
+one worker each. See [test responsibilities and timings](docs/TESTING.md).
 
 ## Evidence and data
 

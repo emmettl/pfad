@@ -1,4 +1,4 @@
-import { test } from 'node:test'
+import { test, vi } from 'vitest'
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
@@ -72,19 +72,19 @@ function fixture(t) {
   }
   const previous = globalThis.AudioContext
   globalThis.AudioContext = Context
-  t.after(() => { globalThis.AudioContext = previous })
-  t.mock.method(globalThis, 'fetch', async url => {
+  t.onTestFinished(() => { globalThis.AudioContext = previous })
+  vi.spyOn(globalThis, 'fetch').mockImplementation(async url => {
     requests.push(url)
     if (fail === true || fail === url) throw new Error('offline')
     return { ok: true, arrayBuffer: async () => bytes.buffer.slice(0) }
   })
-  t.mock.method(globalThis, 'setInterval', fn => { tick = fn; return 1 })
-  t.mock.method(globalThis, 'clearInterval', () => { tick = () => {} })
-  t.mock.method(globalThis, 'setTimeout', fn => { const id = timers.size + 1; timers.set(id, fn); return id })
-  t.mock.method(globalThis, 'clearTimeout', id => { timers.delete(id) })
+  vi.spyOn(globalThis, 'setInterval').mockImplementation(fn => { tick = fn; return 1 })
+  vi.spyOn(globalThis, 'clearInterval').mockImplementation(() => { tick = () => {} })
+  vi.spyOn(globalThis, 'setTimeout').mockImplementation(fn => { const id = timers.size + 1; timers.set(id, fn); return id })
+  vi.spyOn(globalThis, 'clearTimeout').mockImplementation(id => { timers.delete(id) })
   const tracks = ['A', 'B', 'C'].map(id => ({ id, title: id, url: id, seconds: 2, bytes: 4, sha256: hash(bytes) }))
   const player = new Soundtrack(tracks, status => statuses.push(status))
-  t.after(() => player.dispose())
+  t.onTestFinished(() => player.dispose())
   return { player, contexts, requests, statuses, timers, setFail(value) { fail = value }, defer(promise) { deferDecode = promise }, maxDecoding: () => maxDecoding }
 }
 

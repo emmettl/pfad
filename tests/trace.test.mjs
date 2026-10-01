@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test from 'node:test'
+import { test } from 'vitest'
 import { EventTrace } from '../src/search/trace.ts'
 test('exact event buffer grows across a boundary and shrinks without a second trace copy', () => {
   const trace = new EventTrace(600000)

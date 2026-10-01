@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import test from 'node:test'
+import { test } from 'vitest'
 import { compileGraph, countsAt } from '../src/search/engine.ts'
 import { BACKWARD, bidirectional, compileReverse } from '../src/search/bidirectional.ts'
 

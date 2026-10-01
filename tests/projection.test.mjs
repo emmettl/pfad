@@ -1,4 +1,4 @@
-import test from 'node:test'
+import { test } from 'vitest'
 import assert from 'node:assert/strict'
 import { longitudeOffset, normaliseLongitude } from '../src/search/projection.ts'
 test('drawing wraps New Zealand offshore longitudes and picking returns geographic coordinates', () => {

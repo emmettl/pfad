@@ -1,4 +1,4 @@
-import test from 'node:test'
+import { test } from 'vitest'
 import assert from 'node:assert/strict'
 import { gunzipSync } from 'node:zlib'
 import { readStudyLink, studyUrl, StudyUrlBinding } from '../src/records/link.ts'
@@ -24,7 +24,7 @@ test('automatic URL binding throttles to the latest frame, preserves other param
   globalThis.performance = { now: () => now }
   globalThis.setTimeout = fn => { tasks.set(++id, fn); return id }
   globalThis.clearTimeout = id => tasks.delete(id)
-  t.after(() => { globalThis.setTimeout = originalTimeout; globalThis.clearTimeout = originalClear; globalThis.performance = originalPerformance })
+  t.onTestFinished(() => { globalThis.setTimeout = originalTimeout; globalThis.clearTimeout = originalClear; globalThis.performance = originalPerformance })
   const binding = new StudyUrlBinding(() => url, next => { url = next; writes++ })
   binding.update(study); assert.equal(writes, 1)
   for (let i = 0; i < 30; i++) binding.update({ ...study, progress: i / 30 })
