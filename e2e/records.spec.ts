@@ -34,15 +34,23 @@ test('native URL follows journey and camera edits, stays fixed during replay, an
   await page.getByRole('button', { name: 'Show border and lake outlines' }).click()
   await expect.poll(parameters).toMatchObject({ algorithm: 'astar', duration: 15, progress: 0, outlines: false, start: { name: 'Basel' }, dataset: COUNTRIES[0].identity })
   const beforeView = (await parameters()).view ?? { x: 0, y: 0, zoom: 1 }
+  const renderedView = async () => {
+    const view = JSON.parse((await page.locator('canvas').getAttribute('data-view'))!)
+    return { x: Number(view.x.toFixed(6)), y: Number(view.y.toFixed(6)), zoom: Number(view.zoom.toFixed(6)) }
+  }
   const bounds = (await page.locator('canvas').boundingBox())!
   await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height * .45)
   // Playwright cannot send a native wheel in mobile WebKit; exercise the same
   // DOM handler there, then use real pointer input for the pan in both engines.
   if (isMobile) await page.locator('canvas').dispatchEvent('wheel', { deltaY: -300, clientX: bounds.x + bounds.width / 2, clientY: bounds.y + bounds.height * .45 })
   else await page.mouse.wheel(0, -300)
+  await expect.poll(async () => (await renderedView()).zoom).toBeGreaterThan(beforeView.zoom)
+  const zoomedView = await renderedView()
   await page.mouse.down(); await page.mouse.move(bounds.x + bounds.width / 2 + 40, bounds.y + bounds.height * .45 + 20); await page.mouse.up()
-  await expect.poll(async () => (await parameters()).view?.zoom ?? 1).toBeGreaterThan(1)
-  await expect.poll(async () => (await parameters()).view?.x ?? 0).not.toBe(beforeView.x)
+  await expect.poll(async () => (await renderedView()).x).toBeLessThan(zoomedView.x)
+  // The URL writes at most twice a second. Wait for the pan, not only the
+  // earlier zoom, to be represented before reloading the shared study.
+  await expect.poll(async () => (await parameters()).view).toEqual(await renderedView())
   const shared = await parameters()
   expect(await page.evaluate(() => history.length)).toBe(historyLength)
   await page.reload()
