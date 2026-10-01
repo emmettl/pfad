@@ -28,7 +28,8 @@ jobs:
   browser:
     needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Software-rendered national scenes approach ten minutes across 30 checks.
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:

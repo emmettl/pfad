@@ -65,3 +65,8 @@ mirror. The existing rewrite covered only one Deb822 source file; setup now
 rewrites the legacy source list, all `.list`/`.sources` files, and the runner’s
 `/etc/apt/apt-mirrors.txt` indirection identified by the download log. Both
 browser gates remain required.
+
+With mirror setup fixed, WebKit passed all 30 checks. Chromium reached its
+30th check when the existing ten-minute job cap terminated it; a prior run
+passed the same suite in 9m51s. The browser job budget is now 15 minutes, with
+individual test timeouts, both engines and all assertions preserved.
