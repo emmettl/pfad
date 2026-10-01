@@ -3,6 +3,18 @@ import type { MapBoundary } from '@motionstudies/core/domain/boundary'
 import type { MapWaterBodies } from '@motionstudies/core/domain/lakes'
 import type { Geography } from './geography-loader.ts'
 
+export function createGeographyFill(project: (point: { lon: number; lat: number }) => THREE.Vector3, context: Geography) {
+  // These reference rings are country exteriors, independent of road topology.
+  const shapes = context.boundary.rings.map(ring => new THREE.Shape(ring.map(([lon, lat]) => {
+    const point = project({ lon, lat }); return new THREE.Vector2(point.x, point.y)
+  })))
+  const material = new THREE.MeshBasicMaterial({ color: '#88bda5', opacity: .045, transparent: true, depthTest: false, depthWrite: false, toneMapped: false })
+  const fill = new THREE.Mesh(new THREE.ShapeGeometry(shapes), material)
+  fill.frustumCulled = false
+  const group = new THREE.Group(); group.renderOrder = -3; group.add(fill)
+  return group
+}
+
 // Geographic context has no event times and never participates in routing.
 export function createGeography(project: (point: { lon: number; lat: number }) => THREE.Vector3, context: Geography) {
   const boundary = context.boundary as MapBoundary
@@ -25,5 +37,5 @@ export function createGeography(project: (point: { lon: number; lat: number }) =
   return group
 }
 export function disposeGeography(group: THREE.Group) {
-  group.traverse(object => { if (object instanceof THREE.LineSegments) { object.geometry.dispose(); (object.material as THREE.Material).dispose() } })
+  group.traverse(object => { if (object instanceof THREE.LineSegments || object instanceof THREE.Mesh) { object.geometry.dispose(); (object.material as THREE.Material).dispose() } })
 }

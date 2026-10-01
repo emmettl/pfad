@@ -4,7 +4,7 @@ import type { Point, SearchResult, StudyManifest } from '../search/contracts.ts'
 import { RouteDrawing, RouteReveal } from './routeReveal.ts'
 import { createRouteGeometry, createRouteMaterial } from './routeMaterial.ts'
 import type { Geography } from './geography-loader.ts'
-import { createGeography, disposeGeography } from './geography.ts'
+import { createGeography, createGeographyFill, disposeGeography } from './geography.ts'
 import { MeetingFlash, createMeetingMaterial } from './meetingFlash.ts'
 
 const vertexShader = `
@@ -83,7 +83,9 @@ export class RoadScene {
   observer: ResizeObserver
   markers: HTMLDivElement
   points: Point[] = []
-  picking = false
+  private pickingEnabled = false
+  get picking() { return this.pickingEnabled }
+  set picking(value: boolean) { this.pickingEnabled = value; this.updateSelectionFill() }
   onPick?: (lon: number, lat: number) => void
   onViewChange?: (view: { x: number; y: number; zoom: number }) => void
   pointers = new Map<number, { x: number; y: number }>()
@@ -96,6 +98,8 @@ export class RoadScene {
   lastRendered = -Infinity
   geography?: THREE.Group
   geographyVisible = true
+  private geographyContext?: Geography
+  private selectionFill?: THREE.Group
   drawing = new RouteDrawing()
   reveal = new RouteReveal()
   flash = new MeetingFlash()
@@ -158,6 +162,7 @@ export class RoadScene {
         canvas.dataset.outlines = this.geography?.visible ? 'visible' : 'hidden'
         canvas.dataset.outlineCountry = this.geography?.userData.country ?? ''
         canvas.dataset.outlineSegments = String(this.geography?.userData.segments ?? 0)
+        canvas.dataset.selectionFill = this.picking ? this.selectionFill ? 'country' : 'field' : 'hidden'
         canvas.dataset.meetingEvent = String(this.meetingEvent ?? 0)
         canvas.dataset.totalEvents = String(this.events)
         canvas.dataset.flashPhase = this.flash.active ? 'flashing' : 'hidden'
@@ -182,14 +187,32 @@ export class RoadScene {
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.geography = undefined
+    this.geographyContext = undefined; this.clearSelectionFill(); this.updateSelectionFill()
     this.resetView()
   }
   setGeography(context: Geography) {
+    this.geographyContext = context; this.clearSelectionFill()
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.geography = createGeography(point => this.project(point), context)
     this.geography.visible = this.geographyVisible
     this.scene.add(this.geography)
+    this.updateSelectionFill()
+  }
+  private updateSelectionFill() {
+    if (this.picking && !this.selectionFill && this.geographyContext) {
+      this.selectionFill = createGeographyFill(point => this.project(point), this.geographyContext)
+      this.scene.add(this.selectionFill)
+    }
+    if (this.selectionFill) this.selectionFill.visible = this.picking
+    // Retain a quiet cue if geographic context is unavailable.
+    this.renderer.setClearColor(this.picking && !this.selectionFill ? '#0c1513' : '#080d10', 1)
     this.dirty = true
+  }
+  private clearSelectionFill() {
+    if (this.selectionFill) {
+      this.scene.remove(this.selectionFill); disposeGeography(this.selectionFill)
+      this.selectionFill = undefined
+    }
   }
   setGeographyVisible(visible: boolean) {
     this.geographyVisible = visible
@@ -375,6 +398,7 @@ export class RoadScene {
     this.flashPoint?.geometry.dispose(); this.flashMaterial.dispose(); this.backwardTexture.dispose()
     this.proximityTexture.dispose(); this.sourceTexture.dispose()
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
+    this.clearSelectionFill(); this.geographyContext = undefined
     this.scene.traverse(object => { if (object instanceof THREE.LineSegments) object.geometry.dispose() })
     this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.forceContextLoss(); this.renderer.domElement.remove(); this.markers.remove()
   }
