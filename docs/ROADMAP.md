@@ -205,7 +205,8 @@ and communicated without losing its source identity.
 - [x] Add concise native query links containing place slugs or coordinates, country,
   algorithm and meaningful replay/view settings; omit defaults, offsets and graph hashes.
   Bind these parameters automatically to the address bar, with throttled history
-  replacement and paused opening at the beginning. Keep existing JSON links readable;
+  replacement and automatic replay from the beginning, or a completed still for
+  reduced motion. Keep existing JSON links readable;
   exact source identity and frames remain in exported recordings.
 - [x] Publish an attributed share card from a genuine search, with static Open Graph,
   X card and canonical metadata, accessible image text and crawler verification.
@@ -306,7 +307,7 @@ Related: [Concept](CONCEPT.md) · [Music](MUSIC.md) · [Architecture](ARCHITECTU
 ## Review handoff · 1 October 2026
 
 The current pass adds verified chunk caching/retries, the curated ambient loop,
-whole-sequence music lifecycle, shareable paused studies and exact binary search
+whole-sequence music lifecycle, shareable journeys and exact binary search
 exports. [RECORDS.md](RECORDS.md) documents identities and the export envelope.
 Sharing follows journey, settings and camera changes in a concise URL automatically;
 ambient journeys rotate through the three algorithms, starting with the current mode.

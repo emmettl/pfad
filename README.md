@@ -49,9 +49,10 @@ sequence pauses the score too; Next and Exit preserve its player. Reduced motion
 provides completed stills and deliberate Next. Pacing and musical selection are
 ready for author review.
 
-Readable query parameters follow the journey, settings and map view automatically,
-opening the search paused at the beginning when shared. Replay offsets and graph
-hashes stay out of URLs; existing JSON links remain supported. About offers Copy study link
+Readable query parameters follow the journey, settings and map view automatically.
+Shared journeys start replaying from the beginning; reduced motion opens a completed
+still. Replay offsets and graph hashes stay out of URLs; existing JSON links remain
+supported. About offers Copy study link
 and a binary export of the genuine trace with provenance. Verified
 chunk caching retains at most two releases within 128 MiB and supports warm
 opening and retries without downloading intact stored chunks again.

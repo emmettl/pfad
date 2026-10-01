@@ -12,6 +12,7 @@ import { useAmbientChrome } from './ambient/useChrome.ts'
 import type { JourneyPair } from './ambient/selector.ts'
 import { ROAD_CACHE_NAME, type LoadMeasurements } from './search/chunks.ts'
 import { clearStudyUrl, readStudyLink, shareView, studyUrl, StudyUrlBinding, type StudyLink } from './records/link.ts'
+import { openingReplay } from './records/opening.ts'
 import { exportRecord, downloadBlob } from './records/export.ts'
 import './study.css'
 
@@ -161,7 +162,8 @@ export function App() {
         const reducedMotion = prefersReducedMotion()
         if (sequence.state.active) setDuration(sequence.duration)
         const frame = sharedFrame.current; sharedFrame.current = undefined
-        setResult(reply.result); map?.setResult(reply.result); setBusy(false); seek(frame?.progress ?? (reducedMotion ? 1 : 0)); if (frame?.view) map?.setView(frame.view); setPlaying(!frame && !reducedMotion && (!sequence.state.active || sequence.state.running))
+        const opening = openingReplay(frame, reducedMotion)
+        setResult(reply.result); map?.setResult(reply.result); setBusy(false); seek(opening.progress); if (frame?.view) map?.setView(frame.view); setPlaying(opening.playing && (!sequence.state.active || sequence.state.running))
       }
       if (reply.type === 'error' && (reply.requestId === undefined || reply.requestId === currentRequest.current)) { setError(reply.message); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail(reply.message) }
     }
@@ -301,12 +303,12 @@ export function App() {
         <p>Original ambient sketches composed using Driftbox: Plateau, Contours and Afterglow. This is a provisional score, flowing independently of the search. Sound starts off and pauses when you leave the page.</p>
         <p><a href={manifestUrl || './data/pfad-manifest.json'}>Dataset and source record</a>{manifest && <> · <a href={new URL(manifest.evidence.path, manifestUrl).href}>Source evidence</a></>} · <a href="./profiles/road-connectivity-distance-v1.json">Declared routing profile</a></p>
         {measurements && <p>Opening record: {(measurements.networkBytes / 1000000).toFixed(1)} MB downloaded, {(measurements.cachedBytes / 1000000).toFixed(1)} MB from verified cache · {measurements.totalMs.toFixed(0)} ms to complete graph. {measurements.cacheAvailable ? 'Up to two releases are cached within 128 MiB.' : 'Persistent storage unavailable; verified network loading remains available.'}</p>}
-        <p>The address bar follows the current settings, replay frame and map view. Share its URL to open that study paused; sound stays off.</p>
+        <p>The address bar follows the current journey, settings and map view. Shared links start the replay automatically; reduced motion shows the completed route. Sound stays off.</p>
         <div className="record-actions">
           <button disabled={!result || busy} onClick={async () => {
             const study = currentParameters(); if (!study) return
             urlBinding.current?.update(study); const url = urlBinding.current?.flush() ?? studyUrl(location.href, study); setCopiedLink(url)
-            try { await navigator.clipboard.writeText(url); setRecordStatus('Study link copied. Opens paused at this frame.') }
+            try { await navigator.clipboard.writeText(url); setRecordStatus('Study link copied. Replay starts automatically.') }
             catch { setRecordStatus('Select the link below to copy it.') }
           }}>Copy study link</button>
           <button disabled={!result || busy || !manifest || exporting} onClick={async () => {

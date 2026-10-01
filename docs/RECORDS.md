@@ -20,7 +20,9 @@ use `from-name` or `to-name`.
 Copy the URL directly, or use **Copy study link** in About this study to flush and
 copy the latest settings. Updates replace the current browser-history entry at most
 twice a second; replay ticks do not change the URL. Opening a link recomputes the
-genuine search and starts paused at the beginning. It does not autoplay ambient mode or enable music. Computation
+genuine search and automatically plays the replay from the beginning. Reduced-motion
+preferences open a completed still instead, so a shared journey never waits on a
+dark starting frame. Ambient mode and music still require a deliberate action. Computation
 timing is measured anew; a URL does not preserve the original processor time.
 
 Endpoint edits before Search are included. An ambient link captures
@@ -33,7 +35,8 @@ country release selected by the edition that opens them. Exact source identity
 and replay frames remain in search record exports below. Coordinates and settings
 are bounded and validated; malformed or ambiguous parameters give an explicit error.
 
-Existing `pfad-study-link/1` JSON fragments still open their recorded frame paused.
+Existing `pfad-study-link/1` JSON fragments resume playback from their recorded frame;
+completed frames stay complete. Reduced motion shows the completed result.
 An unavailable legacy identity gives an explicit error instead of silently
 substituting today's graph. Successful legacy links are rewritten to the concise
 format in the address bar. A linked UK study still requires the existing

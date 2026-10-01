@@ -5,7 +5,7 @@ import { COUNTRIES } from '../src/countries.ts'
 import { readStudyLink, studyUrl } from '../src/records/link.ts'
 test.setTimeout(120000)
 
-test('native URL follows journey and camera edits, stays fixed during replay, and reloads paused at the beginning', async ({ page, isMobile }) => {
+test('native URL follows journey and camera edits, stays fixed during replay, and reloads with autoplay', async ({ page, isMobile }) => {
   const errors: string[] = []
   page.on('pageerror', error => errors.push(error.message))
   let release!: () => void
@@ -47,8 +47,10 @@ test('native URL follows journey and camera edits, stays fixed during replay, an
   expect(await page.evaluate(() => history.length)).toBe(historyLength)
   await page.reload()
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
-  await expect(page.locator('.study')).toHaveAttribute('data-progress', '0')
-  await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Pause', exact: true })).toBeVisible()
+  const openingFrame = Number(await page.locator('.study').getAttribute('data-progress'))
+  expect(openingFrame).toBeLessThan(.5)
+  await expect.poll(async () => Number(await page.locator('.study').getAttribute('data-progress'))).toBeGreaterThan(openingFrame)
   await expect(page.locator('canvas')).toHaveAttribute('data-view', JSON.stringify(shared.view))
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'astar/1')
   await expect(page.getByRole('combobox', { name: 'Start place' })).toHaveValue('Basel')
@@ -58,7 +60,9 @@ test('native URL follows journey and camera edits, stays fixed during replay, an
   expect(errors).toEqual([])
 })
 
-test('native sharing and history restore journeys, legacy links restore frames, and exports retain genuine events', async ({ page }) => {
+test('shared journeys autoplay, legacy frames resume, reduced motion shows the result, and exports retain genuine events', async ({ page }) => {
+  const musicRequests: string[] = []
+  page.on('request', request => { if (new URL(request.url()).pathname.endsWith('.m4a')) musicRequests.push(request.url()) })
   await page.goto('./'); await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
   await page.getByRole('button', { name: 'Pause', exact: true }).click()
   await page.getByRole('slider', { name: 'Search replay' }).fill('15')
@@ -75,14 +79,18 @@ test('native sharing and history restore journeys, legacy links restore frames, 
   expect(record.search.dataset.identity).toBe(COUNTRIES[0].identity); expect(record.search.routeMetres).toBeGreaterThan(0)
   expect(record.buffers.trace.count).toBe(Number(await page.locator('canvas').getAttribute('data-total-events'))); expect(record.presentation.progress).toBe(.5); expect(record.licence).toBe('ODbL-1.0')
   await page.goto(link); await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
-  await expect(page.locator('.study')).toHaveAttribute('data-progress', '0')
-  await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Pause', exact: true })).toBeVisible()
+  await expect.poll(async () => Number(await page.locator('.study').getAttribute('data-progress'))).toBeGreaterThan(0)
+  expect(Number(await page.locator('.study').getAttribute('data-progress'))).toBeLessThan(.5)
+  expect(page.url()).toBe(link)
+  await page.getByRole('button', { name: 'Pause', exact: true }).click()
   // Exercise actual same-document back/forward, not just a fresh page load.
   await page.evaluate(() => history.pushState(history.state, '', '?from=basel&to=geneve&algorithm=astar'))
   await page.goBack(); await page.goForward()
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
   await expect(page.getByRole('combobox', { name: 'Start place' })).toHaveValue('Basel')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'astar/1')
+  await page.getByRole('button', { name: 'Pause', exact: true }).click()
   const legacy = new URL(link)
   legacy.hash = new URLSearchParams({ study: JSON.stringify(record.presentation) }).toString()
   await page.evaluate(url => {
@@ -91,10 +99,20 @@ test('native sharing and history restore journeys, legacy links restore frames, 
     // Reproduce a pending view URL write before the hashchange is delivered.
     history.replaceState(history.state, '', previous)
   }, legacy.href)
-  await expect(page.locator('.study')).toHaveAttribute('data-progress', '0.5', { timeout: 45000 })
-  await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
+  await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'dijkstra/1', { timeout: 45000 })
+  await expect(page.getByRole('button', { name: 'Pause', exact: true })).toBeVisible()
+  await expect.poll(async () => Number(await page.locator('.study').getAttribute('data-progress'))).toBeGreaterThanOrEqual(.5)
+  expect(Number(await page.locator('.study').getAttribute('data-progress'))).toBeLessThan(.75)
   await expect(page.getByRole('button', { name: 'Show border and lake outlines' })).toHaveAttribute('aria-pressed', 'false')
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'off')
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto(link)
+  await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+  await expect(page.locator('.study')).toHaveAttribute('data-progress', '1')
+  await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
+  await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'complete')
+  expect(page.url()).toBe(link)
+  expect(musicRequests).toEqual([])
 })
 
 test('unavailable releases are explicit errors, and a UK link asks before any graph download', async ({ page }) => {

@@ -4,8 +4,15 @@ import { gunzipSync } from 'node:zlib'
 import { clearStudyUrl, readStudyLink, shareView, studyUrl, StudyUrlBinding } from '../src/records/link.ts'
 import { COUNTRIES } from '../src/countries.ts'
 import { exportRecord } from '../src/records/export.ts'
+import { openingReplay } from '../src/records/opening.ts'
 const study = { schema: 'pfad-study-link/1', country: 'ch', dataset: 'a'.repeat(64), profile: 'road-connectivity-distance-v1', start: { name: 'Genève', lon: 6.1432, lat: 46.2044 }, goal: { name: 'Zürich', lon: 8.5417, lat: 47.3769 }, algorithm: 'astar', duration: 42.4, progress: .37, outlines: false, view: { x: .2, y: -.1, zoom: 4 } }
 const legacy = value => '#study=' + encodeURIComponent(JSON.stringify(value))
+test('opening plays new journeys and legacy partial frames; reduced motion and completed frames stay still', () => {
+  for (const frame of [undefined, { progress: 0 }]) assert.deepEqual(openingReplay(frame, false), { progress: 0, playing: true })
+  assert.deepEqual(openingReplay({ progress: .5 }, false), { progress: .5, playing: true })
+  assert.deepEqual(openingReplay({ progress: 1 }, false), { progress: 1, playing: false })
+  for (const frame of [undefined, { progress: 0 }, { progress: .5 }, { progress: 1 }]) assert.deepEqual(openingReplay(frame, true), { progress: 1, playing: false })
+})
 test('native links retain the journey and presentation on either host without a frame or graph hash', () => {
   for (const base of ['https://motionstudies.app/pfad/', 'https://emmettl.github.io/pfad/']) {
     const url = new URL(studyUrl(base, study)); assert.equal(url.origin, new URL(base).origin)
