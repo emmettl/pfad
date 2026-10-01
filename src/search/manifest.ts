@@ -1,8 +1,9 @@
 import type { StudyManifest } from './contracts.ts'
 
-// Bounds cover UK-sized graphs. Larger releases require another measured budget.
+// Bounds cover validated complete country graphs through about 10.5 million nodes.
+// Larger releases require another measured browser budget.
 // Road IDs must remain exact in the Float32 vertex attribute (< 2^24).
-export const DATA_LIMITS = { nodes: 10000000, edges: 16000000, directedArcs: 32000000, vertices: 64000000, downloadBytes: 256 * 1024 * 1024 }
+export const DATA_LIMITS = { nodes: 11000000, edges: 16000000, directedArcs: 32000000, vertices: 64000000, downloadBytes: 256 * 1024 * 1024 }
 const positive = (n: number) => Number.isSafeInteger(n) && n > 0
 export function validateManifest(data: StudyManifest) {
   if (data.schema !== 'pfad-road-study/1' || data.encoding !== 'le-columnar-deltas/1' || data.coordinateScale !== 100000 || !/^[a-f0-9]{64}$/.test(data.identity)) throw new Error('Unsupported road dataset')

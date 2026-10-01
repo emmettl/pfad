@@ -1,0 +1,27 @@
+{
+  "id": "pl",
+  "name": "Poland",
+  "datasetPrefix": "pl-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/poland-260930.osm.pbf",
+    "sha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+    "md5": "85497298893cbe507847518a9fc765a5",
+    "bytes": 2102684575,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      19,
+      52
+    ],
+    "referenceLatitude": 52,
+    "scaleMetres": 850000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

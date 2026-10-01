@@ -1,0 +1,99 @@
+[
+  {
+    "country": "de",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4209/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "17714912"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "11738319"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3957850"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Wiesbaden→Karlsruhe138.6 kmA*",
+        "events": "1169373"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Dresden→Berlin187.4 kmBidirectional A*",
+        "events": "1761528"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Freiburg→Karlsruhe133.5 kmDijkstra",
+        "events": "2064070"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Stuttgart→Hamburg625.7 kmBidirectional Dijkstra",
+        "events": "33735993"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Rostock · Hamburg · MunichThree-source Dijkstra",
+        "events": "43675855"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Regensburg→Bonn462.5 kmA*",
+        "events": "6569573"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Wiesbaden→Essen214.2 kmBidirectional A*",
+        "events": "3791626"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Munich→Regensburg117.7 kmDijkstra",
+        "events": "3694387"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Düsseldorf→KarlsruheBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "id": "fr",
+  "name": "France",
+  "datasetPrefix": "fr-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/france-260930.osm.pbf",
+    "sha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+    "md5": "0944aa74b10605f50590eeb779713f92",
+    "bytes": 5091610602,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      2.5,
+      46.5
+    ],
+    "referenceLatitude": 46.5,
+    "scaleMetres": 1150000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  },
+  "coverage": "Metropolitan France including Corsica; Geofabrik European extract"
+}

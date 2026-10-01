@@ -1,0 +1,20 @@
+{
+  "dataset": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+  "profile": "road-connectivity-distance-v1",
+  "runs": [
+    {
+      "start": "madrid",
+      "goal": "palma",
+      "expectedConnected": false,
+      "routeMetres": null,
+      "events": 15558655
+    },
+    {
+      "start": "palma",
+      "goal": "alcudia",
+      "expectedConnected": true,
+      "routeMetres": 53545.26,
+      "events": 244158
+    }
+  ]
+}

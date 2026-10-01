@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "pl",
+  "border": {
+    "path": "border-6ede9b7f638e.json",
+    "bytes": 15668,
+    "sha256": "6ede9b7f638e10783ba461b6ff9caeab8b5b45b8d489c9d46402996baf9af7c1"
+  },
+  "lakes": {
+    "path": "lakes-a4b55a8feb72.json",
+    "bytes": 14114,
+    "sha256": "a4b55a8feb72ace9031029824a9d723b43f969174b42e8459a85afc45abc7c40"
+  },
+  "id": "geo-pl-20261001-43e620fb7e57",
+  "identity": "43e620fb7e57c24e96e3efcf7220f713f4a6a78aac2dc145d6ef7bc882559fab"
+}

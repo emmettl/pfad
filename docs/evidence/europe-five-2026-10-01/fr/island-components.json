@@ -1,0 +1,20 @@
+{
+  "dataset": "6edd1a545b54087424151237d4cf39403641f7716955e83dc67b2d996091995b",
+  "profile": "road-connectivity-distance-v1",
+  "runs": [
+    {
+      "start": "paris",
+      "goal": "ajaccio",
+      "expectedConnected": false,
+      "routeMetres": null,
+      "events": 43372032
+    },
+    {
+      "start": "ajaccio",
+      "goal": "bastia",
+      "expectedConnected": true,
+      "routeMetres": 144636.46,
+      "events": 218038
+    }
+  ]
+}

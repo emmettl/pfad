@@ -1,0 +1,81 @@
+{
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/italy-260930.osm.pbf",
+    "sha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+    "md5": "5a29fe6326d7239df3e5215f5f0f420d",
+    "bytes": 2235725279,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "scope": "Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.",
+  "road_classes": {
+    "motorway": 25673,
+    "primary": 140732,
+    "primary_link": 14219,
+    "secondary": 232967,
+    "trunk_link": 28015,
+    "trunk": 28842,
+    "motorway_link": 17778,
+    "tertiary": 326306,
+    "unclassified": 588733,
+    "residential": 1193626,
+    "service": 1187181,
+    "tertiary_link": 8318,
+    "secondary_link": 8049,
+    "living_street": 15650,
+    "road": 867
+  },
+  "excluded": {
+    "private": 262677,
+    "no": 25199,
+    "agricultural": 495,
+    "forestry": 116
+  },
+  "road_shape_nodes": 30298454,
+  "graph_nodes": 5740613,
+  "physical_edges": 6915632,
+  "directed_arcs": 12201686,
+  "profiles": 36569,
+  "restrictions": 186053,
+  "controls": 463113,
+  "graph": {
+    "json_bytes": 465807603,
+    "gzip_bytes": 139784065,
+    "brotli_q9_bytes": 136079726,
+    "sha256": "34033f0e470ea6f3eca07cb17b07a38215464e0fccf7d19cd56b76974de60d23"
+  },
+  "variants": {
+    "0": {
+      "json_bytes": 201894288,
+      "gzip_bytes": 56431581,
+      "brotli_q9_bytes": 53057228,
+      "sha256": "048d0d1ec606fadf3e13e27f3edf4a235acede8bb8f0a12ecf2dcc80794aa688",
+      "interior_vertices": 24557841,
+      "combined_gzip_bytes": 196215646,
+      "combined_brotli_bytes": 189136954
+    },
+    "5": {
+      "json_bytes": 90713514,
+      "gzip_bytes": 17729831,
+      "brotli_q9_bytes": 16585567,
+      "sha256": "604de7aeec17d7131e05338516fa43e7d285064a1a3f96786220cbd9445ac61f",
+      "interior_vertices": 5412079,
+      "combined_gzip_bytes": 157513896,
+      "combined_brotli_bytes": 152665293
+    },
+    "15": {
+      "json_bytes": 68877618,
+      "gzip_bytes": 8783707,
+      "brotli_q9_bytes": 8109782,
+      "sha256": "a23f00eba4fe7194de9ea5ca441eb5b5884501360f9df4db1b7ab8d7e620782f",
+      "interior_vertices": 2291641,
+      "combined_gzip_bytes": 148567772,
+      "combined_brotli_bytes": 144189508
+    }
+  },
+  "elapsed_seconds": 444.10967575001996
+}

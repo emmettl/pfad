@@ -1,0 +1,99 @@
+[
+  {
+    "country": "pl",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4205/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Warsaw→Kraków",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "4618686"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Warsaw→Kraków",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3960535"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Warsaw→Kraków",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "820003"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Katowice→Szczecin531.5 kmA*",
+        "events": "4711983"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Bielsko-Biała→Białystok532.6 kmBidirectional A*",
+        "events": "5766908"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Rzeszów→Bydgoszcz494.9 kmDijkstra",
+        "events": "14658323"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Częstochowa→Kraków116.2 kmBidirectional Dijkstra",
+        "events": "1856910"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Katowice · Poznań · RadomThree-source Dijkstra",
+        "events": "18930377"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Łódź→Katowice192.0 kmA*",
+        "events": "766884"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Bielsko-Biała→Elbląg546.7 kmBidirectional A*",
+        "events": "3824410"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Łódź→Radom135.7 kmDijkstra",
+        "events": "2848166"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Poznań→LegnicaBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

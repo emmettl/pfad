@@ -1,0 +1,27 @@
+{
+  "id": "es",
+  "name": "Spain",
+  "datasetPrefix": "es-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/spain-260930.osm.pbf",
+    "sha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+    "md5": "55612c959415e3376ba73450ef34b24e",
+    "bytes": 1487249803,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      -3,
+      40
+    ],
+    "referenceLatitude": 40,
+    "scaleMetres": 1250000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

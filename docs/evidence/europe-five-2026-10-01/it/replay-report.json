@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T12:57:04.433Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "it-20260930-423f3384f3a6",
+    "counts": {
+      "nodes": 5740613,
+      "edges": 6915632,
+      "directedArcs": 12201686,
+      "vertices": 24655422
+    },
+    "downloadBytes": 85322642,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe/italy-260930.osm.pbf",
+      "sha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 1118.800000011921,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "423f3384f3a6923335b6933ab1388245edc7429e5a947f191dee9d43d5465639",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Turin",
+            "lon": 7.68686,
+            "lat": 45.07032,
+            "node": 4410296,
+            "snapMetres": 3.848758505822821
+          },
+          "goal": {
+            "name": "Lecce",
+            "lon": 18.17398,
+            "lat": 40.35181,
+            "node": 837615,
+            "snapMetres": 171.2900397575532
+          },
+          "searchMs": 804,
+          "snapMs": 345.19999998807907,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Turin",
+              "lon": 7.6869,
+              "lat": 45.0703
+            },
+            "requestedGoal": {
+              "name": "Lecce",
+              "lon": 18.172,
+              "lat": 40.3515
+            }
+          },
+          "events": 19465966,
+          "traceBytes": 77863864,
+          "edgeTextureBytes": 55328768,
+          "nodesSettled": 4664724,
+          "arcsExamined": 9900785,
+          "routeMetres": 1120817.14,
+          "maxQueue": 1297,
+          "traceSha256": "0ff8c4a86dc50b295cee5f67fe9d1453f541c8dafce0144b27cc17f99b0d9ffb",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 24655422,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 77863864
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "423f3384f3a6923335b6933ab1388245edc7429e5a947f191dee9d43d5465639",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Turin",
+            "lon": 7.68686,
+            "lat": 45.07032,
+            "node": 4410296,
+            "snapMetres": 3.848758505822821
+          },
+          "goal": {
+            "name": "Lecce",
+            "lon": 18.17398,
+            "lat": 40.35181,
+            "node": 837615,
+            "snapMetres": 171.2900397575532
+          },
+          "searchMs": 801.5999999940395,
+          "snapMs": 55.30000001192093,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Turin",
+              "lon": 7.6869,
+              "lat": 45.0703
+            },
+            "requestedGoal": {
+              "name": "Lecce",
+              "lon": 18.172,
+              "lat": 40.3515
+            }
+          },
+          "events": 19465966,
+          "traceBytes": 77863864,
+          "edgeTextureBytes": 55328768,
+          "nodesSettled": 4664724,
+          "arcsExamined": 9900785,
+          "routeMetres": 1120817.14,
+          "maxQueue": 1297,
+          "traceSha256": "0ff8c4a86dc50b295cee5f67fe9d1453f541c8dafce0144b27cc17f99b0d9ffb",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 24655422,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 77863864
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "423f3384f3a6923335b6933ab1388245edc7429e5a947f191dee9d43d5465639",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Turin",
+            "lon": 7.68686,
+            "lat": 45.07032,
+            "node": 4410296,
+            "snapMetres": 3.848758505822821
+          },
+          "goal": {
+            "name": "Lecce",
+            "lon": 18.17398,
+            "lat": 40.35181,
+            "node": 837615,
+            "snapMetres": 171.2900397575532
+          },
+          "searchMs": 1195.300000011921,
+          "snapMs": 53.900000005960464,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Turin",
+              "lon": 7.6869,
+              "lat": 45.0703
+            },
+            "requestedGoal": {
+              "name": "Lecce",
+              "lon": 18.172,
+              "lat": 40.3515
+            }
+          },
+          "events": 19566926,
+          "traceBytes": 78267704,
+          "edgeTextureBytes": 110657536,
+          "nodesSettled": 4675532,
+          "arcsExamined": 9972808,
+          "routeMetres": 1120817.14,
+          "maxQueue": 1881,
+          "traceSha256": "4403dec2aacab1c4fc6c56a2f867843cd289a1288b5c072cde12170ef8427283",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 24655422,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 78267704
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "423f3384f3a6923335b6933ab1388245edc7429e5a947f191dee9d43d5465639",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Turin",
+            "lon": 7.68686,
+            "lat": 45.07032,
+            "node": 4410296,
+            "snapMetres": 3.848758505822821
+          },
+          "goal": {
+            "name": "Lecce",
+            "lon": 18.17398,
+            "lat": 40.35181,
+            "node": 837615,
+            "snapMetres": 171.2900397575532
+          },
+          "searchMs": 825,
+          "snapMs": 50,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Turin",
+              "lon": 7.6869,
+              "lat": 45.0703
+            },
+            "requestedGoal": {
+              "name": "Lecce",
+              "lon": 18.172,
+              "lat": 40.3515
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 385.89999997615814,
+            "correctedNodes": 56911,
+            "longitudeScale": 0.6812032379268391,
+            "initialStartCm": 95199532,
+            "startLowerBoundCm": 95199532
+          },
+          "events": 15071386,
+          "traceBytes": 60285544,
+          "edgeTextureBytes": 55328768,
+          "nodesSettled": 3608842,
+          "arcsExamined": 7623758,
+          "routeMetres": 1120817.14,
+          "maxQueue": 4604,
+          "traceSha256": "a03dded8fa98be80f2323b1afbb604a400a6506b54bb1c41a0a888cbd1ee0691",
+          "frameIntervalMedianMs": 16.69999999999709,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 24655422,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 60285544
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 1121,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "423f3384f3a6923335b6933ab1388245edc7429e5a947f191dee9d43d5465639",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Turin",
+            "lon": 7.68686,
+            "lat": 45.07032,
+            "node": 4410296,
+            "snapMetres": 3.848758505822821
+          },
+          "goal": {
+            "name": "Lecce",
+            "lon": 18.17398,
+            "lat": 40.35181,
+            "node": 837615,
+            "snapMetres": 171.2900397575532
+          },
+          "searchMs": 706,
+          "snapMs": 278,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Turin",
+              "lon": 7.6869,
+              "lat": 45.0703
+            },
+            "requestedGoal": {
+              "name": "Lecce",
+              "lon": 18.172,
+              "lat": 40.3515
+            }
+          },
+          "events": 19465966,
+          "traceBytes": 77863864,
+          "edgeTextureBytes": 55328768,
+          "nodesSettled": 4664724,
+          "arcsExamined": 9900785,
+          "routeMetres": 1120817.14,
+          "maxQueue": 1297,
+          "traceSha256": "0ff8c4a86dc50b295cee5f67fe9d1453f541c8dafce0144b27cc17f99b0d9ffb",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 24655422,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 77863864
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "423f3384f3a6923335b6933ab1388245edc7429e5a947f191dee9d43d5465639",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Turin",
+            "lon": 7.68686,
+            "lat": 45.07032,
+            "node": 4410296,
+            "snapMetres": 3.848758505822821
+          },
+          "goal": {
+            "name": "Lecce",
+            "lon": 18.17398,
+            "lat": 40.35181,
+            "node": 837615,
+            "snapMetres": 171.2900397575532
+          },
+          "searchMs": 706,
+          "snapMs": 33,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Turin",
+              "lon": 7.6869,
+              "lat": 45.0703
+            },
+            "requestedGoal": {
+              "name": "Lecce",
+              "lon": 18.172,
+              "lat": 40.3515
+            }
+          },
+          "events": 19465966,
+          "traceBytes": 77863864,
+          "edgeTextureBytes": 55328768,
+          "nodesSettled": 4664724,
+          "arcsExamined": 9900785,
+          "routeMetres": 1120817.14,
+          "maxQueue": 1297,
+          "traceSha256": "0ff8c4a86dc50b295cee5f67fe9d1453f541c8dafce0144b27cc17f99b0d9ffb",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 24655422,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 77863864
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "423f3384f3a6923335b6933ab1388245edc7429e5a947f191dee9d43d5465639",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Turin",
+            "lon": 7.68686,
+            "lat": 45.07032,
+            "node": 4410296,
+            "snapMetres": 3.848758505822821
+          },
+          "goal": {
+            "name": "Lecce",
+            "lon": 18.17398,
+            "lat": 40.35181,
+            "node": 837615,
+            "snapMetres": 171.2900397575532
+          },
+          "searchMs": 1036,
+          "snapMs": 33,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Turin",
+              "lon": 7.6869,
+              "lat": 45.0703
+            },
+            "requestedGoal": {
+              "name": "Lecce",
+              "lon": 18.172,
+              "lat": 40.3515
+            }
+          },
+          "events": 19566926,
+          "traceBytes": 78267704,
+          "edgeTextureBytes": 110657536,
+          "nodesSettled": 4675532,
+          "arcsExamined": 9972808,
+          "routeMetres": 1120817.14,
+          "maxQueue": 1881,
+          "traceSha256": "4403dec2aacab1c4fc6c56a2f867843cd289a1288b5c072cde12170ef8427283",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 24655422,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 78267704
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "423f3384f3a6923335b6933ab1388245edc7429e5a947f191dee9d43d5465639",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Turin",
+            "lon": 7.68686,
+            "lat": 45.07032,
+            "node": 4410296,
+            "snapMetres": 3.848758505822821
+          },
+          "goal": {
+            "name": "Lecce",
+            "lon": 18.17398,
+            "lat": 40.35181,
+            "node": 837615,
+            "snapMetres": 171.2900397575532
+          },
+          "searchMs": 776,
+          "snapMs": 34,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Turin",
+              "lon": 7.6869,
+              "lat": 45.0703
+            },
+            "requestedGoal": {
+              "name": "Lecce",
+              "lon": 18.172,
+              "lat": 40.3515
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 281,
+            "correctedNodes": 56911,
+            "longitudeScale": 0.6812032379268391,
+            "initialStartCm": 95199532,
+            "startLowerBoundCm": 95199532
+          },
+          "events": 15071386,
+          "traceBytes": 60285544,
+          "edgeTextureBytes": 55328768,
+          "nodesSettled": 3608842,
+          "arcsExamined": 7623758,
+          "routeMetres": 1120817.14,
+          "maxQueue": 4604,
+          "traceSha256": "a03dded8fa98be80f2323b1afbb604a400a6506b54bb1c41a0a888cbd1ee0691",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 24655422,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 60285544
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 286282148,
+    "reverseCsrBytes": 120575944,
+    "uploadedRoadAttributeBytes": 295865064,
+    "drawingCoordinateAndOffsetBytes": 224906184,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

@@ -2,13 +2,16 @@ import { preview } from 'vite'
 import { webkit, expect } from '@playwright/test'
 import { writeFile } from 'node:fs/promises'
 const [country='uk',...urls]=process.argv.slice(2)
-const names={uk:'United Kingdom',is:'Iceland',nl:'Netherlands',nz:'New Zealand',lu:'Luxembourg',ie:'Ireland',sc:'Scandinavia'}
+const names={uk:'United Kingdom',is:'Iceland',nl:'Netherlands',nz:'New Zealand',lu:'Luxembourg',ie:'Ireland',sc:'Scandinavia',pl:'Poland',it:'Italy',es:'Spain',fr:'France',de:'Germany'}
 if(!names[country])throw Error('Unknown country')
-const server=urls.length?null:await preview({preview:{host:'127.0.0.1',port:4197,strictPort:true}})
+const port=Number(process.env.PFAD_PROOF_PORT??4197)
+const server=urls.length?null:await preview({build:{outDir:process.env.PFAD_PROOF_DIST??'dist'},preview:{host:'127.0.0.1',port,strictPort:true}})
 const browser=await webkit.launch(), reports=[]
+let activePage, activeErrors
 try {
- for(const url of urls.length?urls:['http://127.0.0.1:4197/']) {
+ for(const url of urls.length?urls:[`http://127.0.0.1:${port}/`]) {
   const page=await browser.newPage({viewport:{width:402,height:874},hasTouch:true,isMobile:true,deviceScaleFactor:3}),errors=[],analyticsErrors=[]
+  activePage=page;activeErrors=errors
   page.on('pageerror',e=>(e.message.includes('cloudflareinsights.com/cdn-cgi/rum')?analyticsErrors:errors).push(e.message))
   await page.goto(url,{waitUntil:'domcontentloaded'})
   await page.locator('.study[data-state="ready"]').waitFor({timeout:90000})
@@ -25,7 +28,7 @@ try {
    await page.getByRole('slider',{name:'Search replay'}).fill('30')
    await expect(page.locator('.route-caption em')).toBeVisible()
    await page.getByRole('slider',{name:'Search replay'}).fill('15')
-   if(['uk','sc'].includes(country))await expect(page.locator('canvas')).toHaveAttribute('data-max-fps','30')
+   if(['uk','sc','pl','it','es','fr','de'].includes(country))await expect(page.locator('canvas')).toHaveAttribute('data-max-fps','30')
    const renderedEvent=(await page.getByRole('slider',{name:'Search replay'}).getAttribute('aria-valuetext')).match(/; (\d+) recorded events/)[1]
    await expect(page.locator('canvas')).toHaveAttribute('data-event',renderedEvent)
    runs.push({mode,caption:await page.locator('.route-caption').textContent(),canvas:await page.locator('canvas').evaluate(c=>({width:c.width,height:c.height,cssWidth:c.clientWidth,cssHeight:c.clientHeight,maxFps:c.dataset.maxFps,event:c.dataset.event}))})
@@ -94,4 +97,7 @@ try {
   await page.close()
  }
  await writeFile(`.cache/${country}-context-report.json`,JSON.stringify(reports,null,2)+'\n')
+}catch(error){
+ if(activePage&&!activePage.isClosed()){await writeFile(`.cache/${country}-context-failure.json`,JSON.stringify({message:String(error),errors:activeErrors,state:await activePage.locator('body').ariaSnapshot()},null,2)+'\n');await activePage.screenshot({path:`.cache/${country}-context-failure.png`})}
+ throw error
 }finally{await browser.close();if(server)await new Promise(r=>server.httpServer.close(r))}

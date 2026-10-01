@@ -42,7 +42,7 @@ const summary = { accepted: journeys.length, attempts: attempts.length, rejected
   durationRange: [Math.min(...journeys.map(j => j.replaySeconds)), Math.max(...journeys.map(j => j.replaySeconds))] }
 const report = { measuredAt: new Date().toISOString(), dataset: manifest.identity, compiler: manifest.compiler, profile: manifest.profile,
   sourceSha256: manifest.source.sha256, seed, selector: SELECTOR_VERSION, pool: pool.version, distanceProfile: selector.distance,
-  note: 'Sixty real country journeys using all four production algorithms in rotation. Graph chunks verified before loading; chosen route adjacency, directions and exact cost sums checked. Actual distance determines acceptance and replay duration. This is a routing/selector audit, not physical-device, rendering, music or memory evidence.', summary, attempts }
+  note: 'Sixty real country journeys using the four exact shortest-distance algorithms in rotation. Graph chunks verified before loading; chosen route adjacency, directions and exact cost sums checked. Actual distance determines acceptance and replay duration. This is a routing/selector audit, not physical-device, rendering, music or memory evidence.', summary, attempts }
 const output = args.includes('--output') ? value('--output') : args[0] && !args[0].startsWith('--') ? args[0] : '.cache/ambient-audit.json'
 await mkdir(dirname(output), { recursive: true }); await writeFile(output, JSON.stringify(report, null, 2) + '\n')
 console.log(JSON.stringify(summary)); console.log(output)

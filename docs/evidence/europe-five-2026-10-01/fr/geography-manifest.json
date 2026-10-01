@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "fr",
+  "border": {
+    "path": "border-8b1200faab98.json",
+    "bytes": 42707,
+    "sha256": "8b1200faab9808f25422eb6f3a7ce90997a3338a51f0e67286ebd7a7798bf72a"
+  },
+  "lakes": {
+    "path": "lakes-6851b537ac8c.json",
+    "bytes": 7512,
+    "sha256": "6851b537ac8c672ac99bcd8aae703f5193ec491865e47fe2812e383b701e8a77"
+  },
+  "id": "geo-fr-20261001-c35e20186d14",
+  "identity": "c35e20186d147e35311723c70ade7ad5edc048d9bd87630bf54db555355bc8bd"
+}

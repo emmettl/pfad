@@ -1,0 +1,99 @@
+[
+  {
+    "country": "fr",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4208/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Paris→Lyon",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "12709085"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Paris→Lyon",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "8962671"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Paris→Lyon",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2446982"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Colmar→Lyon362.9 kmA*",
+        "events": "1707846"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Saint-Étienne→Dijon243.9 kmBidirectional A*",
+        "events": "1157852"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Montpellier→Annecy355.0 kmDijkstra",
+        "events": "14256430"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Reims→Rouen233.4 kmBidirectional Dijkstra",
+        "events": "4183728"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Lille · Marseille · BordeauxThree-source Dijkstra",
+        "events": "43371906"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Nancy→Metz55.2 kmA*",
+        "events": "120257"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Chambéry→Grenoble54.6 kmBidirectional A*",
+        "events": "238583"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Lyon→Nîmes242.2 kmDijkstra",
+        "events": "9099259"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Grenoble→NiceBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

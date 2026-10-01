@@ -24,7 +24,7 @@ test('national manifests reject unsafe paths, resource excess and malformed deco
   const changed = (edit) => { const copy = structuredClone(swiss); edit(copy); assert.throws(() => validateManifest(copy)) }
   changed(m => m.chunks[0].path = '../other.bin.gz.bin')
   changed(m => m.chunks[0].decodedBytes++)
-  changed(m => m.counts.nodes = 10000001)
+  changed(m => m.counts.nodes = 11000001)
   changed(m => m.counts.edges = NaN)
   changed(m => m.projection.scaleMetres = 0)
   changed(m => m.projection.longitudeWrapping = 'unknown/1')
@@ -57,7 +57,7 @@ test('data Worker handles conditional reads and byte ranges without caching part
 
 test('additional country manifests retain selected identities and verified layout', async () => {
   for (const country of COUNTRIES.filter(c => !['ch', 'uk'].includes(c.id))) {
-    const manifest = JSON.parse(await readFile(country.id === 'sc' ? 'docs/evidence/scandinavia-release-2026-10-01/manifest.json' : country.id === 'ie' ? 'docs/evidence/ireland-release-2026-10-01/manifest.json' : `docs/evidence/countries-2026-10-01/${country.id}/manifest.json`))
+    const manifest = JSON.parse(await readFile(['pl', 'it', 'es', 'fr', 'de'].includes(country.id) ? `docs/evidence/europe-five-2026-10-01/${country.id}/manifest.json` : country.id === 'sc' ? 'docs/evidence/scandinavia-release-2026-10-01/manifest.json' : country.id === 'ie' ? 'docs/evidence/ireland-release-2026-10-01/manifest.json' : `docs/evidence/countries-2026-10-01/${country.id}/manifest.json`))
     validateManifest(manifest)
     assert.equal(manifest.identity, country.identity)
     assert.equal(createHash('sha256').update(manifestIdentityPayload(manifest)).digest('hex'), country.identity)

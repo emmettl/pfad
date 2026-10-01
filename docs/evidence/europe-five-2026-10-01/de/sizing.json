@@ -1,0 +1,81 @@
+{
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-29T20:22:51Z",
+    "data_timestamp": "2026-09-29T20:22:51Z",
+    "url": "https://download.geofabrik.de/europe/germany-260929.osm.pbf",
+    "sha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+    "md5": "507139a49f36caf00eccbca5e5410a99",
+    "bytes": 4850520508,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "scope": "Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.",
+  "road_classes": {
+    "residential": 2022604,
+    "tertiary": 487860,
+    "secondary": 516128,
+    "unclassified": 411056,
+    "living_street": 174454,
+    "motorway": 70876,
+    "primary": 243756,
+    "service": 3182021,
+    "motorway_link": 43441,
+    "secondary_link": 13992,
+    "trunk": 33290,
+    "primary_link": 17420,
+    "tertiary_link": 7829,
+    "trunk_link": 21543,
+    "road": 249
+  },
+  "excluded": {
+    "no": 70070,
+    "private": 832512,
+    "agricultural": 8476,
+    "forestry": 1221
+  },
+  "road_shape_nodes": 35330488,
+  "graph_nodes": 10488625,
+  "physical_edges": 11974914,
+  "directed_arcs": 22891751,
+  "profiles": 94986,
+  "restrictions": 149057,
+  "controls": 643427,
+  "graph": {
+    "json_bytes": 789123659,
+    "gzip_bytes": 255064546,
+    "brotli_q9_bytes": 247773679,
+    "sha256": "c46c8ea9468d1fb78caad3d17ec66200746851c290a76ed61f4e9f8cfbd3bc5b"
+  },
+  "variants": {
+    "0": {
+      "json_bytes": 250335101,
+      "gzip_bytes": 65900826,
+      "brotli_q9_bytes": 61096802,
+      "sha256": "9af2550f74efae6bdf70c11dce8009211863c2d776c6186f217d853ea6fcbb26",
+      "interior_vertices": 24841863,
+      "combined_gzip_bytes": 320965372,
+      "combined_brotli_bytes": 308870481
+    },
+    "5": {
+      "json_bytes": 123749405,
+      "gzip_bytes": 17063525,
+      "brotli_q9_bytes": 15514295,
+      "sha256": "75accae8fc5e0b7afd63d10334895ff163208f3f3c55bba81b09fb7b98747056",
+      "interior_vertices": 4500864,
+      "combined_gzip_bytes": 272128071,
+      "combined_brotli_bytes": 263287974
+    },
+    "15": {
+      "json_bytes": 101252846,
+      "gzip_bytes": 7448516,
+      "brotli_q9_bytes": 6712949,
+      "sha256": "ce384c3787257810f482fa4fadab8ee668c56c25682f2d3c403c367cd61ed69b",
+      "interior_vertices": 1701758,
+      "combined_gzip_bytes": 262513062,
+      "combined_brotli_bytes": 254486628
+    }
+  },
+  "elapsed_seconds": 749.1427272919973
+}

@@ -1,0 +1,81 @@
+{
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/poland-260930.osm.pbf",
+    "sha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+    "md5": "85497298893cbe507847518a9fc765a5",
+    "bytes": 2102684575,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "scope": "Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.",
+  "road_classes": {
+    "residential": 604022,
+    "tertiary": 223887,
+    "secondary": 116301,
+    "living_street": 52631,
+    "primary": 68381,
+    "unclassified": 145987,
+    "service": 1645508,
+    "secondary_link": 2862,
+    "trunk": 9568,
+    "primary_link": 5074,
+    "motorway": 21313,
+    "tertiary_link": 3130,
+    "trunk_link": 1074,
+    "motorway_link": 10530,
+    "road": 24
+  },
+  "excluded": {
+    "private": 218835,
+    "no": 30035,
+    "forestry": 611,
+    "agricultural": 225
+  },
+  "road_shape_nodes": 17339053,
+  "graph_nodes": 4586298,
+  "physical_edges": 5150988,
+  "directed_arcs": 9839928,
+  "profiles": 33258,
+  "restrictions": 46382,
+  "controls": 351182,
+  "graph": {
+    "json_bytes": 346406467,
+    "gzip_bytes": 107084704,
+    "brotli_q9_bytes": 103345883,
+    "sha256": "9a31a16979bc4b325cd7aa4b68566c4e49d57e00159f197e542c3c0e3c6f5cb2"
+  },
+  "variants": {
+    "0": {
+      "json_bytes": 118712321,
+      "gzip_bytes": 33804528,
+      "brotli_q9_bytes": 31576149,
+      "sha256": "8f92cb26139e8461f1c823506bf5f02af5c27e9319526d889d8fbd3e8798668e",
+      "interior_vertices": 12752755,
+      "combined_gzip_bytes": 140889232,
+      "combined_brotli_bytes": 134922032
+    },
+    "5": {
+      "json_bytes": 54617278,
+      "gzip_bytes": 8503321,
+      "brotli_q9_bytes": 7781088,
+      "sha256": "b009c546dd364c8f275e773c2ea8893313f005c8d9ba52a9c6482140f8736dbc",
+      "interior_vertices": 2233745,
+      "combined_gzip_bytes": 115588025,
+      "combined_brotli_bytes": 111126971
+    },
+    "15": {
+      "json_bytes": 42115573,
+      "gzip_bytes": 3962263,
+      "brotli_q9_bytes": 3574576,
+      "sha256": "9c42a76127a6d7aeb2fdeb3548b6a7e46a1eb08f1039562e15cc50a0c5e1f6ec",
+      "interior_vertices": 897380,
+      "combined_gzip_bytes": 111046967,
+      "combined_brotli_bytes": 106920459
+    }
+  },
+  "elapsed_seconds": 302.74333637501695
+}

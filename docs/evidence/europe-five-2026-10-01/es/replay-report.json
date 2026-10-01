@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T13:05:36.452Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "es-20260930-044eacc93968",
+    "counts": {
+      "nodes": 3885623,
+      "edges": 4989358,
+      "directedArcs": 8331294,
+      "vertices": 17261400
+    },
+    "downloadBytes": 59007607,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe/spain-260930.osm.pbf",
+      "sha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 920.1999999880791,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Girona",
+            "lon": 2.82127,
+            "lat": 41.97948,
+            "node": 751023,
+            "snapMetres": 13.950134410270627
+          },
+          "goal": {
+            "name": "Seville",
+            "lon": -5.98447,
+            "lat": 37.38918,
+            "node": 409405,
+            "snapMetres": 9.282059088949538
+          },
+          "searchMs": 550.5,
+          "snapMs": 226.59999999403954,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Girona",
+              "lon": 2.8214,
+              "lat": 41.9794
+            },
+            "requestedGoal": {
+              "name": "Seville",
+              "lon": -5.9845,
+              "lat": 37.3891
+            }
+          },
+          "events": 13495092,
+          "traceBytes": 53980368,
+          "edgeTextureBytes": 39927808,
+          "nodesSettled": 3191004,
+          "arcsExamined": 6897979,
+          "routeMetres": 1051616.59,
+          "maxQueue": 1208,
+          "traceSha256": "a559dc315edd380ad53d7163129f142002b8ecc9624173deead803638356a59c",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.799999999999727,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 17261400,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 53980368
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Girona",
+            "lon": 2.82127,
+            "lat": 41.97948,
+            "node": 751023,
+            "snapMetres": 13.950134410270627
+          },
+          "goal": {
+            "name": "Seville",
+            "lon": -5.98447,
+            "lat": 37.38918,
+            "node": 409405,
+            "snapMetres": 9.282059088949538
+          },
+          "searchMs": 539.5,
+          "snapMs": 35.19999998807907,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Girona",
+              "lon": 2.8214,
+              "lat": 41.9794
+            },
+            "requestedGoal": {
+              "name": "Seville",
+              "lon": -5.9845,
+              "lat": 37.3891
+            }
+          },
+          "events": 13495092,
+          "traceBytes": 53980368,
+          "edgeTextureBytes": 39927808,
+          "nodesSettled": 3191004,
+          "arcsExamined": 6897979,
+          "routeMetres": 1051616.59,
+          "maxQueue": 1208,
+          "traceSha256": "a559dc315edd380ad53d7163129f142002b8ecc9624173deead803638356a59c",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.800000000000182,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 17261400,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 53980368
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Girona",
+            "lon": 2.82127,
+            "lat": 41.97948,
+            "node": 751023,
+            "snapMetres": 13.950134410270627
+          },
+          "goal": {
+            "name": "Seville",
+            "lon": -5.98447,
+            "lat": 37.38918,
+            "node": 409405,
+            "snapMetres": 9.282059088949538
+          },
+          "searchMs": 576.1999999880791,
+          "snapMs": 40.900000005960464,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Girona",
+              "lon": 2.8214,
+              "lat": 41.9794
+            },
+            "requestedGoal": {
+              "name": "Seville",
+              "lon": -5.9845,
+              "lat": 37.3891
+            }
+          },
+          "events": 9817422,
+          "traceBytes": 39269688,
+          "edgeTextureBytes": 79855616,
+          "nodesSettled": 2327955,
+          "arcsExamined": 4997781,
+          "routeMetres": 1051616.59,
+          "maxQueue": 1519,
+          "traceSha256": "1c6adca12f4981c7c9385ca5ded96a18849a4292057aa8d6fc15a3ccecf80305",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 17261400,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 39269688
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Girona",
+            "lon": 2.82127,
+            "lat": 41.97948,
+            "node": 751023,
+            "snapMetres": 13.950134410270627
+          },
+          "goal": {
+            "name": "Seville",
+            "lon": -5.98447,
+            "lat": 37.38918,
+            "node": 409405,
+            "snapMetres": 9.282059088949538
+          },
+          "searchMs": 291.2999999821186,
+          "snapMs": 43.69999998807907,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Girona",
+              "lon": 2.8214,
+              "lat": 41.9794
+            },
+            "requestedGoal": {
+              "name": "Seville",
+              "lon": -5.9845,
+              "lat": 37.3891
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 199,
+            "correctedNodes": 70973,
+            "longitudeScale": 0.721926792836625,
+            "initialStartCm": 87189685,
+            "startLowerBoundCm": 87189685
+          },
+          "events": 5887940,
+          "traceBytes": 23551760,
+          "edgeTextureBytes": 39927808,
+          "nodesSettled": 1399301,
+          "arcsExamined": 2959652,
+          "routeMetres": 1051616.59,
+          "maxQueue": 3274,
+          "traceSha256": "95a170fdc24b2fcb4f6d0e93ef30c59d58ebb4fc77533636f11863ae24d0e4e6",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 17261400,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 23551760
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 838,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Girona",
+            "lon": 2.82127,
+            "lat": 41.97948,
+            "node": 751023,
+            "snapMetres": 13.950134410270627
+          },
+          "goal": {
+            "name": "Seville",
+            "lon": -5.98447,
+            "lat": 37.38918,
+            "node": 409405,
+            "snapMetres": 9.282059088949538
+          },
+          "searchMs": 458,
+          "snapMs": 184,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Girona",
+              "lon": 2.8214,
+              "lat": 41.9794
+            },
+            "requestedGoal": {
+              "name": "Seville",
+              "lon": -5.9845,
+              "lat": 37.3891
+            }
+          },
+          "events": 13495092,
+          "traceBytes": 53980368,
+          "edgeTextureBytes": 39927808,
+          "nodesSettled": 3191004,
+          "arcsExamined": 6897979,
+          "routeMetres": 1051616.59,
+          "maxQueue": 1208,
+          "traceSha256": "a559dc315edd380ad53d7163129f142002b8ecc9624173deead803638356a59c",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 17261400,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 53980368
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Girona",
+            "lon": 2.82127,
+            "lat": 41.97948,
+            "node": 751023,
+            "snapMetres": 13.950134410270627
+          },
+          "goal": {
+            "name": "Seville",
+            "lon": -5.98447,
+            "lat": 37.38918,
+            "node": 409405,
+            "snapMetres": 9.282059088949538
+          },
+          "searchMs": 488,
+          "snapMs": 22,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Girona",
+              "lon": 2.8214,
+              "lat": 41.9794
+            },
+            "requestedGoal": {
+              "name": "Seville",
+              "lon": -5.9845,
+              "lat": 37.3891
+            }
+          },
+          "events": 13495092,
+          "traceBytes": 53980368,
+          "edgeTextureBytes": 39927808,
+          "nodesSettled": 3191004,
+          "arcsExamined": 6897979,
+          "routeMetres": 1051616.59,
+          "maxQueue": 1208,
+          "traceSha256": "a559dc315edd380ad53d7163129f142002b8ecc9624173deead803638356a59c",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 17261400,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 53980368
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Girona",
+            "lon": 2.82127,
+            "lat": 41.97948,
+            "node": 751023,
+            "snapMetres": 13.950134410270627
+          },
+          "goal": {
+            "name": "Seville",
+            "lon": -5.98447,
+            "lat": 37.38918,
+            "node": 409405,
+            "snapMetres": 9.282059088949538
+          },
+          "searchMs": 497,
+          "snapMs": 22,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Girona",
+              "lon": 2.8214,
+              "lat": 41.9794
+            },
+            "requestedGoal": {
+              "name": "Seville",
+              "lon": -5.9845,
+              "lat": 37.3891
+            }
+          },
+          "events": 9817422,
+          "traceBytes": 39269688,
+          "edgeTextureBytes": 79855616,
+          "nodesSettled": 2327955,
+          "arcsExamined": 4997781,
+          "routeMetres": 1051616.59,
+          "maxQueue": 1519,
+          "traceSha256": "1c6adca12f4981c7c9385ca5ded96a18849a4292057aa8d6fc15a3ccecf80305",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 17261400,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 39269688
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Girona",
+            "lon": 2.82127,
+            "lat": 41.97948,
+            "node": 751023,
+            "snapMetres": 13.950134410270627
+          },
+          "goal": {
+            "name": "Seville",
+            "lon": -5.98447,
+            "lat": 37.38918,
+            "node": 409405,
+            "snapMetres": 9.282059088949538
+          },
+          "searchMs": 277,
+          "snapMs": 29,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Girona",
+              "lon": 2.8214,
+              "lat": 41.9794
+            },
+            "requestedGoal": {
+              "name": "Seville",
+              "lon": -5.9845,
+              "lat": 37.3891
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 223,
+            "correctedNodes": 70973,
+            "longitudeScale": 0.7219267928366251,
+            "initialStartCm": 87189685,
+            "startLowerBoundCm": 87189685
+          },
+          "events": 5887940,
+          "traceBytes": 23551760,
+          "edgeTextureBytes": 39927808,
+          "nodesSettled": 1399301,
+          "arcsExamined": 2959652,
+          "routeMetres": 1051616.59,
+          "maxQueue": 3274,
+          "traceSha256": "95a170fdc24b2fcb4f6d0e93ef30c59d58ebb4fc77533636f11863ae24d0e4e6",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 17261400,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 23551760
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 198671336,
+    "reverseCsrBytes": 82192848,
+    "uploadedRoadAttributeBytes": 207136800,
+    "drawingCoordinateAndOffsetBytes": 158048832,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

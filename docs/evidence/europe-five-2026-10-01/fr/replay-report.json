@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T13:24:04.013Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "fr-20260930-6edd1a545b54",
+    "counts": {
+      "nodes": 10506139,
+      "edges": 12357600,
+      "directedArcs": 22562153,
+      "vertices": 42305096
+    },
+    "downloadBytes": 151882358,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe/france-260930.osm.pbf",
+      "sha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 1686.0999999940395,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "6edd1a545b54087424151237d4cf39403641f7716955e83dc67b2d996091995b",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Lille",
+            "lon": 3.05687,
+            "lat": 50.62918,
+            "node": 1141055,
+            "snapMetres": 30.41152033526687
+          },
+          "goal": {
+            "name": "Nice",
+            "lon": 7.26206,
+            "lat": 43.71025,
+            "node": 3561712,
+            "snapMetres": 7.359915881879113
+          },
+          "searchMs": 2099,
+          "snapMs": 706,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Lille",
+              "lon": 3.0573,
+              "lat": 50.6292
+            },
+            "requestedGoal": {
+              "name": "Nice",
+              "lon": 7.262,
+              "lat": 43.7102
+            }
+          },
+          "events": 43039609,
+          "traceBytes": 172158436,
+          "edgeTextureBytes": 98861056,
+          "nodesSettled": 10220668,
+          "arcsExamined": 22061964,
+          "routeMetres": 1019229.85,
+          "maxQueue": 2551,
+          "traceSha256": "1eff52dea3ac2922ab644eda904ad593683a0cfef825b62fcd2a70601eafc284",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 42305096,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 172158436
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "6edd1a545b54087424151237d4cf39403641f7716955e83dc67b2d996091995b",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Lille",
+            "lon": 3.05687,
+            "lat": 50.62918,
+            "node": 1141055,
+            "snapMetres": 30.41152033526687
+          },
+          "goal": {
+            "name": "Nice",
+            "lon": 7.26206,
+            "lat": 43.71025,
+            "node": 3561712,
+            "snapMetres": 7.359915881879113
+          },
+          "searchMs": 1950.2999999821186,
+          "snapMs": 96.90000000596046,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Lille",
+              "lon": 3.0573,
+              "lat": 50.6292
+            },
+            "requestedGoal": {
+              "name": "Nice",
+              "lon": 7.262,
+              "lat": 43.7102
+            }
+          },
+          "events": 43039609,
+          "traceBytes": 172158436,
+          "edgeTextureBytes": 98861056,
+          "nodesSettled": 10220668,
+          "arcsExamined": 22061964,
+          "routeMetres": 1019229.85,
+          "maxQueue": 2551,
+          "traceSha256": "1eff52dea3ac2922ab644eda904ad593683a0cfef825b62fcd2a70601eafc284",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 42305096,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 172158436
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "6edd1a545b54087424151237d4cf39403641f7716955e83dc67b2d996091995b",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Lille",
+            "lon": 3.05687,
+            "lat": 50.62918,
+            "node": 1141055,
+            "snapMetres": 30.41152033526687
+          },
+          "goal": {
+            "name": "Nice",
+            "lon": 7.26206,
+            "lat": 43.71025,
+            "node": 3561712,
+            "snapMetres": 7.359915881879113
+          },
+          "searchMs": 2132.199999988079,
+          "snapMs": 102.19999998807907,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Lille",
+              "lon": 3.0573,
+              "lat": 50.6292
+            },
+            "requestedGoal": {
+              "name": "Nice",
+              "lon": 7.262,
+              "lat": 43.7102
+            }
+          },
+          "events": 28621789,
+          "traceBytes": 114487156,
+          "edgeTextureBytes": 197722112,
+          "nodesSettled": 6828319,
+          "arcsExamined": 14615362,
+          "routeMetres": 1019229.85,
+          "maxQueue": 3610,
+          "traceSha256": "4b1445d3a89274b1364dec2376dd999df3819add8072a17e86c317b17cc20bee",
+          "frameIntervalMedianMs": 16.700000000000728,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 42305096,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 114487156
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "6edd1a545b54087424151237d4cf39403641f7716955e83dc67b2d996091995b",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Lille",
+            "lon": 3.05687,
+            "lat": 50.62918,
+            "node": 1141055,
+            "snapMetres": 30.41152033526687
+          },
+          "goal": {
+            "name": "Nice",
+            "lon": 7.26206,
+            "lat": 43.71025,
+            "node": 3561712,
+            "snapMetres": 7.359915881879113
+          },
+          "searchMs": 1189,
+          "snapMs": 89,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Lille",
+              "lon": 3.0573,
+              "lat": 50.6292
+            },
+            "requestedGoal": {
+              "name": "Nice",
+              "lon": 7.262,
+              "lat": 43.7102
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 491.09999999403954,
+            "correctedNodes": 143970,
+            "longitudeScale": 0.6282015439708271,
+            "initialStartCm": 82352105,
+            "startLowerBoundCm": 82352105
+          },
+          "events": 20536265,
+          "traceBytes": 82145060,
+          "edgeTextureBytes": 98861056,
+          "nodesSettled": 4870237,
+          "arcsExamined": 10469473,
+          "routeMetres": 1019229.85,
+          "maxQueue": 5970,
+          "traceSha256": "811fe4f16170102e8c51b1ad0c618616b543e6cc3183f434dd9dabd753575874",
+          "frameIntervalMedianMs": 16.700000000000728,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 42305096,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 82145060
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 1717,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "6edd1a545b54087424151237d4cf39403641f7716955e83dc67b2d996091995b",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Lille",
+            "lon": 3.05687,
+            "lat": 50.62918,
+            "node": 1141055,
+            "snapMetres": 30.41152033526687
+          },
+          "goal": {
+            "name": "Nice",
+            "lon": 7.26206,
+            "lat": 43.71025,
+            "node": 3561712,
+            "snapMetres": 7.359915881879113
+          },
+          "searchMs": 1773,
+          "snapMs": 550,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Lille",
+              "lon": 3.0573,
+              "lat": 50.6292
+            },
+            "requestedGoal": {
+              "name": "Nice",
+              "lon": 7.262,
+              "lat": 43.7102
+            }
+          },
+          "events": 43039609,
+          "traceBytes": 172158436,
+          "edgeTextureBytes": 98861056,
+          "nodesSettled": 10220668,
+          "arcsExamined": 22061964,
+          "routeMetres": 1019229.85,
+          "maxQueue": 2551,
+          "traceSha256": "1eff52dea3ac2922ab644eda904ad593683a0cfef825b62fcd2a70601eafc284",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 27,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 42305096,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 172158436
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "6edd1a545b54087424151237d4cf39403641f7716955e83dc67b2d996091995b",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Lille",
+            "lon": 3.05687,
+            "lat": 50.62918,
+            "node": 1141055,
+            "snapMetres": 30.41152033526687
+          },
+          "goal": {
+            "name": "Nice",
+            "lon": 7.26206,
+            "lat": 43.71025,
+            "node": 3561712,
+            "snapMetres": 7.359915881879113
+          },
+          "searchMs": 1823,
+          "snapMs": 77,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Lille",
+              "lon": 3.0573,
+              "lat": 50.6292
+            },
+            "requestedGoal": {
+              "name": "Nice",
+              "lon": 7.262,
+              "lat": 43.7102
+            }
+          },
+          "events": 43039609,
+          "traceBytes": 172158436,
+          "edgeTextureBytes": 98861056,
+          "nodesSettled": 10220668,
+          "arcsExamined": 22061964,
+          "routeMetres": 1019229.85,
+          "maxQueue": 2551,
+          "traceSha256": "1eff52dea3ac2922ab644eda904ad593683a0cfef825b62fcd2a70601eafc284",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 25,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 42305096,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 172158436
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "6edd1a545b54087424151237d4cf39403641f7716955e83dc67b2d996091995b",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Lille",
+            "lon": 3.05687,
+            "lat": 50.62918,
+            "node": 1141055,
+            "snapMetres": 30.41152033526687
+          },
+          "goal": {
+            "name": "Nice",
+            "lon": 7.26206,
+            "lat": 43.71025,
+            "node": 3561712,
+            "snapMetres": 7.359915881879113
+          },
+          "searchMs": 1899,
+          "snapMs": 78,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Lille",
+              "lon": 3.0573,
+              "lat": 50.6292
+            },
+            "requestedGoal": {
+              "name": "Nice",
+              "lon": 7.262,
+              "lat": 43.7102
+            }
+          },
+          "events": 28621789,
+          "traceBytes": 114487156,
+          "edgeTextureBytes": 197722112,
+          "nodesSettled": 6828319,
+          "arcsExamined": 14615362,
+          "routeMetres": 1019229.85,
+          "maxQueue": 3610,
+          "traceSha256": "4b1445d3a89274b1364dec2376dd999df3819add8072a17e86c317b17cc20bee",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 25,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 42305096,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 114487156
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "6edd1a545b54087424151237d4cf39403641f7716955e83dc67b2d996091995b",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8d84f882d0821e86170b4e3adec6f8a9592e738bfe7725c7cbd9b45f03ac88d2",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Lille",
+            "lon": 3.05687,
+            "lat": 50.62918,
+            "node": 1141055,
+            "snapMetres": 30.41152033526687
+          },
+          "goal": {
+            "name": "Nice",
+            "lon": 7.26206,
+            "lat": 43.71025,
+            "node": 3561712,
+            "snapMetres": 7.359915881879113
+          },
+          "searchMs": 1189,
+          "snapMs": 72,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Lille",
+              "lon": 3.0573,
+              "lat": 50.6292
+            },
+            "requestedGoal": {
+              "name": "Nice",
+              "lon": 7.262,
+              "lat": 43.7102
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 566,
+            "correctedNodes": 143970,
+            "longitudeScale": 0.628201543970827,
+            "initialStartCm": 82352105,
+            "startLowerBoundCm": 82352105
+          },
+          "events": 20536265,
+          "traceBytes": 82145060,
+          "edgeTextureBytes": 98861056,
+          "nodesSettled": 4870237,
+          "arcsExamined": 10469473,
+          "routeMetres": 1019229.85,
+          "maxQueue": 5970,
+          "traceSha256": "811fe4f16170102e8c51b1ad0c618616b543e6cc3183f434dd9dabd753575874",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 25,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 42305096,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 82145060
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 521601852,
+    "reverseCsrBytes": 222521784,
+    "uploadedRoadAttributeBytes": 507661152,
+    "drawingCoordinateAndOffsetBytes": 387871664,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

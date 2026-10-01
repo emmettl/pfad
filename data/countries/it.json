@@ -1,0 +1,27 @@
+{
+  "id": "it",
+  "name": "Italy",
+  "datasetPrefix": "it-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/italy-260930.osm.pbf",
+    "sha256": "7ea1eee3e213dee5d1b0b343b5d92c25b9db6263f063eeb7dd325e424656906b",
+    "md5": "5a29fe6326d7239df3e5215f5f0f420d",
+    "bytes": 2235725279,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      12.5,
+      42
+    ],
+    "referenceLatitude": 42,
+    "scaleMetres": 1250000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

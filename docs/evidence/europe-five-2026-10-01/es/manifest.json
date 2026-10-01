@@ -1,0 +1,981 @@
+{
+  "schema": "pfad-road-study/1",
+  "encoding": "le-columnar-deltas/1",
+  "id": "es-20260930-044eacc93968",
+  "identity": "044eacc9396880ce1f92b4c160629763e54341f3a1114c0eeb531c5105d3865d",
+  "compiler": "pfad-study-compiler/3",
+  "profile": "road-connectivity-distance-v1",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/spain-260930.osm.pbf",
+    "sha256": "4c797ecdfd08c8648331dd8289a4d59861dc8a7c201eecbaa64776626a6431c9",
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "cost": "Original road length in integer centimetres; shortest distance, not estimated travel time.",
+  "limitations": [
+    "Turn restrictions, barriers and conditional access are retained as source evidence but are not applied by this first connectivity profile.",
+    "Ferries and non-motor-road classes are excluded. This is a computation study, not navigation advice."
+  ],
+  "counts": {
+    "nodes": 3885623,
+    "edges": 4989358,
+    "directedArcs": 8331294,
+    "vertices": 17261400
+  },
+  "coordinateScale": 100000,
+  "projection": {
+    "centre": [
+      -3,
+      40
+    ],
+    "referenceLatitude": 40,
+    "scaleMetres": 1250000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  },
+  "bounds": [
+    -0.42915098660564555,
+    -0.4217042281962542,
+    0.49909225039206156,
+    0.33680633968323337
+  ],
+  "classes": [
+    "motorway",
+    "motorway_link",
+    "trunk",
+    "trunk_link",
+    "primary",
+    "primary_link",
+    "secondary",
+    "secondary_link",
+    "tertiary",
+    "tertiary_link",
+    "unclassified",
+    "residential",
+    "living_street",
+    "service",
+    "road"
+  ],
+  "geometryToleranceMetres": 5,
+  "chunks": [
+    {
+      "kind": "nodes",
+      "path": "nodes-000-a29b9a128b19.bin.gz.bin",
+      "start": 0,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 890798,
+      "decodedBytes": 2000000,
+      "sha256": "a29b9a128b19e00e8a00b68d963317cf13403e778b2531758459085cef961ad6"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-001-ce18c5d6f249.bin.gz.bin",
+      "start": 250000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 913265,
+      "decodedBytes": 2000000,
+      "sha256": "ce18c5d6f2490eaa6a49e2509a87f92ee9dad000650a6600366630e65d9fc2ca"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-002-582200e59d8b.bin.gz.bin",
+      "start": 500000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 914156,
+      "decodedBytes": 2000000,
+      "sha256": "582200e59d8bb80994e140d687ed3270e20a3cec442b17b95f552b94e6db6528"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-003-0613d921d96d.bin.gz.bin",
+      "start": 750000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 947695,
+      "decodedBytes": 2000000,
+      "sha256": "0613d921d96d9bbdf2c8ab7434b76f11358d4b0fa00c075c45c4e55f6f811b00"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-004-50eba6408d9f.bin.gz.bin",
+      "start": 1000000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 970981,
+      "decodedBytes": 2000000,
+      "sha256": "50eba6408d9f056e41b078fc9460b53ca1a89979bc64ed8ea2ea5156ee7980a7"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-005-093b22ca2d0f.bin.gz.bin",
+      "start": 1250000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 962777,
+      "decodedBytes": 2000000,
+      "sha256": "093b22ca2d0fc4ecec499a61aa3b616c2f72533a6a98eaa907a49e948c9e0dd5"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-006-f12179bb6a80.bin.gz.bin",
+      "start": 1500000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 963339,
+      "decodedBytes": 2000000,
+      "sha256": "f12179bb6a80376570679552a8f44ce92480e6d40355151c866594a36fb79d6e"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-007-cb8b9defc785.bin.gz.bin",
+      "start": 1750000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 968108,
+      "decodedBytes": 2000000,
+      "sha256": "cb8b9defc7857327f16c6361185cf6a283af017d21498eaeab8b82cbf1904da8"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-008-ee093ae9bbae.bin.gz.bin",
+      "start": 2000000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 975918,
+      "decodedBytes": 2000000,
+      "sha256": "ee093ae9bbae53426fe6d316efa2858461d2c7a087bd88d6180927c9370ae379"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-009-9f9dc986cda3.bin.gz.bin",
+      "start": 2250000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 998629,
+      "decodedBytes": 2000000,
+      "sha256": "9f9dc986cda353be4627ef33c16d6c1165ed153b67b4c4dfbe2957e0c4fd65e4"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-010-65095f49f02d.bin.gz.bin",
+      "start": 2500000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 1026143,
+      "decodedBytes": 2000000,
+      "sha256": "65095f49f02d5374f6e3f560e03aba58421cb46066387a76cd565d9ba02b18da"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-011-df7949d2d5b8.bin.gz.bin",
+      "start": 2750000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 1057015,
+      "decodedBytes": 2000000,
+      "sha256": "df7949d2d5b89ff087a993794ee3e4716ed744bbb75871cd05b56a8b392e201a"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-012-33d6f9f1eeba.bin.gz.bin",
+      "start": 3000000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 1034516,
+      "decodedBytes": 2000000,
+      "sha256": "33d6f9f1eeba21e633631a2d0f4eeecfbd825a9eb2629ab6b04afaa533b88867"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-013-dbb4a1d4f3dd.bin.gz.bin",
+      "start": 3250000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 1066042,
+      "decodedBytes": 2000000,
+      "sha256": "dbb4a1d4f3dd792bf41666072f7046d0a9991033d4fe7d858b8fc906b1efb434"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-014-e72d01df568c.bin.gz.bin",
+      "start": 3500000,
+      "count": 250000,
+      "stride": 8,
+      "bytes": 1080592,
+      "decodedBytes": 2000000,
+      "sha256": "e72d01df568cf4a46563618cccd8ec317b2a50b84544652e61977e8d74a34958"
+    },
+    {
+      "kind": "nodes",
+      "path": "nodes-015-29ec1193f48e.bin.gz.bin",
+      "start": 3750000,
+      "count": 135623,
+      "stride": 8,
+      "bytes": 587443,
+      "decodedBytes": 1084984,
+      "sha256": "29ec1193f48e10e7f16d90966b670bac8b3801e9ab799999c4d1a8ce3370c6df"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-000-8514e3c16295.bin.gz.bin",
+      "start": 0,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 833143,
+      "decodedBytes": 2800000,
+      "sha256": "8514e3c16295f777e6053624fe2ec05186639baefcb483df140911b620b9fb76"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-001-c24d24b22ff1.bin.gz.bin",
+      "start": 200000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 921737,
+      "decodedBytes": 2800000,
+      "sha256": "c24d24b22ff10a38e1b0640439645028b6cab134b88b1508a1411ba62313c18c"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-002-1d6e475682d0.bin.gz.bin",
+      "start": 400000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 935693,
+      "decodedBytes": 2800000,
+      "sha256": "1d6e475682d0aa57b58125ad9c66b8e0660c7a2ebd4c7498468a2b945d08046f"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-003-4702470170ef.bin.gz.bin",
+      "start": 600000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1018782,
+      "decodedBytes": 2800000,
+      "sha256": "4702470170ef8241a41d4b29269a513784404c3361f25fc267bb40ebcf7fb7b6"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-004-02f9ecf6794c.bin.gz.bin",
+      "start": 800000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1017786,
+      "decodedBytes": 2800000,
+      "sha256": "02f9ecf6794c13b8048552ca4c8d1882e8e3ab14eec2eddbbb8ffab7a37833b1"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-005-b384a0bd0f4b.bin.gz.bin",
+      "start": 1000000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1088092,
+      "decodedBytes": 2800000,
+      "sha256": "b384a0bd0f4b3965a91d886bb7d6d233619ff6eb108c900fc9768823f4a5e855"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-006-e4842ca5245e.bin.gz.bin",
+      "start": 1200000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1110895,
+      "decodedBytes": 2800000,
+      "sha256": "e4842ca5245ef1eba53298ce04d522c81e299459f16eb208cdd4c25aa0a388ed"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-007-c807d5a19b88.bin.gz.bin",
+      "start": 1400000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1111867,
+      "decodedBytes": 2800000,
+      "sha256": "c807d5a19b88da07095f3d6e58d28c69a4b2f297262ef4868483971d5b9e3ebb"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-008-c8a0e1ee8b23.bin.gz.bin",
+      "start": 1600000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1138133,
+      "decodedBytes": 2800000,
+      "sha256": "c8a0e1ee8b237d92e06c3ab9b08e5aeed019a6e6f2000545bb66d3813c2e0bd9"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-009-b2cd5096a8ed.bin.gz.bin",
+      "start": 1800000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1134333,
+      "decodedBytes": 2800000,
+      "sha256": "b2cd5096a8ed993f47d2975720e04d14a4a4ca548c54886f46357b2b08281d17"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-010-36089f370652.bin.gz.bin",
+      "start": 2000000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1185630,
+      "decodedBytes": 2800000,
+      "sha256": "36089f37065231adfb6efe43a9cc847dedad56c3442d0eae3a91911683634d7d"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-011-38a045a25e4f.bin.gz.bin",
+      "start": 2200000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1192301,
+      "decodedBytes": 2800000,
+      "sha256": "38a045a25e4fa7f3266779f4f498a7f3c002639b0a3c00ed9effc3448ebb0ba3"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-012-0815136f2593.bin.gz.bin",
+      "start": 2400000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1287233,
+      "decodedBytes": 2800000,
+      "sha256": "0815136f25938420f61e2ec6bc6079a533adce0150ba69c48ba2428be8e07159"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-013-4c45a71b8940.bin.gz.bin",
+      "start": 2600000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1351395,
+      "decodedBytes": 2800000,
+      "sha256": "4c45a71b8940dd15f7111d7202859844f1aac302577973cb11ccfc66ec9e9092"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-014-b95f4be95c44.bin.gz.bin",
+      "start": 2800000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1378495,
+      "decodedBytes": 2800000,
+      "sha256": "b95f4be95c44b290fa851ccb7bb3a730f4ce36df849131caacc71a27d964fa25"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-015-670499a4abdd.bin.gz.bin",
+      "start": 3000000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1432541,
+      "decodedBytes": 2800000,
+      "sha256": "670499a4abdd6042780d0b24fc7f86b70afb044d9e0bf1885aa91ca1c688e6d4"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-016-69f41035eef1.bin.gz.bin",
+      "start": 3200000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1461844,
+      "decodedBytes": 2800000,
+      "sha256": "69f41035eef1a0b5938c24a471cb2c4d316c3d7d8d82f280dbb435f704859e79"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-017-49bf0bd61841.bin.gz.bin",
+      "start": 3400000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1471721,
+      "decodedBytes": 2800000,
+      "sha256": "49bf0bd61841bc0d4aa7a3ea6450e4f2c3f2645818ed8bf7cb5952f51d918230"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-018-9e907e2d0bc6.bin.gz.bin",
+      "start": 3600000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1482087,
+      "decodedBytes": 2800000,
+      "sha256": "9e907e2d0bc6810af17cacdb0816659aab6b2851dce16d23ddc76cb8411d05a5"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-019-03617b3a4e87.bin.gz.bin",
+      "start": 3800000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1524446,
+      "decodedBytes": 2800000,
+      "sha256": "03617b3a4e87d7f85a0cc0976a29bdfad0c26510e002f38047cddb52974eb440"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-020-db6376afcda0.bin.gz.bin",
+      "start": 4000000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1554383,
+      "decodedBytes": 2800000,
+      "sha256": "db6376afcda0ee97bd8448a1d2f7e8594f5836fccc3111ba2a17c11121c3e6d2"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-021-5e147dde66dc.bin.gz.bin",
+      "start": 4200000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1528614,
+      "decodedBytes": 2800000,
+      "sha256": "5e147dde66dc9124ec6de8ef3f9fe6352e17faa4c34ba44f4af8dabe06dcb239"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-022-174fa6c93733.bin.gz.bin",
+      "start": 4400000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1570671,
+      "decodedBytes": 2800000,
+      "sha256": "174fa6c937338d37c4fc7d765cb987a108eaad57220c41faf5285489e53283e2"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-023-bd096a6afa55.bin.gz.bin",
+      "start": 4600000,
+      "count": 200000,
+      "stride": 14,
+      "bytes": 1582271,
+      "decodedBytes": 2800000,
+      "sha256": "bd096a6afa55dcb14fcc1d36d15ead93f818d51504ee00c5ea054bc61ddc9689"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-024-6e0a44b8be77.bin.gz.bin",
+      "start": 4800000,
+      "count": 189358,
+      "stride": 14,
+      "bytes": 1520043,
+      "decodedBytes": 2651012,
+      "sha256": "6e0a44b8be77fd2328dc705715932cdf08dc96cd058ef893d198a3536a0b99c8"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-000-91295205b70d.bin.gz.bin",
+      "start": 0,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 191750,
+      "decodedBytes": 655368,
+      "sha256": "91295205b70df2504c540bae483b0a9f4daaba025f393109c1ef8433212f6661"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-001-18200b59a224.bin.gz.bin",
+      "start": 100000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 186550,
+      "decodedBytes": 642456,
+      "sha256": "18200b59a224b0a39157ab7e1127fcc05304895bd853d93911f597520c67b4c4"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-002-1770483f8776.bin.gz.bin",
+      "start": 200000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 209136,
+      "decodedBytes": 700752,
+      "sha256": "1770483f8776a9ddd4595a12ea1e460d7e467c92ea8b17d6190895cd76d1d478"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-003-653f194b2305.bin.gz.bin",
+      "start": 300000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 196851,
+      "decodedBytes": 672944,
+      "sha256": "653f194b230518764d3baf189c19cf95bcade41ebb39fa72255ed666b9d6f641"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-004-f296907f0149.bin.gz.bin",
+      "start": 400000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 223259,
+      "decodedBytes": 733616,
+      "sha256": "f296907f0149ba087cf3bb4e5ee756b17a902274bf63cc8384b126d78c88ea15"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-005-b21bc25e5d9b.bin.gz.bin",
+      "start": 500000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 252619,
+      "decodedBytes": 807032,
+      "sha256": "b21bc25e5d9bba0e19785294bfa9deda0104b75a8f3ea675bf59d6e31bf34983"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-006-df6ae008c7d1.bin.gz.bin",
+      "start": 600000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 246021,
+      "decodedBytes": 802896,
+      "sha256": "df6ae008c7d16ff2ad3ef65670169a567fc75f12a8f271aeb3010318a0357931"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-007-dd2235ea474e.bin.gz.bin",
+      "start": 700000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 253362,
+      "decodedBytes": 818176,
+      "sha256": "dd2235ea474e7def026aa1eeb55658c5c4504b8cbabb3a9e6a0e5207e9646952"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-008-aa8bbe723b48.bin.gz.bin",
+      "start": 800000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 222822,
+      "decodedBytes": 740416,
+      "sha256": "aa8bbe723b48df4e586d9f5420e85ab97c2bbd3719594b268e7b53d9f79fc374"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-009-eee937450353.bin.gz.bin",
+      "start": 900000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 275713,
+      "decodedBytes": 879480,
+      "sha256": "eee937450353a360506d37b1a6558a2e0569840d6ac83a5f4ea207571af1bf7e"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-010-a26cb48808b4.bin.gz.bin",
+      "start": 1000000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 253358,
+      "decodedBytes": 815152,
+      "sha256": "a26cb48808b49af9810994b785a01ef0777afa08020ec4f795c50dad5078b38a"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-011-6f7109e1a282.bin.gz.bin",
+      "start": 1100000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 247649,
+      "decodedBytes": 812944,
+      "sha256": "6f7109e1a2825828924f8ce96b4fd7ee09df8a9a4f1c2e406776e03aac52706a"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-012-dd0a5637fc0d.bin.gz.bin",
+      "start": 1200000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 250926,
+      "decodedBytes": 820792,
+      "sha256": "dd0a5637fc0d61011af68c719718ad0b2192226302a3a34cb679a193f79ad811"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-013-42023943cce0.bin.gz.bin",
+      "start": 1300000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 253486,
+      "decodedBytes": 828272,
+      "sha256": "42023943cce03e04b4a65b8835c4680c0fed3424fc004693e6f5982f8aa13e94"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-014-0a4137450e7f.bin.gz.bin",
+      "start": 1400000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 273449,
+      "decodedBytes": 878472,
+      "sha256": "0a4137450e7f7c83e0837ab1b5b7f60a811a34c09a5518d88b3af35f8faa2f3d"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-015-e747b120b319.bin.gz.bin",
+      "start": 1500000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 260729,
+      "decodedBytes": 845912,
+      "sha256": "e747b120b3198df24ba7d756041941bfcd6b702a52af955c6817bdd49186ffdb"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-016-f121ea7b6a26.bin.gz.bin",
+      "start": 1600000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 265750,
+      "decodedBytes": 859632,
+      "sha256": "f121ea7b6a261bca0f6bd13c04f1af6246807048f0970ddc008f37d478ce57f9"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-017-534bad5f02d9.bin.gz.bin",
+      "start": 1700000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 297358,
+      "decodedBytes": 947424,
+      "sha256": "534bad5f02d9136a8aadad43dd077cee5755f776c0a8acd14f282caefafa838e"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-018-dbcf76707aab.bin.gz.bin",
+      "start": 1800000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 274517,
+      "decodedBytes": 883672,
+      "sha256": "dbcf76707aaba0c23e9b978253eb9c9123b39d33317d995d5846439d14af83fa"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-019-6b6309b2e029.bin.gz.bin",
+      "start": 1900000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 264550,
+      "decodedBytes": 861120,
+      "sha256": "6b6309b2e029453c417ce7c874bd1eb0f009e9622e57e9c25f1c0c84ddc157b2"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-020-5c4334621435.bin.gz.bin",
+      "start": 2000000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 286654,
+      "decodedBytes": 918432,
+      "sha256": "5c43346214351a9eb83d708ac397aad5a5fbeef8337d205883d50bf3aacdc0c6"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-021-8f404f00ba87.bin.gz.bin",
+      "start": 2100000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 284245,
+      "decodedBytes": 914072,
+      "sha256": "8f404f00ba871fcd78f90cc66413fc9dd05659c3c45cc8cf3be856b0d25247b6"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-022-58e7b630cd7c.bin.gz.bin",
+      "start": 2200000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 278475,
+      "decodedBytes": 899912,
+      "sha256": "58e7b630cd7c677459356d32572934fb6e38a416d01e16b5b927a1b5908ff612"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-023-ef95912d0803.bin.gz.bin",
+      "start": 2300000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 283351,
+      "decodedBytes": 913312,
+      "sha256": "ef95912d0803439b0707fc5cd49f0febffcf0c3a11e7a1a443c44a7888dd7d16"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-024-9cab03a254ee.bin.gz.bin",
+      "start": 2400000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 276503,
+      "decodedBytes": 892576,
+      "sha256": "9cab03a254eebb899e70ec1577289defa4bfd9a12a601248bf33ac238d6c3889"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-025-f493c6dd06b8.bin.gz.bin",
+      "start": 2500000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 247110,
+      "decodedBytes": 810080,
+      "sha256": "f493c6dd06b84757aa1098c53398aef6595d09469a45c37a9f24363ce1dbbea0"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-026-0588a7f22f36.bin.gz.bin",
+      "start": 2600000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 258860,
+      "decodedBytes": 843296,
+      "sha256": "0588a7f22f3674e72e4b1b0e8753ece8efbd0877029930ec5c88e92efc07d9c6"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-027-6a7ba48c5331.bin.gz.bin",
+      "start": 2700000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 278777,
+      "decodedBytes": 897056,
+      "sha256": "6a7ba48c5331ea985b95dd3647199b91cf6589b0eeb033c8f427c9d86874fc07"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-028-6a3927fc3563.bin.gz.bin",
+      "start": 2800000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 277620,
+      "decodedBytes": 888720,
+      "sha256": "6a3927fc3563b4daec8e98277629525005d2fc99d7c0a6b5a3d9ad56a8052c96"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-029-338f047f9d89.bin.gz.bin",
+      "start": 2900000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 285248,
+      "decodedBytes": 913944,
+      "sha256": "338f047f9d89d7223eb34ba48471d1fd448f1648e02938c3a10cb6cf4c867d9e"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-030-d1040b298ecf.bin.gz.bin",
+      "start": 3000000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 359173,
+      "decodedBytes": 1099248,
+      "sha256": "d1040b298ecfc87fcfa5b072bab1055fcbe1489477da0bd4634f31b4bb2e9044"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-031-de8d287a6f9e.bin.gz.bin",
+      "start": 3100000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 271627,
+      "decodedBytes": 879368,
+      "sha256": "de8d287a6f9e8127b2a0ae02c4a93af37f46d32140ce0233e915da9801bc0aee"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-032-3fe9378c4848.bin.gz.bin",
+      "start": 3200000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 224309,
+      "decodedBytes": 752456,
+      "sha256": "3fe9378c4848a28e29b2724a5e05392e950447ef16da24af511cb1829c28f90c"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-033-8fcb1d9e078b.bin.gz.bin",
+      "start": 3300000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 236440,
+      "decodedBytes": 782880,
+      "sha256": "8fcb1d9e078b8496c9d7f018ee770c153b0ff43de55b378329c30e39bb598b1e"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-034-5bd6f87d6507.bin.gz.bin",
+      "start": 3400000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 203160,
+      "decodedBytes": 699616,
+      "sha256": "5bd6f87d65070153a3d12380d3e85d6001e3671743df9ac114c971269671f28d"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-035-5a85e9e971cf.bin.gz.bin",
+      "start": 3500000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 225443,
+      "decodedBytes": 756736,
+      "sha256": "5a85e9e971cfbae7f92b97860bafa195fdf6feee7a0a3b3a027c2b12db188af7"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-036-499d08328258.bin.gz.bin",
+      "start": 3600000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 223625,
+      "decodedBytes": 753704,
+      "sha256": "499d0832825833734a80f85199a3d2eed83799b4779a97f88153897c31213eb9"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-037-6545c96e9178.bin.gz.bin",
+      "start": 3700000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 224674,
+      "decodedBytes": 756984,
+      "sha256": "6545c96e9178c95160023018d32250449902d66eb5b477d0e1a368c1fd1a623f"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-038-140f9b87b64e.bin.gz.bin",
+      "start": 3800000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 207104,
+      "decodedBytes": 708344,
+      "sha256": "140f9b87b64e90dc456fe4b969df7b131be2063fc17a9cdd840e1bf24162b549"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-039-74348124b27a.bin.gz.bin",
+      "start": 3900000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 254697,
+      "decodedBytes": 829040,
+      "sha256": "74348124b27aaf60a515446f3e92897318337cd9217d14dfba1f05ad968759db"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-040-a33a545438c4.bin.gz.bin",
+      "start": 4000000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 205793,
+      "decodedBytes": 703568,
+      "sha256": "a33a545438c4bd18694faaa63f6b836ba3ed283f80e72ab30866cf43dd0e93c6"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-041-6f0f1c850910.bin.gz.bin",
+      "start": 4100000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 183865,
+      "decodedBytes": 648264,
+      "sha256": "6f0f1c850910ecd2281dc4770db5f79085078595e54121b207edcdcea6225b4b"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-042-8c2d3ece55ed.bin.gz.bin",
+      "start": 4200000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 171715,
+      "decodedBytes": 618608,
+      "sha256": "8c2d3ece55ed05469035f1c455ac532c57b17a9f7533b8741d8cbbce878d642e"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-043-8fd5d935f252.bin.gz.bin",
+      "start": 4300000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 182292,
+      "decodedBytes": 644216,
+      "sha256": "8fd5d935f252a55c495784143e6fbe7d5a1b2032ceee3123b0a2af62caff8191"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-044-00da81865a75.bin.gz.bin",
+      "start": 4400000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 186580,
+      "decodedBytes": 655400,
+      "sha256": "00da81865a75a07655ef9ae467e136b56d938878b5f3b91aaa63fb75a20e238a"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-045-ba9a64df3b1c.bin.gz.bin",
+      "start": 4500000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 168636,
+      "decodedBytes": 610592,
+      "sha256": "ba9a64df3b1c13fb90bcda4663cb916924bcfdea1f6388ef5efe550f975a4a78"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-046-0ee9c96576db.bin.gz.bin",
+      "start": 4600000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 190875,
+      "decodedBytes": 671136,
+      "sha256": "0ee9c96576dbc821d15efb1ba23f6dbd87cc2cba64287d068f6dc1080932619c"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-047-eae7b961c3c7.bin.gz.bin",
+      "start": 4700000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 146512,
+      "decodedBytes": 554144,
+      "sha256": "eae7b961c3c74af1a32c0a713be90f7061ca3fb069cf2673dc53e586707717a4"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-048-e8c6c80144b6.bin.gz.bin",
+      "start": 4800000,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 164991,
+      "decodedBytes": 602272,
+      "sha256": "e8c6c80144b61061d1039a273d52278a2bdc3cada87d4b9fa71258a484e5b996"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-049-d5340a0a64a5.bin.gz.bin",
+      "start": 4900000,
+      "count": 89358,
+      "stride": 0,
+      "bytes": 127845,
+      "decodedBytes": 484948,
+      "sha256": "d5340a0a64a50dc93dec983b7bdc2c92c6be09b20dd02abf0bcc9346d133318d"
+    }
+  ],
+  "evidence": {
+    "path": "evidence-f72f80448570.json.gz.bin",
+    "bytes": 25331302,
+    "sha256": "f72f8044857030b2a9fbba9c68eaac722527a6e20eda1ebb89dea5c080a489e0"
+  },
+  "downloadBytes": 59007607
+}

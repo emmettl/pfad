@@ -1,0 +1,99 @@
+[
+  {
+    "country": "es",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4207/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Madrid→Barcelona",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "7198269"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Madrid→Barcelona",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3226241"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Madrid→Barcelona",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "1267232"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Bilbao→Oviedo277.4 kmA*",
+        "events": "707147"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Burgos→Valencia504.8 kmBidirectional A*",
+        "events": "1422048"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Madrid→Aranjuez46.7 kmDijkstra",
+        "events": "884250"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Guadalajara→Valladolid215.2 kmBidirectional Dijkstra",
+        "events": "1903176"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Barcelona · Madrid · BilbaoThree-source Dijkstra",
+        "events": "15558506"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Valencia→Granada440.7 kmA*",
+        "events": "1770887"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Castellón→Valladolid533.0 kmBidirectional A*",
+        "events": "2488991"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Tarragona→Málaga813.0 kmDijkstra",
+        "events": "12262893"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Segovia→AranjuezBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

@@ -348,3 +348,13 @@ context and classifying unresolved source references; physical phone budgets;
 search cancellation, WebGL recovery, richer place/coordinate entry, paired
 comparison, still-image export and a deliberate future graph-refresh audit.
 No physical-device or driving-legality completion is implied by browser tests.
+
+## Five European studies · 1 October 2026
+
+Added Poland, Italy, Spain, metropolitan France with Corsica, and Germany as
+manual immutable road and outline releases, with curated ambient pools. The
+complete France and Germany graphs extend the measured node guard to eleven
+million; the edge, exact road-ID, drawing and download limits remain unchanged.
+National replay and country UI proofs cover desktop Chromium and touch WebKit;
+physical-phone budgets remain open. Switzerland stays bundled and default.
+[Release evidence](evidence/europe-five-2026-10-01/README.md).

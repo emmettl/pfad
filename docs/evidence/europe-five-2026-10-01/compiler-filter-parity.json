@@ -1,0 +1,42 @@
+{
+  "dataset": "lu-20260930-e04927d2555c",
+  "unfilteredElapsedSeconds": 10.157174874999328,
+  "filteredElapsedSeconds": 4.801819082989823,
+  "graph": {
+    "json_bytes": 5524789,
+    "gzip_bytes": 1785761,
+    "brotli_q9_bytes": 1709472,
+    "sha256": "e9185632ef7e58f26daaa328d6b6b187b620c094b06cfc49d79cf0d4aeef42f3"
+  },
+  "variants": {
+    "0": {
+      "json_bytes": 1905364,
+      "gzip_bytes": 577571,
+      "brotli_q9_bytes": 539353,
+      "sha256": "820897fbfc8edc21000c7e3cd1f21a9c01f2861cab41fa6ac8c9e31bcd94791e",
+      "interior_vertices": 224804,
+      "combined_gzip_bytes": 2363332,
+      "combined_brotli_bytes": 2248825
+    },
+    "5": {
+      "json_bytes": 803947,
+      "gzip_bytes": 168368,
+      "brotli_q9_bytes": 155781,
+      "sha256": "a9d519745d7ac00126d07ee738bcd2ca9a379e9d66b97218fce37eae1d3a72ea",
+      "interior_vertices": 45921,
+      "combined_gzip_bytes": 1954129,
+      "combined_brotli_bytes": 1865253
+    },
+    "15": {
+      "json_bytes": 592275,
+      "gzip_bytes": 76479,
+      "brotli_q9_bytes": 70271,
+      "sha256": "cca7c2e4d93ea91b2e213a8c2fe16f20ed9ce985b6e8a7ad9c9870cc6a836438",
+      "interior_vertices": 17673,
+      "combined_gzip_bytes": 1862240,
+      "combined_brotli_bytes": 1779743
+    }
+  },
+  "allCountsClassesControlsRestrictionsAndHashesMatch": true,
+  "nodeLocationCachingPrecedesFilter": true
+}

@@ -1,0 +1,15 @@
+{
+  "baseCommit": "cbba33141444374b23f5105038d60b8cb34d8ea0",
+  "unitTests": 92,
+  "browserTests": 52,
+  "artifactFiles": 57,
+  "artifactBytes": 28928681,
+  "countryUiProofs": [
+    "pl",
+    "it",
+    "es",
+    "fr",
+    "de"
+  ],
+  "note": "Checks and country UI proofs used an isolated snapshot of the base commit with only the five-country release changes applied. Unrelated working-tree source changes were excluded. Each country has eight real ambient studies, one automatic transition, external outlines and a restored Swiss study. Physical-device stability remains unverified."
+}

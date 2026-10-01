@@ -1,0 +1,34 @@
+{
+  "dataset": "423f3384f3a6923335b6933ab1388245edc7429e5a947f191dee9d43d5465639",
+  "profile": "road-connectivity-distance-v1",
+  "runs": [
+    {
+      "start": "rome",
+      "goal": "palermo",
+      "expectedConnected": false,
+      "routeMetres": null,
+      "events": 20457684
+    },
+    {
+      "start": "trapani",
+      "goal": "palermo",
+      "expectedConnected": true,
+      "routeMetres": 90162.9,
+      "events": 321859
+    },
+    {
+      "start": "rome",
+      "goal": "cagliari",
+      "expectedConnected": false,
+      "routeMetres": null,
+      "events": 20457684
+    },
+    {
+      "start": "sassari",
+      "goal": "cagliari",
+      "expectedConnected": true,
+      "routeMetres": 207514.72,
+      "events": 846651
+    }
+  ]
+}

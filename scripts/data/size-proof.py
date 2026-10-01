@@ -84,7 +84,10 @@ class Extract(osmium.SimpleHandler):
             self.restrictions.append([r.id, dict(r.tags), [[m.type, m.ref, m.role] for m in r.members]])
 
 e = Extract()
-e.apply_file(str(SOURCE), locations=True, idx='flex_mem')
+# Cache every node location before filtering callbacks. Every relevant node,
+# way and restriction has one of these keys; empty/other-tagged objects were
+# already ignored by Extract. This reduces Python work without removing roads.
+e.apply_file(str(SOURCE), locations=True, idx='flex_mem', filters=[osmium.filter.KeyFilter('highway', 'barrier', 'type')])
 log('extracted', len(e.ways), 'ways', len(e.uses), 'road shape nodes')
 wayset = {w[0] for w in e.ways}
 restrictions = [r for r in e.restrictions if any(m[0]=='w' and m[1] in wayset for m in r[2])]

@@ -1,0 +1,27 @@
+{
+  "id": "de",
+  "name": "Germany",
+  "datasetPrefix": "de-20260929",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-29T20:22:51Z",
+    "data_timestamp": "2026-09-29T20:22:51Z",
+    "url": "https://download.geofabrik.de/europe/germany-260929.osm.pbf",
+    "sha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+    "md5": "507139a49f36caf00eccbca5e5410a99",
+    "bytes": 4850520508,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      10.5,
+      51
+    ],
+    "referenceLatitude": 51,
+    "scaleMetres": 1000000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

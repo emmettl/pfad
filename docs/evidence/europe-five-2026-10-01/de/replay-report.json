@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T13:41:46.279Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "de-20260929-083582060611",
+    "counts": {
+      "nodes": 10488625,
+      "edges": 11974914,
+      "directedArcs": 22891751,
+      "vertices": 32951556
+    },
+    "downloadBytes": 140876488,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-29T20:22:51Z",
+      "url": "https://download.geofabrik.de/europe/germany-260929.osm.pbf",
+      "sha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 1609.9000000059605,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Hamburg",
+            "lon": 9.99363,
+            "lat": 53.55108,
+            "node": 8358711,
+            "snapMetres": 5.131278017568505
+          },
+          "goal": {
+            "name": "Munich",
+            "lon": 11.58215,
+            "lat": 48.13518,
+            "node": 4904426,
+            "snapMetres": 14.249164715327206
+          },
+          "searchMs": 1902.3999999761581,
+          "snapMs": 678.5999999940395,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Hamburg",
+              "lon": 9.9937,
+              "lat": 53.5511
+            },
+            "requestedGoal": {
+              "name": "Munich",
+              "lon": 11.582,
+              "lat": 48.1351
+            }
+          },
+          "events": 39819221,
+          "traceBytes": 159276884,
+          "edgeTextureBytes": 95813632,
+          "nodesSettled": 9382351,
+          "arcsExamined": 20598629,
+          "routeMetres": 704428.57,
+          "maxQueue": 1946,
+          "traceSha256": "fce51ee87f963980e5c5f8fc3bb6f4cd3b16bc0ea1fe7c770e899c37eee15730",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 32951556,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 159276884
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Hamburg",
+            "lon": 9.99363,
+            "lat": 53.55108,
+            "node": 8358711,
+            "snapMetres": 5.131278017568505
+          },
+          "goal": {
+            "name": "Munich",
+            "lon": 11.58215,
+            "lat": 48.13518,
+            "node": 4904426,
+            "snapMetres": 14.249164715327206
+          },
+          "searchMs": 1896.5,
+          "snapMs": 107.5,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Hamburg",
+              "lon": 9.9937,
+              "lat": 53.5511
+            },
+            "requestedGoal": {
+              "name": "Munich",
+              "lon": 11.582,
+              "lat": 48.1351
+            }
+          },
+          "events": 39819221,
+          "traceBytes": 159276884,
+          "edgeTextureBytes": 95813632,
+          "nodesSettled": 9382351,
+          "arcsExamined": 20598629,
+          "routeMetres": 704428.57,
+          "maxQueue": 1946,
+          "traceSha256": "fce51ee87f963980e5c5f8fc3bb6f4cd3b16bc0ea1fe7c770e899c37eee15730",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 32951556,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 159276884
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Hamburg",
+            "lon": 9.99363,
+            "lat": 53.55108,
+            "node": 8358711,
+            "snapMetres": 5.131278017568505
+          },
+          "goal": {
+            "name": "Munich",
+            "lon": 11.58215,
+            "lat": 48.13518,
+            "node": 4904426,
+            "snapMetres": 14.249164715327206
+          },
+          "searchMs": 2398.800000011921,
+          "snapMs": 112,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Hamburg",
+              "lon": 9.9937,
+              "lat": 53.5511
+            },
+            "requestedGoal": {
+              "name": "Munich",
+              "lon": 11.582,
+              "lat": 48.1351
+            }
+          },
+          "events": 33627726,
+          "traceBytes": 134510904,
+          "edgeTextureBytes": 191627264,
+          "nodesSettled": 7910331,
+          "arcsExamined": 17419525,
+          "routeMetres": 704428.57,
+          "maxQueue": 2980,
+          "traceSha256": "cf2beb5a870d76086bd392b05687f7d44a16573ec51df1a29c9a865e5c40e4df",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 32951556,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 134510904
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Hamburg",
+            "lon": 9.99363,
+            "lat": 53.55108,
+            "node": 8358711,
+            "snapMetres": 5.131278017568505
+          },
+          "goal": {
+            "name": "Munich",
+            "lon": 11.58215,
+            "lat": 48.13518,
+            "node": 4904426,
+            "snapMetres": 14.249164715327206
+          },
+          "searchMs": 696,
+          "snapMs": 107.19999998807907,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Hamburg",
+              "lon": 9.9937,
+              "lat": 53.5511
+            },
+            "requestedGoal": {
+              "name": "Munich",
+              "lon": 11.582,
+              "lat": 48.1351
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 526.5,
+            "correctedNodes": 244691,
+            "longitudeScale": 0.5728193137187972,
+            "initialStartCm": 61066202,
+            "startLowerBoundCm": 61066202
+          },
+          "events": 11726035,
+          "traceBytes": 46904140,
+          "edgeTextureBytes": 95813632,
+          "nodesSettled": 2744334,
+          "arcsExamined": 6052911,
+          "routeMetres": 704428.57,
+          "maxQueue": 5426,
+          "traceSha256": "e766bceef5846927c6e2b02cc5db7f7c60b24adf701a3637d2ca60fc2ad8fcd7",
+          "frameIntervalMedianMs": 16.69999999999709,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 32951556,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 46904140
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 1498,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Hamburg",
+            "lon": 9.99363,
+            "lat": 53.55108,
+            "node": 8358711,
+            "snapMetres": 5.131278017568505
+          },
+          "goal": {
+            "name": "Munich",
+            "lon": 11.58215,
+            "lat": 48.13518,
+            "node": 4904426,
+            "snapMetres": 14.249164715327206
+          },
+          "searchMs": 1761,
+          "snapMs": 567,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Hamburg",
+              "lon": 9.9937,
+              "lat": 53.5511
+            },
+            "requestedGoal": {
+              "name": "Munich",
+              "lon": 11.582,
+              "lat": 48.1351
+            }
+          },
+          "events": 39819221,
+          "traceBytes": 159276884,
+          "edgeTextureBytes": 95813632,
+          "nodesSettled": 9382351,
+          "arcsExamined": 20598629,
+          "routeMetres": 704428.57,
+          "maxQueue": 1946,
+          "traceSha256": "fce51ee87f963980e5c5f8fc3bb6f4cd3b16bc0ea1fe7c770e899c37eee15730",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 26,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 32951556,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 159276884
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Hamburg",
+            "lon": 9.99363,
+            "lat": 53.55108,
+            "node": 8358711,
+            "snapMetres": 5.131278017568505
+          },
+          "goal": {
+            "name": "Munich",
+            "lon": 11.58215,
+            "lat": 48.13518,
+            "node": 4904426,
+            "snapMetres": 14.249164715327206
+          },
+          "searchMs": 1784,
+          "snapMs": 74,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Hamburg",
+              "lon": 9.9937,
+              "lat": 53.5511
+            },
+            "requestedGoal": {
+              "name": "Munich",
+              "lon": 11.582,
+              "lat": 48.1351
+            }
+          },
+          "events": 39819221,
+          "traceBytes": 159276884,
+          "edgeTextureBytes": 95813632,
+          "nodesSettled": 9382351,
+          "arcsExamined": 20598629,
+          "routeMetres": 704428.57,
+          "maxQueue": 1946,
+          "traceSha256": "fce51ee87f963980e5c5f8fc3bb6f4cd3b16bc0ea1fe7c770e899c37eee15730",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 27,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 32951556,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 159276884
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Hamburg",
+            "lon": 9.99363,
+            "lat": 53.55108,
+            "node": 8358711,
+            "snapMetres": 5.131278017568505
+          },
+          "goal": {
+            "name": "Munich",
+            "lon": 11.58215,
+            "lat": 48.13518,
+            "node": 4904426,
+            "snapMetres": 14.249164715327206
+          },
+          "searchMs": 2157,
+          "snapMs": 80,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Hamburg",
+              "lon": 9.9937,
+              "lat": 53.5511
+            },
+            "requestedGoal": {
+              "name": "Munich",
+              "lon": 11.582,
+              "lat": 48.1351
+            }
+          },
+          "events": 33627726,
+          "traceBytes": 134510904,
+          "edgeTextureBytes": 191627264,
+          "nodesSettled": 7910331,
+          "arcsExamined": 17419525,
+          "routeMetres": 704428.57,
+          "maxQueue": 2980,
+          "traceSha256": "cf2beb5a870d76086bd392b05687f7d44a16573ec51df1a29c9a865e5c40e4df",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 26,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 32951556,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 134510904
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "be7f577bef19f51de000f3e2de40950dec387711837ae6b5236f565ff524400e",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Hamburg",
+            "lon": 9.99363,
+            "lat": 53.55108,
+            "node": 8358711,
+            "snapMetres": 5.131278017568505
+          },
+          "goal": {
+            "name": "Munich",
+            "lon": 11.58215,
+            "lat": 48.13518,
+            "node": 4904426,
+            "snapMetres": 14.249164715327206
+          },
+          "searchMs": 644,
+          "snapMs": 76,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Hamburg",
+              "lon": 9.9937,
+              "lat": 53.5511
+            },
+            "requestedGoal": {
+              "name": "Munich",
+              "lon": 11.582,
+              "lat": 48.1351
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 621,
+            "correctedNodes": 244691,
+            "longitudeScale": 0.5728193137187972,
+            "initialStartCm": 61066202,
+            "startLowerBoundCm": 61066202
+          },
+          "events": 11726035,
+          "traceBytes": 46904140,
+          "edgeTextureBytes": 95813632,
+          "nodesSettled": 2744334,
+          "arcsExamined": 6052911,
+          "routeMetres": 704428.57,
+          "maxQueue": 5426,
+          "traceSha256": "e766bceef5846927c6e2b02cc5db7f7c60b24adf701a3637d2ca60fc2ad8fcd7",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 27,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 32951556,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 46904140
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 518600808,
+    "reverseCsrBytes": 225088512,
+    "uploadedRoadAttributeBytes": 395418672,
+    "drawingCoordinateAndOffsetBytes": 311512584,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

@@ -1,0 +1,99 @@
+[
+  {
+    "country": "it",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4206/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Rome→Milan",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "7360139"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Rome→Milan",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "8004824"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Rome→Milan",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2176814"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Bolzano→Venice192.9 kmA*",
+        "events": "648637"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Bergamo→Trento165.3 kmBidirectional A*",
+        "events": "1084557"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Trento→Bolzano57.0 kmDijkstra",
+        "events": "407371"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Siena→Florence68.7 kmBidirectional Dijkstra",
+        "events": "455608"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Perugia · Pisa · PaduaThree-source Dijkstra",
+        "events": "20457888"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Modena→Genoa210.4 kmA*",
+        "events": "1048928"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Ancona→Perugia130.9 kmBidirectional A*",
+        "events": "388351"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Genoa→Trento317.9 kmDijkstra",
+        "events": "9818196"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "recoveredStops": 0,
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Parma→PerugiaBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

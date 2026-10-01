@@ -281,3 +281,33 @@ The independent outline release is `geo-sc-20261001-23b17eadf16e`: 414,604
 layer bytes, with 151 joined coastline rings and major lakes. Source polygons
 from the three countries are dissolved before simplification. This data remains
 outside the app artifact. See [release evidence](evidence/scandinavia-release-2026-10-01/README.md).
+
+## Five European releases · 1 October 2026
+
+| Country | Opening MB | Routing nodes | Physical edges | Drawing vertices |
+| --- | ---: | ---: | ---: | ---: |
+| Poland | 59.626 | 4,586,298 | 5,150,988 | 14,769,466 |
+| Italy | 85.323 | 5,740,613 | 6,915,632 | 24,655,422 |
+| Spain | 59.008 | 3,885,623 | 4,989,358 | 17,261,400 |
+| France | 151.882 | 10,506,139 | 12,357,600 | 42,305,096 |
+| Germany | 140.876 | 10,488,625 | 11,974,914 | 32,951,556 |
+
+Poland, Italy, Spain and France use the pinned 30 September source; Germany
+uses 29 September because the newer provider file stalled. Italy retains Sicily
+and Sardinia; the European Spain extract includes the Balearic Islands and
+excludes the Canary Islands. France covers metropolitan France and Corsica.
+Island roads remain separate components under the existing ferry-free profile.
+All five have curated ambient pools and independently hosted border/coastline
+and major lake layers. Switzerland remains bundled and default.
+
+Complete France and Germany graphs exceed ten million nodes, so the measured
+node guard rises narrowly to eleven million. The sixteen-million-edge guard,
+exact Float32 road-ID constraint, download and drawing limits remain in force.
+Each release passes real routing audits, long deterministic national replays,
+complete-drawing checks and production controls in desktop Chromium/touch
+WebKit. All use DPR 1 and 30 fps on coarse pointers. Physical-phone stability
+remains unverified. See [release evidence](evidence/europe-five-2026-10-01/README.md).
+
+Ignored caches can use an external volume through repository cache links. This
+release stores large sources and sizing intermediates under External Stick;
+ordinary builds and browser playback do not depend on that volume.

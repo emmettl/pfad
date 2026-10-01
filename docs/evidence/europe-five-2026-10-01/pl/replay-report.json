@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T12:53:46.450Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "pl-20260930-404c5b1ce2d0",
+    "counts": {
+      "nodes": 4586298,
+      "edges": 5150988,
+      "directedArcs": 9839928,
+      "vertices": 14769466
+    },
+    "downloadBytes": 59625665,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe/poland-260930.osm.pbf",
+      "sha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 769.5999999940395,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "404c5b1ce2d0870823d97e3e7b6c0f26072f3a99f1c3e15034c8c161e12a246c",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Szczecin",
+            "lon": 14.5529,
+            "lat": 53.42853,
+            "node": 3396277,
+            "snapMetres": 7.417703572983954
+          },
+          "goal": {
+            "name": "Rzeszów",
+            "lon": 21.99902,
+            "lat": 50.04134,
+            "node": 6567,
+            "snapMetres": 7.240313969240125
+          },
+          "searchMs": 706.3000000119209,
+          "snapMs": 240.40000000596046,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Szczecin",
+              "lon": 14.5528,
+              "lat": 53.4285
+            },
+            "requestedGoal": {
+              "name": "Rzeszów",
+              "lon": 21.9991,
+              "lat": 50.0413
+            }
+          },
+          "events": 17670785,
+          "traceBytes": 70683140,
+          "edgeTextureBytes": 41222144,
+          "nodesSettled": 4202643,
+          "arcsExamined": 9085288,
+          "routeMetres": 719420.72,
+          "maxQueue": 1413,
+          "traceSha256": "10fc00754172975ceacbbc35482c50fbd4dcac4ed338372c0ff0c8442649a7a5",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 14769466,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 70683140
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "404c5b1ce2d0870823d97e3e7b6c0f26072f3a99f1c3e15034c8c161e12a246c",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Szczecin",
+            "lon": 14.5529,
+            "lat": 53.42853,
+            "node": 3396277,
+            "snapMetres": 7.417703572983954
+          },
+          "goal": {
+            "name": "Rzeszów",
+            "lon": 21.99902,
+            "lat": 50.04134,
+            "node": 6567,
+            "snapMetres": 7.240313969240125
+          },
+          "searchMs": 713.0999999940395,
+          "snapMs": 41.5,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Szczecin",
+              "lon": 14.5528,
+              "lat": 53.4285
+            },
+            "requestedGoal": {
+              "name": "Rzeszów",
+              "lon": 21.9991,
+              "lat": 50.0413
+            }
+          },
+          "events": 17670785,
+          "traceBytes": 70683140,
+          "edgeTextureBytes": 41222144,
+          "nodesSettled": 4202643,
+          "arcsExamined": 9085288,
+          "routeMetres": 719420.72,
+          "maxQueue": 1413,
+          "traceSha256": "10fc00754172975ceacbbc35482c50fbd4dcac4ed338372c0ff0c8442649a7a5",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 14769466,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 70683140
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "404c5b1ce2d0870823d97e3e7b6c0f26072f3a99f1c3e15034c8c161e12a246c",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Szczecin",
+            "lon": 14.5529,
+            "lat": 53.42853,
+            "node": 3396277,
+            "snapMetres": 7.417703572983954
+          },
+          "goal": {
+            "name": "Rzeszów",
+            "lon": 21.99902,
+            "lat": 50.04134,
+            "node": 6567,
+            "snapMetres": 7.240313969240125
+          },
+          "searchMs": 1025.7000000178814,
+          "snapMs": 40.099999994039536,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Szczecin",
+              "lon": 14.5528,
+              "lat": 53.4285
+            },
+            "requestedGoal": {
+              "name": "Rzeszów",
+              "lon": 21.9991,
+              "lat": 50.0413
+            }
+          },
+          "events": 16470402,
+          "traceBytes": 65881608,
+          "edgeTextureBytes": 82444288,
+          "nodesSettled": 3926336,
+          "arcsExamined": 8454728,
+          "routeMetres": 719420.72,
+          "maxQueue": 2144,
+          "traceSha256": "1da68bfa338d6f59816f991ad43b6ac60bdea1cb6480115c37d767170d65a64c",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 14769466,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 65881608
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "404c5b1ce2d0870823d97e3e7b6c0f26072f3a99f1c3e15034c8c161e12a246c",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Szczecin",
+            "lon": 14.5529,
+            "lat": 53.42853,
+            "node": 3396277,
+            "snapMetres": 7.417703572983954
+          },
+          "goal": {
+            "name": "Rzeszów",
+            "lon": 21.99902,
+            "lat": 50.04134,
+            "node": 6567,
+            "snapMetres": 7.240313969240125
+          },
+          "searchMs": 324.7999999821186,
+          "snapMs": 37.900000005960464,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Szczecin",
+              "lon": 14.5528,
+              "lat": 53.4285
+            },
+            "requestedGoal": {
+              "name": "Rzeszów",
+              "lon": 21.9991,
+              "lat": 50.0413
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 190.90000000596046,
+            "correctedNodes": 69886,
+            "longitudeScale": 0.5759320444769226,
+            "initialStartCm": 60765784,
+            "startLowerBoundCm": 60765784
+          },
+          "events": 6524544,
+          "traceBytes": 26098176,
+          "edgeTextureBytes": 41222144,
+          "nodesSettled": 1530598,
+          "arcsExamined": 3362744,
+          "routeMetres": 719420.72,
+          "maxQueue": 3292,
+          "traceSha256": "cc1722daa1ee043b088ce8c4b644fa7949ef3589b6162259081276ac0e5cf39b",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 14769466,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 26098176
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 775,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "404c5b1ce2d0870823d97e3e7b6c0f26072f3a99f1c3e15034c8c161e12a246c",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Szczecin",
+            "lon": 14.5529,
+            "lat": 53.42853,
+            "node": 3396277,
+            "snapMetres": 7.417703572983954
+          },
+          "goal": {
+            "name": "Rzeszów",
+            "lon": 21.99902,
+            "lat": 50.04134,
+            "node": 6567,
+            "snapMetres": 7.240313969240125
+          },
+          "searchMs": 634,
+          "snapMs": 202,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Szczecin",
+              "lon": 14.5528,
+              "lat": 53.4285
+            },
+            "requestedGoal": {
+              "name": "Rzeszów",
+              "lon": 21.9991,
+              "lat": 50.0413
+            }
+          },
+          "events": 17670785,
+          "traceBytes": 70683140,
+          "edgeTextureBytes": 41222144,
+          "nodesSettled": 4202643,
+          "arcsExamined": 9085288,
+          "routeMetres": 719420.72,
+          "maxQueue": 1413,
+          "traceSha256": "10fc00754172975ceacbbc35482c50fbd4dcac4ed338372c0ff0c8442649a7a5",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 14769466,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 70683140
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "404c5b1ce2d0870823d97e3e7b6c0f26072f3a99f1c3e15034c8c161e12a246c",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Szczecin",
+            "lon": 14.5529,
+            "lat": 53.42853,
+            "node": 3396277,
+            "snapMetres": 7.417703572983954
+          },
+          "goal": {
+            "name": "Rzeszów",
+            "lon": 21.99902,
+            "lat": 50.04134,
+            "node": 6567,
+            "snapMetres": 7.240313969240125
+          },
+          "searchMs": 720,
+          "snapMs": 29,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Szczecin",
+              "lon": 14.5528,
+              "lat": 53.4285
+            },
+            "requestedGoal": {
+              "name": "Rzeszów",
+              "lon": 21.9991,
+              "lat": 50.0413
+            }
+          },
+          "events": 17670785,
+          "traceBytes": 70683140,
+          "edgeTextureBytes": 41222144,
+          "nodesSettled": 4202643,
+          "arcsExamined": 9085288,
+          "routeMetres": 719420.72,
+          "maxQueue": 1413,
+          "traceSha256": "10fc00754172975ceacbbc35482c50fbd4dcac4ed338372c0ff0c8442649a7a5",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 14769466,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 70683140
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "404c5b1ce2d0870823d97e3e7b6c0f26072f3a99f1c3e15034c8c161e12a246c",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Szczecin",
+            "lon": 14.5529,
+            "lat": 53.42853,
+            "node": 3396277,
+            "snapMetres": 7.417703572983954
+          },
+          "goal": {
+            "name": "Rzeszów",
+            "lon": 21.99902,
+            "lat": 50.04134,
+            "node": 6567,
+            "snapMetres": 7.240313969240125
+          },
+          "searchMs": 942,
+          "snapMs": 27,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Szczecin",
+              "lon": 14.5528,
+              "lat": 53.4285
+            },
+            "requestedGoal": {
+              "name": "Rzeszów",
+              "lon": 21.9991,
+              "lat": 50.0413
+            }
+          },
+          "events": 16470402,
+          "traceBytes": 65881608,
+          "edgeTextureBytes": 82444288,
+          "nodesSettled": 3926336,
+          "arcsExamined": 8454728,
+          "routeMetres": 719420.72,
+          "maxQueue": 2144,
+          "traceSha256": "1da68bfa338d6f59816f991ad43b6ac60bdea1cb6480115c37d767170d65a64c",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 14769466,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 65881608
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "404c5b1ce2d0870823d97e3e7b6c0f26072f3a99f1c3e15034c8c161e12a246c",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "3c4dccf397257f6cdd6399e8066aa2492f368b0fd0331578d1277e8f0125ead9",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Szczecin",
+            "lon": 14.5529,
+            "lat": 53.42853,
+            "node": 3396277,
+            "snapMetres": 7.417703572983954
+          },
+          "goal": {
+            "name": "Rzeszów",
+            "lon": 21.99902,
+            "lat": 50.04134,
+            "node": 6567,
+            "snapMetres": 7.240313969240125
+          },
+          "searchMs": 315,
+          "snapMs": 26,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Szczecin",
+              "lon": 14.5528,
+              "lat": 53.4285
+            },
+            "requestedGoal": {
+              "name": "Rzeszów",
+              "lon": 21.9991,
+              "lat": 50.0413
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 224,
+            "correctedNodes": 69886,
+            "longitudeScale": 0.5759320444769226,
+            "initialStartCm": 60765784,
+            "startLowerBoundCm": 60765784
+          },
+          "events": 6524544,
+          "traceBytes": 26098176,
+          "edgeTextureBytes": 41222144,
+          "nodesSettled": 1530598,
+          "arcsExamined": 3362744,
+          "routeMetres": 719420.72,
+          "maxQueue": 3292,
+          "traceSha256": "cc1722daa1ee043b088ce8c4b644fa7949ef3589b6162259081276ac0e5cf39b",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 14769466,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 26098176
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 224214028,
+    "reverseCsrBytes": 97064620,
+    "uploadedRoadAttributeBytes": 177233592,
+    "drawingCoordinateAndOffsetBytes": 138759888,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}
