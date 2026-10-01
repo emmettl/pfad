@@ -1,0 +1,19 @@
+{
+  "note": "Deterministic byte accounting from explicit typed arrays and one GPU copy of each road attribute/texture. Not measured process peak memory. Excludes decoding, heaps, heuristic preparation, route ribbons, outlines, checkpoints, framebuffer, browser/JS overhead, driver allocation and score/result lifetimes. Worker termination schedules reclamation; operating-system reclamation timing is not measured. This follow-up also excludes the small selected-route coordinates/offsets and a bounded expanded upload chunk.",
+  "sourceCommit": "498d38457340640386c3198f5ad9a87c2898b41a",
+  "dataset": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+  "counts": {
+    "nodes": 10488625,
+    "edges": 11974914,
+    "directedArcs": 22891751,
+    "vertices": 32951556
+  },
+  "compressedDrawingBytes": 127374211,
+  "retainedNationalRoadCpuAttributeBytes": 0,
+  "roadGpuAttributeBytes": 395418672,
+  "previousReplayAccountedBytes": 1315898564,
+  "followupReplayAccountedBytes": 999953967,
+  "previousSearchAccountedBytes": 1706122319,
+  "followupSearchAccountedBytes": 1390177722,
+  "accountedReductionBytes": 315944597
+}

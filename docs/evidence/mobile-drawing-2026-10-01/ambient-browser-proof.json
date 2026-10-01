@@ -1,0 +1,99 @@
+[
+  {
+    "country": "de",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "17714912"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "11738319"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Berlin→Munich",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3957850"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Heidelberg→Erfurt304.1 kmA*",
+        "events": "4255855"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Bonn→Munich505.1 kmBidirectional A*",
+        "events": "10558919"
+      },
+      {
+        "algorithm": "greedy-best-first/1",
+        "caption": "Aachen→Dortmund200.2 kmShortest route not guaranteedGreedy best-first",
+        "events": "18719"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Mainz→Hanover341.2 kmDijkstra",
+        "events": "26310283"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Regensburg · Rostock · CologneThree-source Dijkstra",
+        "events": "43675981"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Frankfurt→Würzburg112.7 kmBidirectional Dijkstra",
+        "events": "2079806"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Mainz→Bonn137.7 kmA*",
+        "events": "869161"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Berlin→Leipzig164.3 kmBidirectional A*",
+        "events": "1267963"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "bidirectional-astar/1",
+      "recoveredStops": 0,
+      "after": "greedy-best-first/1",
+      "caption": "Weimar→LeipzigShortest route not guaranteedGreedy best-first"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

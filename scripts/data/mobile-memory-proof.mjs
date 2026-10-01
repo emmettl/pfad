@@ -71,7 +71,7 @@ try {
   await expect(page.locator('canvas')).toHaveAttribute('data-road-uploads', 'resident', { timeout: 180000 })
   await page.getByRole('slider', { name: 'Search replay' }).fill('7.5')
   await page.getByRole('slider', { name: 'Search replay' }).fill('15')
-  const proof = await page.evaluate(() => window.memoryProof)
+  const proof = await page.evaluate(() => ({ ...window.memoryProof, drawing: { retainedRoadCpuBytes: Number(document.querySelector('canvas').dataset.roadCpuBytes), compressedBytes: Number(document.querySelector('canvas').dataset.drawingBytes), vertices: Number(document.querySelector('canvas').dataset.roadVertices), contextRestored: !document.querySelector('canvas').getContext('webgl2').isContextLost() } }))
   if (proof.workers[0].compressedChunks !== 120 || proof.workers[0].drawingBytes >= 395418672) throw Error('National drawing remained expanded')
   if (proof.results[0].traceSha256 !== proof.results[2].traceSha256) throw Error('Repeated bidirectional trace changed')
   if (proof.results.some(result => result.routeMetres !== proof.results[0].routeMetres)) throw Error('Route costs differ')

@@ -1,0 +1,25 @@
+{
+  "sourceCommit": "498d38457340640386c3198f5ad9a87c2898b41a",
+  "pagesRun": 36892780437,
+  "cloudflareRun": 36894262586,
+  "logicTests": 100,
+  "localBrowserChecks": 60,
+  "ciBrowsers": {
+    "webkit": {
+      "startTime": "2026-10-01T16:34:42.841Z",
+      "duration": 217845.59900000002,
+      "expected": 30,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "chromium": {
+      "startTime": "2026-10-01T16:34:17.751Z",
+      "duration": 584838.85,
+      "expected": 30,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
+}
