@@ -26,7 +26,8 @@ Land's End–John o' Groats costs 1,297,497.29 m for Dijkstra, bidirectional Dij
 and A*. Repeated Dijkstra and both desktop-host browsers produce the same trace
 hash. Dijkstra records 28,188,014 events; A* records 25,123,776. Integer event
 textures and WebGL checks pass. Replay median is about 16.7–17 ms on the M4 Max.
-The report records individual timings and deterministic algorithm identities.
+The report records individual timings, deterministic algorithm identities and
+the integrated `nearby-shared-component/1` endpoint preparation.
 A* bound preparation is separate from its search timing.
 
 Memory remains the limiting mobile question. CPU graph arrays are 357.7 MB,

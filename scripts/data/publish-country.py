@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import re
 import time
+import subprocess
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -23,7 +24,7 @@ def verify(directory):
     raw = (directory / 'manifest.json').read_bytes()
     m = json.loads(raw)
     assert re.fullmatch(r'[a-z]{2,8}-\d{8}-[a-f0-9]{12}', m['id']) and directory.name == m['id'], 'Invalid release directory'
-    identity = hashlib.sha256(json.dumps({'chunks': m['chunks'], 'projection': m['projection'], 'profile': m['profile']}, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    identity = subprocess.run(['node', str(Path(__file__).with_name('manifest-identity.mjs'))], input=raw, stdout=subprocess.PIPE, check=True).stdout.decode()
     assert identity == m['identity'] and m['id'].endswith(identity[:12]), 'Release identity mismatch'
     assert m['schema'] == 'pfad-road-study/1' and m['encoding'] == 'le-columnar-deltas/1'
     assert re.fullmatch(r'[a-f0-9]{64}', m['source']['sha256']) and m['source']['licence'] == 'ODbL-1.0'

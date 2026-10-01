@@ -13,6 +13,7 @@ import math
 from pathlib import Path
 import struct
 import sys
+import subprocess
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source', type=Path, required=True)
@@ -132,7 +133,8 @@ evidence_gz = gzip.compress(evidence, compresslevel=9, mtime=0)
 evidence_sha = hashlib.sha256(evidence_gz).hexdigest()
 evidence_name = f'evidence-{evidence_sha[:12]}.json.gz.bin'
 files[evidence_name] = evidence_gz
-identity = hashlib.sha256(json.dumps({'chunks': chunks, 'projection': projection, 'profile': 'road-connectivity-distance-v1'}, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+identity_payload = {'chunks': chunks, 'projection': projection, 'profile': 'road-connectivity-distance-v1'}
+identity = (subprocess.run(['node', str(Path(__file__).with_name('manifest-identity.mjs'))], input=json.dumps(identity_payload).encode(), stdout=subprocess.PIPE, check=True).stdout.decode() if country else hashlib.sha256(json.dumps(identity_payload, sort_keys=True, separators=(',', ':')).encode()).hexdigest())
 dataset = f'{args.dataset_prefix}-{identity[:12]}'
 manifest = {
     'schema': 'pfad-road-study/1', 'encoding': 'le-columnar-deltas/1', 'id': dataset, 'identity': identity,

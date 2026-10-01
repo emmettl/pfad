@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-10-01T00:04:20.025Z",
+  "measuredAt": "2026-10-01T00:17:31.016Z",
   "host": {
     "cpu": "Apple M4 Max",
     "platform": "darwin"
@@ -18,18 +18,18 @@
       "dataTimestamp": "2026-09-29T20:22:51Z",
       "url": "https://download.geofabrik.de/europe/united-kingdom-260929.osm.pbf",
       "sha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
-      "attribution": "\u00a9 OpenStreetMap contributors",
+      "attribution": "© OpenStreetMap contributors",
       "licence": "ODbL-1.0",
       "licenceUrl": "https://www.openstreetmap.org/copyright"
     }
   },
-  "note": "Production worker/engine/renderer with national manifest resource guards. Local serving on M4 Max, not a physical phone. Timings exclude trace hashing. Buffer accounting is not browser peak memory.",
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
   "browsers": [
     {
       "name": "chromium-metal",
       "errors": [],
       "version": "153.0.8010.12",
-      "loadMs": 1203.5999999940395,
+      "loadMs": 1299,
       "maxTextureSize": 16384,
       "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
       "runs": [
@@ -57,8 +57,21 @@
             "node": 3803267,
             "snapMetres": 33.60359121386282
           },
-          "searchMs": 995.8999999910593,
-          "snapMs": 304.59999999403954,
+          "searchMs": 1078.7999999970198,
+          "snapMs": 413.30000001192093,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
           "events": 28188014,
           "traceBytes": 112752056,
           "edgeTextureBytes": 65683456,
@@ -99,8 +112,21 @@
             "node": 3803267,
             "snapMetres": 33.60359121386282
           },
-          "searchMs": 1005,
-          "snapMs": 358.09999999403954,
+          "searchMs": 1094.7000000029802,
+          "snapMs": 65.29999999701977,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
           "events": 28188014,
           "traceBytes": 112752056,
           "edgeTextureBytes": 65683456,
@@ -110,7 +136,7 @@
           "maxQueue": 2416,
           "traceSha256": "92d73230841023af5d947491c0b013e5f78eb2277ecd1f4a8d3564aea8aea27f",
           "frameIntervalMedianMs": 16.69999999999891,
-          "frameIntervalP95Ms": 16.700000000000728,
+          "frameIntervalP95Ms": 16.799999999999272,
           "webglError": 0,
           "integerEventTextures": true,
           "withinExactFloatEventRange": false,
@@ -141,8 +167,21 @@
             "node": 3803267,
             "snapMetres": 33.60359121386282
           },
-          "searchMs": 1550.3999999910593,
-          "snapMs": 328.30000001192093,
+          "searchMs": 1559.8999999910593,
+          "snapMs": 64.5,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
           "events": 27525705,
           "traceBytes": 110102820,
           "edgeTextureBytes": 131366912,
@@ -152,7 +191,7 @@
           "maxQueue": 2708,
           "traceSha256": "d2e78a678fb82c720738cb912c0ef30519291186fb4bf1c517d9350bcce692b9",
           "frameIntervalMedianMs": 16.69999999999891,
-          "frameIntervalP95Ms": 16.799999999999272,
+          "frameIntervalP95Ms": 16.700000000000728,
           "webglError": 0,
           "integerEventTextures": true,
           "withinExactFloatEventRange": false,
@@ -183,8 +222,29 @@
             "node": 3803267,
             "snapMetres": 33.60359121386282
           },
-          "searchMs": 1244.6000000089407,
-          "snapMs": 368.40000000596046,
+          "searchMs": 1252.0999999940395,
+          "snapMs": 60,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 374.29999999701977,
+            "correctedNodes": 280700,
+            "longitudeScale": 0.48743712536422,
+            "initialStartCm": 96384675,
+            "startLowerBoundCm": 96384675
+          },
           "events": 25123776,
           "traceBytes": 100495104,
           "edgeTextureBytes": 65683456,
@@ -194,7 +254,7 @@
           "maxQueue": 5869,
           "traceSha256": "026da125f32e5f1be1ad562aff44955239768aba8035645037c6eaa57e9042a3",
           "frameIntervalMedianMs": 16.700000000000728,
-          "frameIntervalP95Ms": 16.700000000000728,
+          "frameIntervalP95Ms": 16.799999999999272,
           "webglError": 0,
           "integerEventTextures": true,
           "withinExactFloatEventRange": false,
@@ -207,7 +267,7 @@
       "name": "webkit-mobile-viewport",
       "errors": [],
       "version": "26.6",
-      "loadMs": 1271,
+      "loadMs": 1556,
       "maxTextureSize": 16384,
       "renderer": "Apple GPU",
       "runs": [
@@ -235,8 +295,21 @@
             "node": 3803267,
             "snapMetres": 33.60359121386282
           },
-          "searchMs": 993,
-          "snapMs": 224,
+          "searchMs": 1056,
+          "snapMs": 357,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
           "events": 28188014,
           "traceBytes": 112752056,
           "edgeTextureBytes": 65683456,
@@ -277,8 +350,21 @@
             "node": 3803267,
             "snapMetres": 33.60359121386282
           },
-          "searchMs": 1034,
-          "snapMs": 332,
+          "searchMs": 1037,
+          "snapMs": 37,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
           "events": 28188014,
           "traceBytes": 112752056,
           "edgeTextureBytes": 65683456,
@@ -319,8 +405,21 @@
             "node": 3803267,
             "snapMetres": 33.60359121386282
           },
-          "searchMs": 1376,
-          "snapMs": 227,
+          "searchMs": 1377,
+          "snapMs": 38,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
           "events": 27525705,
           "traceBytes": 110102820,
           "edgeTextureBytes": 131366912,
@@ -361,8 +460,29 @@
             "node": 3803267,
             "snapMetres": 33.60359121386282
           },
-          "searchMs": 1157,
-          "snapMs": 212,
+          "searchMs": 1189,
+          "snapMs": 40,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 419,
+            "correctedNodes": 280700,
+            "longitudeScale": 0.48743712536422,
+            "initialStartCm": 96384675,
+            "startLowerBoundCm": 96384675
+          },
           "events": 25123776,
           "traceBytes": 100495104,
           "edgeTextureBytes": 65683456,
@@ -387,6 +507,6 @@
     "reverseCsrBytes": 154373200,
     "uploadedRoadAttributeBytes": 284147856,
     "drawingCoordinateAndOffsetBytes": 222268400,
-    "note": "Road coordinates are shared between GPU upload attributes and retained route geometry; do not add the coordinate field twice. CPU attributes and offsets are distinct from worker graph arrays. GPU copies, search working/transient allocations, route ribbon, textures, app/browser overhead and music are additional."
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
   }
 }

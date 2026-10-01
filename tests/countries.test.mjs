@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises'
 import { COUNTRIES } from '../src/countries.ts'
 import { validateManifest, manifestIdentityPayload } from '../src/search/manifest.ts'
 import worker from '../hosting/data-worker/index.mjs'
+const uk = JSON.parse(await readFile('docs/evidence/uk-release-2026-10-01/manifest.json'))
 const swiss = JSON.parse(await readFile('public/data/pfad/ch-20260929-6a17f71de78c/manifest.json'))
 test('Switzerland stays bundled and default; external releases are pinned and have country endpoints', () => {
   assert.equal(COUNTRIES[0].id, 'ch'); assert.equal(COUNTRIES[0].identity, swiss.identity)
@@ -13,6 +14,8 @@ test('Switzerland stays bundled and default; external releases are pinned and ha
     assert.match(c.identity, /^[a-f0-9]{64}$/); assert.ok(c.places.length >= 2)
     assert.ok(c.manifest.includes(c.identity.slice(0, 12))); assert.ok(c.places.every(p => Number.isFinite(p.lon) && Number.isFinite(p.lat)))
   }
+  assert.equal(createHash('sha256').update(manifestIdentityPayload(uk)).digest('hex'), COUNTRIES[1].identity)
+  validateManifest(uk)
   assert.equal(COUNTRIES[1].outlines, false); assert.equal(COUNTRIES[1].large, true)
 })
 test('national manifests reject unsafe paths, resource excess and malformed decoded layouts', () => {
