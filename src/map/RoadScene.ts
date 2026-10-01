@@ -267,6 +267,11 @@ export class RoadScene {
     this.halfHeight = Math.max((top - bottom) / 2, (right - left) / (2 * aspect)) * 1.12
     this.camera.position.x = (right + left) / 2; this.camera.position.y = (top + bottom) / 2; this.camera.zoom = 1; this.resize()
   }
+  getView() { return { x: this.camera.position.x, y: this.camera.position.y, zoom: this.camera.zoom } }
+  setView(view: { x: number; y: number; zoom: number }) {
+    this.camera.position.x = view.x; this.camera.position.y = view.y; this.camera.zoom = view.zoom
+    this.camera.updateProjectionMatrix(); this.dirty = true
+  }
   screenPoint(x: number, y: number) {
     const bounds = this.renderer.domElement.getBoundingClientRect()
     return new THREE.Vector3((x - bounds.left) / this.width * 2 - 1, 1 - (y - bounds.top) / this.height * 2, 0).unproject(this.camera)

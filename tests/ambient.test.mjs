@@ -1,0 +1,79 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import { JourneySelector, AMBIENT_PLACES, distanceBand, replaySeconds, straightLineKm } from '../src/ambient/selector.ts'
+import { AmbientSequence } from '../src/ambient/sequence.ts'
+
+test('seeded, balanced selection preserves six undirected pairs and uses all curated places', () => {
+  const first = new JourneySelector(12345), second = new JourneySelector(12345), recent = [], seen = new Set(), bands = new Set()
+  for (let i = 0; i < 500; i++) {
+    first.beginJourney(); second.beginJourney()
+    const a = first.choose(), b = second.choose(); assert.deepEqual(a, b); assert.ok(a)
+    const key = [a.start.id, a.goal.id].sort().join('/')
+    assert.equal(recent.includes(key), false)
+    assert.ok(straightLineKm(a.start, a.goal) >= 30)
+    assert.equal(distanceBand(a.estimateKm), a.band)
+    assert.deepEqual(first.record(a, a.estimateKm), second.record(b, b.estimateKm))
+    recent.push(key); if (recent.length > 6) recent.shift()
+    seen.add(a.start.id); seen.add(a.goal.id); bands.add(a.band)
+  }
+  assert.equal(seen.size, AMBIENT_PLACES.length); assert.equal(bands.size, 3)
+})
+test('actual distance validates selection; no route and detours cannot silently change bands', () => {
+  const selector = new JourneySelector(9); selector.beginJourney()
+  const first = selector.choose()
+  assert.equal(selector.record(first, null).accepted, false)
+  assert.equal(selector.record(first, first.band === 'regional' ? 300 : 50).accepted, false)
+  assert.equal(selector.record(first, NaN).accepted, false)
+  const next = selector.choose()
+  assert.notDeepEqual([next.start.id, next.goal.id].sort(), [first.start.id, first.goal.id].sort())
+  assert.equal(next.band, first.band)
+  assert.equal(new JourneySelector(1, [AMBIENT_PLACES[0]]).choose(), null)
+})
+test('replay duration follows road distance with bounded ends, independently of event count', () => {
+  assert.equal(replaySeconds(50), 25); assert.equal(replaySeconds(100), 30)
+  assert.ok(Math.abs(replaySeconds(200) - 42.4264) < .001)
+  assert.equal(replaySeconds(10000), 65)
+})
+function harness(t) {
+  const originalRAF = globalThis.requestAnimationFrame, originalCancel = globalThis.cancelAnimationFrame, originalPerformance = globalThis.performance
+  const frames = new Map(), pairs = []; let now = 0, id = 0
+  globalThis.performance = { now: () => now }
+  globalThis.requestAnimationFrame = fn => { frames.set(++id, fn); return id }
+  globalThis.cancelAnimationFrame = id => frames.delete(id)
+  t.after(() => { globalThis.requestAnimationFrame = originalRAF; globalThis.cancelAnimationFrame = originalCancel; globalThis.performance = originalPerformance })
+  const sequence = new AmbientSequence(() => {}, pair => pairs.push(pair))
+  const step = ms => { for (let i = 0; i < ms; i += 100) { now += 100; const due = [...frames.values()]; frames.clear(); due.forEach(fn => fn(now)) } }
+  const result = (km = pairs.at(-1).estimateKm) => ({ routeMetres: km === null ? null : km * 1000, algorithm: 'dijkstra/1', searchMs: 10, trace: new Uint32Array(10), dataset: { identity: 'verified' } })
+  return { sequence, pairs, step, result, frames }
+}
+test('hold, fade, pause, next and exit preserve a single sequence clock', t => {
+  const { sequence, pairs, step, result, frames } = harness(t)
+  sequence.start(42, false); assert.equal(sequence.receive(result()), true)
+  sequence.complete(); assert.equal(sequence.state.phase, 'hold')
+  step(5900); sequence.pause(); step(9000); assert.equal(sequence.state.phase, 'hold')
+  sequence.resume(); step(200); assert.equal(sequence.state.phase, 'fade')
+  step(600); sequence.pause(); const opacity = sequence.state.opacity
+  step(10000); assert.equal(sequence.state.opacity, opacity)
+  sequence.resume(); step(2000); assert.equal(sequence.state.phase, 'preparing'); assert.equal(pairs.length, 2)
+  sequence.receive(result()); sequence.inspect(); assert.equal(sequence.state.running, false)
+  sequence.exit(); step(20000); assert.equal(sequence.state.active, false); assert.equal(frames.size, 0); assert.equal(pairs.length, 2)
+})
+test('failed candidates stop within five attempts, and metadata history cannot retain traces', t => {
+  const { sequence, pairs, result } = harness(t)
+  sequence.start(5, false)
+  while (sequence.state.phase === 'preparing') sequence.receive(result(null))
+  assert.ok(pairs.length <= 5); assert.equal(sequence.state.phase, 'stopped'); assert.equal(sequence.state.running, false)
+  for (let i = 0; i < 50; i++) { sequence.next(); sequence.receive(result()) }
+  assert.equal(sequence.records.length, 12)
+  assert.equal(sequence.records.some(record => 'trace' in record), false)
+  assert.equal(sequence.records.at(-1).pool, 'swiss-places/1'); assert.equal(sequence.records.at(-1).seed, 5)
+})
+test('reduced motion requires deliberate Next and preference changes cancel choreography', t => {
+  const { sequence, pairs, step, result, frames } = harness(t)
+  sequence.start(3, true); sequence.receive(result()); assert.equal(sequence.state.phase, 'still')
+  step(60000); assert.equal(pairs.length, 1); assert.equal(frames.size, 0)
+  sequence.next(); sequence.receive(result()); assert.equal(pairs.length, 2)
+  sequence.start(4, false); sequence.receive(result()); sequence.complete(); step(6100)
+  sequence.setReduced(true); assert.equal(sequence.state.phase, 'still'); assert.equal(sequence.state.opacity, 1); assert.equal(sequence.state.running, false)
+  step(60000); assert.equal(pairs.length, 3)
+})

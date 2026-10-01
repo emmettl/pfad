@@ -1,4 +1,4 @@
-export type MusicState = 'off' | 'loading' | 'on' | 'error'
+export type MusicState = 'off' | 'loading' | 'on' | 'paused' | 'error'
 export interface MusicTrack { id: string; title: string; url: string; seconds: number; bytes: number; sha256: string }
 export interface MusicStatus { state: MusicState; title: string }
 interface Voice { index: number; source: AudioBufferSourceNode; gain: GainNode; start: number; end: number }
@@ -135,6 +135,12 @@ export class Soundtrack {
       if (this.state === 'on' && intent !== this.intent) this.tick()
     })
   }
+
+  pauseSequence() {
+    if (this.state !== 'on' && this.state !== 'loading') return
+    this.stop(); this.publish('paused')
+  }
+  resumeSequence() { if (this.state === 'paused') void this.start() }
 
   stop(immediate = false) {
     ++this.intent; clearInterval(this.ticker); clearTimeout(this.suspension)

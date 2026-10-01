@@ -117,6 +117,17 @@ footer a { text-decoration: none; pointer-events: auto; }
 }
 
 .country-control { color: var(--text, #c9ddd4); background: #080d10cc; border: 1px solid #b4d4c02b; border-radius: 3px; padding: .45rem .55rem; font: inherit; pointer-events: auto; max-width: 13rem; }
+.ambient-start { font-size: 11px; padding: 5px 10px; }
+.record-actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0; }
+.record-actions button { font-size: 11px; }
+.record-actions input { width: 100%; background: #14251d; color: #d2e4db; border: 1px solid #365d49; padding: 10px; font: inherit; }
+.record-actions > span { font-size: 10px; color: #98b1a2; }
+.about-panel { max-height: calc(100svh - 150px); overflow: auto; }
+.ambient-controls { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; pointer-events: none; }
+.ambient-controls button { font-size: 11px; background: #0a1514bf; pointer-events: auto; }
+.ambient-controls > span { flex-basis: 100%; text-align: center; font-size: 10px; color: #839b8d; }
+.study:not([data-ambient-phase="off"]) :is(.route-panel, .replay-controls, .compute-readout, .event-readout, .reset-view, .country-control) { display: none; }
+.study:not([data-ambient-phase="off"]) .search-readout { justify-content: center; align-items: center; }
 .country-confirm { position: absolute; z-index: 8; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(24rem, calc(100vw - 3rem)); padding: 1.3rem; background: #0b1519f5; border: 1px solid #b4d4c040; color: #c9ddd4; }
 .country-confirm p { line-height: 1.5; }
 .country-confirm button { margin-right: .8rem; padding: .5rem .8rem; }

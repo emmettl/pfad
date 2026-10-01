@@ -17,8 +17,8 @@ provisional and has not yet been selected through the author's listening review.
 The sketches total 3,473,623 encoded bytes and are fetched on demand. A 32 kHz
 audio context retains at most two decoded stereo pieces, approximately 61.4 MB
 within a 64 MiB cap. This is an initial resource limit, not a physical-phone
-performance claim. All three pieces cycle through the same player; national
-ambient journey sequencing and its whole-sequence pause are still planned.
+performance claim. All three pieces cycle through the same player; Swiss
+ambient journey sequencing and its whole-sequence pause are now implemented.
 
 The remaining choices below describe the intended composition and playback.
 
@@ -147,3 +147,15 @@ package versions/integrities, module versions, patch/master/delivery hashes and
 level measurements. Encoder differences can change compressed bytes; a changed
 render requires updating and checking the manifest. The original patches and
 renders follow the repository's MIT licence.
+
+## Ambient lifecycle verification · 1 October 2026
+
+Ambient Next, result holds and fades leave the same score running. Pause sequence
+fades and suspends its single context while preserving scheduled voices and
+musical position; resume continues those voices. Manual visual pause/seeking
+remains independent. Exit reuses the same player. Hidden-page suspension revokes
+automatic music resume: returning and resuming the sequence leaves sound off
+until explicitly enabled again. Reduced-motion stills can be viewed silently
+or with deliberately enabled sound. These behaviours pass unit tests and actual
+Web Audio checks in Chromium and mobile-viewport WebKit. They do not replace
+listening review or sustained physical-phone measurements.

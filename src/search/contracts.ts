@@ -1,3 +1,4 @@
+import type { LoadMeasurements } from './chunks.ts'
 export interface Chunk {
   kind: 'nodes' | 'edges' | 'geometry'
   path: string
@@ -91,6 +92,6 @@ export type Reply =
   | { type: 'progress'; loaded: number; total: number; stage: string }
   | { type: 'manifest'; manifest: StudyManifest; manifestUrl: string }
   | { type: 'geometry'; start: number; count: number; bytes: ArrayBuffer }
-  | { type: 'ready' }
+  | { type: 'ready'; measurements: LoadMeasurements }
   | { type: 'result'; requestId: number; result: SearchResult }
   | { type: 'error'; requestId?: number; message: string }

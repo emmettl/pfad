@@ -26,7 +26,9 @@
     "data:geography": "node scripts/data/acquire-geography.mjs",
     "data:measure": "python3 scripts/data/size-proof.py --source .cache/osm/switzerland-260929.osm.pbf --output .cache/sizing && python3 scripts/data/compact-proof.py --directory .cache/sizing",
     "data:browser": "node scripts/data/browser-proof.mjs .cache/sizing",
-    "data:audit-endpoints": "node scripts/data/audit-endpoints.mjs"
+    "data:audit-endpoints": "node scripts/data/audit-endpoints.mjs",
+    "data:audit-ambient": "node scripts/data/audit-ambient.mjs",
+    "data:browser-ambient": "node scripts/data/ambient-browser-proof.mjs"
   },
   "dependencies": {
     "@motionstudies/core": "0.1.0-alpha.31",

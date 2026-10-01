@@ -92,7 +92,7 @@ preparation are outside that timer. The playback clock follows **event order**,
 not measured per-instruction timing. It stretches a real trace without inventing
 algorithm activity or pretending the processor is still searching.
 
-The renderer receives separate road shapes, quantised to signed 16-bit drawing
+The renderer receives separate road shapes, reconstructed as Float32 drawing
 coordinates, and exact integer first-examination/improvement event orders per
 physical edge. A shader reveals an edge only after examination. Its pulse is an
 authored decay from that recorded event. Reverse seeking changes the event cutoff;
@@ -191,3 +191,17 @@ Run `node scripts/data/replay-proof.mjs` on macOS after building to repeat it.
 
 Pages publishes the checked artifact. Cloudflare independently stages those
 same bytes using pinned hosting tools. No build or request refreshes OSM.
+
+## Sequencing, storage and records
+
+The ambient controller owns only presentation phases and bounded selection
+metadata. It requests the ordinary worker algorithms, accepts by actual distance,
+and never alters topology, search costs or event order. The full graph is reused;
+prior route geometry/textures are disposed when each accepted result arrives.
+Music has one separate owner and changes its pause policy only for whole-sequence
+actions. [AMBIENT.md](AMBIENT.md) describes selection, timing and remaining review.
+
+The verified loader uses two outstanding chunks, optional bounded persistence
+and strict readiness; see [DATA.md](DATA.md). Sharing pins graph/profile and
+restores a paused event frame. Binary exports retain actual packed event buffers
+and provenance rather than JSON-expanded traces; see [RECORDS.md](RECORDS.md).

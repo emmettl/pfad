@@ -1,0 +1,275 @@
+{
+  "base": "http://127.0.0.1:4188/",
+  "measuredAt": "2026-10-01T01:37:54.849Z",
+  "reports": [
+    {
+      "name": "desktop",
+      "browser": "153.0.8010.12",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "warm": {
+        "version": "verified-chunk-loader/1",
+        "networkBytes": 0,
+        "cachedBytes": 15866559,
+        "cacheAvailable": true,
+        "verificationMs": 5.900000050663948,
+        "decodeMs": 103.79999993741512,
+        "compileMs": 21.400000005960464,
+        "totalMs": 162.20000000298023
+      },
+      "samples": [
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Lugano",
+            "goal": "Basel",
+            "metres": 261530.25,
+            "events": 4005902
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Lugano",
+            "goal": "Luzern",
+            "metres": 167787.35,
+            "events": 550589
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Chur",
+            "goal": "Gen\u00e8ve",
+            "metres": 360686.97,
+            "events": 5003259
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Lausanne",
+            "goal": "St. Gallen",
+            "metres": 276565.88,
+            "events": 4499983
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Lausanne",
+            "goal": "Z\u00fcrich",
+            "metres": 201844.88,
+            "events": 3352275
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Bern",
+            "goal": "Z\u00fcrich",
+            "metres": 117072.99,
+            "events": 2894950
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Z\u00fcrich",
+            "goal": "St. Gallen",
+            "metres": 77815.96,
+            "events": 2075262
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Gen\u00e8ve",
+            "goal": "Basel",
+            "metres": 224867.16,
+            "events": 2628971
+          }
+        }
+      ],
+      "errors": [],
+      "note": "Eight real consecutive ambient journeys, manually sought to their complete frames for resource-count inspection. Live WebGL object counts, not bytes, total process memory, physical-phone or thermal evidence."
+    },
+    {
+      "name": "mobile",
+      "browser": "26.6",
+      "viewport": {
+        "width": 390,
+        "height": 664
+      },
+      "warm": {
+        "version": "verified-chunk-loader/1",
+        "networkBytes": 0,
+        "cachedBytes": 15866559,
+        "cacheAvailable": true,
+        "verificationMs": 10,
+        "decodeMs": 126,
+        "compileMs": 18,
+        "totalMs": 190
+      },
+      "samples": [
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "St. Moritz",
+            "goal": "Gen\u00e8ve",
+            "metres": 424096.22,
+            "events": 5003294
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Luzern",
+            "goal": "Gen\u00e8ve",
+            "metres": 230946.4,
+            "events": 4992782
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "St. Gallen",
+            "goal": "Lausanne",
+            "metres": 275812.28,
+            "events": 4469297
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Lugano",
+            "goal": "Basel",
+            "metres": 261530.25,
+            "events": 4005902
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Sion",
+            "goal": "St. Moritz",
+            "metres": 286470.74,
+            "events": 4919296
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Lausanne",
+            "goal": "Bern",
+            "metres": 87769.95,
+            "events": 1299884
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Sion",
+            "goal": "Chur",
+            "metres": 222982.85,
+            "events": 3160341
+          }
+        },
+        {
+          "resources": {
+            "textures": 7,
+            "buffers": 34
+          },
+          "result": {
+            "algorithm": "dijkstra/1",
+            "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+            "start": "Gen\u00e8ve",
+            "goal": "Andermatt",
+            "metres": 268911.8,
+            "events": 3487500
+          }
+        }
+      ],
+      "errors": [],
+      "note": "Eight real consecutive ambient journeys, manually sought to their complete frames for resource-count inspection. Live WebGL object counts, not bytes, total process memory, physical-phone or thermal evidence."
+    }
+  ],
+  "note": "Local M4 Max desktop-host browser review. WebKit uses an emulated phone viewport. GPU object counts are not resource bytes or whole-process memory, and do not establish sustained physical-phone, thermal or frame budgets. Screenshots manually checked, including overlay visibility after removing an unnecessary will-change opacity hint that caused WebKit compositing loss."
+}

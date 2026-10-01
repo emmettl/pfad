@@ -154,3 +154,28 @@ These geographic references are supplied under
 [swisstopo's free-geodata terms](https://www.swisstopo.admin.ch/en/terms-of-use-free-geodata-and-geoservices),
 with source attribution in the study footer and asset metadata. They are not
 relicensed under the code's MIT licence or the road graph's ODbL licence.
+
+## Verified loading and bounded cache
+
+`verified-chunk-loader/1` fetches at most two chunks at once and consumes them
+in manifest order. Nodes finish before connections, then drawing shapes, so
+geometry never uses an incomplete topology. Compressed byte length and SHA-256
+are checked before bounded gzip decoding; decoded lengths/layouts are checked
+before consumption. A failed network or integrity attempt retries once. A
+remaining failure prevents readiness and searching.
+
+Verified compressed bytes are stored in versioned IndexedDB records. Cache
+Storage is a best-effort fallback when the IndexedDB API is absent; a window owner
+keeps that fallback alive across worker replacement in private WebKit contexts.
+At most two graph identities are retained within a 128 MiB declared compressed
+payload cap, pruning least recently opened releases. An IndexedDB-capable browser
+retires the alternate store to avoid retaining two separate budgets. The cache is optional and
+subject to browser quota or eviction. Storage refusal still permits verified
+network loading. Every cached chunk is hashed again; a corrupt entry alone is
+deleted and refetched. Retry and reload avoid downloading intact stored chunks.
+
+Opening measurements retain network/cache bytes, summed verification and decode
+time, graph compilation and total wall time to a complete graph. With two chunks
+in flight, summed stage durations overlap and do not add up to total wall time.
+Endpoint and query timings remain separate. These are diagnostics, not network,
+first-visible-frame or physical-device performance promises.

@@ -19,7 +19,7 @@ promise. The wishlist is a pool of possibilities rather than committed scope.
   A road absent from the final route is not automatically an algorithmic rejection.
 - The current cost is shortest distance. A future fastest-route profile would be
   separately declared; neither profile claims live traffic.
-- Ambient mode is planned: a curated pool of places produces a looping sequence
+- Ambient mode is implemented for review: a curated pool of places produces a looping sequence
   of origin/destination pairs. Journey length shapes both selection and replay
   duration, with grid84 informing the run/hold/transition rhythm.
 - Music selection and playback are core parts of the piece. Begin with original
@@ -56,8 +56,8 @@ Mobile-viewport tests do not establish physical-phone performance.
 **Outcome:** the displayed route obeys a documented road-use model, and the
 edition clearly states what that model can and cannot answer.
 
-- [ ] Specify the initial motor-road profile: included roads, access assumptions,
-  direction rules, costs and treatment of unsupported rules.
+- [x] Specify the preserved connectivity profile in [PROFILE.md](PROFILE.md): included roads, access assumptions,
+  direction rules, costs and treatment of unsupported rules. Driving-rule enforcement remains open.
 - [ ] Audit compiler topology at restriction points and barriers. Preserve the
   junctions and source references needed to apply those rules after compression.
 - [ ] Apply turn restrictions, beginning with via-node `no` and `only` rules;
@@ -73,7 +73,7 @@ edition clearly states what that model can and cannot answer.
   directed no-route outcomes and requested coordinates in the search record.
   Genève → Zürich, all 144 curated pairs and ten three-algorithm comparisons
   are covered by the [endpoint audit](evidence/endpoints-2026-10-01/review.json).
-- [ ] Define the graph’s coverage near borders and its treatment of ferries,
+- [x] Define the current graph’s coverage near borders and its treatment of ferries,
   tunnels, passes and disconnected fragments.
 - [ ] Validate representative national journeys and focused rule fixtures.
   Check route legality and cost against the declared profile, with reproducible
@@ -94,9 +94,11 @@ devices the edition intends to support.
 - [ ] Publish a small device matrix and use its results to set payload, memory
   and rendering budgets. Proposed rendering targets: 60 fps on capable desktops
   and 30 fps on supported phones; these are targets, not current phone claims.
-- [ ] Reduce sequential-download latency with bounded concurrent fetching and
+- [x] Reduce sequential-download latency with bounded concurrent fetching and
   version-aware caching. Retry failed chunks without redownloading valid ones.
-  An incomplete topology must still prevent a complete-route claim.
+  An incomplete topology still prevents searching. Two in-flight chunks, versioned
+  IndexedDB storage (Cache Storage fallback), at most two releases / 128 MiB,
+  reverified reads and one automatic retry are covered by unit and browser checks.
 - [ ] Keep loading, decoding, endpoint preparation, search recording and first
   usable drawing separately measurable.
 - [ ] Add cancellation and replacement of pending searches, with clear behaviour
@@ -135,25 +137,29 @@ accompaniment and a coherent ambient experience.
 - [x] Add keyboard playback: Space play/pause, Left/Right one-second scrubbing,
   Shift five-second jumps and Home/End boundaries. Keep native control keys,
   expose a focusable map and pause the replay when scrubbing.
-  Add Swiss place-name search and coordinate entry beyond the initial town list,
+- [ ] Add Swiss place-name search and coordinate entry beyond the initial town list,
   using a bounded, attributed place dataset.
-- [ ] Add a quiet viewing mode with reduced controls and an optional compact
-  explanation of the active algorithm and its counters.
-- [ ] Build ambient mode from a reviewed place pool, selecting pairs by distance
+- [x] Add quiet ambient viewing with reduced controls; About keeps the profile,
+  source and algorithm explanations accessible.
+- [ ] Add a compact inspectable algorithm/counter overlay within quiet viewing.
+- [x] Build the initial ambient mode from the twelve-place Swiss pool, selecting pairs by distance
   and varying replay duration with actual route length. Include repetition
   controls, a result hold, a clear transition, pause/next/exit and bounded memory.
   [The ambient-mode brief](AMBIENT.md) records confirmed choices, proposed
-  heuristics and completion criteria.
+  implemented heuristics and remaining author/device review. The
+  [60-journey audit](evidence/ambient-2026-10-01/review.json) checks actual costs,
+  directed adjacency, distance acceptance and durations across all three algorithms.
 - [ ] Compose and audition a provisional repertoire of ambient synth pieces
   using Driftbox. Judge the music in context across varied searches, including
   transitions, quiet passages and extended listening.
   Three original sketches are implemented; the author's listening review remains.
-- [ ] Implement opt-in music with volume/mute, gentle fades, continuous playback
+- [x] Implement opt-in music with volume/mute, gentle fades, continuous playback
   across journeys, bounded audio resources and clear pause/hidden-page behaviour.
   [The music brief](MUSIC.md) proposes composition, delivery and lifecycle choices;
   it keeps the eventual repertoire replaceable.
-  The initial manual-study player is implemented; whole-ambient-sequence pause
-  and physical-phone sustained-use measurements remain.
+  Manual and whole-sequence pause, next/exit continuity and hidden-page opt-in
+  are verified in Chromium and WebKit. Physical-phone sustained-use measurements
+  remain R2 work; the repertoire still needs the author’s listening review.
 - [ ] Check reverse seeking and paused frames as carefully as continuous playback.
 
 **Complete when:** a selected set of local, urban, plateau and Alpine searches
@@ -188,11 +194,12 @@ paired comparison and more specialised methods remain open.
 **Outcome:** a particular question, search and visual treatment can be revisited
 and communicated without losing its source identity.
 
-- [ ] Add shareable links containing endpoints, graph/profile identity, algorithm
+- [x] Add shareable links containing endpoints, graph/profile identity, algorithm
   and meaningful replay/view settings.
-- [ ] Preserve graph, compiler, profile and algorithm versions with exported
+- [x] Preserve graph, compiler, profile and algorithm versions with exported
   recordings; provide clear behaviour when an older dataset is unavailable.
-- [ ] Export a trace and its provenance in a documented format.
+- [x] Export an exact packed trace and its provenance in the documented
+  [PFAD record envelope](RECORDS.md), including optional ambient metadata.
 - [ ] Curate a small set of representative studies showing different geography
   and search behaviour, with concise contextual notes.
 - [ ] Add still-image export with accessible attribution and source information;
@@ -278,3 +285,19 @@ Related: [Concept](CONCEPT.md) · [Music](MUSIC.md) · [Architecture](ARCHITECTU
 [Data and refresh policy](DATA.md) · [Initial replay evidence](evidence/first-study-2026-09-30/replay-report.json) ·
 [Bidirectional review](evidence/bidirectional-2026-10-01/review.json) ·
 [A* review](evidence/astar-2026-10-01/review.json).
+
+## Review handoff · 1 October 2026
+
+The current pass adds verified chunk caching/retries, the curated ambient loop,
+whole-sequence music lifecycle, shareable paused studies and exact binary search
+exports. [RECORDS.md](RECORDS.md) documents identities and the export envelope.
+
+Author review: the ambient 25–65 s pacing, 6 s result hold and 2 s transition;
+regional versus national balance; final-route brightness; and the three sketches
+in longer listening sessions. These are provisional authored choices.
+
+Technical work still open: a new profile enforcing turns/barriers/conditional
+context and classifying unresolved source references; physical phone budgets;
+search cancellation, WebGL recovery, richer place/coordinate entry, paired
+comparison, still-image export and a deliberate future graph-refresh audit.
+No physical-device or driving-legality completion is implied by browser tests.

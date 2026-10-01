@@ -149,3 +149,18 @@ test('next-piece failure suspends sound and retry preserves the current musical 
   assert.equal(f.player.state, 'on'); assert.equal(f.contexts.length, 1)
   assert.deepEqual(f.requests, ['A', 'B', 'B'])
 })
+
+test('sequence pause preserves voices and position; hidden-page stop revokes automatic resume', async t => {
+  const f = fixture(t)
+  f.player.pauseSequence(); f.player.resumeSequence(); assert.equal(f.contexts.length, 0)
+  await f.player.start(); await until(() => f.contexts[0].sources.length === 2)
+  const context = f.contexts[0], requests = f.requests.length
+  context.advance(.4); const position = context.currentTime
+  f.player.pauseSequence(); assert.equal(f.player.state, 'paused')
+  for (const fn of f.timers.values()) fn()
+  assert.equal(context.state, 'suspended'); assert.equal(context.currentTime, position)
+  f.player.resumeSequence(); await until(() => f.player.state === 'on')
+  assert.equal(context.sources.length, 2); assert.equal(context.currentTime, position); assert.equal(f.requests.length, requests)
+  f.player.stop(true); f.player.resumeSequence(); await settled()
+  assert.equal(f.player.state, 'off'); assert.equal(context.state, 'suspended'); assert.equal(f.contexts.length, 1)
+})

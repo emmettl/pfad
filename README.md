@@ -6,7 +6,8 @@
 [GitHub Pages](https://emmettl.github.io/pfad/) ·
 [Concept](docs/CONCEPT.md) · [Roadmap and wishlist](docs/ROADMAP.md) ·
 [Ambient-mode brief](docs/AMBIENT.md) · [Music brief](docs/MUSIC.md) ·
-[Architecture](docs/ARCHITECTURE.md)
+[Architecture](docs/ARCHITECTURE.md) · [Routing profile](docs/PROFILE.md) ·
+[Sharing and records](docs/RECORDS.md)
 
 PFAD replays genuine pathfinding over recorded OpenStreetMap road
 network. The computation runs normally; its recorded search becomes an event
@@ -40,6 +41,17 @@ silences it, and returning requires enabling sound again. This is a provisional
 repertoire for listening review. Its 3.47 MB of compressed audio is loaded on
 demand, with two decoded pieces retained at most. See the [music brief](docs/MUSIC.md)
 for composition sources, reproduction and remaining device checks.
+
+Ambient loops distance-selected journeys from the twelve curated Swiss places,
+with distance-based duration, a result hold and a transition to darkness. Pause
+sequence pauses the score too; Next and Exit preserve its player. Reduced motion
+provides completed stills and deliberate Next. Pacing and musical selection are
+ready for author review.
+
+About also offers a share link opening the exact pinned study paused at its
+current frame, and a binary export of the genuine trace with provenance. Verified
+chunk caching retains at most two releases within 128 MiB and supports warm
+opening and retries without downloading intact stored chunks again.
 
 This is a **shortest-distance connectivity model**. One-way directions apply;
 turn restrictions, barriers and conditional access are preserved as evidence

@@ -47,3 +47,10 @@ test('builds preserve the pinned snapshot without downloading or refreshing it',
   assert.doesNotMatch(JSON.parse(readFileSync('package.json', 'utf8')).scripts.build, /acquire|download|fetch|data:/)
   assert.equal(edition.source.url.endsWith('-latest.osm.pbf'), false)
 })
+test('the preserved profile explicitly declares scope, unsupported rules and coverage', () => {
+  const profile = JSON.parse(readFileSync(`public/profiles/${manifest.profile}.json`))
+  assert.equal(profile.id, manifest.profile); assert.deepEqual(profile.includedHighways, manifest.classes)
+  assert.equal(profile.status, 'connectivity-study'); assert.equal(profile.drivingLegalityValidated, false)
+  assert.ok(profile.unsupportedRules.includes('turn restrictions'))
+  assert.match(profile.coverage.ferries, /Excluded/); assert.match(profile.directions.otherValues, /unsupported/)
+})

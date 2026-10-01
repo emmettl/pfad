@@ -3,18 +3,15 @@ import { compileGraph, dijkstra, snapEndpoints } from './engine.ts'
 import { bidirectional, compileReverse, type ReverseGraph } from './bidirectional.ts'
 import { astar } from './astar.ts'
 import { validateManifest, manifestIdentityPayload } from './manifest.ts'
+import { loadChunks, sha256 } from './chunks.ts'
 
 let graph: Graph | undefined
 let manifest: StudyManifest | undefined
 let reverse: ReverseGraph | undefined
 function reply(message: Reply, transfer: Transferable[] = []) { self.postMessage(message, { transfer }) }
 
-async function sha256(compressed: Uint8Array<ArrayBuffer>) {
-  const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', compressed))
-  return Array.from(digest, x => x.toString(16).padStart(2, '0')).join('')
-}
-
 async function load(url: string, expectedIdentity?: string) {
+  const opened = performance.now()
   const response = await fetch(url)
   if (!response.ok) throw new Error('The road manifest could not be loaded. Try again.')
   const data = await response.json() as StudyManifest
@@ -26,90 +23,68 @@ async function load(url: string, expectedIdentity?: string) {
   const { nodes, edges } = data.counts
   const xy = new Int32Array(nodes * 2), from = new Uint32Array(edges), to = new Uint32Array(edges), length = new Uint32Array(edges)
   const direction = new Uint8Array(edges), category = new Uint8Array(edges)
-  let loaded = 0, vertices = 0
-  for (const chunk of data.chunks) {
-    reply({ type: 'progress', loaded, total: data.downloadBytes, stage: chunk.kind === 'geometry' ? 'Loading road shapes' : 'Loading the national graph' })
-    const response = await fetch(new URL(chunk.path, url))
-    if (!response.ok || !response.body) throw new Error('A road chunk could not be loaded. The incomplete graph cannot be searched.')
-    const reader = response.body.getReader()
-    const compressed = new Uint8Array(chunk.bytes)
-    let offset = 0
-    while (true) {
-      const { value, done } = await reader.read()
-      if (done) break
-      if (offset + value.length > chunk.bytes) throw new Error('Road chunk size mismatch')
-      compressed.set(value, offset); offset += value.length; loaded += value.length
-      reply({ type: 'progress', loaded, total: data.downloadBytes, stage: chunk.kind === 'geometry' ? 'Loading road shapes' : 'Loading the national graph' })
-    }
-    if (offset !== chunk.bytes) throw new Error('Incomplete road chunk')
-    const hash = await sha256(compressed)
-    if (hash !== chunk.sha256) throw new Error('Road chunk checksum mismatch')
-    const unpacked = new Uint8Array(chunk.decodedBytes)
-    const decoder = new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip')).getReader()
-    let decodedOffset = 0
-    while (true) {
-      const { value, done } = await decoder.read()
-      if (done) break
-      if (decodedOffset + value.length > unpacked.length) { await decoder.cancel(); throw new Error('Decoded road chunk exceeds its declared size') }
-      unpacked.set(value, decodedOffset); decodedOffset += value.length
-    }
-    if (decodedOffset !== unpacked.length) throw new Error('Incomplete decoded road chunk')
-    const decoded = unpacked.buffer
-    if (decoded.byteLength !== chunk.decodedBytes || (chunk.stride && decoded.byteLength !== chunk.count * chunk.stride)) throw new Error('Invalid road chunk layout')
-    if (chunk.kind === 'nodes') {
-      if (chunk.start + chunk.count > nodes || chunk.stride !== 8) throw new Error('Invalid node chunk')
-      const view = new DataView(decoded)
-      let x = 0, y = 0
-      for (let i = 0; i < chunk.count; i++) {
-        x += view.getInt32(i * 8, true); y += view.getInt32(i * 8 + 4, true)
-        xy[(chunk.start + i) * 2] = x; xy[(chunk.start + i) * 2 + 1] = y
-      }
-    } else if (chunk.kind === 'edges') {
-      if (chunk.start + chunk.count > edges || chunk.stride !== 14) throw new Error('Invalid edge chunk')
-      const view = new DataView(decoded)
-      let u = 0
-      for (let i = 0; i < chunk.count; i++) {
-        const e = chunk.start + i, p = i * 4
-        u += view.getInt32(p, true)
-        from[e] = u; to[e] = u + view.getInt32(chunk.count * 4 + p, true); length[e] = view.getUint32(chunk.count * 8 + p, true)
-        direction[e] = view.getUint8(chunk.count * 12 + i); category[e] = view.getUint8(chunk.count * 13 + i)
-        if (from[e] >= nodes || to[e] >= nodes || direction[e] > 2) throw new Error('Invalid road connection')
-      }
-    } else {
-      if (chunk.start + chunk.count > edges || chunk.stride !== 0) throw new Error('Invalid geometry chunk')
-      const view = new DataView(decoded)
-      let pointCount = 0
-      for (let i = 0; i < chunk.count; i++) pointCount += view.getUint16(i * 2, true)
-      if (chunk.count * 2 + pointCount * 8 !== decoded.byteLength) throw new Error('Geometry point count mismatch')
-      const count = (pointCount + chunk.count) * 2
-      const bytes = new ArrayBuffer(count * 12), output = new DataView(bytes)
-      let cursor = chunk.count * 2, vertex = 0
-      const projection = data.projection
-      const sx = Math.cos(projection.referenceLatitude * Math.PI / 180) * 111195.0802 / projection.scaleMetres
-      const sy = 111195.0802 / projection.scaleMetres
-      function append(x: number, y: number, e: number) {
-        output.setFloat32(vertex * 12, (x / 100000 - projection.centre[0]) * sx, true)
-        output.setFloat32(vertex * 12 + 4, (y / 100000 - projection.centre[1]) * sy, true)
-        output.setUint32(vertex * 12 + 8, e, true); vertex++
-      }
-      for (let i = 0; i < chunk.count; i++) {
-        const e = chunk.start + i
-        let x = xy[from[e] * 2], y = xy[from[e] * 2 + 1]
-        for (let j = 0; j < view.getUint16(i * 2, true); j++) {
-          const nextX = x + view.getInt32(cursor, true), nextY = y + view.getInt32(cursor + 4, true); cursor += 8
-          append(x, y, e); append(nextX, nextY, e); x = nextX; y = nextY
+  let vertices = 0
+  const measurements = await loadChunks(data, url,
+    (loaded, stage) => reply({ type: 'progress', loaded, total: data.downloadBytes, stage }),
+    (chunk, decoded) => {
+      if (chunk.kind === 'nodes') {
+        if (chunk.start + chunk.count > nodes || chunk.stride !== 8) throw new Error('Invalid node chunk')
+        const view = new DataView(decoded)
+        let x = 0, y = 0
+        for (let i = 0; i < chunk.count; i++) {
+          x += view.getInt32(i * 8, true); y += view.getInt32(i * 8 + 4, true)
+          xy[(chunk.start + i) * 2] = x; xy[(chunk.start + i) * 2 + 1] = y
         }
-        append(x, y, e); append(xy[to[e] * 2], xy[to[e] * 2 + 1], e)
+      } else if (chunk.kind === 'edges') {
+        if (chunk.start + chunk.count > edges || chunk.stride !== 14) throw new Error('Invalid edge chunk')
+        const view = new DataView(decoded)
+        let u = 0
+        for (let i = 0; i < chunk.count; i++) {
+          const e = chunk.start + i, p = i * 4
+          u += view.getInt32(p, true)
+          from[e] = u; to[e] = u + view.getInt32(chunk.count * 4 + p, true); length[e] = view.getUint32(chunk.count * 8 + p, true)
+          direction[e] = view.getUint8(chunk.count * 12 + i); category[e] = view.getUint8(chunk.count * 13 + i)
+          if (from[e] >= nodes || to[e] >= nodes || direction[e] > 2) throw new Error('Invalid road connection')
+        }
+      } else {
+        if (chunk.start + chunk.count > edges || chunk.stride !== 0) throw new Error('Invalid geometry chunk')
+        const view = new DataView(decoded)
+        let pointCount = 0
+        for (let i = 0; i < chunk.count; i++) pointCount += view.getUint16(i * 2, true)
+        if (chunk.count * 2 + pointCount * 8 !== decoded.byteLength) throw new Error('Geometry point count mismatch')
+        const count = (pointCount + chunk.count) * 2
+        const bytes = new ArrayBuffer(count * 12), output = new DataView(bytes)
+        let cursor = chunk.count * 2, vertex = 0
+        const projection = data.projection
+        const sx = Math.cos(projection.referenceLatitude * Math.PI / 180) * 111195.0802 / projection.scaleMetres
+        const sy = 111195.0802 / projection.scaleMetres
+        function append(x: number, y: number, e: number) {
+          output.setFloat32(vertex * 12, (x / 100000 - projection.centre[0]) * sx, true)
+          output.setFloat32(vertex * 12 + 4, (y / 100000 - projection.centre[1]) * sy, true)
+          output.setUint32(vertex * 12 + 8, e, true); vertex++
+        }
+        for (let i = 0; i < chunk.count; i++) {
+          const e = chunk.start + i
+          let x = xy[from[e] * 2], y = xy[from[e] * 2 + 1]
+          for (let j = 0; j < view.getUint16(i * 2, true); j++) {
+            const nextX = x + view.getInt32(cursor, true), nextY = y + view.getInt32(cursor + 4, true); cursor += 8
+            append(x, y, e); append(nextX, nextY, e); x = nextX; y = nextY
+          }
+          append(x, y, e); append(xy[to[e] * 2], xy[to[e] * 2 + 1], e)
+        }
+        reply({ type: 'geometry', start: vertices, count, bytes }, [bytes]); vertices += count
       }
-      reply({ type: 'geometry', start: vertices, count, bytes }, [bytes]); vertices += count
-    }
-  }
+  })
+  reply({ type: 'progress', loaded: data.downloadBytes, total: data.downloadBytes, stage: 'Preparing road connections' })
+  const compiling = performance.now()
   const complete = compileGraph({ xy, from, to, length, direction, category })
   reverse = undefined
   if (vertices !== data.counts.vertices) throw new Error('Drawing geometry mismatch')
   if (complete.arcTo.length !== data.counts.directedArcs) throw new Error('Road connectivity mismatch')
   graph = complete
-  reply({ type: 'ready' })
+  measurements.compileMs = performance.now() - compiling
+  measurements.totalMs = performance.now() - opened
+  reply({ type: 'ready', measurements })
 }
 
 self.addEventListener('message', async (event: MessageEvent<Request>) => {

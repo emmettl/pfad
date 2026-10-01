@@ -1,0 +1,42 @@
+{
+  "schema": "pfad-routing-profile/1",
+  "id": "road-connectivity-distance-v1",
+  "status": "connectivity-study",
+  "drivingLegalityValidated": false,
+  "includedHighways": ["motorway", "motorway_link", "trunk", "trunk_link", "primary", "primary_link", "secondary", "secondary_link", "tertiary", "tertiary_link", "unclassified", "residential", "living_street", "service", "road"],
+  "wayAccess": {
+    "precedence": ["motorcar", "motor_vehicle", "vehicle", "access"],
+    "interpretation": "First present unconditional tag; not an intersection of all values.",
+    "excludedValues": ["no", "private", "agricultural", "forestry"],
+    "excludedImpassable": "yes",
+    "otherOrMissingValues": "Included; destination, delivery, permit and other contextual access are not enforced."
+  },
+  "directions": {
+    "reverse": ["-1"],
+    "forward": ["yes", "1", "true"],
+    "implicitForwardWhenOnewayAbsent": { "highway": ["motorway"], "junction": ["roundabout"] },
+    "otherValues": "Both directions; reversible, alternating and conditional meanings are unsupported. An explicit oneway=no overrides the implicit forward rules."
+  },
+  "cost": {
+    "unit": "integer centimetres",
+    "calculation": "Sum original way-shape segment lengths: hypot(deltaLongitude * cos(mean segment latitude), deltaLatitude) * 111195.0802 metres per degree; round each graph edge to centimetres.",
+    "objective": "Minimum sum of permitted directed edge costs, without travel-time or elevation penalties.",
+    "drawing": "Simplification and projection do not change cost or connectivity. Zero-cost edges caused by rounding remain valid."
+  },
+  "topology": {
+    "junctions": "OSM shared node references, original way endpoints, retained control nodes and restriction via-nodes split selected ways. A visual crossing alone creates no connection.",
+    "barriers": "Retained as nodes and source evidence; passage is not blocked by barrier tags.",
+    "turns": "Both via-node and via-way restriction evidence is retained, but turns are not enforced."
+  },
+  "coverage": {
+    "boundary": "Selected dated Geofabrik extract; no clipping to the decorative national border and no promise of all routes leaving and re-entering the country.",
+    "ferries": "Excluded; sea crossings, islands and Northern Ireland can be disconnected.",
+    "tunnelsBridgesPasses": "Included when the road class and basic access filter include the way; no vehicle dimensions, toll, season, weather or closure model.",
+    "components": "Retained, including small fragments. Endpoint preparation does not invent connections or guarantee directed reachability."
+  },
+  "endpointPreparation": "nearby-shared-component/1; two-kilometre bound; see docs/DATA.md",
+  "unsupportedRules": ["turn restrictions", "node barrier access", "conditional or time-dependent access", "vehicle dimensions and weight", "permits and destination-only access", "reversible or alternating one-way operation", "seasonal closures", "traffic", "ferry crossings"],
+  "context": "No vehicle specification, departure time or live road status is supplied. The result answers this declared connectivity model.",
+  "compilerReferences": ["scripts/data/size-proof.py", "scripts/data/build-study.py"],
+  "licence": "MIT (profile specification); road data and evidence retain ODbL-1.0"
+}

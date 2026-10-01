@@ -1,6 +1,6 @@
 # Ambient mode
 
-Design brief · 30 September 2026 · Planned, not implemented
+Design brief · updated 1 October 2026 · Initial implementation for review
 
 PFAD should be able to run as an unattended succession of genuine road searches.
 The places are curated; the origin/destination pairs are chosen by a distance
@@ -142,5 +142,58 @@ Sound remains opt-in, with clear volume, mute and sequence-pause behaviour.
 - Sustained looping passes the supported-device checks without growing retained
   recordings, reloading the graph each time or continuing work in hidden tabs.
 
-This is planned within R3, with R1’s profile and R2’s device reliability as the
+This is implemented for initial review within R3, with R1’s profile and R2’s device reliability as the
 release gates. See [the roadmap](ROADMAP.md).
+
+## Implemented prototype
+
+`swiss-places/1` uses the twelve named places above with stable IDs.
+`distance-balanced-pairs/1` selects a target band with weights 1:3:3 (regional,
+interregional, national), shortlists pairs using straight-line distance × 1.25,
+excludes direct distances below 30 km and the last six undirected accepted pairs,
+and weights candidates inversely by one plus both endpoints’ accumulated use.
+A seeded xorshift32 generator makes the sequence reproducible. No precomputed
+route list is retained.
+
+Every candidate runs the selected real algorithm. Its actual road distance must
+match the target band; a mismatch or no route is recorded and retried, up to five
+candidates. Exhaustion stops honestly and offers Next for a new band. Accepted
+road distance sets the proposed square-root duration exactly, within 25–65 s.
+The real route flourish finishes before the 6 s hold and 2 s fade. The map stays
+dark during preparation of the next journey. All searches share the loaded graph.
+
+Pause freezes replay, reveal, hold and fade, and fades/suspends the score; resume
+continues it. Next preserves musical continuity. Exit cancels pending automatic
+advancement and leaves the current trace inspectable at its existing event
+cutoff, restoring the prior manual duration. Hidden pages pause without automatic
+return. Reduced motion shows completed stills with deliberate Next and allows
+explicit listening without camera or fade choreography.
+
+Only the active trace and twelve metadata records are retained, with six recent
+pairs and one sequence animation frame. Exported records include selector/pool
+versions, seed, selection number, actual distance and rejected attempts. See
+[RECORDS.md](RECORDS.md). The initial pool currently covers Switzerland.
+
+The [60-journey audit](evidence/ambient-2026-10-01/review.json) accepts all sixty
+journeys within bounded attempts (four distance mismatches, 64 actual searches),
+uses all twelve places and all three algorithms, and checks every final route’s
+adjacency, direction and exact cost sum. Eight journeys are regional, 27
+interregional and 25 national; durations span 26.5–61.8 seconds. This is selector
+and routing evidence, not physical-device or memory measurement.
+
+Browser and unit checks cover pause/next/exit, hold/fade, reduced motion, hidden
+return and music continuity. Visual pacing, place balance and sustained listening
+remain author review; actual phone memory, thermal behaviour and frames remain R2.
+
+## Repeating the checks
+
+`npm run data:audit-ambient -- .cache/ambient-audit.json` repeats the seeded
+sixty-journey audit against verified committed graph bytes, without any source
+download. After building and starting `npm run preview`, run
+`npm run data:browser-ambient` for cold/warm opening and eight consecutive real
+journeys in desktop Chromium and mobile-viewport WebKit. It saves screenshots and
+a report under `.cache/ambient-browser-proof/`; an optional first argument selects
+another host URL. The committed [browser review](evidence/ambient-2026-10-01/browser.json)
+shows zero chunk-download bytes on warm opening and stable live WebGL object
+counts (seven textures, 34 buffers) across the eight complete frames in each
+browser. These counts do not measure GPU bytes, process memory or phone budgets.
