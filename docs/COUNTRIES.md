@@ -145,3 +145,39 @@ journey. The browser proof checks three manual modes, eight reduced-motion
 journeys, outlines, an automatic transition and return to Switzerland. See
 `docs/evidence/countries-2026-10-01/` for source identities and measured results.
 Desktop WebKit is useful regression evidence, not a physical iPhone certification.
+
+## Independent outline releases
+
+Borders and lakes are fetched only for the selected country; none of their
+coordinates are imported into the app bundle. Switzerland's road graph remains
+bundled. `src/map/geography-releases.json` pins each outline manifest URL, exact
+byte count and SHA-256 separately from road graph identities. The verified
+manifest pins the two layer objects. Metadata inside each layer retains source
+edition, source checksum, simplification and attribution. Outlines never enter
+routing or algorithm events. Missing or corrupt outlines produce a visible
+message and retry action; genuine road searches remain available.
+
+After explicitly preparing/reviewing geographic references with `npm run
+data:geography`, package them using the chosen manual release date:
+
+```sh
+node scripts/data/package-geography.mjs YYYYMMDD
+python scripts/data/publish-country.py .cache/geography/<geo-release-id> --dry-run
+python scripts/data/publish-country.py .cache/geography/<geo-release-id> --wrangler-auth
+python scripts/data/publish-country.py .cache/geography/<geo-release-id> \
+  --verify-url https://motionstudies.app/pfad-data
+```
+
+The package tool checks every layer against `data/geography-sources.json`, writes
+ignored release candidates and updates the app's small manifest-reference registry.
+Review that registry, publish and verify every referenced candidate, then run
+`npm run check` and relevant browser checks before app publication. Never follow a
+mutable “latest” outline. Road releases need no rebuild when geographic context
+changes. The data Worker accepts only immutable graph/outline keys and GET, HEAD,
+OPTIONS. It supplies CORS and immutable caching; manifests upload last and existing
+objects cannot be overwritten by the publisher.
+
+The 1 October 2026 outline releases contain 18 objects in total. Border and lake
+bytes per country are: CH 123,585; UK 93,543; IS 40,507; NL 16,112; NZ 83,798;
+LU 4,767, plus approximately 494 bytes for each manifest. Reviewed geometry is
+unchanged; Iceland and Luxembourg's pinned lake references contain no features.

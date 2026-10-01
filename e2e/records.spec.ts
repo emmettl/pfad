@@ -96,5 +96,5 @@ test('unavailable releases are explicit errors, and a UK link asks before any gr
   await expect(page.getByRole('dialog')).toContainText('93 MB'); expect(graphRequests).toEqual([])
   await page.getByRole('button', { name: 'Cancel', exact: true }).click()
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
-  expect(graphRequests.every(url => url.includes('/data/pfad/ch-'))).toBe(true)
+  expect(graphRequests.every(url => url.includes('/data/pfad/ch-') || url.includes('/pfad-data/geo-ch-'))).toBe(true)
 })

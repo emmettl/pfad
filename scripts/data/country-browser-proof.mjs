@@ -41,6 +41,8 @@ try {
   await expect(outlines).toBeEnabled()
   await outlines.click();await expect(page.locator('canvas')).toHaveAttribute('data-outlines','hidden')
   await outlines.click();await expect(page.locator('canvas')).toHaveAttribute('data-outlines','visible')
+  await expect(page.locator('canvas')).toHaveAttribute('data-outline-country',country)
+  await expect.poll(async()=>Number(await page.locator('canvas').getAttribute('data-outline-segments'))).toBeGreaterThan(0)
   await page.screenshot({path:`.cache/${country}-context-phone.png`})
   await page.emulateMedia({reducedMotion:'reduce'})
   await page.getByRole('button',{name:'Ambient',exact:true}).click()

@@ -1,0 +1,44 @@
+[
+  {
+    "url": "http://127.0.0.1:4197/",
+    "country": "ch",
+    "segments": 5640,
+    "visible": true,
+    "toggle": true
+  },
+  {
+    "url": "http://127.0.0.1:4197/",
+    "country": "is",
+    "segments": 1857,
+    "visible": true,
+    "toggle": true
+  },
+  {
+    "url": "http://127.0.0.1:4197/",
+    "country": "nl",
+    "segments": 728,
+    "visible": true,
+    "toggle": true
+  },
+  {
+    "url": "http://127.0.0.1:4197/",
+    "country": "nz",
+    "segments": 3627,
+    "visible": true,
+    "toggle": true
+  },
+  {
+    "url": "http://127.0.0.1:4197/",
+    "country": "lu",
+    "segments": 157,
+    "visible": true,
+    "toggle": true
+  },
+  {
+    "url": "http://127.0.0.1:4197/",
+    "country": "uk",
+    "segments": 4513,
+    "visible": true,
+    "toggle": true
+  }
+]

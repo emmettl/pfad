@@ -1,4 +1,4 @@
-"""Verify and publish one immutable country release to R2, manifest last.
+"""Verify and publish one immutable road or outline release to R2, manifest last.
 
 Requires Python >=3.11. No source acquisition, mutable aliases, or app deployment.
 Use --dry-run first. Credentials come from CLOUDFLARE_API_TOKEN, or explicitly
@@ -23,6 +23,8 @@ ACCOUNT = '8cac82a07417990e553f88793670f361'
 def verify(directory):
     raw = (directory / 'manifest.json').read_bytes()
     m = json.loads(raw)
+    if m.get('schema') == 'pfad-geography/1':
+        return verify_geography(directory, m)
     assert re.fullmatch(r'[a-z]{2,8}-\d{8}-[a-f0-9]{12}', m['id']) and directory.name == m['id'], 'Invalid release directory'
     identity = subprocess.run(['node', str(Path(__file__).with_name('manifest-identity.mjs'))], input=raw, stdout=subprocess.PIPE, check=True).stdout.decode()
     assert identity == m['identity'] and m['id'].endswith(identity[:12]), 'Release identity mismatch'
@@ -51,6 +53,30 @@ def verify(directory):
     assert not (directory / 'manifest.json').is_symlink()
     return m, files
 
+def verify_geography(directory, m):
+    payload = {key: m[key] for key in ['schema', 'country', 'border', 'lakes']}
+    canonical = json.dumps(payload, separators=(',', ':'), ensure_ascii=False).encode()
+    identity = hashlib.sha256(canonical).hexdigest()
+    assert re.fullmatch(r'[a-z]{2}', m['country']) and m['id'].startswith('geo-' + m['country'] + '-')
+    assert m['identity'] == identity and directory.name == m['id']
+    assert re.fullmatch(r'geo-[a-z]{2}-\d{8}-' + identity[:12], m['id'])
+    files = []
+    for kind in ['border', 'lakes']:
+        ref = m[kind]
+        assert ref['path'] == kind + '-' + ref['sha256'][:12] + '.json'
+        assert re.fullmatch(r'[a-f0-9]{64}', ref['sha256'])
+        path = directory / ref['path']
+        assert not path.is_symlink()
+        raw = path.read_bytes()
+        assert len(raw) == ref['bytes'] and hashlib.sha256(raw).hexdigest() == ref['sha256']
+        layer = json.loads(raw)
+        assert layer['metadata']['outputCrs'] == 'EPSG:4326' and layer['metadata']['attribution']
+        files.append(path)
+    assert not (directory / 'manifest.json').is_symlink()
+    assert set(p.name for p in directory.iterdir()) == {p.name for p in files} | {'manifest.json'}
+    # Shared immutable uploader reports the independent context download size.
+    return {**m, 'downloadBytes': sum(m[k]['bytes'] for k in ['border', 'lakes'])}, files
+
 def publish(directory, bucket, account, token):
     m, files = verify(directory)
     base = f'https://api.cloudflare.com/client/v4/accounts/{account}/r2/buckets/{bucket}/objects/'
@@ -66,7 +92,7 @@ def publish(directory, bucket, account, token):
             return
         except urllib.error.HTTPError as e:
             if e.code != 404: raise RuntimeError(f'R2 read failed ({e.code}); no object changed') from None
-        h.update({'Content-Type': 'application/json' if path.name == 'manifest.json' else 'application/octet-stream', 'Cache-Control': 'public, max-age=31536000, immutable'})
+        h.update({'Content-Type': 'application/json' if path.name.endswith('.json') else 'application/octet-stream', 'Cache-Control': 'public, max-age=31536000, immutable'})
         for attempt in range(4):
             try:
                 with urllib.request.urlopen(urllib.request.Request(url, data=data, headers=h, method='PUT'), timeout=180) as r:

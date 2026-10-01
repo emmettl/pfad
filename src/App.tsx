@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { TimelineScrubber } from '@motionstudies/web/components/TimelineScrubber'
 import '@motionstudies/web/timeline-scrubber.css'
+import { loadGeography } from './map/geography-loader.ts'
 import { RoadScene } from './map/RoadScene.ts'
 import { COUNTRIES } from './countries.ts'
 import { countsAt } from './search/engine.ts'
@@ -46,6 +47,8 @@ export function App() {
   const ambient = useRef<AmbientSequence | null>(null), ambientSearch = useRef<(pair: JourneyPair, algorithm: SearchAlgorithm) => void>(() => {})
   ambient.current ??= new AmbientSequence(setAmbientState, (pair, mode) => ambientSearch.current(pair, mode))
   const [measurements, setMeasurements] = useState<LoadMeasurements | null>(null)
+  const [outlineAttempt, setOutlineAttempt] = useState(0)
+  const [outlineReady, setOutlineReady] = useState(false), [outlineError, setOutlineError] = useState('')
   const [attempt, setAttempt] = useState(0)
   const [start, setStart] = useState<Point>(shared.study?.start ?? COUNTRIES[0].places[0]), [goal, setGoal] = useState<Point>(shared.study?.goal ?? COUNTRIES[0].places[1])
   const [manifest, setManifest] = useState<StudyManifest | null>(null), [manifestUrl, setManifestUrl] = useState('')
@@ -126,6 +129,7 @@ export function App() {
 
   useEffect(() => {
     if (!host.current || shared.error || (shared.study?.country !== country.id && selectedCountry.large)) return
+    setOutlineReady(false); setOutlineError('');
     setReady(false); setBusy(false); setMeasurements(null); setManifest(null); setManifestUrl(''); setPick(null); setError(''); setMapError(''); setResult(null); setPlaying(false); setRevealing(false); revealingRef.current = false; setLoading({ loaded: 0, total: 0, stage: 'Opening the road record' }); seek(0); ++currentRequest.current
     let map: RoadScene | null = null
     try {
@@ -140,7 +144,9 @@ export function App() {
     engine.onmessage = (event: MessageEvent<Reply>) => {
       const reply = event.data
       if (reply.type === 'progress') setLoading(reply)
-      if (reply.type === 'manifest') { setManifest(reply.manifest); setManifestUrl(reply.manifestUrl); map?.setManifest(reply.manifest, country.outlines) }
+      if (reply.type === 'manifest') {
+        setManifest(reply.manifest); setManifestUrl(reply.manifestUrl); map?.setManifest(reply.manifest)
+      }
       if (reply.type === 'geometry') map?.addGeometry(reply.bytes, reply.count)
       if (reply.type === 'ready') { setReady(true); setMeasurements(reply.measurements); search(initialQuery.current.start, initialQuery.current.goal) }
       if (reply.type === 'result' && reply.requestId === currentRequest.current) {
@@ -160,6 +166,17 @@ export function App() {
     void cacheOwner.current.then(() => { if (worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity }) })
     return () => { engine.terminate(); map?.dispose(); scene.current = null; worker.current = null }
   }, [attempt, country, shared, search, seek])
+
+  useEffect(() => {
+    const map = scene.current
+    if (!map || !manifest || !manifest.id.startsWith(country.id + '-') || !country.outlines) return
+    const controller = new AbortController()
+    setOutlineReady(false); setOutlineError('')
+    void loadGeography(country.id, AbortSignal.any([controller.signal, AbortSignal.timeout(30000)]))
+      .then(context => { if (!controller.signal.aborted && scene.current === map) { map.setGeography(context); setOutlineReady(true) } })
+      .catch(() => { if (!controller.signal.aborted && scene.current === map) setOutlineError('Outlines could not be loaded or verified. Road searches remain available.') })
+    return () => controller.abort()
+  }, [manifest, country, outlineAttempt])
 
   useEffect(() => {
     if (scene.current) {
@@ -297,7 +314,7 @@ export function App() {
           <span role="status">{recordStatus}</span>
         </div>
         <a href="https://github.com/emmettl/pfad">PFAD repository ↗</a>
-      </div></details><div className="map-tools"><SoundControl ref={sound} sequencePaused={ambientState.active && !ambientState.running} /><button className="outline-control" aria-label="Show border and lake outlines" aria-pressed={outlines} disabled={!ready || !!mapError || !country.outlines} onClick={() => { const visible = !outlines; setOutlines(visible); outlinePreference.current = visible; scene.current?.setGeographyVisible(visible) }}><span aria-hidden="true">◇</span> Outlines</button></div></div>
+      </div></details><div className="map-tools"><SoundControl ref={sound} sequencePaused={ambientState.active && !ambientState.running} /><button className="outline-control" aria-label="Show border and lake outlines" aria-pressed={outlines} disabled={!ready || !outlineReady || !!mapError || !country.outlines} onClick={() => { const visible = !outlines; setOutlines(visible); outlinePreference.current = visible; scene.current?.setGeographyVisible(visible) }}><span aria-hidden="true">◇</span> Outlines</button></div></div>
     </header>
     <div className="route-panel" aria-label="Search endpoints">
       {queryControl(start, setStart, 'start')}
@@ -310,6 +327,7 @@ export function App() {
     {pick && <div className="map-hint">Choose point {pick === 'start' ? 'A' : 'B'} on the map <button onClick={() => setPick(null)}>Cancel</button></div>}
     {!ready && !error && <div className="loading-panel" role="status"><span className="loading-title">Opening {country.name}</span><p>{loading.stage}</p>{loading.total > 0 && <><progress value={loading.loaded} max={loading.total} aria-label="Road data download" /><span className="mono">{(loading.loaded / 1000000).toFixed(1)} / {(loading.total / 1000000).toFixed(1)} MB</span></>}</div>}
     {error && <div className="error-panel" role="alert"><p>{error}</p><button onClick={() => { if (shared.error) { clearShared(); return } exitAmbient(); initialQuery.current = { start, goal }; setAttempt(value => value + 1) }}>{shared.error ? 'Open default study' : 'Try again'}</button></div>}
+    {outlineError && <div className="error-panel" role="status"><p>{outlineError}</p><button onClick={() => setOutlineAttempt(value => value + 1)}>Retry outlines</button></div>}
     {mapError && <div className="error-panel" role="status"><p>{mapError}</p></div>}
     <button className="reset-view" aria-label="Show whole network" title="Show whole network" onClick={() => scene.current?.resetView()}>↗↙</button>
     <div className="playback-panel">

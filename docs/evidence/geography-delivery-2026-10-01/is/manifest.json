@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "is",
+  "border": {
+    "path": "border-8e834fed7eee.json",
+    "bytes": 39321,
+    "sha256": "8e834fed7eee9c008a9a415bbcb6ddba4836b999aa6355d0f715a370f91754c2"
+  },
+  "lakes": {
+    "path": "lakes-4ff840b538a6.json",
+    "bytes": 1186,
+    "sha256": "4ff840b538a6cae38c263d64ee1140905050e245e7e30a221cd6e474d81adbcd"
+  },
+  "id": "geo-is-20261001-560330b12879",
+  "identity": "560330b12879e4e0d78e3dfd9fb64a1db74b13052067effe1ed216f142b8c752"
+}

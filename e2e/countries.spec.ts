@@ -4,7 +4,7 @@ const swiss = await readFile('public/data/pfad/ch-20260929-6a17f71de78c/manifest
 test('country downloads are opt-in, pinned, and switching back restores the bundled Swiss study', async ({ page }) => {
   test.setTimeout(90000)
   const requests: string[] = []
-  await page.route('https://motionstudies.app/pfad-data/**', route => {
+  await page.route('https://motionstudies.app/pfad-data/uk-*/**', route => {
     requests.push(route.request().url())
     // An obsolete or mismatched release must fail before any graph chunks load.
     return route.fulfill({ contentType: 'application/json', body: swiss, headers: { 'Access-Control-Allow-Origin': '*' } })

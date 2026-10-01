@@ -1,0 +1,32 @@
+{
+  "ch": {
+    "url": "https://motionstudies.app/pfad-data/geo-ch-20261001-a456e6f86583/manifest.json",
+    "bytes": 494,
+    "sha256": "e40868b1d22d914ae44f4c9d44469473dc4780e944609bab1859bb886598519c"
+  },
+  "uk": {
+    "url": "https://motionstudies.app/pfad-data/geo-uk-20261001-ab5e255cde5a/manifest.json",
+    "bytes": 493,
+    "sha256": "7bfcc40b0bfdde8d8574148a7c7d40a2e8f77c870085dc037492e25da035cd0a"
+  },
+  "is": {
+    "url": "https://motionstudies.app/pfad-data/geo-is-20261001-560330b12879/manifest.json",
+    "bytes": 493,
+    "sha256": "a2bdfde8969ced409dd2b7db3a11f95f0fe9c3932e38b7d95a790cc36f03a929"
+  },
+  "nl": {
+    "url": "https://motionstudies.app/pfad-data/geo-nl-20261001-cedf78743ca3/manifest.json",
+    "bytes": 493,
+    "sha256": "2f452d310e4fbf6133f4c2db396f2a5709c77f4d29bd80445215d03db6c185e3"
+  },
+  "nz": {
+    "url": "https://motionstudies.app/pfad-data/geo-nz-20261001-78111f4ceac3/manifest.json",
+    "bytes": 494,
+    "sha256": "fb50f4ecb7433ad83eafc11b43e62428b802f952d654296e47da42c9d63f2cb8"
+  },
+  "lu": {
+    "url": "https://motionstudies.app/pfad-data/geo-lu-20261001-b9eb49506de2/manifest.json",
+    "bytes": 492,
+    "sha256": "10f8603c00ef1dc337b730a107adaf939b2e6661a51af1271450221d778ca555"
+  }
+}

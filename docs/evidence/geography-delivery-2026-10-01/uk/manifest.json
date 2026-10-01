@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "uk",
+  "border": {
+    "path": "border-e9ed6f5f39e6.json",
+    "bytes": 84117,
+    "sha256": "e9ed6f5f39e66b98a0b9551ef75a472bfdf6aaaf7594ca6d89430701839af437"
+  },
+  "lakes": {
+    "path": "lakes-0e2257538e7a.json",
+    "bytes": 9426,
+    "sha256": "0e2257538e7a74e354ad47fed9a621022880c814eaf11a1a07ba5cd38c1eaec9"
+  },
+  "id": "geo-uk-20261001-ab5e255cde5a",
+  "identity": "ab5e255cde5a48ace1c2f96e462c674de17050fb4cfcfbba4dc8273c08656968"
+}

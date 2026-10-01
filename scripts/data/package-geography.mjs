@@ -1,0 +1,30 @@
+// Pack independent, immutable context releases; road identities remain untouched.
+import { readFile, mkdir, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+const date = process.argv[2]
+if (!/^\d{8}$/.test(date ?? '')) throw Error('Usage: node scripts/data/package-geography.mjs YYYYMMDD')
+const digest = bytes => createHash('sha256').update(bytes).digest('hex')
+const sources = JSON.parse(await readFile('data/geography-sources.json', 'utf8'))
+const registry = {}
+for (const country of ['ch', 'uk', 'is', 'nl', 'nz', 'lu']) {
+  const prefix = country === 'ch' ? 'switzerland' : country
+  const assets = []
+  for (const kind of ['border', 'lakes']) {
+    const path = `src/map/data/${prefix}-${kind}.json`
+    const source = sources.assets.find(asset => asset.path === path)
+    const bytes = await readFile(path)
+    if (!source || source.bytes !== bytes.length || source.sha256 !== digest(bytes)) throw Error('Unverified outline: ' + path)
+    assets.push({ kind, bytes, reference: { path: `${kind}-${source.sha256.slice(0, 12)}.json`, bytes: bytes.length, sha256: source.sha256 } })
+  }
+  const payload = { schema: 'pfad-geography/1', country, border: assets[0].reference, lakes: assets[1].reference }
+  const identity = digest(JSON.stringify(payload))
+  const id = `geo-${country}-${date}-${identity.slice(0, 12)}`
+  const directory = `.cache/geography/${id}`
+  await mkdir(directory, { recursive: true })
+  for (const asset of assets) await writeFile(`${directory}/${asset.reference.path}`, asset.bytes)
+  const raw = Buffer.from(JSON.stringify({ ...payload, id, identity }, null, 2) + '\n')
+  await writeFile(`${directory}/manifest.json`, raw)
+  registry[country] = { url: `https://motionstudies.app/pfad-data/${id}/manifest.json`, bytes: raw.length, sha256: digest(raw) }
+  console.log(directory)
+}
+await writeFile('src/map/geography-releases.json', JSON.stringify(registry, null, 2) + '\n')

@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import type { Point, SearchResult, StudyManifest } from '../search/contracts.ts'
 import { RouteDrawing, RouteReveal } from './routeReveal.ts'
 import { createRouteGeometry, createRouteMaterial } from './routeMaterial.ts'
+import type { Geography } from './geography-loader.ts'
 import { createGeography, disposeGeography } from './geography.ts'
 import { MeetingFlash, createMeetingMaterial } from './meetingFlash.ts'
 
@@ -139,6 +140,8 @@ export class RoadScene {
         canvas.dataset.routeProgress = String(this.routeMaterial.uniforms.uProgress.value)
         canvas.dataset.routeEnergy = String(this.routeMaterial.uniforms.uEnergy.value)
         canvas.dataset.outlines = this.geography?.visible ? 'visible' : 'hidden'
+        canvas.dataset.outlineCountry = this.geography?.userData.country ?? ''
+        canvas.dataset.outlineSegments = String(this.geography?.userData.segments ?? 0)
         canvas.dataset.meetingEvent = String(this.meetingEvent ?? 0)
         canvas.dataset.totalEvents = String(this.events)
         canvas.dataset.flashPhase = this.flash.active ? 'flashing' : 'hidden'
@@ -153,7 +156,7 @@ export class RoadScene {
     document.addEventListener('visibilitychange', this.visibilityChange)
     draw(this.previousFrame)
   }
-  setManifest(manifest: StudyManifest, outlines = manifest.id.startsWith('ch-')) {
+  setManifest(manifest: StudyManifest) {
     this.manifest = manifest
     const phoneNetwork = manifest.counts.nodes > 2000000 && window.matchMedia('(pointer: coarse)').matches
     this.renderInterval = phoneNetwork ? 1000 / 30 : 0
@@ -161,11 +164,14 @@ export class RoadScene {
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.geography = undefined
-    if (outlines) {
-      this.geography = createGeography(point => this.project(point), manifest.id.split('-')[0]); this.geography.visible = this.geographyVisible
-      this.scene.add(this.geography)
-    }
     this.resetView()
+  }
+  setGeography(context: Geography) {
+    if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
+    this.geography = createGeography(point => this.project(point), context)
+    this.geography.visible = this.geographyVisible
+    this.scene.add(this.geography)
+    this.dirty = true
   }
   setGeographyVisible(visible: boolean) {
     this.geographyVisible = visible

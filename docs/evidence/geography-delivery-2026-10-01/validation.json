@@ -1,0 +1,11 @@
+{
+  "unitTests": 69,
+  "browserTests": 44,
+  "countryContextProofs": 6,
+  "outlineObjects": 18,
+  "artifactFiles": 57,
+  "artifactBytes": 28869865,
+  "previousArtifactBytes": 29226265,
+  "savedBytes": 356400,
+  "note": "Complete local check and Chromium/touch-WebKit suite passed. Real country graphs and external outlines used. Failure/retry preserves recorded event; no physical phone assertion."
+}

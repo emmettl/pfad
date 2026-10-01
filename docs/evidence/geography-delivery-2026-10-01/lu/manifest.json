@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "lu",
+  "border": {
+    "path": "border-28e8d105a947.json",
+    "bytes": 3585,
+    "sha256": "28e8d105a947f92543a731851576e0773d91ee818c39783eae684d267deb0614"
+  },
+  "lakes": {
+    "path": "lakes-a4613e88ba5d.json",
+    "bytes": 1182,
+    "sha256": "a4613e88ba5d742ccf9c774d69cf276fd79ecca12ee7d5a0a947e87f49276d63"
+  },
+  "id": "geo-lu-20261001-b9eb49506de2",
+  "identity": "b9eb49506de21bd0b8257710a44233bf8588560104fd5941aba1bd476ec2b971"
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "ch",
+  "border": {
+    "path": "border-38fd890c6bc7.json",
+    "bytes": 9435,
+    "sha256": "38fd890c6bc78415c8b2fef3047f210846d7660340977361afed9d40cc384599"
+  },
+  "lakes": {
+    "path": "lakes-2ed8ae2942bb.json",
+    "bytes": 114150,
+    "sha256": "2ed8ae2942bb9fff570c0266bd1d0da11a7b6c99530e05761934b258594e58b7"
+  },
+  "id": "geo-ch-20261001-a456e6f86583",
+  "identity": "a456e6f865837d268ff24924171348970bedb102d757226739eada5249869b1b"
+}
