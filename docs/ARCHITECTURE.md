@@ -335,3 +335,11 @@ discovery counts. `depth-first-traversal-focus/1` records both visits and return
 in the exported focus streams. The first-found route follows the discovery
 tree and is not guaranteed shortest. Lavender roads and focus distinguish this
 manual trial; the automatic ambient repertoire remains unchanged pending review.
+
+### Breadth-first manual study
+
+`breadth-first/1` uses a FIFO queue and compiler arc order, visiting each node
+once. The first-discovery tree minimizes compiled directed connections, not
+metres. Exports preserve `routeGuarantee: fewest-connections` and actual route
+lengths. Gold road examinations form a layer-by-layer wave; no single moving
+focus or invented wave geometry is drawn. This mode stays outside ambient.
