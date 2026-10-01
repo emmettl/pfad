@@ -20,6 +20,7 @@
     "test": "node --test tests/*.test.mjs",
     "test:browser": "playwright test",
     "check": "npm run typecheck && npm run lint && npm run check:boundary && npm test && npm run build && npm run check:budget",
+    "share:render": "node scripts/social-card.mjs",
     "music:compose": "node scripts/music/compose.mjs",
     "music:render": "node scripts/music/render.mjs",
     "data:acquire": "python3 scripts/data/fetch-source.py",

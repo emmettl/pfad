@@ -1,0 +1,84 @@
+{
+  "schema": "pfad-social-card/1",
+  "generatedAt": "2026-10-01T06:52:08.075Z",
+  "image": {
+    "path": "share/pfad-5ab5a326ec7f.png",
+    "width": 1200,
+    "height": 630,
+    "bytes": 283203,
+    "sha256": "5ab5a326ec7fd72523fe9c91b8801a8f246811222abd68d2cb2e3514348db54d"
+  },
+  "presentation": {
+    "schema": "pfad-study-link/1",
+    "country": "ch",
+    "dataset": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+    "profile": "road-connectivity-distance-v1",
+    "start": {
+      "name": "Zürich",
+      "lon": 8.5417,
+      "lat": 47.3769
+    },
+    "goal": {
+      "name": "Genève",
+      "lon": 6.1432,
+      "lat": 46.2044
+    },
+    "algorithm": "dijkstra",
+    "duration": 30,
+    "progress": 1,
+    "outlines": true,
+    "view": {
+      "x": 0.00037854760683864175,
+      "y": -0.004342167881809578,
+      "zoom": 1
+    }
+  },
+  "search": {
+    "dataset": {
+      "identity": "6a17f71de78c6a9883f333e39ee27c5ddfc1657bded4ede92842549004b0908e",
+      "compiler": "pfad-study-compiler/1",
+      "profile": "road-connectivity-distance-v1",
+      "sourceSha256": "95e29e18873357b927d22daa0bfc08a35e8840079a591cd70ba24a4208b4a4dd",
+      "sourceTimestamp": "2026-09-29T20:22:51Z"
+    },
+    "algorithm": "dijkstra/1",
+    "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+    "snapping": {
+      "version": "nearby-shared-component/1",
+      "requestedStart": {
+        "name": "Zürich",
+        "lon": 8.5417,
+        "lat": 47.3769
+      },
+      "requestedGoal": {
+        "name": "Genève",
+        "lon": 6.1432,
+        "lat": 46.2044
+      }
+    },
+    "start": {
+      "name": "Zürich",
+      "lon": 8.54186,
+      "lat": 47.37689,
+      "node": 3128,
+      "snapMetres": 12.09892862903552
+    },
+    "goal": {
+      "name": "Genève",
+      "lon": 6.14362,
+      "lat": 46.20389,
+      "node": 511979,
+      "snapMetres": 65.27378828986983
+    },
+    "routeMetres": 262733.98,
+    "events": 4993816,
+    "exploredNodes": 1199535,
+    "examinedArcs": 2551408
+  },
+  "sources": {
+    "roads": "© OpenStreetMap contributors · ODbL-1.0",
+    "outlines": "© swisstopo, FOEN",
+    "fonts": "@motionstudies/web pinned public font assets · OFL"
+  },
+  "note": "A real completed production-renderer search captured at the pinned release. Typography and framing are authored; roads, considered edges and the final route are genuine. Regenerate manually against a built local preview."
+}

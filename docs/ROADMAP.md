@@ -200,6 +200,8 @@ and communicated without losing its source identity.
   and meaningful replay/view settings.
   Bind these parameters automatically to the address bar, with throttled history
   replacement and paused restoration on opening or reloading a link.
+- [x] Publish an attributed share card from a genuine search, with static Open Graph,
+  X card and canonical metadata, accessible image text and crawler verification.
 - [x] Preserve graph, compiler, profile and algorithm versions with exported
   recordings; provide clear behaviour when an older dataset is unavailable.
 - [x] Export an exact packed trace and its provenance in the documented

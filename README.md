@@ -54,6 +54,9 @@ the exact pinned study paused when shared. About also offers Copy study link
 and a binary export of the genuine trace with provenance. Verified
 chunk caching retains at most two releases within 128 MiB and supports warm
 opening and retries without downloading intact stored chunks again.
+Static share metadata uses an attributed 1200 × 630 card captured from a genuine
+Swiss search. Its source record and manual regeneration are documented in
+[Sharing and records](docs/RECORDS.md).
 
 This is a **shortest-distance connectivity model**. One-way directions apply;
 turn restrictions, barriers and conditional access are preserved as evidence

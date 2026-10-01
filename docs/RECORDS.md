@@ -23,6 +23,35 @@ substituting today's graph. A linked UK release still requires the existing
 under their immutable published keys; preserving them is a deliberate, bounded
 archive policy, not a guarantee of indefinite retention of every future release.
 
+## Share previews
+
+The initial HTML includes a canonical Motion Studies URL, Open Graph and X card
+metadata, image dimensions/type/alternative text, icons and CreativeWork JSON-LD.
+Both hosts identify `https://motionstudies.app/pfad/` as the canonical edition.
+No JavaScript, graph download or sound is needed to read the metadata or image.
+
+The 1200 × 630 card is an authored composition of the actual Zürich → Genève
+Dijkstra study, captured from the production renderer at the pinned Swiss release.
+Its [source record](evidence/sharing-2026-10-01/social-card.json) retains the graph,
+algorithm, requested/snapped endpoints, event count, route cost and image checksum.
+Road and outline attribution appears in the card. It is an edition preview shared
+by all study URLs; URL fragments retain the interactive state and do not reach
+the HTTP server, so previews do not depict every linked journey individually.
+
+The committed image has a content-hashed filename. To regenerate deliberately,
+build and serve a local preview on port 4191, then run `npm run share:render`.
+An optional argument selects another built local preview URL. Review the image
+and source record, update image references in `index.html`, and remove the old
+card only when publishing its replacement. Normal builds reuse the reviewed PNG.
+The renderer uses the pinned public font assets; it does not refresh geographic data.
+
+Metadata follows the [Open Graph protocol](https://ogp.me/) and uses a large-image
+card declaration. Automated checks read the delivered HTML with JavaScript disabled,
+verify asset responses, dimensions/checksums and canonical agreement, and confirm
+that crawling does not load road chunks or music.
+
+## Search record exports
+
 **Export search record** downloads `.pfad.gz`: a gzip envelope containing the
 actual existing trace, route and textures, without running another search.
 Exporting uses Blob parts and streaming compression rather than expanding
