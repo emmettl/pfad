@@ -146,6 +146,6 @@ export function countsAt(result: Pick<SearchResult, 'trace' | 'checkpoints' | 'c
   const stop = Math.min(result.trace.length, Math.max(0, Math.floor(progress * result.trace.length)))
   const checkpoint = Math.floor(stop / result.checkpointStride)
   const counts: [number, number, number] = [result.checkpoints[checkpoint * 3], result.checkpoints[checkpoint * 3 + 1], result.checkpoints[checkpoint * 3 + 2]]
-  for (let i = checkpoint * result.checkpointStride; i < stop; i++) counts[result.trace[i] & 3]++
+  for (let i = checkpoint * result.checkpointStride; i < stop; i++) { const kind = result.trace[i] & 3; if (kind < 3) counts[kind]++ }
   return counts
 }

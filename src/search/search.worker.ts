@@ -5,6 +5,7 @@ import { compileGraph, dijkstra, snapEndpoints } from './engine.ts'
 import { bidirectional, compileReverse, type ReverseGraph } from './bidirectional.ts'
 import { multisource } from './multisource.ts'
 import { snapSources } from './endpoints.ts'
+import { depthFirst } from './depth-first.ts'
 import { greedy } from './greedy.ts'
 import { astar } from './astar.ts'
 import { validateManifest, manifestIdentityPayload } from './manifest.ts'
@@ -107,7 +108,7 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
       const result = request.algorithm === 'multisource' && sourceEndpoints ? multisource(graph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar') && reverse
         ? bidirectional(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs, request.algorithm === 'bidirectional-astar')
         : request.algorithm === 'astar' && reverse ? astar(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
-          : request.algorithm === 'greedy' ? greedy(graph, endpoints.start, endpoints.goal, endpoints.snapMs) : dijkstra(graph, endpoints.start, endpoints.goal, endpoints.snapMs)
+          : request.algorithm === 'depth-first' ? depthFirst(graph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'greedy' ? greedy(graph, endpoints.start, endpoints.goal, endpoints.snapMs) : dijkstra(graph, endpoints.start, endpoints.goal, endpoints.snapMs)
       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }
       result.snapping = endpoints.snapping
       if (sourceEndpoints) { result.requestedSources = request.sources; result.sourceSnappingVersion = 'nearby-shared-three-source-component/1' }

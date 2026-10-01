@@ -184,3 +184,5 @@ footer a { text-decoration: none; pointer-events: auto; }
 @media (max-width: 600px) {
   .search-tip { width: 12px; height: 12px; box-shadow: 0 0 7px 3px #ffb68d, 0 0 24px 9px #ff806077; }
 }
+
+.depth-first-tip { background: #efdcff; box-shadow: 0 0 7px 3px #c29aef, 0 0 24px 9px #b280ff77; }

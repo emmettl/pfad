@@ -38,6 +38,7 @@ const fragmentShader = `
   uniform float uTerritoryComplete;
   uniform float uGreedy;
   uniform float uCompact;
+  uniform float uDepth;
   flat in float vSource;
   uniform float uAstar;
   flat in uvec2 vTimes;
@@ -52,7 +53,7 @@ const fragmentShader = `
     uint improvement = times.y;
     float tree = improvement != 0u && uEvent >= improvement ? 1. : 0.;
     float memory = mix(mix(.12, .045, uAstar) + tree * mix(.07, .10, uAstar), mix(.10 + tree * .04, .32 + tree * .16, uCompact), uGreedy);
-    return vec4(mix(quiet, bright, pulse), memory + pulse * mix(.72, .92, uGreedy));
+    return vec4(mix(quiet, bright, pulse), mix(memory, .25 + tree * .12, uDepth) + pulse * mix(.72, .92, uGreedy));
   }
   void main() {
     vec3 quiet = mix(vec3(.21, .48, .42), mix(vec3(.16, .35, .65), vec3(.30, .55, .60), vGoalProximity), uAstar);
@@ -61,6 +62,7 @@ const fragmentShader = `
       quiet = mix(vec3(.60, .24, .19), vec3(.90, .38, .27), uCompact);
       bright = mix(vec3(1., .40, .32), vec3(1., .87, .72), vGoalProximity);
     }
+    if (uDepth > .5) { quiet = vec3(.55, .35, .75); bright = vec3(.90, .75, 1.); }
     if (uTerritories > .5) {
       if (vSource > 1.5) { quiet = vec3(.38, .35, .60); bright = vec3(.73, .70, 1.); }
       else if (vSource > .5) { quiet = vec3(.55, .38, .19); bright = vec3(1., .76, .43); }
@@ -148,7 +150,7 @@ export class RoadScene {
     this.proximityTexture.needsUpdate = true
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, glslVersion: THREE.GLSL3,
-      uniforms: { uCompact: { value: 0 }, uGreedy: { value: 0 }, uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
+      uniforms: { uDepth: { value: 0 }, uCompact: { value: 0 }, uGreedy: { value: 0 }, uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
       transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     })
     host.appendChild(this.renderer.domElement)
@@ -325,7 +327,7 @@ export class RoadScene {
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uBackwardTimes.value = this.backwardTexture
     this.material.uniforms.uGoalProximity.value = this.proximityTexture
     this.material.uniforms.uSources.value = this.sourceTexture; this.material.uniforms.uTerritories.value = 0; this.material.uniforms.uTerritoryComplete.value = 0
-    this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0; this.material.uniforms.uGreedy.value = 0
+    this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0; this.material.uniforms.uGreedy.value = 0; this.material.uniforms.uDepth.value = 0
     this.material.uniforms.uTextureSize.value.set(1, 1); this.material.uniforms.uEvent.value = 0
     this.focusEvents = undefined; this.focusCoordinates = undefined; this.focusPoint = undefined; this.tip.hidden = true; this.tip.dataset.event = '0'
     this.points = []; this.markers.replaceChildren(); this.dirty = true
@@ -337,7 +339,9 @@ export class RoadScene {
     for (const object of this.scene.children) if (object instanceof THREE.LineSegments && object.material === this.material) object.visible = true
     if (this.flashPoint) { this.scene.remove(this.flashPoint); this.flashPoint.geometry.dispose(); this.flashPoint = undefined }
     this.flash.clear(); this.meetingEvent = result.meeting?.event
-    const greedy = result.algorithm === 'greedy-best-first/1'
+    const greedy = result.algorithm === 'greedy-best-first/1', depthFirst = result.algorithm === 'depth-first/1'
+    this.material.uniforms.uDepth.value = depthFirst ? 1 : 0
+    this.tip.classList.toggle('depth-first-tip', depthFirst)
     this.focusEvents = result.focusEvents; this.focusCoordinates = result.focusCoordinates
     this.material.uniforms.uGreedy.value = greedy ? 1 : 0
     this.routeMaterial.uniforms.uColour.value.setRGB(...(greedy ? [1, .76, .60] as const : [.76, .98, .81] as const))

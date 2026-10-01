@@ -325,3 +325,13 @@ Worst-case recorder workspace gains twelve packed bytes per expanded node for
 focus events and coordinates, plus the temporary number arrays before packing.
 Greedy may explore extensively on awkward graphs; national examples do not
 establish physical-phone budgets or routing legality.
+
+### Depth-first trial
+
+`depth-first/1` visits each node once, descending immediately in compiler arc
+order using an explicit stack. Trace kind 3 records a return to the parent
+when a branch is exhausted; it does not increment settlement, examination or
+discovery counts. `depth-first-traversal-focus/1` records both visits and returns
+in the exported focus streams. The first-found route follows the discovery
+tree and is not guaranteed shortest. Lavender roads and focus distinguish this
+manual trial; the automatic ambient repertoire remains unchanged pending review.
