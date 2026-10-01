@@ -1,0 +1,204 @@
+[
+  {
+    "country": "ie",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "https://emmettl.github.io/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Dublin\u2192Belfast",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "1788970"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Dublin\u2192Belfast",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "1449251"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Dublin\u2192Belfast",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "511185"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Westport\u2192Dingle300.7 kmA*",
+        "events": "1039861"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Athlone\u2192Letterkenny195.0 kmDijkstra",
+        "events": "5021682"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Dublin\u2192Waterford152.6 kmBidirectional Dijkstra",
+        "events": "2213142"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Dingle\u2192Limerick142.1 kmA*",
+        "events": "180419"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Tralee\u2192Sligo302.4 kmDijkstra",
+        "events": "4667720"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Cork\u2192Athlone200.1 kmBidirectional Dijkstra",
+        "events": "2485976"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Letterkenny\u2192Wexford343.4 kmA*",
+        "events": "2554023"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Kilkenny\u2192Derry297.2 kmDijkstra",
+        "events": "6554017"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Belfast\u2192ArmaghBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks.",
+      "/cloudflareinsights.com/cdn-cgi/rum due to access control checks."
+    ],
+    "swissRestored": true
+  },
+  {
+    "country": "ie",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "https://motionstudies.app/pfad/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Dublin\u2192Belfast",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "1788970"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Dublin\u2192Belfast",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "1449251"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Dublin\u2192Belfast",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "511185"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Galway\u2192Westport78.6 kmA*",
+        "events": "137076"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Belfast\u2192Armagh59.4 kmDijkstra",
+        "events": "954782"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Sligo\u2192Enniskillen63.4 kmBidirectional Dijkstra",
+        "events": "165126"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Waterford\u2192Letterkenny344.1 kmA*",
+        "events": "1806806"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Wexford\u2192Waterford56.2 kmDijkstra",
+        "events": "294626"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Athlone\u2192Limerick115.8 kmBidirectional Dijkstra",
+        "events": "661709"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Galway\u2192Letterkenny239.6 kmA*",
+        "events": "685645"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Enniskillen\u2192Derry83.7 kmDijkstra",
+        "events": "860417"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Armagh\u2192LetterkennyBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "repository": "emmettl/pfad",
+  "pagesRun": 36849699655,
+  "cloudflareRun": 36850405140,
+  "sourceCommit": "ea122641342c6255fdf1f7d7287d1da74d935fab",
+  "sourceFiles": 57,
+  "sourceBytes": 28874669,
+  "contentSha256": "ca5b0dffe89ff8ff82da7b3c2de01c846bf9f9327cdb66eceafadd7945426e16",
+  "note": "Pages passed both hosted browser engines and deployed. Cloudflare receipt confirms the same successful Pages artifact. Both hosts passed the complete Ireland UI proof."
+}

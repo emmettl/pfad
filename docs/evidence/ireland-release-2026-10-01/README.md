@@ -50,3 +50,11 @@ Existing country graphs and outline payloads remain unchanged.
 Validation: `npm run check` passed 75 unit cases and the complete 44-case
 Chromium/touch-WebKit browser suite passed. The app artifact is 57 files /
 28,874,669 bytes; country data and outlines remain separate.
+
+Publication: Pages run 36849699655 passed both hosted browser engines and
+deployed; Cloudflare run 36850405140 published that exact successful artifact.
+`deployment.json` records its source commit, byte count and content identity.
+`live-browser-context.json` confirms manual algorithms, outlines, native shared
+journey reload, eight genuine ambient journeys, automatic transition and return
+to Switzerland on both hosts. No application errors occurred; unrelated
+Cloudflare analytics CORS errors on Pages are retained separately in the report.
