@@ -9,8 +9,8 @@ export interface AmbientRecord extends JourneyRecord {
   events: number; replaySeconds: number | null; selector: string; pool: string; seed: number; selection: number
   cycle: string; journey: number; distanceProfile: DistanceProfile
 }
-export const ALGORITHM_CYCLE_VERSION = 'three-algorithm-rotation/1'
-const ALGORITHMS: SearchAlgorithm[] = ['dijkstra', 'bidirectional', 'astar']
+export const ALGORITHM_CYCLE_VERSION = 'four-algorithm-rotation/1'
+const ALGORITHMS: SearchAlgorithm[] = ['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar']
 const HOLD_MS = 6000, FADE_MS = 2000, ATTEMPTS = 5
 const off = (): AmbientState => ({ active: false, running: false, phase: 'off', opacity: 1, message: '' })
 

@@ -27,7 +27,7 @@ for (const a of PLACES) for (const b of PLACES) {
 }
 for (const [a, b] of [['Genève', 'Zürich'], ['Zürich', 'Genève'], ['Lugano', 'Basel'], ['Basel', 'Lugano'], ['Sion', 'Chur'], ['Chur', 'Sion'], ['Andermatt', 'St. Moritz'], ['St. Moritz', 'Andermatt'], ['Genève', 'Lausanne'], ['Lausanne', 'Genève']]) {
   const r = snapEndpoints(graph, PLACES.find(p => p.name === a), PLACES.find(p => p.name === b))
-  const results = [dijkstra(graph, r.start, r.goal), bidirectional(graph, reverse, r.start, r.goal), astar(graph, reverse, r.start, r.goal)]
+  const results = [dijkstra(graph, r.start, r.goal), bidirectional(graph, reverse, r.start, r.goal), astar(graph, reverse, r.start, r.goal), bidirectional(graph, reverse, r.start, r.goal, 0, true)]
   assert.notEqual(results[0].routeMetres, null)
   for (const result of results) {
     assert.equal(result.routeMetres, results[0].routeMetres)
@@ -41,14 +41,14 @@ for (const [a, b] of [['Genève', 'Zürich'], ['Zürich', 'Genève'], ['Lugano',
   }
   const comparison = { start: r.start, goal: r.goal, snapping: r.snapping, routeMetres: results[0].routeMetres,
     algorithms: results.map(result => ({ algorithm: result.algorithm, searchMs: result.searchMs,
-      events: result.trace.length, settlements: result.exploredNodes, examinedArcs: result.examinedArcs, routeEdges: result.routeEdges.length })) }
+      balancedHeuristic: result.balancedHeuristic, tieBreak: result.tieBreak, events: result.trace.length, settlements: result.exploredNodes, examinedArcs: result.examinedArcs, routeEdges: result.routeEdges.length })) }
   comparisons.push(comparison)
-  console.log(`${a} → ${b}: ${comparison.routeMetres} m, all three algorithms agree`)
+  console.log(`${a} → ${b}: ${comparison.routeMetres} m, all four algorithms agree`)
 }
 const report = { measuredAt: new Date().toISOString(), snappingVersion: 'nearby-shared-component/1',
   dataset: { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile,
     sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp },
-  note: 'Checked the committed node/edge chunks against their hashes. Directed reachability and reversal-stable snaps checked for all 12 × 12 curated pairs. Ten directed journeys compared across all three production algorithms; every chosen edge checked for adjacency, allowed direction and exact cost sum. Snap preparation is separate from algorithm replay.',
+  note: 'Checked the committed node/edge chunks against their hashes. Directed reachability and reversal-stable snaps checked for all 12 × 12 curated pairs. Ten directed journeys compared across all four production algorithms; every chosen edge checked for adjacency, allowed direction and exact cost sum. Snap preparation is separate from algorithm replay.',
   checks, comparisons }
 const output = process.argv[2] ?? '.cache/endpoint-audit.json'
 await mkdir(dirname(output), { recursive: true }); await writeFile(output, JSON.stringify(report, null, 2) + '\n')

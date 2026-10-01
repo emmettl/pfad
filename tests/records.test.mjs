@@ -124,3 +124,16 @@ test('all curated manual and ambient places round-trip as unique slugs across ev
   }
   assert.ok(readStudyLink(studyUrl('https://motionstudies.app/pfad/', { ...study, country: 'unknown' })).error)
 })
+
+test('bidirectional A* survives native and legacy links and exports its balanced heuristic provenance', async () => {
+  const presentation = { ...study, algorithm: 'bidirectional-astar', progress: 0 }
+  assert.equal(readStudyLink(studyUrl('https://example.org/', presentation)).study.algorithm, presentation.algorithm)
+  assert.deepEqual(readStudyLink(legacy(presentation)).study, presentation)
+  const balancedHeuristic = { version: 'balanced-feasible-planar-distance/1', preparationMs: 12, forward: { version: 'feasible-planar-distance/1' }, backward: { version: 'feasible-planar-distance/1' } }
+  const result = { algorithm: 'bidirectional-astar/1', balancedHeuristic, trace: new Uint32Array([0x80000005]), backwardTimes: new Uint32Array([1, 0]) }
+  const bytes = gunzipSync(Buffer.from(await (await exportRecord(result, { source: {} }, presentation, [])).arrayBuffer()))
+  const record = JSON.parse(bytes.subarray(12, 12 + bytes.readUInt32LE(8)))
+  assert.equal(record.search.algorithm, 'bidirectional-astar/1')
+  assert.deepEqual(record.search.balancedHeuristic, balancedHeuristic)
+  assert.equal(record.buffers.backwardTimes.count, 2)
+})

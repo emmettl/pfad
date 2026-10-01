@@ -205,3 +205,29 @@ The verified loader uses two outstanding chunks, optional bounded persistence
 and strict readiness; see [DATA.md](DATA.md). Sharing pins graph/profile and
 restores a paused event frame. Binary exports retain actual packed event buffers
 and provenance rather than JSON-expanded traces; see [RECORDS.md](RECORDS.md).
+
+## Bidirectional A*
+
+`bidirectional-astar/1` shares the genuine two-front event recorder and renderer
+with bidirectional Dijkstra. Prepare feasible planar bounds `hG` towards the goal
+on the original directed graph and `hS` towards the start on the reversed graph.
+The balanced potential is `p(u) = (hG(u) - hS(u)) / 2`. Each original arc has
+nonnegative reduced cost `c(u,v) + p(v) - p(u)`; half-centimetres are represented
+exactly. Queue priorities are normalised to zero at each front's origin:
+
+- Forward: `dF(u) + p(u) - p(start)`.
+- Backward: `dB(u) + p(goal) - p(u)`.
+
+Stop when the sum of queue minima reaches
+`bestOriginalCost + p(goal) - p(start)`, or a front is exhausted. First contact
+remains an upper bound, never the stopping criterion. Route costs and
+predecessors retain original centimetres. Equal queue priorities alternate
+fronts starting forward; node IDs and arc order retain the existing deterministic
+rules. No shortcut or invented examination is recorded.
+
+Both heuristic preparations precede the search clock. Exported records include
+`balancedHeuristic` with version `balanced-feasible-planar-distance/1`, total
+preparation time and the two original heuristic records. Preparation temporarily
+adds two Float64 node arrays and the existing correction workspace; physical
+phone memory validation remains open. The replay retains mint/amber fronts and
+the existing first-connection light.

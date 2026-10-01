@@ -123,3 +123,10 @@ timestamps. The soundtrack and audiovisual/video export are not included.
 Road-derived recordings preserve OpenStreetMap attribution and ODbL terms in
 their metadata. Importing an arbitrary file into the live edition is future work;
 the documented envelope can already be inspected independently.
+
+Bidirectional A* links use `algorithm=bidirectional-astar`. Its exact exports
+retain both front timestamp arrays and `balancedHeuristic`, including the
+balanced-potential version, total preparation time and each directed estimate's
+version and correction measurements. The ambient cycle is now
+`four-algorithm-rotation/1`; older exported three-algorithm cycles retain their
+original metadata.

@@ -1,5 +1,6 @@
 import type { Endpoint, Graph, Meeting, SearchResult } from './contracts.ts'
 import { EventTrace } from './trace.ts'
+import { prepareHeuristic } from './astar.ts'
 import { Heap } from './engine.ts'
 
 // Bit 31 records the front; the remaining bits retain the original graph ID.
@@ -15,7 +16,13 @@ export function compileReverse(graph: Graph): ReverseGraph {
   return { offsets, from, arc }
 }
 
-export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoint, goal: Endpoint, snapMs = 0): SearchResult {
+export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoint, goal: Endpoint, snapMs = 0, guided = false): SearchResult {
+  const preparation = performance.now()
+  const towardGoal = guided ? prepareHeuristic(graph, reverse, start.node, goal.node) : undefined
+  const towardStart = guided ? prepareHeuristic(graph, reverse, goal.node, start.node, true) : undefined
+  const potential = towardGoal?.potential
+  if (potential && towardStart) for (let u = 0; u < potential.length; u++) potential[u] = (potential[u] - towardStart.potential[u]) / 2
+  const preparationMs = performance.now() - preparation
   const begun = performance.now(), n = graph.xy.length / 2, e = graph.from.length
   if (n >= 2 ** 29 || graph.arcTo.length >= 2 ** 29) throw new Error('Graph IDs exceed the bidirectional trace format')
   const distance = [new Float64Array(n).fill(Infinity), new Float64Array(n).fill(Infinity)]
@@ -40,11 +47,18 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
     if (candidate < best) { best = candidate; join = node }
   }
   distance[0][start.node] = 0; distance[1][goal.node] = 0
+  // Normalised reduced costs are nonnegative in both directions. Their path
+  // sum is the original cost plus p(goal)-p(start), including half-centimetres.
+  const shift = potential ? potential[goal.node] - potential[start.node] : 0
+  function priority(side: number, node: number, cost: number) {
+    if (!potential) return cost
+    return cost + (side ? potential[goal.node] - potential[node] : potential[node] - potential[start.node])
+  }
   heap[0].push(start.node, 0); heap[1].push(goal.node, 0)
   while (true) {
     const forward = heap[0].minimum(settled[0]), backward = heap[1].minimum(settled[1])
     // First contact is only an upper bound. Both queue minima certify optimality.
-    if (forward + backward >= best || !Number.isFinite(forward) || !Number.isFinite(backward)) break
+    if (forward + backward >= best + shift || !Number.isFinite(forward) || !Number.isFinite(backward)) break
     const side = forward === backward ? 1 - previousSide : forward < backward ? 0 : 1
     previousSide = side
     const u = heap[side].pop(); settled[side][u] = 1; exploredNodes++; record(side, 0, u); connect(u)
@@ -56,7 +70,7 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
       const candidate = distance[side][u] + graph.length[road]
       if (candidate < distance[side][v]) {
         distance[side][v] = candidate; parent[side][v] = u; parentEdge[side][v] = road
-        heap[side].push(v, candidate); improvements++; record(side, 2, a)
+        heap[side].push(v, priority(side, v, candidate)); improvements++; record(side, 2, a)
         if (!times[side][road * 2 + 1]) times[side][road * 2 + 1] = used
         connect(v)
       }
@@ -79,8 +93,9 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
     }
   }
   return {
-    algorithm: 'bidirectional-dijkstra/1',
-    tieBreak: 'smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection',
+    algorithm: guided ? 'bidirectional-astar/1' : 'bidirectional-dijkstra/1',
+    balancedHeuristic: towardGoal && towardStart ? { version: 'balanced-feasible-planar-distance/1', preparationMs, forward: towardGoal.record, backward: towardStart.record } : undefined,
+    tieBreak: `smaller queue ${guided ? 'normalised reduced cost' : 'distance'}; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection`,
     start, goal, searchMs, snapMs, routeMetres: Number.isFinite(best) ? best / 100 : null,
     routeNodes: Uint32Array.from(routeNodes), routeEdges: Uint32Array.from(routeEdges),
     routeReversed: Uint8Array.from(routeEdges, (edge, i) => Number(graph.from[edge] !== routeNodes[i])),

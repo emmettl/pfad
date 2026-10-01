@@ -162,7 +162,7 @@ and weights candidates inversely by one plus both endpoints’ accumulated use.
 A seeded xorshift32 generator makes the sequence reproducible. No precomputed
 route list is retained.
 
-`three-algorithm-rotation/1` cycles Dijkstra → bidirectional Dijkstra → A* →
+`four-algorithm-rotation/1` cycles Dijkstra → bidirectional Dijkstra → A* → bidirectional A* →
 Dijkstra, beginning with the manually selected algorithm. Automatic advancement
 and deliberate Next each advance one slot; retries within that journey keep its
 algorithm. Pause/resume leaves the slot unchanged. The quiet status identifies

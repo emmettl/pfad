@@ -270,7 +270,6 @@ its purpose, dependencies and completion criterion are clear.
 
 | Feature | What it could add | Dependency or constraint |
 | --- | --- | --- |
-| Bidirectional A* | Extend the delivered two-front Dijkstra mode with goal-directed search | R1–R4; a valid heuristic and bidirectional stopping rule |
 | Fastest-route profile | Compare distance with estimated travel time | Declared speed assumptions and access rules; no live-traffic claim |
 | Waypoints and alternative routes | Explore different answers to the same journey | Genuine routing method with explicit constraints |
 | Reachability / distance contours | Show the territory reachable within a distance or modelled time | Real single-source computation; separate from destination search |
@@ -321,3 +320,12 @@ context and classifying unresolved source references; physical phone budgets;
 search cancellation, WebGL recovery, richer place/coordinate entry, paired
 comparison, still-image export and a deliberate future graph-refresh audit.
 No physical-device or driving-legality completion is implied by browser tests.
+
+## Bidirectional A* · 1 October 2026
+
+Added a fourth exact shortest-distance algorithm using balanced feasible planar
+bounds, the existing two-front replay and a reduced-cost stopping certificate.
+Manual selection, shared links, exported provenance and ambient rotation include
+it. This does not complete routing legality or physical-phone validation.
+See [architecture](ARCHITECTURE.md#bidirectional-a) and
+[validation evidence](evidence/bidirectional-astar-2026-10-01/README.md).

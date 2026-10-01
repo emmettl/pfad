@@ -16,7 +16,7 @@ that can be watched, paused and inspected. The search is the subject.
 ## Current state
 
 A first working national study: a Web Worker runs deterministic Dijkstra,
-bidirectional Dijkstra or A* on
+bidirectional Dijkstra, A* or bidirectional A* on
 1,258,587 nodes and 1,390,206 physical road edges. A WebGL map reveals real
 examinations in event order. Choose towns or points on the map, pan and zoom,
 pause, seek backwards, or change the replay duration. The visual direction
@@ -27,6 +27,9 @@ two genuine fronts, mint from the origin and amber from the destination. A small
 light marks their first recorded connection; the algorithm continues to confirm
 the shortest distance. Completion reveals the actual route with a travelling
 glow. Very faint border and lake outlines can be toggled beside Sound.
+
+Bidirectional A* guides both mint/amber fronts with balanced, checked estimates,
+continuing after first contact to certify the shortest distance.
 
 A* explores using a checked lower bound on the remaining distance. Its cooler
 blue search shades towards ice-white as that estimate falls, with quieter older
@@ -43,7 +46,7 @@ demand, with two decoded pieces retained at most. See the [music brief](docs/MUS
 for composition sources, reproduction and remaining device checks.
 
 Ambient loops distance-selected journeys from the twelve curated Swiss places,
-cycling Dijkstra, bidirectional Dijkstra and A* from the selected algorithm,
+cycling Dijkstra, bidirectional Dijkstra, A* and bidirectional A* from the selected algorithm,
 with distance-based duration, a result hold and a transition to darkness. Pause
 sequence pauses the score too; Next and Exit preserve its player. Reduced motion
 provides completed stills and deliberate Next. Pacing and musical selection are

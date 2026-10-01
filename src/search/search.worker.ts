@@ -96,9 +96,9 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
     else {
       if (!graph || !manifest) throw new Error('The national graph has not finished loading')
       const endpoints = snapEndpoints(graph, request.start, request.goal)
-      if (request.algorithm === 'bidirectional' || request.algorithm === 'astar') reverse ??= compileReverse(graph)
-      const result = request.algorithm === 'bidirectional' && reverse
-        ? bidirectional(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
+      if (request.algorithm === 'bidirectional' || request.algorithm === 'astar' || request.algorithm === 'bidirectional-astar') reverse ??= compileReverse(graph)
+      const result = (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar') && reverse
+        ? bidirectional(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs, request.algorithm === 'bidirectional-astar')
         : request.algorithm === 'astar' && reverse ? astar(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
           : dijkstra(graph, endpoints.start, endpoints.goal, endpoints.snapMs)
       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }

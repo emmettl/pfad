@@ -5,13 +5,15 @@ import { BACKWARD, bidirectional, compileReverse } from '../src/search/bidirecti
 
 const endpoint = node => ({ node, name: String(node), lon: 0, lat: 0, snapMetres: 0 })
 const graph = (n, edges) => compileGraph({ xy: new Int32Array(n * 2), from: Uint32Array.from(edges, e => e[0]), to: Uint32Array.from(edges, e => e[1]), length: Uint32Array.from(edges, e => e[2]), direction: Uint8Array.from(edges, e => e[3] ?? 1), category: new Uint8Array(edges.length) })
-const run = (g, s, t) => bidirectional(g, compileReverse(g), endpoint(s), endpoint(t))
+for (const guided of [false, true]) {
+const run = (g, s, t) => bidirectional(g, compileReverse(g), endpoint(s), endpoint(t), 0, guided)
 
-test('bidirectional search matches independent relaxation on directed graphs, including zero costs and disconnected pairs', () => {
+test(`${guided ? 'bidirectional A*' : 'bidirectional Dijkstra'}: bidirectional search matches independent relaxation on directed graphs, including zero costs and disconnected pairs`, () => {
   let seed = 163
   const random = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed }
   for (let sample = 0; sample < 35; sample++) {
     const n = 9, g = graph(n, Array.from({ length: 19 }, () => [random() % n, random() % n, random() % 8, random() % 3]))
+    for (let u = 0; u < n; u++) { g.xy[u * 2] = random() % 100; g.xy[u * 2 + 1] = random() % 100 }
     for (let s = 0; s < n; s++) {
       const d = Array(n).fill(Infinity); d[s] = 0
       for (let j = 0; j < n; j++) for (let u = 0; u < n; u++) for (let a = g.offsets[u]; a < g.offsets[u + 1]; a++) d[g.arcTo[a]] = Math.min(d[g.arcTo[a]], d[u] + g.length[g.arcEdge[a]])
@@ -33,7 +35,7 @@ test('bidirectional search matches independent relaxation on directed graphs, in
   }
 })
 
-test('first contact is recorded without prematurely accepting a longer route', () => {
+test(`${guided ? 'bidirectional A*' : 'bidirectional Dijkstra'}: first contact is recorded without prematurely accepting a longer route`, () => {
   const g = graph(4, [[0, 3, 1000], [0, 1, 100], [1, 2, 100], [2, 3, 100]])
   const r = run(g, 0, 3)
   assert.equal(r.meeting.candidateMetres, 10)
@@ -45,7 +47,7 @@ test('first contact is recorded without prematurely accepting a longer route', (
   assert.equal(run(g, 2, 2).meeting, undefined)
 })
 
-test('both fronts record only genuine directed arcs, texture timestamps and checkpoint counts', () => {
+test(`${guided ? 'bidirectional A*' : 'bidirectional Dijkstra'}: both fronts record only genuine directed arcs, texture timestamps and checkpoint counts`, () => {
   const g = graph(4000, Array.from({ length: 3999 }, (_, i) => [i, i + 1, 10]))
   const r = run(g, 0, 3999), current = [-1, -1], seen = [new Set(), new Set()], examined = [-1, -1]
   const firstSeen = [new Map(), new Map()], firstImproved = [new Map(), new Map()]
@@ -74,3 +76,5 @@ test('both fronts record only genuine directed arcs, texture timestamps and chec
     assert.deepEqual(countsAt(r, (stop + .1) / r.trace.length), counts)
   }
 })
+
+}

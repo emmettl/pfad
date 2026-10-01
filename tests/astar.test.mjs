@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'vitest'
 import { compileGraph, countsAt, dijkstra } from '../src/search/engine.ts'
-import { compileReverse } from '../src/search/bidirectional.ts'
+import { compileReverse, bidirectional } from '../src/search/bidirectional.ts'
 import { astar, prepareHeuristic } from '../src/search/astar.ts'
 
 const endpoint = node => ({ node, name: String(node), lon: 0, lat: 0, snapMetres: 0 })
@@ -73,4 +73,25 @@ test('goal-directed search settles less work on a branching corridor and records
     const expected = [0, 0, 0]; for (let i = 0; i < stop; i++) expected[r.trace[i] & 3]++
     assert.deepEqual(countsAt(r, (stop + .1) / r.trace.length), expected)
   }
+})
+
+ test('balanced bidirectional A* keeps reduced costs feasible and focuses a branching corridor', () => {
+  const xy = [], edges = []
+  for (let i = 0; i < 800; i++) {
+    xy.push([i * 10, 0], [i * 10, 10])
+    if (i) edges.push([(i - 1) * 2, i * 2, 1112, 0])
+    edges.push([i * 2, i * 2 + 1, 1112, 0])
+  }
+  const g = graph(xy, edges), reverse = compileReverse(g)
+  const f = prepareHeuristic(g, reverse, 0, 1598).potential
+  const b = prepareHeuristic(g, reverse, 1598, 0, true).potential
+  const p = Array.from(f, (h, u) => (h - b[u]) / 2)
+  for (let u = 0; u < p.length; u++) for (let a = g.offsets[u]; a < g.offsets[u + 1]; a++) {
+    assert.ok(g.length[g.arcEdge[a]] + p[g.arcTo[a]] - p[u] >= 0)
+  }
+  const r = bidirectional(g, reverse, endpoint(0), endpoint(1598), 0, true)
+  assert.equal(r.routeMetres, dijkstra(g, endpoint(0), endpoint(1598)).routeMetres)
+  assert.ok(r.exploredNodes < bidirectional(g, reverse, endpoint(0), endpoint(1598)).exploredNodes)
+  assert.deepEqual(r.trace, bidirectional(g, reverse, endpoint(0), endpoint(1598), 0, true).trace)
+  assert.equal(r.balancedHeuristic.version, 'balanced-feasible-planar-distance/1')
 })
