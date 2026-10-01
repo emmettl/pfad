@@ -53,6 +53,7 @@ h1 { font-size: 43px; font-weight: 400; letter-spacing: -.07em; line-height: 1; 
 .map { position: absolute; inset: 0; touch-action: none; cursor: grab; }
 .map canvas { display: block; touch-action: none; }
 .map:active { cursor: grabbing; }
+.map:focus-visible { outline: 1px solid #88bda5; outline-offset: -3px; }
 .map.pick-mode { cursor: crosshair; }
 .map-markers { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .map-marker { position: absolute; transform: translate(-5px, -5px); display: flex; align-items: center; gap: 10px; color: #cce7d8; white-space: nowrap; font-size: 11px; text-shadow: 0 1px 8px #080d10, 0 0 4px #080d10; }

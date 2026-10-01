@@ -132,6 +132,9 @@ accompaniment and a coherent ambient experience.
 - [ ] Refine playback pacing and duration choices for searches of very different
   sizes. State any nonlinear event-time treatment clearly.
 - [ ] Improve endpoint editing, snap feedback, keyboard use and touch controls.
+- [x] Add keyboard playback: Space play/pause, Left/Right one-second scrubbing,
+  Shift five-second jumps and Home/End boundaries. Keep native control keys,
+  expose a focusable map and pause the replay when scrubbing.
   Add Swiss place-name search and coordinate entry beyond the initial town list,
   using a bounded, attributed place dataset.
 - [ ] Add a quiet viewing mode with reduced controls and an optional compact

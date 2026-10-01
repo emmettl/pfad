@@ -4,6 +4,15 @@ PFAD owns its compiler, routing graph, search engine, event trace and WebGL
 composition. Public Motion Studies packages provide fonts, tokens and the
 accessible timeline scrubber. Imports and releases are checked at the boundary.
 
+Playback shortcuts share the button's toggle and the scrubber's seek path.
+Space toggles once per press; Left/Right seeks one replay second, Shift seeks
+five, and Home/End selects a boundary. Seeking pauses and clamps to the replay
+window, using the current replay duration. Keyboard focus can enter the map and
+timeline. Native pickers, sound sliders, editable fields and About retain their
+own keys; shortcuts are inactive while loading, computing, picking, confirming
+a large dataset or in an error state. Modifier combinations used by the browser
+are not intercepted.
+
 ## Data and search
 
 The offline study compiler packages a source-verified OSM graph and separately

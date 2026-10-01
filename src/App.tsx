@@ -38,6 +38,11 @@ export function App() {
     const p = Math.min(1, Math.max(0, value)); progressRef.current = p; setProgress(p)
     return scene.current?.setProgress(p, animate) ?? false
   }, [])
+  const togglePlayback = useCallback(() => {
+    if (!result || busy) return
+    if (progressRef.current >= 1 && !revealingRef.current) seek(0)
+    setPlaying(value => !value)
+  }, [result, busy, seek])
   const search = useCallback((a: Point, b: Point) => {
     if (!worker.current) return
     setError(''); setBusy(true); setPlaying(false); setPick(null)
@@ -103,6 +108,31 @@ export function App() {
     initialQuery.current = { start: next.places[0], goal: next.places[1] }
     setStart(next.places[0]); setGoal(next.places[1]); setPendingCountry(null); setCountry(next)
   }
+
+  useEffect(() => {
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || event.isComposing || event.altKey || event.ctrlKey || event.metaKey || document.hidden) return
+      const target = event.target instanceof Element ? event.target : null
+      const timeline = !!target?.closest('.ms-timeline-scrubber')
+      if (target?.closest('select, textarea, [contenteditable]:not([contenteditable="false"]), details, dialog, [role="dialog"], [role="combobox"], [role="listbox"], [role="menu"], [role="tree"], [role="radiogroup"]')) return
+      if (target?.closest('input, [role="slider"], [role="spinbutton"]') && !timeline) return
+      if (!result || busy || error || pick !== null || pendingCountry !== null) return
+      const space = event.code === 'Space' || event.key === ' '
+      if (space) {
+        if (target?.closest('button, a, [role="button"]')) return
+        event.preventDefault()
+        if (!event.repeat) togglePlayback()
+      } else if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+        event.preventDefault(); setPlaying(false)
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? 1
+          : progressRef.current + (event.key === 'ArrowLeft' ? -1 : 1) * (event.shiftKey ? 5 : 1) / duration
+        seek(next)
+      }
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [result, busy, error, pick, pendingCountry, duration, seek, togglePlayback])
+
   const counts = result ? countsAt(result, progress) : [0, 0, 0]
   const completed = progress >= 1 && result !== null
   const queryControl = (point: Point, update: (point: Point) => void, end: 'start' | 'goal') => (
@@ -126,6 +156,7 @@ export function App() {
         <p>A* directs the search using a checked lower bound on the remaining distance. Cool blue roads shade towards ice-white as that estimate falls; recent examinations glow while earlier branches recede. Only roads actually examined are revealed.</p>
         <p>The A* distance bound is prepared separately from the timed search, with corrections for the graph’s rounded coordinates and road lengths. All three algorithms solve the same shortest-distance question.</p>
         <p>Once the recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
+        <p id="playback-shortcuts">Keyboard: Space plays or pauses the search replay. Left/Right moves one second; hold Shift to move five seconds. Home/End jumps to the beginning or end. These shortcuts work on the map and timeline; place pickers and sound controls keep their own keys.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Ferries are excluded, so islands and Northern Ireland can form separate components. Its route describes this connectivity model.</p>
         <p>Endpoints snap to nearby main or residential road nodes, within two kilometres. Where possible, both ends use the same road component with the smallest combined displacement. The search still checks one-way reachability; disconnected journeys can return no route.</p>
         <p>OpenStreetMap snapshot · {country.snapshot}.<br />Road curves are simplified for drawing; search costs retain original lengths.</p>
@@ -141,7 +172,7 @@ export function App() {
       {queryControl(goal, setGoal, 'goal')}
       <button className="search-button" disabled={!ready || busy} onClick={() => search(start, goal)}>{busy ? 'Computing…' : 'Search'}</button>
     </div>
-    <main className={`map ${pick ? 'pick-mode' : ''}`} ref={host} aria-label={`Recorded pathfinding across ${country.name}`} />
+    <main className={`map ${pick ? 'pick-mode' : ''}`} ref={host} tabIndex={0} aria-label={`Recorded pathfinding across ${country.name}`} aria-describedby="playback-shortcuts" aria-keyshortcuts="Space ArrowLeft ArrowRight Shift+ArrowLeft Shift+ArrowRight Home End" />
     {pending && <div className="country-confirm" role="dialog" aria-label="Open a large road dataset"><p>{pending.name} · {pending.downloadMB} MB download</p><p>{pending.deviceNote}</p><button onClick={() => chooseCountry(pending.id)}>Open {pending.name}</button><button onClick={() => setPendingCountry(null)}>Cancel</button></div>}
     {pick && <div className="map-hint">Choose point {pick === 'start' ? 'A' : 'B'} on the map <button onClick={() => setPick(null)}>Cancel</button></div>}
     {!ready && !error && <div className="loading-panel" role="status"><span className="loading-title">Opening {country.name}</span><p>{loading.stage}</p>{loading.total > 0 && <><progress value={loading.loaded} max={loading.total} aria-label="Road data download" /><span className="mono">{(loading.loaded / 1000000).toFixed(1)} / {(loading.total / 1000000).toFixed(1)} MB</span></>}</div>}
@@ -154,9 +185,9 @@ export function App() {
         <div className="compute-readout"><select aria-label="Search algorithm" value={algorithm} disabled={!ready || busy} onChange={event => { const mode = event.target.value as SearchAlgorithm; algorithmRef.current = mode; setAlgorithm(mode); search(start, goal) }}><option value="dijkstra">Dijkstra</option><option value="bidirectional">Bidirectional Dijkstra</option><option value="astar">A*</option></select>{result && <><strong data-testid="compute-time">{result.searchMs.toFixed(0)} ms</strong><span>computation</span></>}{result?.backwardTimes && <span className="front-key"><i className="front-a" />A<i className="front-b" />B</span>}{result?.goalProximity && <span className="front-key"><i className="goal-gradient" />Towards B</span>}</div>
       </div>
       <div className="replay-controls">
-        <button disabled={!result || busy} onClick={() => { if (progress >= 1 && !revealingRef.current) seek(0); setPlaying(value => !value) }}>{playing ? 'Pause' : 'Play'}</button>
+        <button disabled={!result || busy} onClick={togglePlayback} title="Play / pause (Space)" aria-keyshortcuts="Space">{playing ? 'Pause' : 'Play'}</button>
         <button disabled={!result || busy} onClick={() => { seek(0); setPlaying(true) }} aria-label="Replay search from the beginning">↺</button>
-        <TimelineScrubber windowStart={0} windowEnd={duration} time={progress * duration} onSeek={time => { setPlaying(false); seek(time / duration) }} onScrubStart={() => setPlaying(false)} ariaLabel="Search replay" ariaValueText={`${(progress * duration).toFixed(1)} seconds of ${duration}; ${Math.floor(progress * (result?.trace.length ?? 0))} recorded events`} step={.01} disabled={!result || busy} />
+        <TimelineScrubber windowStart={0} windowEnd={duration} time={progress * duration} onSeek={time => { setPlaying(false); seek(time / duration) }} onScrubStart={() => setPlaying(false)} ariaLabel="Search replay" describedBy="playback-shortcuts" ariaValueText={`${(progress * duration).toFixed(1)} seconds of ${duration}; ${Math.floor(progress * (result?.trace.length ?? 0))} recorded events`} step={.01} disabled={!result || busy} />
         <span className="replay-time">{(progress * duration).toFixed(1)}<small> / {duration}s</small></span>
         <select aria-label="Replay duration" value={duration} onChange={event => setDuration(Number(event.target.value))}>{[5, 15, 30, 60, 120].map(value => <option key={value} value={value}>{value}s</option>)}</select>
       </div>
