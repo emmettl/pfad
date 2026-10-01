@@ -10,8 +10,8 @@ const output = process.argv[3] ?? '.cache/mobile-memory/phone-proof.json'
 const server = base ? null : await preview({ build: { outDir: process.env.PFAD_PROOF_DIST ?? 'dist' }, preview: { host: '127.0.0.1', port: 4199, strictPort: true } })
 const browser = await webkit.launch()
 const page = await browser.newPage({ viewport: { width: 402, height: 874 }, isMobile: true, hasTouch: true, deviceScaleFactor: 3 })
-const errors = []
-page.on('pageerror', error => errors.push(error.message))
+const errors = [], analyticsErrors = []
+page.on('pageerror', error => (error.message.includes('cloudflareinsights.com/cdn-cgi/rum') ? analyticsErrors : errors).push(error.message))
 await page.addInitScript(() => {
   localStorage.setItem('pfad-country-warning:de', '1')
   const NativeWorker = window.Worker
@@ -68,6 +68,6 @@ try {
   if (proof.workers.slice(1).some(worker => worker.geometryChunks !== 0 || worker.loading.networkBytes !== 0)) throw Error('Topology reload redownloaded cached data or duplicated drawing')
   if (errors.length) throw Error(errors.join('; '))
   await mkdir(dirname(output), { recursive: true })
-  await writeFile(output, JSON.stringify({ measuredAt: new Date().toISOString(), url: page.url(), note: 'Desktop WebKit touch viewport, not a physical iPhone or a measurement of process peak memory.', ...proof, errors }, null, 2) + '\n')
+  await writeFile(output, JSON.stringify({ measuredAt: new Date().toISOString(), url: page.url(), note: 'Desktop WebKit touch viewport, not a physical iPhone or a measurement of process peak memory.', ...proof, errors, analyticsErrors }, null, 2) + '\n')
   console.log(JSON.stringify(proof))
 } finally { await browser.close(); if (server) await new Promise(resolve => server.httpServer.close(resolve)) }

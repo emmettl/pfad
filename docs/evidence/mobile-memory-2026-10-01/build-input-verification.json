@@ -1,0 +1,5 @@
+{
+  "sourceCommit": "a98181a9a4844199dfb8699920e625ae80c3c95d",
+  "verifiedInputFiles": 109,
+  "note": "Committed source, public assets, package locks and build configuration are byte-identical to the locally tested isolated build."
+}

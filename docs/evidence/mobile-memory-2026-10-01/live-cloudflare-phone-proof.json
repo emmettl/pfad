@@ -1,0 +1,106 @@
+{
+  "measuredAt": "2026-10-01T16:02:26.877Z",
+  "url": "https://motionstudies.app/pfad/?country=de&from=berlin&to=munich&algorithm=bidirectional&duration=15",
+  "note": "Desktop WebKit touch viewport, not a physical iPhone or a measurement of process peak memory.",
+  "workers": [
+    {
+      "terminated": true,
+      "requests": [
+        {
+          "type": "load",
+          "topologyOnly": false
+        },
+        {
+          "type": "search",
+          "roadUploads": "deferred"
+        }
+      ],
+      "geometryChunks": 120,
+      "loading": {
+        "version": "verified-chunk-loader/1",
+        "networkBytes": 140876488,
+        "cachedBytes": 0,
+        "cacheAvailable": true,
+        "verificationMs": 118,
+        "decodeMs": 828,
+        "compileMs": 270,
+        "totalMs": 13837
+      }
+    },
+    {
+      "terminated": true,
+      "requests": [
+        {
+          "type": "load",
+          "topologyOnly": true,
+          "roadUploads": "deferred"
+        },
+        {
+          "type": "search",
+          "roadUploads": "deferred"
+        }
+      ],
+      "geometryChunks": 0,
+      "loading": {
+        "version": "verified-chunk-loader/1",
+        "networkBytes": 0,
+        "cachedBytes": 125254351,
+        "cacheAvailable": true,
+        "verificationMs": 68,
+        "decodeMs": 777,
+        "compileMs": 310,
+        "totalMs": 1014
+      }
+    },
+    {
+      "terminated": true,
+      "requests": [
+        {
+          "type": "load",
+          "topologyOnly": true,
+          "roadUploads": "deferred"
+        },
+        {
+          "type": "search",
+          "roadUploads": "deferred"
+        }
+      ],
+      "geometryChunks": 0,
+      "loading": {
+        "version": "verified-chunk-loader/1",
+        "networkBytes": 0,
+        "cachedBytes": 125254351,
+        "cacheAvailable": true,
+        "verificationMs": 78,
+        "decodeMs": 711,
+        "compileMs": 290,
+        "totalMs": 997
+      }
+    }
+  ],
+  "results": [
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "routeMetres": 578359.82,
+      "events": 23476639,
+      "drawingVertices": "32951556",
+      "traceSha256": "9499d05ebe4ecde78a6948c66cdd4727e5666b110d7dc5fe84898f94c4b8b022"
+    },
+    {
+      "algorithm": "astar/1",
+      "routeMetres": 578359.82,
+      "events": 7915701,
+      "drawingVertices": "32951556",
+      "traceSha256": "aac2f4bebd041d9fd1a6e625cad918049daf28e41d80ac616b75406a4f1c8e29"
+    },
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "routeMetres": 578359.82,
+      "events": 23476639,
+      "drawingVertices": "32951556",
+      "traceSha256": "9499d05ebe4ecde78a6948c66cdd4727e5666b110d7dc5fe84898f94c4b8b022"
+    }
+  ],
+  "errors": [],
+  "analyticsErrors": []
+}

@@ -70,3 +70,24 @@ With mirror setup fixed, WebKit passed all 30 checks. Chromium reached its
 30th check when the existing ten-minute job cap terminated it; a prior run
 passed the same suite in 9m51s. The browser job budget is now 15 minutes, with
 individual test timeouts, both engines and all assertions preserved.
+
+## Published result
+
+[Pages release run 36886777092](https://github.com/emmettl/pfad/actions/runs/36886777092)
+passed build/unit checks and all 60 browser checks, then deployed source
+`a98181a9a4844199dfb8699920e625ae80c3c95d`.
+[Cloudflare run 36888280928](https://github.com/emmettl/pfad/actions/runs/36888280928)
+independently published that same successful artifact. The
+[release receipt](cloudflare-release.json) records 57 files / 28,938,329 bytes
+and content SHA-256 `9c9e82f1028dcb0d459d46a30d1260db74ab4dae9424ba704e08c2f7b687f663`.
+
+[Every file](live-artifact-verification.json) is byte-identical to the tested
+build on Pages, the canonical Cloudflare path and the PFAD subdomain.
+[Pages](live-pages-phone-proof.json) and
+[Cloudflare](live-cloudflare-phone-proof.json) live checks each replay
+Berlin–Munich in full at 15 seconds, reopen A*, then repeat bidirectional.
+All vertices, route costs and trace hashes agree; routing workers terminate
+before replay and subsequent searches fetch no new topology or geometry bytes.
+Application error lists are empty; unrelated Cloudflare analytics CORS errors
+are retained separately when observed. These remain desktop WebKit checks,
+not confirmation that the reporting iPhone has stopped crashing.
