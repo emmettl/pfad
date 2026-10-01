@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-10-01T08:35:05.023566+00:00",
+  "measuredAt": "2026-10-01T08:50:45.729739+00:00",
   "unitTests": 61,
   "browserTests": 46,
   "targetedSharingLoadingTests": 8,
@@ -14,5 +14,10 @@
     "files": 57,
     "bytes": 29225995
   },
-  "note": "Local npm run check and complete Chromium/touch-WebKit Playwright suite passed on combined country/ambient-controls app; country UI proofs used live immutable R2 data. No physical phone assertion."
+  "note": "Local npm run check and complete Chromium/touch-WebKit Playwright suite passed on combined country/ambient-controls app; country UI proofs used live immutable R2 data. No physical phone assertion.",
+  "scoreWakeTests": {
+    "chromium": true,
+    "webkit": true,
+    "softwareChromium": true
+  }
 }

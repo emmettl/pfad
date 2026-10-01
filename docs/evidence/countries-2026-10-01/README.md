@@ -53,3 +53,9 @@ reads current study parameters before committing the final URL. The final
 combined browser run passed all 46 checks; the targeted sharing/loading run
 also passed all eight checks. Four final country UI proofs passed after merging
 the ambient-controls improvement, including keyboard Escape exit.
+
+The preceding ambient-controls CI release exposed a score-test interaction issue:
+its Pause click could occur after controls retreated on a slow renderer. The
+score test now focuses the actual map to wake the controls before clicking. Both
+engine runs and a Chromium software-graphics run passed; the app artifact remains
+unchanged by this test-only correction.
