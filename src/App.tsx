@@ -323,7 +323,7 @@ export function App() {
           <span role="status">{recordStatus}</span>
         </div>
         <a href="https://github.com/emmettl/pfad">PFAD repository ↗</a>
-      </div></details><div className="map-tools"><SoundControl ref={sound} sequencePaused={ambientState.active && !ambientState.running} /><button className="outline-control" aria-label="Show border and lake outlines" aria-pressed={outlines} disabled={!ready || !outlineReady || !!mapError || !country.outlines} onClick={() => { const visible = !outlines; setOutlines(visible); outlinePreference.current = visible; scene.current?.setGeographyVisible(visible) }}><span aria-hidden="true">◇</span> Outlines</button></div></div>
+      </div></details><div className="map-tools"><SoundControl ref={sound} sequencePaused={ambientState.active && !ambientState.running} /><button className="outline-control" aria-label="Show border and lake outlines" aria-pressed={outlines} disabled={!outlineReady || !!mapError || !country.outlines} onClick={() => { const visible = !outlines; setOutlines(visible); outlinePreference.current = visible; scene.current?.setGeographyVisible(visible) }}><span aria-hidden="true">◇</span> Outlines</button></div></div>
     </header>
     <div className="route-panel" aria-label="Search endpoints">
       {queryControl(start, setStart, 'start')}
