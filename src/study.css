@@ -180,3 +180,7 @@ footer a { text-decoration: none; pointer-events: auto; }
 .watch-actions button span { margin-left: 12px; }
 .watch-exit > span { font-size: 10px; color: #839b8d; white-space: nowrap; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .watch-exit { transition: none; } }
+
+@media (max-width: 600px) {
+  .search-tip { width: 12px; height: 12px; box-shadow: 0 0 7px 3px #ffb68d, 0 0 24px 9px #ff806077; }
+}

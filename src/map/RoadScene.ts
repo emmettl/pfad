@@ -36,6 +36,7 @@ const fragmentShader = `
   uniform float uTerritories;
   uniform float uTerritoryComplete;
   uniform float uGreedy;
+  uniform float uCompact;
   flat in float vSource;
   uniform float uAstar;
   flat in uvec2 vTimes;
@@ -46,17 +47,17 @@ const fragmentShader = `
     if (times.x == 0u || uEvent < times.x) return vec4(0.);
     uint recent = uGreedy > .5 && times.y != 0u && uEvent >= times.y ? max(times.x, times.y) : times.x;
     float age = float(uEvent - recent) / max(uTotal, 1.);
-    float pulse = exp(-age / mix(.006, .0035, uGreedy));
+    float pulse = exp(-age / mix(.006, mix(.0035, .014, uCompact), uGreedy));
     uint improvement = times.y;
     float tree = improvement != 0u && uEvent >= improvement ? 1. : 0.;
-    float memory = mix(mix(.12, .045, uAstar) + tree * mix(.07, .10, uAstar), .10 + tree * .04, uGreedy);
+    float memory = mix(mix(.12, .045, uAstar) + tree * mix(.07, .10, uAstar), mix(.10 + tree * .04, .32 + tree * .16, uCompact), uGreedy);
     return vec4(mix(quiet, bright, pulse), memory + pulse * mix(.72, .92, uGreedy));
   }
   void main() {
     vec3 quiet = mix(vec3(.21, .48, .42), mix(vec3(.16, .35, .65), vec3(.30, .55, .60), vGoalProximity), uAstar);
     vec3 bright = mix(vec3(.52, .95, .78), mix(vec3(.42, .72, 1.), vec3(.78, .97, 1.), vGoalProximity), uAstar);
     if (uGreedy > .5) {
-      quiet = vec3(.60, .24, .19);
+      quiet = mix(vec3(.60, .24, .19), vec3(.90, .38, .27), uCompact);
       bright = mix(vec3(1., .40, .32), vec3(1., .87, .72), vGoalProximity);
     }
     if (uTerritories > .5) {
@@ -141,7 +142,7 @@ export class RoadScene {
     this.proximityTexture.needsUpdate = true
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, glslVersion: THREE.GLSL3,
-      uniforms: { uGreedy: { value: 0 }, uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
+      uniforms: { uCompact: { value: 0 }, uGreedy: { value: 0 }, uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
       transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     })
     host.appendChild(this.renderer.domElement)
@@ -383,6 +384,7 @@ export class RoadScene {
   resize() {
     this.width = Math.max(this.host.clientWidth, 1); this.height = Math.max(this.host.clientHeight, 1)
     this.renderer.setSize(this.width, this.height)
+    this.material.uniforms.uCompact.value = this.width <= 600 ? 1 : 0
     this.routeMaterial.uniforms.uResolution.value.set(this.width, this.height)
     const half = this.halfHeight, aspect = this.width / this.height
     this.camera.left = -half * aspect; this.camera.right = half * aspect; this.camera.top = half; this.camera.bottom = -half
