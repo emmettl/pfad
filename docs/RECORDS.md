@@ -1,24 +1,42 @@
 # Sharing and exporting a study
 
-The address bar follows requested endpoints, exact graph identity and profile,
-algorithm, replay duration, event progress, outlines and camera position/zoom.
+The address bar follows requested endpoints, country, algorithm, replay duration,
+outlines and camera position/zoom using readable native query parameters:
+
+```text
+https://motionstudies.app/pfad/?from=zurich&to=geneve
+https://motionstudies.app/pfad/?from=basel&to=lugano&algorithm=astar&duration=15
+https://motionstudies.app/pfad/?country=is&from=reykjavik&to=akureyri
+```
+
+Curated places use lowercase name slugs; map-picked points use `longitude,latitude`.
+Switzerland, Dijkstra, a 30-second replay, visible outlines and the default camera
+are omitted as defaults. Other settings use `country`, `algorithm`, `duration`,
+`outlines=0` and `view=x,y,zoom`. Camera values keep up to six decimal places and
+replay durations up to two; requested
+coordinates retain their numeric precision. Custom endpoint labels, when needed,
+use `from-name` or `to-name`.
+
 Copy the URL directly, or use **Copy study link** in About this study to flush and
-copy the latest frame. Updates replace the current browser-history entry at most
-twice a second; they do not reload the graph or add an entry per frame. Opening a
-URL recomputes the genuine search and displays that
-frame paused. It does not autoplay ambient mode or enable music. Computation
+copy the latest settings. Updates replace the current browser-history entry at most
+twice a second; replay ticks do not change the URL. Opening a link recomputes the
+genuine search and starts paused at the beginning. It does not autoplay ambient mode or enable music. Computation
 timing is measured anew; a URL does not preserve the original processor time.
 
-Endpoint edits before Search are included, with progress reset to zero because
-the existing trace belongs to the previous question. An ambient link captures
+Endpoint edits before Search are included. An ambient link captures
 the currently accepted journey and its algorithm, not an automatically started
 sequence. Candidate retries leave the previous accepted link intact. Exports
 continue to describe the actual recorded search, even when picker edits are pending.
 
-Links use `pfad-study-link/1` JSON in the URL fragment. Coordinates and settings
-are bounded and validated. The edition accepts only a selected, pinned country
-release. An unavailable identity gives an explicit error instead of silently
-substituting today's graph. A linked UK release still requires the existing
+New links do not contain a replay offset or graph checksum. They use the immutable
+country release selected by the edition that opens them. Exact source identity
+and replay frames remain in search record exports below. Coordinates and settings
+are bounded and validated; malformed or ambiguous parameters give an explicit error.
+
+Existing `pfad-study-link/1` JSON fragments still open their recorded frame paused.
+An unavailable legacy identity gives an explicit error instead of silently
+substituting today's graph. Successful legacy links are rewritten to the concise
+format in the address bar. A linked UK study still requires the existing
 93 MB confirmation before downloading. Swiss and UK releases remain available
 under their immutable published keys; preserving them is a deliberate, bounded
 archive policy, not a guarantee of indefinite retention of every future release.
@@ -35,8 +53,8 @@ Dijkstra study, captured from the production renderer at the pinned Swiss releas
 Its [source record](evidence/sharing-2026-10-01/social-card.json) retains the graph,
 algorithm, requested/snapped endpoints, event count, route cost and image checksum.
 Road and outline attribution appears in the card. It is an edition preview shared
-by all study URLs; URL fragments retain the interactive state and do not reach
-the HTTP server, so previews do not depict every linked journey individually.
+by all study URLs. The static hosts serve the same edition preview for every
+journey; previews do not depict each linked journey individually.
 
 The committed image has a content-hashed filename. To regenerate deliberately,
 build and serve a local preview on port 4191, then run `npm run share:render`.

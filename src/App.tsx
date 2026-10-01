@@ -11,7 +11,7 @@ import { AmbientSequence, type AmbientState } from './ambient/sequence.ts'
 import { useAmbientChrome } from './ambient/useChrome.ts'
 import type { JourneyPair } from './ambient/selector.ts'
 import { ROAD_CACHE_NAME, type LoadMeasurements } from './search/chunks.ts'
-import { readStudyLink, studyUrl, StudyUrlBinding, type StudyLink } from './records/link.ts'
+import { clearStudyUrl, readStudyLink, shareView, studyUrl, StudyUrlBinding, type StudyLink } from './records/link.ts'
 import { exportRecord, downloadBlob } from './records/export.ts'
 import './study.css'
 
@@ -23,7 +23,7 @@ const algorithmName = (algorithm: SearchAlgorithm) => ({ dijkstra: 'Dijkstra', b
 
 export function App() {
   const [shared, setShared] = useState(() => {
-    const parsed = readStudyLink(location.hash)
+    const parsed = readStudyLink(location.href)
     if (parsed.study && COUNTRIES.find(c => c.id === parsed.study!.country)?.identity !== parsed.study.dataset) return { error: 'The exact road release in this link is not available in this edition. Its graph has not been substituted.' }
     return parsed
   })
@@ -89,22 +89,28 @@ export function App() {
   }, [country.large])
 
   useEffect(() => {
-    const binding = new StudyUrlBinding(() => location.href, url => history.replaceState(history.state, '', url))
+    let previousURL = location.href
+    const binding = new StudyUrlBinding(() => location.href, url => { previousURL = url; history.replaceState(history.state, '', url) })
     urlBinding.current = binding
-    const navigate = (event: HashChangeEvent) => {
-      if ([event.oldURL, event.newURL].some(url => new URLSearchParams(new URL(url).hash.slice(1)).has('study'))) {
+    const navigate = (event: HashChangeEvent | PopStateEvent) => {
+      const hash = event.type === 'hashchange' ? event as HashChangeEvent : undefined
+      const hasStudy = (url: string) => { const parsed = readStudyLink(url); return !!(parsed.study || parsed.error) }
+      // Fragment navigation also emits popstate; let hashchange handle legacy
+      // links with its explicit target URL, including pending-write races.
+      if (!hash && new URL(previousURL).search === location.search) return
+      if (hash ? [hash.oldURL, hash.newURL].some(url => new URLSearchParams(new URL(url).hash.slice(1)).has('study')) : [previousURL, location.href].some(hasStudy)) {
         binding.dispose()
-        // A pending replay write can run between fragment navigation and this
-        // event. Restore the requested URL before reloading its paused study.
-        if (location.href !== event.newURL) history.replaceState(history.state, '', event.newURL)
+        // A pending view write can run before legacy hashchange is delivered.
+        if (hash && location.href !== hash.newURL) history.replaceState(history.state, '', hash.newURL)
         location.reload()
       }
     }
     const flush = () => { binding.update(currentParametersRef.current()); binding.flush() }
     window.addEventListener('hashchange', navigate)
+    window.addEventListener('popstate', navigate)
     window.addEventListener('pagehide', flush)
     document.addEventListener('visibilitychange', flush)
-    return () => { binding.dispose(); urlBinding.current = null; window.removeEventListener('hashchange', navigate); window.removeEventListener('pagehide', flush); document.removeEventListener('visibilitychange', flush) }
+    return () => { binding.dispose(); urlBinding.current = null; window.removeEventListener('hashchange', navigate); window.removeEventListener('popstate', navigate); window.removeEventListener('pagehide', flush); document.removeEventListener('visibilitychange', flush) }
   }, [])
 
   ambientSearch.current = (pair, mode) => { algorithmRef.current = mode; setAlgorithm(mode); setStart(pair.start); setGoal(pair.goal); search(pair.start, pair.goal, mode) }
@@ -206,7 +212,7 @@ export function App() {
     if (next.id === country.id) { if (shared.study && shared.study.country !== next.id) clearShared(); else setPendingCountry(null); return }
     if (next.large && pendingCountry !== id) { setPendingCountry(id); return }
     exitAmbient()
-    if (shared.study && shared.study.country !== next.id) { sharedFrame.current = undefined; setShared({}); history.replaceState(null, '', location.pathname + location.search) }
+    if (shared.study && shared.study.country !== next.id) { sharedFrame.current = undefined; setShared({}); history.replaceState(history.state, '', clearStudyUrl(location.href)) }
     const a = shared.study?.country === next.id ? shared.study.start : next.places[0], b = shared.study?.country === next.id ? shared.study.goal : next.places[1]
     initialQuery.current = { start: a, goal: b }
     setStart(a); setGoal(b); setPendingCountry(null); setCountry(next)
@@ -247,12 +253,12 @@ export function App() {
     const restoring = frame?.country === country.id && samePoint(start, frame.start) && samePoint(goal, frame.goal) && algorithm === frame.algorithm
     return { schema: 'pfad-study-link/1', country: country.id, dataset: country.identity, profile: manifest?.profile ?? 'road-connectivity-distance-v1',
       start, goal, algorithm, duration, progress: restoring ? frame.progress : !busy && sameSearch ? progressRef.current : 0, outlines,
-      view: restoring ? frame.view : manifest?.identity === country.identity ? view : undefined }
+      view: restoring ? frame.view : manifest?.identity === country.identity ? shareView(view, manifest.bounds) : undefined }
   }
   currentParametersRef.current = currentParameters
   useEffect(() => { urlBinding.current?.update(currentParameters()) })
   const clearShared = () => {
-    history.replaceState(null, '', location.pathname + location.search); sharedFrame.current = undefined; setShared({}); setPendingCountry(null); setError('')
+    history.replaceState(history.state, '', clearStudyUrl(location.href)); sharedFrame.current = undefined; setShared({}); setPendingCountry(null); setError('')
     initialQuery.current = { start: COUNTRIES[0].places[0], goal: COUNTRIES[0].places[1] }; setStart(initialQuery.current.start); setGoal(initialQuery.current.goal); setCountry(COUNTRIES[0])
   }
   const counts = result ? countsAt(result, progress) : [0, 0, 0]

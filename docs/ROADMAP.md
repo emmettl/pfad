@@ -202,10 +202,11 @@ paired comparison and more specialised methods remain open.
 **Outcome:** a particular question, search and visual treatment can be revisited
 and communicated without losing its source identity.
 
-- [x] Add shareable links containing endpoints, graph/profile identity, algorithm
-  and meaningful replay/view settings.
+- [x] Add concise native query links containing place slugs or coordinates, country,
+  algorithm and meaningful replay/view settings; omit defaults, offsets and graph hashes.
   Bind these parameters automatically to the address bar, with throttled history
-  replacement and paused restoration on opening or reloading a link.
+  replacement and paused opening at the beginning. Keep existing JSON links readable;
+  exact source identity and frames remain in exported recordings.
 - [x] Publish an attributed share card from a genuine search, with static Open Graph,
   X card and canonical metadata, accessible image text and crawler verification.
 - [x] Preserve graph, compiler, profile and algorithm versions with exported
@@ -305,7 +306,7 @@ Related: [Concept](CONCEPT.md) · [Music](MUSIC.md) · [Architecture](ARCHITECTU
 The current pass adds verified chunk caching/retries, the curated ambient loop,
 whole-sequence music lifecycle, shareable paused studies and exact binary search
 exports. [RECORDS.md](RECORDS.md) documents identities and the export envelope.
-Sharing now follows settings, playback and camera changes in the URL automatically;
+Sharing follows journey, settings and camera changes in a concise URL automatically;
 ambient journeys rotate through the three algorithms, starting with the current mode.
 
 Author review: the ambient 25–65 s pacing, 6 s result hold and 2 s transition;

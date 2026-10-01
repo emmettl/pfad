@@ -32,6 +32,9 @@ try {
     }
   })
   await page.goto(studyUrl(base, study))
+  await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+  // Journey links open at the beginning; artwork deliberately uses the result.
+  await page.getByRole('slider', { name: 'Search replay' }).fill(String(study.duration))
   await expect(page.locator('.study')).toHaveAttribute('data-progress', '1', { timeout: 45000 })
   await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'complete')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'dijkstra/1')
