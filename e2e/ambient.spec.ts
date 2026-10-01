@@ -84,6 +84,15 @@ test('ambient binds genuine journeys, reuses loaded chunks, and exits into the c
 })
 
 test('reduced-motion ambient presents completed stills and requires explicit Next', async ({ page }) => {
+  // This integration fixture traverses all five algorithms. A random greedy
+  // detour can legitimately exhaust a distance band; pin an audited real cycle.
+  await page.addInitScript(() => {
+    const random = crypto.getRandomValues.bind(crypto)
+    crypto.getRandomValues = <T extends ArrayBufferView | null>(array: T): T => {
+      if (array instanceof Uint32Array && array.length === 1) { array[0] = 20261001; return array }
+      return random(array)
+    }
+  })
   await page.emulateMedia({ reducedMotion: 'reduce' }); await page.goto('./')
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
   await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('astar')

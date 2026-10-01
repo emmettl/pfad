@@ -52,3 +52,9 @@ Local validation: `npm run check` passes 99 tests and build/resource checks;
 four integration checks for the subsequently committed Watch controls. Deployment
 and final host checks are recorded separately after publication. Physical
 iPhone stability remains unverified until the reporter retests this release.
+
+The first CI attempt stopped on a random Swiss Greedy journey outside its
+requested distance band. The production bounded-stop behaviour was correct;
+the integration test assumed acceptance of every random cycle. That test now
+pins seed 20261001, independently checked against all six real studies in
+[the seed audit](ambient-ci-seed.json). No route or event data is substituted.

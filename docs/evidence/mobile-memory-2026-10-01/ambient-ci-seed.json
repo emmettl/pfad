@@ -1,0 +1,150 @@
+{
+  "seed": 20261001,
+  "accepted": [
+    {
+      "start": "zurich",
+      "goal": "st-gallen",
+      "band": "regional",
+      "estimateKm": 78.83481751922662,
+      "roadKm": 77.81596,
+      "accepted": true,
+      "algorithm": "astar/1",
+      "searchMs": 27.221666000000027,
+      "events": 553221,
+      "replaySeconds": 26.46400649939461,
+      "selector": "distance-balanced-pairs/3",
+      "pool": "swiss-places/1",
+      "distanceProfile": {
+        "minimumKm": 30,
+        "regionalBelowKm": 100,
+        "interregionalBelowKm": 220
+      },
+      "seed": 20261001,
+      "selection": 2,
+      "cycle": "five-algorithms-with-territories/1",
+      "journey": 1
+    },
+    {
+      "start": "sion",
+      "goal": "lugano",
+      "band": "interregional",
+      "estimateKm": 156.6124843361202,
+      "roadKm": 209.62995,
+      "accepted": true,
+      "algorithm": "bidirectional-astar/1",
+      "searchMs": 32.791292,
+      "events": 511127,
+      "replaySeconds": 43.43580953545128,
+      "selector": "distance-balanced-pairs/3",
+      "pool": "swiss-places/1",
+      "distanceProfile": {
+        "minimumKm": 30,
+        "regionalBelowKm": 100,
+        "interregionalBelowKm": 220
+      },
+      "seed": 20261001,
+      "selection": 3,
+      "cycle": "five-algorithms-with-territories/1",
+      "journey": 2
+    },
+    {
+      "start": "st-gallen",
+      "goal": "geneva",
+      "band": "national",
+      "estimateKm": 351.19027493915297,
+      "roadKm": 456.36706,
+      "accepted": true,
+      "algorithm": "greedy-best-first/1",
+      "searchMs": 6.8992079999999305,
+      "events": 44751,
+      "replaySeconds": 64.08824806468031,
+      "selector": "distance-balanced-pairs/3",
+      "pool": "swiss-places/1",
+      "distanceProfile": {
+        "minimumKm": 30,
+        "regionalBelowKm": 100,
+        "interregionalBelowKm": 220
+      },
+      "seed": 20261001,
+      "selection": 4,
+      "cycle": "five-algorithms-with-territories/1",
+      "journey": 3
+    },
+    {
+      "start": "andermatt",
+      "goal": "basel",
+      "band": "interregional",
+      "estimateKm": 159.9014199500368,
+      "roadKm": 165.58256,
+      "accepted": true,
+      "algorithm": "dijkstra/1",
+      "searchMs": 151.63416700000005,
+      "events": 3888643,
+      "replaySeconds": 38.603666147142036,
+      "selector": "distance-balanced-pairs/3",
+      "pool": "swiss-places/1",
+      "distanceProfile": {
+        "minimumKm": 30,
+        "regionalBelowKm": 100,
+        "interregionalBelowKm": 220
+      },
+      "seed": 20261001,
+      "selection": 5,
+      "cycle": "five-algorithms-with-territories/1",
+      "journey": 4
+    },
+    {
+      "kind": "territories",
+      "sources": [
+        "bern",
+        "andermatt",
+        "st-moritz"
+      ],
+      "accepted": true,
+      "maximumMetres": 170700.19,
+      "sourceNodes": [
+        673796,
+        467125,
+        83120
+      ],
+      "algorithm": "multisource-dijkstra/1",
+      "searchMs": 193.56158300000004,
+      "events": 5093554,
+      "replaySeconds": 39.195684839022775,
+      "selector": "separated-three-sources/1",
+      "pool": "swiss-places/1",
+      "seed": 1968200443,
+      "selection": 1,
+      "cycle": "five-algorithms-with-territories/1",
+      "journey": 5,
+      "distanceProfile": {
+        "minimumKm": 30,
+        "regionalBelowKm": 100,
+        "interregionalBelowKm": 220
+      }
+    },
+    {
+      "start": "basel",
+      "goal": "lugano",
+      "band": "national",
+      "estimateKm": 252.15345993841305,
+      "roadKm": 261.20721,
+      "accepted": true,
+      "algorithm": "bidirectional-dijkstra/1",
+      "searchMs": 151.52708299999995,
+      "events": 3062893,
+      "replaySeconds": 48.485718412745,
+      "selector": "distance-balanced-pairs/3",
+      "pool": "swiss-places/1",
+      "distanceProfile": {
+        "minimumKm": 30,
+        "regionalBelowKm": 100,
+        "interregionalBelowKm": 220
+      },
+      "seed": 20261001,
+      "selection": 6,
+      "cycle": "five-algorithms-with-territories/1",
+      "journey": 6
+    }
+  ]
+}
