@@ -12,7 +12,7 @@ const out = resolve(process.argv[3] ?? '.cache/uk-browser')
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'))
 const phone = process.argv.includes('--phone')
 let phoneReport
-const endpoints = process.argv[4] && process.argv[4] !== '--phone' ? JSON.parse(await readFile(resolve(process.argv[4]), 'utf8')) : { start: { name: "Land's End", lon: -5.714, lat: 50.066 }, goal: { name: "John o' Groats", lon: -3.069, lat: 58.638 } }
+const endpoints = process.argv[4] && !process.argv[4].startsWith('--') ? JSON.parse(await readFile(resolve(process.argv[4]), 'utf8')) : { start: { name: "Land's End", lon: -5.714, lat: 50.066 }, goal: { name: "John o' Groats", lon: -3.069, lat: 58.638 } }
 await mkdir(out, { recursive: true })
 const pageSource = `<html><head><title>PFAD national feasibility experiment</title>
 <style>body{margin:0;background:#080d10}main{position:absolute;inset:0}.map-markers{display:none}</style></head>
@@ -54,6 +54,8 @@ window.run = async (algorithm) => {
  record.withinExactFloatEventRange=r.trace.length<=16777216;
  record.roundedFirstExaminationTimestamps=r.edgeTimes instanceof Uint32Array ? 0 : null;
  record.drawingVertices=scene.renderer.info.render.lines*2;
+ record.maxFps=Number(scene.renderer.domElement.dataset.maxFps);record.pixelRatio=scene.renderer.getPixelRatio();
+ record.traceBackingBytes=r.trace.buffer.byteLength;
  window.proof.runs.push(record);return record;
 };
 ${phone ? `
@@ -125,7 +127,7 @@ try {
     try {
       browser = await engine.launch({ args })
       record.version = browser.version()
-      const page = await browser.newPage({ viewport })
+      const page = await browser.newPage({ viewport, ...(process.argv.includes('--mobile-budget') && name === 'webkit-mobile-viewport' ? { isMobile: true, hasTouch: true, deviceScaleFactor: 3 } : {}) })
       page.on('pageerror', e => record.errors.push(String(e)))
       page.on('console', message => { if (message.type() === 'error') record.errors.push(message.text()) })
       await page.goto('http://127.0.0.1:4201/national-proof')

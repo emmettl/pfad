@@ -53,15 +53,16 @@ async function load(url: string, expectedIdentity?: string) {
         for (let i = 0; i < chunk.count; i++) pointCount += view.getUint16(i * 2, true)
         if (chunk.count * 2 + pointCount * 8 !== decoded.byteLength) throw new Error('Geometry point count mismatch')
         const count = (pointCount + chunk.count) * 2
-        const bytes = new ArrayBuffer(count * 12), output = new DataView(bytes)
+        const bytes = new ArrayBuffer(count * 12)
+        const positions = new Float32Array(bytes, 0, count * 2), roads = new Float32Array(bytes, count * 8, count)
         let cursor = chunk.count * 2, vertex = 0
         const projection = data.projection
         const sx = Math.cos(projection.referenceLatitude * Math.PI / 180) * 111195.0802 / projection.scaleMetres
         const sy = 111195.0802 / projection.scaleMetres
         function append(x: number, y: number, e: number) {
-          output.setFloat32(vertex * 12, (x / 100000 - projection.centre[0]) * sx, true)
-          output.setFloat32(vertex * 12 + 4, (y / 100000 - projection.centre[1]) * sy, true)
-          output.setUint32(vertex * 12 + 8, e, true); vertex++
+          positions[vertex * 2] = (x / 100000 - projection.centre[0]) * sx
+          positions[vertex * 2 + 1] = (y / 100000 - projection.centre[1]) * sy
+          roads[vertex++] = e
         }
         for (let i = 0; i < chunk.count; i++) {
           const e = chunk.start + i

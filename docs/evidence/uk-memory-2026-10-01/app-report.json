@@ -1,0 +1,45 @@
+[
+  {
+    "url": "http://127.0.0.1:4195/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "London→Edinburgh",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "65754"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "London→Edinburgh",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "100815"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "London→Edinburgh",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "217900"
+        }
+      }
+    ],
+    "errors": [],
+    "swissRestored": true
+  }
+]

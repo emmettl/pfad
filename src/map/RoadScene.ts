@@ -75,6 +75,8 @@ export class RoadScene {
   frame = 0
   previousFrame = 0
   dirty = true
+  renderInterval = 0
+  lastRendered = -Infinity
   geography?: THREE.Group
   geographyVisible = true
   drawing = new RouteDrawing()
@@ -126,8 +128,10 @@ export class RoadScene {
         if (finished) { this.onRouteRevealChange?.(false); this.onRouteRevealComplete?.() }
       }
       this.previousFrame = now
-      if (this.dirty) {
+      if (this.dirty && now - this.lastRendered >= this.renderInterval - .5) {
+        this.lastRendered = now
         this.renderer.render(this.scene, this.camera); this.placeMarkers()
+        canvas.dataset.maxFps = this.renderInterval ? '30' : '60'
         canvas.dataset.event = String(this.material.uniforms.uEvent.value)
         canvas.dataset.routePhase = !this.reveal.visible ? 'hidden' : this.reveal.active ? 'revealing' : 'complete'
         canvas.dataset.routeProgress = String(this.routeMaterial.uniforms.uProgress.value)
@@ -148,6 +152,10 @@ export class RoadScene {
   }
   setManifest(manifest: StudyManifest, outlines = manifest.id.startsWith('ch-')) {
     this.manifest = manifest
+    const phoneNetwork = manifest.counts.nodes > 2000000 && window.matchMedia('(pointer: coarse)').matches
+    this.renderInterval = phoneNetwork ? 1000 / 30 : 0
+    this.renderer.setPixelRatio(phoneNetwork ? 1 : Math.min(window.devicePixelRatio, 1.5))
+    this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.geography = undefined
     if (outlines) {
@@ -162,8 +170,7 @@ export class RoadScene {
     this.dirty = true
   }
   addGeometry(bytes: ArrayBuffer, count: number) {
-    const positions = new Float32Array(count * 2), roads = new Float32Array(count), view = new DataView(bytes)
-    for (let i = 0; i < count; i++) { positions[i * 2] = view.getFloat32(i * 12, true); positions[i * 2 + 1] = view.getFloat32(i * 12 + 4, true); roads[i] = view.getUint32(i * 12 + 8, true) }
+    const positions = new Float32Array(bytes, 0, count * 2), roads = new Float32Array(bytes, count * 8, count)
     const geometry = new THREE.BufferGeometry()
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 2))
     geometry.setAttribute('roadId', new THREE.BufferAttribute(roads, 1))
@@ -173,6 +180,22 @@ export class RoadScene {
     const lines = new THREE.LineSegments(geometry, this.material); lines.frustumCulled = false
     this.drawing.add(positions, roads)
     this.scene.add(lines); this.dirty = true
+  }
+  clearResult() {
+    this.route?.geometry.dispose(); if (this.route) this.scene.remove(this.route); this.route = undefined
+    this.flashPoint?.geometry.dispose(); if (this.flashPoint) this.scene.remove(this.flashPoint); this.flashPoint = undefined
+    this.flash.clear(); this.meetingEvent = undefined; this.reveal.clear()
+    this.texture.dispose(); this.backwardTexture.dispose(); this.proximityTexture.dispose()
+    this.texture = new THREE.DataTexture(new Uint32Array(2), 1, 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
+    this.backwardTexture = new THREE.DataTexture(new Uint32Array(2), 1, 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
+    this.proximityTexture = new THREE.DataTexture(new Uint8Array(1), 1, 1, THREE.RedFormat, THREE.UnsignedByteType)
+    this.texture.needsUpdate = this.backwardTexture.needsUpdate = this.proximityTexture.needsUpdate = true
+    this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uBackwardTimes.value = this.backwardTexture
+    this.material.uniforms.uGoalProximity.value = this.proximityTexture
+    this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0
+    this.material.uniforms.uTextureSize.value.set(1, 1); this.material.uniforms.uEvent.value = 0
+    this.points = []; this.markers.replaceChildren(); this.dirty = true
+    this.onRouteRevealChange?.(false)
   }
   setResult(result: SearchResult) {
     if (this.flashPoint) { this.scene.remove(this.flashPoint); this.flashPoint.geometry.dispose(); this.flashPoint = undefined }
@@ -314,6 +337,6 @@ export class RoadScene {
     this.proximityTexture.dispose()
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.scene.traverse(object => { if (object instanceof THREE.LineSegments) object.geometry.dispose() })
-    this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.domElement.remove(); this.markers.remove()
+    this.texture.dispose(); this.material.dispose(); this.renderer.dispose(); this.renderer.forceContextLoss(); this.renderer.domElement.remove(); this.markers.remove()
   }
 }

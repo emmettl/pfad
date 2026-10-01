@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T06:12:12.864Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "uk-20260929-0555cf638ba1",
+    "counts": {
+      "nodes": 7366915,
+      "edges": 8209041,
+      "directedArcs": 15613192,
+      "vertices": 23678988
+    },
+    "downloadBytes": 92374715,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-29T20:22:51Z",
+      "url": "https://download.geofabrik.de/europe/united-kingdom-260929.osm.pbf",
+      "sha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 1499.5,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0555cf638ba1cc246e741531c406e9a32a651b3c75b2a842f77f2fdbdfe7f909",
+            "compiler": "pfad-study-compiler/2",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Land's End",
+            "lon": -5.70713,
+            "lat": 50.06615,
+            "node": 1307049,
+            "snapMetres": 490.6411832106718
+          },
+          "goal": {
+            "name": "John o' Groats",
+            "lon": -3.06893,
+            "lat": 58.6383,
+            "node": 3803267,
+            "snapMetres": 33.60359121386282
+          },
+          "searchMs": 1295.5,
+          "snapMs": 467.59999999403954,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "events": 28188014,
+          "traceBytes": 112752056,
+          "edgeTextureBytes": 65683456,
+          "nodesSettled": 6758341,
+          "arcsExamined": 14426387,
+          "routeMetres": 1297497.29,
+          "maxQueue": 2416,
+          "traceSha256": "92d73230841023af5d947491c0b013e5f78eb2277ecd1f4a8d3564aea8aea27f",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 23678988,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 112752056
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0555cf638ba1cc246e741531c406e9a32a651b3c75b2a842f77f2fdbdfe7f909",
+            "compiler": "pfad-study-compiler/2",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Land's End",
+            "lon": -5.70713,
+            "lat": 50.06615,
+            "node": 1307049,
+            "snapMetres": 490.6411832106718
+          },
+          "goal": {
+            "name": "John o' Groats",
+            "lon": -3.06893,
+            "lat": 58.6383,
+            "node": 3803267,
+            "snapMetres": 33.60359121386282
+          },
+          "searchMs": 1227.5999999940395,
+          "snapMs": 87.29999999701977,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "events": 28188014,
+          "traceBytes": 112752056,
+          "edgeTextureBytes": 65683456,
+          "nodesSettled": 6758341,
+          "arcsExamined": 14426387,
+          "routeMetres": 1297497.29,
+          "maxQueue": 2416,
+          "traceSha256": "92d73230841023af5d947491c0b013e5f78eb2277ecd1f4a8d3564aea8aea27f",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 23678988,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 112752056
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "0555cf638ba1cc246e741531c406e9a32a651b3c75b2a842f77f2fdbdfe7f909",
+            "compiler": "pfad-study-compiler/2",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Land's End",
+            "lon": -5.70713,
+            "lat": 50.06615,
+            "node": 1307049,
+            "snapMetres": 490.6411832106718
+          },
+          "goal": {
+            "name": "John o' Groats",
+            "lon": -3.06893,
+            "lat": 58.6383,
+            "node": 3803267,
+            "snapMetres": 33.60359121386282
+          },
+          "searchMs": 1717,
+          "snapMs": 64.79999999701977,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "events": 27525705,
+          "traceBytes": 110102820,
+          "edgeTextureBytes": 131366912,
+          "nodesSettled": 6600495,
+          "arcsExamined": 14085345,
+          "routeMetres": 1297497.29,
+          "maxQueue": 2708,
+          "traceSha256": "d2e78a678fb82c720738cb912c0ef30519291186fb4bf1c517d9350bcce692b9",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 23678988,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 110102820
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0555cf638ba1cc246e741531c406e9a32a651b3c75b2a842f77f2fdbdfe7f909",
+            "compiler": "pfad-study-compiler/2",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Land's End",
+            "lon": -5.70713,
+            "lat": 50.06615,
+            "node": 1307049,
+            "snapMetres": 490.6411832106718
+          },
+          "goal": {
+            "name": "John o' Groats",
+            "lon": -3.06893,
+            "lat": 58.6383,
+            "node": 3803267,
+            "snapMetres": 33.60359121386282
+          },
+          "searchMs": 1353.8999999910593,
+          "snapMs": 60.20000000298023,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 388.40000000596046,
+            "correctedNodes": 280700,
+            "longitudeScale": 0.48743712536422,
+            "initialStartCm": 96384675,
+            "startLowerBoundCm": 96384675
+          },
+          "events": 25123776,
+          "traceBytes": 100495104,
+          "edgeTextureBytes": 65683456,
+          "nodesSettled": 6002439,
+          "arcsExamined": 12827208,
+          "routeMetres": 1297497.29,
+          "maxQueue": 5869,
+          "traceSha256": "026da125f32e5f1be1ad562aff44955239768aba8035645037c6eaa57e9042a3",
+          "frameIntervalMedianMs": 16.700000000000728,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 23678988,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 100495104
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 1336,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0555cf638ba1cc246e741531c406e9a32a651b3c75b2a842f77f2fdbdfe7f909",
+            "compiler": "pfad-study-compiler/2",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Land's End",
+            "lon": -5.70713,
+            "lat": 50.06615,
+            "node": 1307049,
+            "snapMetres": 490.6411832106718
+          },
+          "goal": {
+            "name": "John o' Groats",
+            "lon": -3.06893,
+            "lat": 58.6383,
+            "node": 3803267,
+            "snapMetres": 33.60359121386282
+          },
+          "searchMs": 1204,
+          "snapMs": 388,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "events": 28188014,
+          "traceBytes": 112752056,
+          "edgeTextureBytes": 65683456,
+          "nodesSettled": 6758341,
+          "arcsExamined": 14426387,
+          "routeMetres": 1297497.29,
+          "maxQueue": 2416,
+          "traceSha256": "92d73230841023af5d947491c0b013e5f78eb2277ecd1f4a8d3564aea8aea27f",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 17,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 23678988,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 112752056
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0555cf638ba1cc246e741531c406e9a32a651b3c75b2a842f77f2fdbdfe7f909",
+            "compiler": "pfad-study-compiler/2",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Land's End",
+            "lon": -5.70713,
+            "lat": 50.06615,
+            "node": 1307049,
+            "snapMetres": 490.6411832106718
+          },
+          "goal": {
+            "name": "John o' Groats",
+            "lon": -3.06893,
+            "lat": 58.6383,
+            "node": 3803267,
+            "snapMetres": 33.60359121386282
+          },
+          "searchMs": 1180,
+          "snapMs": 41,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "events": 28188014,
+          "traceBytes": 112752056,
+          "edgeTextureBytes": 65683456,
+          "nodesSettled": 6758341,
+          "arcsExamined": 14426387,
+          "routeMetres": 1297497.29,
+          "maxQueue": 2416,
+          "traceSha256": "92d73230841023af5d947491c0b013e5f78eb2277ecd1f4a8d3564aea8aea27f",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 17,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 23678988,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 112752056
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "0555cf638ba1cc246e741531c406e9a32a651b3c75b2a842f77f2fdbdfe7f909",
+            "compiler": "pfad-study-compiler/2",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Land's End",
+            "lon": -5.70713,
+            "lat": 50.06615,
+            "node": 1307049,
+            "snapMetres": 490.6411832106718
+          },
+          "goal": {
+            "name": "John o' Groats",
+            "lon": -3.06893,
+            "lat": 58.6383,
+            "node": 3803267,
+            "snapMetres": 33.60359121386282
+          },
+          "searchMs": 1560,
+          "snapMs": 39,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "events": 27525705,
+          "traceBytes": 110102820,
+          "edgeTextureBytes": 131366912,
+          "nodesSettled": 6600495,
+          "arcsExamined": 14085345,
+          "routeMetres": 1297497.29,
+          "maxQueue": 2708,
+          "traceSha256": "d2e78a678fb82c720738cb912c0ef30519291186fb4bf1c517d9350bcce692b9",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 23678988,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 110102820
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "0555cf638ba1cc246e741531c406e9a32a651b3c75b2a842f77f2fdbdfe7f909",
+            "compiler": "pfad-study-compiler/2",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "34553df28e9f73aa64abb029c34147dcf0650d8857f4e75254707e56ad789ab8",
+            "sourceTimestamp": "2026-09-29T20:22:51Z"
+          },
+          "start": {
+            "name": "Land's End",
+            "lon": -5.70713,
+            "lat": 50.06615,
+            "node": 1307049,
+            "snapMetres": 490.6411832106718
+          },
+          "goal": {
+            "name": "John o' Groats",
+            "lon": -3.06893,
+            "lat": 58.6383,
+            "node": 3803267,
+            "snapMetres": 33.60359121386282
+          },
+          "searchMs": 1357,
+          "snapMs": 39,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Land's End",
+              "lon": -5.714,
+              "lat": 50.066
+            },
+            "requestedGoal": {
+              "name": "John o' Groats",
+              "lon": -3.069,
+              "lat": 58.638
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 467,
+            "correctedNodes": 280700,
+            "longitudeScale": 0.48743712536422,
+            "initialStartCm": 96384675,
+            "startLowerBoundCm": 96384675
+          },
+          "events": 25123776,
+          "traceBytes": 100495104,
+          "edgeTextureBytes": 65683456,
+          "nodesSettled": 6002439,
+          "arcsExamined": 12827208,
+          "routeMetres": 1297497.29,
+          "maxQueue": 5869,
+          "traceSha256": "026da125f32e5f1be1ad562aff44955239768aba8035645037c6eaa57e9042a3",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": false,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 23678988,
+          "maxFps": 30,
+          "pixelRatio": 1,
+          "traceBackingBytes": 100495104
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 357702754,
+    "reverseCsrBytes": 154373200,
+    "uploadedRoadAttributeBytes": 284147856,
+    "drawingCoordinateAndOffsetBytes": 222268400,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

@@ -73,8 +73,9 @@ export function App() {
   const search = useCallback((a: Point, b: Point) => {
     if (!worker.current) return
     setError(''); setBusy(true); setPlaying(false); setPick(null)
+    if (country.large) { setResult(null); scene.current?.clearResult() }
     worker.current.postMessage({ type: 'search', requestId: ++currentRequest.current, start: a, goal: b, algorithm: algorithmRef.current })
-  }, [])
+  }, [country.large])
 
   useEffect(() => {
     const navigate = (event: HashChangeEvent) => {

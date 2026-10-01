@@ -1,4 +1,5 @@
 import type { Endpoint, Graph, HeuristicRecord, SearchResult } from './contracts.ts'
+import { EventTrace } from './trace.ts'
 export { snapEndpoints } from './endpoints.ts'
 
 export function compileGraph(graph: Omit<Graph, 'offsets' | 'arcTo' | 'arcEdge' | 'incoming'>): Graph {
@@ -74,9 +75,9 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
   const settled = new Uint8Array(n)
   const heap = new Heap()
   // One settled event per node; at most one examination and improvement per arc.
-  const events = new Uint32Array(n + 2 * graph.arcTo.length)
-  const firstSeen = new Uint32Array(e), firstImproved = new Uint32Array(e)
+  const events = new EventTrace(n + 2 * graph.arcTo.length)
   const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
+  const edgeTimes = new Uint32Array(textureWidth * textureHeight * 2)
   const goalProximity = estimate ? new Uint8Array(textureWidth * textureHeight) : undefined
   const potential = estimate?.potential
   const originEstimate = Math.max(1, potential?.[start.node] ?? 0)
@@ -84,7 +85,7 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
   const checkpoints: number[] = [0, 0, 0]
   let used = 0, exploredNodes = 0, examinedArcs = 0, improvements = 0, uniqueEdges = 0
   function record(kind: number, id: number) {
-    events[used++] = id * 4 + kind
+    events.set(used++, id * 4 + kind)
     if (used % checkpointStride === 0) checkpoints.push(exploredNodes, examinedArcs, improvements)
   }
   distance[start.node] = 0; heap.push(start.node, potential?.[start.node] ?? 0)
@@ -96,15 +97,15 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
     for (let a = graph.offsets[u]; a < graph.offsets[u + 1]; a++) {
       const v = graph.arcTo[a], road = graph.arcEdge[a]
       examinedArcs++; record(1, a)
-      if (!firstSeen[road]) {
-        firstSeen[road] = used; uniqueEdges++
+      if (!edgeTimes[road * 2]) {
+        edgeTimes[road * 2] = used; uniqueEdges++
         if (goalProximity && potential) goalProximity[road] = Math.round(255 * (1 - Math.min(1, potential[v] / originEstimate)))
       }
       const candidate = distance[u] + graph.length[road]
       if (candidate < distance[v]) {
         distance[v] = candidate; predecessor[v] = u; previousEdge[v] = road
         heap.push(v, candidate + (potential?.[v] ?? 0)); improvements++; record(2, a)
-        if (!firstImproved[road]) firstImproved[road] = used
+        if (!edgeTimes[road * 2 + 1]) edgeTimes[road * 2 + 1] = used
       }
     }
   }
@@ -120,11 +121,6 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
     }
     routeNodes.reverse(); routeEdges.reverse()
   }
-  const edgeTimes = new Uint32Array(textureWidth * textureHeight * 2)
-  for (let i = 0; i < e; i++) {
-    if (firstSeen[i]) edgeTimes[i * 2] = firstSeen[i]
-    if (firstImproved[i]) edgeTimes[i * 2 + 1] = firstImproved[i]
-  }
   return {
     algorithm: estimate ? 'astar/1' : 'dijkstra/1',
     tieBreak: estimate ? 'cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order' : 'distance, then ascending node id; neighbours in compiler edge order',
@@ -132,7 +128,7 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
     routeNodes: Uint32Array.from(routeNodes), routeEdges: Uint32Array.from(routeEdges),
     routeReversed: Uint8Array.from(routeEdges, (edge, i) => Number(graph.from[edge] !== routeNodes[i])),
     routeLengths: Uint32Array.from(routeEdges, edge => graph.length[edge]),
-    trace: events.slice(0, used), checkpoints: Uint32Array.from(checkpoints), checkpointStride,
+    trace: events.finish(used), checkpoints: Uint32Array.from(checkpoints), checkpointStride,
     edgeTimes, goalProximity, heuristic: estimate?.record, textureWidth, textureHeight, exploredNodes, examinedArcs, improvements, uniqueEdges, maxQueue: heap.maximum,
   }
 }

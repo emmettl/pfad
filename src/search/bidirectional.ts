@@ -1,4 +1,5 @@
 import type { Endpoint, Graph, Meeting, SearchResult } from './contracts.ts'
+import { EventTrace } from './trace.ts'
 import { Heap } from './engine.ts'
 
 // Bit 31 records the front; the remaining bits retain the original graph ID.
@@ -21,14 +22,15 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
   const parent = [new Int32Array(n).fill(-1), new Int32Array(n).fill(-1)]
   const parentEdge = [new Int32Array(n).fill(-1), new Int32Array(n).fill(-1)]
   const settled = [new Uint8Array(n), new Uint8Array(n)], heap = [new Heap(), new Heap()]
-  const seen = [new Uint32Array(e), new Uint32Array(e)], improved = [new Uint32Array(e), new Uint32Array(e)]
-  const events = new Uint32Array(2 * n + 4 * graph.arcTo.length)
+  const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
+  const times = [new Uint32Array(textureWidth * textureHeight * 2), new Uint32Array(textureWidth * textureHeight * 2)]
+  const events = new EventTrace(2 * n + 4 * graph.arcTo.length)
   const checkpointStride = 4096, checkpoints: number[] = [0, 0, 0]
   let used = 0, exploredNodes = 0, examinedArcs = 0, improvements = 0, uniqueEdges = 0, maxQueue = 2
   let best = start.node === goal.node ? 0 : Infinity, join = start.node === goal.node ? start.node : -1
   let meeting: Meeting | undefined, previousSide = 1
   function record(side: number, kind: number, id: number) {
-    events[used++] = (id * 4 + kind) | (side ? BACKWARD : 0)
+    events.set(used++, (id * 4 + kind) | (side ? BACKWARD : 0))
     if (used % checkpointStride === 0) checkpoints.push(exploredNodes, examinedArcs, improvements)
   }
   function connect(node: number) {
@@ -50,12 +52,12 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
     for (let i = offsets[u]; i < offsets[u + 1]; i++) {
       const a = side ? reverse.arc[i] : i, v = side ? reverse.from[i] : graph.arcTo[a], road = graph.arcEdge[a]
       examinedArcs++; record(side, 1, a)
-      if (!seen[side][road]) { if (!seen[1 - side][road]) uniqueEdges++; seen[side][road] = used }
+      if (!times[side][road * 2]) { if (!times[1 - side][road * 2]) uniqueEdges++; times[side][road * 2] = used }
       const candidate = distance[side][u] + graph.length[road]
       if (candidate < distance[side][v]) {
         distance[side][v] = candidate; parent[side][v] = u; parentEdge[side][v] = road
         heap[side].push(v, candidate); improvements++; record(side, 2, a)
-        if (!improved[side][road]) improved[side][road] = used
+        if (!times[side][road * 2 + 1]) times[side][road * 2 + 1] = used
         connect(v)
       }
       maxQueue = Math.max(maxQueue, heap[0].size + heap[1].size)
@@ -76,15 +78,6 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
       if (routeNodes.length > n) throw new Error('Invalid backward predecessor cycle')
     }
   }
-  const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
-  const times = seen.map((front, side) => {
-    const texture = new Uint32Array(textureWidth * textureHeight * 2)
-    for (let i = 0; i < e; i++) {
-      if (front[i]) texture[i * 2] = front[i]
-      if (improved[side][i]) texture[i * 2 + 1] = improved[side][i]
-    }
-    return texture
-  })
   return {
     algorithm: 'bidirectional-dijkstra/1',
     tieBreak: 'smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection',
@@ -92,7 +85,7 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
     routeNodes: Uint32Array.from(routeNodes), routeEdges: Uint32Array.from(routeEdges),
     routeReversed: Uint8Array.from(routeEdges, (edge, i) => Number(graph.from[edge] !== routeNodes[i])),
     routeLengths: Uint32Array.from(routeEdges, edge => graph.length[edge]),
-    trace: events.slice(0, used), checkpoints: Uint32Array.from(checkpoints), checkpointStride,
+    trace: events.finish(used), checkpoints: Uint32Array.from(checkpoints), checkpointStride,
     edgeTimes: times[0], backwardTimes: times[1], meeting, textureWidth, textureHeight,
     exploredNodes, examinedArcs, improvements, uniqueEdges, maxQueue,
   }
