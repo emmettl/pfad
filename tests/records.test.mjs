@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { gunzipSync } from 'node:zlib'
 import { readStudyLink, studyUrl, StudyUrlBinding } from '../src/records/link.ts'
+import { COUNTRIES } from '../src/countries.ts'
 import { exportRecord } from '../src/records/export.ts'
 const study = { schema: 'pfad-study-link/1', country: 'ch', dataset: 'a'.repeat(64), profile: 'road-connectivity-distance-v1', start: { name: 'Genève', lon: 6.1432, lat: 46.2044 }, goal: { name: 'Zürich', lon: 8.5417, lat: 47.3769 }, algorithm: 'astar', duration: 42.4, progress: .37, outlines: false, view: { x: .2, y: -.1, zoom: 4 } }
 test('links retain exact graph, requested endpoints, algorithm, replay frame and camera on either host', () => {
@@ -55,4 +56,12 @@ test('record export retains exact binary events including IDs above Float32 prec
     const values = Array.from({ length: descriptor.count }, (_, i) => descriptor.type === 'uint32-le' ? bytes.readUInt32LE(at + i * 4) : bytes[at + i])
     assert.deepEqual(values, [...result[name]])
   }
+})
+
+test('every selected country can round-trip its exact study link', () => {
+  for (const country of COUNTRIES) {
+    const record = { ...study, country: country.id, dataset: country.identity, start: country.places[0], goal: country.places[1] }
+    assert.deepEqual(readStudyLink(new URL(studyUrl('https://motionstudies.app/pfad/', record)).hash), { study: record })
+  }
+  assert.ok(readStudyLink(new URL(studyUrl('https://motionstudies.app/pfad/', { ...study, country: 'unknown' })).hash).error)
 })

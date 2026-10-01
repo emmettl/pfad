@@ -1,7 +1,8 @@
 # Manual country releases
 
-Switzerland remains bundled and selected by default. United Kingdom is an
-additional, explicitly opened release hosted independently on Cloudflare R2.
+Switzerland remains bundled and selected by default. United Kingdom, Iceland, Netherlands, New Zealand and Luxembourg are additional
+immutable releases hosted independently on Cloudflare R2. The UK requires an
+explicit large-download acknowledgement; the smaller releases open on selection.
 No country source is acquired by ordinary builds, CI or browser page requests.
 
 `data/countries/<id>.json` pins source URL/date/bytes/SHA-256, dataset prefix and
@@ -92,3 +93,55 @@ configured. Swiss migration to R2 is deliberately deferred.
 UK uses the same optional faint outline styling as Switzerland. Its pinned Natural Earth 1:10m country and global/European lakes references supply 57 coastline/border rings and 14 lake polygons (including unnamed features). This is a generalized reference layer, not a comprehensive inventory of UK lakes or a routing input. Sources, SHA-256 identities and preparation tolerances are recorded in `data/geography-sources.json`. `npm run data:geography` verifies existing assets or manually prepares missing ones from pinned sources; the raw inputs stay in ignored `.cache/`. UK outline assets total 93,543 bytes.
 
 Ambient uses `uk-places/1`, with 18 Great Britain and four Northern Ireland places. It retains the country’s complete published road graph, actual-distance acceptance, algorithm rotation and phone rendering budget. Candidates never cross the sea between the two road regions. Island studies remain available manually; no ferry connectivity is invented. Switzerland’s original geographic assets and pool remain unchanged.
+
+## Four-country generalization proof
+
+The four 30 September 2026 extracts use the same compiler, loader, algorithms,
+renderer and publication pipeline. Only New Zealand's drawing needs optional
+`longitudeWrapping: "centre/1"`; its original OSM coordinates and topology remain
+unchanged. Picking converts wrapped drawing longitude back to EPSG:4326. Compiler
+`pfad-study-compiler/3` records this new projection capability; existing Swiss/UK
+release bytes and identities remain unchanged.
+
+| Country | Road download (decimal MB) | Nodes | Edges | Drawing vertices |
+| --- | ---: | ---: | ---: | ---: |
+| Iceland | 1.492 | 97,917 | 110,561 | 476,660 |
+| Netherlands (European extract) | 22.158 | 1,794,621 | 2,141,404 | 5,572,870 |
+| New Zealand | 9.272 | 632,564 | 719,433 | 3,046,354 |
+| Luxembourg | 0.966 | 71,628 | 83,662 | 259,166 |
+
+These releases are stored outside the app artifact. Each includes separately
+published optional OSM evidence. The 1.4 GB Netherlands source illustrates why
+source PBF size alone is not a browser feasibility measure.
+
+`data/geography-countries.json` selects Natural Earth ADMIN names, coverage bounds,
+reference latitudes and optional tolerances/wrapping. Run
+`python3 scripts/data/prepare-country-geography.py <id>` against the verified
+cached sources to produce context assets and update their checksum registry.
+The Netherlands outline covers its European extract. Iceland and Luxembourg
+have borders only: this pinned Natural Earth lake source supplies no lake
+features there. No water features are invented. New Zealand has 24 border rings
+and 21 reference lake features; the source contains separate features sharing
+some lake names. All outlines use the same quiet styling and never affect routing.
+
+Authored ambient pools live in `src/ambient/pools.ts`. New Zealand separates North
+and South Island road regions. Luxembourg uses 5/25/50 km selection thresholds;
+the other countries preserve the original 30/100/220 km thresholds. Selector
+`distance-balanced-pairs/3` exports the pool identity and distance profile with
+bounded journey metadata. Actual road distance still decides acceptance.
+
+```sh
+node scripts/data/audit-ambient.mjs --country nz \
+  --manifest .cache/countries/<dataset-id>/manifest.json \
+  --output .cache/nz-ambient-audit.json
+node scripts/data/country-browser-proof.mjs nz
+# Same UI/replay checks against either published app host:
+node scripts/data/country-browser-proof.mjs nz https://motionstudies.app/pfad/
+```
+
+The audit runs sixty real journeys per country with all three algorithms, checks
+route adjacency/directions/cost sums and permits at most five attempts per
+journey. The browser proof checks three manual modes, eight reduced-motion
+journeys, outlines, an automatic transition and return to Switzerland. See
+`docs/evidence/countries-2026-10-01/` for source identities and measured results.
+Desktop WebKit is useful regression evidence, not a physical iPhone certification.

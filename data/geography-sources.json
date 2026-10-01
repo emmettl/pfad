@@ -11,7 +11,7 @@
       "bytes": 9435,
       "sha256": "38fd890c6bc78415c8b2fef3047f210846d7660340977361afed9d40cc384599",
       "source": "swissBOUNDARIES3D 2026-01",
-      "attribution": "© swisstopo",
+      "attribution": "\u00a9 swisstopo",
       "simplificationToleranceMetres": 700,
       "preparationCommit": "c7096bd37b7db30f3817f13bcb4941c833fba8dd"
     },
@@ -21,7 +21,7 @@
       "bytes": 114150,
       "sha256": "2ed8ae2942bb9fff570c0266bd1d0da11a7b6c99530e05761934b258594e58b7",
       "source": "FOEN Vector25 lakes; 2007 reference shorelines",
-      "attribution": "© FOEN, swisstopo",
+      "attribution": "\u00a9 FOEN, swisstopo",
       "simplificationToleranceMetres": 60,
       "preparationCommit": "5a2ae742874568d1e6fa0c5fe467929e73a86cc9"
     },
@@ -30,7 +30,7 @@
       "bytes": 84117,
       "sha256": "e9ed6f5f39e66b98a0b9551ef75a472bfdf6aaaf7594ca6d89430701839af437",
       "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
-      "attribution": "Natural Earth · public domain",
+      "attribution": "Natural Earth \u00b7 public domain",
       "simplificationToleranceMetres": 300,
       "preparation": "python3 scripts/data/prepare-uk-geography.py",
       "bounds": [
@@ -45,7 +45,7 @@
       "bytes": 9426,
       "sha256": "0e2257538e7a74e354ad47fed9a621022880c814eaf11a1a07ba5cd38c1eaec9",
       "source": "Natural Earth 1:10m ne_10m_lakes",
-      "attribution": "Natural Earth · public domain",
+      "attribution": "Natural Earth \u00b7 public domain",
       "simplificationToleranceMetres": 60,
       "preparation": "python3 scripts/data/prepare-uk-geography.py",
       "bounds": [
@@ -53,6 +53,126 @@
         49,
         2,
         62
+      ]
+    },
+    {
+      "path": "src/map/data/is-border.json",
+      "bytes": 39321,
+      "sha256": "8e834fed7eee9c008a9a415bbcb6ddba4836b999aa6355d0f715a370f91754c2",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-country-geography.py is",
+      "bounds": [
+        -25,
+        63,
+        -12,
+        68
+      ]
+    },
+    {
+      "path": "src/map/data/is-lakes.json",
+      "bytes": 1186,
+      "sha256": "4ff840b538a6cae38c263d64ee1140905050e245e7e30a221cd6e474d81adbcd",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py is",
+      "bounds": [
+        -25,
+        63,
+        -12,
+        68
+      ]
+    },
+    {
+      "path": "src/map/data/nl-border.json",
+      "bytes": 10253,
+      "sha256": "b402f586e59c65cabb87f865b167bac1f6ea39bec1e4657eb46c918f9faec94b",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-country-geography.py nl",
+      "bounds": [
+        3,
+        50,
+        8,
+        54
+      ]
+    },
+    {
+      "path": "src/map/data/nl-lakes.json",
+      "bytes": 5859,
+      "sha256": "af9103ae997ef0f9d462aae80c5a7c4e39800ef37333dfbff9f50407280e49cf",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py nl",
+      "bounds": [
+        3,
+        50,
+        8,
+        54
+      ]
+    },
+    {
+      "path": "src/map/data/lu-border.json",
+      "bytes": 3585,
+      "sha256": "28e8d105a947f92543a731851576e0773d91ee818c39783eae684d267deb0614",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 100,
+      "preparation": "python3 scripts/data/prepare-country-geography.py lu",
+      "bounds": [
+        5,
+        49,
+        7,
+        51
+      ]
+    },
+    {
+      "path": "src/map/data/lu-lakes.json",
+      "bytes": 1182,
+      "sha256": "a4613e88ba5d742ccf9c774d69cf276fd79ecca12ee7d5a0a947e87f49276d63",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py lu",
+      "bounds": [
+        5,
+        49,
+        7,
+        51
+      ]
+    },
+    {
+      "path": "src/map/data/nz-border.json",
+      "bytes": 63201,
+      "sha256": "e4c9477489f5a9aa254ceca49f47c3800edcd4a979ab900f1c7e2ea6ecb54760",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-country-geography.py nz",
+      "bounds": [
+        160,
+        -56,
+        190,
+        -28
+      ]
+    },
+    {
+      "path": "src/map/data/nz-lakes.json",
+      "bytes": 20597,
+      "sha256": "27241d706db8b25ac26f502eb05d213336f3d4f2f3a65ba303f12ff8de65e15e",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py nz",
+      "bounds": [
+        160,
+        -56,
+        190,
+        -28
       ]
     }
   ],

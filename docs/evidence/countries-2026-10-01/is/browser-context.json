@@ -1,0 +1,97 @@
+[
+  {
+    "country": "is",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Reykjavík→Keflavík",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "72287"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Reykjavík→Keflavík",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "70635"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Reykjavík→Keflavík",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "53554"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Akureyri→Egilsstaðir246.0 kmA*",
+        "events": "41852"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Borgarnes→Stykkishólmur99.4 kmDijkstra",
+        "events": "170688"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Egilsstaðir→Ísafjörður770.4 kmBidirectional Dijkstra",
+        "events": "157908"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Selfoss→Höfn379.6 kmA*",
+        "events": "227790"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Blönduós→Reykjavík243.1 kmDijkstra",
+        "events": "229893"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Húsavík→Reykjavík441.2 kmBidirectional Dijkstra",
+        "events": "357639"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Reykjavík→Keflavík47.6 kmA*",
+        "events": "107108"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Borgarnes→Egilsstaðir553.3 kmDijkstra",
+        "events": "385335"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Húsavík→HöfnBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "dataset": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db",
+  "offshoreNodes": 329,
+  "requested": {
+    "start": {
+      "name": "Waitangi",
+      "lon": -176.559,
+      "lat": -43.951
+    },
+    "goal": {
+      "name": "Owenga",
+      "lon": -176.369,
+      "lat": -44.025
+    }
+  },
+  "snapped": {
+    "start": {
+      "name": "Waitangi",
+      "lon": -176.56022,
+      "lat": -43.95114,
+      "node": 111651,
+      "snapMetres": 98.89764995896226
+    },
+    "goal": {
+      "name": "Owenga",
+      "lon": -176.36844,
+      "lat": -44.02488,
+      "node": 359275,
+      "snapMetres": 46.71986555271088
+    },
+    "snapMs": 36.33283400000002,
+    "snapping": {
+      "version": "nearby-shared-component/1",
+      "requestedStart": {
+        "name": "Waitangi",
+        "lon": -176.559,
+        "lat": -43.951
+      },
+      "requestedGoal": {
+        "name": "Owenga",
+        "lon": -176.369,
+        "lat": -44.025
+      }
+    }
+  },
+  "runs": [
+    {
+      "algorithm": "dijkstra/1",
+      "routeMetres": 19833.44,
+      "events": 896
+    },
+    {
+      "algorithm": "bidirectional-dijkstra/1",
+      "routeMetres": 19833.44,
+      "events": 778
+    },
+    {
+      "algorithm": "astar/1",
+      "routeMetres": 19833.44,
+      "events": 498
+    }
+  ],
+  "mainlandToChatham": {
+    "routeMetres": null
+  },
+  "note": "Actual complete graph: three equal-cost road routes within Chatham Island; mainland-to-island search is disconnected. Drawing wraps independently of road coordinates."
+}

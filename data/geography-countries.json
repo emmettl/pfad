@@ -1,0 +1,6 @@
+{
+  "is": { "admin": "Iceland", "bounds": [-25, 63, -12, 68], "referenceLatitude": 65 },
+  "nl": { "admin": "Netherlands", "bounds": [3, 50, 8, 54], "referenceLatitude": 52.2 },
+  "nz": { "admin": "New Zealand", "bounds": [160, -56, 190, -28], "referenceLatitude": -40.5, "longitudeCentre": 175 },
+  "lu": { "admin": "Luxembourg", "bounds": [5, 49, 7, 51], "referenceLatitude": 49.8, "borderToleranceMetres": 100 }
+}

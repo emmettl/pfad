@@ -1,0 +1,97 @@
+[
+  {
+    "country": "nl",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Amsterdam→Rotterdam",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "1116888"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Amsterdam→Rotterdam",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "873962"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Amsterdam→Rotterdam",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "259275"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Eindhoven→Arnhem79.5 kmA*",
+        "events": "492788"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Den Haag→Leeuwarden183.9 kmDijkstra",
+        "events": "6082660"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Middelburg→Amsterdam156.1 kmBidirectional Dijkstra",
+        "events": "3095035"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Amsterdam→Utrecht38.5 kmA*",
+        "events": "125350"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Groningen→Amsterdam175.2 kmDijkstra",
+        "events": "3370438"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Maastricht→Groningen307.9 kmBidirectional Dijkstra",
+        "events": "4343189"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Zwolle→Rotterdam144.2 kmA*",
+        "events": "1012948"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Maastricht→Arnhem148.2 kmDijkstra",
+        "events": "1713464"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Enschede→UtrechtBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

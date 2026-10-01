@@ -1,0 +1,101 @@
+{
+  "schema": "pfad-road-study/1",
+  "encoding": "le-columnar-deltas/1",
+  "id": "lu-20260930-e04927d2555c",
+  "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626",
+  "compiler": "pfad-study-compiler/3",
+  "profile": "road-connectivity-distance-v1",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/luxembourg-260930.osm.pbf",
+    "sha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "cost": "Original road length in integer centimetres; shortest distance, not estimated travel time.",
+  "limitations": [
+    "Turn restrictions, barriers and conditional access are retained as source evidence but are not applied by this first connectivity profile.",
+    "Ferries and non-motor-road classes are excluded. This is a computation study, not navigation advice."
+  ],
+  "counts": {
+    "nodes": 71628,
+    "edges": 83662,
+    "directedArcs": 151647,
+    "vertices": 259166
+  },
+  "coordinateScale": 100000,
+  "projection": {
+    "centre": [
+      6.1,
+      49.8
+    ],
+    "referenceLatitude": 49.8,
+    "scaleMetres": 65000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  },
+  "bounds": [
+    -0.4005414030000009,
+    -0.6146008686685147,
+    0.47765735499316575,
+    0.6580866984944413
+  ],
+  "classes": [
+    "motorway",
+    "motorway_link",
+    "trunk",
+    "trunk_link",
+    "primary",
+    "primary_link",
+    "secondary",
+    "secondary_link",
+    "tertiary",
+    "tertiary_link",
+    "unclassified",
+    "residential",
+    "living_street",
+    "service",
+    "road"
+  ],
+  "geometryToleranceMetres": 5,
+  "chunks": [
+    {
+      "kind": "nodes",
+      "path": "nodes-000-3c9ffa8147ef.bin.gz.bin",
+      "start": 0,
+      "count": 71628,
+      "stride": 8,
+      "bytes": 290146,
+      "decodedBytes": 573024,
+      "sha256": "3c9ffa8147eff5c2bd7889f3b49e79c62da51571eafb0e18f97d8416a9618e26"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-000-bb5f5f22622e.bin.gz.bin",
+      "start": 0,
+      "count": 83662,
+      "stride": 14,
+      "bytes": 520229,
+      "decodedBytes": 1171268,
+      "sha256": "bb5f5f22622edf0fc6133da6b73e9484ede6a8289043575820b36a79026f32ce"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-000-573c4ab8ac2f.bin.gz.bin",
+      "start": 0,
+      "count": 83662,
+      "stride": 0,
+      "bytes": 155588,
+      "decodedBytes": 534692,
+      "sha256": "573c4ab8ac2f4688a230cda9b75ff04c5c39f478d9a21387ab569a51662605a3"
+    }
+  ],
+  "evidence": {
+    "path": "evidence-311fbf9d6ed8.json.gz.bin",
+    "bytes": 568802,
+    "sha256": "311fbf9d6ed8233ae267f70b198fb60fcd1919d540616e0a35653c08dc4aee23"
+  },
+  "downloadBytes": 965963
+}

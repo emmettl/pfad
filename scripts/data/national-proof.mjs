@@ -14,7 +14,7 @@ const phone = process.argv.includes('--phone')
 let phoneReport
 const endpoints = process.argv[4] && !process.argv[4].startsWith('--') ? JSON.parse(await readFile(resolve(process.argv[4]), 'utf8')) : { start: { name: "Land's End", lon: -5.714, lat: 50.066 }, goal: { name: "John o' Groats", lon: -3.069, lat: 58.638 } }
 await mkdir(out, { recursive: true })
-const pageSource = `<html><head><title>PFAD national feasibility experiment</title>
+const pageSource = `<html><head><meta charset="utf-8"><title>PFAD national feasibility experiment</title>
 <style>body{margin:0;background:#080d10}main{position:absolute;inset:0}.map-markers{display:none}</style></head>
 <body><main></main><script type="module">
 import { RoadScene } from '/src/map/RoadScene.ts';

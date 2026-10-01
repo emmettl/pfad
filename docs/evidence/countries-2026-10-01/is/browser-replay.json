@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T08:25:20.656Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "is-20260930-ad6c30aac073",
+    "counts": {
+      "nodes": 97917,
+      "edges": 110561,
+      "directedArcs": 208898,
+      "vertices": 476660
+    },
+    "downloadBytes": 1492367,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe/iceland-260930.osm.pbf",
+      "sha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 46.400000005960464,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Reykjavík",
+            "lon": -21.94273,
+            "lat": 64.14658,
+            "node": 32964,
+            "snapMetres": 6.684345210788331
+          },
+          "goal": {
+            "name": "Höfn",
+            "lon": -15.20789,
+            "lat": 64.25474,
+            "node": 42125,
+            "snapMetres": 94.59643637198964
+          },
+          "searchMs": 13.899999991059303,
+          "snapMs": 8.299999997019768,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Reykjavík",
+              "lon": -21.9426,
+              "lat": 64.1466
+            },
+            "requestedGoal": {
+              "name": "Höfn",
+              "lon": -15.2082,
+              "lat": 64.2539
+            }
+          },
+          "events": 365297,
+          "traceBytes": 1461188,
+          "edgeTextureBytes": 884736,
+          "nodesSettled": 87580,
+          "arcsExamined": 186929,
+          "routeMetres": 436677.97,
+          "maxQueue": 231,
+          "traceSha256": "556d5dd647e96272e9d2b111a346ebf2320b2a2a7fec6b604a3adc91ed21f733",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000273,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 476660,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1461188
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Reykjavík",
+            "lon": -21.94273,
+            "lat": 64.14658,
+            "node": 32964,
+            "snapMetres": 6.684345210788331
+          },
+          "goal": {
+            "name": "Höfn",
+            "lon": -15.20789,
+            "lat": 64.25474,
+            "node": 42125,
+            "snapMetres": 94.59643637198964
+          },
+          "searchMs": 11.399999991059303,
+          "snapMs": 1,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Reykjavík",
+              "lon": -21.9426,
+              "lat": 64.1466
+            },
+            "requestedGoal": {
+              "name": "Höfn",
+              "lon": -15.2082,
+              "lat": 64.2539
+            }
+          },
+          "events": 365297,
+          "traceBytes": 1461188,
+          "edgeTextureBytes": 884736,
+          "nodesSettled": 87580,
+          "arcsExamined": 186929,
+          "routeMetres": 436677.97,
+          "maxQueue": 231,
+          "traceSha256": "556d5dd647e96272e9d2b111a346ebf2320b2a2a7fec6b604a3adc91ed21f733",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 476660,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1461188
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Reykjavík",
+            "lon": -21.94273,
+            "lat": 64.14658,
+            "node": 32964,
+            "snapMetres": 6.684345210788331
+          },
+          "goal": {
+            "name": "Höfn",
+            "lon": -15.20789,
+            "lat": 64.25474,
+            "node": 42125,
+            "snapMetres": 94.59643637198964
+          },
+          "searchMs": 13.099999994039536,
+          "snapMs": 1,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Reykjavík",
+              "lon": -21.9426,
+              "lat": 64.1466
+            },
+            "requestedGoal": {
+              "name": "Höfn",
+              "lon": -15.2082,
+              "lat": 64.2539
+            }
+          },
+          "events": 314308,
+          "traceBytes": 1257232,
+          "edgeTextureBytes": 1769472,
+          "nodesSettled": 75434,
+          "arcsExamined": 160628,
+          "routeMetres": 436677.97,
+          "maxQueue": 235,
+          "traceSha256": "cedad11bd13399009fa530f6264ffd038dd8180026c3cc135234495acfba5614",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 476660,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1257232
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Reykjavík",
+            "lon": -21.94273,
+            "lat": 64.14658,
+            "node": 32964,
+            "snapMetres": 6.684345210788331
+          },
+          "goal": {
+            "name": "Höfn",
+            "lon": -15.20789,
+            "lat": 64.25474,
+            "node": 42125,
+            "snapMetres": 94.59643637198964
+          },
+          "searchMs": 14.200000002980232,
+          "snapMs": 0.8999999910593033,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Reykjavík",
+              "lon": -21.9426,
+              "lat": 64.1466
+            },
+            "requestedGoal": {
+              "name": "Höfn",
+              "lon": -15.2082,
+              "lat": 64.2539
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 4.299999997019768,
+            "correctedNodes": 379,
+            "longitudeScale": 0.3979808147504524,
+            "initialStartCm": 29828286,
+            "startLowerBoundCm": 29828286
+          },
+          "events": 273794,
+          "traceBytes": 1095176,
+          "edgeTextureBytes": 884736,
+          "nodesSettled": 65738,
+          "arcsExamined": 139397,
+          "routeMetres": 436677.97,
+          "maxQueue": 277,
+          "traceSha256": "8b2141b2218c33a29c3eabea3aa6683249abff697a0de030569f349be31afbd4",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 476660,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1095176
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 56,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Reykjavík",
+            "lon": -21.94273,
+            "lat": 64.14658,
+            "node": 32964,
+            "snapMetres": 6.684345210788331
+          },
+          "goal": {
+            "name": "Höfn",
+            "lon": -15.20789,
+            "lat": 64.25474,
+            "node": 42125,
+            "snapMetres": 94.59643637198964
+          },
+          "searchMs": 11,
+          "snapMs": 8,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Reykjavík",
+              "lon": -21.9426,
+              "lat": 64.1466
+            },
+            "requestedGoal": {
+              "name": "Höfn",
+              "lon": -15.2082,
+              "lat": 64.2539
+            }
+          },
+          "events": 365297,
+          "traceBytes": 1461188,
+          "edgeTextureBytes": 884736,
+          "nodesSettled": 87580,
+          "arcsExamined": 186929,
+          "routeMetres": 436677.97,
+          "maxQueue": 231,
+          "traceSha256": "556d5dd647e96272e9d2b111a346ebf2320b2a2a7fec6b604a3adc91ed21f733",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 476660,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1461188
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Reykjavík",
+            "lon": -21.94273,
+            "lat": 64.14658,
+            "node": 32964,
+            "snapMetres": 6.684345210788331
+          },
+          "goal": {
+            "name": "Höfn",
+            "lon": -15.20789,
+            "lat": 64.25474,
+            "node": 42125,
+            "snapMetres": 94.59643637198964
+          },
+          "searchMs": 11,
+          "snapMs": 0,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Reykjavík",
+              "lon": -21.9426,
+              "lat": 64.1466
+            },
+            "requestedGoal": {
+              "name": "Höfn",
+              "lon": -15.2082,
+              "lat": 64.2539
+            }
+          },
+          "events": 365297,
+          "traceBytes": 1461188,
+          "edgeTextureBytes": 884736,
+          "nodesSettled": 87580,
+          "arcsExamined": 186929,
+          "routeMetres": 436677.97,
+          "maxQueue": 231,
+          "traceSha256": "556d5dd647e96272e9d2b111a346ebf2320b2a2a7fec6b604a3adc91ed21f733",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 476660,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1461188
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Reykjavík",
+            "lon": -21.94273,
+            "lat": 64.14658,
+            "node": 32964,
+            "snapMetres": 6.684345210788331
+          },
+          "goal": {
+            "name": "Höfn",
+            "lon": -15.20789,
+            "lat": 64.25474,
+            "node": 42125,
+            "snapMetres": 94.59643637198964
+          },
+          "searchMs": 13,
+          "snapMs": 1,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Reykjavík",
+              "lon": -21.9426,
+              "lat": 64.1466
+            },
+            "requestedGoal": {
+              "name": "Höfn",
+              "lon": -15.2082,
+              "lat": 64.2539
+            }
+          },
+          "events": 314308,
+          "traceBytes": 1257232,
+          "edgeTextureBytes": 1769472,
+          "nodesSettled": 75434,
+          "arcsExamined": 160628,
+          "routeMetres": 436677.97,
+          "maxQueue": 235,
+          "traceSha256": "cedad11bd13399009fa530f6264ffd038dd8180026c3cc135234495acfba5614",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 476660,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1257232
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Reykjavík",
+            "lon": -21.94273,
+            "lat": 64.14658,
+            "node": 32964,
+            "snapMetres": 6.684345210788331
+          },
+          "goal": {
+            "name": "Höfn",
+            "lon": -15.20789,
+            "lat": 64.25474,
+            "node": 42125,
+            "snapMetres": 94.59643637198964
+          },
+          "searchMs": 13,
+          "snapMs": 1,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Reykjavík",
+              "lon": -21.9426,
+              "lat": 64.1466
+            },
+            "requestedGoal": {
+              "name": "Höfn",
+              "lon": -15.2082,
+              "lat": 64.2539
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 5,
+            "correctedNodes": 379,
+            "longitudeScale": 0.3979808147504524,
+            "initialStartCm": 29828286,
+            "startLowerBoundCm": 29828286
+          },
+          "events": 273794,
+          "traceBytes": 1095176,
+          "edgeTextureBytes": 884736,
+          "nodesSettled": 65738,
+          "arcsExamined": 139397,
+          "routeMetres": 436677.97,
+          "maxQueue": 277,
+          "traceSha256": "8b2141b2218c33a29c3eabea3aa6683249abff697a0de030569f349be31afbd4",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 476660,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1095176
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 4785714,
+    "reverseCsrBytes": 2062856,
+    "uploadedRoadAttributeBytes": 5719920,
+    "drawingCoordinateAndOffsetBytes": 4255532,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

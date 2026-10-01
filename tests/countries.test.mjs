@@ -27,6 +27,7 @@ test('national manifests reject unsafe paths, resource excess and malformed deco
   changed(m => m.counts.nodes = 10000001)
   changed(m => m.counts.edges = NaN)
   changed(m => m.projection.scaleMetres = 0)
+  changed(m => m.projection.longitudeWrapping = 'unknown/1')
 })
 const key = '/pfad-data/uk-20260929-0555cf638ba1/manifest.json'
 const object = () => ({ body: 'immutable graph', size: 15, uploaded: new Date('2026-10-01'), httpEtag: '"hash"' })
@@ -52,4 +53,14 @@ test('data Worker handles conditional reads and byte ranges without caching part
   env.DATA.get = async () => ({ ...object(), range: { offset: 0, length: 4 }, body: 'data' })
   const r = await worker.fetch(request(key, 'GET', { Range: 'bytes=0-3' }), env, {})
   assert.equal(r.status, 206); assert.equal(r.headers.get('Content-Range'), 'bytes 0-3/15'); assert.equal(await r.text(), 'data')
+})
+
+test('additional country manifests retain selected identities and verified layout', async () => {
+  for (const country of COUNTRIES.filter(c => !['ch', 'uk'].includes(c.id))) {
+    const manifest = JSON.parse(await readFile(`docs/evidence/countries-2026-10-01/${country.id}/manifest.json`))
+    validateManifest(manifest)
+    assert.equal(manifest.identity, country.identity)
+    assert.equal(createHash('sha256').update(manifestIdentityPayload(manifest)).digest('hex'), country.identity)
+    assert.ok(country.outlines && country.ambient.places.length >= 10)
+  }
 })

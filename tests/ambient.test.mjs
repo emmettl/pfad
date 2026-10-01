@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { JourneySelector, AMBIENT_PLACES, distanceBand, replaySeconds, straightLineKm } from '../src/ambient/selector.ts'
 import { AmbientSequence, ALGORITHM_CYCLE_VERSION } from '../src/ambient/sequence.ts'
-import { UK_POOL } from '../src/ambient/pools.ts'
+import { UK_POOL, AMBIENT_POOLS, LU_POOL } from '../src/ambient/pools.ts'
 
 test('UK selection spans all road regions without proposing sea crossings and exports its pool identity', t => {
   const selector = new JourneySelector(20261001, UK_POOL.places), seen = new Set(), bands = new Set()
@@ -106,4 +106,20 @@ test('reduced motion requires deliberate Next and preference changes cancel chor
   sequence.start(4, false); sequence.receive(result()); sequence.complete(); step(6100)
   sequence.setReduced(true); assert.equal(sequence.state.phase, 'still'); assert.equal(sequence.state.opacity, 1); assert.equal(sequence.state.running, false)
   step(60000); assert.equal(pairs.length, 3)
+})
+
+test('every country pool supplies all distance bands without crossing road regions', () => {
+  for (const pool of Object.values(AMBIENT_POOLS)) {
+    const selector = new JourneySelector(20261001, pool.places, pool.distance), bands = new Set(), places = new Set()
+    for (let i = 0; i < 500; i++) {
+      selector.beginJourney(); const pair = selector.choose(); assert.ok(pair, pool.version)
+      assert.equal(pair.start.region, pair.goal.region)
+      assert.equal(distanceBand(pair.estimateKm, pool.distance), pair.band)
+      bands.add(pair.band); places.add(pair.start.id); places.add(pair.goal.id)
+      selector.record(pair, pair.estimateKm)
+    }
+    assert.equal(bands.size, 3, pool.version); assert.equal(places.size, pool.places.length, pool.version)
+  }
+  assert.equal(distanceBand(55, LU_POOL.distance), 'national')
+  assert.equal(distanceBand(55), 'regional')
 })

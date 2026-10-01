@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T08:16:27.167Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "nz-20260930-7bbcde863f2e",
+    "counts": {
+      "nodes": 632564,
+      "edges": 719433,
+      "directedArcs": 1339259,
+      "vertices": 3046354
+    },
+    "downloadBytes": 9271569,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/australia-oceania/new-zealand-260930.osm.pbf",
+      "sha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 144,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Invercargill",
+            "lon": 168.35375,
+            "lat": -46.41322,
+            "node": 596019,
+            "snapMetres": 4.4315983119182425
+          },
+          "goal": {
+            "name": "Nelson",
+            "lon": 173.28403,
+            "lat": -41.27063,
+            "node": 121004,
+            "snapMetres": 4.173025520088402
+          },
+          "searchMs": 24.399999991059303,
+          "snapMs": 32.69999998807907,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Invercargill",
+              "lon": 168.3538,
+              "lat": -46.4132
+            },
+            "requestedGoal": {
+              "name": "Nelson",
+              "lon": 173.284,
+              "lat": -41.2706
+            }
+          },
+          "events": 800296,
+          "traceBytes": 3201184,
+          "edgeTextureBytes": 5767168,
+          "nodesSettled": 189203,
+          "arcsExamined": 411978,
+          "routeMetres": 961916.77,
+          "maxQueue": 308,
+          "traceSha256": "8a5eec0bcc6121d915826a9b4e1ded2c7c64d4440b178d560d01627ba304672b",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000273,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 3046354,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 3201184
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Invercargill",
+            "lon": 168.35375,
+            "lat": -46.41322,
+            "node": 596019,
+            "snapMetres": 4.4315983119182425
+          },
+          "goal": {
+            "name": "Nelson",
+            "lon": 173.28403,
+            "lat": -41.27063,
+            "node": 121004,
+            "snapMetres": 4.173025520088402
+          },
+          "searchMs": 26.799999997019768,
+          "snapMs": 5,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Invercargill",
+              "lon": 168.3538,
+              "lat": -46.4132
+            },
+            "requestedGoal": {
+              "name": "Nelson",
+              "lon": 173.284,
+              "lat": -41.2706
+            }
+          },
+          "events": 800296,
+          "traceBytes": 3201184,
+          "edgeTextureBytes": 5767168,
+          "nodesSettled": 189203,
+          "arcsExamined": 411978,
+          "routeMetres": 961916.77,
+          "maxQueue": 308,
+          "traceSha256": "8a5eec0bcc6121d915826a9b4e1ded2c7c64d4440b178d560d01627ba304672b",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 3046354,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 3201184
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Invercargill",
+            "lon": 168.35375,
+            "lat": -46.41322,
+            "node": 596019,
+            "snapMetres": 4.4315983119182425
+          },
+          "goal": {
+            "name": "Nelson",
+            "lon": 173.28403,
+            "lat": -41.27063,
+            "node": 121004,
+            "snapMetres": 4.173025520088402
+          },
+          "searchMs": 44.6000000089407,
+          "snapMs": 12.700000002980232,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Invercargill",
+              "lon": 168.3538,
+              "lat": -46.4132
+            },
+            "requestedGoal": {
+              "name": "Nelson",
+              "lon": 173.284,
+              "lat": -41.2706
+            }
+          },
+          "events": 817752,
+          "traceBytes": 3271008,
+          "edgeTextureBytes": 11534336,
+          "nodesSettled": 193447,
+          "arcsExamined": 420898,
+          "routeMetres": 961916.77,
+          "maxQueue": 341,
+          "traceSha256": "d1f740e47db82ba4c3fc4b734b0bdb58c4ee40ac0bdf23d62da28a3409fed9e2",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 3046354,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 3271008
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Invercargill",
+            "lon": 168.35375,
+            "lat": -46.41322,
+            "node": 596019,
+            "snapMetres": 4.4315983119182425
+          },
+          "goal": {
+            "name": "Nelson",
+            "lon": 173.28403,
+            "lat": -41.27063,
+            "node": 121004,
+            "snapMetres": 4.173025520088402
+          },
+          "searchMs": 34.900000005960464,
+          "snapMs": 7.699999988079071,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Invercargill",
+              "lon": 168.3538,
+              "lat": -46.4132
+            },
+            "requestedGoal": {
+              "name": "Nelson",
+              "lon": 173.284,
+              "lat": -41.2706
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 23.799999997019768,
+            "correctedNodes": 15958,
+            "longitudeScale": 0.6831150980404418,
+            "initialStartCm": 68354963,
+            "startLowerBoundCm": 68354963
+          },
+          "events": 777946,
+          "traceBytes": 3111784,
+          "edgeTextureBytes": 5767168,
+          "nodesSettled": 183245,
+          "arcsExamined": 399456,
+          "routeMetres": 961916.77,
+          "maxQueue": 665,
+          "traceSha256": "9f9a06cacbffd25e06e14a6db4ffeb31d05680893b255dcbf267d8e65c915dd7",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 3046354,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 3111784
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 146,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Invercargill",
+            "lon": 168.35375,
+            "lat": -46.41322,
+            "node": 596019,
+            "snapMetres": 4.4315983119182425
+          },
+          "goal": {
+            "name": "Nelson",
+            "lon": 173.28403,
+            "lat": -41.27063,
+            "node": 121004,
+            "snapMetres": 4.173025520088402
+          },
+          "searchMs": 22,
+          "snapMs": 35,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Invercargill",
+              "lon": 168.3538,
+              "lat": -46.4132
+            },
+            "requestedGoal": {
+              "name": "Nelson",
+              "lon": 173.284,
+              "lat": -41.2706
+            }
+          },
+          "events": 800296,
+          "traceBytes": 3201184,
+          "edgeTextureBytes": 5767168,
+          "nodesSettled": 189203,
+          "arcsExamined": 411978,
+          "routeMetres": 961916.77,
+          "maxQueue": 308,
+          "traceSha256": "8a5eec0bcc6121d915826a9b4e1ded2c7c64d4440b178d560d01627ba304672b",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 3046354,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 3201184
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Invercargill",
+            "lon": 168.35375,
+            "lat": -46.41322,
+            "node": 596019,
+            "snapMetres": 4.4315983119182425
+          },
+          "goal": {
+            "name": "Nelson",
+            "lon": 173.28403,
+            "lat": -41.27063,
+            "node": 121004,
+            "snapMetres": 4.173025520088402
+          },
+          "searchMs": 25,
+          "snapMs": 5,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Invercargill",
+              "lon": 168.3538,
+              "lat": -46.4132
+            },
+            "requestedGoal": {
+              "name": "Nelson",
+              "lon": 173.284,
+              "lat": -41.2706
+            }
+          },
+          "events": 800296,
+          "traceBytes": 3201184,
+          "edgeTextureBytes": 5767168,
+          "nodesSettled": 189203,
+          "arcsExamined": 411978,
+          "routeMetres": 961916.77,
+          "maxQueue": 308,
+          "traceSha256": "8a5eec0bcc6121d915826a9b4e1ded2c7c64d4440b178d560d01627ba304672b",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 3046354,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 3201184
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Invercargill",
+            "lon": 168.35375,
+            "lat": -46.41322,
+            "node": 596019,
+            "snapMetres": 4.4315983119182425
+          },
+          "goal": {
+            "name": "Nelson",
+            "lon": 173.28403,
+            "lat": -41.27063,
+            "node": 121004,
+            "snapMetres": 4.173025520088402
+          },
+          "searchMs": 44,
+          "snapMs": 9,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Invercargill",
+              "lon": 168.3538,
+              "lat": -46.4132
+            },
+            "requestedGoal": {
+              "name": "Nelson",
+              "lon": 173.284,
+              "lat": -41.2706
+            }
+          },
+          "events": 817752,
+          "traceBytes": 3271008,
+          "edgeTextureBytes": 11534336,
+          "nodesSettled": 193447,
+          "arcsExamined": 420898,
+          "routeMetres": 961916.77,
+          "maxQueue": 341,
+          "traceSha256": "d1f740e47db82ba4c3fc4b734b0bdb58c4ee40ac0bdf23d62da28a3409fed9e2",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 3046354,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 3271008
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Invercargill",
+            "lon": 168.35375,
+            "lat": -46.41322,
+            "node": 596019,
+            "snapMetres": 4.4315983119182425
+          },
+          "goal": {
+            "name": "Nelson",
+            "lon": 173.28403,
+            "lat": -41.27063,
+            "node": 121004,
+            "snapMetres": 4.173025520088402
+          },
+          "searchMs": 33,
+          "snapMs": 9,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Invercargill",
+              "lon": 168.3538,
+              "lat": -46.4132
+            },
+            "requestedGoal": {
+              "name": "Nelson",
+              "lon": 173.284,
+              "lat": -41.2706
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 44,
+            "correctedNodes": 15958,
+            "longitudeScale": 0.6831150980404418,
+            "initialStartCm": 68354963,
+            "startLowerBoundCm": 68354963
+          },
+          "events": 777946,
+          "traceBytes": 3111784,
+          "edgeTextureBytes": 5767168,
+          "nodesSettled": 183245,
+          "arcsExamined": 399456,
+          "routeMetres": 961916.77,
+          "maxQueue": 665,
+          "traceSha256": "9f9a06cacbffd25e06e14a6db4ffeb31d05680893b255dcbf267d8e65c915dd7",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 3046354,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 3111784
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 30907162,
+    "reverseCsrBytes": 13244332,
+    "uploadedRoadAttributeBytes": 36556248,
+    "drawingCoordinateAndOffsetBytes": 27248596,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

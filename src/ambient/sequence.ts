@@ -1,5 +1,5 @@
 import type { SearchAlgorithm, SearchResult } from '../search/contracts.ts'
-import { JourneySelector, replaySeconds, POOL_VERSION, SELECTOR_VERSION, type JourneyPair, type JourneyRecord } from './selector.ts'
+import { JourneySelector, replaySeconds, POOL_VERSION, SELECTOR_VERSION, type JourneyPair, type DistanceProfile, type JourneyRecord } from './selector.ts'
 import { SWISS_POOL, type AmbientPool } from './pools.ts'
 
 export type AmbientPhase = 'off' | 'preparing' | 'replay' | 'hold' | 'fade' | 'still' | 'stopped'
@@ -7,7 +7,7 @@ export interface AmbientState { active: boolean; running: boolean; phase: Ambien
 export interface AmbientRecord extends JourneyRecord {
   dataset?: SearchResult['dataset']; algorithm: SearchResult['algorithm']; searchMs: number
   events: number; replaySeconds: number | null; selector: string; pool: string; seed: number; selection: number
-  cycle: string; journey: number
+  cycle: string; journey: number; distanceProfile: DistanceProfile
 }
 export const ALGORITHM_CYCLE_VERSION = 'three-algorithm-rotation/1'
 const ALGORITHMS: SearchAlgorithm[] = ['dijkstra', 'bidirectional', 'astar']
@@ -34,7 +34,7 @@ export class AmbientSequence {
   constructor(changed: (state: AmbientState) => void, search: (pair: JourneyPair, algorithm: SearchAlgorithm) => void) { this.changed = changed; this.search = search }
   private publish(update: Partial<AmbientState>) { this.state = { ...this.state, ...update }; this.changed(this.state) }
   start(seed: number, reduced: boolean, firstAlgorithm: SearchAlgorithm = 'dijkstra', pool: AmbientPool = SWISS_POOL) {
-    this.cancel(); this.selector = new JourneySelector(seed, pool.places); this.poolVersion = pool.version; this.records = []; this.reduced = reduced
+    this.cancel(); this.selector = new JourneySelector(seed, pool.places, pool.distance); this.poolVersion = pool.version; this.records = []; this.reduced = reduced
     this.algorithmIndex = ALGORITHMS.indexOf(firstAlgorithm) - 1; this.journey = 0
     this.publish({ active: true, running: true, phase: 'preparing', opacity: 1, message: '' }); this.next()
   }
@@ -55,7 +55,7 @@ export class AmbientSequence {
     const record = this.selector!.record(this.pair, result.routeMetres === null ? null : result.routeMetres / 1000)
     this.duration = record.accepted ? replaySeconds(record.roadKm!) : 30
     this.records.push({ ...record, dataset: result.dataset, algorithm: result.algorithm, searchMs: result.searchMs, events: result.trace.length,
-      replaySeconds: record.accepted ? this.duration : null, selector: SELECTOR_VERSION, pool: this.poolVersion, seed: this.selector!.seed, selection: this.selector!.selections,
+      replaySeconds: record.accepted ? this.duration : null, selector: SELECTOR_VERSION, pool: this.poolVersion, distanceProfile: this.selector!.distance, seed: this.selector!.seed, selection: this.selector!.selections,
       cycle: ALGORITHM_CYCLE_VERSION, journey: this.journey })
     this.records = this.records.slice(-12)
     if (!record.accepted) { this.select(); return false }

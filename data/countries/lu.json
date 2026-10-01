@@ -1,0 +1,27 @@
+{
+  "id": "lu",
+  "name": "Luxembourg",
+  "datasetPrefix": "lu-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/luxembourg-260930.osm.pbf",
+    "sha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+    "md5": "5c4a30a33a6978d5181900871ea55b05",
+    "bytes": 47593670,
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      6.1,
+      49.8
+    ],
+    "referenceLatitude": 49.8,
+    "scaleMetres": 65000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

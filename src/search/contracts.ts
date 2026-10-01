@@ -20,7 +20,7 @@ export interface StudyManifest {
   source: { dataTimestamp: string; attribution: string; licence: string; licenceUrl: string; url: string; sha256: string }
   counts: { nodes: number; edges: number; directedArcs: number; vertices: number }
   coordinateScale: number
-  projection: { centre: [number, number]; referenceLatitude: number; scaleMetres: number; quantisationMetres: number }
+  projection: { longitudeWrapping?: 'centre/1'; centre: [number, number]; referenceLatitude: number; scaleMetres: number; quantisationMetres: number }
   bounds: [number, number, number, number]
   classes: string[]
   chunks: Chunk[]

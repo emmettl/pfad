@@ -1,0 +1,97 @@
+[
+  {
+    "country": "nz",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Auckland→Wellington",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "852153"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Auckland→Wellington",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "828648"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Auckland→Wellington",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "621468"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Rotorua→Tauranga61.0 kmA*",
+        "events": "49081"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Whanganui→Palmerston North73.2 kmDijkstra",
+        "events": "45448"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Whanganui→Auckland441.1 kmBidirectional Dijkstra",
+        "events": "1507934"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Invercargill→Dunedin202.8 kmA*",
+        "events": "68677"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Hamilton→Auckland122.5 kmDijkstra",
+        "events": "704432"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Invercargill→Nelson961.9 kmBidirectional Dijkstra",
+        "events": "817752"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Wellington→Napier313.8 kmA*",
+        "events": "329683"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Ashburton→Timaru76.9 kmDijkstra",
+        "events": "120979"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Rotorua→HamiltonBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

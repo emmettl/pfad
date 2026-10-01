@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T08:15:37.158Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "lu-20260930-e04927d2555c",
+    "counts": {
+      "nodes": 71628,
+      "edges": 83662,
+      "directedArcs": 151647,
+      "vertices": 259166
+    },
+    "downloadBytes": 965963,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe/luxembourg-260930.osm.pbf",
+      "sha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 55.1000000089407,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Esch-sur-Alzette",
+            "lon": 5.98093,
+            "lat": 49.49566,
+            "node": 20042,
+            "snapMetres": 28.466815305121987
+          },
+          "goal": {
+            "name": "Clervaux",
+            "lon": 6.03086,
+            "lat": 50.05475,
+            "node": 33230,
+            "snapMetres": 18.013872955309697
+          },
+          "searchMs": 12.299999997019768,
+          "snapMs": 6.299999997019768,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Esch-sur-Alzette",
+              "lon": 5.9806,
+              "lat": 49.4958
+            },
+            "requestedGoal": {
+              "name": "Clervaux",
+              "lon": 6.0311,
+              "lat": 50.0547
+            }
+          },
+          "events": 279512,
+          "traceBytes": 1118048,
+          "edgeTextureBytes": 671744,
+          "nodesSettled": 66802,
+          "arcsExamined": 142534,
+          "routeMetres": 78538.45,
+          "maxQueue": 186,
+          "traceSha256": "20da1104762fb3e14dc98a96204073da93291a96a5a8332ad8be0c671188f58b",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.799999999999955,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 259166,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1118048
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Esch-sur-Alzette",
+            "lon": 5.98093,
+            "lat": 49.49566,
+            "node": 20042,
+            "snapMetres": 28.466815305121987
+          },
+          "goal": {
+            "name": "Clervaux",
+            "lon": 6.03086,
+            "lat": 50.05475,
+            "node": 33230,
+            "snapMetres": 18.013872955309697
+          },
+          "searchMs": 9.399999991059303,
+          "snapMs": 0.6000000089406967,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Esch-sur-Alzette",
+              "lon": 5.9806,
+              "lat": 49.4958
+            },
+            "requestedGoal": {
+              "name": "Clervaux",
+              "lon": 6.0311,
+              "lat": 50.0547
+            }
+          },
+          "events": 279512,
+          "traceBytes": 1118048,
+          "edgeTextureBytes": 671744,
+          "nodesSettled": 66802,
+          "arcsExamined": 142534,
+          "routeMetres": 78538.45,
+          "maxQueue": 186,
+          "traceSha256": "20da1104762fb3e14dc98a96204073da93291a96a5a8332ad8be0c671188f58b",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 259166,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1118048
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Esch-sur-Alzette",
+            "lon": 5.98093,
+            "lat": 49.49566,
+            "node": 20042,
+            "snapMetres": 28.466815305121987
+          },
+          "goal": {
+            "name": "Clervaux",
+            "lon": 6.03086,
+            "lat": 50.05475,
+            "node": 33230,
+            "snapMetres": 18.013872955309697
+          },
+          "searchMs": 12.200000002980232,
+          "snapMs": 0.699999988079071,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Esch-sur-Alzette",
+              "lon": 5.9806,
+              "lat": 49.4958
+            },
+            "requestedGoal": {
+              "name": "Clervaux",
+              "lon": 6.0311,
+              "lat": 50.0547
+            }
+          },
+          "events": 251500,
+          "traceBytes": 1006000,
+          "edgeTextureBytes": 1343488,
+          "nodesSettled": 60056,
+          "arcsExamined": 128250,
+          "routeMetres": 78538.45,
+          "maxQueue": 254,
+          "traceSha256": "6615afdad3dd00f961327ad6e3078271a6457a4e59968e5097973604e0f3b1f0",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 259166,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1006000
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Esch-sur-Alzette",
+            "lon": 5.98093,
+            "lat": 49.49566,
+            "node": 20042,
+            "snapMetres": 28.466815305121987
+          },
+          "goal": {
+            "name": "Clervaux",
+            "lon": 6.03086,
+            "lat": 50.05475,
+            "node": 33230,
+            "snapMetres": 18.013872955309697
+          },
+          "searchMs": 12.599999994039536,
+          "snapMs": 0.6000000089406967,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Esch-sur-Alzette",
+              "lon": 5.9806,
+              "lat": 49.4958
+            },
+            "requestedGoal": {
+              "name": "Clervaux",
+              "lon": 6.0311,
+              "lat": 50.0547
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 5.200000002980232,
+            "correctedNodes": 3014,
+            "longitudeScale": 0.6403149696002594,
+            "initialStartCm": 6226961,
+            "startLowerBoundCm": 6226961
+          },
+          "events": 206731,
+          "traceBytes": 826924,
+          "edgeTextureBytes": 671744,
+          "nodesSettled": 49379,
+          "arcsExamined": 104846,
+          "routeMetres": 78538.45,
+          "maxQueue": 415,
+          "traceSha256": "b30f86265d60c3e6eb69858fff88eeeac0c72327f3eced879dc9e56cfc46c6ba",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 259166,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 826924
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 45,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Esch-sur-Alzette",
+            "lon": 5.98093,
+            "lat": 49.49566,
+            "node": 20042,
+            "snapMetres": 28.466815305121987
+          },
+          "goal": {
+            "name": "Clervaux",
+            "lon": 6.03086,
+            "lat": 50.05475,
+            "node": 33230,
+            "snapMetres": 18.013872955309697
+          },
+          "searchMs": 9,
+          "snapMs": 6,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Esch-sur-Alzette",
+              "lon": 5.9806,
+              "lat": 49.4958
+            },
+            "requestedGoal": {
+              "name": "Clervaux",
+              "lon": 6.0311,
+              "lat": 50.0547
+            }
+          },
+          "events": 279512,
+          "traceBytes": 1118048,
+          "edgeTextureBytes": 671744,
+          "nodesSettled": 66802,
+          "arcsExamined": 142534,
+          "routeMetres": 78538.45,
+          "maxQueue": 186,
+          "traceSha256": "20da1104762fb3e14dc98a96204073da93291a96a5a8332ad8be0c671188f58b",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 259166,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1118048
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Esch-sur-Alzette",
+            "lon": 5.98093,
+            "lat": 49.49566,
+            "node": 20042,
+            "snapMetres": 28.466815305121987
+          },
+          "goal": {
+            "name": "Clervaux",
+            "lon": 6.03086,
+            "lat": 50.05475,
+            "node": 33230,
+            "snapMetres": 18.013872955309697
+          },
+          "searchMs": 8,
+          "snapMs": 1,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Esch-sur-Alzette",
+              "lon": 5.9806,
+              "lat": 49.4958
+            },
+            "requestedGoal": {
+              "name": "Clervaux",
+              "lon": 6.0311,
+              "lat": 50.0547
+            }
+          },
+          "events": 279512,
+          "traceBytes": 1118048,
+          "edgeTextureBytes": 671744,
+          "nodesSettled": 66802,
+          "arcsExamined": 142534,
+          "routeMetres": 78538.45,
+          "maxQueue": 186,
+          "traceSha256": "20da1104762fb3e14dc98a96204073da93291a96a5a8332ad8be0c671188f58b",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 259166,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1118048
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Esch-sur-Alzette",
+            "lon": 5.98093,
+            "lat": 49.49566,
+            "node": 20042,
+            "snapMetres": 28.466815305121987
+          },
+          "goal": {
+            "name": "Clervaux",
+            "lon": 6.03086,
+            "lat": 50.05475,
+            "node": 33230,
+            "snapMetres": 18.013872955309697
+          },
+          "searchMs": 21,
+          "snapMs": 1,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Esch-sur-Alzette",
+              "lon": 5.9806,
+              "lat": 49.4958
+            },
+            "requestedGoal": {
+              "name": "Clervaux",
+              "lon": 6.0311,
+              "lat": 50.0547
+            }
+          },
+          "events": 251500,
+          "traceBytes": 1006000,
+          "edgeTextureBytes": 1343488,
+          "nodesSettled": 60056,
+          "arcsExamined": 128250,
+          "routeMetres": 78538.45,
+          "maxQueue": 254,
+          "traceSha256": "6615afdad3dd00f961327ad6e3078271a6457a4e59968e5097973604e0f3b1f0",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 259166,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 1006000
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "8a64e56e254f87de9e1eccd7919a98fda4eb562137ff0da4b0d5cf2a7bd487fb",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Esch-sur-Alzette",
+            "lon": 5.98093,
+            "lat": 49.49566,
+            "node": 20042,
+            "snapMetres": 28.466815305121987
+          },
+          "goal": {
+            "name": "Clervaux",
+            "lon": 6.03086,
+            "lat": 50.05475,
+            "node": 33230,
+            "snapMetres": 18.013872955309697
+          },
+          "searchMs": 20,
+          "snapMs": 1,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Esch-sur-Alzette",
+              "lon": 5.9806,
+              "lat": 49.4958
+            },
+            "requestedGoal": {
+              "name": "Clervaux",
+              "lon": 6.0311,
+              "lat": 50.0547
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 11,
+            "correctedNodes": 3014,
+            "longitudeScale": 0.6403149696002594,
+            "initialStartCm": 6226961,
+            "startLowerBoundCm": 6226961
+          },
+          "events": 206731,
+          "traceBytes": 826924,
+          "edgeTextureBytes": 671744,
+          "nodesSettled": 49379,
+          "arcsExamined": 104846,
+          "routeMetres": 78538.45,
+          "maxQueue": 415,
+          "traceSha256": "b30f86265d60c3e6eb69858fff88eeeac0c72327f3eced879dc9e56cfc46c6ba",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 259166,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 826924
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 3530496,
+    "reverseCsrBytes": 1499692,
+    "uploadedRoadAttributeBytes": 3109992,
+    "drawingCoordinateAndOffsetBytes": 2407980,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

@@ -1,3 +1,4 @@
+import { COUNTRIES } from '../countries.ts'
 import type { Point, SearchAlgorithm } from '../search/contracts.ts'
 export interface StudyLink {
   schema: 'pfad-study-link/1'; country: string; dataset: string; profile: string
@@ -12,7 +13,7 @@ export function readStudyLink(hash: string): { study?: StudyLink; error?: string
   try {
     if (raw.length > 4000) throw new Error()
     const s = JSON.parse(raw) as StudyLink
-    if (!s || s.schema !== 'pfad-study-link/1' || !['ch', 'uk'].includes(s.country) || !/^[a-f0-9]{64}$/.test(s.dataset) || s.profile !== 'road-connectivity-distance-v1'
+    if (!s || s.schema !== 'pfad-study-link/1' || !COUNTRIES.some(country => country.id === s.country) || !/^[a-f0-9]{64}$/.test(s.dataset) || s.profile !== 'road-connectivity-distance-v1'
       || !point(s.start) || !point(s.goal) || !['dijkstra', 'bidirectional', 'astar'].includes(s.algorithm)
       || !finite(s.duration, 5, 120) || !finite(s.progress, 0, 1) || typeof s.outlines !== 'boolean'
       || (s.view && (!finite(s.view.x, -100, 100) || !finite(s.view.y, -100, 100) || !finite(s.view.zoom, .6, 24)))) throw new Error()

@@ -1,0 +1,536 @@
+{
+  "measuredAt": "2026-10-01T08:17:12.633Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "nl-20260930-40fbb64d05c2",
+    "counts": {
+      "nodes": 1794621,
+      "edges": 2141404,
+      "directedArcs": 3879145,
+      "vertices": 5572870
+    },
+    "downloadBytes": 22158494,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe/netherlands-260930.osm.pbf",
+      "sha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 275.59999999403954,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "40fbb64d05c268e91d65f285b1bd7951ac02500fa1919b24f8b8a250db31ade7",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Maastricht",
+            "lon": 5.69057,
+            "lat": 50.85165,
+            "node": 578798,
+            "snapMetres": 36.1863757535632
+          },
+          "goal": {
+            "name": "Groningen",
+            "lon": 6.5668,
+            "lat": 53.21953,
+            "node": 45466,
+            "snapMetres": 24.655588745147764
+          },
+          "searchMs": 254.59999999403954,
+          "snapMs": 93.20000000298023,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Maastricht",
+              "lon": 5.6909,
+              "lat": 50.8514
+            },
+            "requestedGoal": {
+              "name": "Groningen",
+              "lon": 6.5665,
+              "lat": 53.2194
+            }
+          },
+          "events": 7129005,
+          "traceBytes": 28516020,
+          "edgeTextureBytes": 17137664,
+          "nodesSettled": 1685531,
+          "arcsExamined": 3662111,
+          "routeMetres": 307935.11,
+          "maxQueue": 1408,
+          "traceSha256": "fda971878df4c75f6456df15dbfb959f6ec397920b2e90f623d9969d76c36493",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000273,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5572870,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 28516020
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "40fbb64d05c268e91d65f285b1bd7951ac02500fa1919b24f8b8a250db31ade7",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Maastricht",
+            "lon": 5.69057,
+            "lat": 50.85165,
+            "node": 578798,
+            "snapMetres": 36.1863757535632
+          },
+          "goal": {
+            "name": "Groningen",
+            "lon": 6.5668,
+            "lat": 53.21953,
+            "node": 45466,
+            "snapMetres": 24.655588745147764
+          },
+          "searchMs": 257.6000000089407,
+          "snapMs": 29.200000002980232,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Maastricht",
+              "lon": 5.6909,
+              "lat": 50.8514
+            },
+            "requestedGoal": {
+              "name": "Groningen",
+              "lon": 6.5665,
+              "lat": 53.2194
+            }
+          },
+          "events": 7129005,
+          "traceBytes": 28516020,
+          "edgeTextureBytes": 17137664,
+          "nodesSettled": 1685531,
+          "arcsExamined": 3662111,
+          "routeMetres": 307935.11,
+          "maxQueue": 1408,
+          "traceSha256": "fda971878df4c75f6456df15dbfb959f6ec397920b2e90f623d9969d76c36493",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5572870,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 28516020
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "40fbb64d05c268e91d65f285b1bd7951ac02500fa1919b24f8b8a250db31ade7",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Maastricht",
+            "lon": 5.69057,
+            "lat": 50.85165,
+            "node": 578798,
+            "snapMetres": 36.1863757535632
+          },
+          "goal": {
+            "name": "Groningen",
+            "lon": 6.5668,
+            "lat": 53.21953,
+            "node": 45466,
+            "snapMetres": 24.655588745147764
+          },
+          "searchMs": 216.3999999910593,
+          "snapMs": 21.600000008940697,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Maastricht",
+              "lon": 5.6909,
+              "lat": 50.8514
+            },
+            "requestedGoal": {
+              "name": "Groningen",
+              "lon": 6.5665,
+              "lat": 53.2194
+            }
+          },
+          "events": 4343189,
+          "traceBytes": 17372756,
+          "edgeTextureBytes": 34275328,
+          "nodesSettled": 1019286,
+          "arcsExamined": 2244252,
+          "routeMetres": 307935.11,
+          "maxQueue": 1148,
+          "traceSha256": "455d373bede35b8883b617d9fe5dafe65399ba2b471226cebc05a7c2f5af6d13",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.700000000000728,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5572870,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 17372756
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "40fbb64d05c268e91d65f285b1bd7951ac02500fa1919b24f8b8a250db31ade7",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Maastricht",
+            "lon": 5.69057,
+            "lat": 50.85165,
+            "node": 578798,
+            "snapMetres": 36.1863757535632
+          },
+          "goal": {
+            "name": "Groningen",
+            "lon": 6.5668,
+            "lat": 53.21953,
+            "node": 45466,
+            "snapMetres": 24.655588745147764
+          },
+          "searchMs": 90.59999999403954,
+          "snapMs": 30.200000002980232,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Maastricht",
+              "lon": 5.6909,
+              "lat": 50.8514
+            },
+            "requestedGoal": {
+              "name": "Groningen",
+              "lon": 6.5665,
+              "lat": 53.2194
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 72.6000000089407,
+            "correctedNodes": 49430,
+            "longitudeScale": 0.5948696457700889,
+            "initialStartCm": 26960048,
+            "startLowerBoundCm": 26960048
+          },
+          "events": 2120446,
+          "traceBytes": 8481784,
+          "edgeTextureBytes": 17137664,
+          "nodesSettled": 493345,
+          "arcsExamined": 1091342,
+          "routeMetres": 307935.11,
+          "maxQueue": 2072,
+          "traceSha256": "78039791137226477b1146d88fa1eacc2322e35a8ec49d08cb0defe340a85eb3",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5572870,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 8481784
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 288,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "40fbb64d05c268e91d65f285b1bd7951ac02500fa1919b24f8b8a250db31ade7",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Maastricht",
+            "lon": 5.69057,
+            "lat": 50.85165,
+            "node": 578798,
+            "snapMetres": 36.1863757535632
+          },
+          "goal": {
+            "name": "Groningen",
+            "lon": 6.5668,
+            "lat": 53.21953,
+            "node": 45466,
+            "snapMetres": 24.655588745147764
+          },
+          "searchMs": 218,
+          "snapMs": 86,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Maastricht",
+              "lon": 5.6909,
+              "lat": 50.8514
+            },
+            "requestedGoal": {
+              "name": "Groningen",
+              "lon": 6.5665,
+              "lat": 53.2194
+            }
+          },
+          "events": 7129005,
+          "traceBytes": 28516020,
+          "edgeTextureBytes": 17137664,
+          "nodesSettled": 1685531,
+          "arcsExamined": 3662111,
+          "routeMetres": 307935.11,
+          "maxQueue": 1408,
+          "traceSha256": "fda971878df4c75f6456df15dbfb959f6ec397920b2e90f623d9969d76c36493",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5572870,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 28516020
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "40fbb64d05c268e91d65f285b1bd7951ac02500fa1919b24f8b8a250db31ade7",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Maastricht",
+            "lon": 5.69057,
+            "lat": 50.85165,
+            "node": 578798,
+            "snapMetres": 36.1863757535632
+          },
+          "goal": {
+            "name": "Groningen",
+            "lon": 6.5668,
+            "lat": 53.21953,
+            "node": 45466,
+            "snapMetres": 24.655588745147764
+          },
+          "searchMs": 234,
+          "snapMs": 15,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Maastricht",
+              "lon": 5.6909,
+              "lat": 50.8514
+            },
+            "requestedGoal": {
+              "name": "Groningen",
+              "lon": 6.5665,
+              "lat": 53.2194
+            }
+          },
+          "events": 7129005,
+          "traceBytes": 28516020,
+          "edgeTextureBytes": 17137664,
+          "nodesSettled": 1685531,
+          "arcsExamined": 3662111,
+          "routeMetres": 307935.11,
+          "maxQueue": 1408,
+          "traceSha256": "fda971878df4c75f6456df15dbfb959f6ec397920b2e90f623d9969d76c36493",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5572870,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 28516020
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "40fbb64d05c268e91d65f285b1bd7951ac02500fa1919b24f8b8a250db31ade7",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Maastricht",
+            "lon": 5.69057,
+            "lat": 50.85165,
+            "node": 578798,
+            "snapMetres": 36.1863757535632
+          },
+          "goal": {
+            "name": "Groningen",
+            "lon": 6.5668,
+            "lat": 53.21953,
+            "node": 45466,
+            "snapMetres": 24.655588745147764
+          },
+          "searchMs": 186,
+          "snapMs": 23,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Maastricht",
+              "lon": 5.6909,
+              "lat": 50.8514
+            },
+            "requestedGoal": {
+              "name": "Groningen",
+              "lon": 6.5665,
+              "lat": 53.2194
+            }
+          },
+          "events": 4343189,
+          "traceBytes": 17372756,
+          "edgeTextureBytes": 34275328,
+          "nodesSettled": 1019286,
+          "arcsExamined": 2244252,
+          "routeMetres": 307935.11,
+          "maxQueue": 1148,
+          "traceSha256": "455d373bede35b8883b617d9fe5dafe65399ba2b471226cebc05a7c2f5af6d13",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5572870,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 17372756
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "40fbb64d05c268e91d65f285b1bd7951ac02500fa1919b24f8b8a250db31ade7",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Maastricht",
+            "lon": 5.69057,
+            "lat": 50.85165,
+            "node": 578798,
+            "snapMetres": 36.1863757535632
+          },
+          "goal": {
+            "name": "Groningen",
+            "lon": 6.5668,
+            "lat": 53.21953,
+            "node": 45466,
+            "snapMetres": 24.655588745147764
+          },
+          "searchMs": 92,
+          "snapMs": 22,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Maastricht",
+              "lon": 5.6909,
+              "lat": 50.8514
+            },
+            "requestedGoal": {
+              "name": "Groningen",
+              "lon": 6.5665,
+              "lat": 53.2194
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 83,
+            "correctedNodes": 49430,
+            "longitudeScale": 0.5948696457700889,
+            "initialStartCm": 26960048,
+            "startLowerBoundCm": 26960048
+          },
+          "events": 2120446,
+          "traceBytes": 8481784,
+          "edgeTextureBytes": 17137664,
+          "nodesSettled": 493345,
+          "arcsExamined": 1091342,
+          "routeMetres": 307935.11,
+          "maxQueue": 2072,
+          "traceSha256": "78039791137226477b1146d88fa1eacc2322e35a8ec49d08cb0defe340a85eb3",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 5572870,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 8481784
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 89726756,
+    "reverseCsrBytes": 38211648,
+    "uploadedRoadAttributeBytes": 66874440,
+    "drawingCoordinateAndOffsetBytes": 53148664,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

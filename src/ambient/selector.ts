@@ -1,6 +1,6 @@
 import type { Point } from '../search/contracts.ts'
 
-export const SELECTOR_VERSION = 'distance-balanced-pairs/2'
+export const SELECTOR_VERSION = 'distance-balanced-pairs/3'
 export const POOL_VERSION = 'swiss-places/1'
 // A versioned authored pool, independent of future additions to the manual picker.
 export const AMBIENT_PLACES: AmbientPlace[] = [
@@ -25,8 +25,10 @@ export interface JourneyRecord {
   roadKm: number | null; accepted: boolean
 }
 export const replaySeconds = (km: number) => Math.min(65, Math.max(25, 30 * Math.sqrt(km / 100)))
-export function distanceBand(km: number): DistanceBand | null {
-  return km < 30 ? null : km < 100 ? 'regional' : km < 220 ? 'interregional' : 'national'
+export interface DistanceProfile { minimumKm: number; regionalBelowKm: number; interregionalBelowKm: number }
+export const DEFAULT_DISTANCE_PROFILE: DistanceProfile = { minimumKm: 30, regionalBelowKm: 100, interregionalBelowKm: 220 }
+export function distanceBand(km: number, profile = DEFAULT_DISTANCE_PROFILE): DistanceBand | null {
+  return km < profile.minimumKm ? null : km < profile.regionalBelowKm ? 'regional' : km < profile.interregionalBelowKm ? 'interregional' : 'national'
 }
 export function straightLineKm(a: Point, b: Point) {
   const rad = Math.PI / 180, dy = (b.lat - a.lat) * rad, dx = (b.lon - a.lon) * rad
@@ -39,14 +41,15 @@ const pairKey = (a: string, b: string) => [a, b].sort().join('/')
 export class JourneySelector {
   readonly seed: number
   readonly places: AmbientPlace[]
+  readonly distance: DistanceProfile
   private randomState: number
   private history: string[] = []
   private uses = new Map<string, number>()
   private attempted = new Set<string>()
   private band: DistanceBand | undefined
   selections = 0
-  constructor(seed: number, places = AMBIENT_PLACES) {
-    this.seed = seed >>> 0; this.randomState = this.seed || 0x6d2b79f5; this.places = places
+  constructor(seed: number, places = AMBIENT_PLACES, distance = DEFAULT_DISTANCE_PROFILE) {
+    this.seed = seed >>> 0; this.randomState = this.seed || 0x6d2b79f5; this.places = places; this.distance = distance
   }
   private random() {
     let x = this.randomState; x ^= x << 13; x ^= x >>> 17; x ^= x << 5
@@ -65,7 +68,7 @@ export class JourneySelector {
       const key = pairKey(start.id, goal.id)
       if (this.history.includes(key) || this.attempted.has(key)) continue
       const direct = straightLineKm(start, goal), estimateKm = direct * 1.25
-      if (direct < 30 || distanceBand(estimateKm) !== this.band) continue
+      if (direct < this.distance.minimumKm || distanceBand(estimateKm, this.distance) !== this.band) continue
       candidates.push({ pair: { start, goal, band: this.band!, estimateKm }, key, weight: 1 / (1 + (this.uses.get(start.id) ?? 0) + (this.uses.get(goal.id) ?? 0)) })
     }
     let draw = this.random() * candidates.reduce((sum, item) => sum + item.weight, 0)
@@ -75,7 +78,7 @@ export class JourneySelector {
     return selected.pair
   }
   record(pair: JourneyPair, roadKm: number | null): JourneyRecord {
-    const accepted = roadKm !== null && Number.isFinite(roadKm) && distanceBand(roadKm) === pair.band
+    const accepted = roadKm !== null && Number.isFinite(roadKm) && distanceBand(roadKm, this.distance) === pair.band
     if (accepted) {
       this.history.push(pairKey(pair.start.id, pair.goal.id)); this.history = this.history.slice(-6)
       for (const point of [pair.start, pair.goal]) this.uses.set(point.id, (this.uses.get(point.id) ?? 0) + 1)

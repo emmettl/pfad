@@ -1,6 +1,6 @@
 import type { Point } from './search/contracts.ts'
 import { PLACES } from './places.ts'
-import { SWISS_POOL, UK_POOL, type AmbientPool } from './ambient/pools.ts'
+import { SWISS_POOL, UK_POOL, AMBIENT_POOLS, type AmbientPool } from './ambient/pools.ts'
 export interface Country {
   id: string; name: string; manifest: string; identity: string; places: Point[]
   outlines: boolean; large: boolean; downloadMB: number; snapshot: string; deviceNote?: string
@@ -16,4 +16,8 @@ export const COUNTRIES: Country[] = [
     { name: 'Belfast', lon: -5.9301, lat: 54.5973 }, { name: 'Bristol', lon: -2.5879, lat: 51.4545 },
     { name: "Land's End", lon: -5.714, lat: 50.066 }, { name: "John o’ Groats", lon: -3.069, lat: 58.638 },
   ] },
+  {"id": "is", "name": "Iceland", "manifest": "https://motionstudies.app/pfad-data/is-20260930-ad6c30aac073/manifest.json", "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990", "outlines": true, "large": false, "downloadMB": 1.5, "snapshot": "30 Sep 2026", "outlineDescription": "Country outline from a pinned Natural Earth 1:10m reference snapshot.", "outlineCredit": "Natural Earth · public domain", "outlineCreditUrl": "https://www.naturalearthdata.com/about/terms-of-use/", ambient: AMBIENT_POOLS.is, places: AMBIENT_POOLS.is.places },
+  {"id": "nz", "name": "New Zealand", "manifest": "https://motionstudies.app/pfad-data/nz-20260930-7bbcde863f2e/manifest.json", "identity": "7bbcde863f2ec5a31d478a4e13513385649c07225b28f609aea402578e9c21db", "outlines": true, "large": false, "downloadMB": 9.3, "snapshot": "30 Sep 2026", "outlineDescription": "New Zealand coastline and major lake shorelines from a pinned Natural Earth 1:10m reference snapshot.", "outlineCredit": "Natural Earth · public domain", "outlineCreditUrl": "https://www.naturalearthdata.com/about/terms-of-use/", ambient: AMBIENT_POOLS.nz, places: AMBIENT_POOLS.nz.places },
+  {"id": "lu", "name": "Luxembourg", "manifest": "https://motionstudies.app/pfad-data/lu-20260930-e04927d2555c/manifest.json", "identity": "e04927d2555c1ae98a15b022f30308a983e9596951c4dad64bc703ffcb0c1626", "outlines": true, "large": false, "downloadMB": 1.0, "snapshot": "30 Sep 2026", "outlineDescription": "Country outline from a pinned Natural Earth 1:10m reference snapshot.", "outlineCredit": "Natural Earth · public domain", "outlineCreditUrl": "https://www.naturalearthdata.com/about/terms-of-use/", ambient: AMBIENT_POOLS.lu, places: AMBIENT_POOLS.lu.places },
+  {"id": "nl", "name": "Netherlands", "manifest": "https://motionstudies.app/pfad-data/nl-20260930-40fbb64d05c2/manifest.json", "identity": "40fbb64d05c268e91d65f285b1bd7951ac02500fa1919b24f8b8a250db31ade7", "outlines": true, "large": false, "downloadMB": 22.2, "snapshot": "30 Sep 2026", "outlineDescription": "European Netherlands coastline and land border, with major lake shorelines, from a pinned Natural Earth 1:10m reference snapshot.", "outlineCredit": "Natural Earth · public domain", "outlineCreditUrl": "https://www.naturalearthdata.com/about/terms-of-use/", ambient: AMBIENT_POOLS.nl, places: AMBIENT_POOLS.nl.places },
 ]

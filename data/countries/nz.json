@@ -1,0 +1,28 @@
+{
+  "id": "nz",
+  "name": "New Zealand",
+  "datasetPrefix": "nz-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/australia-oceania/new-zealand-260930.osm.pbf",
+    "sha256": "24fcc1c790c49792870ebb1f022c929492b75f6d460f130275fb7d7df80b3391",
+    "md5": "a1c035afa55cc60931532571a103ae88",
+    "bytes": 404207511,
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      175,
+      -40.5
+    ],
+    "referenceLatitude": -40.5,
+    "scaleMetres": 1600000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1",
+    "longitudeWrapping": "centre/1"
+  }
+}

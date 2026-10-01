@@ -1,0 +1,18 @@
+{
+  "measuredAt": "2026-10-01T08:35:05.023566+00:00",
+  "unitTests": 61,
+  "browserTests": 46,
+  "targetedSharingLoadingTests": 8,
+  "ambientJourneys": 240,
+  "countryUiProofs": [
+    "is",
+    "nl",
+    "nz",
+    "lu"
+  ],
+  "artifact": {
+    "files": 57,
+    "bytes": 29225995
+  },
+  "note": "Local npm run check and complete Chromium/touch-WebKit Playwright suite passed on combined country/ambient-controls app; country UI proofs used live immutable R2 data. No physical phone assertion."
+}

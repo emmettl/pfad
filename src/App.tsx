@@ -31,6 +31,7 @@ export function App() {
   const [pendingCountry, setPendingCountry] = useState<string | null>(selectedCountry.large ? selectedCountry.id : null)
   const sharedFrame = useRef(shared.study)
   const urlBinding = useRef<StudyUrlBinding | null>(null)
+  const currentParametersRef = useRef<() => StudyLink | null>(() => null)
   const [view, setView] = useState<StudyLink['view']>(shared.study?.view)
   const [recordStatus, setRecordStatus] = useState(''), [exporting, setExporting] = useState(false)
   const [copiedLink, setCopiedLink] = useState('')
@@ -96,7 +97,7 @@ export function App() {
         location.reload()
       }
     }
-    const flush = () => binding.flush()
+    const flush = () => { binding.update(currentParametersRef.current()); binding.flush() }
     window.addEventListener('hashchange', navigate)
     window.addEventListener('pagehide', flush)
     document.addEventListener('visibilitychange', flush)
@@ -231,6 +232,7 @@ export function App() {
       start, goal, algorithm, duration, progress: restoring ? frame.progress : !busy && sameSearch ? progressRef.current : 0, outlines,
       view: restoring ? frame.view : manifest?.identity === country.identity ? view : undefined }
   }
+  currentParametersRef.current = currentParameters
   useEffect(() => { urlBinding.current?.update(currentParameters()) })
   const clearShared = () => {
     history.replaceState(null, '', location.pathname + location.search); sharedFrame.current = undefined; setShared({}); setPendingCountry(null); setError('')
@@ -267,8 +269,8 @@ export function App() {
         <p>The A* distance bound is prepared separately from the timed search, with corrections for the graph’s rounded coordinates and road lengths. All three algorithms solve the same shortest-distance question.</p>
         <p>Once the recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
         <p id="playback-shortcuts">Keyboard: Space plays or pauses the search replay; in ambient it pauses the whole sequence and Escape leaves ambient. Left/Right moves one second; hold Shift to move five seconds. Home/End jumps to the beginning or end. These shortcuts work on the map and timeline; place pickers and sound controls keep their own keys.</p>
-        <p>Ambient chooses journeys from twelve curated Swiss places and cycles Dijkstra, bidirectional Dijkstra and A*, beginning with the selected algorithm. Road distance sets both the selection band and replay duration (25–65 seconds), followed by a six-second hold and two seconds to darkness. Pause sequence pauses the score too; Next keeps it continuous. Reduced motion shows stills with deliberate Next. The sequence pauses when the page is hidden.</p>
-        <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Ferries are excluded, so islands and Northern Ireland can form separate components. Its route describes this connectivity model.</p>
+        <p>Ambient chooses journeys from {country.ambient.places.length} curated places in {country.name} and cycles Dijkstra, bidirectional Dijkstra and A*, beginning with the selected algorithm. Road distance sets both the selection band and replay duration (25–65 seconds), followed by a six-second hold and two seconds to darkness. Pause sequence pauses the score too; Next keeps it continuous. Reduced motion shows stills with deliberate Next. The sequence pauses when the page is hidden.</p>
+        <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Ferries are excluded, so land areas without road connections form separate components. Its route describes this connectivity model.</p>
         <p>Endpoints snap to nearby main or residential road nodes, within two kilometres. Where possible, both ends use the same road component with the smallest combined displacement. The search still checks one-way reachability; disconnected journeys can return no route.</p>
         {result && <p>Current endpoint displacement: A {result.start.snapMetres.toFixed(0)} m · B {result.goal.snapMetres.toFixed(0)} m from the requested coordinates.</p>}
         <p>OpenStreetMap snapshot · {country.snapshot}.<br />Road curves are simplified for drawing; search costs retain original lengths.</p>

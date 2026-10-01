@@ -1,0 +1,111 @@
+{
+  "schema": "pfad-road-study/1",
+  "encoding": "le-columnar-deltas/1",
+  "id": "is-20260930-ad6c30aac073",
+  "identity": "ad6c30aac073a816465eb9cb1f4d6f92aace87387cb702ebd96266b557619990",
+  "compiler": "pfad-study-compiler/3",
+  "profile": "road-connectivity-distance-v1",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/iceland-260930.osm.pbf",
+    "sha256": "0a0f52580dc1329f4977bd56f9a172b60ad4b2f6f5ba0d22fd47c6c7f7dc4d69",
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "cost": "Original road length in integer centimetres; shortest distance, not estimated travel time.",
+  "limitations": [
+    "Turn restrictions, barriers and conditional access are retained as source evidence but are not applied by this first connectivity profile.",
+    "Ferries and non-motor-road classes are excluded. This is a computation study, not navigation advice."
+  ],
+  "counts": {
+    "nodes": 97917,
+    "edges": 110561,
+    "directedArcs": 208898,
+    "vertices": 476660
+  },
+  "coordinateScale": 100000,
+  "projection": {
+    "centre": [
+      -19,
+      65
+    ],
+    "referenceLatitude": 65,
+    "scaleMetres": 450000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  },
+  "bounds": [
+    -0.5774748813742667,
+    -0.39543194420724026,
+    0.5665192299699786,
+    0.38250860488621746
+  ],
+  "classes": [
+    "motorway",
+    "motorway_link",
+    "trunk",
+    "trunk_link",
+    "primary",
+    "primary_link",
+    "secondary",
+    "secondary_link",
+    "tertiary",
+    "tertiary_link",
+    "unclassified",
+    "residential",
+    "living_street",
+    "service",
+    "road"
+  ],
+  "geometryToleranceMetres": 5,
+  "chunks": [
+    {
+      "kind": "nodes",
+      "path": "nodes-000-3c1269a4ede0.bin.gz.bin",
+      "start": 0,
+      "count": 97917,
+      "stride": 8,
+      "bytes": 406918,
+      "decodedBytes": 783336,
+      "sha256": "3c1269a4ede0385e7e7daa1df8583dd8eed937572c78b2c5fc0f4d3506d3748e"
+    },
+    {
+      "kind": "edges",
+      "path": "edges-000-25f09aefbd15.bin.gz.bin",
+      "start": 0,
+      "count": 110561,
+      "stride": 14,
+      "bytes": 647189,
+      "decodedBytes": 1547854,
+      "sha256": "25f09aefbd15afaf27a350ac061eda3c260b4661585da444b9bc12df6b1c44cd"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-000-92d7c8b4afbd.bin.gz.bin",
+      "start": 0,
+      "count": 100000,
+      "stride": 0,
+      "bytes": 414657,
+      "decodedBytes": 1170008,
+      "sha256": "92d7c8b4afbd6a69f44e7998ca1c512f6b34d2657384345e496815fe2da9e75c"
+    },
+    {
+      "kind": "geometry",
+      "path": "geometry-001-98d20881334c.bin.gz.bin",
+      "start": 100000,
+      "count": 10561,
+      "stride": 0,
+      "bytes": 23603,
+      "decodedBytes": 73266,
+      "sha256": "98d20881334c4a03dc09dee3b0e2abef7233762f9f5ae4899b12b5354f2113d5"
+    }
+  ],
+  "evidence": {
+    "path": "evidence-59069926d7fe.json.gz.bin",
+    "bytes": 593696,
+    "sha256": "59069926d7fe94473e828763e04de17e11d272a101cc18d949f790e8bdf81302"
+  },
+  "downloadBytes": 1492367
+}

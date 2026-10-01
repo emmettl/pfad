@@ -6,13 +6,32 @@ import lakeData from './data/switzerland-lakes.json'
 import ukBorderData from './data/uk-border.json'
 import ukLakeData from './data/uk-lakes.json'
 
+import isBorder from './data/is-border.json'
+import isLakes from './data/is-lakes.json'
+import nlBorder from './data/nl-border.json'
+import nlLakes from './data/nl-lakes.json'
+import nzBorder from './data/nz-border.json'
+import nzLakes from './data/nz-lakes.json'
+import luBorder from './data/lu-border.json'
+import luLakes from './data/lu-lakes.json'
+
 export const border = borderData as unknown as MapBoundary
 export const lakes = lakeData as unknown as MapWaterBodies
 
+const geography: Record<string, { boundary: unknown; water: unknown }> = {
+  ch: { boundary: border, water: lakes }, uk: { boundary: ukBorderData, water: ukLakeData },
+  is: { boundary: isBorder, water: isLakes },
+  nl: { boundary: nlBorder, water: nlLakes },
+  nz: { boundary: nzBorder, water: nzLakes },
+  lu: { boundary: luBorder, water: luLakes },
+}
+
 // Geographic context has no event times and never participates in routing.
 export function createGeography(project: (point: { lon: number; lat: number }) => THREE.Vector3, country = 'ch') {
-  const boundary = (country === 'uk' ? ukBorderData : border) as unknown as MapBoundary
-  const water = (country === 'uk' ? ukLakeData : lakes) as unknown as MapWaterBodies
+  const context = geography[country]
+  if (!context) throw new Error('No geographic context for country: ' + country)
+  const boundary = context.boundary as MapBoundary
+  const water = context.water as MapWaterBodies
   const group = new THREE.Group(); group.renderOrder = -2
   function outlines(rings: readonly (readonly (readonly [number, number])[])[], colour: string, opacity: number) {
     const positions: number[] = []

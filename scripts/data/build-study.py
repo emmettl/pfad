@@ -104,7 +104,11 @@ for index, start in enumerate(range(0, edge_count, 200000)):
 
 bounds = [math.inf, math.inf, -math.inf, -math.inf]
 def project(x, y):
-    px = (x / 100000 - projection['centre'][0]) * math.cos(math.radians(projection['referenceLatitude'])) * 111195.0802 / projection['scaleMetres']
+    longitude = x / 100000 - projection['centre'][0]
+    if projection.get('longitudeWrapping') == 'centre/1':
+        if longitude > 180: longitude -= 360
+        if longitude < -180: longitude += 360
+    px = longitude * math.cos(math.radians(projection['referenceLatitude'])) * 111195.0802 / projection['scaleMetres']
     py = (y / 100000 - projection['centre'][1]) * 111195.0802 / projection['scaleMetres']
     assert abs(px) <= 1 and abs(py) <= 1, 'Projection outside quantised extent'
     bounds[0] = min(bounds[0], px); bounds[1] = min(bounds[1], py)
@@ -138,7 +142,7 @@ identity = (subprocess.run(['node', str(Path(__file__).with_name('manifest-ident
 dataset = f'{args.dataset_prefix}-{identity[:12]}'
 manifest = {
     'schema': 'pfad-road-study/1', 'encoding': 'le-columnar-deltas/1', 'id': dataset, 'identity': identity,
-    'compiler': 'pfad-study-compiler/2' if country else 'pfad-study-compiler/1', 'profile': 'road-connectivity-distance-v1',
+    'compiler': 'pfad-study-compiler/3' if country else 'pfad-study-compiler/1', 'profile': 'road-connectivity-distance-v1',
     'source': {'provider': 'OpenStreetMap via Geofabrik', 'dataTimestamp': source['data_timestamp'], 'url': source['url'], 'sha256': SOURCE_HASH, 'attribution': '© OpenStreetMap contributors', 'licence': 'ODbL-1.0', 'licenceUrl': 'https://www.openstreetmap.org/copyright'},
     'cost': 'Original road length in integer centimetres; shortest distance, not estimated travel time.',
     'limitations': ['Turn restrictions, barriers and conditional access are retained as source evidence but are not applied by this first connectivity profile.', 'Ferries and non-motor-road classes are excluded. This is a computation study, not navigation advice.'],

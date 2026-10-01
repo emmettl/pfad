@@ -1,3 +1,4 @@
+import { longitudeOffset, normaliseLongitude } from '../search/projection.ts'
 import * as THREE from 'three'
 import type { Point, SearchResult, StudyManifest } from '../search/contracts.ts'
 import { RouteDrawing, RouteReveal } from './routeReveal.ts'
@@ -161,7 +162,7 @@ export class RoadScene {
     if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography) }
     this.geography = undefined
     if (outlines) {
-      this.geography = createGeography(point => this.project(point), manifest.id.startsWith('uk-') ? 'uk' : 'ch'); this.geography.visible = this.geographyVisible
+      this.geography = createGeography(point => this.project(point), manifest.id.split('-')[0]); this.geography.visible = this.geographyVisible
       this.scene.add(this.geography)
     }
     this.resetView()
@@ -269,7 +270,7 @@ export class RoadScene {
   project(point: Pick<Point, 'lon' | 'lat'>) {
     if (!this.manifest) return new THREE.Vector3()
     const p = this.manifest.projection
-    return new THREE.Vector3((point.lon - p.centre[0]) * Math.cos(p.referenceLatitude * Math.PI / 180) * 111195.0802 / p.scaleMetres, (point.lat - p.centre[1]) * 111195.0802 / p.scaleMetres, 0)
+    return new THREE.Vector3(longitudeOffset(point.lon, p.centre[0], p.longitudeWrapping === 'centre/1') * Math.cos(p.referenceLatitude * Math.PI / 180) * 111195.0802 / p.scaleMetres, (point.lat - p.centre[1]) * 111195.0802 / p.scaleMetres, 0)
   }
   placeMarkers() {
     for (let i = 0; i < this.points.length; i++) {
@@ -329,7 +330,7 @@ export class RoadScene {
   pointerUp = (event: PointerEvent) => {
     if (this.picking && this.moved < 5 && this.pointers.size === 1 && this.manifest) {
       const point = this.screenPoint(event.clientX, event.clientY), p = this.manifest.projection
-      this.onPick?.(point.x * p.scaleMetres / (Math.cos(p.referenceLatitude * Math.PI / 180) * 111195.0802) + p.centre[0], point.y * p.scaleMetres / 111195.0802 + p.centre[1])
+      this.onPick?.(normaliseLongitude(point.x * p.scaleMetres / (Math.cos(p.referenceLatitude * Math.PI / 180) * 111195.0802) + p.centre[0]), point.y * p.scaleMetres / 111195.0802 + p.centre[1])
     }
     this.pointerCancel(event)
   }

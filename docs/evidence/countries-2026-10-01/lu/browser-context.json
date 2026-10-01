@@ -1,0 +1,97 @@
+[
+  {
+    "country": "lu",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Luxembourg→Esch-sur-Alzette",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "60900"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Luxembourg→Esch-sur-Alzette",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "41849"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Luxembourg→Esch-sur-Alzette",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "7256"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Diekirch→Clervaux30.5 kmA*",
+        "events": "20381"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Echternach→Diekirch28.6 kmDijkstra",
+        "events": "56931"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Esch-sur-Alzette→Ettelbruck46.9 kmBidirectional Dijkstra",
+        "events": "194828"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Clervaux→Luxembourg62.0 kmA*",
+        "events": "51530"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Luxembourg→Wiltz54.1 kmDijkstra",
+        "events": "265402"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Remich→Differdange40.6 kmBidirectional Dijkstra",
+        "events": "113555"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Esch-sur-Alzette→Echternach51.9 kmA*",
+        "events": "85455"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Esch-sur-Alzette→Differdange9.0 kmDijkstra",
+        "events": "30548"
+      }
+    ],
+    "automaticTransition": {
+      "before": "dijkstra/1",
+      "after": "bidirectional-dijkstra/1",
+      "caption": "Differdange→RemichBidirectional Dijkstra"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "id": "nl",
+  "name": "Netherlands",
+  "datasetPrefix": "nl-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/netherlands-260930.osm.pbf",
+    "sha256": "fbdb2ac31b408f77abbc6552bc062181aee2276d9901535679c06e4efe0d6e74",
+    "md5": "0553dbb1659d541d22e386c8ece0e770",
+    "bytes": 1404055502,
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      5.5,
+      52.2
+    ],
+    "referenceLatitude": 52.2,
+    "scaleMetres": 250000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

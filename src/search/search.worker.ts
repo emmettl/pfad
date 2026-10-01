@@ -1,3 +1,4 @@
+import { longitudeOffset } from './projection.ts'
 import type { Graph, Reply, Request, StudyManifest } from './contracts.ts'
 import { compileGraph, dijkstra, snapEndpoints } from './engine.ts'
 import { bidirectional, compileReverse, type ReverseGraph } from './bidirectional.ts'
@@ -60,7 +61,7 @@ async function load(url: string, expectedIdentity?: string) {
         const sx = Math.cos(projection.referenceLatitude * Math.PI / 180) * 111195.0802 / projection.scaleMetres
         const sy = 111195.0802 / projection.scaleMetres
         function append(x: number, y: number, e: number) {
-          positions[vertex * 2] = (x / 100000 - projection.centre[0]) * sx
+          positions[vertex * 2] = longitudeOffset(x / 100000, projection.centre[0], projection.longitudeWrapping === 'centre/1') * sx
           positions[vertex * 2 + 1] = (y / 100000 - projection.centre[1]) * sy
           roads[vertex++] = e
         }

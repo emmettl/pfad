@@ -10,6 +10,7 @@ export function validateManifest(data: StudyManifest) {
   if (!positive(data.downloadBytes) || data.downloadBytes > DATA_LIMITS.downloadBytes || data.chunks.length > 1000) throw new Error('Road download exceeds the browser budget')
   const p = data.projection
   if (!p || !p.centre.every(Number.isFinite) || !Number.isFinite(p.referenceLatitude) || !Number.isFinite(p.scaleMetres) || p.scaleMetres <= 0 || !data.bounds.every(Number.isFinite)) throw new Error('Invalid road projection')
+  if (p.longitudeWrapping !== undefined && p.longitudeWrapping !== 'centre/1') throw new Error('Unsupported longitude wrapping')
   const covered = { nodes: 0, edges: 0, geometry: 0 }
   const order = { nodes: 0, edges: 1, geometry: 2 }
   const paths = new Set<string>()

@@ -4,11 +4,11 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
 import { execFileSync } from 'node:child_process'
 const records = JSON.parse(await readFile(new URL('../../data/geography-sources.json', import.meta.url), 'utf8'))
-let prepare = false
+const prepare = new Set()
 for (const record of records.assets.filter(asset => asset.preparation)) {
-  try { await readFile(new URL(`../../${record.path}`, import.meta.url)) } catch (error) { if (error.code !== 'ENOENT') throw error; prepare = true }
+  try { await readFile(new URL(`../../${record.path}`, import.meta.url)) } catch (error) { if (error.code !== 'ENOENT') throw error; prepare.add(record.preparation) }
 }
-if (prepare) {
+if (prepare.size) {
   await mkdir(new URL('../../.cache/', import.meta.url), { recursive: true })
   for (const source of records.sources) {
     const response = await fetch(source.url)
@@ -17,7 +17,11 @@ if (prepare) {
     if (createHash('sha256').update(bytes).digest('hex') !== source.sha256) throw new Error('Geographic source checksum mismatch')
     await writeFile(new URL(`../../.cache/${source.url.split('/').at(-1)}`, import.meta.url), bytes)
   }
-  execFileSync('python3', ['scripts/data/prepare-uk-geography.py'], { cwd: new URL('../../', import.meta.url), stdio: 'inherit' })
+  for (const command of prepare) {
+    const [executable, ...args] = command.split(' ')
+    if (executable !== 'python3' || !args[0].startsWith('scripts/data/prepare-') || args.some(arg => !/^[a-z0-9/.-]+$/i.test(arg))) throw Error('Invalid preparation command')
+    execFileSync(executable, args, { cwd: new URL('../../', import.meta.url), stdio: 'inherit' })
+  }
 }
 for (const record of records.assets) {
   const target = new URL(`../../${record.path}`, import.meta.url)
