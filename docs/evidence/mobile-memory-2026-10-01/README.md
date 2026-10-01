@@ -62,5 +62,6 @@ pins seed 20261001, independently checked against all six real studies in
 The corrected release passed all 30 Chromium CI checks. Its WebKit setup
 timed out before tests began while still downloading from Azure's Ubuntu
 mirror. The existing rewrite covered only one Deb822 source file; setup now
-rewrites the legacy source list and all `.list`/`.sources` files too. Both
+rewrites the legacy source list, all `.list`/`.sources` files, and the runner’s
+`/etc/apt/apt-mirrors.txt` indirection identified by the download log. Both
 browser gates remain required.

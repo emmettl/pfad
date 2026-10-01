@@ -49,7 +49,7 @@ jobs:
       # installing WebKit runtime libraries. Keep both browser engines checked.
       - run: |
           shopt -s nullglob
-          for source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+          for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
             if [ -f "$source" ]; then
               sudo sed -i 's|azure.archive.ubuntu.com|archive.ubuntu.com|g' "$source"
             fi
