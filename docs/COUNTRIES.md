@@ -1,9 +1,33 @@
 # Manual country releases
 
-Switzerland remains bundled and selected by default. United Kingdom, Iceland, Netherlands, New Zealand, Luxembourg, Ireland and Scandinavia are additional
-immutable releases hosted independently on Cloudflare R2. The UK and Scandinavia require an
-explicit large-download acknowledgement; the smaller releases open on selection.
+Switzerland remains bundled and selected by default. The other selected immutable
+releases are hosted independently on Cloudflare R2. UK and Scandinavia require a
+large-download acknowledgement on first use, remembered per country/browser/site;
+the smaller releases open on selection.
 No country source is acquired by ordinary builds, CI or browser page requests.
+
+## Selected catalogue
+
+Road downloads below are decimal MB for complete topology and drawing, excluding
+optional source evidence, outlines and music. Source identity, exact bytes and
+coverage are retained in each immutable manifest.
+
+| ID | Study | Road MB | Source date | Coverage |
+| --- | --- | ---: | --- | --- |
+| `ch` | Switzerland | 15.867 | 29 Sep 2026 | Swiss Geofabrik extract; bundled default |
+| `uk` | United Kingdom | 92.375 | 29 Sep 2026 | UK extract; ferry-only regions remain disconnected |
+| `is` | Iceland | 1.492 | 30 Sep 2026 | Iceland extract |
+| `nz` | New Zealand | 9.272 | 30 Sep 2026 | New Zealand extract; ambient separates the two main islands |
+| `lu` | Luxembourg | 0.966 | 30 Sep 2026 | Luxembourg extract |
+| `nl` | Netherlands | 22.158 | 30 Sep 2026 | European Netherlands extract |
+| `ie` | Ireland | 20.411 | 30 Sep 2026 | Whole island, including Northern Ireland |
+| `sc` | Scandinavia | 77.859 | 30 Sep 2026 | Norway, Sweden and Denmark; mainland and coastal islands |
+
+Each study has a versioned ambient pool and independently pinned geographic
+references. Iceland and Luxembourg's selected lake source has no features;
+no lakes are invented. All studies retain [the current connectivity-profile limits](PROFILE.md).
+Phone support, especially for larger graphs, remains unvalidated. New candidates
+are not selected releases until complete-graph validation and catalogue publication.
 
 `data/countries/<id>.json` pins source URL/date/bytes/SHA-256, dataset prefix and
 drawing projection. Country IDs are short lowercase codes. `src/countries.ts`
@@ -53,10 +77,14 @@ and 256 MiB downloaded road chunks, with bounded individual decoded chunks.
 These are allocation guards, not a guarantee that every device can load them.
 The UK selector requires explicit confirmation on first use of its 93 MB download
 and approximately 1–2 GB browser-memory requirement, plus graphics memory.
-Acceptance is remembered in local storage for this site; later selections and
+Acceptance is remembered per country in local storage for this site; later selections and
 shared links open directly. Cancelling does not save acceptance. Graphs
 remain complete: missing chunks prevent searching. Switching countries terminates
-the old worker and disposes its map, drawing arrays and GPU resources.
+the old worker and disposes its map, drawing arrays and GPU resources. Scandinavia
+also carries a large-download notice (77.9 MB in the UI) and uses the same
+acknowledgement mechanism. If storage is blocked, acknowledgement lasts for the
+current page session. Large graphs on coarse-pointer devices use the 30 fps / pixel
+ratio 1 rendering cap; this is mitigation, not a physical-phone certification.
 
 ## Publish and select
 
@@ -94,7 +122,11 @@ configured. Swiss migration to R2 is deliberately deferred.
 
 UK uses the same optional faint outline styling as Switzerland. Its pinned Natural Earth 1:10m country and global/European lakes references supply 57 coastline/border rings and 14 lake polygons (including unnamed features). This is a generalized reference layer, not a comprehensive inventory of UK lakes or a routing input. Sources, SHA-256 identities and preparation tolerances are recorded in `data/geography-sources.json`. `npm run data:geography` verifies existing assets or manually prepares missing ones from pinned sources; the raw inputs stay in ignored `.cache/`. UK outline assets total 93,543 bytes.
 
-Ambient uses `uk-places/1`, with 18 Great Britain and four Northern Ireland places. It retains the country’s complete published road graph, actual-distance acceptance, algorithm rotation and phone rendering budget. Candidates never cross the sea between the two road regions. Island studies remain available manually; no ferry connectivity is invented. Switzerland’s original geographic assets and pool remain unchanged.
+Ambient uses `uk-places/1`, with 18 Great Britain and four Northern Ireland places.
+It retains the complete graph, actual-distance acceptance and the shared sequence
+of four journey modes plus territory studies. Candidates remain within one authored
+road region; island studies are available manually and no ferry connectivity is
+invented. See [AMBIENT.md](AMBIENT.md) for the current selectors and pacing.
 
 ## Four-country generalization proof
 
@@ -141,10 +173,11 @@ node scripts/data/country-browser-proof.mjs nz
 node scripts/data/country-browser-proof.mjs nz https://motionstudies.app/pfad/
 ```
 
-The audit runs sixty real journeys per country with all three algorithms, checks
+The current audit runs sixty real journeys per country with all four journey algorithms, checks
 route adjacency/directions/cost sums and permits at most five attempts per
-journey. The browser proof checks three manual modes, eight reduced-motion
-journeys, outlines, an automatic transition and return to Switzerland. See
+journey. Original release reports retain the three-algorithm set tested then.
+The browser proof checks manual modes, reduced-motion ambient studies, outlines,
+an automatic transition and return to Switzerland. See
 `docs/evidence/countries-2026-10-01/` for source identities and measured results.
 Desktop WebKit is useful regression evidence, not a physical iPhone certification.
 
@@ -179,10 +212,14 @@ changes. The data Worker accepts only immutable graph/outline keys and GET, HEAD
 OPTIONS. It supplies CORS and immutable caching; manifests upload last and existing
 objects cannot be overwritten by the publisher.
 
-The 1 October 2026 outline releases contain 18 objects in total. Border and lake
+The initial six-country outline publication contained 18 objects. Border and lake
 bytes per country are: CH 123,585; UK 93,543; IS 40,507; NL 16,112; NZ 83,798;
 LU 4,767, plus approximately 494 bytes for each manifest. Reviewed geometry is
 unchanged; Iceland and Luxembourg's pinned lake references contain no features.
+Ireland and Scandinavia's later releases are documented below. The outline
+toggle works as soon as verified context arrives, including while roads are
+loading. Point selection reuses the country exterior for a temporary faint fill,
+independently of line visibility; it does not clip or alter the road graph.
 
 ## Whole-island Ireland
 

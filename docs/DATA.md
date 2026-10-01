@@ -34,7 +34,7 @@ npm run data:browser
 
 The acquisition command uses the fixed source above and verifies bytes and
 SHA-256. Everything large is written under ignored `.cache/`. Browser proof
-requires the Playwright engines installed as described in the README. The
+requires the Playwright engines installed as described in [Development](DEVELOPMENT.md). The
 benchmark uses a local HTTP server, not a mobile network simulation.
 
 The compiler includes motorway through residential/service road classes, with
@@ -57,7 +57,8 @@ compiler/profile version, lengths and SHA-256 for every chunk. Total opening
 road bytes: 15,866,559. The optional evidence file is 8,090,540 bytes and contains
 OSM node and way IDs, tag profiles, controls and original restriction relations.
 Both the Swiss graph and its evidence remain available in this public repo.
-The additional UK release is served from R2; see [Countries](COUNTRIES.md).
+Additional country and regional releases are served independently from R2;
+see [Countries](COUNTRIES.md) for the selected catalogue and coverage.
 
 After the sizing experiment, package the selected snapshot explicitly:
 
@@ -108,9 +109,9 @@ retains requested coordinates, snapping version, actual nodes and displacement.
 Index preparation and snapping time remain separate from the recorded search.
 This does not establish turn-rule legality or solve cross-border coverage.
 
-The [endpoint regression audit](evidence/endpoints-2026-10-01/review.json) checks
+The initial [endpoint regression audit](evidence/endpoints-2026-10-01/review.json) checks
 all 144 curated pairs for directed reachability and reversal-stable snapping.
-It compares ten directed journeys across all three algorithms, including Genève
+It compares ten directed journeys across the three algorithms available then, including Genève
 → Zürich, whose previously selected origin was trapped in a four-node directed
 fragment. Its corrected endpoint lies 65.3 metres from the requested city point.
 Reproduce without downloading or changing the dataset:
@@ -143,11 +144,19 @@ The build and CI do not download or refresh them.
 - Lakes: FOEN Vector25 reference shorelines (2007); 160 lakes with 190 rings,
   5,357 coordinates, generalised to 60 metres and minimum area 0.1 km².
   Outer shores and island rings are preserved, including complete cross-border
-  lake outlines present in the source. No polygon fills, labels or river overlay.
+  lake outlines present in the source. The outline layer adds no lake fills,
+  labels or river overlay.
 
-Together they occupy 123,585 JSON bytes, bundled and compressed with the app.
-They use the same projection as the roads but are independent of graph topology,
-search costs and events. The renderer adds 11,280 static line vertices.
+Together the Swiss layers occupy 123,585 JSON bytes. Their reviewed source copies
+remain in the repository for offline validation; the app fetches independently
+published outline objects through a pinned manifest and does not bundle their
+coordinates. See [independent outline releases](COUNTRIES.md#independent-outline-releases)
+for packaging, checksums, other countries and manual publication.
+
+The references use the road projection but remain independent of graph topology,
+costs and events. Swiss outlines add 11,280 static line vertices. During point
+selection, a temporary fill reuses the country exterior; it adds no data download
+and is not a reachability boundary. Normal viewing retains unfilled outline lines.
 
 Border attribution is © swisstopo; lake attribution is © FOEN, swisstopo.
 These geographic references are supplied under

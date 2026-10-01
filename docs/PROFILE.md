@@ -36,5 +36,5 @@ Small components are preserved and can honestly produce no-route outcomes.
 R1's remaining work is a new validated profile: classify unresolved source
 references against the original extract, enforce turn and barrier rules, specify
 conditional context, and test legality with focused fixtures and national
-journeys. Agreement between three shortest-path algorithms establishes cost
+journeys. Agreement between the four journey algorithms establishes cost
 agreement on this graph; it does not establish driving legality.

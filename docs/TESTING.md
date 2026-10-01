@@ -8,7 +8,7 @@ the built site: `npm run build`, then `npm run test:browser`.
 
 | Responsibility | Runner | Reason |
 | --- | --- | --- |
-| Dijkstra, bidirectional Dijkstra and A* correctness, snapping, directed roads, ties, trace events and checkpoint seeking | Vitest | Deterministic graph logic; independent reference algorithms verify optimal costs. |
+| Four journey algorithms, three-source nearest-distance assignment, snapping, directed roads, ties, trace events and checkpoint seeking | Vitest | Deterministic graph logic; independent reference algorithms verify costs and source assignments. |
 | Real Swiss forward/reverse route costs and exact national event counts | Vitest | The production worker entry point loads the published chunk bytes through a local transport; no browser or GPU is needed to verify its answers. |
 | Distance bands, curated pools, seeded selection, algorithm rotation, retries, replay duration, hold/fade/pause and reduced-motion sequence rules | Vitest | Controlled clocks and small results cover full sequences without waiting through journeys. |
 | Chrome idle deadline, reset and cleanup | Vitest | Fake timers cover the exact four-second boundary and cancelled timers. |
@@ -26,7 +26,11 @@ the built site: `npm run build`, then `npm run test:browser`.
 
 Browser animation checks observe a real partial frame and its paused state, then
 use the reduced-motion path to verify the final frame. Exact flourish timing,
-replay and clearing rules are tested in Vitest. Idle UI checks use Playwright's
+replay and clearing rules are tested in Vitest. Play-to-completion checks seek
+near the end before resuming, so a software GPU's national-frame speed does not
+define a correctness deadline. URL reload checks wait for the rendered pan/zoom
+to match the throttled, rounded address-bar view before capturing it.
+Idle UI checks use Playwright's
 clock to advance the deadline, retaining real input, CSS transitions and focus
 behaviour. No production search or road data is substituted.
 
@@ -61,8 +65,16 @@ do not establish performance on physical phones.
 
 ## Local measurement · 1 October 2026
 
-Measured on the same Apple M4 Max / macOS host. Both revised runs use the same
-build, all 42 browser checks pass without retries, and the real Swiss graph is
+This is a dated earlier benchmark, not the current suite count. The checked
+application at `97da1de` passes 92 Vitest tests in 22 files and 52 browser cases
+(26 per engine), including bidirectional A*, ambient territories and the URL /
+completion synchronization fixes. [Pages run 36865594011](https://github.com/emmettl/pfad/actions/runs/36865594011)
+passed both engines and deployed. Live picker checks passed in Chromium and WebKit
+on both hosts with outlines on/off; the missing-context fallback was also checked
+in Chromium on the Motion Studies host.
+
+The earlier benchmark was measured on the same Apple M4 Max / macOS host. Both
+revised runs use the same build, all 42 browser checks pass without retries, and the real Swiss graph is
 retained. The earlier passing suite's time is rounded by Playwright's reporter.
 
 | Suite | Browser workers | Wall time |

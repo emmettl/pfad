@@ -1,97 +1,110 @@
 # Ambient mode
 
-Design brief · updated 1 October 2026 · Initial implementation for review
+Implemented for author review · updated 1 October 2026
 
-PFAD should be able to run as an unattended succession of genuine road searches.
-The places are curated; the origin/destination pairs are chosen by a distance
-heuristic. Journey length influences both selection and replay duration. These
-two choices were confirmed by the author on 30 September 2026.
+Ambient is a succession of genuine road studies drawn from curated places.
+The author confirmed pair selection by distance and distance-based replay duration
+on 30 September 2026. PFAD adapts grid84's run/hold/transition rhythm within its
+validated dark field and luminous geography. It chooses studies rather than
+replaying a fixed playlist.
 
-## The experience
+## Sequence and presentation
 
-Borrow grid84’s loop rhythm: a quiet introduction, one run, a hold on the result,
-then the next run. Retain PFAD’s validated dark field and luminous roads.
-Grid84’s current loop uses authored scenarios, roughly 45-second runs and a
-nine-second result hold. PFAD adapts the presentation rhythm while generating
-pairs from its own place pool and varying replay duration with journey length.
+`four-journeys-one-territory/1` runs four journeys, followed by one three-source
+Dijkstra territory study, then repeats. The journey algorithms rotate Dijkstra →
+bidirectional Dijkstra → A* → bidirectional A*, beginning with the selected manual
+mode. The territory slot does not advance that rotation. Retries keep the same
+slot and algorithm; Next advances a slot, and pause/resume keeps it unchanged.
 
-1. Introduce the origin and destination with restrained labels.
-2. Run the real algorithm and replay its recorded search.
-3. Hold the final route within the field of explored roads, with its actual
-   distance and measured computation time.
-4. Fade the drawing to darkness, introduce the next pair, and repeat.
+Each accepted journey introduces its endpoints, replays its recorded search,
+finishes the actual-route flourish, holds for six seconds and fades to darkness
+for two seconds. A territory holds its completed three-colour field without a
+route reveal. The map remains dark while the next computation is prepared.
+The fade is a presentation transition, not an algorithmic rejection.
 
-The end-of-run fade is a presentation transition, not an algorithmic rejection.
-No vehicle needs to travel along the route: the subject remains the search.
+The camera begins at the fitted national or regional view and stays stable within
+the study. Running controls, About and Sound fade after four seconds without input.
+Pointer movement, a tap, wheel or keyboard activity restores them. Focused controls,
+About, pause, reduced-motion stills and errors keep the controls visible. The PFAD
+mark, current study/algorithm and geographic credits remain on screen.
 
-Controls retreat to a small pause/resume, next journey and exit affordance.
-Attribution, profile identity and source information remain accessible. Leaving
-ambient mode restores deliberate exploration of the current journey.
+Pause freezes replay, reveal, hold and fade and suspends the score. Next preserves
+musical continuity. Exit cancels automatic advancement, preserves the inspectable
+current trace and restores the previous manual duration. Escape exits too. A
+territory can be switched back to two-point controls with Journey. Hiding the page
+pauses the sequence; returning needs an explicit resume and a separate sound opt-in.
+Reduced motion presents completed stills with deliberate Next, without automatic
+camera or fade choreography. See [usage](USAGE.md) and [music](MUSIC.md).
 
-During a running loop, the controls, About and sound fade after four seconds of
-inactivity. Pointer movement, a tap, wheel input or keyboard activity restores
-them. Keyboard-focused controls and an open About panel stay visible; pause,
-reduced-motion stills and search errors also keep controls available. Escape exits
-ambient. A small PFAD mark, journey names, current algorithm and geographic
-credits remain on screen.
+## Curated pools
 
-## Curated place pool
+`src/ambient/pools.ts` contains versioned places with stable IDs, names,
+coordinates and optional authored road regions. Every selected catalogue study
+has a pool. Manual picker places and ambient curation need not be identical.
 
-Use a versioned list of places, with stable IDs, names, coordinates and optional
-regional/geographic tags. Begin by reviewing the existing twelve places:
-Zürich, Genève, Basel, Bern, Lausanne, Luzern, Lugano, Chur, St. Gallen,
-St. Moritz, Sion and Andermatt. Add or replace places to improve the geographical
-range, rather than treating the current menu as a finished curation.
+| Study | Pool | Places | Authored road regions |
+| --- | --- | ---: | --- |
+| Switzerland | `swiss-places/1` | 12 | One pool |
+| United Kingdom | `uk-places/1` | 22 | Great Britain / Northern Ireland |
+| Iceland | `is-places/1` | 12 | One pool |
+| Netherlands | `nl-places/1` | 12 | European extract |
+| New Zealand | `nz-places/1` | 18 | North / South Island |
+| Luxembourg | `lu-places/1` | 10 | One pool; smaller distance bands |
+| Ireland | `ie-places/1` | 18 | Whole island |
+| Scandinavia | `sc-places/1` | 29 | Connected mainland region |
 
-The pool should give the selector plateau, lake, urban and Alpine possibilities.
-Those tags describe the curated places; they do not establish what a route
-crosses. Claims about a particular tunnel, pass or corridor require route evidence.
-Allow explicit pair exclusions and occasional authored exceptions without turning
-the mode into a fixed playlist.
+Candidates remain within one authored region; these labels avoid proposing known
+sea crossings, not proving connectivity. The complete directed graph decides
+whether a route or source coverage exists. Islands remain available manually,
+and no ferry edges are invented. [COUNTRIES.md](COUNTRIES.md) records coverage.
+Place tags do not establish which pass, tunnel or landscape a route crosses.
 
-The journeys are independent studies. The destination of one does not have to
-become the origin of the next.
+## Journey selection
 
-## Pair selection heuristic
+`distance-balanced-pairs/3` uses a seeded xorshift32 generator. It chooses
+regional/interregional/national distance bands with weights 1:3:3. The default
+actual-road bands are 30–100, 100–220 and 220+ km; Luxembourg uses 5–25, 25–50
+and 50+ km. The pool's minimum also filters straight-line separation.
 
-These are initial tuning proposals, to be tested visually rather than treated
-as established thresholds.
+Straight-line distance × 1.25 shortlists candidates. This is a selection estimate,
+not the displayed route distance. Identical endpoints, the last six accepted
+undirected pairs and pairs already attempted in this slot are excluded. Candidate
+weights are inverse to one plus both endpoints' accumulated use. Reversed
+journeys remain different directed searches even though repetition groups them.
 
-- Exclude identical endpoints and trivially nearby pairs. A provisional minimum
-  of 30 km straight-line separation is a cheap first filter, with explicit
-  exceptions for an authored local study.
-- Choose a target distance band to keep the loop varied. Start with regional,
-  interregional and national bands, provisionally 30–100, 100–220 and 220+ km
-  of actual road distance. Favour the latter two without removing regional searches.
-- Use straight-line separation to shortlist candidates cheaply. It is an estimate
-  for selection, not the displayed road distance. Check the actual route length
-  after the real search; allow bounded retries when a target band is missed.
-- Keep a recent-history window, initially six pairs. Avoid immediate repeats
-  and reversals, and avoid repeatedly favouring one origin or destination.
-- Use a seeded selector and record its version, seed and chosen pairs so a
-  sequence can be repeated. Treat reversed routes as distinct directed searches,
-  even when the repetition rule groups them together.
-- If a pair cannot be routed under the active profile, record the failure and
-  choose another eligible pair with a bounded retry policy. Stop with an honest
-  explanation if the pool has no eligible journeys.
+Each candidate runs the slot's real algorithm. Its actual route distance must
+match the target band; mismatches and no-route outcomes are recorded and retried.
+Five attempts are allowed. Exhaustion stops with an explanation and deliberate
+Next can try another band. The selector does not precompute and retain all routes
+or relax the routing profile to obtain an accepted journey.
 
-Do not solve and retain every pair before starting. Selection should operate
-against the loaded graph, with only the active recording and a bounded amount
-of next-journey preparation held in memory. A selected route must retain the
-normal snap feedback and profile limitations; ambient mode must not quietly
-relax routing rules to obtain a spectacle.
+## Three-source selection
 
-## Replay duration heuristic
+`separated-three-sources/1` uses a separate xorshift32 stream seeded with
+`ambientSeed XOR 0x74657272`. Triples come from one authored road region. Every
+pair must meet the pool's minimum separation and at least 20% of the triple's
+largest separation. Candidate weights equal minimum pair separation; seeded
+shuffling varies source colour order. The last three accepted triples and the
+slot's previously attempted triples are excluded, with five attempts at most.
 
-Use **actual road-route distance**, obtained from the completed computation.
-Longer journeys receive more screen time, with diminishing returns and a floor
-and ceiling. A starting rule is:
+`multisource-dijkstra/1` searches to exhaustion from the three snapped sources.
+Settled nodes receive their minimum outward directed road distance from any
+source. Mint, amber and periwinkle identify the source of each road's first real
+examination. They are not interpolated geographical borders within a road.
+Unreachable roads stay dark. There is no meeting flash or final path; the manual
+picker gains no third endpoint control. See the [event contract](ARCHITECTURE.md#three-source-territory-study).
+
+## Replay duration and retained state
+
+Journeys use actual route kilometres. Territories use the maximum reached node's
+nearest-source road distance, a coverage measure rather than a journey length.
+Both apply the implemented pacing rule:
 
 ```text
-replaySeconds = min(65, max(25, 30 × sqrt(routeKilometres / 100)))
+replaySeconds = min(65, max(25, 30 × sqrt(kilometres / 100)))
 ```
 
-| Actual route length | Proposed replay duration |
+| Distance measure | Replay duration |
 | --- | --- |
 | 50 km | 25 seconds |
 | 100 km | 30 seconds |
@@ -99,141 +112,50 @@ replaySeconds = min(65, max(25, 30 × sqrt(routeKilometres / 100)))
 | 300 km | About 52 seconds |
 | 450 km | About 64 seconds |
 
-Start with a six-second result hold and a two-second clear/transition. Keep these
-values configurable and tune them on representative searches. A manual duration
-override can remain available outside the quiet view.
+Distance controls selection/pacing, not computational work. A shorter journey can
+explore a denser network. Replay follows genuine event order rather than measured
+per-operation CPU time. The 25–65 s range, six-second hold and two-second fade
+are implemented authored choices still awaiting visual review.
 
-Distance is a pacing heuristic, not a proxy for computational work. A shorter
-journey can explore a dense or obstructed network. Judge legibility using the
-actual trace as well as route length, and document any later pacing adjustment.
-The replay clock still advances through genuine event order; these durations
-neither change the algorithm nor claim to preserve individual operation timings.
+The loaded graph is reused. Only the active trace, twelve attempt metadata records,
+six recent journey pairs, three recent territory triples and bounded selector state
+are retained. Superseded route geometry and textures are disposed. Exported
+metadata preserves graph/profile/algorithm, pool/selector/cycle versions, slot,
+seed, selection and acceptance. Journey records retain estimated/actual distance
+and band; territory records retain source IDs and coverage statistics.
+[RECORDS.md](RECORDS.md) specifies links and exports. Music uses one independent
+player and is neither stretched nor restarted for variable journey durations.
 
-## Framing and operation
+## Evidence and reproduction
 
-Music is a core part of the planned experience. Start with a provisional repertoire
-of ambient synth pieces made using Driftbox, drawing on Luft's listening experience.
-The proposed musical clock spans several journeys: distance-based replay pacing,
-result holds and next-journey actions do not restart or stretch the soundtrack.
-Sound remains opt-in, with clear volume, mute and sequence-pause behaviour.
-[The music brief](MUSIC.md) records the composition and playback proposals.
+- The [initial Swiss audit](evidence/ambient-2026-10-01/review.json) preserves its
+  earlier three-algorithm run; the [four-algorithm audit](evidence/bidirectional-astar-2026-10-01/ambient-audit.json)
+  validates the later journey rotation. Each checks sixty real accepted journeys,
+  adjacency, directions, exact cost sums, distance acceptance and bounded attempts.
+- [Territory evidence](evidence/territories-2026-10-01/README.md) compares six
+  Swiss triples with separate complete single-source runs and checks source-tagged events.
+- Country-specific sixty-journey audits are linked from [COUNTRIES.md](COUNTRIES.md).
+  Older release reports identify the three algorithms tested at publication.
+- Unit and browser checks cover the current insertion cycle, seeking, pause/next/exit,
+  quiet controls, hidden return, reduced motion, sharing and music continuity.
 
-- Keep the camera stable within a search. Begin with the national view; investigate
-  fitting the actual explored extent for regional searches when needed. Fitting
-  only the chosen route must not crop away the search that produced it.
-- Load the national graph once and reuse it across journeys. Next-journey
-  preparation must fit R2’s measured memory and sustained-use budgets.
-- Pause the sequence and its hold/transition timers while the page is hidden.
-- Pause/resume and next must work during replay and the final hold. Exiting must
-  cancel automatic advancement and preserve an inspectable current study.
-- Respect reduced motion: no automatic entry or camera/fade choreography.
-  Offer completed stills and deliberate advancement; any optional still-image
-  cycling needs an explicit start control.
-- Every run carries the dataset, profile, algorithm and selector identities.
-  A cached recording is acceptable only when it is an actual, correctly identified
-  trace from that graph; it must not be presented as newly measured computation.
+```sh
+npm run data:audit-ambient -- .cache/ambient-audit.json
+node scripts/data/audit-territories.mjs .cache/territory-audit.json
+node scripts/data/audit-ambient.mjs --country nz \
+  --manifest .cache/countries/<dataset-id>/manifest.json \
+  --output .cache/nz-ambient-audit.json
+```
 
-## Completion criteria
+These commands use verified graph bytes, not a new OSM source. The current journey
+audit rotates all four algorithms; territory validation is separate. After
+building and serving a preview, `npm run data:browser-ambient` checks opening and
+successive real studies in Chromium and mobile-viewport WebKit. An optional first
+argument selects another host; output stays in `.cache/ambient-browser-proof/`.
+The [earlier browser review](evidence/ambient-2026-10-01/browser.json) records its
+warm-download and WebGL object counts; those are not memory-byte or phone budgets.
 
-- A reviewed place pool produces a varied, repeatable sequence under a documented
-  selector, with bounded repetition, retries and memory use.
-- Actual journey length affects both selection and replay duration; estimates,
-  computed route distance and measured execution time remain distinguishable.
-- Each displayed run comes from a real search or an identified real recording.
-  Failures never appear as successful journeys.
-- The run/hold/transition rhythm is visually reviewed on regional and national
-  examples, with final routes readable and no invented exploration.
-- Pause, next, exit, hidden-page and reduced-motion behaviour are verified.
-- With sound enabled, music continues across journeys and transitions; sequence
-  pause and hidden-page handling follow the music brief. Silent use is complete.
-- Sustained looping passes the supported-device checks without growing retained
-  recordings, reloading the graph each time or continuing work in hidden tabs.
-
-This is implemented for initial review within R3, with R1’s profile and R2’s device reliability as the
-release gates. See [the roadmap](ROADMAP.md).
-
-## Implemented prototype
-
-`swiss-places/1` uses the twelve named places above with stable IDs.
-`distance-balanced-pairs/2` selects a target band with weights 1:3:3 (regional,
-interregional, national), shortlists pairs using straight-line distance × 1.25,
-excludes direct distances below 30 km and the last six undirected accepted pairs,
-and weights candidates inversely by one plus both endpoints’ accumulated use.
-A seeded xorshift32 generator makes the sequence reproducible. No precomputed
-route list is retained.
-
-`four-algorithm-rotation/1` cycles Dijkstra → bidirectional Dijkstra → A* → bidirectional A* →
-Dijkstra, beginning with the manually selected algorithm. Automatic advancement
-and deliberate Next each advance one slot; retries within that journey keep its
-algorithm. Pause/resume leaves the slot unchanged. The quiet status identifies
-the current mode; exiting restores that mode alongside the current trace.
-
-Every candidate runs its journey's real algorithm. Its actual road distance must
-match the target band; a mismatch or no route is recorded and retried, up to five
-candidates. Exhaustion stops honestly and offers Next for a new band. Accepted
-road distance sets the proposed square-root duration exactly, within 25–65 s.
-The real route flourish finishes before the 6 s hold and 2 s fade. The map stays
-dark during preparation of the next journey. All searches share the loaded graph.
-
-Pause freezes replay, reveal, hold and fade, and fades/suspends the score; resume
-continues it. Next preserves musical continuity. Exit cancels pending automatic
-advancement and leaves the current trace inspectable at its existing event
-cutoff, restoring the prior manual duration. Hidden pages pause without automatic
-return. Reduced motion shows completed stills with deliberate Next and allows
-explicit listening without camera or fade choreography.
-
-Only the active trace and twelve metadata records are retained, with six recent
-pairs and one sequence animation frame. Exported records include selector/pool
-versions, algorithm-cycle version, journey number, seed, selection number, actual distance and rejected attempts. See
-[RECORDS.md](RECORDS.md). The pools cover Switzerland and the United Kingdom. `uk-places/1` contains 22 authored places across Great Britain and Northern Ireland; candidates remain within their authored road region to avoid sea crossings. Actual graph connectivity and road distance still decide acceptance.
-
-The [60-journey audit](evidence/ambient-2026-10-01/review.json) accepts all sixty
-journeys within bounded attempts (four distance mismatches, 64 actual searches),
-uses all twelve places and all three algorithms, and checks every final route’s
-adjacency, direction and exact cost sum. Eight journeys are regional, 27
-interregional and 25 national; durations span 26.5–61.8 seconds. This is selector
-and routing evidence, not physical-device or memory measurement.
-
-Browser and unit checks cover pause/next/exit, hold/fade, reduced motion, hidden
-return and music continuity. Visual pacing, place balance and sustained listening
-remain author review; actual phone memory, thermal behaviour and frames remain R2.
-
-## Repeating the checks
-
-`npm run data:audit-ambient -- .cache/ambient-audit.json` repeats the seeded
-sixty-journey audit against verified committed graph bytes, without any source
-download. After building and starting `npm run preview`, run
-`npm run data:browser-ambient` for cold/warm opening and eight consecutive real
-journeys in desktop Chromium and mobile-viewport WebKit. It saves screenshots and
-a report under `.cache/ambient-browser-proof/`; an optional first argument selects
-another host URL. The committed [browser review](evidence/ambient-2026-10-01/browser.json)
-shows zero chunk-download bytes on warm opening and stable live WebGL object
-counts (seven textures, 34 buffers) across the eight complete frames in each
-browser. These counts do not measure GPU bytes, process memory or phone budgets.
-
-The UK audit can be repeated with `node scripts/data/audit-ambient.mjs .cache/uk-ambient-audit.json --uk` against the cached immutable UK release. Seed 20261001 accepted sixty journeys in 67 attempts, spanning all 22 places and all three distance bands.
-
-## Three-source studies · 1 October 2026
-
-`four-journeys-one-territory/1` keeps the four journey algorithms in their existing
-order, beginning with the selected mode, and inserts a three-source Dijkstra
-study after every fourth journey. The territory slot does not advance the
-journey algorithm. Retry stays within the slot; Next advances a slot.
-
-`separated-three-sources/1` uses a separate xorshift32 stream seeded with
-`ambientSeed XOR 0x74657272`. It selects triples in one authored road region,
-requiring each pair to meet that pool's minimum separation and at least 20% of
-the triple's largest separation. Candidate weights equal minimum pair separation;
-source order is seeded and shuffled to vary colour placement. The last three
-accepted triples are excluded; retries exclude previously attempted triples and
-stop after five attempts. The exact stream seed, selector and pool are recorded.
-
-Territories compute to exhaustion and replay for 25–65 seconds, using the normal
-square-root pacing function on the maximum recorded nearest-source road distance.
-This coverage distance is not a journey distance or distance-band acceptance.
-The completed mint/amber/periwinkle field holds for six seconds, then fades for
-two. There is no final-route reveal. Reduced motion presents completed stills
-with deliberate Next. Pause, visibility, music and quiet chrome use the same
-sequence lifecycle. The manual picker gains no third endpoint control.
-
-[Validation](evidence/territories-2026-10-01/README.md).
+Review still open: place balance, geographical variety, pacing, road persistence,
+territory colour/brightness and extended listening. Physical-phone memory, frames,
+thermal behaviour and sustained audiovisual budgets remain R2 work. Driving-rule
+enforcement remains R1. Browser checks do not complete those gates.

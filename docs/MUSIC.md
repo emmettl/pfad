@@ -1,6 +1,6 @@
 # Music
 
-Design brief · 30 September 2026 · First listening prototype implemented
+Provisional repertoire and implemented playback · updated 1 October 2026
 
 Music selection and implementation are central to PFAD. The author's initial
 direction is to use the Driftbox rack to create ambient synth pieces as a
@@ -17,10 +17,11 @@ provisional and has not yet been selected through the author's listening review.
 The sketches total 3,473,623 encoded bytes and are fetched on demand. A 32 kHz
 audio context retains at most two decoded stereo pieces, approximately 61.4 MB
 within a 64 MiB cap. This is an initial resource limit, not a physical-phone
-performance claim. All three pieces cycle through the same player; Swiss
-ambient journey sequencing and its whole-sequence pause are now implemented.
+performance claim. All three pieces cycle through one player across manual
+journeys and the selected catalogue's ambient journey/territory sequence.
 
-The remaining choices below describe the intended composition and playback.
+Composition and listening choices remain open. The playback lifecycle below is
+implemented and browser-verified; sustained physical-device budgets are still open.
 
 ## Musical direction
 
@@ -67,7 +68,7 @@ reproduce the render. Record manual performance into automation when it is part
 of the piece. Keep a short note identifying its author and intended playback
 behaviour.
 
-For the first implementation, prefer rendered stereo pieces. This makes the
+The current implementation uses rendered stereo pieces. This makes the
 auditioned performance consistent and lets us measure decoding, memory and
 download cost separately from route computation. Driftbox's public rack API
 supports offline rendering; PFAD does not need to include a rack editor to use
@@ -89,7 +90,7 @@ copy the synthesis implementation.
 
 Borrow Luft's explicit sound opt-in, gentle gain ramps and reusable audio context.
 Luft's current score is rendered locally with Web Audio; its useful precedent
-here is the listening experience and lifecycle. Driftbox is PFAD's proposed
+here is the listening experience and lifecycle. Driftbox is PFAD's implemented
 composition workflow.
 
 - Sound starts off. Enabling it is a deliberate action, and ambient mode can

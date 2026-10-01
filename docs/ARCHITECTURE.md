@@ -71,7 +71,7 @@ The A* result retains the heuristic version, preparation time, number of correct
 nodes, longitude scale and initial/final origin estimate alongside the existing
 source identity, search time, work counters, tie-breaking and final cost.
 The reverse CSR is shared with bidirectional mode. Heuristic potentials add
-10,068,696 working bytes on the national graph and are released after each query.
+10,068,696 working bytes on the Swiss graph and are released after each query.
 
 The first profile is road connectivity, not complete driving legality. Turn,
 barrier and conditional restrictions are not applied; their source records
@@ -107,7 +107,7 @@ cost, not proof that a road belongs to the final route. Successful improvements
 retain their distinct emphasis, and recent examination pulses follow real event
 orders. No unexamined corridor or invented attraction to the goal is drawn.
 The tone texture uses one byte per padded physical edge: 1,390,592 bytes for the
-national graph, plus GPU storage. It is disposed when changing results. Pause
+Swiss graph, plus GPU storage. It is disposed when changing results. Pause
 and reverse seeking restore the same recorded colours and counters. All modes
 share the separate final-route presentation and reduced-motion behaviour.
 
@@ -128,7 +128,7 @@ Reduced motion skips it, including live preference changes. Hidden pages freeze
 this clock. The closing route reveal remains separate and starts only when the
 recorded search ends.
 
-On the pinned national graph the retained reverse CSR adds 26,224,632 bytes in
+On the pinned Swiss graph the retained reverse CSR adds 26,224,632 bytes in
 the worker, and the second padded event texture adds 11,124,736 bytes in the
 main thread (plus GPU storage). Bidirectional working labels and the trace
 allocation also grow; these figures are not total or peak browser memory.
@@ -141,7 +141,7 @@ event; counters and the event cutoff remain fixed. The overlay uses the same
 actual road curves, ordered and oriented by the reconstructed route. Original
 road lengths weight its progress, distributed along each simplified curve.
 A screen-space ribbon keeps its fine core and soft travelling halo legible at
-different zoom levels. Drawing offsets add about 5.6 MB; the curve coordinates
+different zoom levels. Swiss drawing offsets add about 5.6 MB; the curve coordinates
 are shared with the existing drawing, and only the current route gets a ribbon.
 The preceding route ribbon is disposed when a new result arrives.
 
@@ -152,22 +152,34 @@ including when the preference changes during it. Hidden pages do not advance
 the presentation clock. No vehicle, additional search activity or invented
 connections are implied by the travelling light.
 
-The whole national drawing is 4,119,930 line vertices. The renderer caps pixel
+The Swiss drawing is 4,119,930 line vertices. The renderer normally caps pixel
 ratio at 1.5, skips unchanged frames, and supports pan, wheel zoom and pinch.
+Large graphs on devices with a coarse primary pointer use pixel ratio 1 and a
+30 fps rendering cap. These limits retain all road geometry and search events;
+they do not establish physical-phone stability.
 Reduced-motion preference starts at the completed trace with autoplay disabled.
 The canvas fills the viewport behind transparent header, playback and footer
 overlays. Empty overlay space passes map gestures through; buttons, selectors,
 links and the timeline keep their own interaction areas. Subtle text shadows
 preserve label contrast without reserving or obscuring bands of the map.
 
-An optional static layer draws faint, unfilled national-border and lake-shoreline
-rings below all road drawing. The reviewed geographic assets are bundled with
-the application, projected with the road manifest's projection and consume two
-additional draw calls (11,280 vertices). The Outlines button changes visibility
-without changing the event cutoff, route, replay clock or counters. Its preference
-survives a dataset retry within the page. Outline geometries and materials are
-disposed with the scene. These reference lines have no search-event semantics;
-their dates, generalisation and attribution are separate from OSM. See [DATA.md](DATA.md).
+An optional static layer draws faint national-border and lake-shoreline rings
+below the roads. Verified, immutable outline releases are fetched separately for
+the selected country and projected with its road manifest. The Swiss lines use
+11,280 vertices; geometry varies by study. The Outlines button works as soon as
+context is verified, including during road loading, and changes visibility without
+changing events, routes, replay or counters. Its preference survives a dataset
+retry within the page. Outline failures have a separate retry and do not prevent
+road searches. Country switches abort stale requests. See [DATA.md](DATA.md) and
+[COUNTRIES.md](COUNTRIES.md#independent-outline-releases).
+
+Point selection lazily triangulates the same verified country exteriors into a
+faint mint fill beneath outlines and roads. It shares the map projection and camera,
+remains visible when outline lines are hidden, and clears on selection or cancellation.
+The group is reused between picker activations and disposed on geographic-context
+replacement or scene teardown. Missing context uses a quiet clear-colour tint
+instead. This adds no geographic download and has no search-event semantics.
+Reference dates and attribution remain separate from the OSM road graph.
 
 ## Verification and remaining gates
 
@@ -179,9 +191,9 @@ missing chunks and inspect reduced-motion behaviour.
 
 Mobile WebKit here runs on a desktop host with an emulated viewport. Actual phone
 memory, thermal behaviour and frame pacing still require device measurements.
-Turn-rule validation remains the next routing gate. Dijkstra, bidirectional
-Dijkstra and A* currently compare the same declared connectivity graph; their
-agreement does not establish driving legality.
+Turn-rule validation remains the next routing gate. All four journey algorithms
+compare the same declared connectivity graph; their agreement does not establish
+driving legality.
 
 [The first-study replay measurement](evidence/first-study-2026-09-30/replay-report.json)
 records about 60 fps with Chromium Metal and WebKit on an M4 Max. Chromium’s
@@ -194,17 +206,22 @@ same bytes using pinned hosting tools. No build or request refreshes OSM.
 
 ## Sequencing, storage and records
 
-The ambient controller owns only presentation phases and bounded selection
-metadata. It requests the ordinary worker algorithms, accepts by actual distance,
-and never alters topology, search costs or event order. The full graph is reused;
-prior route geometry/textures are disposed when each accepted result arrives.
+The ambient controller owns presentation phases and bounded selection metadata.
+It rotates four ordinary journey algorithms and inserts a three-source study
+after four journeys. Journey acceptance uses actual route distance; territories
+use genuine source coverage. It never alters topology, costs or event order.
+The full graph is reused; prior route geometry/textures are disposed when each
+accepted result arrives.
 Music has one separate owner and changes its pause policy only for whole-sequence
 actions. [AMBIENT.md](AMBIENT.md) describes selection, timing and remaining review.
 
 The verified loader uses two outstanding chunks, optional bounded persistence
-and strict readiness; see [DATA.md](DATA.md). Sharing pins graph/profile and
-restores a paused event frame. Binary exports retain actual packed event buffers
-and provenance rather than JSON-expanded traces; see [RECORDS.md](RECORDS.md).
+and strict readiness; see [DATA.md](DATA.md). Native links follow requested points,
+algorithm, settings and camera without a graph hash or replay offset. Opening
+recomputes and autoplays from the beginning; reduced motion shows the completed
+trace. Legacy identity-bearing links remain validated and resume their recorded
+frame. Binary exports retain exact graph/profile identity, presentation state,
+packed events and provenance; see [RECORDS.md](RECORDS.md).
 
 ## Bidirectional A*
 

@@ -45,8 +45,10 @@ and the read-only Worker `pfad-data`, at `https://motionstudies.app/pfad-data/`.
 Its more specific route takes precedence over the app's `pfad*` route. Switzerland
 remains bundled in the existing app artifact, with the same dataset identity.
 GitHub Pages and Cloudflare still publish exactly the same tested app artifact.
-The app is about 28.7 MB including Switzerland and music; UK adds no graph files
-to Pages. The catalogue is compiled into the application (`src/countries.ts`).
+The app artifact includes Switzerland and music and stays within its 30 MiB budget.
+Additional country graphs and all outline coordinates are served independently;
+they add no graph/outline objects to Pages. The catalogue and pinned outline
+manifest references are compiled into the application.
 
 Dataset paths contain country, source date and content identity. Every object is
 immutable and publicly readable; there are no public uploads, object listings,

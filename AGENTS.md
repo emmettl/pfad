@@ -18,9 +18,11 @@ over a real road graph, replayed at human scale. No invented search activity.
   The edition is unnumbered. Do not assign a catalogue number.
 - Use `docs/ROADMAP.md` for staged priorities, completion criteria and the feature
   wishlist. Wishlist items are possibilities, not committed implementation scope.
+- Keep the root README concise. Put current-state and implementation details in
+  the relevant supporting docs, linked through `docs/README.md`.
 - Music is core R3 scope: begin with original ambient pieces composed using the
-  Driftbox rack as a provisional repertoire. Consult `docs/MUSIC.md`; its playback
-  details are proposals, and the final musical selection remains open.
+  Driftbox rack as a provisional repertoire. Consult `docs/MUSIC.md`; playback is
+  implemented, while author listening review and final musical selection remain open.
 - Data refreshes are manual, versioned releases. Do not add scheduled downloads
   or replace the graph behind an existing trace without an explicit request.
 - Source OSM and generated graphs belong in ignored `.cache/` until validated

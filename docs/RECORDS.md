@@ -7,6 +7,7 @@ outlines and camera position/zoom using readable native query parameters:
 https://motionstudies.app/pfad/?from=zurich&to=geneve
 https://motionstudies.app/pfad/?from=basel&to=lugano&algorithm=astar&duration=15
 https://motionstudies.app/pfad/?country=is&from=reykjavik&to=akureyri
+https://motionstudies.app/pfad/?from=geneve&to=zurich&source-c=lugano&algorithm=multisource
 ```
 
 Curated places use lowercase name slugs; map-picked points use `longitude,latitude`.
@@ -26,8 +27,8 @@ dark starting frame. Ambient mode and music still require a deliberate action. C
 timing is measured anew; a URL does not preserve the original processor time.
 
 Endpoint edits before Search are included. An ambient link captures
-the currently accepted journey and its algorithm, not an automatically started
-sequence. Candidate retries leave the previous accepted link intact. Exports
+the currently accepted journey or territory and its algorithm, not an automatically
+started sequence. Candidate retries leave the previous accepted link intact. Exports
 continue to describe the actual recorded search, even when picker edits are pending.
 
 New links do not contain a replay offset or graph checksum. They use the immutable
@@ -39,11 +40,12 @@ Existing `pfad-study-link/1` JSON fragments resume playback from their recorded 
 completed frames stay complete. Reduced motion shows the completed result.
 An unavailable legacy identity gives an explicit error instead of silently
 substituting today's graph. Successful legacy links are rewritten to the concise
-format in the address bar. A linked UK study asks for confirmation of its
-93 MB download on first use. Acceptance is remembered in local storage for this
-site, so later links and reloads open directly. Cancelling saves no acceptance.
-Swiss and UK releases remain available
-under their immutable published keys; preserving them is a deliberate, bounded
+format in the address bar. Large studies ask for download acknowledgement on first
+use (UK: 93 MB; Scandinavia: 77.9 MB in the catalogue). Acceptance is remembered
+per country in local storage for that browser and site; later links and reloads
+open directly. Cancelling saves nothing; unavailable storage cannot persist it.
+Selected releases remain available under their immutable published keys;
+preserving them is a deliberate, bounded
 archive policy, not a guarantee of indefinite retention of every future release.
 
 ## Share previews
@@ -126,12 +128,14 @@ Road-derived recordings preserve OpenStreetMap attribution and ODbL terms in
 their metadata. Importing an arbitrary file into the live edition is future work;
 the documented envelope can already be inspected independently.
 
+## Algorithm-specific records
+
 Bidirectional A* links use `algorithm=bidirectional-astar`. Its exact exports
 retain both front timestamp arrays and `balancedHeuristic`, including the
 balanced-potential version, total preparation time and each directed estimate's
-version and correction measurements. The ambient cycle is now
-`four-algorithm-rotation/1`; older exported three-algorithm cycles retain their
-original metadata.
+version and correction measurements. The current ambient cycle is
+`four-journeys-one-territory/1`; earlier four-algorithm and three-algorithm
+recordings retain their original cycle metadata.
 
 Territory studies use `algorithm=multisource`, `from` and `to` for the first two
 sources, plus `source-c` (and optional `source-c-name`) for the third. These are
