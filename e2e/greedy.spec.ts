@@ -50,8 +50,16 @@ test('greedy displays real coral exploration, reversible replay and an honest fi
 test('greedy naturally ends the search and reveals its route before resting', async ({ page }) => {
   await page.goto('./?algorithm=greedy&duration=5')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'greedy-best-first/1', { timeout: 45000 })
-  await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'revealing', { timeout: 15000 })
-  await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'complete', { timeout: 10000 })
+  // Replay caps each frame's time step. Slow software-rendered CI hosts can
+  // take longer than five wall-clock seconds; exercise the natural endpoint
+  // from its final segment instead of timing the whole search animation.
+  await page.getByRole('button', { name: 'Pause', exact: true }).click()
+  await expect(page.getByRole('combobox', { name: 'Replay duration' })).toHaveValue('5')
+  await page.getByRole('slider', { name: 'Search replay' }).fill('4.5')
+  await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'hidden')
+  await page.getByRole('button', { name: 'Play', exact: true }).click()
+  await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'revealing', { timeout: 30000 })
+  await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'complete', { timeout: 30000 })
   await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
   await expect(page.locator('.greedy-note')).toBeVisible()
 })
