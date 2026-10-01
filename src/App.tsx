@@ -4,6 +4,7 @@ import '@motionstudies/web/timeline-scrubber.css'
 import { loadGeography } from './map/geography-loader.ts'
 import { RoadScene } from './map/RoadScene.ts'
 import { COUNTRIES } from './countries.ts'
+import { countryWarningAcknowledged, rememberCountryWarning } from './country-warning.ts'
 import { countsAt } from './search/engine.ts'
 import type { Point, Reply, SearchAlgorithm, SearchResult, StudyManifest } from './search/contracts.ts'
 import { SoundControl, type SoundHandle } from './music/SoundControl.tsx'
@@ -29,8 +30,9 @@ export function App() {
     return parsed
   })
   const selectedCountry = shared.study ? COUNTRIES.find(c => c.id === shared.study!.country)! : COUNTRIES[0]
-  const [country, setCountry] = useState(selectedCountry.large ? COUNTRIES[0] : selectedCountry)
-  const [pendingCountry, setPendingCountry] = useState<string | null>(selectedCountry.large ? selectedCountry.id : null)
+  const [country, setCountry] = useState(() => selectedCountry.large && !countryWarningAcknowledged(selectedCountry.id) ? COUNTRIES[0] : selectedCountry)
+  const [pendingCountry, setPendingCountry] = useState<string | null>(() => country.id === selectedCountry.id ? null : selectedCountry.id)
+  const acknowledgedWarnings = useRef(new Set<string>())
   const sharedFrame = useRef(shared.study)
   const urlBinding = useRef<StudyUrlBinding | null>(null)
   const currentParametersRef = useRef<() => StudyLink | null>(() => null)
@@ -212,7 +214,7 @@ export function App() {
   const chooseCountry = (id: string) => {
     const next = COUNTRIES.find(c => c.id === id)!
     if (next.id === country.id) { if (shared.study && shared.study.country !== next.id) clearShared(); else setPendingCountry(null); return }
-    if (next.large && pendingCountry !== id) { setPendingCountry(id); return }
+    if (next.large && !acknowledgedWarnings.current.has(id) && !countryWarningAcknowledged(id)) { setPendingCountry(id); return }
     exitAmbient()
     if (shared.study && shared.study.country !== next.id) { sharedFrame.current = undefined; setShared({}); history.replaceState(history.state, '', clearStudyUrl(location.href)) }
     const a = shared.study?.country === next.id ? shared.study.start : next.places[0], b = shared.study?.country === next.id ? shared.study.goal : next.places[1]
@@ -332,7 +334,7 @@ export function App() {
       <button className="search-button" disabled={!ready || busy} onClick={() => search(start, goal)}>{busy ? 'Computing…' : 'Search'}</button>
     </div>
     <main className={`map ${pick ? 'pick-mode' : ''}`} ref={host} style={{ opacity: ambientState.opacity }} tabIndex={0} aria-label={`Recorded pathfinding across ${country.name}`} aria-describedby="playback-shortcuts" aria-keyshortcuts="Space ArrowLeft ArrowRight Shift+ArrowLeft Shift+ArrowRight Home End Escape" />
-    {pending && <div className="country-confirm" role="dialog" aria-label="Open a large road dataset"><p>{pending.name} · {pending.downloadMB} MB download</p><p>{pending.deviceNote}</p><button onClick={() => chooseCountry(pending.id)}>Open {pending.name}</button><button onClick={() => shared.study ? clearShared() : setPendingCountry(null)}>Cancel</button></div>}
+    {pending && <div className="country-confirm" role="dialog" aria-label="Open a large road dataset"><p>{pending.name} · {pending.downloadMB} MB download</p><p>{pending.deviceNote}</p><button onClick={() => { acknowledgedWarnings.current.add(pending.id); rememberCountryWarning(pending.id); chooseCountry(pending.id) }}>Open {pending.name}</button><button onClick={() => shared.study ? clearShared() : setPendingCountry(null)}>Cancel</button></div>}
     {pick && <div className="map-hint">Choose point {pick === 'start' ? 'A' : 'B'} on the map <button onClick={() => setPick(null)}>Cancel</button></div>}
     {!ready && !error && <div className="loading-panel" role="status"><span className="loading-title">Opening {country.name}</span><p>{loading.stage}</p>{loading.total > 0 && <><progress value={loading.loaded} max={loading.total} aria-label="Road data download" /><span className="mono">{(loading.loaded / 1000000).toFixed(1)} / {(loading.total / 1000000).toFixed(1)} MB</span></>}</div>}
     {error && <div className="error-panel" role="alert"><p>{error}</p><button onClick={() => { if (shared.error) { clearShared(); return } exitAmbient(); initialQuery.current = { start, goal }; setAttempt(value => value + 1) }}>{shared.error ? 'Open default study' : 'Try again'}</button></div>}
