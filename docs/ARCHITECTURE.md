@@ -362,3 +362,14 @@ objective for manual searches, with integer millisecond costs derived from the
 existing road-class byte. All four optimal solvers support both objectives.
 Physical route lengths remain separate from time costs; exports retain the
 complete speed model. This first profile adds no download attributes.
+
+### Goal-directed Prim manual trial
+
+`spanning-tree/1` grows Prim’s tree from A on the physical undirected multigraph,
+stopping when B is accepted. Direction flags are deliberately ignored; this is
+a connectivity journey, not a legal driving route. Equal crossing weights use
+destination node ID then physical road ID. Kind 2 records accepted roads, kind
+1 examined roads, and kind 0 entered nodes. `treeEdges` and
+`undirected-prim-goal/1` preserve acceptance order and policy. The unique tree
+path from A to B is revealed after exploration; it is not guaranteed shortest.
+Copper-gold branches persist behind the route. No ambient insertion.

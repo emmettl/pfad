@@ -1,3 +1,4 @@
+import { selectAlgorithm } from './algorithm-picker.ts'
 import { test, expect } from '@playwright/test'
 test('depth-first replays real traversal, seeks reversibly and shares its mode', async ({ page }) => {
  test.setTimeout(90000)
@@ -13,7 +14,7 @@ test('depth-first replays real traversal, seeks reversibly and shares its mode',
  await expect(page.locator('.replay-status')).toHaveText('Depth-first route found')
  await expect(page.locator('.greedy-note')).toHaveText('Shortest route not guaranteed')
  await slider.fill('15'); await expect(page.getByTestId('examined-count')).toHaveText(count!)
- await page.getByRole('combobox',{name:'Search algorithm'}).selectOption('dijkstra')
+ await selectAlgorithm(page, 'dijkstra')
  await expect(page.locator('.study')).toHaveAttribute('data-algorithm','dijkstra/1')
  expect(errors).toEqual([])
 })

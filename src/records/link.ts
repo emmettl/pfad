@@ -49,7 +49,7 @@ function legacyStudy(raw: string): StudyLink {
   const s = JSON.parse(raw) as StudyLink
   if (s.objective !== undefined && !['distance', 'time'].includes(s.objective)) throw new Error()
   if (!s || s.schema !== 'pfad-study-link/1' || !COUNTRIES.some(country => country.id === s.country) || !/^[a-f0-9]{64}$/.test(s.dataset) || s.profile !== 'road-connectivity-distance-v1'
-    || !point(s.start) || !point(s.goal) || !['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar', 'multisource', 'greedy', 'depth-first', 'breadth-first', 'time-dijkstra'].includes(s.algorithm)
+    || !point(s.start) || !point(s.goal) || !['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar', 'multisource', 'greedy', 'depth-first', 'breadth-first', 'time-dijkstra', 'spanning-tree'].includes(s.algorithm)
     || !finite(s.duration, 5, 120) || !finite(s.progress, 0, 1) || typeof s.outlines !== 'boolean'
     || (s.view && (!finite(s.view.x, -100, 100) || !finite(s.view.y, -100, 100) || !finite(s.view.zoom, .6, 24)))) throw new Error()
   if (s.algorithm === 'multisource' ? !s.sources || s.sources.length !== 3 || !s.sources.every(point) || !samePoint(s.start, s.sources[0]) || !samePoint(s.goal, s.sources[1]) : !!s.sources) throw new Error()
@@ -70,7 +70,7 @@ export function readStudyLink(address: string): { study?: StudyLink; error?: str
     const country = COUNTRIES.find(country => country.id === (parameters.get('country') ?? 'ch'))
     if (!country) throw new Error()
     const algorithm = parameters.get('algorithm') ?? 'dijkstra'
-    if (!['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar', 'multisource', 'greedy', 'depth-first', 'breadth-first', 'time-dijkstra'].includes(algorithm)) throw new Error()
+    if (!['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar', 'multisource', 'greedy', 'depth-first', 'breadth-first', 'time-dijkstra', 'spanning-tree'].includes(algorithm)) throw new Error()
     if (algorithm === 'multisource' ? !parameters.has('source-c') : parameters.has('source-c') || parameters.has('source-c-name')) throw new Error()
     const start = endpoint(parameters, 'from', country), goal = endpoint(parameters, 'to', country)
     const sources: [Point, Point, Point] | undefined = algorithm === 'multisource' ? [start, goal, endpoint(parameters, 'source-c', country)] : undefined

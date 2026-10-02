@@ -43,6 +43,7 @@ const fragmentShader = `
   uniform float uGreedy;
   uniform float uCompact;
   uniform float uDepth;
+  uniform float uTree;
   uniform float uTimeAstar;
   uniform float uBreadth;
   flat in float vSource;
@@ -59,6 +60,7 @@ const fragmentShader = `
     uint improvement = times.y;
     float tree = improvement != 0u && uEvent >= improvement ? 1. : 0.;
     float memory = mix(mix(.12, .045, uAstar) + tree * mix(.07, .10, uAstar), mix(.10 + tree * .04, .32 + tree * .16, uCompact), uGreedy);
+    if (uTree > .5) { if (tree < .5) return vec4(quiet, .025); return vec4(bright, .65 + pulse * .35); }
     memory = mix(memory, .38 + tree * .20, uTimeAstar);
     return vec4(mix(quiet, bright, pulse), mix(memory, .25 + tree * .12, uDepth) + pulse * mix(.72, .92, uGreedy));
   }
@@ -70,6 +72,7 @@ const fragmentShader = `
       bright = mix(vec3(1., .40, .32), vec3(1., .87, .72), vGoalProximity);
     }
     if (uTimeAstar > .5) { quiet = mix(vec3(.32, .57, .85), vec3(.55, .80, .92), vGoalProximity); bright = vec3(.85, .97, 1.); }
+    if (uTree > .5) { quiet = vec3(.40, .25, .20); bright = vec3(1., .64, .40); }
     if (uBreadth > .5) { quiet = vec3(.65, .43, .12); bright = vec3(1., .87, .43); }
     if (uDepth > .5) { quiet = vec3(.55, .35, .75); bright = vec3(.90, .75, 1.); }
     if (uTerritories > .5) {
@@ -163,7 +166,7 @@ export class RoadScene {
     this.proximityTexture.needsUpdate = true
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, glslVersion: THREE.GLSL3,
-      uniforms: { uTimeAstar: { value: 0 }, uBreadth: { value: 0 }, uDepth: { value: 0 }, uCompact: { value: 0 }, uGreedy: { value: 0 }, uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
+      uniforms: { uTree: { value: 0 }, uTimeAstar: { value: 0 }, uBreadth: { value: 0 }, uDepth: { value: 0 }, uCompact: { value: 0 }, uGreedy: { value: 0 }, uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
       transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     })
     host.appendChild(this.renderer.domElement)
@@ -385,7 +388,7 @@ export class RoadScene {
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uBackwardTimes.value = this.backwardTexture
     this.material.uniforms.uGoalProximity.value = this.proximityTexture
     this.material.uniforms.uSources.value = this.sourceTexture; this.material.uniforms.uTerritories.value = 0; this.material.uniforms.uTerritoryComplete.value = 0
-    this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0; this.material.uniforms.uGreedy.value = 0; this.material.uniforms.uDepth.value = 0; this.material.uniforms.uBreadth.value = 0; this.material.uniforms.uTimeAstar.value = 0; this.routeMaterial.uniforms.uEmphasis.value = 1
+    this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0; this.material.uniforms.uGreedy.value = 0; this.material.uniforms.uDepth.value = 0; this.material.uniforms.uBreadth.value = 0; this.material.uniforms.uTree.value = 0; this.material.uniforms.uTimeAstar.value = 0; this.routeMaterial.uniforms.uEmphasis.value = 1
     this.material.uniforms.uTextureSize.value.set(1, 1); this.material.uniforms.uEvent.value = 0
     this.focusEvents = undefined; this.focusCoordinates = undefined; this.focusPoint = undefined; this.tip.hidden = true; this.tip.dataset.event = '0'
     this.points = []; this.markers.replaceChildren(); this.dirty = true
@@ -397,6 +400,7 @@ export class RoadScene {
     for (const object of this.scene.children) if (object instanceof THREE.LineSegments && object.material === this.material) object.visible = true
     if (this.flashPoint) { this.scene.remove(this.flashPoint); this.flashPoint.geometry.dispose(); this.flashPoint = undefined }
     this.flash.clear(); this.meetingEvent = result.meeting?.event
+    this.material.uniforms.uTree.value = result.tree ? 1 : 0
     const timeAstar = result.objective === 'time' && ['astar/1', 'bidirectional-astar/1'].includes(result.algorithm)
     this.material.uniforms.uTimeAstar.value = timeAstar ? 1 : 0
     this.tip.classList.toggle('time-astar-tip', timeAstar)

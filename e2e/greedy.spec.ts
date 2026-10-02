@@ -1,3 +1,4 @@
+import { selectAlgorithm } from './algorithm-picker.ts'
 import { test, expect } from '@playwright/test'
 test.setTimeout(90000)
 
@@ -29,19 +30,19 @@ test('greedy displays real coral exploration, reversible replay and an honest fi
   await expect(canvas).toHaveAttribute('data-route-phase', 'hidden')
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await expect(canvas).toHaveAttribute('data-route-energy', '0')
-  await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('dijkstra')
+  await selectAlgorithm(page, 'dijkstra')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'dijkstra/1')
   await expect(canvas).toHaveAttribute('data-greedy', 'false')
   await expect(page.locator('.greedy-note')).toHaveCount(0)
   await expect(page.locator('.route-caption')).toContainText('262.7 km')
   expect(greedyKm).toBeGreaterThanOrEqual(262.7)
-  await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('greedy')
+  await selectAlgorithm(page, 'greedy')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'greedy-best-first/1')
   await expect(canvas).toHaveAttribute('data-route-energy', '0')
   await expect(page).toHaveURL(/algorithm=greedy/)
   await page.reload()
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'greedy-best-first/1', { timeout: 45000 })
-  await expect(page.getByRole('combobox', { name: 'Search algorithm' })).toHaveValue('greedy')
+  await expect(page.getByRole('combobox', { name: 'Search algorithm' })).toHaveAttribute('data-value', 'greedy')
   await expect(page.locator('.greedy-note')).toBeVisible()
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   expect(errors).toEqual([])

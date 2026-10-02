@@ -1,3 +1,4 @@
+import { selectAlgorithm } from './algorithm-picker.ts'
 import { test, expect } from '@playwright/test'
 import { readFile } from 'node:fs/promises'
 import { gunzipSync } from 'node:zlib'
@@ -26,7 +27,7 @@ test('native URL follows journey and camera edits, stays fixed during replay, an
   await page.getByRole('combobox', { name: 'Start place' }).selectOption('Basel')
   await expect.poll(async () => (await parameters()).start.name).toBe('Basel')
   expect((await parameters()).progress).toBe(0)
-  await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('astar')
+  await selectAlgorithm(page, 'astar')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'astar/1', { timeout: 45000 })
   await page.getByRole('button', { name: 'Pause', exact: true }).click()
   await page.getByRole('combobox', { name: 'Replay duration' }).selectOption('15')

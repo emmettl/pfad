@@ -1,3 +1,4 @@
+import { selectAlgorithm } from './algorithm-picker.ts'
 import { test, expect } from '@playwright/test'
 test('estimated time retains distance, model labels and reversible replay', async ({page})=>{
  test.setTimeout(90000)
@@ -12,7 +13,7 @@ test('estimated time retains distance, model labels and reversible replay', asyn
  await expect(page.locator('.route-caption em')).toContainText('min)')
  await expect(page.locator('.route-caption em')).toContainText('km')
  await slider.fill('15');await expect(page.getByTestId('examined-count')).toHaveText(count!)
- await page.getByRole('combobox',{name:'Search algorithm'}).selectOption('astar')
+ await selectAlgorithm(page, 'astar')
  await expect(page.locator('.study')).toHaveAttribute('data-algorithm','astar/1')
  await expect(page.locator('canvas')).toHaveAttribute('data-time-emphasis','true')
  await page.getByRole('slider',{name:'Search replay'}).fill('15')
@@ -23,7 +24,7 @@ test('estimated time retains distance, model labels and reversible replay', asyn
  await expect(page.locator('.study')).toHaveAttribute('data-algorithm','astar/1')
  await expect(page.locator('.greedy-note')).toHaveCount(0)
  await expect(page.locator('canvas')).toHaveAttribute('data-time-emphasis','false')
- await page.getByRole('combobox',{name:'Search algorithm'}).selectOption('breadth-first')
+ await selectAlgorithm(page, 'breadth-first')
  await expect(page.locator('.study')).toHaveAttribute('data-algorithm','breadth-first/1')
  await expect(page.getByRole('button',{name:'Distance',exact:true})).toBeDisabled()
  await expect(page.getByRole('button',{name:'Estimated time',exact:true})).toBeDisabled()

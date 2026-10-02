@@ -1,3 +1,4 @@
+import { selectAlgorithm } from './algorithm-picker.ts'
 import { test, expect } from '@playwright/test'
 test.setTimeout(90000)
 
@@ -89,7 +90,7 @@ test('ambient binds genuine journeys, reuses loaded chunks, and exits into the c
   await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()
   await expect(page.getByRole('combobox', { name: 'Replay duration' })).toHaveValue('30')
   await expect(page.locator('main.map')).toHaveCSS('opacity', '1')
-  await expect(page.getByRole('combobox', { name: 'Search algorithm' })).toHaveValue('bidirectional')
+  await expect(page.getByRole('combobox', { name: 'Search algorithm' })).toHaveAttribute('data-value', 'bidirectional')
   expect(music).toEqual([]); expect(errors).toEqual([])
 })
 
@@ -105,7 +106,7 @@ test('reduced-motion ambient presents completed stills and requires explicit Nex
   })
   await page.emulateMedia({ reducedMotion: 'reduce' }); await page.goto('./')
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
-  await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('astar')
+  await selectAlgorithm(page, 'astar')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'astar/1')
   await page.getByRole('button', { name: 'Ambient', exact: true }).click()
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'still', { timeout: 45000 })

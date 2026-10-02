@@ -4,8 +4,8 @@ import type { AmbientRecord } from '../ambient/sequence.ts'
 
 /** A gzip container with small JSON metadata and exact packed little-endian buffers. */
 export async function exportRecord(result: SearchResult, manifest: StudyManifest, presentation: StudyLink, ambient: AmbientRecord[]) {
-  const { trace, traceArchive, checkpoints, edgeTimes, edgeSources, focusEvents, focusCoordinates, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths, ...search } = result
-  const arrays = { trace, checkpoints, edgeTimes, edgeSources, focusEvents, focusCoordinates, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths }
+  const { treeEdges, trace, traceArchive, checkpoints, edgeTimes, edgeSources, focusEvents, focusCoordinates, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths, ...search } = result
+  const arrays = { treeEdges, trace, checkpoints, edgeTimes, edgeSources, focusEvents, focusCoordinates, backwardTimes, goalProximity, routeNodes, routeEdges, routeReversed, routeLengths }
   const buffers: Record<string, { type: string; offset: number; count: number; bytes: number }> = {}
   const plans: { name: string; array: Uint32Array | Int32Array | Uint8Array; padding: number }[] = []
   let offset = 0

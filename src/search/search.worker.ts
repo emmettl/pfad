@@ -7,6 +7,7 @@ import { bidirectional, compileReverse, type ReverseGraph } from './bidirectiona
 import { multisource } from './multisource.ts'
 import { releaseEndpointIndex, snapSources } from './endpoints.ts'
 import { estimateRouteTime, annotateTime, timeGraph, timeDijkstra } from './time.ts'
+import { spanningTree } from './spanning-tree.ts'
 import { breadthFirst } from './breadth-first.ts'
 import { depthFirst } from './depth-first.ts'
 import { greedy } from './greedy.ts'
@@ -116,21 +117,21 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
         releaseBuffers(graph.direction, undefined, graph.incoming)
       }
       const physicalGraph = graph
-      const timeObjective = request.objective === 'time'
+      const timeObjective = request.objective === 'time' && request.algorithm !== 'spanning-tree'
       const weighted = timeObjective ? timeGraph(graph, manifest.classes) : undefined
       const optimizes = !['greedy', 'depth-first', 'breadth-first'].includes(request.algorithm)
       const searchGraph = weighted && optimizes ? weighted : graph
-      const result = request.algorithm === 'multisource' && sourceEndpoints ? multisource(searchGraph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar') && reverse
+      const result = request.algorithm === 'spanning-tree' ? spanningTree(graph, endpoints.start, endpoints.snapMs, endpoints.goal) : request.algorithm === 'multisource' && sourceEndpoints ? multisource(searchGraph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar') && reverse
         ? bidirectional(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs, request.algorithm === 'bidirectional-astar')
         : request.algorithm === 'astar' && reverse ? astar(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
           : request.algorithm === 'time-dijkstra' ? timeDijkstra(searchGraph, manifest.classes, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'breadth-first' ? breadthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'depth-first' ? depthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'greedy' ? greedy(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : dijkstra(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs)
       if (weighted) { annotateTime(result, physicalGraph, weighted, optimizes); releaseBuffers(weighted.length) }
-      if (!weighted && request.algorithm !== 'time-dijkstra') estimateRouteTime(result, physicalGraph, manifest.classes)
+      if (!weighted && request.algorithm !== 'time-dijkstra' && request.algorithm !== 'spanning-tree') estimateRouteTime(result, physicalGraph, manifest.classes)
       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }
       result.snapping = endpoints.snapping
       if (sourceEndpoints) { result.requestedSources = request.sources; result.sourceSnappingVersion = 'nearby-shared-three-source-component/1' }
       if (disposable) { graph = undefined; reverse = undefined }
-      reply({ type: 'result', requestId: request.requestId, result }, [result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer, result.routeReversed.buffer, result.routeLengths.buffer, ...(result.backwardTimes ? [result.backwardTimes.buffer] : []), ...(result.focusEvents ? [result.focusEvents.buffer] : []), ...(result.focusCoordinates ? [result.focusCoordinates.buffer] : []), ...(result.edgeSources ? [result.edgeSources.buffer] : []), ...(result.goalProximity ? [result.goalProximity.buffer] : [])])
+      reply({ type: 'result', requestId: request.requestId, result }, [...(result.treeEdges ? [result.treeEdges.buffer] : []), result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer, result.routeReversed.buffer, result.routeLengths.buffer, ...(result.backwardTimes ? [result.backwardTimes.buffer] : []), ...(result.focusEvents ? [result.focusEvents.buffer] : []), ...(result.focusCoordinates ? [result.focusCoordinates.buffer] : []), ...(result.edgeSources ? [result.edgeSources.buffer] : []), ...(result.goalProximity ? [result.goalProximity.buffer] : [])])
     }
   } catch (error) {
     reply({ type: 'error', requestId: request.type === 'search' ? request.requestId : undefined, message: error instanceof Error ? error.message : 'The search could not be completed' })

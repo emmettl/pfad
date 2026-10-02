@@ -1,3 +1,4 @@
+import { selectAlgorithm } from './algorithm-picker.ts'
 import { test, expect, type Page } from '@playwright/test'
 
 test.setTimeout(90000)
@@ -10,7 +11,7 @@ async function seek(page: Page, value: number) {
 async function bidirectional(page: Page, guided: boolean) {
   await page.goto('./')
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
-  await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption(guided ? 'bidirectional-astar' : 'bidirectional')
+  await selectAlgorithm(page, guided ? 'bidirectional-astar' : 'bidirectional')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', guided ? 'bidirectional-astar/1' : 'bidirectional-dijkstra/1')
 }
 
@@ -51,7 +52,7 @@ test(`${guided ? 'bidirectional A*' : 'bidirectional Dijkstra'}: two real fronts
   await expect(canvas).toHaveAttribute('data-flash-phase', 'hidden')
   await expect(canvas).toHaveAttribute('data-route-phase', 'complete')
   await expect(canvas).toHaveAttribute('data-route-energy', '0')
-  await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('dijkstra')
+  await selectAlgorithm(page, 'dijkstra')
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'dijkstra/1')
   await expect(canvas).toHaveAttribute('data-meeting-event', '0')
   await expect(canvas).toHaveAttribute('data-flash-phase', 'hidden')

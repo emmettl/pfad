@@ -40,7 +40,7 @@ test('ambient introduces three real territories, shares their sources and return
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'dijkstra/1', { timeout: 45000 })
   await expect(canvas).toHaveAttribute('data-source-count', '0')
   await expect(page.getByRole('combobox', { name: 'Start place' })).toBeVisible()
-  await expect(page.getByRole('combobox', { name: 'Search algorithm' })).toHaveValue('dijkstra')
+  await expect(page.getByRole('combobox', { name: 'Search algorithm' })).toHaveAttribute('data-value', 'dijkstra')
   expect(errors).toEqual([])
 })
 
