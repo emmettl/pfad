@@ -1,4 +1,4 @@
-import { prepareReplayDrawing, replayVertexCount } from './replayDrawing.ts'
+import { prepareSpatialReplayDrawing, replayVertexCount } from './replayDrawing.ts'
 import { unpackDrawing } from './drawing-codec.ts'
 import { longitudeOffset, normaliseLongitude } from '../search/projection.ts'
 import * as THREE from 'three'
@@ -91,7 +91,7 @@ export class RoadScene {
   proximityTexture: THREE.DataTexture
   manifest?: StudyManifest
   private storedDrawing: { bytes: ArrayBuffer; count: number; compressed: boolean }[] = []
-  private roadBatches: { lines: THREE.LineSegments; ends: Uint32Array }[] = []
+  private roadBatches: { lines: THREE.LineSegments; ends: Uint32Array; bounds: readonly [number, number, number, number] }[] = []
   private drawingGeneration = 0
   private drawingDisposed = false
   private lastResult?: SearchResult
@@ -181,7 +181,7 @@ export class RoadScene {
       this.previousFrame = now
       if (this.dirty && now - this.lastRendered >= this.renderInterval - .5) {
         this.lastRendered = now
-        this.renderer.render(this.scene, this.camera); this.placeMarkers()
+        this.cullRoadBatches(); this.renderer.render(this.scene, this.camera); this.placeMarkers()
         canvas.dataset.maxFps = this.renderInterval ? '30' : '60'
         canvas.dataset.event = String(this.material.uniforms.uEvent.value)
         canvas.dataset.routePhase = !this.reveal.visible ? 'hidden' : this.reveal.active ? 'revealing' : 'complete'
@@ -274,8 +274,9 @@ export class RoadScene {
         if (chosen.has(roads[begin])) this.drawing.add(positions.slice(begin * 2, end * 2), roads.slice(begin, end))
         begin = end
       }
-      const selected = prepareReplayDrawing(positions, roads, result.edgeTimes, result.backwardTimes, result.trace.length)
-      if (selected.count) {
+      const batches = prepareSpatialReplayDrawing(positions, roads, result.edgeTimes, result.backwardTimes, result.trace.length)
+      const upload = new THREE.Scene()
+      for (const selected of batches) {
         const geometry = new THREE.BufferGeometry()
         geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(selected.bytes, 0, selected.count * 2), 2))
         const integerIds = new Uint32Array(selected.bytes, selected.count * 8, selected.count)
@@ -288,23 +289,40 @@ export class RoadScene {
         const [left, bottom, right, top] = selected.bounds
         geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3((left + right) / 2, (bottom + top) / 2, 0), Math.hypot(right - left, top - bottom) / 2 + 1e-7)
         const lines = new THREE.LineSegments(geometry, this.material)
+        lines.frustumCulled = false
         // Upload once, then release expanded CPU buffers. The original drawing
         // remains available for repeated searches and context restoration.
         for (const attribute of Object.values(geometry.attributes)) if (attribute instanceof THREE.BufferAttribute) attribute.onUpload(() => { attribute.array = attribute.array instanceof Uint32Array ? new Uint32Array(0) : new Float32Array(0) })
         geometry.setDrawRange(0, 0)
-        const upload = new THREE.Scene(); upload.add(lines)
-        const culled = lines.frustumCulled; lines.frustumCulled = false
-        this.renderer.render(upload, this.camera); upload.remove(lines); lines.frustumCulled = culled
-        this.scene.add(lines); this.roadBatches.push({ lines, ends: selected.ends }); submitted += selected.count
+        upload.add(lines)
+        this.roadBatches.push({ lines, ends: selected.ends, bounds: selected.bounds }); submitted += selected.count
       }
+      // All attributes in this bounded source chunk upload in one empty render,
+      // rather than clearing the framebuffer separately for every spatial leaf.
+      if (upload.children.length) this.renderer.render(upload, this.camera)
+      while (upload.children.length) this.scene.add(upload.children[0])
       // Keep cancellation and gestures responsive between bounded uploads.
       if (performance.now() - yielded >= 16) { await new Promise<void>(resolve => setTimeout(resolve, 0)); yielded = performance.now() }
       if (this.drawingDisposed || generation !== this.drawingGeneration) return false
     }
+    this.renderer.domElement.dataset.roadBatches = String(this.roadBatches.length)
     this.renderer.domElement.dataset.replayVertices = String(submitted)
     this.renderer.domElement.dataset.roadUploads = 'resident'
     this.renderer.domElement.dataset.roadCpuBytes = String(this.roadBatches.reduce((sum, batch) => sum + Object.values(batch.lines.geometry.attributes).reduce((bytes, attribute) => bytes + attribute.array.byteLength, 0), 0))
     return true
+  }
+  private cullRoadBatches() {
+    // Orthographic map: exact axis-aligned view bounds avoid the loose circle
+    // test for elongated road batches. One pixel of padding retains edge lines.
+    const pixel = 2 * this.halfHeight / (this.camera.zoom * this.height)
+    const left = this.camera.position.x + this.camera.left / this.camera.zoom - pixel
+    const right = this.camera.position.x + this.camera.right / this.camera.zoom + pixel
+    const bottom = this.camera.position.y + this.camera.bottom / this.camera.zoom - pixel
+    const top = this.camera.position.y + this.camera.top / this.camera.zoom + pixel
+    for (const batch of this.roadBatches) {
+      const b = batch.bounds
+      batch.lines.visible = b[0] <= right && b[2] >= left && b[1] <= top && b[3] >= bottom
+    }
   }
   private clearRoadBatches() {
     for (const { lines } of this.roadBatches) { lines.geometry.dispose(); this.scene.remove(lines) }

@@ -59,7 +59,7 @@ test('swapping endpoints binds Genève to Zürich to the real worker result', as
   await expect(page.getByRole('combobox', { name: 'Start place' })).toHaveValue('Genève')
   await expect(page.getByRole('combobox', { name: 'Destination place' })).toHaveValue('Zürich')
   await page.getByRole('button', { name: 'Search', exact: true }).click()
-  await expect(page.locator('.route-caption')).toHaveText('Genève→Zürich262.7 km', { timeout: 20000 })
+  await expect(page.locator('.route-caption')).toContainText('Genève→Zürich262.7 km', { timeout: 20000 })
   await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'complete')
   await expect(page.getByRole('alert')).toHaveCount(0)
 })

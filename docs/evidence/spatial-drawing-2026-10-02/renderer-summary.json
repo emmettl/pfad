@@ -1,0 +1,74 @@
+[
+  {
+    "country": "germany",
+    "traceSha256": "90d65e026387126d788ed679a6b64380a7b9f607b6c0bc175f1c3e2812f850fd",
+    "events": 23512843,
+    "routeMetres": 578130.91,
+    "preparationMs": {
+      "baseline": 753,
+      "spatial": 917
+    },
+    "views": [
+      {
+        "zoom": 1,
+        "baselineAverageVertices": 8797224.049792532,
+        "spatialAverageVertices": 8808866.44813278,
+        "reduction": -0.0013234172819005519,
+        "baselineFps": 60.08476689104961,
+        "spatialFps": 60.02490660024907
+      },
+      {
+        "zoom": 4,
+        "baselineAverageVertices": 8796814.566666666,
+        "spatialAverageVertices": 3698155.283333333,
+        "reduction": 0.5796029056533066,
+        "baselineFps": 59.97001499250375,
+        "spatialFps": 60
+      },
+      {
+        "zoom": 12,
+        "baselineAverageVertices": 8786312.866666667,
+        "spatialAverageVertices": 936711.775,
+        "reduction": 0.8933896630799846,
+        "baselineFps": 60,
+        "spatialFps": 60
+      }
+    ]
+  },
+  {
+    "country": "us",
+    "traceSha256": "787a284d46ced3eb150cc5d489956e9a371eafc35256f68e510874e533ef509e",
+    "events": 211895254,
+    "routeMetres": 4600874.9,
+    "preparationMs": {
+      "baseline": 4866,
+      "spatial": 7821
+    },
+    "views": [
+      {
+        "zoom": 1,
+        "baselineAverageVertices": 91990039.59663865,
+        "spatialAverageVertices": 92689542.06504065,
+        "reduction": -0.007604110961025867,
+        "baselineFps": 29.61672473867596,
+        "spatialFps": 30.415430267062316
+      },
+      {
+        "zoom": 4,
+        "baselineAverageVertices": 94315618.1,
+        "spatialAverageVertices": 21936298.525,
+        "reduction": 0.767416055082822,
+        "baselineFps": 59.7758405977584,
+        "spatialFps": 59.985003749062734
+      },
+      {
+        "zoom": 12,
+        "baselineAverageVertices": 87262622.20833333,
+        "spatialAverageVertices": 9347211.483333332,
+        "reduction": 0.8928841324408344,
+        "baselineFps": 59.97001499250375,
+        "spatialFps": 60
+      }
+    ]
+  }
+]

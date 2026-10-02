@@ -1,0 +1,67 @@
+{
+  "variant": "texel",
+  "country": "us",
+  "engineName": "chromium",
+  "algorithm": "bidirectional",
+  "manifestIdentity": "b72d1c0f671afad5af6963fd273a012b5374feaf79aabcf85b37758662a8826b",
+  "errors": [],
+  "measurements": [
+    {
+      "zoom": 1,
+      "renderFinishMedianMs": 31.69999998807907,
+      "renderFinishP95Ms": 52.19999998807907,
+      "frames": 121,
+      "fps": 30.14224148655079,
+      "medianMs": 33.30000000000291,
+      "p95Ms": 50,
+      "averageDraws": 8985.123966942148,
+      "averageVertices": 92613991.47107439
+    },
+    {
+      "zoom": 4,
+      "renderFinishMedianMs": 4.4000000059604645,
+      "renderFinishP95Ms": 5.199999988079071,
+      "frames": 241,
+      "fps": 60.03537353923942,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.79999999998836,
+      "averageDraws": 1886.1410788381743,
+      "averageVertices": 21983407.991701245
+    },
+    {
+      "zoom": 12,
+      "renderFinishMedianMs": 2.600000023841858,
+      "renderFinishP95Ms": 3.399999976158142,
+      "frames": 241,
+      "fps": 60.0278967816395,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.70000000001164,
+      "averageDraws": 707.0539419087137,
+      "averageVertices": 9363327.269709544
+    }
+  ],
+  "images": [
+    "zoom1-progress0.2.png",
+    "zoom1-progress0.5.png",
+    "zoom1-progress0.8.png",
+    "zoom1-progress1.png",
+    "zoom4-progress0.2.png",
+    "zoom4-progress0.5.png",
+    "zoom4-progress0.8.png",
+    "zoom4-progress1.png",
+    "zoom12-progress0.2.png",
+    "zoom12-progress0.5.png",
+    "zoom12-progress0.8.png",
+    "zoom12-progress1.png"
+  ],
+  "result": {
+    "sha": "787a284d46ced3eb150cc5d489956e9a371eafc35256f68e510874e533ef509e",
+    "routeMetres": 4600874.9,
+    "events": 211895254,
+    "preparationMs": 11654.399999976158,
+    "replayVertices": "200941440",
+    "batches": 9060,
+    "roadCpuBytes": "0"
+  },
+  "glError": 0
+}

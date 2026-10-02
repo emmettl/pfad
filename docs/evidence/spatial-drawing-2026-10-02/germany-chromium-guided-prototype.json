@@ -1,0 +1,61 @@
+{
+  "variant": "candidate",
+  "country": "de",
+  "engineName": "chromium",
+  "algorithm": "bidirectional-astar",
+  "manifestIdentity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+  "errors": [],
+  "measurements": [
+    {
+      "zoom": 1,
+      "frames": 241,
+      "fps": 60.035373539952516,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.700000000000728,
+      "averageDraws": 259.91701244813277,
+      "averageVertices": 3199248.058091286
+    },
+    {
+      "zoom": 4,
+      "frames": 241,
+      "fps": 60.036869114643004,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.700000000000728,
+      "averageDraws": 187.21991701244812,
+      "averageVertices": 2187060.4232365144
+    },
+    {
+      "zoom": 12,
+      "frames": 241,
+      "fps": 60.008465924920465,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 16.700000000000728,
+      "averageDraws": 76.6804979253112,
+      "averageVertices": 769112.5477178423
+    }
+  ],
+  "images": [
+    "zoom1-progress0.2.png",
+    "zoom1-progress0.5.png",
+    "zoom1-progress0.8.png",
+    "zoom1-progress1.png",
+    "zoom4-progress0.2.png",
+    "zoom4-progress0.5.png",
+    "zoom4-progress0.8.png",
+    "zoom4-progress1.png",
+    "zoom12-progress0.2.png",
+    "zoom12-progress0.5.png",
+    "zoom12-progress0.8.png",
+    "zoom12-progress1.png"
+  ],
+  "result": {
+    "sha": "499db21b077d114a25610c85d764bc37a515dde186d7cf446565376e66f07b8c",
+    "routeMetres": 578130.91,
+    "events": 9147727,
+    "preparationMs": 1070.5999999940395,
+    "replayVertices": "6568312",
+    "batches": 261,
+    "roadCpuBytes": "0"
+  },
+  "glError": 0
+}

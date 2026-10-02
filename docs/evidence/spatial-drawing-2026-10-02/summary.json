@@ -1,0 +1,122 @@
+{
+  "method": "Eight evenly spaced geometry chunks per country; compressed SHA-256 and decoded lengths verified. Reconstruct every segment using original integer coordinates and endpoints. Recursively median-split segment midpoints on longest bounds axis; bounds include both endpoints. Nine viewport centers per scale within each original chunk. Weight totals by segment count. Compare entire original batch with spatial AABB and conservative bounding-sphere AABB overlap.",
+  "limitations": [
+    "No replay filtering or temporal buckets; not a route-specific benchmark.",
+    "Viewports are relative to individual chunk bounds, not a shared national camera.",
+    "Sphere AABB overlap is conservative, not an exact Three.js frustum calculation.",
+    "No browser fps, GPU memory, preparation timing or physical phone measurement.",
+    "Per-original-chunk splitting retains overlap across original chunks; global repackaging could differ."
+  ],
+  "summary": [
+    {
+      "manifest": ".cache/countries/de-20260929-083582060611/manifest.json",
+      "identity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+      "sampleSegments": 1092827,
+      "rows": [
+        {
+          "viewportSideFractionOfChunkBounds": 0.25,
+          "maximumSegmentsPerBatch": 4096,
+          "batchesAcrossSample": 480,
+          "submittedFractionAABB": 0.16523495687992903,
+          "submittedFractionSphereAABB": 0.20987646413079716,
+          "segmentBoundsIntersectionFraction": 0.08193865797402314
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.25,
+          "maximumSegmentsPerBatch": 16384,
+          "batchesAcrossSample": 120,
+          "submittedFractionAABB": 0.2566767963578255,
+          "submittedFractionSphereAABB": 0.38857639660969007,
+          "segmentBoundsIntersectionFraction": 0.08193865797402314
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.25,
+          "maximumSegmentsPerBatch": 65536,
+          "batchesAcrossSample": 30,
+          "submittedFractionAABB": 0.46927891300879887,
+          "submittedFractionSphereAABB": 0.7072189834255559,
+          "segmentBoundsIntersectionFraction": 0.08193865797402314
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.0625,
+          "maximumSegmentsPerBatch": 4096,
+          "batchesAcrossSample": 480,
+          "submittedFractionAABB": 0.03717229615381839,
+          "submittedFractionSphereAABB": 0.06981414055269294,
+          "segmentBoundsIntersectionFraction": 0.004657848151832103
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.0625,
+          "maximumSegmentsPerBatch": 16384,
+          "batchesAcrossSample": 120,
+          "submittedFractionAABB": 0.09642687167217583,
+          "submittedFractionSphereAABB": 0.19485355158888115,
+          "segmentBoundsIntersectionFraction": 0.004657848151832103
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.0625,
+          "maximumSegmentsPerBatch": 65536,
+          "batchesAcrossSample": 30,
+          "submittedFractionAABB": 0.2920671697248411,
+          "submittedFractionSphereAABB": 0.5023889620426858,
+          "segmentBoundsIntersectionFraction": 0.004657848151832103
+        }
+      ]
+    },
+    {
+      "manifest": "/Volumes/External Stick/motionstudies/pfad/.cache/us-desktop/countries/us-20260929-b72d1c0f671a/manifest.json",
+      "identity": "b72d1c0f671afad5af6963fd273a012b5374feaf79aabcf85b37758662a8826b",
+      "sampleSegments": 1412244,
+      "rows": [
+        {
+          "viewportSideFractionOfChunkBounds": 0.25,
+          "maximumSegmentsPerBatch": 4096,
+          "batchesAcrossSample": 512,
+          "submittedFractionAABB": 0.12651173907939736,
+          "submittedFractionSphereAABB": 0.1442904578340098,
+          "segmentBoundsIntersectionFraction": 0.08800816289536369
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.25,
+          "maximumSegmentsPerBatch": 16384,
+          "batchesAcrossSample": 128,
+          "submittedFractionAABB": 0.19426891607336347,
+          "submittedFractionSphereAABB": 0.2387448627857509,
+          "segmentBoundsIntersectionFraction": 0.08800816289536369
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.25,
+          "maximumSegmentsPerBatch": 65536,
+          "batchesAcrossSample": 32,
+          "submittedFractionAABB": 0.40883728307572914,
+          "submittedFractionSphereAABB": 0.48228650447247234,
+          "segmentBoundsIntersectionFraction": 0.08800816289536369
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.0625,
+          "maximumSegmentsPerBatch": 4096,
+          "batchesAcrossSample": 512,
+          "submittedFractionAABB": 0.02673766793210742,
+          "submittedFractionSphereAABB": 0.04097977718046205,
+          "segmentBoundsIntersectionFraction": 0.00769106943748153
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.0625,
+          "maximumSegmentsPerBatch": 16384,
+          "batchesAcrossSample": 128,
+          "submittedFractionAABB": 0.07439570562090467,
+          "submittedFractionSphereAABB": 0.11752611840132127,
+          "segmentBoundsIntersectionFraction": 0.00769106943748153
+        },
+        {
+          "viewportSideFractionOfChunkBounds": 0.0625,
+          "maximumSegmentsPerBatch": 65536,
+          "batchesAcrossSample": 32,
+          "submittedFractionAABB": 0.26023839443545954,
+          "submittedFractionSphereAABB": 0.34618561350273436,
+          "segmentBoundsIntersectionFraction": 0.00769106943748153
+        }
+      ]
+    }
+  ]
+}

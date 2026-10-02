@@ -1,0 +1,62 @@
+[
+  {
+    "image": "zoom1-progress0.2.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom1-progress0.5.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom1-progress0.8.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom1-progress1.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom12-progress0.2.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom12-progress0.5.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom12-progress0.8.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom12-progress1.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom4-progress0.2.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom4-progress0.5.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom4-progress0.8.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  },
+  {
+    "image": "zoom4-progress1.png",
+    "maxChannelDifference": 0,
+    "differentPixels": 0
+  }
+]

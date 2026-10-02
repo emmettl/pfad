@@ -112,6 +112,17 @@ the final route becomes bright only at completion. Later examinations of the
 same physical road remain in the trace and counters rather than creating a
 second road. The endpoint markers are separate from explored edges.
 
+Examined road segments are grouped into spatial batches of at most 16,384
+segments, then into 64 conservative temporal buckets inside each batch.
+Partitions assign whole segments by midpoint; bounds include both endpoints.
+The orthographic viewport culls those bounds with one pixel of padding, while
+the unchanged integer-event shader controls the exact appearance of every road.
+Source geometry, road IDs, event times, pulse colours, meeting lights and route
+reveal remain unchanged. All batches from one source chunk upload together,
+and expanded attribute buffers are released after upload. This reduces
+submitted geometry when zooming; it does not reduce all-country GPU residency.
+See the [spatial rendering measurements](evidence/spatial-drawing-2026-10-02/README.md).
+
 A* uses a cool blue-to-ice palette and dimmer historical branches. Each road's
 tone records the remaining-distance bound at the target of its first examined
 arc, normalised against the origin's bound. This is an estimate of remaining

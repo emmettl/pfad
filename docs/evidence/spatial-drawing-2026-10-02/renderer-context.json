@@ -1,0 +1,29 @@
+{
+  "measuredDate": "2026-10-02",
+  "baselineCommit": "997b9d1bb64c14762ef63389e87000e811ba9a7c",
+  "integrationCommit": "13bb5fabc2f604d4259d214539a05445ee4f729c",
+  "productionFiles": {
+    "src/map/RoadScene.ts": "bc680dda27e6ca3605cd4a9776dae58a7e9a11a45b8064e23ecc3a645f7536a2",
+    "src/map/replayDrawing.ts": "c04d067bb248c7125b6e710224d5377b68478481a32043bdd7da2b37d13e34fe",
+    "tests/replay-drawing.test.mjs": "f4fe469c084920b0c297ca125f53a1f60f89eebd201ef2e33f2cdf76f10ae94e",
+    "e2e/drawing.spec.ts": "b5d034d8700f0e730955c8dd492072285ce0f28faef5706a82583790532ae704",
+    "e2e/study.spec.ts": "225db9c99dc3c1f6b13df6d33b635e3399ecac14ff5c5c1770e4e1520e24f23a"
+  },
+  "testOnlyAdaptations": [
+    "Both isolated benchmark snapshots raise manifest limits to the exact US counts and permit 1,300 chunks.",
+    "Both use an 8,192-wide event texture in the experiment; production limits and width are unchanged.",
+    "The harness hides HTML markers and tips; complete app effects and interactions are covered by the browser suite.",
+    "Graphs are served locally; opening network latency is not measured."
+  ],
+  "timingCaution": "renderFinish timing fields in exploratory reports are not reliable GPU measurements and are excluded from conclusions. An instrumented repeat of the Chromium baseline suffered synchronization-related slowdowns and is excluded. Ordinary playback records are retained; overview variation is not claimed as a speedup.",
+  "screenshotsCompared": 64,
+  "differentPixels": 0,
+  "publishedUsDataset": false,
+  "restorationComparison": {
+    "chromiumDifferentPixels": 8,
+    "maximumChannelDifference": 1,
+    "webkitDifferentPixels": 0,
+    "normalFrameParityAllowance": 0,
+    "resetFrameParityAllowance": 1
+  }
+}
