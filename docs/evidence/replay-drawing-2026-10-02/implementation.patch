@@ -1,0 +1,442 @@
+diff --git a/e2e/drawing.spec.ts b/e2e/drawing.spec.ts
+new file mode 100644
+index 0000000..a594915
+--- /dev/null
++++ b/e2e/drawing.spec.ts
+@@ -0,0 +1,29 @@
++import { test, expect } from '@playwright/test'
++
++test('drawing restores its recorded frame and geographic context after GPU context loss', async ({ page }) => {
++  const errors: string[] = []
++  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
++  page.on('pageerror', error => errors.push(error.message))
++  await page.emulateMedia({ reducedMotion: 'reduce' })
++  await page.goto('./')
++  await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 60000 })
++  const canvas = page.locator('canvas'), slider = page.getByRole('slider', { name: 'Search replay' })
++  await slider.fill('15')
++  const event = (await slider.getAttribute('aria-valuetext'))!.match(/; (\d+) recorded events/)![1]
++  await expect(canvas).toHaveAttribute('data-event', event)
++  await expect(canvas).toHaveAttribute('data-outlines', 'visible', { timeout: 30000 })
++  await page.evaluate(() => {
++    const gl = document.querySelector('canvas')!.getContext('webgl2')!
++    const extension = gl.getExtension('WEBGL_lose_context')!
++    extension.loseContext(); setTimeout(() => extension.restoreContext(), 200)
++  })
++  await expect(canvas).toHaveAttribute('data-road-uploads', 'deferred')
++  await expect(canvas).toHaveAttribute('data-road-uploads', 'resident', { timeout: 30000 })
++  await expect(canvas).toHaveAttribute('data-event', event)
++  await expect(canvas).toHaveAttribute('data-outlines', 'visible')
++  await expect(canvas).toHaveAttribute('data-road-cpu-bytes', '0')
++  await slider.fill(await slider.getAttribute('max') ?? '30')
++  await expect(page.locator('.route-caption em')).toBeVisible()
++  expect(await canvas.evaluate(element => element.getContext('webgl2')!.getError())).toBe(0)
++  expect(errors).toEqual([])
++})
+diff --git a/scripts/data/mobile-memory-proof.mjs b/scripts/data/mobile-memory-proof.mjs
+index 1512160..8fbcdf4 100644
+--- a/scripts/data/mobile-memory-proof.mjs
++++ b/scripts/data/mobile-memory-proof.mjs
+@@ -6,16 +6,21 @@ import { dirname } from 'node:path'
+ import { mkdir, writeFile } from 'node:fs/promises'
+ 
+ const base = process.argv[2]
++const country = process.env.PFAD_PROOF_COUNTRY ?? 'de'
++const configurations = { de: { from: 'berlin', to: 'munich', vertices: 32951556, chunks: 120 }, uk: { from: 'london', to: 'edinburgh', vertices: 23678988, chunks: 83 } }
++const configuration = configurations[country]
++if (!configuration) throw Error('Unknown proof country')
+ const output = process.argv[3] ?? '.cache/mobile-memory/phone-proof.json'
+ const server = base ? null : await preview({ build: { outDir: process.env.PFAD_PROOF_DIST ?? 'dist' }, preview: { host: '127.0.0.1', port: 4199, strictPort: true } })
+ const browser = await webkit.launch()
+ const page = await browser.newPage({ viewport: { width: 402, height: 874 }, isMobile: true, hasTouch: true, deviceScaleFactor: 3 })
+ const errors = [], analyticsErrors = []
++page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
+ page.on('pageerror', error => (error.message.includes('cloudflareinsights.com/cdn-cgi/rum') ? analyticsErrors : errors).push(error.message))
+-await page.addInitScript(() => {
+-  localStorage.setItem('pfad-country-warning:de', '1')
++await page.addInitScript(country => {
++  localStorage.setItem('pfad-country-warning:' + country, '1')
+   const NativeWorker = window.Worker
+-  window.memoryProof = { workers: [], results: [] }
++  window.memoryProof = { workers: [], results: [], drawings: [] }
+   window.Worker = class extends NativeWorker {
+     constructor(...args) {
+       super(...args)
+@@ -35,15 +40,17 @@ await page.addInitScript(() => {
+     postMessage(request, ...args) { this.record.requests.push({ type: request.type, topologyOnly: request.topologyOnly, roadUploads: document.querySelector('canvas')?.dataset.roadUploads }); super.postMessage(request, ...args) }
+     terminate() { this.record.terminated = true; super.terminate() }
+   }
+-})
++}, country)
+ try {
+-  await page.goto(new URL('?country=de&from=berlin&to=munich&algorithm=bidirectional&duration=15', base || 'http://127.0.0.1:4199/').href)
++  await page.goto(new URL(`?country=${country}&from=${configuration.from}&to=${configuration.to}&algorithm=bidirectional&duration=15`, base || 'http://127.0.0.1:4199/').href)
+   const ready = async algorithm => {
+     await expect(page.locator('.study')).toHaveAttribute('data-algorithm', algorithm, { timeout: 180000 })
+     await expect(page.getByRole('button', { name: 'Search', exact: true })).toBeEnabled({ timeout: 180000 })
+-    await expect(page.locator('canvas')).toHaveAttribute('data-road-vertices', '32951556')
++    await expect(page.locator('canvas')).toHaveAttribute('data-road-vertices', String(configuration.vertices))
+     await expect(page.locator('canvas')).toHaveAttribute('data-road-uploads', 'resident')
+     await expect(page.locator('canvas')).toHaveAttribute('data-road-cpu-bytes', '0')
++    const drawing = await page.evaluate(() => { const canvas = document.querySelector('canvas'); const record = { replayVertices: Number(canvas.dataset.replayVertices), sourceVertices: Number(canvas.dataset.roadVertices), cpuBytes: Number(canvas.dataset.roadCpuBytes), webglError: canvas.getContext('webgl2').getError() }; window.memoryProof.drawings.push(record); return record })
++    if (drawing.replayVertices > drawing.sourceVertices || drawing.webglError !== 0) throw Error('Replay drawing coverage or WebGL error')
+     const workers = await page.evaluate(() => window.memoryProof.workers)
+     if (workers.some(worker => !worker.terminated)) throw Error('A national routing worker remains alive during replay')
+     const pause = page.getByRole('button', { name: 'Pause', exact: true })
+@@ -71,8 +78,8 @@ try {
+   await expect(page.locator('canvas')).toHaveAttribute('data-road-uploads', 'resident', { timeout: 180000 })
+   await page.getByRole('slider', { name: 'Search replay' }).fill('7.5')
+   await page.getByRole('slider', { name: 'Search replay' }).fill('15')
+-  const proof = await page.evaluate(() => ({ ...window.memoryProof, drawing: { retainedRoadCpuBytes: Number(document.querySelector('canvas').dataset.roadCpuBytes), compressedBytes: Number(document.querySelector('canvas').dataset.drawingBytes), vertices: Number(document.querySelector('canvas').dataset.roadVertices), contextRestored: !document.querySelector('canvas').getContext('webgl2').isContextLost() } }))
+-  if (proof.workers[0].compressedChunks !== 120 || proof.workers[0].drawingBytes >= 395418672) throw Error('National drawing remained expanded')
++  const proof = await page.evaluate(() => ({ ...window.memoryProof, drawing: { retainedRoadCpuBytes: Number(document.querySelector('canvas').dataset.roadCpuBytes), replayVertices: Number(document.querySelector('canvas').dataset.replayVertices), submittedVertices: Number(document.querySelector('canvas').dataset.submittedVertices), compressedBytes: Number(document.querySelector('canvas').dataset.drawingBytes), vertices: Number(document.querySelector('canvas').dataset.roadVertices), contextRestored: !document.querySelector('canvas').getContext('webgl2').isContextLost() } }))
++  if (proof.workers[0].compressedChunks !== configuration.chunks || proof.workers[0].drawingBytes >= configuration.vertices * 12) throw Error('National drawing remained expanded')
+   if (proof.results[0].traceSha256 !== proof.results[2].traceSha256) throw Error('Repeated bidirectional trace changed')
+   if (proof.results.some(result => result.routeMetres !== proof.results[0].routeMetres)) throw Error('Route costs differ')
+   if (proof.workers.length !== 3 || proof.workers[0].requests[0].topologyOnly || proof.workers.slice(1).some(worker => !worker.requests[0].topologyOnly)) throw Error('Worker reload did not preserve the existing drawing')
+diff --git a/src/App.tsx b/src/App.tsx
+index e2c42a9..2619a31 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -195,7 +195,7 @@ export function App() {
+       // Keep a window connection: WebKit private contexts otherwise drop their
+       // worker-only cache when retry terminates the sole cache owner.
+       cacheOwner.current ??= (async () => { try { return await globalThis.caches?.open(ROAD_CACHE_NAME) } catch { return undefined } })()
+-      void cacheOwner.current.then(() => { if (!disposed && worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity, topologyOnly, compactDrawing: releaseAfterSearch }) })
++      void cacheOwner.current.then(() => { if (!disposed && worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity, topologyOnly, compactDrawing: country.large }) })
+     }
+     submitSearch.current = request => {
+       if (worker.current) worker.current.postMessage(request)
+diff --git a/src/map/RoadScene.ts b/src/map/RoadScene.ts
+index f6b9317..f91e46a 100644
+--- a/src/map/RoadScene.ts
++++ b/src/map/RoadScene.ts
+@@ -1,3 +1,4 @@
++import { prepareReplayDrawing, replayVertexCount } from './replayDrawing.ts'
+ import { unpackDrawing } from './drawing-codec.ts'
+ import { longitudeOffset, normaliseLongitude } from '../search/projection.ts'
+ import * as THREE from 'three'
+@@ -9,7 +10,7 @@ import { createGeography, createGeographyFill, disposeGeography } from './geogra
+ import { MeetingFlash, createMeetingMaterial } from './meetingFlash.ts'
+ 
+ const vertexShader = `
+-  in float roadId;
++  in uint roadId;
+   uniform highp usampler2D uTimes;
+   uniform highp usampler2D uBackwardTimes;
+   uniform float uBidirectional;
+@@ -23,7 +24,7 @@ const vertexShader = `
+   flat out uvec2 vBackwardTimes;
+   out float vGoalProximity;
+   void main() {
+-    vec2 uv = (vec2(mod(roadId, uTextureSize.x), floor(roadId / uTextureSize.x)) + .5) / uTextureSize;
++    vec2 uv = (vec2(roadId % uint(uTextureSize.x), roadId / uint(uTextureSize.x)) + .5) / uTextureSize;
+     vTimes = texture(uTimes, uv).rg;
+     vSource = uTerritories > .5 ? floor(texture(uSources, uv).r * 255. + .5) : 0.;
+     vBackwardTimes = uBidirectional > .5 ? texture(uBackwardTimes, uv).rg : uvec2(0u);
+@@ -89,11 +90,12 @@ export class RoadScene {
+   sourceTexture: THREE.DataTexture
+   proximityTexture: THREE.DataTexture
+   manifest?: StudyManifest
+-  private releaseRoadUploads = false
+-  private compressedDrawing: { bytes: ArrayBuffer; count: number }[] = []
++  private storedDrawing: { bytes: ArrayBuffer; count: number; compressed: boolean }[] = []
++  private roadBatches: { lines: THREE.LineSegments; ends: Uint32Array }[] = []
+   private drawingGeneration = 0
+   private drawingDisposed = false
+   private lastResult?: SearchResult
++  private restoredProgress = 0
+   onDrawingError?: (message: string) => void
+   events = 1
+   width = 1
+@@ -160,6 +162,7 @@ export class RoadScene {
+     this.markers = document.createElement('div'); this.markers.className = 'map-markers'; host.appendChild(this.markers)
+     this.observer = new ResizeObserver(() => this.resize()); this.observer.observe(host)
+     const canvas = this.renderer.domElement
++    canvas.addEventListener('webglcontextlost', this.loseDrawing)
+     canvas.addEventListener('webglcontextrestored', this.restoreDrawing)
+     canvas.addEventListener('wheel', this.wheel, { passive: false })
+     canvas.addEventListener('pointerdown', this.pointerDown)
+@@ -209,7 +212,6 @@ export class RoadScene {
+   setManifest(manifest: StudyManifest) {
+     this.manifest = manifest
+     const phoneNetwork = manifest.counts.nodes > 2000000 && window.matchMedia('(pointer: coarse)').matches
+-    this.releaseRoadUploads = phoneNetwork
+     this.renderInterval = phoneNetwork ? 1000 / 30 : 0
+     this.renderer.setPixelRatio(phoneNetwork ? 1 : Math.min(window.devicePixelRatio, 1.5))
+     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
+@@ -248,75 +250,86 @@ export class RoadScene {
+     this.dirty = true
+   }
+   addGeometry(bytes: ArrayBuffer, count: number, compressed = false) {
+-    if (compressed) {
+-      this.compressedDrawing.push({ bytes, count })
+-      this.renderer.domElement.dataset.roadVertices = String(Number(this.renderer.domElement.dataset.roadVertices ?? 0) + count)
+-      this.renderer.domElement.dataset.drawingBytes = String(this.compressedDrawing.reduce((sum, chunk) => sum + chunk.bytes.byteLength, 0))
+-      this.renderer.domElement.dataset.roadUploads = 'deferred'
+-      return
+-    }
+-    this.addRoadBuffers(bytes, count)
+-  }
+-  private addRoadBuffers(bytes: ArrayBuffer, count: number, uploadOnly = false) {
+-    const positions = new Float32Array(bytes, 0, count * 2), roads = new Float32Array(bytes, count * 8, count)
+-    const geometry = new THREE.BufferGeometry()
+-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 2))
+-    geometry.setAttribute('roadId', new THREE.BufferAttribute(roads, 1))
+-    // Drawing coordinates are deliberately two-dimensional and within [-1, 1].
+-    // Three's automatic sphere calculation assumes a three-component position.
+-    geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), Math.SQRT2)
+-    const lines = new THREE.LineSegments(geometry, this.material); lines.frustumCulled = false
+-    lines.visible = uploadOnly || !this.releaseRoadUploads
+-    if (uploadOnly) {
+-      // The GPU owns the uploaded bytes. Keep only compressed, lossless copies
+-      // for subsequent searches and WebGL context restoration.
+-      for (const attribute of Object.values(geometry.attributes)) if (attribute instanceof THREE.BufferAttribute) attribute.onUpload(() => { attribute.array = new Float32Array(0) })
+-      const upload = new THREE.Scene(); upload.add(lines)
+-      this.renderer.render(upload, this.camera); upload.remove(lines)
+-    } else this.drawing.add(positions, roads)
+-    if (!uploadOnly) this.renderer.domElement.dataset.roadVertices = String(Number(this.renderer.domElement.dataset.roadVertices ?? 0) + count)
+-    this.renderer.domElement.dataset.roadUploads = this.releaseRoadUploads ? 'deferred' : 'resident'
+-    this.scene.add(lines); this.dirty = true
++    this.storedDrawing.push({ bytes, count, compressed })
++    this.renderer.domElement.dataset.roadVertices = String(Number(this.renderer.domElement.dataset.roadVertices ?? 0) + count)
++    this.renderer.domElement.dataset.drawingBytes = String(this.storedDrawing.reduce((sum, chunk) => sum + chunk.bytes.byteLength, 0))
++    this.renderer.domElement.dataset.roadUploads = 'deferred'
+   }
+   async prepareResult(result: SearchResult) {
+-    if (!this.compressedDrawing.length) return true
+     const generation = ++this.drawingGeneration
++    this.clearRoadBatches()
+     this.drawing.chunks = []
+     const chosen = new Set(result.routeEdges)
+-    for (const chunk of this.compressedDrawing) {
+-      const bytes = await unpackDrawing(chunk.bytes, chunk.count)
++    let submitted = 0, yielded = performance.now()
++    for (const chunk of this.storedDrawing) {
++      const bytes = chunk.compressed ? await unpackDrawing(chunk.bytes, chunk.count) : chunk.bytes
+       if (this.drawingDisposed || generation !== this.drawingGeneration) return false
+       if (bytes.byteLength !== chunk.count * 12) throw new Error('Stored drawing geometry size mismatch')
+-      const positions = new Float32Array(bytes, 0, chunk.count * 2), roads = new Float32Array(bytes, chunk.count * 8, chunk.count)
+-      // Preserve only the chosen route's exact coordinates on the CPU.
++      const positions = new Float32Array(bytes, 0, chunk.count * 2)
++      const roads = this.manifest && this.manifest.counts.edges > 16777216 ? new Uint32Array(bytes, chunk.count * 8, chunk.count) : new Float32Array(bytes, chunk.count * 8, chunk.count)
++      // Retain only the chosen route's exact geometry on the CPU.
+       for (let begin = 0; begin < roads.length;) {
+         let end = begin + 1
+         while (end < roads.length && roads[end] === roads[begin]) end++
+         if (chosen.has(roads[begin])) this.drawing.add(positions.slice(begin * 2, end * 2), roads.slice(begin, end))
+         begin = end
+       }
+-      this.addRoadBuffers(bytes, chunk.count, true)
++      const selected = prepareReplayDrawing(positions, roads, result.edgeTimes, result.backwardTimes, result.trace.length)
++      if (selected.count) {
++        const geometry = new THREE.BufferGeometry()
++        geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(selected.bytes, 0, selected.count * 2), 2))
++        const integerIds = new Uint32Array(selected.bytes, selected.count * 8, selected.count)
++        const ids = new THREE.BufferAttribute(integerIds, 1)
++        const selectedRoads = roads instanceof Uint32Array ? new Uint32Array(selected.bytes, selected.count * 8, selected.count) : new Float32Array(selected.bytes, selected.count * 8, selected.count)
++        // Integer GPU attributes preserve exact IDs for national graphs of any size.
++        if (!(roads instanceof Uint32Array)) for (let i = 0; i < selected.count; i++) integerIds[i] = selectedRoads[i]
++        ids.gpuType = THREE.IntType
++        geometry.setAttribute('roadId', ids)
++        const [left, bottom, right, top] = selected.bounds
++        geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3((left + right) / 2, (bottom + top) / 2, 0), Math.hypot(right - left, top - bottom) / 2 + 1e-7)
++        const lines = new THREE.LineSegments(geometry, this.material)
++        // Upload once, then release expanded CPU buffers. The original drawing
++        // remains available for repeated searches and context restoration.
++        for (const attribute of Object.values(geometry.attributes)) if (attribute instanceof THREE.BufferAttribute) attribute.onUpload(() => { attribute.array = attribute.array instanceof Uint32Array ? new Uint32Array(0) : new Float32Array(0) })
++        geometry.setDrawRange(0, 0)
++        const upload = new THREE.Scene(); upload.add(lines)
++        const culled = lines.frustumCulled; lines.frustumCulled = false
++        this.renderer.render(upload, this.camera); upload.remove(lines); lines.frustumCulled = culled
++        this.scene.add(lines); this.roadBatches.push({ lines, ends: selected.ends }); submitted += selected.count
++      }
++      // Keep cancellation and gestures responsive between bounded uploads.
++      if (performance.now() - yielded >= 16) { await new Promise<void>(resolve => setTimeout(resolve, 0)); yielded = performance.now() }
++      if (this.drawingDisposed || generation !== this.drawingGeneration) return false
+     }
++    this.renderer.domElement.dataset.replayVertices = String(submitted)
+     this.renderer.domElement.dataset.roadUploads = 'resident'
+-    this.renderer.domElement.dataset.roadCpuBytes = String(this.scene.children.reduce((sum, object) => sum + (object instanceof THREE.LineSegments && object.material === this.material ? Object.values((object.geometry as THREE.BufferGeometry).attributes).reduce((bytes, attribute) => bytes + attribute.array.byteLength, 0) : 0), 0))
++    this.renderer.domElement.dataset.roadCpuBytes = String(this.roadBatches.reduce((sum, batch) => sum + Object.values(batch.lines.geometry.attributes).reduce((bytes, attribute) => bytes + attribute.array.byteLength, 0), 0))
+     return true
+   }
++  private clearRoadBatches() {
++    for (const { lines } of this.roadBatches) { lines.geometry.dispose(); this.scene.remove(lines) }
++    this.roadBatches = []
++  }
++  private loseDrawing = () => {
++    const result = this.lastResult
++    this.restoredProgress = this.material.uniforms.uEvent.value / Math.max(1, this.events)
++    // Dispose while the context is lost, before Three replaces its resource
++    // managers. Old geometry disposal listeners otherwise retain stale buffers.
++    this.clearResult(); this.lastResult = result
++    if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography); this.geography = undefined }
++    this.clearSelectionFill()
++  }
+   private restoreDrawing = () => {
+     const result = this.lastResult
+-    if (!result || !this.compressedDrawing.length) return
++    if (this.geographyContext) this.setGeography(this.geographyContext)
++    if (!result || !this.storedDrawing.length) return
+     this.clearResult()
+-    void this.prepareResult(result).then(restored => { if (restored && !this.drawingDisposed) this.setResult(result) }).catch(() => this.onDrawingError?.('Road drawing could not be restored. Please reload the study.'))
++    void this.prepareResult(result).then(restored => { if (restored && !this.drawingDisposed) { this.setResult(result); this.setProgress(this.restoredProgress) } }).catch(() => this.onDrawingError?.('Road drawing could not be restored. Please reload the study.'))
+   }
+   clearResult() {
+     ++this.drawingGeneration; this.lastResult = undefined
+-    if (this.compressedDrawing.length) {
+-      this.drawing.chunks = []
+-      for (const object of this.scene.children.filter(object => object instanceof THREE.LineSegments && object.material === this.material)) { (object as THREE.LineSegments).geometry.dispose(); this.scene.remove(object) }
+-    }
+-    if (this.releaseRoadUploads) for (const object of this.scene.children) if (object instanceof THREE.LineSegments && object.material === this.material) {
+-      object.visible = false; object.geometry.dispose()
+-    }
+-    if (this.releaseRoadUploads) this.renderer.domElement.dataset.roadUploads = 'deferred'
++    this.drawing.chunks = []; this.clearRoadBatches()
++    this.renderer.domElement.dataset.roadUploads = 'deferred'
+     this.route?.geometry.dispose(); if (this.route) this.scene.remove(this.route); this.route = undefined
+     this.flashPoint?.geometry.dispose(); if (this.flashPoint) this.scene.remove(this.flashPoint); this.flashPoint = undefined
+     this.flash.clear(); this.meetingEvent = undefined; this.reveal.clear()
+@@ -360,7 +373,7 @@ export class RoadScene {
+       this.route = new THREE.Mesh(createRouteGeometry(this.drawing.build(result.routeEdges, result.routeReversed, result.routeLengths)), this.routeMaterial)
+       this.route.frustumCulled = false; this.route.renderOrder = 1; this.route.visible = false; this.scene.add(this.route)
+     }
+-    if (this.compressedDrawing.length) this.drawing.chunks = []
++    if (this.storedDrawing.length) this.drawing.chunks = []
+     this.sourceTexture.dispose()
+     this.sourceTexture = new THREE.DataTexture(result.edgeSources ?? new Uint8Array([0]), result.edgeSources ? result.textureWidth : 1, result.edgeSources ? result.textureHeight : 1, THREE.RedFormat, THREE.UnsignedByteType)
+     this.sourceTexture.needsUpdate = true
+@@ -396,6 +409,9 @@ export class RoadScene {
+     this.material.uniforms.uTerritoryComplete.value = this.material.uniforms.uTerritories.value && progress >= 1 ? 1 : 0
+     this.flash.cross(this.material.uniforms.uEvent.value, next, this.meetingEvent, animate, this.reducedMotion.matches); this.updateFlash()
+     this.material.uniforms.uEvent.value = next
++    let vertices = 0
++    for (const batch of this.roadBatches) { const count = replayVertexCount(batch.ends, next, this.events); batch.lines.geometry.setDrawRange(0, count); vertices += count }
++    this.renderer.domElement.dataset.submittedVertices = String(vertices)
+     this.focusPoint = undefined; this.tip.dataset.event = '0'; this.tip.hidden = true
+     if (progress < 1 && this.focusEvents && this.focusCoordinates) {
+       let low = 0, high = this.focusEvents.length
+@@ -505,7 +521,9 @@ export class RoadScene {
+   }
+   pointerCancel = (event: PointerEvent) => { this.pointers.delete(event.pointerId); this.moved = 0; this.lastPinch = 0 }
+   dispose() {
+-    this.drawingDisposed = true; ++this.drawingGeneration; this.lastResult = undefined; this.compressedDrawing = []
++    this.clearRoadBatches()
++    this.drawingDisposed = true; ++this.drawingGeneration; this.lastResult = undefined; this.storedDrawing = []
++    this.renderer.domElement.removeEventListener('webglcontextlost', this.loseDrawing)
+     this.renderer.domElement.removeEventListener('webglcontextrestored', this.restoreDrawing)
+     cancelAnimationFrame(this.frame); this.observer.disconnect()
+     this.reducedMotion.removeEventListener('change', this.motionChange)
+diff --git a/src/map/replayDrawing.ts b/src/map/replayDrawing.ts
+new file mode 100644
+index 0000000..6db3e0b
+--- /dev/null
++++ b/src/map/replayDrawing.ts
+@@ -0,0 +1,41 @@
++/** Exact segment selection and conservative temporal batching for replay.
++ * The shader still decides visibility at the original integer event. */
++export const REPLAY_BUCKETS = 64
++export type RoadIds = Float32Array | Uint32Array
++export function firstRoadEvent(edge: number, forward: Uint32Array, backward?: Uint32Array) {
++  const a = forward[edge * 2], b = backward?.[edge * 2] ?? 0
++  return a && b ? Math.min(a, b) : a || b
++}
++export function prepareReplayDrawing(positions: Float32Array, roads: RoadIds, forward: Uint32Array, backward: Uint32Array | undefined, events: number) {
++  if (roads.length % 2 || positions.length !== roads.length * 2) throw new Error('Invalid drawing segments')
++  const counts = new Uint32Array(REPLAY_BUCKETS)
++  const bucket = (event: number) => Math.min(REPLAY_BUCKETS - 1, Math.floor(event / Math.max(1, events) * REPLAY_BUCKETS))
++  for (let i = 0; i < roads.length; i += 2) {
++    if (roads[i] !== roads[i + 1] || roads[i] * 2 + 1 >= forward.length) throw new Error('Invalid drawing road ID')
++    const first = firstRoadEvent(roads[i], forward, backward)
++    if (first) counts[bucket(first)] += 2
++  }
++  const ends = new Uint32Array(REPLAY_BUCKETS), cursors = new Uint32Array(REPLAY_BUCKETS)
++  let count = 0
++  for (let i = 0; i < counts.length; i++) { cursors[i] = count; count += counts[i]; ends[i] = count }
++  const bytes = new ArrayBuffer(count * 12)
++  const selectedPositions = new Float32Array(bytes, 0, count * 2)
++  const selectedRoads: RoadIds = roads instanceof Uint32Array ? new Uint32Array(bytes, count * 8, count) : new Float32Array(bytes, count * 8, count)
++  let left = Infinity, bottom = Infinity, right = -Infinity, top = -Infinity
++  for (let i = 0; i < roads.length; i += 2) {
++    const first = firstRoadEvent(roads[i], forward, backward)
++    if (!first) continue
++    const index = bucket(first), target = cursors[index]; cursors[index] += 2
++    for (let v = 0; v < 2; v++) {
++      const x = positions[(i + v) * 2], y = positions[(i + v) * 2 + 1]
++      selectedPositions[(target + v) * 2] = x; selectedPositions[(target + v) * 2 + 1] = y
++      selectedRoads[target + v] = roads[i + v]
++      left = Math.min(left, x); right = Math.max(right, x); bottom = Math.min(bottom, y); top = Math.max(top, y)
++    }
++  }
++  return { bytes, count, ends, bounds: [left, bottom, right, top] as const }
++}
++export function replayVertexCount(ends: Uint32Array, event: number, events: number) {
++  if (event <= 0) return 0
++  return ends[Math.min(ends.length - 1, Math.floor(event / Math.max(1, events) * ends.length))]
++}
+diff --git a/src/map/routeReveal.ts b/src/map/routeReveal.ts
+index 495877e..ab29e4f 100644
+--- a/src/map/routeReveal.ts
++++ b/src/map/routeReveal.ts
+@@ -23,7 +23,7 @@ export class RouteReveal {
+ interface DrawingChunk { positions: Int16Array | Float32Array; first: number; offsets: Uint32Array }
+ export class RouteDrawing {
+   chunks: DrawingChunk[] = []
+-  add(positions: Int16Array | Float32Array, roads: Float32Array) {
++  add(positions: Int16Array | Float32Array, roads: Float32Array | Uint32Array) {
+     if (!roads.length) return
+     const first = roads[0], last = roads[roads.length - 1]
+     const offsets = new Uint32Array(last - first + 2)
+diff --git a/src/search/search.worker.ts b/src/search/search.worker.ts
+index 0d4e9c6..ec3baf1 100644
+--- a/src/search/search.worker.ts
++++ b/src/search/search.worker.ts
+@@ -61,7 +61,7 @@ async function load(url: string, expectedIdentity?: string, topologyOnly = false
+         if (chunk.count * 2 + pointCount * 8 !== decoded.byteLength) throw new Error('Geometry point count mismatch')
+         const count = (pointCount + chunk.count) * 2
+         const bytes = new ArrayBuffer(count * 12)
+-        const positions = new Float32Array(bytes, 0, count * 2), roads = new Float32Array(bytes, count * 8, count)
++        const positions = new Float32Array(bytes, 0, count * 2), roads = data.counts.edges > 16777216 ? new Uint32Array(bytes, count * 8, count) : new Float32Array(bytes, count * 8, count)
+         let cursor = chunk.count * 2, vertex = 0
+         const projection = data.projection
+         const sx = Math.cos(projection.referenceLatitude * Math.PI / 180) * 111195.0802 / projection.scaleMetres
+diff --git a/tests/replay-drawing.test.mjs b/tests/replay-drawing.test.mjs
+new file mode 100644
+index 0000000..b124fde
+--- /dev/null
++++ b/tests/replay-drawing.test.mjs
+@@ -0,0 +1,33 @@
++import { test, expect } from 'vitest'
++import { prepareReplayDrawing, replayVertexCount, firstRoadEvent } from '../src/map/replayDrawing.ts'
++
++test('replay batching preserves exact reached segments and submits every visible road across arbitrary seeks', () => {
++  const positions = Float32Array.from([0, 0, 1, 1, 2, 0, 3, 1, 4, 0, 5, 1, 6, 0, 7, 1])
++  const roads = Float32Array.from([0, 0, 1, 1, 2, 2, 3, 3])
++  const forward = Uint32Array.from([90, 95, 0, 0, 40, 45, 0, 0])
++  const backward = Uint32Array.from([10, 20, 70, 80, 0, 0, 0, 0])
++  const result = prepareReplayDrawing(positions, roads, forward, backward, 100)
++  expect(result.count).toBe(6)
++  expect(result.bounds).toEqual([0, 0, 5, 1])
++  const ids = new Float32Array(result.bytes, result.count * 8, result.count)
++  const points = new Float32Array(result.bytes, 0, result.count * 2)
++  for (const event of [0, 10, 70, 9, 40, 100, 20]) {
++    const submitted = replayVertexCount(result.ends, event, 100)
++    for (let edge = 0; edge < 4; edge++) {
++      const first = firstRoadEvent(edge, forward, backward)
++      if (first && first <= event) expect(Array.from(ids.slice(0, submitted))).toContain(edge)
++    }
++  }
++  for (let i = 0; i < ids.length; i += 2) expect(Array.from(points.slice(i * 2, i * 2 + 4))).toEqual(Array.from(positions.slice(ids[i] * 4, ids[i] * 4 + 4)))
++  expect(replayVertexCount(result.ends, 0, 100)).toBe(0)
++  expect(Array.from(ids)).not.toContain(3)
++})
++
++test('integer road IDs beyond float precision survive selection and complete empty searches', () => {
++  const edge = 16777217
++  const forward = new Uint32Array((edge + 1) * 2); forward[edge * 2] = 1
++  const result = prepareReplayDrawing(Float32Array.from([0, 0, 1, 1]), Uint32Array.from([edge, edge]), forward, undefined, 1)
++  expect(new Uint32Array(result.bytes, result.count * 8, result.count)).toEqual(Uint32Array.from([edge, edge]))
++  const empty = prepareReplayDrawing(Float32Array.from([0, 0, 1, 1]), Uint32Array.from([0, 0]), new Uint32Array(2), undefined, 0)
++  expect(empty.count).toBe(0); expect(replayVertexCount(empty.ends, 0, 0)).toBe(0)
++})

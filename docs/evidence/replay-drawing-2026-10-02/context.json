@@ -1,0 +1,15 @@
+{
+  "baseCommit": "b3b3f5ed51aa9f6285b6c947e895de3a4ea5e44f",
+  "files": {
+    "src/App.tsx": "18b62a14d1c3e7d0a83a198f3ea27d99ca19ac7f13d6e25c631fbcb2c6349c67",
+    "src/map/RoadScene.ts": "c5dfc106aa87dfeee1a7368ab0158524be268b15e116132f56b08e06bd53f1b8",
+    "src/map/replayDrawing.ts": "225b061ff615f88f2653660c0c2fda3727eaa224db5da33024e50e47e7d91271",
+    "src/map/routeReveal.ts": "210301c6a204df323b8dc591ed339807b0bb40b7f7e544af56f2bf5f934b9977",
+    "src/search/search.worker.ts": "f115f58d360212bd3cee16e3ec12be71f98a93fefa0fc8c5230a4bf6c35671f1",
+    "scripts/data/mobile-memory-proof.mjs": "8fad17d4356464b1a5ccfaba245dfa1d83530db143a8476ca8e55aa428be6611",
+    "tests/replay-drawing.test.mjs": "dee3251d0ef18579c7bcec465cf9bd28abeae278d8c16ffeb6ad6b551a77473b",
+    "e2e/drawing.spec.ts": "136846f3e4ca7fe351301007d9ffda3b433c32d7bfb43701298f1e97bc0f3982"
+  },
+  "usCapacityAdaptations": "Only the isolated US checkout raises manifest limits and event texture width to 4096; production country catalogue and dataset limits remain unchanged.",
+  "measurementOrder": "US comparison preceded the final context-loss cleanup and diagnostic counter changes; final production checks cover those changes separately."
+}

@@ -1,0 +1,16 @@
+{
+  "manifestPath": "/Volumes/External Stick/motionstudies/pfad/.cache/us-desktop/countries/us-20260929-b72d1c0f671a/manifest.json",
+  "identity": "b72d1c0f671afad5af6963fd273a012b5374feaf79aabcf85b37758662a8826b",
+  "counts": {
+    "nodes": 53308658,
+    "edges": 67107295,
+    "directedArcs": 127122119,
+    "vertices": 226125654
+  },
+  "changes": [
+    "isolated resource guards raised to the measured complete US manifest",
+    "Uint32 road IDs and integer shader texture addressing above 2^24 physical edges",
+    "4096-wide event textures, keeping height at or below 16384 rows"
+  ],
+  "publishedAppChanged": false
+}

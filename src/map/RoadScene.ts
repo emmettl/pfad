@@ -1,3 +1,4 @@
+import { prepareReplayDrawing, replayVertexCount } from './replayDrawing.ts'
 import { unpackDrawing } from './drawing-codec.ts'
 import { longitudeOffset, normaliseLongitude } from '../search/projection.ts'
 import * as THREE from 'three'
@@ -9,7 +10,7 @@ import { createGeography, createGeographyFill, disposeGeography } from './geogra
 import { MeetingFlash, createMeetingMaterial } from './meetingFlash.ts'
 
 const vertexShader = `
-  in float roadId;
+  in uint roadId;
   uniform highp usampler2D uTimes;
   uniform highp usampler2D uBackwardTimes;
   uniform float uBidirectional;
@@ -23,7 +24,7 @@ const vertexShader = `
   flat out uvec2 vBackwardTimes;
   out float vGoalProximity;
   void main() {
-    vec2 uv = (vec2(mod(roadId, uTextureSize.x), floor(roadId / uTextureSize.x)) + .5) / uTextureSize;
+    vec2 uv = (vec2(roadId % uint(uTextureSize.x), roadId / uint(uTextureSize.x)) + .5) / uTextureSize;
     vTimes = texture(uTimes, uv).rg;
     vSource = uTerritories > .5 ? floor(texture(uSources, uv).r * 255. + .5) : 0.;
     vBackwardTimes = uBidirectional > .5 ? texture(uBackwardTimes, uv).rg : uvec2(0u);
@@ -89,11 +90,12 @@ export class RoadScene {
   sourceTexture: THREE.DataTexture
   proximityTexture: THREE.DataTexture
   manifest?: StudyManifest
-  private releaseRoadUploads = false
-  private compressedDrawing: { bytes: ArrayBuffer; count: number }[] = []
+  private storedDrawing: { bytes: ArrayBuffer; count: number; compressed: boolean }[] = []
+  private roadBatches: { lines: THREE.LineSegments; ends: Uint32Array }[] = []
   private drawingGeneration = 0
   private drawingDisposed = false
   private lastResult?: SearchResult
+  private restoredProgress = 0
   onDrawingError?: (message: string) => void
   events = 1
   width = 1
@@ -160,6 +162,7 @@ export class RoadScene {
     this.markers = document.createElement('div'); this.markers.className = 'map-markers'; host.appendChild(this.markers)
     this.observer = new ResizeObserver(() => this.resize()); this.observer.observe(host)
     const canvas = this.renderer.domElement
+    canvas.addEventListener('webglcontextlost', this.loseDrawing)
     canvas.addEventListener('webglcontextrestored', this.restoreDrawing)
     canvas.addEventListener('wheel', this.wheel, { passive: false })
     canvas.addEventListener('pointerdown', this.pointerDown)
@@ -209,7 +212,6 @@ export class RoadScene {
   setManifest(manifest: StudyManifest) {
     this.manifest = manifest
     const phoneNetwork = manifest.counts.nodes > 2000000 && window.matchMedia('(pointer: coarse)').matches
-    this.releaseRoadUploads = phoneNetwork
     this.renderInterval = phoneNetwork ? 1000 / 30 : 0
     this.renderer.setPixelRatio(phoneNetwork ? 1 : Math.min(window.devicePixelRatio, 1.5))
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
@@ -248,75 +250,86 @@ export class RoadScene {
     this.dirty = true
   }
   addGeometry(bytes: ArrayBuffer, count: number, compressed = false) {
-    if (compressed) {
-      this.compressedDrawing.push({ bytes, count })
-      this.renderer.domElement.dataset.roadVertices = String(Number(this.renderer.domElement.dataset.roadVertices ?? 0) + count)
-      this.renderer.domElement.dataset.drawingBytes = String(this.compressedDrawing.reduce((sum, chunk) => sum + chunk.bytes.byteLength, 0))
-      this.renderer.domElement.dataset.roadUploads = 'deferred'
-      return
-    }
-    this.addRoadBuffers(bytes, count)
-  }
-  private addRoadBuffers(bytes: ArrayBuffer, count: number, uploadOnly = false) {
-    const positions = new Float32Array(bytes, 0, count * 2), roads = new Float32Array(bytes, count * 8, count)
-    const geometry = new THREE.BufferGeometry()
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 2))
-    geometry.setAttribute('roadId', new THREE.BufferAttribute(roads, 1))
-    // Drawing coordinates are deliberately two-dimensional and within [-1, 1].
-    // Three's automatic sphere calculation assumes a three-component position.
-    geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), Math.SQRT2)
-    const lines = new THREE.LineSegments(geometry, this.material); lines.frustumCulled = false
-    lines.visible = uploadOnly || !this.releaseRoadUploads
-    if (uploadOnly) {
-      // The GPU owns the uploaded bytes. Keep only compressed, lossless copies
-      // for subsequent searches and WebGL context restoration.
-      for (const attribute of Object.values(geometry.attributes)) if (attribute instanceof THREE.BufferAttribute) attribute.onUpload(() => { attribute.array = new Float32Array(0) })
-      const upload = new THREE.Scene(); upload.add(lines)
-      this.renderer.render(upload, this.camera); upload.remove(lines)
-    } else this.drawing.add(positions, roads)
-    if (!uploadOnly) this.renderer.domElement.dataset.roadVertices = String(Number(this.renderer.domElement.dataset.roadVertices ?? 0) + count)
-    this.renderer.domElement.dataset.roadUploads = this.releaseRoadUploads ? 'deferred' : 'resident'
-    this.scene.add(lines); this.dirty = true
+    this.storedDrawing.push({ bytes, count, compressed })
+    this.renderer.domElement.dataset.roadVertices = String(Number(this.renderer.domElement.dataset.roadVertices ?? 0) + count)
+    this.renderer.domElement.dataset.drawingBytes = String(this.storedDrawing.reduce((sum, chunk) => sum + chunk.bytes.byteLength, 0))
+    this.renderer.domElement.dataset.roadUploads = 'deferred'
   }
   async prepareResult(result: SearchResult) {
-    if (!this.compressedDrawing.length) return true
     const generation = ++this.drawingGeneration
+    this.clearRoadBatches()
     this.drawing.chunks = []
     const chosen = new Set(result.routeEdges)
-    for (const chunk of this.compressedDrawing) {
-      const bytes = await unpackDrawing(chunk.bytes, chunk.count)
+    let submitted = 0, yielded = performance.now()
+    for (const chunk of this.storedDrawing) {
+      const bytes = chunk.compressed ? await unpackDrawing(chunk.bytes, chunk.count) : chunk.bytes
       if (this.drawingDisposed || generation !== this.drawingGeneration) return false
       if (bytes.byteLength !== chunk.count * 12) throw new Error('Stored drawing geometry size mismatch')
-      const positions = new Float32Array(bytes, 0, chunk.count * 2), roads = new Float32Array(bytes, chunk.count * 8, chunk.count)
-      // Preserve only the chosen route's exact coordinates on the CPU.
+      const positions = new Float32Array(bytes, 0, chunk.count * 2)
+      const roads = this.manifest && this.manifest.counts.edges > 16777216 ? new Uint32Array(bytes, chunk.count * 8, chunk.count) : new Float32Array(bytes, chunk.count * 8, chunk.count)
+      // Retain only the chosen route's exact geometry on the CPU.
       for (let begin = 0; begin < roads.length;) {
         let end = begin + 1
         while (end < roads.length && roads[end] === roads[begin]) end++
         if (chosen.has(roads[begin])) this.drawing.add(positions.slice(begin * 2, end * 2), roads.slice(begin, end))
         begin = end
       }
-      this.addRoadBuffers(bytes, chunk.count, true)
+      const selected = prepareReplayDrawing(positions, roads, result.edgeTimes, result.backwardTimes, result.trace.length)
+      if (selected.count) {
+        const geometry = new THREE.BufferGeometry()
+        geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(selected.bytes, 0, selected.count * 2), 2))
+        const integerIds = new Uint32Array(selected.bytes, selected.count * 8, selected.count)
+        const ids = new THREE.BufferAttribute(integerIds, 1)
+        const selectedRoads = roads instanceof Uint32Array ? new Uint32Array(selected.bytes, selected.count * 8, selected.count) : new Float32Array(selected.bytes, selected.count * 8, selected.count)
+        // Integer GPU attributes preserve exact IDs for national graphs of any size.
+        if (!(roads instanceof Uint32Array)) for (let i = 0; i < selected.count; i++) integerIds[i] = selectedRoads[i]
+        ids.gpuType = THREE.IntType
+        geometry.setAttribute('roadId', ids)
+        const [left, bottom, right, top] = selected.bounds
+        geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3((left + right) / 2, (bottom + top) / 2, 0), Math.hypot(right - left, top - bottom) / 2 + 1e-7)
+        const lines = new THREE.LineSegments(geometry, this.material)
+        // Upload once, then release expanded CPU buffers. The original drawing
+        // remains available for repeated searches and context restoration.
+        for (const attribute of Object.values(geometry.attributes)) if (attribute instanceof THREE.BufferAttribute) attribute.onUpload(() => { attribute.array = attribute.array instanceof Uint32Array ? new Uint32Array(0) : new Float32Array(0) })
+        geometry.setDrawRange(0, 0)
+        const upload = new THREE.Scene(); upload.add(lines)
+        const culled = lines.frustumCulled; lines.frustumCulled = false
+        this.renderer.render(upload, this.camera); upload.remove(lines); lines.frustumCulled = culled
+        this.scene.add(lines); this.roadBatches.push({ lines, ends: selected.ends }); submitted += selected.count
+      }
+      // Keep cancellation and gestures responsive between bounded uploads.
+      if (performance.now() - yielded >= 16) { await new Promise<void>(resolve => setTimeout(resolve, 0)); yielded = performance.now() }
+      if (this.drawingDisposed || generation !== this.drawingGeneration) return false
     }
+    this.renderer.domElement.dataset.replayVertices = String(submitted)
     this.renderer.domElement.dataset.roadUploads = 'resident'
-    this.renderer.domElement.dataset.roadCpuBytes = String(this.scene.children.reduce((sum, object) => sum + (object instanceof THREE.LineSegments && object.material === this.material ? Object.values((object.geometry as THREE.BufferGeometry).attributes).reduce((bytes, attribute) => bytes + attribute.array.byteLength, 0) : 0), 0))
+    this.renderer.domElement.dataset.roadCpuBytes = String(this.roadBatches.reduce((sum, batch) => sum + Object.values(batch.lines.geometry.attributes).reduce((bytes, attribute) => bytes + attribute.array.byteLength, 0), 0))
     return true
+  }
+  private clearRoadBatches() {
+    for (const { lines } of this.roadBatches) { lines.geometry.dispose(); this.scene.remove(lines) }
+    this.roadBatches = []
+  }
+  private loseDrawing = () => {
+    const result = this.lastResult
+    this.restoredProgress = this.material.uniforms.uEvent.value / Math.max(1, this.events)
+    // Dispose while the context is lost, before Three replaces its resource
+    // managers. Old geometry disposal listeners otherwise retain stale buffers.
+    this.clearResult(); this.lastResult = result
+    if (this.geography) { this.scene.remove(this.geography); disposeGeography(this.geography); this.geography = undefined }
+    this.clearSelectionFill()
   }
   private restoreDrawing = () => {
     const result = this.lastResult
-    if (!result || !this.compressedDrawing.length) return
+    if (this.geographyContext) this.setGeography(this.geographyContext)
+    if (!result || !this.storedDrawing.length) return
     this.clearResult()
-    void this.prepareResult(result).then(restored => { if (restored && !this.drawingDisposed) this.setResult(result) }).catch(() => this.onDrawingError?.('Road drawing could not be restored. Please reload the study.'))
+    void this.prepareResult(result).then(restored => { if (restored && !this.drawingDisposed) { this.setResult(result); this.setProgress(this.restoredProgress) } }).catch(() => this.onDrawingError?.('Road drawing could not be restored. Please reload the study.'))
   }
   clearResult() {
     ++this.drawingGeneration; this.lastResult = undefined
-    if (this.compressedDrawing.length) {
-      this.drawing.chunks = []
-      for (const object of this.scene.children.filter(object => object instanceof THREE.LineSegments && object.material === this.material)) { (object as THREE.LineSegments).geometry.dispose(); this.scene.remove(object) }
-    }
-    if (this.releaseRoadUploads) for (const object of this.scene.children) if (object instanceof THREE.LineSegments && object.material === this.material) {
-      object.visible = false; object.geometry.dispose()
-    }
-    if (this.releaseRoadUploads) this.renderer.domElement.dataset.roadUploads = 'deferred'
+    this.drawing.chunks = []; this.clearRoadBatches()
+    this.renderer.domElement.dataset.roadUploads = 'deferred'
     this.route?.geometry.dispose(); if (this.route) this.scene.remove(this.route); this.route = undefined
     this.flashPoint?.geometry.dispose(); if (this.flashPoint) this.scene.remove(this.flashPoint); this.flashPoint = undefined
     this.flash.clear(); this.meetingEvent = undefined; this.reveal.clear()
@@ -360,7 +373,7 @@ export class RoadScene {
       this.route = new THREE.Mesh(createRouteGeometry(this.drawing.build(result.routeEdges, result.routeReversed, result.routeLengths)), this.routeMaterial)
       this.route.frustumCulled = false; this.route.renderOrder = 1; this.route.visible = false; this.scene.add(this.route)
     }
-    if (this.compressedDrawing.length) this.drawing.chunks = []
+    if (this.storedDrawing.length) this.drawing.chunks = []
     this.sourceTexture.dispose()
     this.sourceTexture = new THREE.DataTexture(result.edgeSources ?? new Uint8Array([0]), result.edgeSources ? result.textureWidth : 1, result.edgeSources ? result.textureHeight : 1, THREE.RedFormat, THREE.UnsignedByteType)
     this.sourceTexture.needsUpdate = true
@@ -396,6 +409,9 @@ export class RoadScene {
     this.material.uniforms.uTerritoryComplete.value = this.material.uniforms.uTerritories.value && progress >= 1 ? 1 : 0
     this.flash.cross(this.material.uniforms.uEvent.value, next, this.meetingEvent, animate, this.reducedMotion.matches); this.updateFlash()
     this.material.uniforms.uEvent.value = next
+    let vertices = 0
+    for (const batch of this.roadBatches) { const count = replayVertexCount(batch.ends, next, this.events); batch.lines.geometry.setDrawRange(0, count); vertices += count }
+    this.renderer.domElement.dataset.submittedVertices = String(vertices)
     this.focusPoint = undefined; this.tip.dataset.event = '0'; this.tip.hidden = true
     if (progress < 1 && this.focusEvents && this.focusCoordinates) {
       let low = 0, high = this.focusEvents.length
@@ -505,7 +521,9 @@ export class RoadScene {
   }
   pointerCancel = (event: PointerEvent) => { this.pointers.delete(event.pointerId); this.moved = 0; this.lastPinch = 0 }
   dispose() {
-    this.drawingDisposed = true; ++this.drawingGeneration; this.lastResult = undefined; this.compressedDrawing = []
+    this.clearRoadBatches()
+    this.drawingDisposed = true; ++this.drawingGeneration; this.lastResult = undefined; this.storedDrawing = []
+    this.renderer.domElement.removeEventListener('webglcontextlost', this.loseDrawing)
     this.renderer.domElement.removeEventListener('webglcontextrestored', this.restoreDrawing)
     cancelAnimationFrame(this.frame); this.observer.disconnect()
     this.reducedMotion.removeEventListener('change', this.motionChange)

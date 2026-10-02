@@ -1,0 +1,29 @@
+{
+  "elapsedSeconds": 12387.800395166007,
+  "selectedWays": 31855674,
+  "roadShapeNodes": 246936679,
+  "roadClasses": {
+    "residential": 8885391,
+    "tertiary": 1158867,
+    "secondary": 1075725,
+    "service": 17985034,
+    "motorway": 286758,
+    "primary": 835471,
+    "motorway_link": 275400,
+    "primary_link": 82986,
+    "unclassified": 764267,
+    "trunk": 309946,
+    "tertiary_link": 32507,
+    "secondary_link": 69254,
+    "trunk_link": 77008,
+    "living_street": 15724,
+    "road": 1336
+  },
+  "counts": {
+    "nodes": 53308658,
+    "edges": 67107295,
+    "directedArcs": 127122119,
+    "vertices": 226125654
+  },
+  "downloadBytes": 800026269
+}

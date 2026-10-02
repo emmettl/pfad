@@ -61,7 +61,7 @@ async function load(url: string, expectedIdentity?: string, topologyOnly = false
         if (chunk.count * 2 + pointCount * 8 !== decoded.byteLength) throw new Error('Geometry point count mismatch')
         const count = (pointCount + chunk.count) * 2
         const bytes = new ArrayBuffer(count * 12)
-        const positions = new Float32Array(bytes, 0, count * 2), roads = new Float32Array(bytes, count * 8, count)
+        const positions = new Float32Array(bytes, 0, count * 2), roads = data.counts.edges > 16777216 ? new Uint32Array(bytes, count * 8, count) : new Float32Array(bytes, count * 8, count)
         let cursor = chunk.count * 2, vertex = 0
         const projection = data.projection
         const sx = Math.cos(projection.referenceLatitude * Math.PI / 180) * 111195.0802 / projection.scaleMetres

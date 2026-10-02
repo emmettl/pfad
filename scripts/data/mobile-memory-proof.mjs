@@ -6,16 +6,21 @@ import { dirname } from 'node:path'
 import { mkdir, writeFile } from 'node:fs/promises'
 
 const base = process.argv[2]
+const country = process.env.PFAD_PROOF_COUNTRY ?? 'de'
+const configurations = { de: { from: 'berlin', to: 'munich', vertices: 32951556, chunks: 120 }, uk: { from: 'london', to: 'edinburgh', vertices: 23678988, chunks: 83 } }
+const configuration = configurations[country]
+if (!configuration) throw Error('Unknown proof country')
 const output = process.argv[3] ?? '.cache/mobile-memory/phone-proof.json'
 const server = base ? null : await preview({ build: { outDir: process.env.PFAD_PROOF_DIST ?? 'dist' }, preview: { host: '127.0.0.1', port: 4199, strictPort: true } })
 const browser = await webkit.launch()
 const page = await browser.newPage({ viewport: { width: 402, height: 874 }, isMobile: true, hasTouch: true, deviceScaleFactor: 3 })
 const errors = [], analyticsErrors = []
+page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
 page.on('pageerror', error => (error.message.includes('cloudflareinsights.com/cdn-cgi/rum') ? analyticsErrors : errors).push(error.message))
-await page.addInitScript(() => {
-  localStorage.setItem('pfad-country-warning:de', '1')
+await page.addInitScript(country => {
+  localStorage.setItem('pfad-country-warning:' + country, '1')
   const NativeWorker = window.Worker
-  window.memoryProof = { workers: [], results: [] }
+  window.memoryProof = { workers: [], results: [], drawings: [] }
   window.Worker = class extends NativeWorker {
     constructor(...args) {
       super(...args)
@@ -35,15 +40,17 @@ await page.addInitScript(() => {
     postMessage(request, ...args) { this.record.requests.push({ type: request.type, topologyOnly: request.topologyOnly, roadUploads: document.querySelector('canvas')?.dataset.roadUploads }); super.postMessage(request, ...args) }
     terminate() { this.record.terminated = true; super.terminate() }
   }
-})
+}, country)
 try {
-  await page.goto(new URL('?country=de&from=berlin&to=munich&algorithm=bidirectional&duration=15', base || 'http://127.0.0.1:4199/').href)
+  await page.goto(new URL(`?country=${country}&from=${configuration.from}&to=${configuration.to}&algorithm=bidirectional&duration=15`, base || 'http://127.0.0.1:4199/').href)
   const ready = async algorithm => {
     await expect(page.locator('.study')).toHaveAttribute('data-algorithm', algorithm, { timeout: 180000 })
     await expect(page.getByRole('button', { name: 'Search', exact: true })).toBeEnabled({ timeout: 180000 })
-    await expect(page.locator('canvas')).toHaveAttribute('data-road-vertices', '32951556')
+    await expect(page.locator('canvas')).toHaveAttribute('data-road-vertices', String(configuration.vertices))
     await expect(page.locator('canvas')).toHaveAttribute('data-road-uploads', 'resident')
     await expect(page.locator('canvas')).toHaveAttribute('data-road-cpu-bytes', '0')
+    const drawing = await page.evaluate(() => { const canvas = document.querySelector('canvas'); const record = { replayVertices: Number(canvas.dataset.replayVertices), sourceVertices: Number(canvas.dataset.roadVertices), cpuBytes: Number(canvas.dataset.roadCpuBytes), webglError: canvas.getContext('webgl2').getError() }; window.memoryProof.drawings.push(record); return record })
+    if (drawing.replayVertices > drawing.sourceVertices || drawing.webglError !== 0) throw Error('Replay drawing coverage or WebGL error')
     const workers = await page.evaluate(() => window.memoryProof.workers)
     if (workers.some(worker => !worker.terminated)) throw Error('A national routing worker remains alive during replay')
     const pause = page.getByRole('button', { name: 'Pause', exact: true })
@@ -71,8 +78,8 @@ try {
   await expect(page.locator('canvas')).toHaveAttribute('data-road-uploads', 'resident', { timeout: 180000 })
   await page.getByRole('slider', { name: 'Search replay' }).fill('7.5')
   await page.getByRole('slider', { name: 'Search replay' }).fill('15')
-  const proof = await page.evaluate(() => ({ ...window.memoryProof, drawing: { retainedRoadCpuBytes: Number(document.querySelector('canvas').dataset.roadCpuBytes), compressedBytes: Number(document.querySelector('canvas').dataset.drawingBytes), vertices: Number(document.querySelector('canvas').dataset.roadVertices), contextRestored: !document.querySelector('canvas').getContext('webgl2').isContextLost() } }))
-  if (proof.workers[0].compressedChunks !== 120 || proof.workers[0].drawingBytes >= 395418672) throw Error('National drawing remained expanded')
+  const proof = await page.evaluate(() => ({ ...window.memoryProof, drawing: { retainedRoadCpuBytes: Number(document.querySelector('canvas').dataset.roadCpuBytes), replayVertices: Number(document.querySelector('canvas').dataset.replayVertices), submittedVertices: Number(document.querySelector('canvas').dataset.submittedVertices), compressedBytes: Number(document.querySelector('canvas').dataset.drawingBytes), vertices: Number(document.querySelector('canvas').dataset.roadVertices), contextRestored: !document.querySelector('canvas').getContext('webgl2').isContextLost() } }))
+  if (proof.workers[0].compressedChunks !== configuration.chunks || proof.workers[0].drawingBytes >= configuration.vertices * 12) throw Error('National drawing remained expanded')
   if (proof.results[0].traceSha256 !== proof.results[2].traceSha256) throw Error('Repeated bidirectional trace changed')
   if (proof.results.some(result => result.routeMetres !== proof.results[0].routeMetres)) throw Error('Route costs differ')
   if (proof.workers.length !== 3 || proof.workers[0].requests[0].topologyOnly || proof.workers.slice(1).some(worker => !worker.requests[0].topologyOnly)) throw Error('Worker reload did not preserve the existing drawing')

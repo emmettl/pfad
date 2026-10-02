@@ -23,7 +23,7 @@ export class RouteReveal {
 interface DrawingChunk { positions: Int16Array | Float32Array; first: number; offsets: Uint32Array }
 export class RouteDrawing {
   chunks: DrawingChunk[] = []
-  add(positions: Int16Array | Float32Array, roads: Float32Array) {
+  add(positions: Int16Array | Float32Array, roads: Float32Array | Uint32Array) {
     if (!roads.length) return
     const first = roads[0], last = roads[roads.length - 1]
     const offsets = new Uint32Array(last - first + 2)

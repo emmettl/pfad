@@ -195,7 +195,7 @@ export function App() {
       // Keep a window connection: WebKit private contexts otherwise drop their
       // worker-only cache when retry terminates the sole cache owner.
       cacheOwner.current ??= (async () => { try { return await globalThis.caches?.open(ROAD_CACHE_NAME) } catch { return undefined } })()
-      void cacheOwner.current.then(() => { if (!disposed && worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity, topologyOnly, compactDrawing: releaseAfterSearch }) })
+      void cacheOwner.current.then(() => { if (!disposed && worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity, topologyOnly, compactDrawing: country.large }) })
     }
     submitSearch.current = request => {
       if (worker.current) worker.current.postMessage(request)

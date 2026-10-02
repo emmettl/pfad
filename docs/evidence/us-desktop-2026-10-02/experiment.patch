@@ -1,0 +1,109 @@
+--- a/src/search/manifest.ts
++++ b/src/search/manifest.ts
+@@ -3,12 +3,12 @@
+ // Bounds cover validated complete country graphs through about 10.5 million nodes.
+ // Larger releases require another measured browser budget.
+ // Road IDs must remain exact in the Float32 vertex attribute (< 2^24).
+-export const DATA_LIMITS = { nodes: 11000000, edges: 16000000, directedArcs: 32000000, vertices: 64000000, downloadBytes: 256 * 1024 * 1024 }
++export const DATA_LIMITS = {"nodes": 53308658, "edges": 67107295, "directedArcs": 127122119, "vertices": 226125654, "downloadBytes": 800026269}
+ const positive = (n: number) => Number.isSafeInteger(n) && n > 0
+ export function validateManifest(data: StudyManifest) {
+   if (data.schema !== 'pfad-road-study/1' || data.encoding !== 'le-columnar-deltas/1' || data.coordinateScale !== 100000 || !/^[a-f0-9]{64}$/.test(data.identity)) throw new Error('Unsupported road dataset')
+   for (const key of ['nodes', 'edges', 'directedArcs', 'vertices'] as const) if (!positive(data.counts[key]) || data.counts[key] > DATA_LIMITS[key]) throw new Error('Road dataset exceeds the measured browser budget')
+-  if (!positive(data.downloadBytes) || data.downloadBytes > DATA_LIMITS.downloadBytes || data.chunks.length > 1000) throw new Error('Road download exceeds the browser budget')
++  if (!positive(data.downloadBytes) || data.downloadBytes > DATA_LIMITS.downloadBytes || data.chunks.length > 1222) throw new Error('Road download exceeds the browser budget')
+   const p = data.projection
+   if (!p || !p.centre.every(Number.isFinite) || !Number.isFinite(p.referenceLatitude) || !Number.isFinite(p.scaleMetres) || p.scaleMetres <= 0 || !data.bounds.every(Number.isFinite)) throw new Error('Invalid road projection')
+   if (p.longitudeWrapping !== undefined && p.longitudeWrapping !== 'centre/1') throw new Error('Unsupported longitude wrapping')
+--- a/src/search/search.worker.ts
++++ b/src/search/search.worker.ts
+@@ -59,7 +59,7 @@
+         if (chunk.count * 2 + pointCount * 8 !== decoded.byteLength) throw new Error('Geometry point count mismatch')
+         const count = (pointCount + chunk.count) * 2
+         const bytes = new ArrayBuffer(count * 12)
+-        const positions = new Float32Array(bytes, 0, count * 2), roads = new Float32Array(bytes, count * 8, count)
++        const positions = new Float32Array(bytes, 0, count * 2), roads = data.counts.edges > 16777216 ? new Uint32Array(bytes, count * 8, count) : new Float32Array(bytes, count * 8, count)
+         let cursor = chunk.count * 2, vertex = 0
+         const projection = data.projection
+         const sx = Math.cos(projection.referenceLatitude * Math.PI / 180) * 111195.0802 / projection.scaleMetres
+--- a/src/map/RoadScene.ts
++++ b/src/map/RoadScene.ts
+@@ -204,6 +204,10 @@
+   }
+   setManifest(manifest: StudyManifest) {
+     this.manifest = manifest
++    if (manifest.counts.edges > 16777216) {
++      this.material.vertexShader = vertexShader.replace('in float roadId;', 'in uint roadId;').replace('vec2(mod(roadId, uTextureSize.x), floor(roadId / uTextureSize.x))', 'vec2(float(roadId % uint(uTextureSize.x)), float(roadId / uint(uTextureSize.x)))')
++      this.material.needsUpdate = true
++    }
+     const phoneNetwork = manifest.counts.nodes > 2000000 && window.matchMedia('(pointer: coarse)').matches
+     this.releaseRoadUploads = phoneNetwork
+     this.renderInterval = phoneNetwork ? 1000 / 30 : 0
+@@ -254,10 +258,12 @@
+     this.addRoadBuffers(bytes, count)
+   }
+   private addRoadBuffers(bytes: ArrayBuffer, count: number, uploadOnly = false) {
+-    const positions = new Float32Array(bytes, 0, count * 2), roads = new Float32Array(bytes, count * 8, count)
++    const positions = new Float32Array(bytes, 0, count * 2), roads = this.manifest!.counts.edges > 16777216 ? new Uint32Array(bytes, count * 8, count) : new Float32Array(bytes, count * 8, count)
+     const geometry = new THREE.BufferGeometry()
+     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 2))
+-    geometry.setAttribute('roadId', new THREE.BufferAttribute(roads, 1))
++    const roadAttribute = new THREE.BufferAttribute(roads, 1)
++    if (roads instanceof Uint32Array) roadAttribute.gpuType = THREE.IntType
++    geometry.setAttribute('roadId', roadAttribute)
+     // Drawing coordinates are deliberately two-dimensional and within [-1, 1].
+     // Three's automatic sphere calculation assumes a three-component position.
+     geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), Math.SQRT2)
+@@ -283,7 +289,7 @@
+       const bytes = await unpackDrawing(chunk.bytes, chunk.count)
+       if (this.drawingDisposed || generation !== this.drawingGeneration) return false
+       if (bytes.byteLength !== chunk.count * 12) throw new Error('Stored drawing geometry size mismatch')
+-      const positions = new Float32Array(bytes, 0, chunk.count * 2), roads = new Float32Array(bytes, chunk.count * 8, chunk.count)
++      const positions = new Float32Array(bytes, 0, chunk.count * 2), roads = this.manifest!.counts.edges > 16777216 ? new Uint32Array(bytes, chunk.count * 8, chunk.count) : new Float32Array(bytes, chunk.count * 8, chunk.count)
+       // Preserve only the chosen route's exact coordinates on the CPU.
+       for (let begin = 0; begin < roads.length;) {
+         let end = begin + 1
+--- a/src/map/routeReveal.ts
++++ b/src/map/routeReveal.ts
+@@ -23,7 +23,7 @@
+ interface DrawingChunk { positions: Int16Array | Float32Array; first: number; offsets: Uint32Array }
+ export class RouteDrawing {
+   chunks: DrawingChunk[] = []
+-  add(positions: Int16Array | Float32Array, roads: Float32Array) {
++  add(positions: Int16Array | Float32Array, roads: Float32Array | Uint32Array) {
+     if (!roads.length) return
+     const first = roads[0], last = roads[roads.length - 1]
+     const offsets = new Uint32Array(last - first + 2)
+--- a/src/search/engine.ts
++++ b/src/search/engine.ts
+@@ -76,7 +76,7 @@
+   const heap = new Heap()
+   // One settled event per node; at most one examination and improvement per arc.
+   const events = new EventTrace(n + 2 * graph.arcTo.length)
+-  const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
++  const textureWidth = Math.min(4096, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
+   const edgeTimes = new Uint32Array(textureWidth * textureHeight * 2)
+   const goalProximity = estimate ? new Uint8Array(textureWidth * textureHeight) : undefined
+   const potential = estimate?.potential
+--- a/src/search/bidirectional.ts
++++ b/src/search/bidirectional.ts
+@@ -37,7 +37,7 @@
+   const distance = [new Float64Array(n).fill(Infinity), new Float64Array(n).fill(Infinity)]
+   const parentEdge = [new Int32Array(n).fill(-1), new Int32Array(n).fill(-1)]
+   const settled = [new Uint8Array(n), new Uint8Array(n)], heap = [new Heap(), new Heap()]
+-  const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
++  const textureWidth = Math.min(4096, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
+   const times = [new Uint32Array(textureWidth * textureHeight * 2), new Uint32Array(textureWidth * textureHeight * 2)]
+   const events = new EventTrace(2 * n + 4 * graph.arcTo.length)
+   const checkpointStride = 4096, checkpoints: number[] = [0, 0, 0]
+--- a/src/search/multisource.ts
++++ b/src/search/multisource.ts
+@@ -10,7 +10,7 @@
+   if (n >= 2 ** 28 || graph.arcTo.length >= 2 ** 28) throw new Error('Graph IDs exceed the three-source trace format')
+   if (new Set(sources.map(source => source.node)).size !== 3) throw new Error('Three distinct road sources are required')
+   const distance = new Float64Array(n).fill(Infinity), owner = new Uint8Array(n).fill(255), settled = new Uint8Array(n), heap = new Heap()
+-  const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
++  const textureWidth = Math.min(4096, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
+   const edgeTimes = new Uint32Array(textureWidth * textureHeight * 2), edgeSources = new Uint8Array(textureWidth * textureHeight)
+   const events = new EventTrace(n + 2 * graph.arcTo.length), checkpointStride = 4096, checkpoints = [0, 0, 0]
+   let used = 0, exploredNodes = 0, examinedArcs = 0, improvements = 0, uniqueEdges = 0, maximumCm = 0

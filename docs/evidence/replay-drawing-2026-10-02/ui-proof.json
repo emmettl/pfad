@@ -1,0 +1,18 @@
+{
+  "url": "http://127.0.0.1:4218/?country=us&from=san-francisco&to=new-york&algorithm=bidirectional&duration=15",
+  "computeTime": "16757 ms",
+  "drawing": {
+    "chunks": 672,
+    "compressed": 672,
+    "bytes": 697100668,
+    "retainedCpuBytes": 0,
+    "replayVertices": 200941440,
+    "glError": 0,
+    "viewport": {
+      "normalVertices": 200941440,
+      "zoomedVertices": 186008082
+    }
+  },
+  "roadVertices": "226125654",
+  "errors": []
+}

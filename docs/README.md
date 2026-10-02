@@ -53,3 +53,7 @@ that time; its older counts and algorithm sets are not current feature limits.
 | [Hosting](HOSTING.md) | Dual app hosting, artifact provenance and independent R2 data delivery |
 
 - [Germany phone drawing follow-up](evidence/mobile-drawing-2026-10-01/README.md): lossless compressed CPU drawing, phased uploads and physical-phone retest limitation.
+
+- [Whole-US desktop feasibility](evidence/us-desktop-2026-10-02/README.md): complete national graph, Chromium/WebKit coast-to-coast tests, and measured rendering limits.
+
+- [Exact replay drawing optimization](evidence/replay-drawing-2026-10-02/README.md): temporal batching, viewport culling, reduced GPU geometry and UK/Germany/US validation.

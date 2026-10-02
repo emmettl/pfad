@@ -1,0 +1,21 @@
+
+> pfad@0.0.0 test:browser
+> playwright test e2e/drawing.spec.ts
+
+[WebServer] (node:22652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+(node:22655) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:22656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] [chromium] › e2e/drawing.spec.ts:3:1 › drawing restores its recorded frame and geographic context after GPU context loss
+[2/2] [webkit-mobile] › e2e/drawing.spec.ts:3:1 › drawing restores its recorded frame and geographic context after GPU context loss
+  2 passed (4.7s)

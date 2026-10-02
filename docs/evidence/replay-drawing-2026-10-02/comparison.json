@@ -1,0 +1,125 @@
+{
+  "rows": [
+    {
+      "browser": "chromium-metal",
+      "journey": "San Francisco\u2013New York",
+      "algorithm": "bidirectional-dijkstra/1",
+      "repeat": false,
+      "baselineFps": 13.804729447224425,
+      "optimizedFps": 29.859102360770866,
+      "speedup": 2.1629617932696488,
+      "preparationMs": 4855.300000011921,
+      "replayVertices": 200941440,
+      "traceUnchanged": true
+    },
+    {
+      "browser": "chromium-metal",
+      "journey": "San Francisco\u2013New York",
+      "algorithm": "bidirectional-dijkstra/1",
+      "repeat": true,
+      "baselineFps": 14.147747652005267,
+      "optimizedFps": 33.759263821668604,
+      "speedup": 2.3861935236654896,
+      "preparationMs": 4299.0999999940395,
+      "replayVertices": 200941440,
+      "traceUnchanged": true
+    },
+    {
+      "browser": "chromium-metal",
+      "journey": "San Francisco\u2013New York",
+      "algorithm": "astar/1",
+      "repeat": false,
+      "baselineFps": 14.410657245511509,
+      "optimizedFps": 43.30273273558513,
+      "speedup": 3.0049103242027804,
+      "preparationMs": 4246.0999999940395,
+      "replayVertices": 155734468,
+      "traceUnchanged": true
+    },
+    {
+      "browser": "chromium-metal",
+      "journey": "San Francisco\u2013New York",
+      "algorithm": "dijkstra/1",
+      "repeat": false,
+      "baselineFps": 14.315105432404707,
+      "optimizedFps": 39.7591805746574,
+      "speedup": 2.777428413810746,
+      "preparationMs": 4144,
+      "replayVertices": 202934034,
+      "traceUnchanged": true
+    },
+    {
+      "browser": "chromium-metal",
+      "journey": "Seattle\u2013Miami",
+      "algorithm": "bidirectional-dijkstra/1",
+      "repeat": false,
+      "baselineFps": 14.481778202930904,
+      "optimizedFps": 31.977555877671726,
+      "speedup": 2.2081235763713,
+      "preparationMs": 4686.300000011921,
+      "replayVertices": 214377372,
+      "traceUnchanged": true
+    },
+    {
+      "browser": "webkit-desktop",
+      "journey": "San Francisco\u2013New York",
+      "algorithm": "bidirectional-dijkstra/1",
+      "repeat": false,
+      "baselineFps": 14.08731477174563,
+      "optimizedFps": 31.926947943744583,
+      "speedup": 2.2663615075726993,
+      "preparationMs": 2983,
+      "replayVertices": 200941440,
+      "traceUnchanged": true
+    },
+    {
+      "browser": "webkit-desktop",
+      "journey": "San Francisco\u2013New York",
+      "algorithm": "bidirectional-dijkstra/1",
+      "repeat": true,
+      "baselineFps": 13.938669852648347,
+      "optimizedFps": 31.59368126374725,
+      "speedup": 2.2666209615219812,
+      "preparationMs": 3337,
+      "replayVertices": 200941440,
+      "traceUnchanged": true
+    },
+    {
+      "browser": "webkit-desktop",
+      "journey": "San Francisco\u2013New York",
+      "algorithm": "astar/1",
+      "repeat": false,
+      "baselineFps": 14.265715618958737,
+      "optimizedFps": 43.79659211927583,
+      "speedup": 3.0700592447722275,
+      "preparationMs": 2943,
+      "replayVertices": 155734468,
+      "traceUnchanged": true
+    },
+    {
+      "browser": "webkit-desktop",
+      "journey": "San Francisco\u2013New York",
+      "algorithm": "dijkstra/1",
+      "repeat": false,
+      "baselineFps": 14.302820649281532,
+      "optimizedFps": 37.52582816769979,
+      "speedup": 2.6236662744970385,
+      "preparationMs": 3611,
+      "replayVertices": 202934034,
+      "traceUnchanged": true
+    },
+    {
+      "browser": "webkit-desktop",
+      "journey": "Seattle\u2013Miami",
+      "algorithm": "bidirectional-dijkstra/1",
+      "repeat": false,
+      "baselineFps": 14.375083189138826,
+      "optimizedFps": 31.066666666666666,
+      "speedup": 2.161146913580247,
+      "preparationMs": 3857,
+      "replayVertices": 214377372,
+      "traceUnchanged": true
+    }
+  ],
+  "note": "First Chromium run overlapped the initial Germany check; subsequent Chromium runs and all WebKit runs had no other browser proof running. US comparison retains expanded source drawing for consistency with the baseline; normal app compression is checked separately."
+}

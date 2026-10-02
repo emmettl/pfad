@@ -1,0 +1,36 @@
+{
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-29T20:22:51Z",
+    "data_timestamp": "2026-09-29T20:22:51Z",
+    "url": "https://download.geofabrik.de/north-america/us-260929.osm.pbf",
+    "sha256": "447809e1e128cef6ef70b02234b4ed741c4831798119095d460f64d59b83971d",
+    "md5": "cf4661cdddc71680b1f483a8070ea9cf",
+    "bytes": 12175192796,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "baselineCommit": "84f7bb4497f2545e6b3b8fce074e7091917fbbf6",
+  "compiler": "pfad-study-streaming-compiler/1",
+  "profile": "road-connectivity-distance-v1",
+  "parity": {
+    "Luxembourg": "identical compressed road chunks and decoded source evidence",
+    "Switzerland": "all 27 decoded chunks and decoded source evidence identical; gzip header bytes differ",
+    "SwitzerlandOptimized": "identical manifest, chunks, and evidence to initial streaming build",
+    "LuxembourgReusedIndex": "identical dataset identity and chunks"
+  },
+  "integerIdPreflight": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "completedSearchReplays": 5
+    },
+    {
+      "name": "webkit-desktop",
+      "errors": [],
+      "completedSearchReplays": 5
+    }
+  ],
+  "publication": "experimental ignored data only; no catalogue or live app changes"
+}

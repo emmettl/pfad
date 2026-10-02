@@ -1,0 +1,12 @@
+{
+  "provider": "OpenStreetMap via Geofabrik",
+  "dataTimestamp": "2026-09-29T20:22:51Z",
+  "data_timestamp": "2026-09-29T20:22:51Z",
+  "url": "https://download.geofabrik.de/north-america/us-260929.osm.pbf",
+  "sha256": "447809e1e128cef6ef70b02234b4ed741c4831798119095d460f64d59b83971d",
+  "md5": "cf4661cdddc71680b1f483a8070ea9cf",
+  "bytes": 12175192796,
+  "attribution": "\u00a9 OpenStreetMap contributors",
+  "licence": "ODbL-1.0",
+  "licenceUrl": "https://www.openstreetmap.org/copyright"
+}

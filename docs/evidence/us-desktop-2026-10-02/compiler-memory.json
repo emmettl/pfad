@@ -1,0 +1,9 @@
+{
+  "pid": 55603,
+  "sampleIntervalSeconds": 2,
+  "elapsedSeconds": 12416.03266787529,
+  "peakRssBytes": 13516292096,
+  "lastRssBytes": 5901369344,
+  "samples": 6179,
+  "note": "Sampled RSS for the streaming compiler, not browser memory; includes resident mapped pages."
+}

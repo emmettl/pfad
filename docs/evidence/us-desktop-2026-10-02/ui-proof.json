@@ -1,0 +1,6 @@
+{
+  "url": "http://127.0.0.1:4216/?country=us&from=san-francisco&to=new-york&algorithm=bidirectional&duration=15",
+  "computeTime": "17059 ms",
+  "roadVertices": "226125654",
+  "errors": []
+}
