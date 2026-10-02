@@ -4,6 +4,14 @@ test('drawing restores its recorded frame and geographic context after GPU conte
   const errors: string[] = []
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
   page.on('pageerror', error => errors.push(error.message))
+  // Retain the GPU buffer for before/after pixel capture. Headless WebKit may
+  // discard the recovered drawing buffer before its screenshot compositor reads it.
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext
+    HTMLCanvasElement.prototype.getContext = function (kind: string, options?: object) {
+      return original.call(this, kind, kind === 'webgl2' ? { ...options, preserveDrawingBuffer: true } : options)
+    } as typeof original
+  })
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('./')
   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 60000 })
