@@ -6,6 +6,7 @@ import { compileGraph, dijkstra, snapEndpoints } from './engine.ts'
 import { bidirectional, compileReverse, type ReverseGraph } from './bidirectional.ts'
 import { multisource } from './multisource.ts'
 import { releaseEndpointIndex, snapSources } from './endpoints.ts'
+import { estimateRouteTime, annotateTime, timeGraph, timeDijkstra } from './time.ts'
 import { breadthFirst } from './breadth-first.ts'
 import { depthFirst } from './depth-first.ts'
 import { greedy } from './greedy.ts'
@@ -112,12 +113,19 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
         // Eligibility and weak components have served their snapping purpose;
         // the directed CSR and reverse graph already contain all routing arcs.
         releaseEndpointIndex(graph)
-        releaseBuffers(graph.direction, graph.category, graph.incoming)
+        releaseBuffers(graph.direction, undefined, graph.incoming)
       }
-      const result = request.algorithm === 'multisource' && sourceEndpoints ? multisource(graph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar') && reverse
-        ? bidirectional(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs, request.algorithm === 'bidirectional-astar')
-        : request.algorithm === 'astar' && reverse ? astar(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
-          : request.algorithm === 'breadth-first' ? breadthFirst(graph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'depth-first' ? depthFirst(graph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'greedy' ? greedy(graph, endpoints.start, endpoints.goal, endpoints.snapMs) : dijkstra(graph, endpoints.start, endpoints.goal, endpoints.snapMs)
+      const physicalGraph = graph
+      const timeObjective = request.objective === 'time'
+      const weighted = timeObjective ? timeGraph(graph, manifest.classes) : undefined
+      const optimizes = !['greedy', 'depth-first', 'breadth-first'].includes(request.algorithm)
+      const searchGraph = weighted && optimizes ? weighted : graph
+      const result = request.algorithm === 'multisource' && sourceEndpoints ? multisource(searchGraph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar') && reverse
+        ? bidirectional(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs, request.algorithm === 'bidirectional-astar')
+        : request.algorithm === 'astar' && reverse ? astar(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
+          : request.algorithm === 'time-dijkstra' ? timeDijkstra(searchGraph, manifest.classes, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'breadth-first' ? breadthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'depth-first' ? depthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'greedy' ? greedy(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : dijkstra(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs)
+      if (weighted) { annotateTime(result, physicalGraph, weighted, optimizes); releaseBuffers(weighted.length) }
+      if (!weighted && request.algorithm !== 'time-dijkstra') estimateRouteTime(result, physicalGraph, manifest.classes)
       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }
       result.snapping = endpoints.snapping
       if (sourceEndpoints) { result.requestedSources = request.sources; result.sourceSnappingVersion = 'nearby-shared-three-source-component/1' }

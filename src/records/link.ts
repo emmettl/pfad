@@ -3,12 +3,13 @@ import type { Point, SearchAlgorithm } from '../search/contracts.ts'
 export interface StudyLink {
   schema: 'pfad-study-link/1'; country: string; dataset: string; profile: string
   start: Point; goal: Point; algorithm: SearchAlgorithm; duration: number; progress: number; outlines: boolean
+  objective?: 'distance' | 'time'
   sources?: [Point, Point, Point]
   view?: { x: number; y: number; zoom: number }
 }
 const finite = (value: unknown, min: number, max: number): value is number => typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max
 const point = (p: Point) => p && typeof p.name === 'string' && p.name.length > 0 && p.name.length <= 100 && finite(p.lon, -180, 180) && finite(p.lat, -90, 90)
-const keys = ['country', 'from', 'to', 'algorithm', 'duration', 'outlines', 'view', 'from-name', 'to-name', 'source-c', 'source-c-name']
+const keys = ['objective', 'country', 'from', 'to', 'algorithm', 'duration', 'outlines', 'view', 'from-name', 'to-name', 'source-c', 'source-c-name']
 const slug = (name: string) => name.toLowerCase().replace(/[ðþæøß]/g, letter => ({ ð: 'd', þ: 'th', æ: 'ae', ø: 'o', ß: 'ss' })[letter]!)
   .normalize('NFD').replace(/\p{M}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 const places = (country: Country) => [...country.places, ...country.ambient.places]
@@ -46,8 +47,9 @@ function endpoint(parameters: URLSearchParams, key: 'from' | 'to' | 'source-c', 
 function legacyStudy(raw: string): StudyLink {
   if (raw.length > 4000) throw new Error()
   const s = JSON.parse(raw) as StudyLink
+  if (s.objective !== undefined && !['distance', 'time'].includes(s.objective)) throw new Error()
   if (!s || s.schema !== 'pfad-study-link/1' || !COUNTRIES.some(country => country.id === s.country) || !/^[a-f0-9]{64}$/.test(s.dataset) || s.profile !== 'road-connectivity-distance-v1'
-    || !point(s.start) || !point(s.goal) || !['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar', 'multisource', 'greedy', 'depth-first', 'breadth-first'].includes(s.algorithm)
+    || !point(s.start) || !point(s.goal) || !['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar', 'multisource', 'greedy', 'depth-first', 'breadth-first', 'time-dijkstra'].includes(s.algorithm)
     || !finite(s.duration, 5, 120) || !finite(s.progress, 0, 1) || typeof s.outlines !== 'boolean'
     || (s.view && (!finite(s.view.x, -100, 100) || !finite(s.view.y, -100, 100) || !finite(s.view.zoom, .6, 24)))) throw new Error()
   if (s.algorithm === 'multisource' ? !s.sources || s.sources.length !== 3 || !s.sources.every(point) || !samePoint(s.start, s.sources[0]) || !samePoint(s.goal, s.sources[1]) : !!s.sources) throw new Error()
@@ -68,17 +70,19 @@ export function readStudyLink(address: string): { study?: StudyLink; error?: str
     const country = COUNTRIES.find(country => country.id === (parameters.get('country') ?? 'ch'))
     if (!country) throw new Error()
     const algorithm = parameters.get('algorithm') ?? 'dijkstra'
-    if (!['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar', 'multisource', 'greedy', 'depth-first', 'breadth-first'].includes(algorithm)) throw new Error()
+    if (!['dijkstra', 'bidirectional', 'astar', 'bidirectional-astar', 'multisource', 'greedy', 'depth-first', 'breadth-first', 'time-dijkstra'].includes(algorithm)) throw new Error()
     if (algorithm === 'multisource' ? !parameters.has('source-c') : parameters.has('source-c') || parameters.has('source-c-name')) throw new Error()
     const start = endpoint(parameters, 'from', country), goal = endpoint(parameters, 'to', country)
     const sources: [Point, Point, Point] | undefined = algorithm === 'multisource' ? [start, goal, endpoint(parameters, 'source-c', country)] : undefined
+    const objective = parameters.get('objective') ?? 'distance'
+    if (!['distance', 'time'].includes(objective)) throw new Error()
     const duration = numbers(parameters.get('duration') ?? '30', [[5, 120]])[0]
     const outlines = parameters.get('outlines') ?? '1'
     if (!['0', '1'].includes(outlines)) throw new Error()
     const view = parameters.has('view') ? numbers(parameters.get('view')!, [[-100, 100], [-100, 100], [.6, 24]]) : undefined
     return { study: { schema: 'pfad-study-link/1', country: country.id, dataset: country.identity, profile: 'road-connectivity-distance-v1',
       start, goal, ...(sources ? { sources } : {}), algorithm: algorithm as SearchAlgorithm,
-      duration, progress: 0, outlines: outlines === '1', ...(view ? { view: { x: view[0], y: view[1], zoom: view[2] } } : {}) } }
+      ...(objective === 'time' ? { objective: 'time' as const } : {}), duration, progress: 0, outlines: outlines === '1', ...(view ? { view: { x: view[0], y: view[1], zoom: view[2] } } : {}) } }
   } catch { return { error: 'This study link is invalid or uses an unsupported record version.' } }
 }
 
@@ -101,6 +105,7 @@ export function studyUrl(base: string, study: StudyLink) {
     parameters.set(key, named ? slug(named.name) : `${p.lon},${p.lat}`)
     if (!named && p.name !== (key === 'from' ? 'Point A' : key === 'to' ? 'Point B' : 'Point C')) parameters.set(`${key}-name`, p.name)
   }
+  if (study.objective === 'time') parameters.set('objective', 'time')
   if (study.algorithm !== 'dijkstra') parameters.set('algorithm', study.algorithm)
   const duration = Number(study.duration.toFixed(2))
   if (duration !== 30) parameters.set('duration', String(duration))

@@ -186,3 +186,7 @@ footer a { text-decoration: none; pointer-events: auto; }
 }
 
 .depth-first-tip { background: #efdcff; box-shadow: 0 0 7px 3px #c29aef, 0 0 24px 9px #b280ff77; }
+
+.objective-toggle { display: flex; gap: 2px; }
+.objective-toggle button { padding: 6px 8px; font-size: 10px; border: 1px solid #9fb4a933; }
+.objective-toggle button[aria-pressed="true"] { color: #e0eee4; background: #173027; border-color: #86b59b; }

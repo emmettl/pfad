@@ -69,7 +69,7 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
   return singleFrontSearch(graph, start, goal, snapMs)
 }
 
-export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0, estimate?: { potential: Float64Array | Uint32Array; record: HeuristicRecord; ordering?: 'astar' } | { potential: Float64Array; record: ProximityHeuristicRecord; ordering: 'greedy' }, releaseEstimate = false): SearchResult {
+export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0, estimate?: { potential: Float64Array | Uint32Array; record: HeuristicRecord; ordering?: 'astar' } | { potential: Float64Array; record: ProximityHeuristicRecord; ordering: 'greedy' }, releaseEstimate = false, edgeCost?: (edge: number) => number): SearchResult {
   const begun = performance.now(), greedy = estimate?.ordering === 'greedy'
   const n = graph.xy.length / 2, e = graph.from.length
   const distance = new Float64Array(n).fill(Infinity)
@@ -105,7 +105,7 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
         edgeTimes[road * 2] = used; uniqueEdges++
         if (goalProximity && potential) goalProximity[road] = Math.round(255 * (1 - Math.min(1, potential[v] / originEstimate)))
       }
-      const candidate = distance[u] + graph.length[road]
+      const candidate = distance[u] + (edgeCost ? edgeCost(road) : graph.length[road])
       // Greedy keeps its first-discovery tree. Replacing parents by lower
       // costs after expansion would make its stopped route cost inconsistent.
       if (greedy ? distance[v] === Infinity : candidate < distance[v]) {

@@ -11,7 +11,9 @@ Corsica, and Germany. [COUNTRIES.md](COUNTRIES.md) records coverage,
 downloads and immutable releases. Austria joins the catalogue with a complete
 national graph; its [release evidence](evidence/austria-release-2026-10-02/README.md) records validation.
 
-Manual journeys offer Dijkstra, bidirectional Dijkstra, A* and bidirectional A*.
+Manual journeys offer Dijkstra, bidirectional Dijkstra, A*, bidirectional A*,
+greedy best-first, depth-first, breadth-first and a manual
+[estimated road-class time study](TIME.md).
 The recorded computation drives roads, counters and colours; route completion
 has a separate travelling reveal. Map-point selection adds a faint country fill,
 including when outlines are hidden. Playback supports keyboard controls, seeking,

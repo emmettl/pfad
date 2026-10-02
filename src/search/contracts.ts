@@ -45,8 +45,8 @@ export interface Graph {
 export interface Point { name: string; lon: number; lat: number }
 export interface Endpoint extends Point { node: number; snapMetres: number }
 export interface SnappingRecord { version: 'nearby-shared-component/1'; requestedStart: Point; requestedGoal: Point }
-export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar' | 'bidirectional-astar' | 'multisource' | 'greedy' | 'depth-first' | 'breadth-first'
-export interface Meeting { event: number; node: number; lon: number; lat: number; candidateMetres: number }
+export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar' | 'bidirectional-astar' | 'multisource' | 'greedy' | 'depth-first' | 'breadth-first' | 'time-dijkstra'
+export interface Meeting { event: number; node: number; lon: number; lat: number; candidateMetres?: number; candidateMilliseconds?: number }
 export interface HeuristicRecord {
   version: 'feasible-planar-distance/1'
   preparationMs: number
@@ -60,7 +60,7 @@ export interface ProximityHeuristicRecord { version: 'great-circle-proximity/1';
 
 export interface SearchResult {
   dataset?: { identity: string; compiler: string; profile: string; sourceSha256: string; sourceTimestamp: string }
-  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1' | 'astar/1' | 'bidirectional-astar/1' | 'multisource-dijkstra/1' | 'greedy-best-first/1' | 'depth-first/1' | 'breadth-first/1'
+  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1' | 'astar/1' | 'bidirectional-astar/1' | 'multisource-dijkstra/1' | 'greedy-best-first/1' | 'depth-first/1' | 'breadth-first/1' | 'time-dijkstra/1'
   tieBreak: string
   start: Endpoint
   goal: Endpoint
@@ -68,6 +68,10 @@ export interface SearchResult {
   snapMs: number
   snapping?: SnappingRecord
   routeMetres: number | null
+  objective?: 'distance' | 'time'
+  timeHeuristic?: { version: 'feasible-road-class-time/1'; unit: 'millisecond'; preparationMs: number }
+  routeMilliseconds?: number | null
+  timeModel?: { version: 'road-class-time/1'; costUnit: 'millisecond'; rounding: 'nearest-ms-minimum-one'; speedsKph: Record<string, number>; fallbackKph: number; assumptions: string[] }
   routeNodes: Uint32Array
   routeEdges: Uint32Array
   routeReversed: Uint8Array
@@ -79,7 +83,7 @@ export interface SearchResult {
   sources?: [Endpoint, Endpoint, Endpoint]
   requestedSources?: [Point, Point, Point]
   sourceSnappingVersion?: 'nearby-shared-three-source-component/1'
-  territories?: { version: 'three-source-first-examination/1'; sourceNodes: number[]; maximumMetres: number }
+  territories?: { version: 'three-source-first-examination/1'; sourceNodes: number[]; maximumMetres?: number; maximumMilliseconds?: number }
   edgeSources?: Uint8Array
   backwardTimes?: Uint32Array
   goalProximity?: Uint8Array
@@ -100,7 +104,7 @@ export interface SearchResult {
   maxQueue: number
 }
 
-export type Request = { type: 'load'; manifestUrl: string; expectedIdentity?: string; topologyOnly?: boolean; compactDrawing?: boolean; releaseAfterSearch?: boolean } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm; sources?: [Point, Point, Point] }
+export type Request = { type: 'load'; manifestUrl: string; expectedIdentity?: string; topologyOnly?: boolean; compactDrawing?: boolean; releaseAfterSearch?: boolean } | { type: 'search'; requestId: number; start: Point; goal: Point; algorithm: SearchAlgorithm; objective?: 'distance' | 'time'; sources?: [Point, Point, Point] }
 export type Reply =
   | { type: 'progress'; loaded: number; total: number; stage: string }
   | { type: 'manifest'; manifest: StudyManifest; manifestUrl: string }

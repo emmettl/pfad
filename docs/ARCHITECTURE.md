@@ -343,3 +343,11 @@ once. The first-discovery tree minimizes compiled directed connections, not
 metres. Exports preserve `routeGuarantee: fewest-connections` and actual route
 lengths. Gold road examinations form a layer-by-layer wave; no single moving
 focus or invented wave geometry is drawn. This mode stays outside ambient.
+
+### Estimated time
+
+[Time model](TIME.md) documents an independent Distance / Estimated time
+objective for manual searches, with integer millisecond costs derived from the
+existing road-class byte. All four optimal solvers support both objectives.
+Physical route lengths remain separate from time costs; exports retain the
+complete speed model. This first profile adds no download attributes.

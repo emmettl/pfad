@@ -59,7 +59,7 @@ export class AmbientSequence {
       const study = this.pair, territory = result.territories
       const accepted = !!territory && result.algorithm === 'multisource-dijkstra/1' && result.sources?.length === 3 && territory.sourceNodes.length === 3 && territory.sourceNodes.every(count => count > 0) && Number.isFinite(territory.maximumMetres)
       // Coverage distance is a real nearest-source distance, not a route length.
-      this.duration = accepted ? replaySeconds(territory.maximumMetres / 1000) : 30
+      this.duration = accepted ? replaySeconds((territory.maximumMetres ?? 0) / 1000) : 30
       this.records.push({ kind: 'territories', sources: study.sources.map(source => source.id), accepted,
         maximumMetres: territory?.maximumMetres ?? 0, sourceNodes: territory?.sourceNodes ?? [],
         dataset: result.dataset, algorithm: result.algorithm, searchMs: result.searchMs, events: result.trace.length,

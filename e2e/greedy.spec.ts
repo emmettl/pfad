@@ -22,7 +22,7 @@ test('greedy displays real coral exploration, reversible replay and an honest fi
   await expect(page.locator('.search-tip')).toBeHidden()
   await expect(page.locator('.replay-status')).toHaveText('Greedy route found')
   await expect(canvas).toHaveAttribute('data-route-phase', 'complete')
-  const greedyKm = Number((await page.locator('.route-caption em').textContent())!.replace(' km', ''))
+  const greedyKm = parseFloat((await page.locator('.route-caption em').textContent())!)
   await page.screenshot({ path: `test-results/greedy-route-${test.info().project.name}.png` })
   await slider.fill('15')
   await expect(page.getByTestId('examined-count')).toHaveText(halfway!)
