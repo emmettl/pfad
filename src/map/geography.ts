@@ -1,4 +1,7 @@
 import * as THREE from 'three'
+import { LineSegments2 } from 'three/addons/lines/LineSegments2.js'
+import { LineSegmentsGeometry } from 'three/addons/lines/LineSegmentsGeometry.js'
+import { LineMaterial } from 'three/addons/lines/LineMaterial.js'
 import type { MapBoundary } from '@motionstudies/core/domain/boundary'
 import type { MapWaterBodies } from '@motionstudies/core/domain/lakes'
 import type { Geography } from './geography-loader.ts'
@@ -20,20 +23,23 @@ export function createGeography(project: (point: { lon: number; lat: number }) =
   const boundary = context.boundary as MapBoundary
   const water = context.water as MapWaterBodies
   const group = new THREE.Group(); group.renderOrder = -2; group.userData.country = context.country; group.userData.segments = 0
-  function outlines(rings: readonly (readonly (readonly [number, number])[])[], colour: string, opacity: number) {
+  function outlines(rings: readonly (readonly (readonly [number, number])[])[], colour: string, opacity: number, width: number) {
     const positions: number[] = []
     for (const ring of rings) for (let i = 1; i < ring.length; i++) {
       const a = project({ lon: ring[i - 1][0], lat: ring[i - 1][1] }), b = project({ lon: ring[i][0], lat: ring[i][1] })
       positions.push(a.x, a.y, 0, b.x, b.y, 0)
     }
+    if (!positions.length) return
     group.userData.segments += positions.length / 6
-    const geometry = new THREE.BufferGeometry()
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
-    const material = new THREE.LineBasicMaterial({ color: colour, opacity, transparent: true, depthTest: false, depthWrite: false, toneMapped: false })
-    const lines = new THREE.LineSegments(geometry, material); lines.frustumCulled = false; group.add(lines)
+    // Native WebGL lines are one framebuffer pixel wide, which becomes less
+    // than one CSS pixel on high-density phones. Screen-space strips preserve
+    // a readable reference stroke across pixel ratios, resizing and zooming.
+    const geometry = new LineSegmentsGeometry().setPositions(positions)
+    const material = new LineMaterial({ color: colour, opacity, linewidth: width, transparent: true, depthTest: false, depthWrite: false, toneMapped: false })
+    const lines = new LineSegments2(geometry, material); lines.frustumCulled = false; group.add(lines)
   }
-  outlines(boundary.rings, '#73847e', .18)
-  outlines(water.lakes.flatMap(lake => lake.polygons.flatMap(polygon => polygon)), '#648d92', .18)
+  outlines(boundary.rings, '#8ba499', .48, 1.25)
+  outlines(water.lakes.flatMap(lake => lake.polygons.flatMap(polygon => polygon)), '#80a8b1', .44, 1.1)
   return group
 }
 export function disposeGeography(group: THREE.Group) {

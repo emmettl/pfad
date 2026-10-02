@@ -58,3 +58,5 @@ that time; its older counts and algorithm sets are not current feature limits.
 - [Whole-US desktop feasibility](evidence/us-desktop-2026-10-02/README.md): complete national graph, Chromium/WebKit coast-to-coast tests, and measured rendering limits.
 
 - [Exact replay drawing optimization](evidence/replay-drawing-2026-10-02/README.md): temporal batching, viewport culling, reduced GPU geometry and UK/Germany/US validation.
+
+- [Phone outline visibility](evidence/outline-visibility-2026-10-02/README.md): readable screen-space border/lake strokes and before/after pixel checks.

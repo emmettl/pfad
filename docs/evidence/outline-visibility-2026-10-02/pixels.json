@@ -1,0 +1,42 @@
+[
+  {
+    "engine": "webkit",
+    "version": "before",
+    "width": 1179,
+    "height": 2556,
+    "changedPixels": 16790,
+    "pixelsAtLeast20Levels": 1028,
+    "meanChangedPixelDifference": 9.701012507444908,
+    "maximumDifference": 40
+  },
+  {
+    "engine": "webkit",
+    "version": "after",
+    "width": 1179,
+    "height": 2556,
+    "changedPixels": 25372,
+    "pixelsAtLeast20Levels": 17517,
+    "meanChangedPixelDifference": 55.94852593410058,
+    "maximumDifference": 153
+  },
+  {
+    "engine": "chromium",
+    "version": "before",
+    "width": 1179,
+    "height": 2556,
+    "changedPixels": 17443,
+    "pixelsAtLeast20Levels": 521,
+    "meanChangedPixelDifference": 9.268302470905235,
+    "maximumDifference": 41
+  },
+  {
+    "engine": "chromium",
+    "version": "after",
+    "width": 1179,
+    "height": 2556,
+    "changedPixels": 25895,
+    "pixelsAtLeast20Levels": 20610,
+    "meanChangedPixelDifference": 54.69094419772157,
+    "maximumDifference": 150
+  }
+]
