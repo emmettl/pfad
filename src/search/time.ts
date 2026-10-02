@@ -39,7 +39,7 @@ export function timeGraph(graph: Graph, classes: string[]) {
     if (ms > 0xffffffff) throw new Error('Time cost exceeds the recording format')
     return ms
   })
-  return { ...graph, length }
+  return { ...graph, length, routingObjective: 'time' as const }
 }
 export function annotateTime(result: SearchResult, graph: Graph, weighted: Graph, optimizes: boolean) {
   result.objective = 'time'

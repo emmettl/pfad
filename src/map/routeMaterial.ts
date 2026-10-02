@@ -2,7 +2,7 @@ import * as THREE from 'three'
 
 export function createRouteMaterial() {
   return new THREE.ShaderMaterial({
-    uniforms: { uColour: { value: new THREE.Color(.76, .98, .81) }, uHeadColour: { value: new THREE.Color(1, 1, .88) }, uProgress: { value: 0 }, uEnergy: { value: 0 }, uWidth: { value: 5 }, uResolution: { value: new THREE.Vector2(1, 1) } },
+    uniforms: { uEmphasis: { value: 1 }, uColour: { value: new THREE.Color(.76, .98, .81) }, uHeadColour: { value: new THREE.Color(1, 1, .88) }, uProgress: { value: 0 }, uEnergy: { value: 0 }, uWidth: { value: 5 }, uResolution: { value: new THREE.Vector2(1, 1) } },
     vertexShader: `
       attribute vec2 tangent;
       attribute float across;
@@ -24,6 +24,7 @@ export function createRouteMaterial() {
     fragmentShader: `
       uniform float uProgress;
       uniform float uEnergy;
+      uniform float uEmphasis;
       uniform vec3 uColour;
       uniform vec3 uHeadColour;
       uniform float uWidth;
@@ -31,7 +32,7 @@ export function createRouteMaterial() {
       varying float vDistance;
       void main() {
         if (vDistance > uProgress) discard;
-        float transverse = abs(vAcross) * uWidth;
+        float transverse = abs(vAcross) * uWidth / uEmphasis;
         float core = 1. - smoothstep(.35, 1.25, transverse);
         float halo = exp(-transverse * transverse / 7.);
         float head = uProgress < 1. ? exp(-(uProgress - vDistance) / .025) : 0.;

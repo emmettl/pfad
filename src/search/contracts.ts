@@ -30,6 +30,7 @@ export interface StudyManifest {
 }
 
 export interface Graph {
+  routingObjective?: 'time'
   xy: Int32Array
   from: Uint32Array
   to: Uint32Array

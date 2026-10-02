@@ -71,6 +71,7 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
 
 export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0, estimate?: { potential: Float64Array | Uint32Array; record: HeuristicRecord; ordering?: 'astar' } | { potential: Float64Array; record: ProximityHeuristicRecord; ordering: 'greedy' }, releaseEstimate = false, edgeCost?: (edge: number) => number): SearchResult {
   const begun = performance.now(), greedy = estimate?.ordering === 'greedy'
+  const focused = greedy || !!estimate && graph.routingObjective === 'time'
   const n = graph.xy.length / 2, e = graph.from.length
   const distance = new Float64Array(n).fill(Infinity)
   const predecessor = new Int32Array(n).fill(-1), previousEdge = new Int32Array(n).fill(-1)
@@ -96,7 +97,7 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
     const u = heap.pop()
     if (settled[u]) continue
     settled[u] = 1; exploredNodes++; record(0, u)
-    if (greedy) { focusEvents.push(used); focusCoordinates.push(graph.xy[u * 2], graph.xy[u * 2 + 1]) }
+    if (focused) { focusEvents.push(used); focusCoordinates.push(graph.xy[u * 2], graph.xy[u * 2 + 1]) }
     if (u === goal.node) break
     for (let a = graph.offsets[u]; a < graph.offsets[u + 1]; a++) {
       const v = graph.arcTo[a], road = graph.arcEdge[a]
@@ -132,9 +133,9 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
   return {
     algorithm: greedy ? 'greedy-best-first/1' : estimate ? 'astar/1' : 'dijkstra/1',
     routeGuarantee: greedy ? 'first-found' : undefined,
-    focusVersion: greedy ? 'expanded-node-focus/1' : undefined,
-    focusEvents: greedy ? Uint32Array.from(focusEvents) : undefined,
-    focusCoordinates: greedy ? Int32Array.from(focusCoordinates) : undefined,
+    focusVersion: focused ? 'expanded-node-focus/1' : undefined,
+    focusEvents: focused ? Uint32Array.from(focusEvents) : undefined,
+    focusCoordinates: focused ? Int32Array.from(focusCoordinates) : undefined,
     proximityHeuristic: estimate?.ordering === 'greedy' ? estimate.record : undefined,
     tieBreak: greedy ? 'great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded' : estimate ? 'cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order' : 'distance, then ascending node id; neighbours in compiler edge order',
     start, goal, searchMs, snapMs, routeMetres,
