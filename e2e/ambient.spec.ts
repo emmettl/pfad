@@ -68,12 +68,22 @@ test('ambient binds genuine journeys, reuses loaded chunks, and exits into the c
   await page.keyboard.press('End'); await page.keyboard.press('Space')
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'hold')
   const first = await page.locator('.route-caption').textContent()
+  const canvas = page.locator('canvas')
+  await canvas.dispatchEvent('wheel', { deltaY: -2400, clientX: 100, clientY: 100 })
+  await expect.poll(async () => JSON.parse((await canvas.getAttribute('data-view'))!).zoom).toBeGreaterThan(5)
+  const closeView = await canvas.getAttribute('data-view')
   chunks.length = 0
   await page.getByRole('button', { name: 'Next journey' }).press('Space')
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'replay', { timeout: 45000 })
   expect(await page.locator('.route-caption').textContent()).not.toBe(first)
   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'bidirectional-dijkstra/1')
   expect(chunks).toEqual([])
+  await expect.poll(() => canvas.getAttribute('data-view')).not.toBe(closeView)
+  await expect.poll(async () => page.locator('.map-marker').evaluateAll(markers => markers.every(marker => {
+    const box = marker.getBoundingClientRect()
+    return box.x > 0 && box.y > 0 && box.right < innerWidth && box.bottom < innerHeight
+  }))).toBe(true)
+
   await page.getByRole('button', { name: 'Exit ambient' }).press('Space')
   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'off')
   await expect(page.getByRole('button', { name: 'Play', exact: true })).toBeVisible()

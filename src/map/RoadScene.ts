@@ -125,6 +125,7 @@ export class RoadScene {
   lastPinch = 0
   moved = 0
   frame = 0
+  private viewTransition?: { from: { x: number; y: number; zoom: number }; to: { x: number; y: number; zoom: number }; elapsed: number }
   previousFrame = 0
   dirty = true
   renderInterval = 0
@@ -186,6 +187,7 @@ export class RoadScene {
         this.updateRoute()
         if (finished) { this.onRouteRevealChange?.(false); this.onRouteRevealComplete?.() }
       }
+      this.advanceView(Math.min(now - this.previousFrame, 100))
       this.previousFrame = now
       if (this.dirty && now - this.lastRendered >= this.renderInterval - .5) {
         this.lastRendered = now
@@ -486,7 +488,10 @@ export class RoadScene {
     this.dirty = true
   }
   motionChange = () => {
-    if (this.reducedMotion.matches) { this.flash.clear(); this.updateFlash() }
+    if (this.reducedMotion.matches) {
+      if (this.viewTransition) this.setView(this.viewTransition.to)
+      this.flash.clear(); this.updateFlash()
+    }
     if (this.reducedMotion.matches && this.reveal.active) {
       this.reveal.finish(); this.updateRoute(); this.onRouteRevealChange?.(false); this.onRouteRevealComplete?.()
     }
@@ -519,14 +524,47 @@ export class RoadScene {
     this.camera.updateProjectionMatrix(); this.dirty = true
   }
   resetView() {
+    this.cancelReframe()
     if (!this.manifest) return
     const [left, bottom, right, top] = this.manifest.bounds, aspect = this.width / this.height
     this.halfHeight = Math.max((top - bottom) / 2, (right - left) / (2 * aspect)) * 1.12
     this.camera.position.x = (right + left) / 2; this.camera.position.y = (top + bottom) / 2; this.camera.zoom = 1; this.resize()
     this.onViewChange?.(this.getView())
   }
+  reframeJourney() {
+    if (!this.manifest) return
+    let left = Infinity, bottom = Infinity, right = -Infinity, top = -Infinity
+    for (const batch of this.roadBatches) {
+      const b = batch.bounds
+      left = Math.min(left, b[0]); bottom = Math.min(bottom, b[1])
+      right = Math.max(right, b[2]); top = Math.max(top, b[3])
+    }
+    for (const point of this.points) {
+      const p = this.project(point)
+      left = Math.min(left, p.x); bottom = Math.min(bottom, p.y)
+      right = Math.max(right, p.x); top = Math.max(top, p.y)
+    }
+    if (!Number.isFinite(left)) return
+    const half = Math.max((top - bottom) / 2, (right - left) / (2 * this.width / this.height), this.halfHeight / 24) * 1.3
+    const to = { x: (left + right) / 2, y: (bottom + top) / 2, zoom: this.halfHeight / half }
+    if (this.reducedMotion.matches) { this.setView(to); return }
+    this.viewTransition = { from: this.getView(), to, elapsed: 0 }
+  }
+  cancelReframe() { this.viewTransition = undefined }
+  private advanceView(delta: number) {
+    const transition = this.viewTransition
+    if (!transition || document.hidden) return
+    transition.elapsed += delta
+    const t = Math.min(transition.elapsed / 1800, 1), eased = t * t * (3 - 2 * t)
+    this.camera.position.x = transition.from.x + (transition.to.x - transition.from.x) * eased
+    this.camera.position.y = transition.from.y + (transition.to.y - transition.from.y) * eased
+    this.camera.zoom = Math.exp(Math.log(transition.from.zoom) + Math.log(transition.to.zoom / transition.from.zoom) * eased)
+    this.camera.updateProjectionMatrix(); this.dirty = true
+    if (t === 1) { this.cancelReframe(); this.onViewChange?.(this.getView()) }
+  }
   getView() { return { x: this.camera.position.x, y: this.camera.position.y, zoom: this.camera.zoom } }
   setView(view: { x: number; y: number; zoom: number }) {
+    this.cancelReframe()
     this.camera.position.x = view.x; this.camera.position.y = view.y; this.camera.zoom = view.zoom
     this.camera.updateProjectionMatrix(); this.dirty = true
     this.onViewChange?.(this.getView())
@@ -536,6 +574,7 @@ export class RoadScene {
     return new THREE.Vector3((x - bounds.left) / this.width * 2 - 1, 1 - (y - bounds.top) / this.height * 2, 0).unproject(this.camera)
   }
   zoom(factor: number, x: number, y: number) {
+    this.cancelReframe()
     const before = this.screenPoint(x, y)
     this.camera.zoom = Math.min(24, Math.max(.6, this.camera.zoom * factor)); this.camera.updateProjectionMatrix()
     const after = this.screenPoint(x, y)
@@ -543,7 +582,7 @@ export class RoadScene {
     this.onViewChange?.(this.getView())
   }
   wheel = (event: WheelEvent) => { event.preventDefault(); this.zoom(Math.exp(-event.deltaY * .001), event.clientX, event.clientY) }
-  pointerDown = (event: PointerEvent) => { this.renderer.domElement.setPointerCapture(event.pointerId); this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY }); if (this.pointers.size === 1) this.moved = 0; if (this.pointers.size === 2) this.lastPinch = this.pinchDistance() }
+  pointerDown = (event: PointerEvent) => { this.cancelReframe(); this.renderer.domElement.setPointerCapture(event.pointerId); this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY }); if (this.pointers.size === 1) this.moved = 0; if (this.pointers.size === 2) this.lastPinch = this.pinchDistance() }
   pinchDistance() { const [a, b] = [...this.pointers.values()]; return Math.hypot(a.x - b.x, a.y - b.y) }
   pointerMove = (event: PointerEvent) => {
     const previous = this.pointers.get(event.pointerId); if (!previous) return
