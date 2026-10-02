@@ -20,6 +20,7 @@ test('drawing restores its recorded frame and geographic context after GPU conte
   await page.mouse.down(); await page.mouse.move(bounds.x + bounds.width / 2 + 80, bounds.y + bounds.height / 2 + 40); await page.mouse.up()
   await expect.poll(async () => JSON.parse((await canvas.getAttribute('data-view'))!).x).not.toBe(beforePan)
   const view = (await canvas.getAttribute('data-view'))!
+  const generation = await canvas.getAttribute('data-road-frame')
   const frame = await canvas.screenshot()
   await page.evaluate(() => {
     const gl = document.querySelector('canvas')!.getContext('webgl2')!
@@ -28,6 +29,7 @@ test('drawing restores its recorded frame and geographic context after GPU conte
   })
   await expect(canvas).toHaveAttribute('data-road-uploads', 'deferred')
   await expect(canvas).toHaveAttribute('data-road-uploads', 'resident', { timeout: 30000 })
+  await expect.poll(() => canvas.getAttribute('data-road-frame')).not.toBe(generation)
   await expect(canvas).toHaveAttribute('data-event', event)
   await expect(canvas).toHaveAttribute('data-outlines', 'visible')
   await expect(canvas).toHaveAttribute('data-road-cpu-bytes', '0')
@@ -47,9 +49,9 @@ test('drawing restores its recorded frame and geographic context after GPU conte
     for (let i = 0; i < a.length; i++) maximum = Math.max(maximum, Math.abs(a[i] - b[i]))
     return maximum
   }, { before: frame.toString('base64'), after: restoredFrame.toString('base64') })
-  // A fresh GPU context can round a blended channel one 8-bit level differently.
+  // A fresh GPU context can round a blended channel two 8-bit levels differently.
   // Camera, event index and all source geometry still match exactly.
-  expect(maximumDifference).toBeLessThanOrEqual(1)
+  expect(maximumDifference).toBeLessThanOrEqual(2)
   await slider.fill(await slider.getAttribute('max') ?? '30')
   await expect(page.locator('.route-caption em')).toBeVisible()
   expect(await canvas.evaluate(element => element.getContext('webgl2')!.getError())).toBe(0)

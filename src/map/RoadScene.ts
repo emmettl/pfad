@@ -184,6 +184,7 @@ export class RoadScene {
         this.cullRoadBatches(); this.renderer.render(this.scene, this.camera); this.placeMarkers()
         canvas.dataset.maxFps = this.renderInterval ? '30' : '60'
         canvas.dataset.event = String(this.material.uniforms.uEvent.value)
+        if (canvas.dataset.roadUploads === 'resident') canvas.dataset.roadFrame = String(this.drawingGeneration)
         canvas.dataset.routePhase = !this.reveal.visible ? 'hidden' : this.reveal.active ? 'revealing' : 'complete'
         canvas.dataset.routeProgress = String(this.routeMaterial.uniforms.uProgress.value)
         canvas.dataset.routeEnergy = String(this.routeMaterial.uniforms.uEnergy.value)
