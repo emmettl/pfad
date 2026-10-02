@@ -1,3 +1,4 @@
+import { releaseBuffers } from './release-buffers.ts'
 import type { Endpoint, Graph, Point, SnappingRecord } from './contracts.ts'
 
 const metresPerDegree = 111195.0802, maximumSnapMetres = 2000
@@ -25,6 +26,7 @@ function index(graph: Graph) {
     component[i] = root(i)
     if (!graph.incoming[i] || graph.offsets[i] === graph.offsets[i + 1]) eligible[i] = 0
   }
+  releaseBuffers(rank)
   const result = { eligible, component }; indexes.set(graph, result)
   return result
 }
@@ -79,4 +81,13 @@ export function snapSources(graph: Graph, points: [Point, Point, Point]) {
     if (total < best || (total === best && first.node < sources[0].node)) { best = total; sources = [first, second, third] }
   }
   return { sources: sources as [Endpoint, Endpoint, Endpoint], snapMs: performance.now() - begun }
+}
+
+// One-shot phone workers no longer need the snapping index after endpoints
+// are selected. Reusable workers keep it for subsequent journeys.
+export function releaseEndpointIndex(graph: Graph) {
+  const lookup = indexes.get(graph)
+  if (!lookup) return 0
+  indexes.delete(graph)
+  return releaseBuffers(lookup.eligible, lookup.component)
 }

@@ -1,0 +1,14 @@
+{
+  "note": "Test-only wrapper of ArrayBuffer.transfer(0). Bytes count distinct scratch buffers detached across phases, not a measured peak RSS reduction.",
+  "algorithm": "bidirectional-astar/1",
+  "events": 9147727,
+  "routeMetres": 578130.91,
+  "scratch": {
+    "loadBytes": 41954504,
+    "searchBytes": 511243474,
+    "calls": 25,
+    "searching": true
+  },
+  "traceSha256": "499db21b077d114a25610c85d764bc37a515dde186d7cf446565376e66f07b8c",
+  "errors": []
+}

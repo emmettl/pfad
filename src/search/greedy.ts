@@ -15,5 +15,5 @@ export function prepareProximity(graph: Graph, start: number, goal: number) {
   return { potential, record, ordering: 'greedy' as const }
 }
 export function greedy(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0) {
-  return singleFrontSearch(graph, start, goal, snapMs, prepareProximity(graph, start.node, goal.node))
+  return singleFrontSearch(graph, start, goal, snapMs, prepareProximity(graph, start.node, goal.node), true)
 }

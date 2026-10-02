@@ -1,10 +1,11 @@
+import { releaseBuffers } from './release-buffers.ts'
 import { packDrawing } from '../map/drawing-codec.ts'
 import { longitudeOffset } from './projection.ts'
 import type { Graph, Reply, Request, StudyManifest } from './contracts.ts'
 import { compileGraph, dijkstra, snapEndpoints } from './engine.ts'
 import { bidirectional, compileReverse, type ReverseGraph } from './bidirectional.ts'
 import { multisource } from './multisource.ts'
-import { snapSources } from './endpoints.ts'
+import { releaseEndpointIndex, snapSources } from './endpoints.ts'
 import { breadthFirst } from './breadth-first.ts'
 import { depthFirst } from './depth-first.ts'
 import { greedy } from './greedy.ts'
@@ -12,6 +13,7 @@ import { astar } from './astar.ts'
 import { validateManifest, manifestIdentityPayload } from './manifest.ts'
 import { loadChunks, sha256 } from './chunks.ts'
 
+let disposable = false
 let graph: Graph | undefined
 let manifest: StudyManifest | undefined
 let reverse: ReverseGraph | undefined
@@ -99,13 +101,19 @@ async function load(url: string, expectedIdentity?: string, topologyOnly = false
 self.addEventListener('message', async (event: MessageEvent<Request>) => {
   const request = event.data
   try {
-    if (request.type === 'load') await load(request.manifestUrl, request.expectedIdentity, request.topologyOnly, request.compactDrawing)
+    if (request.type === 'load') { disposable = request.releaseAfterSearch ?? false; await load(request.manifestUrl, request.expectedIdentity, request.topologyOnly, request.compactDrawing) }
     else {
       if (!graph || !manifest) throw new Error('The national graph has not finished loading')
       if (request.algorithm === 'multisource' && !request.sources) throw new Error('Three sources are required for a territory study')
       const sourceEndpoints = request.sources ? snapSources(graph, request.sources) : undefined
       const endpoints = sourceEndpoints ? { start: sourceEndpoints.sources[0], goal: sourceEndpoints.sources[1], snapMs: sourceEndpoints.snapMs, snapping: undefined } : snapEndpoints(graph, request.start, request.goal)
       if (request.algorithm === 'bidirectional' || request.algorithm === 'astar' || request.algorithm === 'bidirectional-astar') reverse ??= compileReverse(graph)
+      if (disposable) {
+        // Eligibility and weak components have served their snapping purpose;
+        // the directed CSR and reverse graph already contain all routing arcs.
+        releaseEndpointIndex(graph)
+        releaseBuffers(graph.direction, graph.category, graph.incoming)
+      }
       const result = request.algorithm === 'multisource' && sourceEndpoints ? multisource(graph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar') && reverse
         ? bidirectional(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs, request.algorithm === 'bidirectional-astar')
         : request.algorithm === 'astar' && reverse ? astar(graph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
@@ -113,6 +121,7 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }
       result.snapping = endpoints.snapping
       if (sourceEndpoints) { result.requestedSources = request.sources; result.sourceSnappingVersion = 'nearby-shared-three-source-component/1' }
+      if (disposable) { graph = undefined; reverse = undefined }
       reply({ type: 'result', requestId: request.requestId, result }, [result.trace.buffer, result.checkpoints.buffer, result.edgeTimes.buffer, result.routeNodes.buffer, result.routeEdges.buffer, result.routeReversed.buffer, result.routeLengths.buffer, ...(result.backwardTimes ? [result.backwardTimes.buffer] : []), ...(result.focusEvents ? [result.focusEvents.buffer] : []), ...(result.focusCoordinates ? [result.focusCoordinates.buffer] : []), ...(result.edgeSources ? [result.edgeSources.buffer] : []), ...(result.goalProximity ? [result.goalProximity.buffer] : [])])
     }
   } catch (error) {

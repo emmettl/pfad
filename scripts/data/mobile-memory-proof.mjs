@@ -9,6 +9,9 @@ const base = process.argv[2]
 const country = process.env.PFAD_PROOF_COUNTRY ?? 'de'
 const configurations = { de: { from: 'berlin', to: 'munich', vertices: 32951556, chunks: 120 }, uk: { from: 'london', to: 'edinburgh', vertices: 23678988, chunks: 83 } }
 const configuration = configurations[country]
+const firstMode = process.env.PFAD_PROOF_MODE ?? 'bidirectional'
+const firstAlgorithm = firstMode === 'bidirectional-astar' ? 'bidirectional-astar/1' : 'bidirectional-dijkstra/1'
+if (!['bidirectional', 'bidirectional-astar'].includes(firstMode)) throw Error('Unknown proof mode')
 if (!configuration) throw Error('Unknown proof country')
 const output = process.argv[3] ?? '.cache/mobile-memory/phone-proof.json'
 const server = base ? null : await preview({ build: { outDir: process.env.PFAD_PROOF_DIST ?? 'dist' }, preview: { host: '127.0.0.1', port: 4199, strictPort: true } })
@@ -31,18 +34,18 @@ await page.addInitScript(country => {
         if (data.type === 'ready') record.loading = data.measurements
         if (data.type === 'result') {
           const r = data.result
-          const result = { algorithm: r.algorithm, routeMetres: r.routeMetres, events: r.trace.length, drawingVertices: document.querySelector('canvas')?.dataset.roadVertices }
+          const result = { algorithm: r.algorithm, routeMetres: r.routeMetres, events: r.trace.length, scratch: r.memoryProof, drawingVertices: document.querySelector('canvas')?.dataset.roadVertices }
           window.memoryProof.results.push(result)
           crypto.subtle.digest('SHA-256', r.trace).then(hash => { result.traceSha256 = Array.from(new Uint8Array(hash), n => n.toString(16).padStart(2, '0')).join('') })
         }
       })
     }
-    postMessage(request, ...args) { this.record.requests.push({ type: request.type, topologyOnly: request.topologyOnly, roadUploads: document.querySelector('canvas')?.dataset.roadUploads }); super.postMessage(request, ...args) }
+    postMessage(request, ...args) { this.record.requests.push({ type: request.type, topologyOnly: request.topologyOnly, releaseAfterSearch: request.releaseAfterSearch, roadUploads: document.querySelector('canvas')?.dataset.roadUploads }); super.postMessage(request, ...args) }
     terminate() { this.record.terminated = true; super.terminate() }
   }
 }, country)
 try {
-  await page.goto(new URL(`?country=${country}&from=${configuration.from}&to=${configuration.to}&algorithm=bidirectional&duration=15`, base || 'http://127.0.0.1:4199/').href)
+  await page.goto(new URL(`?country=${country}&from=${process.env.PFAD_PROOF_FROM ?? configuration.from}&to=${process.env.PFAD_PROOF_TO ?? configuration.to}&algorithm=${firstMode}&duration=15`, base || 'http://127.0.0.1:4199/').href)
   const ready = async algorithm => {
     await expect(page.locator('.study')).toHaveAttribute('data-algorithm', algorithm, { timeout: 180000 })
     await expect(page.getByRole('button', { name: 'Search', exact: true })).toBeEnabled({ timeout: 180000 })
@@ -62,11 +65,11 @@ try {
     await page.getByRole('slider', { name: 'Search replay' }).fill('15')
     await expect(page.locator('.route-caption em')).toBeVisible()
   }
-  await ready('bidirectional-dijkstra/1')
+  await ready(firstAlgorithm)
   await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('astar')
   await ready('astar/1')
-  await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption('bidirectional')
-  await ready('bidirectional-dijkstra/1')
+  await page.getByRole('combobox', { name: 'Search algorithm' }).selectOption(firstMode)
+  await ready(firstAlgorithm)
   await expect.poll(() => page.evaluate(() => window.memoryProof.results.every(result => result.traceSha256))).toBe(true)
   // Rebuild from lossless compressed copies after a real WebGL context loss.
   await page.evaluate(() => {

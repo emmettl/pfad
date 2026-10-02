@@ -1,0 +1,17 @@
+{
+  "validatedBase": "e4ff9dd8c38552438171120915bd32bbd7d4f138",
+  "integratedBase": "b55a69e0ef5762be44bb64fff695f0bafe7860ff",
+  "fileSha256": {
+    "src/App.tsx": "0c6ccc479ab2719e858e70560f81f7d066681bca7af6863de30897c80f03f5b8",
+    "src/search/astar.ts": "68dfa299877e5609bf65ed09ddb19a015fad5fcdbcafc4fee63a96b27e4c7e34",
+    "src/search/bidirectional.ts": "f97a104eff79aff07d2afc1942453ecf0caec8920686fa76750cab9ac823e59c",
+    "src/search/engine.ts": "dadbf06811598b238894e58c74e752432e3a3333f702ad0e97076d2dce8e30b4",
+    "src/search/endpoints.ts": "58f82749f634824baa8e81c1d5204cee3b2233e93cd3e240e64cd6b43d90c996",
+    "src/search/greedy.ts": "b9988308ebe2be925b3595fb920afa960f960f12eeb672bf807bd63cb856d46a",
+    "src/search/search.worker.ts": "708bf11d8775e9f8fcb59e582fe1416854fe675ce37dea3b762c195a2dac091e",
+    "src/search/release-buffers.ts": "c6e05b125bfeccbc6a8cf5a2774a2428c5d439b45e5fa7a0f5e73399536a6d5d",
+    "tests/search-memory.test.mjs": "e4071fe6c8bc3be60db0936ca2cd574034dfcfd0afe25505a307cb3a1eab5854",
+    "scripts/data/mobile-memory-proof.mjs": "242b74f9920b05c8f1da91f865a309c53d9d8d6113c8c815a3ddafa825109414"
+  },
+  "contractSha256": "04bd96df3e2fb06f7fdfbcf5615f9d4133acc42fffe3787327d6ecb44824e066"
+}

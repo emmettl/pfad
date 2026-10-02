@@ -1,0 +1,33 @@
+
+> pfad@0.0.0 test:browser
+> playwright test e2e/astar.spec.ts e2e/greedy.spec.ts
+
+[WebServer] (node:32626) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 6 tests using 2 workers
+
+(node:32627) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:32628) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/6] [chromium] › e2e/greedy.spec.ts:4:1 › greedy displays real coral exploration, reversible replay and an honest first-found route
+[2/6] [chromium] › e2e/astar.spec.ts:11:1 › A* reveals a real goal-directed search, restores paused frames and preserves the route across mode changes
+[3/6] [chromium] › e2e/greedy.spec.ts:50:1 › greedy naturally ends the search and reveals its route before resting
+(node:32667) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[4/6] [webkit-mobile] › e2e/astar.spec.ts:11:1 › A* reveals a real goal-directed search, restores paused frames and preserves the route across mode changes
+[5/6] [webkit-mobile] › e2e/greedy.spec.ts:4:1 › greedy displays real coral exploration, reversible replay and an honest first-found route
+(node:32686) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[6/6] [webkit-mobile] › e2e/greedy.spec.ts:50:1 › greedy naturally ends the search and reveals its route before resting
+  6 passed (16.4s)

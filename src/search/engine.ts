@@ -1,4 +1,5 @@
 import type { Endpoint, Graph, HeuristicRecord, ProximityHeuristicRecord, SearchResult } from './contracts.ts'
+import { releaseBuffers } from './release-buffers.ts'
 import { EventTrace } from './trace.ts'
 export { snapEndpoints } from './endpoints.ts'
 
@@ -20,6 +21,7 @@ export function compileGraph(graph: Omit<Graph, 'offsets' | 'arcTo' | 'arcEdge' 
     if (d !== 2) { const a = cursor[u]++; arcTo[a] = v; arcEdge[a] = e }
     if (d !== 1) { const a = cursor[v]++; arcTo[a] = u; arcEdge[a] = e }
   }
+  releaseBuffers(cursor)
   return { ...graph, offsets, incoming, arcTo, arcEdge }
 }
 
@@ -67,7 +69,7 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
   return singleFrontSearch(graph, start, goal, snapMs)
 }
 
-export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0, estimate?: { potential: Float64Array; record: HeuristicRecord; ordering?: 'astar' } | { potential: Float64Array; record: ProximityHeuristicRecord; ordering: 'greedy' }): SearchResult {
+export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0, estimate?: { potential: Float64Array | Uint32Array; record: HeuristicRecord; ordering?: 'astar' } | { potential: Float64Array; record: ProximityHeuristicRecord; ordering: 'greedy' }, releaseEstimate = false): SearchResult {
   const begun = performance.now(), greedy = estimate?.ordering === 'greedy'
   const n = graph.xy.length / 2, e = graph.from.length
   const distance = new Float64Array(n).fill(Infinity)
@@ -125,6 +127,8 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
     }
     routeNodes.reverse(); routeEdges.reverse()
   }
+  const routeMetres = Number.isFinite(distance[goal.node]) ? distance[goal.node] / 100 : null
+  releaseBuffers(distance, predecessor, previousEdge, settled, heap.nodes, heap.scores, releaseEstimate ? potential : undefined)
   return {
     algorithm: greedy ? 'greedy-best-first/1' : estimate ? 'astar/1' : 'dijkstra/1',
     routeGuarantee: greedy ? 'first-found' : undefined,
@@ -133,7 +137,7 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
     focusCoordinates: greedy ? Int32Array.from(focusCoordinates) : undefined,
     proximityHeuristic: estimate?.ordering === 'greedy' ? estimate.record : undefined,
     tieBreak: greedy ? 'great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded' : estimate ? 'cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order' : 'distance, then ascending node id; neighbours in compiler edge order',
-    start, goal, searchMs, snapMs, routeMetres: Number.isFinite(distance[goal.node]) ? distance[goal.node] / 100 : null,
+    start, goal, searchMs, snapMs, routeMetres,
     routeNodes: Uint32Array.from(routeNodes), routeEdges: Uint32Array.from(routeEdges),
     routeReversed: Uint8Array.from(routeEdges, (edge, i) => Number(graph.from[edge] !== routeNodes[i])),
     routeLengths: Uint32Array.from(routeEdges, edge => graph.length[edge]),

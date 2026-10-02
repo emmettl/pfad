@@ -1,0 +1,13 @@
+{
+  "nodes": 10488625,
+  "edges": 11974914,
+  "oldRetainedBalancedBytes": 167818000,
+  "newRetainedBalancedBytes": 41954500,
+  "balancedReductionBytes": 125863500,
+  "phoneSnappingIndexBytes": 52443125,
+  "phoneDirectionCategoryIncomingBytes": 65904328,
+  "phonePreSearchReductionBytes": 118347453,
+  "combinedRetainedReductionBytes": 244210953,
+  "bidirectionalFinalScratchBytesWithoutHeap": 314658750,
+  "physicalIphonePeakMeasured": false
+}

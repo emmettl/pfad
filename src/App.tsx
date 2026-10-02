@@ -189,13 +189,13 @@ export function App() {
           if (disposed || reply.requestId !== currentRequest.current) return
           setResult(reply.result); map?.setResult(reply.result); setBusy(false); seek(opening.progress); if (frame?.view) map?.setView(frame.view); setPlaying(opening.playing && (!sequence.state.active || sequence.state.running))
         }
-        if (reply.type === 'error' && (reply.requestId === undefined || reply.requestId === currentRequest.current)) { setError(reply.message); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail(reply.message) }
+        if (reply.type === 'error' && (reply.requestId === undefined || reply.requestId === currentRequest.current)) { if (releaseAfterSearch && reply.requestId !== undefined) { engine.terminate(); activeEngine = null; worker.current = null } setError(reply.message); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail(reply.message) }
       }
       engine.onerror = () => { setError('The road search could not be started. Please try again.'); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail('The road search could not be started.') }
       // Keep a window connection: WebKit private contexts otherwise drop their
       // worker-only cache when retry terminates the sole cache owner.
       cacheOwner.current ??= (async () => { try { return await globalThis.caches?.open(ROAD_CACHE_NAME) } catch { return undefined } })()
-      void cacheOwner.current.then(() => { if (!disposed && worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity, topologyOnly, compactDrawing: country.large }) })
+      void cacheOwner.current.then(() => { if (!disposed && worker.current === engine) engine.postMessage({ type: 'load', manifestUrl: new URL(country.manifest, document.baseURI).href, expectedIdentity: country.identity, topologyOnly, compactDrawing: country.large, releaseAfterSearch }) })
     }
     submitSearch.current = request => {
       if (worker.current) worker.current.postMessage(request)

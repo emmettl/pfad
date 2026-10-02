@@ -1,0 +1,140 @@
+{
+  "measuredAt": "2026-10-02T08:16:11.071Z",
+  "url": "https://motionstudies.app/pfad/?country=de&from=munich&to=berlin&algorithm=bidirectional-astar&duration=15",
+  "note": "Desktop WebKit touch viewport, not a physical iPhone or a measurement of process peak memory.",
+  "workers": [
+    {
+      "terminated": true,
+      "requests": [
+        {
+          "type": "load",
+          "topologyOnly": false
+        },
+        {
+          "type": "search",
+          "roadUploads": "deferred"
+        }
+      ],
+      "geometryChunks": 120,
+      "drawingBytes": 127374211,
+      "compressedChunks": 120,
+      "loading": {
+        "version": "verified-chunk-loader/1",
+        "networkBytes": 140876488,
+        "cachedBytes": 0,
+        "cacheAvailable": true,
+        "verificationMs": 96,
+        "decodeMs": 820,
+        "compileMs": 229,
+        "totalMs": 12520
+      }
+    },
+    {
+      "terminated": true,
+      "requests": [
+        {
+          "type": "load",
+          "topologyOnly": true,
+          "roadUploads": "deferred"
+        },
+        {
+          "type": "search",
+          "roadUploads": "deferred"
+        }
+      ],
+      "geometryChunks": 0,
+      "drawingBytes": 0,
+      "compressedChunks": 0,
+      "loading": {
+        "version": "verified-chunk-loader/1",
+        "networkBytes": 0,
+        "cachedBytes": 125254351,
+        "cacheAvailable": true,
+        "verificationMs": 108,
+        "decodeMs": 606,
+        "compileMs": 229,
+        "totalMs": 740
+      }
+    },
+    {
+      "terminated": true,
+      "requests": [
+        {
+          "type": "load",
+          "topologyOnly": true,
+          "roadUploads": "deferred"
+        },
+        {
+          "type": "search",
+          "roadUploads": "deferred"
+        }
+      ],
+      "geometryChunks": 0,
+      "drawingBytes": 0,
+      "compressedChunks": 0,
+      "loading": {
+        "version": "verified-chunk-loader/1",
+        "networkBytes": 0,
+        "cachedBytes": 125254351,
+        "cacheAvailable": true,
+        "verificationMs": 97,
+        "decodeMs": 596,
+        "compileMs": 231,
+        "totalMs": 734
+      }
+    }
+  ],
+  "results": [
+    {
+      "algorithm": "bidirectional-astar/1",
+      "routeMetres": 578130.91,
+      "events": 9147727,
+      "drawingVertices": "32951556",
+      "traceSha256": "499db21b077d114a25610c85d764bc37a515dde186d7cf446565376e66f07b8c"
+    },
+    {
+      "algorithm": "astar/1",
+      "routeMetres": 578130.91,
+      "events": 7863093,
+      "drawingVertices": "32951556",
+      "traceSha256": "942c0e0da7c711afb29faf3513ea80e3fe92b708796aac581e079a314862e7ec"
+    },
+    {
+      "algorithm": "bidirectional-astar/1",
+      "routeMetres": 578130.91,
+      "events": 9147727,
+      "drawingVertices": "32951556",
+      "traceSha256": "499db21b077d114a25610c85d764bc37a515dde186d7cf446565376e66f07b8c"
+    }
+  ],
+  "drawings": [
+    {
+      "replayVertices": 6568312,
+      "sourceVertices": 32951556,
+      "cpuBytes": 0,
+      "webglError": 0
+    },
+    {
+      "replayVertices": 5974358,
+      "sourceVertices": 32951556,
+      "cpuBytes": 0,
+      "webglError": 0
+    },
+    {
+      "replayVertices": 6568312,
+      "sourceVertices": 32951556,
+      "cpuBytes": 0,
+      "webglError": 0
+    }
+  ],
+  "drawing": {
+    "retainedRoadCpuBytes": 0,
+    "replayVertices": 6568312,
+    "submittedVertices": 6568312,
+    "compressedBytes": 127374211,
+    "vertices": 32951556,
+    "contextRestored": true
+  },
+  "errors": [],
+  "analyticsErrors": []
+}

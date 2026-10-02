@@ -1,0 +1,41 @@
+
+> pfad@0.0.0 test:browser
+> playwright test e2e/drawing.spec.ts e2e/bidirectional.spec.ts e2e/geography.spec.ts e2e/territories.spec.ts
+
+[WebServer] (node:30989) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 14 tests using 2 workers
+
+(node:30992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:30993) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/14] [chromium] › e2e/bidirectional.spec.ts:18:1 › bidirectional A*: two real fronts render their meeting light, preserve a paused frame and honour reduced motion
+[2/14] [chromium] › e2e/bidirectional.spec.ts:18:1 › bidirectional Dijkstra: two real fronts render their meeting light, preserve a paused frame and honour reduced motion
+[3/14] [chromium] › e2e/drawing.spec.ts:3:1 › drawing restores its recorded frame and geographic context after GPU context loss
+[4/14] [chromium] › e2e/geography.spec.ts:5:3 › desktop outline controls › verified outlines can be toggled while roads are still downloading
+[5/14] [chromium] › e2e/geography.spec.ts:28:1 › failed external outlines leave genuine road searches available and can be retried
+[6/14] [chromium] › e2e/territories.spec.ts:4:1 › ambient introduces three real territories, shares their sources and returns to journey controls
+[7/14] [chromium] › e2e/territories.spec.ts:47:1 › territories replay genuine events forward and backward, then hold without route animation
+(node:31090) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:31091) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[8/14] [webkit-mobile] › e2e/bidirectional.spec.ts:18:1 › bidirectional Dijkstra: two real fronts render their meeting light, preserve a paused frame and honour reduced motion
+[9/14] [webkit-mobile] › e2e/bidirectional.spec.ts:18:1 › bidirectional A*: two real fronts render their meeting light, preserve a paused frame and honour reduced motion
+[10/14] [webkit-mobile] › e2e/drawing.spec.ts:3:1 › drawing restores its recorded frame and geographic context after GPU context loss
+[11/14] [webkit-mobile] › e2e/geography.spec.ts:5:3 › desktop outline controls › verified outlines can be toggled while roads are still downloading
+[12/14] [webkit-mobile] › e2e/geography.spec.ts:28:1 › failed external outlines leave genuine road searches available and can be retried
+[13/14] [webkit-mobile] › e2e/territories.spec.ts:4:1 › ambient introduces three real territories, shares their sources and returns to journey controls
+[14/14] [webkit-mobile] › e2e/territories.spec.ts:47:1 › territories replay genuine events forward and backward, then hold without route animation
+  14 passed (25.8s)

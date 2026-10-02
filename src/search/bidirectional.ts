@@ -1,4 +1,5 @@
 import type { Endpoint, Graph, Meeting, SearchResult } from './contracts.ts'
+import { releaseBuffers } from './release-buffers.ts'
 import { EventTrace } from './trace.ts'
 import { prepareHeuristic } from './astar.ts'
 import { Heap } from './engine.ts'
@@ -25,13 +26,22 @@ export function arcSource(graph: Graph, a: number): number {
   return graph.arcTo[a] === graph.to[edge] ? graph.from[edge] : graph.to[edge]
 }
 
+export function prepareBalancedHeuristic(graph: Graph, reverse: ReverseGraph, start: number, goal: number) {
+  const begun = performance.now()
+  const forward = prepareHeuristic(graph, reverse, start, goal, false, true)
+  const backward = prepareHeuristic(graph, reverse, goal, start, true, true)
+  const compact = forward.potential instanceof Uint32Array && backward.potential instanceof Uint32Array
+  const potential = compact ? new Int32Array(forward.potential.buffer) : forward.potential instanceof Float64Array ? forward.potential : Float64Array.from(forward.potential)
+  const divisor = compact ? 2 : 1
+  for (let u = 0; u < potential.length; u++) potential[u] = (forward.potential[u] - backward.potential[u]) / (compact ? 1 : 2)
+  if (potential.buffer !== forward.potential.buffer) releaseBuffers(forward.potential)
+  releaseBuffers(backward.potential)
+  return { potential, divisor, forward: forward.record, backward: backward.record, preparationMs: performance.now() - begun }
+}
+
 export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoint, goal: Endpoint, snapMs = 0, guided = false): SearchResult {
-  const preparation = performance.now()
-  const towardGoal = guided ? prepareHeuristic(graph, reverse, start.node, goal.node) : undefined
-  const towardStart = guided ? prepareHeuristic(graph, reverse, goal.node, start.node, true) : undefined
-  const potential = towardGoal?.potential
-  if (potential && towardStart) for (let u = 0; u < potential.length; u++) potential[u] = (potential[u] - towardStart.potential[u]) / 2
-  const preparationMs = performance.now() - preparation
+  const balanced = guided ? prepareBalancedHeuristic(graph, reverse, start.node, goal.node) : undefined
+  const potential = balanced?.potential, divisor = balanced?.divisor ?? 1
   const begun = performance.now(), n = graph.xy.length / 2, e = graph.from.length
   if (n >= 2 ** 29 || graph.arcTo.length >= 2 ** 29) throw new Error('Graph IDs exceed the bidirectional trace format')
   const distance = [new Float64Array(n).fill(Infinity), new Float64Array(n).fill(Infinity)]
@@ -57,10 +67,10 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
   distance[0][start.node] = 0; distance[1][goal.node] = 0
   // Normalised reduced costs are nonnegative in both directions. Their path
   // sum is the original cost plus p(goal)-p(start), including half-centimetres.
-  const shift = potential ? potential[goal.node] - potential[start.node] : 0
+  const shift = potential ? (potential[goal.node] - potential[start.node]) / divisor : 0
   function priority(side: number, node: number, cost: number) {
     if (!potential) return cost
-    return cost + (side ? potential[goal.node] - potential[node] : potential[node] - potential[start.node])
+    return cost + (side ? potential[goal.node] - potential[node] : potential[node] - potential[start.node]) / divisor
   }
   heap[0].push(start.node, 0); heap[1].push(goal.node, 0)
   while (true) {
@@ -102,9 +112,10 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
       if (routeNodes.length > n) throw new Error('Invalid backward predecessor cycle')
     }
   }
+  releaseBuffers(...distance, ...parentEdge, ...settled, ...heap.flatMap(front => [front.nodes, front.scores]), potential)
   return {
     algorithm: guided ? 'bidirectional-astar/1' : 'bidirectional-dijkstra/1',
-    balancedHeuristic: towardGoal && towardStart ? { version: 'balanced-feasible-planar-distance/1', preparationMs, forward: towardGoal.record, backward: towardStart.record } : undefined,
+    balancedHeuristic: balanced ? { version: 'balanced-feasible-planar-distance/1', preparationMs: balanced.preparationMs, forward: balanced.forward, backward: balanced.backward } : undefined,
     tieBreak: `smaller queue ${guided ? 'normalised reduced cost' : 'distance'}; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection`,
     start, goal, searchMs, snapMs, routeMetres: Number.isFinite(best) ? best / 100 : null,
     routeNodes: Uint32Array.from(routeNodes), routeEdges: Uint32Array.from(routeEdges),
