@@ -1,0 +1,14 @@
+
+Running 2 tests using 1 worker
+
+(node:95239) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/2] [chromium] › e2e/trace-storage.spec.ts:36:1 › exact archived traces stream exports and retire safely in browser storage
+(node:95245) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/2] [webkit-mobile] › e2e/trace-storage.spec.ts:36:1 › exact archived traces stream exports and retire safely in browser storage
+  2 passed (2.4s)

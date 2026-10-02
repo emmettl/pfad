@@ -1,0 +1,361 @@
+{
+  "manifest": "b72d1c0f671afad5af6963fd273a012b5374feaf79aabcf85b37758662a8826b",
+  "browser": "153.0.8010.12",
+  "runs": [
+    {
+      "goal": {
+        "name": "Sacramento",
+        "lon": -121.4944,
+        "lat": 38.5816
+      },
+      "algorithm": "astar/1",
+      "events": 1606249,
+      "routeMetres": 139060.27,
+      "sha": "2f71711b6c8bcdafcde6770bbc540cf5d19a0b8f820552f33d54730770170c7a",
+      "kindBytes": 401563,
+      "kindPackingMs": 2.9000000059604645,
+      "kindExact": true,
+      "searchMs": 138,
+      "snapMs": 2971,
+      "heuristic": {
+        "version": "feasible-planar-distance/1",
+        "preparationMs": 1984,
+        "correctedNodes": 382066,
+        "longitudeScale": 0.3196910180374002,
+        "initialStartCm": 9556142,
+        "startLowerBoundCm": 9556142
+      },
+      "audit": {
+        "heuristicPhases": {
+          "boundsMs": 50.29999998211861,
+          "initialMs": 366.90000000596046,
+          "arcScanMs": 1444.2000000178814,
+          "propagationMs": 122.19999998807907
+        },
+        "totalMs": 6296.300000011921,
+        "snapWallMs": 2971,
+        "reverseMs": 1193.699999988079,
+        "algorithmWallMs": 2131.600000023842
+      },
+      "buffers": [
+        {
+          "name": "routeNodes",
+          "bytes": 2044,
+          "gzipBytes": 1834,
+          "compressMs": 2.0999999940395355,
+          "decodeMs": 0.4000000059604645,
+          "exact": true
+        },
+        {
+          "name": "routeEdges",
+          "bytes": 2040,
+          "gzipBytes": 1856,
+          "compressMs": 0.30000001192092896,
+          "decodeMs": 0.09999999403953552,
+          "exact": true
+        },
+        {
+          "name": "routeReversed",
+          "bytes": 510,
+          "gzipBytes": 43,
+          "compressMs": 0.19999998807907104,
+          "decodeMs": 0.10000002384185791,
+          "exact": true
+        },
+        {
+          "name": "routeLengths",
+          "bytes": 2040,
+          "gzipBytes": 1387,
+          "compressMs": 0.29999998211860657,
+          "decodeMs": 0.09999999403953552,
+          "exact": true
+        },
+        {
+          "name": "trace",
+          "bytes": 6424996,
+          "gzipBytes": 5970750,
+          "compressMs": 100.30000001192093,
+          "decodeMs": 17.099999994039536,
+          "exact": true
+        },
+        {
+          "name": "checkpoints",
+          "bytes": 4716,
+          "gzipBytes": 3653,
+          "compressMs": 0.29999998211860657,
+          "decodeMs": 0,
+          "exact": true
+        },
+        {
+          "name": "edgeTimes",
+          "bytes": 536870912,
+          "gzipBytes": 3786301,
+          "compressMs": 923.3000000119209,
+          "decodeMs": 156.5,
+          "exact": true
+        },
+        {
+          "name": "goalProximity",
+          "bytes": 67108864,
+          "gzipBytes": 421378,
+          "compressMs": 159.7999999821186,
+          "decodeMs": 17.700000017881393,
+          "exact": true
+        }
+      ]
+    },
+    {
+      "goal": {
+        "name": "Sacramento",
+        "lon": -121.4944,
+        "lat": 38.5816
+      },
+      "algorithm": "astar/1",
+      "events": 1606249,
+      "routeMetres": 139060.27,
+      "sha": "2f71711b6c8bcdafcde6770bbc540cf5d19a0b8f820552f33d54730770170c7a",
+      "kindBytes": 401563,
+      "kindPackingMs": 3.7999999821186066,
+      "kindExact": true,
+      "searchMs": 172.2999999821186,
+      "snapMs": 433.09999999403954,
+      "heuristic": {
+        "version": "feasible-planar-distance/1",
+        "preparationMs": 2714.600000023842,
+        "correctedNodes": 382066,
+        "longitudeScale": 0.3196910180374002,
+        "initialStartCm": 9556142,
+        "startLowerBoundCm": 9556142
+      },
+      "audit": {
+        "heuristicPhases": {
+          "boundsMs": 53.400000005960464,
+          "initialMs": 373.09999999403954,
+          "arcScanMs": 2157.5,
+          "propagationMs": 130.2000000178814
+        },
+        "totalMs": 3333.4000000059605,
+        "snapWallMs": 433.09999999403954,
+        "reverseMs": 0,
+        "algorithmWallMs": 2900.300000011921
+      },
+      "buffers": [
+        {
+          "name": "routeNodes",
+          "bytes": 2044
+        },
+        {
+          "name": "routeEdges",
+          "bytes": 2040
+        },
+        {
+          "name": "routeReversed",
+          "bytes": 510
+        },
+        {
+          "name": "routeLengths",
+          "bytes": 2040
+        },
+        {
+          "name": "trace",
+          "bytes": 6424996
+        },
+        {
+          "name": "checkpoints",
+          "bytes": 4716
+        },
+        {
+          "name": "edgeTimes",
+          "bytes": 536870912
+        },
+        {
+          "name": "goalProximity",
+          "bytes": 67108864
+        }
+      ]
+    },
+    {
+      "goal": {
+        "name": "New York",
+        "lon": -74.006,
+        "lat": 40.7128
+      },
+      "algorithm": "astar/1",
+      "events": 162342445,
+      "routeMetres": 4600874.9,
+      "sha": "b84f210727929384632f4c1ff1ffaabe6ab633dfa07e82cbdb36ce17030b5f66",
+      "kindBytes": 40585612,
+      "kindPackingMs": 238.30000001192093,
+      "kindExact": true,
+      "searchMs": 8932,
+      "snapMs": 435.40000000596046,
+      "heuristic": {
+        "version": "feasible-planar-distance/1",
+        "preparationMs": 2628,
+        "correctedNodes": 219479,
+        "longitudeScale": 0.3196910180374002,
+        "initialStartCm": 175173661,
+        "startLowerBoundCm": 175173661
+      },
+      "audit": {
+        "heuristicPhases": {
+          "boundsMs": 49.099999994039536,
+          "initialMs": 375.2000000178814,
+          "arcScanMs": 2114.7999999821186,
+          "propagationMs": 88.5
+        },
+        "totalMs": 12069.200000017881,
+        "snapWallMs": 435.40000000596046,
+        "reverseMs": 0,
+        "algorithmWallMs": 11633.800000011921
+      },
+      "buffers": [
+        {
+          "name": "routeNodes",
+          "bytes": 51716,
+          "gzipBytes": 45015,
+          "compressMs": 5.0999999940395355,
+          "decodeMs": 0.29999998211860657,
+          "exact": true
+        },
+        {
+          "name": "routeEdges",
+          "bytes": 51712,
+          "gzipBytes": 45558,
+          "compressMs": 0.9000000059604645,
+          "decodeMs": 0.30000001192092896,
+          "exact": true
+        },
+        {
+          "name": "routeReversed",
+          "bytes": 12928,
+          "gzipBytes": 454,
+          "compressMs": 0.5,
+          "decodeMs": 0.09999999403953552,
+          "exact": true
+        },
+        {
+          "name": "routeLengths",
+          "bytes": 51712,
+          "gzipBytes": 33506,
+          "compressMs": 1,
+          "decodeMs": 0.30000001192092896,
+          "exact": true
+        },
+        {
+          "name": "trace",
+          "bytes": 649369780,
+          "gzipBytes": 616390286,
+          "compressMs": 9559.199999988079,
+          "decodeMs": 1758.300000011921,
+          "exact": true
+        },
+        {
+          "name": "checkpoints",
+          "bytes": 475620,
+          "gzipBytes": 408867,
+          "compressMs": 12.199999988079071,
+          "decodeMs": 1.4000000059604645,
+          "exact": true
+        },
+        {
+          "name": "edgeTimes",
+          "bytes": 536870912,
+          "gzipBytes": 317036181,
+          "compressMs": 6753.199999988079,
+          "decodeMs": 1001.3000000119209,
+          "exact": true
+        },
+        {
+          "name": "goalProximity",
+          "bytes": 67108864,
+          "gzipBytes": 14685392,
+          "compressMs": 1383.0999999940395,
+          "decodeMs": 80.30000001192093,
+          "exact": true
+        }
+      ]
+    },
+    {
+      "goal": {
+        "name": "New York",
+        "lon": -74.006,
+        "lat": 40.7128
+      },
+      "algorithm": "astar/1",
+      "events": 162342445,
+      "routeMetres": 4600874.9,
+      "sha": "b84f210727929384632f4c1ff1ffaabe6ab633dfa07e82cbdb36ce17030b5f66",
+      "kindBytes": 40585612,
+      "kindPackingMs": 249.09999999403954,
+      "kindExact": true,
+      "searchMs": 9161.100000023842,
+      "snapMs": 432.59999999403954,
+      "heuristic": {
+        "version": "feasible-planar-distance/1",
+        "preparationMs": 2655,
+        "correctedNodes": 219479,
+        "longitudeScale": 0.3196910180374002,
+        "initialStartCm": 175173661,
+        "startLowerBoundCm": 175173661
+      },
+      "audit": {
+        "heuristicPhases": {
+          "boundsMs": 51.70000001788139,
+          "initialMs": 382.5,
+          "arcScanMs": 2133.2999999821186,
+          "propagationMs": 86.90000000596046
+        },
+        "totalMs": 12350.09999999404,
+        "snapWallMs": 432.59999999403954,
+        "reverseMs": 0,
+        "algorithmWallMs": 11917.5
+      },
+      "buffers": [
+        {
+          "name": "routeNodes",
+          "bytes": 51716
+        },
+        {
+          "name": "routeEdges",
+          "bytes": 51712
+        },
+        {
+          "name": "routeReversed",
+          "bytes": 12928
+        },
+        {
+          "name": "routeLengths",
+          "bytes": 51712
+        },
+        {
+          "name": "trace",
+          "bytes": 649369780
+        },
+        {
+          "name": "checkpoints",
+          "bytes": 475620
+        },
+        {
+          "name": "edgeTimes",
+          "bytes": 536870912
+        },
+        {
+          "name": "goalProximity",
+          "bytes": 67108864
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "loading": {
+    "version": "verified-chunk-loader/1",
+    "networkBytes": 651038597,
+    "cachedBytes": 0,
+    "cacheAvailable": false,
+    "verificationMs": 252.90000012516975,
+    "decodeMs": 4251.400000303984,
+    "compileMs": 1495.7000000178814,
+    "totalMs": 5152.700000017881
+  }
+}

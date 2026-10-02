@@ -78,6 +78,16 @@ export interface SearchResult {
   routeReversed: Uint8Array
   routeLengths: Uint32Array
   trace: Uint32Array
+  /** App-owned runtime storage; worker results always contain the full resident trace. */
+  traceArchive?: {
+    count: number
+    kinds: Uint8Array
+    bytes: number
+    blocks: number
+    readBlock: (index: number) => Promise<Uint8Array<ArrayBuffer>>
+    retain: () => () => void
+    dispose: () => Promise<void>
+  }
   checkpoints: Uint32Array
   checkpointStride: number
   edgeTimes: Uint32Array

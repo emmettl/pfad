@@ -1,0 +1,357 @@
+{
+  "country": "de",
+  "engineName": "webkit",
+  "manifest": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+  "browser": "26.6",
+  "runs": [
+    {
+      "goal": {
+        "name": "Augsburg",
+        "lon": 10.8978,
+        "lat": 48.3705
+      },
+      "algorithm": "astar/1",
+      "events": 567334,
+      "routeMetres": 63987.98,
+      "sha": "523558f7d33a50e352470fc08b709b856a12cd0cb31d494b7411bee2c548edf2",
+      "storage": {
+        "backend": "indexeddb",
+        "originalBytes": 2269336,
+        "residentTraceBytes": 0,
+        "counterBytes": 141834,
+        "blocks": 1,
+        "writeMs": 1,
+        "readMs": 1,
+        "verifyMs": 1,
+        "countersExact": true,
+        "blocksExact": true,
+        "recoveredBytes": 2269336
+      },
+      "kindBytes": 141834,
+      "kindPackingMs": 3,
+      "kindExact": true,
+      "searchMs": 41,
+      "snapMs": 56,
+      "heuristic": {
+        "version": "feasible-planar-distance/1",
+        "preparationMs": 566,
+        "correctedNodes": 243621,
+        "longitudeScale": 0.5728193137187972,
+        "initialStartCm": 5083972,
+        "startLowerBoundCm": 5083972
+      },
+      "audit": {
+        "endpointAudit": {
+          "baselineMs": 492,
+          "indexedMs": 48,
+          "buildMs": 43,
+          "indexBytes": 26223852,
+          "eligibleNodes": 6546961,
+          "exact": true
+        },
+        "heuristicPhases": {
+          "boundsMs": 16,
+          "initialMs": 83,
+          "arcScanMs": 357,
+          "propagationMs": 110
+        },
+        "totalMs": 815,
+        "snapWallMs": 56,
+        "reverseMs": 149,
+        "algorithmWallMs": 610
+      },
+      "buffers": [
+        {
+          "name": "routeNodes",
+          "bytes": 2976
+        },
+        {
+          "name": "routeEdges",
+          "bytes": 2972
+        },
+        {
+          "name": "routeReversed",
+          "bytes": 743
+        },
+        {
+          "name": "routeLengths",
+          "bytes": 2972
+        },
+        {
+          "name": "trace",
+          "bytes": 2269336
+        },
+        {
+          "name": "checkpoints",
+          "bytes": 1668
+        },
+        {
+          "name": "edgeTimes",
+          "bytes": 95813632
+        },
+        {
+          "name": "goalProximity",
+          "bytes": 11976704
+        }
+      ]
+    },
+    {
+      "goal": {
+        "name": "Augsburg",
+        "lon": 10.8978,
+        "lat": 48.3705
+      },
+      "algorithm": "astar/1",
+      "events": 567334,
+      "routeMetres": 63987.98,
+      "sha": "523558f7d33a50e352470fc08b709b856a12cd0cb31d494b7411bee2c548edf2",
+      "kindBytes": 141834,
+      "kindPackingMs": 4,
+      "kindExact": true,
+      "searchMs": 40,
+      "snapMs": 58,
+      "heuristic": {
+        "version": "feasible-planar-distance/1",
+        "preparationMs": 653,
+        "correctedNodes": 243621,
+        "longitudeScale": 0.5728193137187972,
+        "initialStartCm": 5083972,
+        "startLowerBoundCm": 5083972
+      },
+      "audit": {
+        "endpointAudit": {
+          "baselineMs": 56,
+          "indexedMs": 3,
+          "buildMs": 43,
+          "indexBytes": 26223852,
+          "eligibleNodes": 6546961,
+          "exact": true
+        },
+        "heuristicPhases": {
+          "boundsMs": 22,
+          "initialMs": 86,
+          "arcScanMs": 443,
+          "propagationMs": 102
+        },
+        "totalMs": 751,
+        "snapWallMs": 58,
+        "reverseMs": 0,
+        "algorithmWallMs": 693
+      },
+      "buffers": [
+        {
+          "name": "routeNodes",
+          "bytes": 2976
+        },
+        {
+          "name": "routeEdges",
+          "bytes": 2972
+        },
+        {
+          "name": "routeReversed",
+          "bytes": 743
+        },
+        {
+          "name": "routeLengths",
+          "bytes": 2972
+        },
+        {
+          "name": "trace",
+          "bytes": 2269336
+        },
+        {
+          "name": "checkpoints",
+          "bytes": 1668
+        },
+        {
+          "name": "edgeTimes",
+          "bytes": 95813632
+        },
+        {
+          "name": "goalProximity",
+          "bytes": 11976704
+        }
+      ]
+    },
+    {
+      "goal": {
+        "name": "Berlin",
+        "lon": 13.405,
+        "lat": 52.52
+      },
+      "algorithm": "astar/1",
+      "events": 7863093,
+      "routeMetres": 578130.91,
+      "sha": "942c0e0da7c711afb29faf3513ea80e3fe92b708796aac581e079a314862e7ec",
+      "storage": {
+        "backend": "indexeddb",
+        "originalBytes": 31452372,
+        "residentTraceBytes": 0,
+        "counterBytes": 1965774,
+        "blocks": 4,
+        "writeMs": 10,
+        "readMs": 4,
+        "verifyMs": 11,
+        "countersExact": true,
+        "blocksExact": true,
+        "recoveredBytes": 31452372
+      },
+      "kindBytes": 1965774,
+      "kindPackingMs": 13,
+      "kindExact": true,
+      "searchMs": 400,
+      "snapMs": 56,
+      "heuristic": {
+        "version": "feasible-planar-distance/1",
+        "preparationMs": 583,
+        "correctedNodes": 130655,
+        "longitudeScale": 0.5728193137187972,
+        "initialStartCm": 50120496,
+        "startLowerBoundCm": 50120496
+      },
+      "audit": {
+        "endpointAudit": {
+          "baselineMs": 56,
+          "indexedMs": 3,
+          "buildMs": 43,
+          "indexBytes": 26223852,
+          "eligibleNodes": 6546961,
+          "exact": true
+        },
+        "heuristicPhases": {
+          "boundsMs": 7,
+          "initialMs": 79,
+          "arcScanMs": 440,
+          "propagationMs": 57
+        },
+        "totalMs": 1040,
+        "snapWallMs": 56,
+        "reverseMs": 0,
+        "algorithmWallMs": 984
+      },
+      "buffers": [
+        {
+          "name": "routeNodes",
+          "bytes": 10472
+        },
+        {
+          "name": "routeEdges",
+          "bytes": 10468
+        },
+        {
+          "name": "routeReversed",
+          "bytes": 2617
+        },
+        {
+          "name": "routeLengths",
+          "bytes": 10468
+        },
+        {
+          "name": "trace",
+          "bytes": 31452372
+        },
+        {
+          "name": "checkpoints",
+          "bytes": 23040
+        },
+        {
+          "name": "edgeTimes",
+          "bytes": 95813632
+        },
+        {
+          "name": "goalProximity",
+          "bytes": 11976704
+        }
+      ]
+    },
+    {
+      "goal": {
+        "name": "Berlin",
+        "lon": 13.405,
+        "lat": 52.52
+      },
+      "algorithm": "astar/1",
+      "events": 7863093,
+      "routeMetres": 578130.91,
+      "sha": "942c0e0da7c711afb29faf3513ea80e3fe92b708796aac581e079a314862e7ec",
+      "kindBytes": 1965774,
+      "kindPackingMs": 4,
+      "kindExact": true,
+      "searchMs": 394,
+      "snapMs": 57,
+      "heuristic": {
+        "version": "feasible-planar-distance/1",
+        "preparationMs": 601,
+        "correctedNodes": 130655,
+        "longitudeScale": 0.5728193137187972,
+        "initialStartCm": 50120496,
+        "startLowerBoundCm": 50120496
+      },
+      "audit": {
+        "endpointAudit": {
+          "baselineMs": 58,
+          "indexedMs": 3,
+          "buildMs": 43,
+          "indexBytes": 26223852,
+          "eligibleNodes": 6546961,
+          "exact": true
+        },
+        "heuristicPhases": {
+          "boundsMs": 7,
+          "initialMs": 81,
+          "arcScanMs": 456,
+          "propagationMs": 57
+        },
+        "totalMs": 1053,
+        "snapWallMs": 57,
+        "reverseMs": 0,
+        "algorithmWallMs": 996
+      },
+      "buffers": [
+        {
+          "name": "routeNodes",
+          "bytes": 10472
+        },
+        {
+          "name": "routeEdges",
+          "bytes": 10468
+        },
+        {
+          "name": "routeReversed",
+          "bytes": 2617
+        },
+        {
+          "name": "routeLengths",
+          "bytes": 10468
+        },
+        {
+          "name": "trace",
+          "bytes": 31452372
+        },
+        {
+          "name": "checkpoints",
+          "bytes": 23040
+        },
+        {
+          "name": "edgeTimes",
+          "bytes": 95813632
+        },
+        {
+          "name": "goalProximity",
+          "bytes": 11976704
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "loading": {
+    "version": "verified-chunk-loader/1",
+    "networkBytes": 125254351,
+    "cachedBytes": 0,
+    "cacheAvailable": true,
+    "verificationMs": 152,
+    "decodeMs": 490,
+    "compileMs": 244,
+    "totalMs": 860
+  }
+}

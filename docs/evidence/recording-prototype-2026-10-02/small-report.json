@@ -1,0 +1,36 @@
+[
+  {
+    "name": "chromium",
+    "version": "153.0.8010.12",
+    "result": {
+      "backend": "opfs",
+      "originalBytes": 4194304,
+      "residentTraceBytes": 0,
+      "counterBytes": 262144,
+      "blocks": 1,
+      "writeMs": 4.200000017881393,
+      "readMs": 1.5999999940395355,
+      "verifyMs": 1.600000023841858,
+      "countersExact": true,
+      "blocksExact": true,
+      "recoveredBytes": 4194304
+    }
+  },
+  {
+    "name": "webkit",
+    "version": "26.6",
+    "result": {
+      "backend": "indexeddb",
+      "originalBytes": 4194304,
+      "residentTraceBytes": 0,
+      "counterBytes": 262144,
+      "blocks": 1,
+      "writeMs": 3,
+      "readMs": 2,
+      "verifyMs": 2,
+      "countersExact": true,
+      "blocksExact": true,
+      "recoveredBytes": 4194304
+    }
+  }
+]

@@ -1,0 +1,21 @@
+
+Running 6 tests using 1 worker
+
+(node:99328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/6] [chromium] › e2e/drawing.spec.ts:3:1 › drawing restores its recorded frame and geographic context after GPU context loss
+[2/6] [chromium] › e2e/trace-storage.spec.ts:44:1 › exact archived traces stream exports and retire safely in browser storage
+[chromium] › e2e/trace-storage.spec.ts:44:1 › exact archived traces stream exports and retire safely in browser storage
+5:11:52 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+[3/6] [chromium] › e2e/trace-storage.spec.ts:50:1 › context recovery preserves the dark field without geographic fill
+(node:99337) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[4/6] [webkit-mobile] › e2e/drawing.spec.ts:3:1 › drawing restores its recorded frame and geographic context after GPU context loss
+[5/6] [webkit-mobile] › e2e/trace-storage.spec.ts:44:1 › exact archived traces stream exports and retire safely in browser storage
+[6/6] [webkit-mobile] › e2e/trace-storage.spec.ts:50:1 › context recovery preserves the dark field without geographic fill
+  6 passed (8.2s)

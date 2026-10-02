@@ -1,3 +1,5 @@
+import type { SearchResult } from './contracts.ts'
+
 // Retain the exact event words, without a worst-case buffer plus a full copy.
 // Modern browsers grow this backing store only as the search actually records.
 const STEP_BYTES = 1024 * 1024
@@ -44,4 +46,12 @@ export class EventTrace {
     this.blocks = []; this.buffer = new ArrayBuffer(0); this.words = new Uint32Array(this.buffer)
     return result
   }
+}
+
+export function traceLength(result: Pick<SearchResult, 'trace' | 'traceArchive'>) {
+  return result.traceArchive?.count ?? result.trace.length
+}
+export function traceKind(result: Pick<SearchResult, 'trace' | 'traceArchive'>, event: number) {
+  const kinds = result.traceArchive?.kinds
+  return kinds ? (kinds[event >>> 2] >>> ((event & 3) * 2)) & 3 : result.trace[event] & 3
 }

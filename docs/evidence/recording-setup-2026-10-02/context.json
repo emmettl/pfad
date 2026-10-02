@@ -1,0 +1,12 @@
+{
+  "baseCommit": "9197c1a3d394f9c827c99bc29262f3072f7695a3",
+  "host": "Apple M4 Max, 36 GiB RAM",
+  "scope": "Topology-only Chromium worker, no drawing or GPU preparation; distance A*",
+  "provenance": "Existing unpublished complete US graph; no refresh",
+  "timingLimit": "Single sequential run per condition, graph/index/reverse retained; compression between first and second query; no claimed process peak RSS",
+  "sourceHashes": {
+    "src/search/manifest.ts": "f3b4a6633d4d4658db59bcc8981ad832738911bb79add3ff63ab4876e3f1fec7",
+    "src/search/search.worker.ts": "a8d995ee8f52cf68b09640e47b76c2266cec760aa4cf64fce965093025085399",
+    "src/search/astar.ts": "d10060abbc424e38b6ba5c7e7ca9bdb744012538046be715b64e333f55b11776"
+  }
+}

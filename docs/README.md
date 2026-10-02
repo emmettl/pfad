@@ -67,3 +67,7 @@ that time; its older counts and algorithm sets are not current feature limits.
 
 - [Exact spatial replay batches](evidence/spatial-drawing-2026-10-02/README.md): pixel-identical Germany/US rendering, spatial culling, measured preparation cost and unchanged real search traces.
 - [Exact replay pipeline improvements](evidence/replay-pipeline-2026-10-02/README.md): compact event textures, safe drawing chunk pruning, paired visual proof and worker/batch/heap experiments.
+
+- [US recording memory and search setup](evidence/recording-setup-2026-10-02/README.md): retained buffers, lossless compression tradeoffs and measured cold/repeated search phases.
+- [Recording blocks and exact endpoint index prototypes](evidence/recording-prototype-2026-10-02/README.md): storage recovery, counter parity and desktop query/memory tradeoffs.
+- [Exact trace archiving and streaming exports](evidence/trace-archive-2026-10-02/README.md): bounded recording storage, exact replay counters, exports and graphics recovery.

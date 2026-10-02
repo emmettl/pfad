@@ -1,3 +1,4 @@
+import { traceLength, traceKind } from './trace.ts'
 import type { Endpoint, Graph, HeuristicRecord, ProximityHeuristicRecord, SearchResult } from './contracts.ts'
 import { releaseBuffers } from './release-buffers.ts'
 import { EventTrace } from './trace.ts'
@@ -147,10 +148,10 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
   }
 }
 
-export function countsAt(result: Pick<SearchResult, 'trace' | 'checkpoints' | 'checkpointStride'>, progress: number): [number, number, number] {
-  const stop = Math.min(result.trace.length, Math.max(0, Math.floor(progress * result.trace.length)))
+export function countsAt(result: Pick<SearchResult, 'trace' | 'traceArchive' | 'checkpoints' | 'checkpointStride'>, progress: number): [number, number, number] {
+  const stop = Math.min(traceLength(result), Math.max(0, Math.floor(progress * traceLength(result))))
   const checkpoint = Math.floor(stop / result.checkpointStride)
   const counts: [number, number, number] = [result.checkpoints[checkpoint * 3], result.checkpoints[checkpoint * 3 + 1], result.checkpoints[checkpoint * 3 + 2]]
-  for (let i = checkpoint * result.checkpointStride; i < stop; i++) { const kind = result.trace[i] & 3; if (kind < 3) counts[kind]++ }
+  for (let i = checkpoint * result.checkpointStride; i < stop; i++) { const kind = traceKind(result, i); if (kind < 3) counts[kind]++ }
   return counts
 }

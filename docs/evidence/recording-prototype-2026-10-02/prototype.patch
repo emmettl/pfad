@@ -1,0 +1,139 @@
+--- a/src/search/manifest.ts
++++ b/src/search/manifest.ts
+@@ -3,12 +3,12 @@
+ // Bounds cover validated complete country graphs through about 10.5 million nodes.
+ // Larger releases require another measured browser budget.
+ // Road IDs must remain exact in the Float32 vertex attribute (< 2^24).
+-export const DATA_LIMITS = { nodes: 11000000, edges: 16000000, directedArcs: 32000000, vertices: 64000000, downloadBytes: 256 * 1024 * 1024 }
++export const DATA_LIMITS = { nodes: 60000000, edges: 80000000, directedArcs: 160000000, vertices: 300000000, downloadBytes: 1024 * 1024 * 1024 }
+ const positive = (n: number) => Number.isSafeInteger(n) && n > 0
+ export function validateManifest(data: StudyManifest) {
+   if (data.schema !== 'pfad-road-study/1' || data.encoding !== 'le-columnar-deltas/1' || data.coordinateScale !== 100000 || !/^[a-f0-9]{64}$/.test(data.identity)) throw new Error('Unsupported road dataset')
+   for (const key of ['nodes', 'edges', 'directedArcs', 'vertices'] as const) if (!positive(data.counts[key]) || data.counts[key] > DATA_LIMITS[key]) throw new Error('Road dataset exceeds the measured browser budget')
+-  if (!positive(data.downloadBytes) || data.downloadBytes > DATA_LIMITS.downloadBytes || data.chunks.length > 1000) throw new Error('Road download exceeds the browser budget')
++  if (!positive(data.downloadBytes) || data.downloadBytes > DATA_LIMITS.downloadBytes || data.chunks.length > 2000) throw new Error('Road download exceeds the browser budget')
+   const p = data.projection
+   if (!p || !p.centre.every(Number.isFinite) || !Number.isFinite(p.referenceLatitude) || !Number.isFinite(p.scaleMetres) || p.scaleMetres <= 0 || !data.bounds.every(Number.isFinite)) throw new Error('Invalid road projection')
+   if (p.longitudeWrapping !== undefined && p.longitudeWrapping !== 'centre/1') throw new Error('Unsupported longitude wrapping')
+--- a/src/search/search.worker.ts
++++ b/src/search/search.worker.ts
+@@ -5,7 +5,7 @@
+ import { compileGraph, dijkstra, snapEndpoints } from './engine.ts'
+ import { bidirectional, compileReverse, type ReverseGraph } from './bidirectional.ts'
+ import { multisource } from './multisource.ts'
+-import { releaseEndpointIndex, snapSources } from './endpoints.ts'
++import { endpointIndexAudit, releaseEndpointIndex, snapSources } from './endpoints.ts'
+ import { estimateRouteTime, annotateTime, timeGraph, timeDijkstra } from './time.ts'
+ import { breadthFirst } from './breadth-first.ts'
+ import { depthFirst } from './depth-first.ts'
+@@ -106,9 +106,13 @@
+     else {
+       if (!graph || !manifest) throw new Error('The national graph has not finished loading')
+       if (request.algorithm === 'multisource' && !request.sources) throw new Error('Three sources are required for a territory study')
++      const endpointAudit=endpointIndexAudit(graph,request.start,request.goal);
++      const auditStart = performance.now();
+       const sourceEndpoints = request.sources ? snapSources(graph, request.sources) : undefined
+       const endpoints = sourceEndpoints ? { start: sourceEndpoints.sources[0], goal: sourceEndpoints.sources[1], snapMs: sourceEndpoints.snapMs, snapping: undefined } : snapEndpoints(graph, request.start, request.goal)
++      const auditSnapped = performance.now();
+       if (request.algorithm === 'bidirectional' || request.algorithm === 'astar' || request.algorithm === 'bidirectional-astar') reverse ??= compileReverse(graph)
++      const auditReversed = performance.now();
+       if (disposable) {
+         // Eligibility and weak components have served their snapping purpose;
+         // the directed CSR and reverse graph already contain all routing arcs.
+@@ -126,6 +130,8 @@
+           : request.algorithm === 'time-dijkstra' ? timeDijkstra(searchGraph, manifest.classes, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'breadth-first' ? breadthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'depth-first' ? depthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'greedy' ? greedy(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : dijkstra(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs)
+       if (weighted) { annotateTime(result, physicalGraph, weighted, optimizes); releaseBuffers(weighted.length) }
+       if (!weighted && request.algorithm !== 'time-dijkstra') estimateRouteTime(result, physicalGraph, manifest.classes)
++      const auditFinished = performance.now();
++      Object.assign(result, {audit: {endpointAudit, heuristicPhases: (globalThis as unknown as {auditHeuristic: unknown}).auditHeuristic, totalMs: auditFinished-auditStart, snapWallMs: auditSnapped-auditStart, reverseMs: auditReversed-auditSnapped, algorithmWallMs: auditFinished-auditReversed}});
+       result.dataset = { identity: manifest.identity, compiler: manifest.compiler, profile: manifest.profile, sourceSha256: manifest.source.sha256, sourceTimestamp: manifest.source.dataTimestamp }
+       result.snapping = endpoints.snapping
+       if (sourceEndpoints) { result.requestedSources = request.sources; result.sourceSnappingVersion = 'nearby-shared-three-source-component/1' }
+--- a/src/search/astar.ts
++++ b/src/search/astar.ts
+@@ -12,6 +12,7 @@
+     const x = graph.xy[i * 2], y = graph.xy[i * 2 + 1]
+     latitude = Math.max(latitude, Math.abs(y)); minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y)
+   }
++  const auditBounds = performance.now();
+   const longitudeScale = Math.cos(latitude / 100000 * Math.PI / 180)
+   const units = 111.1950802, gx = graph.xy[goal * 2], gy = graph.xy[goal * 2 + 1]
+   // Bounds prove every integer estimate fits, including after corrections.
+@@ -19,6 +20,7 @@
+   const maximum = Math.floor(Math.hypot(Math.max(Math.abs(minX - gx), Math.abs(maxX - gx)) * longitudeScale, Math.max(Math.abs(minY - gy), Math.abs(maxY - gy))) * units)
+   const potential = compact && maximum <= 0x7ffffffe ? new Uint32Array(n) : new Float64Array(n)
+   for (let i = 0; i < n; i++) potential[i] = Math.floor(Math.hypot((graph.xy[i * 2] - gx) * longitudeScale, graph.xy[i * 2 + 1] - gy) * units)
++  const auditInitial = performance.now();
+   const initialStartCm = potential[start], changed = new Uint8Array(n), heap = new Heap()
+   let correctedNodes = 0
+   function lower(node: number, candidate: number) {
+@@ -30,6 +32,7 @@
+     const v = graph.arcTo[a]
+     lower(backwards ? v : u, graph.length[graph.arcEdge[a]] + potential[backwards ? u : v])
+   }
++  const auditArcs = performance.now();
+   // A lowered estimate can invalidate estimates at its incoming neighbours.
+   // Propagate only reductions until every original arc satisfies the inequality.
+   while (heap.size) {
+@@ -41,6 +44,7 @@
+       for (let i = reverse.offsets[u]; i < reverse.offsets[u + 1]; i++) lower(arcSource(graph, reverse.arc[i]), score + graph.length[graph.arcEdge[reverse.arc[i]]])
+     }
+   }
++  Object.assign(globalThis, {auditHeuristic: {boundsMs:auditBounds-begun, initialMs:auditInitial-auditBounds, arcScanMs:auditArcs-auditInitial, propagationMs:performance.now()-auditArcs}});
+   releaseBuffers(changed, heap.nodes, heap.scores)
+   return { potential, record: { version: 'feasible-planar-distance/1', preparationMs: performance.now() - begun, correctedNodes, longitudeScale, initialStartCm, startLowerBoundCm: potential[start] } }
+ }
+--- a/src/search/endpoints.ts
++++ b/src/search/endpoints.ts
+@@ -31,7 +31,7 @@
+   return result
+ }
+
+-function candidates(graph: Graph, point: Point, lookup: ReturnType<typeof index>): Map<number, Endpoint> {
++function scanCandidates(graph: Graph, point: Point, lookup: ReturnType<typeof index>): Map<number, Endpoint> {
+   const choices = new Map<number, Endpoint>(), scale = Math.cos(point.lat * Math.PI / 180)
+   const limit = (maximumSnapMetres / metresPerDegree) ** 2
+   for (let i = 0; i < lookup.eligible.length; i++) {
+@@ -91,3 +91,42 @@
+   indexes.delete(graph)
+   return releaseBuffers(lookup.eligible, lookup.component)
+ }
++
++const spatial = new WeakMap<Graph, {offsets: Uint32Array; nodes: Uint32Array; buildMs: number}>()
++function latitudeIndex(graph: Graph, lookup: ReturnType<typeof index>) {
++  const cached = spatial.get(graph)
++  if (cached) return cached
++  const begun = performance.now(), offsets = new Uint32Array(9002)
++  const cell = (y: number) => Math.max(0, Math.min(9000, Math.floor((y / 100000 + 90) * 50)))
++  for (let i=0; i<lookup.eligible.length; i++) if (lookup.eligible[i]) offsets[cell(graph.xy[i*2+1])+1]++
++  for (let i=1; i<offsets.length; i++) offsets[i]+=offsets[i-1]
++  const nodes = new Uint32Array(offsets[offsets.length-1]), cursor = offsets.slice()
++  for (let i=0; i<lookup.eligible.length; i++) if (lookup.eligible[i]) nodes[cursor[cell(graph.xy[i*2+1])]++]=i
++  releaseBuffers(cursor)
++  const result={offsets,nodes,buildMs:performance.now()-begun};spatial.set(graph,result);return result
++}
++function candidates(graph: Graph, point: Point, lookup: ReturnType<typeof index>) {
++  if (!(globalThis as unknown as {indexedEndpoints?:boolean}).indexedEndpoints) return scanCandidates(graph,point,lookup)
++  const ix=latitudeIndex(graph,lookup), choices=new Map<number,Endpoint>(), scale=Math.cos(point.lat*Math.PI/180)
++  const radius=maximumSnapMetres/metresPerDegree, limit=radius**2
++  // Expand by one bin on each side, then apply the original exact distance test.
++  const lo=Math.max(0,Math.floor((point.lat-radius+90)*50)-1),hi=Math.min(9000,Math.floor((point.lat+radius+90)*50)+1)
++  for(let k=ix.offsets[lo];k<ix.offsets[hi+1];k++){
++    const i=ix.nodes[k],lon=graph.xy[i*2]/100000,lat=graph.xy[i*2+1]/100000
++    const dx=(lon-point.lon)*scale,dy=lat-point.lat,distance=dx*dx+dy*dy
++    if (!(distance<=limit))continue
++    const snapMetres=Math.sqrt(distance)*metresPerDegree,group=lookup.component[i],previous=choices.get(group)
++    if(!previous||snapMetres<previous.snapMetres||(snapMetres===previous.snapMetres&&i<previous.node))choices.set(group,{...point,node:i,lon,lat,snapMetres})
++  }
++  if(!choices.size)throw new Error(`No road within 2 km of ${point.name}. Choose a point closer to the network.`)
++  return choices
++}
++export function endpointIndexAudit(graph: Graph, start:Point,goal:Point){
++ const baseline=snapEndpoints(graph,start,goal), began=performance.now()
++ ;(globalThis as unknown as {indexedEndpoints:boolean}).indexedEndpoints=true
++ const candidate=snapEndpoints(graph,start,goal), elapsed=performance.now()-began
++ ;(globalThis as unknown as {indexedEndpoints:boolean}).indexedEndpoints=false
++ const ix=spatial.get(graph)!
++ const exact=JSON.stringify([baseline.start,baseline.goal,baseline.snapping])===JSON.stringify([candidate.start,candidate.goal,candidate.snapping])
++ return {baselineMs:baseline.snapMs,indexedMs:elapsed,buildMs:ix.buildMs,indexBytes:ix.nodes.byteLength+ix.offsets.byteLength,eligibleNodes:ix.nodes.length,exact}
++}

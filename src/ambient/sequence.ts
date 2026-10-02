@@ -1,3 +1,4 @@
+import { traceLength } from '../search/trace.ts'
 import type { SearchAlgorithm, SearchResult } from '../search/contracts.ts'
 import { JourneySelector, replaySeconds, POOL_VERSION, SELECTOR_VERSION, type JourneyPair, type DistanceProfile, type JourneyRecord } from './selector.ts'
 import { TerritorySelector, TERRITORY_SELECTOR_VERSION, type TerritoryStudy } from './territories.ts'
@@ -62,7 +63,7 @@ export class AmbientSequence {
       this.duration = accepted ? replaySeconds((territory.maximumMetres ?? 0) / 1000) : 30
       this.records.push({ kind: 'territories', sources: study.sources.map(source => source.id), accepted,
         maximumMetres: territory?.maximumMetres ?? 0, sourceNodes: territory?.sourceNodes ?? [],
-        dataset: result.dataset, algorithm: result.algorithm, searchMs: result.searchMs, events: result.trace.length,
+        dataset: result.dataset, algorithm: result.algorithm, searchMs: result.searchMs, events: traceLength(result),
         replaySeconds: accepted ? this.duration : null, selector: TERRITORY_SELECTOR_VERSION, pool: this.poolVersion,
         seed: this.territorySelector!.seed, selection: this.territorySelector!.selections,
         cycle: ALGORITHM_CYCLE_VERSION, journey: this.journey, distanceProfile: this.selector!.distance })
@@ -72,7 +73,7 @@ export class AmbientSequence {
     }
     const record = this.selector!.record(this.pair, result.routeMetres === null ? null : result.routeMetres / 1000)
     this.duration = record.accepted ? replaySeconds(record.roadKm!) : 30
-    this.records.push({ ...record, dataset: result.dataset, algorithm: result.algorithm, searchMs: result.searchMs, events: result.trace.length,
+    this.records.push({ ...record, dataset: result.dataset, algorithm: result.algorithm, searchMs: result.searchMs, events: traceLength(result),
       replaySeconds: record.accepted ? this.duration : null, selector: SELECTOR_VERSION, pool: this.poolVersion, distanceProfile: this.selector!.distance, seed: this.selector!.seed, selection: this.selector!.selections,
       cycle: ALGORITHM_CYCLE_VERSION, journey: this.journey })
     this.records = this.records.slice(-12)

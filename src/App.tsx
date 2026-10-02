@@ -1,3 +1,5 @@
+import { traceLength } from './search/trace.ts'
+import { archiveTrace, disposeTrace, cleanupTraceStorage } from './records/trace-storage.ts'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { TimelineScrubber } from '@motionstudies/web/components/TimelineScrubber'
 import '@motionstudies/web/timeline-scrubber.css'
@@ -26,6 +28,7 @@ const resultAlgorithm = (result: SearchResult): SearchAlgorithm => result.algori
 const algorithmName = (algorithm: SearchAlgorithm) => ({ dijkstra: 'Dijkstra', bidirectional: 'Bidirectional Dijkstra', astar: 'A*', 'bidirectional-astar': 'Bidirectional A*', multisource: 'Three-source Dijkstra', greedy: 'Greedy best-first', 'depth-first': 'Depth-first', 'breadth-first': 'Breadth-first', 'time-dijkstra': 'Estimated time' }[algorithm])
 
 export function App() {
+  useEffect(() => { void cleanupTraceStorage() }, [])
   const surface = useRef<HTMLDivElement>(null)
   const watch = useWatchMode(surface)
   const [shared, setShared] = useState(() => {
@@ -64,6 +67,7 @@ export function App() {
   const [ready, setReady] = useState(false), [busy, setBusy] = useState(false)
   const [loading, setLoading] = useState({ loaded: 0, total: 0, stage: 'Opening the road record' })
   const [result, setResult] = useState<SearchResult | null>(null)
+  useEffect(() => () => { void disposeTrace(result) }, [result])
   const [algorithm, setAlgorithm] = useState<SearchAlgorithm>(shared.study?.algorithm ?? 'dijkstra')
   const [objective, setObjective] = useState<'distance' | 'time'>(shared.study?.objective ?? 'distance')
   const objectiveRef = useRef<'distance' | 'time'>(shared.study?.objective ?? 'distance')
@@ -186,9 +190,11 @@ export function App() {
           if (sequence.state.active) setDuration(sequence.duration)
           const frame = sharedFrame.current; sharedFrame.current = undefined
           const opening = openingReplay(frame, reducedMotion)
+          await archiveTrace(reply.result, { signal: traceController.signal, valid: () => !disposed && reply.requestId === currentRequest.current })
+          if (disposed || reply.requestId !== currentRequest.current) { await disposeTrace(reply.result); return }
           try { await map?.prepareResult(reply.result) }
-          catch { setMapError('The road drawing could not be prepared. Please reload the study.'); setBusy(false); return }
-          if (disposed || reply.requestId !== currentRequest.current) return
+          catch { await disposeTrace(reply.result); setMapError('The road drawing could not be prepared. Please reload the study.'); setBusy(false); return }
+          if (disposed || reply.requestId !== currentRequest.current) { await disposeTrace(reply.result); return }
           setResult(reply.result); map?.setResult(reply.result); setBusy(false); seek(opening.progress); if (frame?.view) map?.setView(frame.view); setPlaying(opening.playing && (!sequence.state.active || sequence.state.running))
         }
         if (reply.type === 'error' && (reply.requestId === undefined || reply.requestId === currentRequest.current)) { if (releaseAfterSearch && reply.requestId !== undefined) { engine.terminate(); activeEngine = null; worker.current = null } setError(reply.message); setBusy(false); if (ambient.current!.state.active) ambient.current!.fail(reply.message) }
@@ -203,8 +209,9 @@ export function App() {
       if (worker.current) worker.current.postMessage(request)
       else { pendingSearch = request; createEngine(true) }
     }
+    const traceController = new AbortController()
     createEngine(false)
-    return () => { disposed = true; submitSearch.current = null; activeEngine?.terminate(); map?.dispose(); scene.current = null; worker.current = null }
+    return () => { traceController.abort(); disposed = true; submitSearch.current = null; activeEngine?.terminate(); map?.dispose(); scene.current = null; worker.current = null }
   }, [attempt, country, shared, search, seek])
 
   useEffect(() => {
@@ -393,7 +400,7 @@ export function App() {
       <div className="replay-controls">
         <button disabled={!result || busy} onClick={togglePlayback} title="Play / pause (Space)" aria-keyshortcuts="Space">{playing ? 'Pause' : 'Play'}</button>
         <button disabled={!result || busy} onClick={() => { seek(0); setPlaying(true) }} aria-label="Replay search from the beginning">↺</button>
-        <TimelineScrubber windowStart={0} windowEnd={duration} time={progress * duration} onSeek={time => { setPlaying(false); seek(time / duration) }} onScrubStart={() => setPlaying(false)} ariaLabel="Search replay" describedBy="playback-shortcuts" ariaValueText={`${(progress * duration).toFixed(1)} seconds of ${duration}; ${Math.floor(progress * (result?.trace.length ?? 0))} recorded events`} step={.01} disabled={!result || busy} />
+        <TimelineScrubber windowStart={0} windowEnd={duration} time={progress * duration} onSeek={time => { setPlaying(false); seek(time / duration) }} onScrubStart={() => setPlaying(false)} ariaLabel="Search replay" describedBy="playback-shortcuts" ariaValueText={`${(progress * duration).toFixed(1)} seconds of ${duration}; ${Math.floor(progress * (result ? traceLength(result) : 0))} recorded events`} step={.01} disabled={!result || busy} />
         <span className="replay-time">{(progress * duration).toFixed(1)}<small> / {Number(duration.toFixed(1))}s</small></span>
         <select aria-label="Replay duration" value={duration} onChange={event => setDuration(Number(event.target.value))}>{![5, 15, 30, 60, 120].includes(duration) && <option value={duration}>{duration.toFixed(1)}s</option>}{[5, 15, 30, 60, 120].map(value => <option key={value} value={value}>{value}s</option>)}</select>
       </div>

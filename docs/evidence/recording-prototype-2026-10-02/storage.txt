@@ -1,0 +1,20 @@
+const traceSha=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',r.trace)),v=>v.toString(16).padStart(2,'0')).join('');let storage;
+if(compress){
+ const trace=r.trace, checkpoints=r.checkpoints, stride=r.checkpointStride, length=trace.length;
+ const count=(kinds,p)=>{const stop=Math.min(length,Math.max(0,Math.floor(p*length))),c=Math.floor(stop/stride),v=[checkpoints[c*3],checkpoints[c*3+1],checkpoints[c*3+2]];for(let i=c*stride;i<stop;i++){const kind=kinds?((packedKinds[i>>>2]>>>((i&3)*2))&3):(trace[i]&3);if(kind<3)v[kind]++}return v};
+ const expected=Array.from({length:501},(_,i)=>count(false,i/500));let directory, database, backend='opfs';
+ try {directory=await(await navigator.storage.getDirectory()).getDirectoryHandle('pfad-trace-proof',{create:true})}catch{backend='indexeddb';database=await new Promise((resolve,reject)=>{const q=indexedDB.open('pfad-trace-proof',1);q.onupgradeneeded=()=>q.result.createObjectStore('blocks');q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)});}
+ const transact=(mode,operation)=>new Promise((resolve,reject)=>{const tx=database.transaction('blocks',mode),q=operation(tx.objectStore('blocks'));let result;q.onsuccess=()=>{result=q.result};tx.oncomplete=()=>resolve(result);q.onerror=()=>reject(q.error||new Error('block request failed'));tx.onerror=()=>reject(tx.error||q.error||new Error('block transaction failed'));tx.onabort=()=>reject(tx.error||q.error||new Error('block transaction aborted'))});
+ const put=async(name,data)=>{if(directory){const f=await directory.getFileHandle(name,{create:true}),writer=await f.createWritable();await writer.write(data);await writer.close()}else await transact('readwrite',store=>store.put(data.slice().buffer,name));};
+ const get=async name=>directory?await(await(await directory.getFileHandle(name)).getFile()).arrayBuffer():await transact('readonly',store=>store.get(name));
+ const remove=async name=>directory?await directory.removeEntry(name):await transact('readwrite',store=>store.delete(name));
+ const blocks=[];let writeMs=0,readMs=0,verifyMs=0;
+ try{
+  for(let start=0;start<trace.byteLength;start+=8*1024*1024){const data=new Uint8Array(trace.buffer,start,Math.min(8*1024*1024,trace.byteLength-start));const digest=new Uint8Array(await crypto.subtle.digest('SHA-256',data));const name='block-'+blocks.length;const begun=performance.now();await put(name,data);writeMs+=performance.now()-begun;blocks.push({name,bytes:data.byteLength,digest});}
+  const originalBytes=trace.byteLength;trace.buffer.transfer(0);
+  const countersExact=expected.every((v,i)=>JSON.stringify(v)===JSON.stringify(count(true,i/500)));
+  let recoveredBytes=0,blocksExact=true;
+  for(const b of blocks){const begun=performance.now(),data=await get(b.name);readMs+=performance.now()-begun;const verify=performance.now();const digest=new Uint8Array(await crypto.subtle.digest('SHA-256',data));blocksExact&&=data.byteLength===b.bytes&&String(digest)===String(b.digest);verifyMs+=performance.now()-verify;recoveredBytes+=data.byteLength;}
+  storage={backend,originalBytes,residentTraceBytes:trace.byteLength,counterBytes:packedKinds.byteLength,blocks:blocks.length,writeMs,readMs,verifyMs,countersExact,blocksExact,recoveredBytes};console.log('storage',JSON.stringify(storage));
+ }finally{for(const b of blocks)await remove(b.name);if(database)database.close();}
+}

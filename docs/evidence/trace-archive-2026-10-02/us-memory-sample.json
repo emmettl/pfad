@@ -1,0 +1,653 @@
+{
+  "memorySamples": [
+    {
+      "elapsedMs": 321.62925,
+      "phase": "loading",
+      "bytes": 133234688
+    },
+    {
+      "elapsedMs": 1320.196959,
+      "phase": "loading",
+      "bytes": 958676992
+    },
+    {
+      "elapsedMs": 2322.229709,
+      "phase": "loading",
+      "bytes": 1421361152
+    },
+    {
+      "elapsedMs": 3323.12325,
+      "phase": "loading",
+      "bytes": 1841217536
+    },
+    {
+      "elapsedMs": 4323.24925,
+      "phase": "loading",
+      "bytes": 2178383872
+    },
+    {
+      "elapsedMs": 5324.746084,
+      "phase": "loading",
+      "bytes": 2293907456
+    },
+    {
+      "elapsedMs": 6323.61975,
+      "phase": "loading",
+      "bytes": 2399141888
+    },
+    {
+      "elapsedMs": 7324.285375,
+      "phase": "loading",
+      "bytes": 2479128576
+    },
+    {
+      "elapsedMs": 8326.576375,
+      "phase": "loading",
+      "bytes": 2416459776
+    },
+    {
+      "elapsedMs": 9325.558667,
+      "phase": "loading",
+      "bytes": 2498166784
+    },
+    {
+      "elapsedMs": 10327.672209,
+      "phase": "loading",
+      "bytes": 2431762432
+    },
+    {
+      "elapsedMs": 11329.036584,
+      "phase": "loading",
+      "bytes": 2532507648
+    },
+    {
+      "elapsedMs": 12331.083042,
+      "phase": "loading",
+      "bytes": 2495004672
+    },
+    {
+      "elapsedMs": 13330.993667,
+      "phase": "loading",
+      "bytes": 2572615680
+    },
+    {
+      "elapsedMs": 14334.5545,
+      "phase": "loading",
+      "bytes": 2526494720
+    },
+    {
+      "elapsedMs": 15334.508584,
+      "phase": "loading",
+      "bytes": 2611429376
+    },
+    {
+      "elapsedMs": 16337.458042,
+      "phase": "loading",
+      "bytes": 2559590400
+    },
+    {
+      "elapsedMs": 17337.626334,
+      "phase": "loading",
+      "bytes": 2667757568
+    },
+    {
+      "elapsedMs": 18340.071084,
+      "phase": "loading",
+      "bytes": 2611281920
+    },
+    {
+      "elapsedMs": 19342.562959,
+      "phase": "loading",
+      "bytes": 2700918784
+    },
+    {
+      "elapsedMs": 20342.299084,
+      "phase": "loading",
+      "bytes": 2622242816
+    },
+    {
+      "elapsedMs": 21342.705042,
+      "phase": "loading",
+      "bytes": 2682994688
+    },
+    {
+      "elapsedMs": 22347.090125,
+      "phase": "loading",
+      "bytes": 2753314816
+    },
+    {
+      "elapsedMs": 23345.650042,
+      "phase": "loading",
+      "bytes": 2665857024
+    },
+    {
+      "elapsedMs": 24348.088042,
+      "phase": "loading",
+      "bytes": 2642558976
+    },
+    {
+      "elapsedMs": 25350.713959,
+      "phase": "loading",
+      "bytes": 2698625024
+    },
+    {
+      "elapsedMs": 26350.378,
+      "phase": "loading",
+      "bytes": 2763718656
+    },
+    {
+      "elapsedMs": 27350.757042,
+      "phase": "loading",
+      "bytes": 2820227072
+    },
+    {
+      "elapsedMs": 28352.848,
+      "phase": "loading",
+      "bytes": 2868297728
+    },
+    {
+      "elapsedMs": 29353.232875,
+      "phase": "loading",
+      "bytes": 2778808320
+    },
+    {
+      "elapsedMs": 30354.77675,
+      "phase": "loading",
+      "bytes": 2833776640
+    },
+    {
+      "elapsedMs": 31356.974459,
+      "phase": "loading",
+      "bytes": 2872000512
+    },
+    {
+      "elapsedMs": 32365.112625,
+      "phase": "loading",
+      "bytes": 2927476736
+    },
+    {
+      "elapsedMs": 33359.899875,
+      "phase": "loading",
+      "bytes": 2985771008
+    },
+    {
+      "elapsedMs": 34361.333167,
+      "phase": "loading",
+      "bytes": 2871427072
+    },
+    {
+      "elapsedMs": 35363.07175,
+      "phase": "loading",
+      "bytes": 2915794944
+    },
+    {
+      "elapsedMs": 36364.590959,
+      "phase": "loading",
+      "bytes": 2970025984
+    },
+    {
+      "elapsedMs": 37366.359542,
+      "phase": "loading",
+      "bytes": 3018113024
+    },
+    {
+      "elapsedMs": 38368.362875,
+      "phase": "loading",
+      "bytes": 3063300096
+    },
+    {
+      "elapsedMs": 39371.14725,
+      "phase": "loading",
+      "bytes": 3095183360
+    },
+    {
+      "elapsedMs": 40371.946875,
+      "phase": "loading",
+      "bytes": 2993061888
+    },
+    {
+      "elapsedMs": 41372.746167,
+      "phase": "loading",
+      "bytes": 3033530368
+    },
+    {
+      "elapsedMs": 42372.12525,
+      "phase": "loading",
+      "bytes": 3082403840
+    },
+    {
+      "elapsedMs": 43374.524375,
+      "phase": "loading",
+      "bytes": 3125575680
+    },
+    {
+      "elapsedMs": 44374.752625,
+      "phase": "loading",
+      "bytes": 3178643456
+    },
+    {
+      "elapsedMs": 45388.562125,
+      "phase": "loading",
+      "bytes": 3494264832
+    },
+    {
+      "elapsedMs": 46380.100792,
+      "phase": "loading",
+      "bytes": 4655480832
+    },
+    {
+      "elapsedMs": 46610.976,
+      "phase": "search",
+      "bytes": 4484235264
+    },
+    {
+      "elapsedMs": 47380.898292,
+      "phase": "search",
+      "bytes": 4623122432
+    },
+    {
+      "elapsedMs": 48382.806459,
+      "phase": "search",
+      "bytes": 4764647424
+    },
+    {
+      "elapsedMs": 49383.685834,
+      "phase": "search",
+      "bytes": 4804673536
+    },
+    {
+      "elapsedMs": 50387.989625,
+      "phase": "search",
+      "bytes": 5402230784
+    },
+    {
+      "elapsedMs": 51390.559667,
+      "phase": "search",
+      "bytes": 5472944128
+    },
+    {
+      "elapsedMs": 52391.123417,
+      "phase": "search",
+      "bytes": 5360844800
+    },
+    {
+      "elapsedMs": 53392.62275,
+      "phase": "search",
+      "bytes": 5384454144
+    },
+    {
+      "elapsedMs": 54397.55075,
+      "phase": "search",
+      "bytes": 6600556544
+    },
+    {
+      "elapsedMs": 55395.058209,
+      "phase": "search",
+      "bytes": 6759792640
+    },
+    {
+      "elapsedMs": 56397.746334,
+      "phase": "search",
+      "bytes": 6854737920
+    },
+    {
+      "elapsedMs": 57397.278792,
+      "phase": "search",
+      "bytes": 6951272448
+    },
+    {
+      "elapsedMs": 58399.004209,
+      "phase": "search",
+      "bytes": 7037894656
+    },
+    {
+      "elapsedMs": 59401.648875,
+      "phase": "search",
+      "bytes": 7104675840
+    },
+    {
+      "elapsedMs": 60402.753959,
+      "phase": "search",
+      "bytes": 7172456448
+    },
+    {
+      "elapsedMs": 61405.130084,
+      "phase": "search",
+      "bytes": 7243464704
+    },
+    {
+      "elapsedMs": 62407.256125,
+      "phase": "search",
+      "bytes": 7308410880
+    },
+    {
+      "elapsedMs": 63408.194292,
+      "phase": "search",
+      "bytes": 7380566016
+    },
+    {
+      "elapsedMs": 64410.707042,
+      "phase": "search",
+      "bytes": 7450951680
+    },
+    {
+      "elapsedMs": 65060.904042,
+      "phase": "trace-hash",
+      "bytes": 5937512448
+    },
+    {
+      "elapsedMs": 65393.36825,
+      "phase": "archive",
+      "bytes": 2885238784
+    },
+    {
+      "elapsedMs": 65412.78925,
+      "phase": "archive",
+      "bytes": 2885238784
+    },
+    {
+      "elapsedMs": 66370.37,
+      "phase": "drawing-preparation",
+      "bytes": 3726327808
+    },
+    {
+      "elapsedMs": 66415.29425,
+      "phase": "drawing-preparation",
+      "bytes": 3755687936
+    },
+    {
+      "elapsedMs": 67417.42225,
+      "phase": "drawing-preparation",
+      "bytes": 4597432320
+    },
+    {
+      "elapsedMs": 68419.554209,
+      "phase": "drawing-preparation",
+      "bytes": 3923787776
+    },
+    {
+      "elapsedMs": 69422.161042,
+      "phase": "drawing-preparation",
+      "bytes": 4160634880
+    },
+    {
+      "elapsedMs": 70423.706084,
+      "phase": "drawing-preparation",
+      "bytes": 4377968640
+    },
+    {
+      "elapsedMs": 71426.618917,
+      "phase": "drawing-preparation",
+      "bytes": 4606787584
+    },
+    {
+      "elapsedMs": 72428.355084,
+      "phase": "drawing-preparation",
+      "bytes": 4811489280
+    },
+    {
+      "elapsedMs": 73430.316459,
+      "phase": "drawing-preparation",
+      "bytes": 5029412864
+    },
+    {
+      "elapsedMs": 74433.987625,
+      "phase": "drawing-preparation",
+      "bytes": 5282578432
+    },
+    {
+      "elapsedMs": 75431.907959,
+      "phase": "drawing-preparation",
+      "bytes": 5451628544
+    },
+    {
+      "elapsedMs": 76438.195334,
+      "phase": "drawing-preparation",
+      "bytes": 5653446656
+    },
+    {
+      "elapsedMs": 76767.985625,
+      "phase": "replay",
+      "bytes": 5657870336
+    },
+    {
+      "elapsedMs": 77442.736209,
+      "phase": "replay",
+      "bytes": 5707808768
+    },
+    {
+      "elapsedMs": 78443.448792,
+      "phase": "replay",
+      "bytes": 5716148224
+    },
+    {
+      "elapsedMs": 79444.89275,
+      "phase": "replay",
+      "bytes": 5566070784
+    },
+    {
+      "elapsedMs": 80448.2475,
+      "phase": "replay",
+      "bytes": 5537759232
+    },
+    {
+      "elapsedMs": 81454.48225,
+      "phase": "replay",
+      "bytes": 5413912576
+    },
+    {
+      "elapsedMs": 82448.532834,
+      "phase": "replay",
+      "bytes": 5443649536
+    },
+    {
+      "elapsedMs": 83446.136917,
+      "phase": "replay",
+      "bytes": 5450104832
+    },
+    {
+      "elapsedMs": 84456.066375,
+      "phase": "replay",
+      "bytes": 5454217216
+    },
+    {
+      "elapsedMs": 85455.157292,
+      "phase": "replay",
+      "bytes": 5390041088
+    },
+    {
+      "elapsedMs": 86451.908792,
+      "phase": "replay",
+      "bytes": 5369577472
+    },
+    {
+      "elapsedMs": 87454.85425,
+      "phase": "replay",
+      "bytes": 5361532928
+    },
+    {
+      "elapsedMs": 88455.648417,
+      "phase": "replay",
+      "bytes": 5361631232
+    },
+    {
+      "elapsedMs": 89459.167209,
+      "phase": "replay",
+      "bytes": 5355618304
+    },
+    {
+      "elapsedMs": 90462.335625,
+      "phase": "replay",
+      "bytes": 5279039488
+    },
+    {
+      "elapsedMs": 91456.046042,
+      "phase": "replay",
+      "bytes": 5279645696
+    },
+    {
+      "elapsedMs": 92341.4035,
+      "phase": "context-recovery",
+      "bytes": 5280612352
+    },
+    {
+      "elapsedMs": 92454.247667,
+      "phase": "context-recovery",
+      "bytes": 5280694272
+    },
+    {
+      "elapsedMs": 93458.544834,
+      "phase": "context-recovery",
+      "bytes": 3402891264
+    },
+    {
+      "elapsedMs": 94458.363917,
+      "phase": "context-recovery",
+      "bytes": 3557277696
+    },
+    {
+      "elapsedMs": 95459.67225,
+      "phase": "context-recovery",
+      "bytes": 3783196672
+    },
+    {
+      "elapsedMs": 96460.32,
+      "phase": "context-recovery",
+      "bytes": 4022976512
+    },
+    {
+      "elapsedMs": 97462.53975,
+      "phase": "context-recovery",
+      "bytes": 4199809024
+    },
+    {
+      "elapsedMs": 98464.942709,
+      "phase": "context-recovery",
+      "bytes": 4435361792
+    },
+    {
+      "elapsedMs": 99467.197917,
+      "phase": "context-recovery",
+      "bytes": 4645650432
+    },
+    {
+      "elapsedMs": 100468.364584,
+      "phase": "context-recovery",
+      "bytes": 4881580032
+    },
+    {
+      "elapsedMs": 101473.092875,
+      "phase": "context-recovery",
+      "bytes": 5080825856
+    },
+    {
+      "elapsedMs": 102473.922042,
+      "phase": "context-recovery",
+      "bytes": 5197201408
+    },
+    {
+      "elapsedMs": 103477.431292,
+      "phase": "context-recovery",
+      "bytes": 5467750400
+    },
+    {
+      "elapsedMs": 103638.122167,
+      "phase": "recording-verification",
+      "bytes": 5368446976
+    },
+    {
+      "elapsedMs": 104366.654042,
+      "phase": "recording-verification",
+      "bytes": 6250020864
+    }
+  ],
+  "variant": "final",
+  "country": "us",
+  "engineName": "chromium",
+  "algorithm": "astar",
+  "manifestIdentity": "b72d1c0f671afad5af6963fd273a012b5374feaf79aabcf85b37758662a8826b",
+  "errors": [],
+  "measurements": [
+    {
+      "visibleGeometryBytes": 1868813616,
+      "totalGeometryBytes": 1868813616,
+      "zoom": 1,
+      "frames": 56,
+      "fps": 13.606433899517308,
+      "medianMs": 66.69999999999709,
+      "p95Ms": 133.40000000000873,
+      "averageDraws": 6513.571428571428,
+      "averageVertices": 69255411.89285715
+    },
+    {
+      "visibleGeometryBytes": 492522360,
+      "totalGeometryBytes": 1868813616,
+      "zoom": 4,
+      "frames": 118,
+      "fps": 29.273133217520552,
+      "medianMs": 33.30000000000291,
+      "p95Ms": 50.09999999999127,
+      "averageDraws": 1705.4237288135594,
+      "averageVertices": 36499716.576271184
+    },
+    {
+      "visibleGeometryBytes": 193446936,
+      "totalGeometryBytes": 1868813616,
+      "zoom": 12,
+      "frames": 241,
+      "fps": 60.03686911455383,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.70000000001164,
+      "averageDraws": 671.2033195020747,
+      "averageVertices": 14838990.589211619
+    }
+  ],
+  "images": [
+    "zoom1-progress0.2.png",
+    "zoom1-progress0.5.png",
+    "zoom1-progress0.8.png",
+    "zoom1-progress1.png",
+    "zoom4-progress0.2.png",
+    "zoom4-progress0.5.png",
+    "zoom4-progress0.8.png",
+    "zoom4-progress1.png",
+    "zoom12-progress0.2.png",
+    "zoom12-progress0.5.png",
+    "zoom12-progress0.8.png",
+    "zoom12-progress1.png",
+    "start-zoom12-progress0.2.png",
+    "start-zoom12-progress0.5.png",
+    "start-zoom12-progress0.8.png",
+    "start-zoom12-progress1.png",
+    "goal-zoom12-progress0.2.png",
+    "goal-zoom12-progress0.5.png",
+    "goal-zoom12-progress0.8.png",
+    "goal-zoom12-progress1.png"
+  ],
+  "browserVersion": "153.0.8010.12",
+  "result": {
+    "sha": "b84f210727929384632f4c1ff1ffaabe6ab633dfa07e82cbdb36ce17030b5f66",
+    "routeMetres": 4600874.9,
+    "events": 162342445,
+    "archived": true,
+    "archiveMs": 975.5,
+    "countersExact": true,
+    "retainedTraceBytes": 0,
+    "counterBytes": 40585612,
+    "searchMs": 10833.300000011921,
+    "preparationMs": 10371.899999976158,
+    "maxPreparationTimerGapMs": 60,
+    "replayVertices": "155734468",
+    "batches": 6632,
+    "roadCpuBytes": "0",
+    "decodedChunks": "669",
+    "eventTextureBytes": "603979776",
+    "denseTextureBytes": 603979776
+  },
+  "contextEvent": "162342445",
+  "blockProof": {
+    "blocks": 78,
+    "verifiedBytes": 649369780
+  },
+  "glError": 0
+}

@@ -1,0 +1,44 @@
+{
+  "before": {
+    "gl": [
+      0.0313725508749485,
+      0.05098428949713707,
+      0.0627492293715477,
+      1
+    ],
+    "renderer": "080d10",
+    "attributes": {
+      "alpha": true,
+      "antialias": false,
+      "depth": true,
+      "desynchronized": false,
+      "failIfMajorPerformanceCaveat": false,
+      "powerPreference": "low-power",
+      "premultipliedAlpha": true,
+      "preserveDrawingBuffer": true,
+      "stencil": false,
+      "xrCompatible": false
+    }
+  },
+  "after": {
+    "gl": [
+      0.0313725508749485,
+      0.05098428949713707,
+      0.0627492293715477,
+      1
+    ],
+    "renderer": "080d10",
+    "attributes": {
+      "alpha": true,
+      "antialias": false,
+      "depth": true,
+      "desynchronized": false,
+      "failIfMajorPerformanceCaveat": false,
+      "powerPreference": "low-power",
+      "premultipliedAlpha": true,
+      "preserveDrawingBuffer": true,
+      "stencil": false,
+      "xrCompatible": false
+    }
+  }
+}

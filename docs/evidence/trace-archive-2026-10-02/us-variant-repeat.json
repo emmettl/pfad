@@ -1,0 +1,92 @@
+{
+  "memorySamples": [],
+  "variant": "verified",
+  "country": "us",
+  "engineName": "chromium",
+  "algorithm": "astar",
+  "manifestIdentity": "b72d1c0f671afad5af6963fd273a012b5374feaf79aabcf85b37758662a8826b",
+  "errors": [],
+  "measurements": [
+    {
+      "visibleGeometryBytes": 1868813616,
+      "totalGeometryBytes": 1868813616,
+      "zoom": 1,
+      "frames": 108,
+      "fps": 26.905159313460146,
+      "medianMs": 33.39999999999418,
+      "p95Ms": 66.69999999999709,
+      "averageDraws": 6570.592592592592,
+      "averageVertices": 70851038.53703703
+    },
+    {
+      "visibleGeometryBytes": 492522360,
+      "totalGeometryBytes": 1868813616,
+      "zoom": 4,
+      "frames": 241,
+      "fps": 60.03088726131724,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.80000000000291,
+      "averageDraws": 1712.8630705394191,
+      "averageVertices": 37218388.65560166
+    },
+    {
+      "visibleGeometryBytes": 193446936,
+      "totalGeometryBytes": 1868813616,
+      "zoom": 12,
+      "frames": 241,
+      "fps": 60.03686911464306,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.79999999998836,
+      "averageDraws": 671.2033195020747,
+      "averageVertices": 14838990.589211619
+    }
+  ],
+  "images": [
+    "zoom1-progress0.2.png",
+    "zoom1-progress0.5.png",
+    "zoom1-progress0.8.png",
+    "zoom1-progress1.png",
+    "zoom4-progress0.2.png",
+    "zoom4-progress0.5.png",
+    "zoom4-progress0.8.png",
+    "zoom4-progress1.png",
+    "zoom12-progress0.2.png",
+    "zoom12-progress0.5.png",
+    "zoom12-progress0.8.png",
+    "zoom12-progress1.png",
+    "start-zoom12-progress0.2.png",
+    "start-zoom12-progress0.5.png",
+    "start-zoom12-progress0.8.png",
+    "start-zoom12-progress1.png",
+    "goal-zoom12-progress0.2.png",
+    "goal-zoom12-progress0.5.png",
+    "goal-zoom12-progress0.8.png",
+    "goal-zoom12-progress1.png"
+  ],
+  "browserVersion": "153.0.8010.12",
+  "result": {
+    "sha": "b84f210727929384632f4c1ff1ffaabe6ab633dfa07e82cbdb36ce17030b5f66",
+    "routeMetres": 4600874.9,
+    "events": 162342445,
+    "archived": true,
+    "archiveMs": 791.7000000178814,
+    "countersExact": true,
+    "retainedTraceBytes": 0,
+    "counterBytes": 40585612,
+    "searchMs": 8489.200000017881,
+    "preparationMs": 9759.40000000596,
+    "maxPreparationTimerGapMs": 48.400000005960464,
+    "replayVertices": "155734468",
+    "batches": 6632,
+    "roadCpuBytes": "0",
+    "decodedChunks": "669",
+    "eventTextureBytes": "603979776",
+    "denseTextureBytes": 603979776
+  },
+  "contextEvent": "162342445",
+  "blockProof": {
+    "blocks": 78,
+    "verifiedBytes": 649369780
+  },
+  "glError": 0
+}

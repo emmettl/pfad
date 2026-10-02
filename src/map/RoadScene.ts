@@ -1,3 +1,4 @@
+import { traceLength } from '../search/trace.ts'
 import { prepareSpatialReplayDrawing, replayVertexCount } from './replayDrawing.ts'
 import { prepareReplayTextures, prepareReplayTexturesAsync, replayTextureBytes, type ReplayTextures } from './replayTextures.ts'
 import { drawingRoadRange, drawingChunkNeeded, type DrawingRoadRange } from './drawingLayout.ts'
@@ -292,7 +293,7 @@ export class RoadScene {
         if (chosen.has(roads[begin])) this.drawing.add(positions.slice(begin * 2, end * 2), roads.slice(begin, end))
         begin = end
       }
-      const batches = prepareSpatialReplayDrawing(positions, roads, result.edgeTimes, result.backwardTimes, result.trace.length)
+      const batches = prepareSpatialReplayDrawing(positions, roads, result.edgeTimes, result.backwardTimes, traceLength(result))
       const upload = new THREE.Scene()
       for (const selected of batches) {
         const geometry = new THREE.BufferGeometry()
@@ -359,6 +360,7 @@ export class RoadScene {
     this.clearSelectionFill()
   }
   private restoreDrawing = () => {
+    this.renderer.setClearColor('#080d10', 1); this.dirty = true
     const result = this.lastResult
     if (this.geographyContext) this.setGeography(this.geographyContext)
     if (!result || !this.storedDrawing.length) return
@@ -434,7 +436,7 @@ export class RoadScene {
     this.proximityTexture.needsUpdate = true
     this.material.uniforms.uGoalProximity.value = this.proximityTexture; this.material.uniforms.uAstar.value = result.goalProximity ? 1 : 0
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uTextureSize.value.set(textures.width, textures.height)
-    this.events = result.trace.length; this.material.uniforms.uTotal.value = this.events
+    this.events = traceLength(result); this.material.uniforms.uTotal.value = this.events
     this.points = result.sources ?? [result.start, result.goal]; this.markers.replaceChildren()
     this.markers.classList.toggle('bidirectional', !!result.backwardTimes)
     this.markers.classList.toggle('astar', !!result.goalProximity)

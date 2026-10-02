@@ -1,0 +1,19 @@
+{
+  "baseCommit": "9197c1a3d394f9c827c99bc29262f3072f7695a3",
+  "host": "Apple M4 Max,36GiB RAM",
+  "normalChecks": "isolated HEAD plus owned changes; excludes concurrent spanning-tree/profile work",
+  "sourceHashes": {
+    "src/App.tsx": "f65587e9e755ab49085b3d6a506d6168c49bf622e7b88ce877a3c358f8325547",
+    "src/ambient/sequence.ts": "8fb95edc1860b2ad975cd1fd0a5299083ba8b775453e3a850a507d1af8dae041",
+    "src/map/RoadScene.ts": "7b407a224a93c53c10198f65dc68085751929b1fabf2555c848a36fbe6b0b6b0",
+    "src/records/export.ts": "34f0a44ff0ad6fdf9319bce116a88df8a7f6cdc86765bcf96820c882a530c7ef",
+    "src/records/trace-storage.ts": "b226a87598455c5dede74b46fc5932242ec7ae9367421b69f078ba0f8278df7b",
+    "src/search/contracts.ts": "dad092d07458f5eee38c3eac536d5b0dc673a8398775cab714add2eadf67f25c",
+    "src/search/engine.ts": "62e97b4b0d3b2e8f7567390656dc6c95f79cda87ba90e11879699421d06e9863",
+    "src/search/trace.ts": "9b4e7a9559688d33f0b695ade66a9fcb22d214166418bcaec0e0cc1ae5a5e986",
+    "tests/trace-storage.test.mjs": "fcbe9a10430d1522f36e83c7bdd283efd104b15676f66f2db638d2af1f6fb6d5",
+    "e2e/trace-storage.spec.ts": "81bc0378fe9ed2d93b01b4f922ca5cfb9e645852619985f7f552d64b08f8d2e1"
+  },
+  "fullUS": "Existing unpublished graph, test-only capacity/chunk/atlas allowances; no source refresh or US publication",
+  "phone": "No physical iPhone qualification"
+}

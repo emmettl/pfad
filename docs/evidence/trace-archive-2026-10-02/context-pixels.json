@@ -1,0 +1,6 @@
+{
+  "maximumDifference": 0,
+  "capturePreservedBuffer": true,
+  "event": "162342445",
+  "note": "Test-only retained GPU buffer; production renderer unchanged."
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "name": "chromium",
+    "version": "153.0.8010.12",
+    "result": {
+      "failed": true,
+      "message": "simulated storage unavailable",
+      "retainedTraceBytes": 4194304
+    }
+  }
+]
