@@ -384,6 +384,36 @@
         25,
         55
       ]
+    },
+    {
+      "path": "src/map/data/at-border.json",
+      "bytes": 12467,
+      "sha256": "7b9ed40edf795bd47440f6017f058c159bd50313a92236058c0b755b0d108947",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-country-geography.py at",
+      "bounds": [
+        9,
+        46,
+        18,
+        50
+      ]
+    },
+    {
+      "path": "src/map/data/at-lakes.json",
+      "bytes": 4355,
+      "sha256": "e453cd13c792df5be9d220b948f398959d962941b6d9d6ae90e461f8f3328570",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py at",
+      "bounds": [
+        9,
+        46,
+        18,
+        50
+      ]
     }
   ],
   "publishedCommit": "5910d68b2eb4c78376007b42639d1c4a17986b7b",

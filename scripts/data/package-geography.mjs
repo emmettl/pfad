@@ -28,4 +28,4 @@ for (const country of countries) {
   registry[country] = { url: `https://motionstudies.app/pfad-data/${id}/manifest.json`, bytes: raw.length, sha256: digest(raw) }
   console.log(directory)
 }
-await writeFile('src/map/geography-releases.json', JSON.stringify(registry, null, 2) + '\n')
+if (!process.argv.includes('--no-registry')) await writeFile('src/map/geography-releases.json', JSON.stringify(registry, null, 2) + '\n')

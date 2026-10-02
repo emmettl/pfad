@@ -369,3 +369,12 @@ million; the edge, exact road-ID, drawing and download limits remain unchanged.
 National replay and country UI proofs cover desktop Chromium and touch WebKit;
 physical-phone budgets remain open. Switzerland stays bundled and default.
 [Release evidence](evidence/europe-five-2026-10-01/README.md).
+
+### Austria catalogue addition · 2 October 2026
+
+Austria has a pinned complete national graph, independent border/lake reference
+release and twenty-place ambient pool. Its 23.35 MB road download uses the
+existing direct-opening policy. Validation includes all authored endpoints in
+both directions, sixty accepted ambient journeys and deterministic national
+replay in Chromium and touch WebKit. See
+[release evidence](evidence/austria-release-2026-10-02/README.md).

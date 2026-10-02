@@ -5,7 +5,9 @@ import { createHash } from 'node:crypto'
 import { loadGeography } from '../src/map/geography-loader.ts'
 import releases from '../src/map/geography-releases.json'
 import worker from '../hosting/data-worker/index.mjs'
-execFileSync(process.execPath, ['scripts/data/package-geography.mjs', '20261001'])
+for (const date of new Set(Object.values(releases).map(reference => reference.url.match(/geo-[a-z]{2}-(\d{8})-/)[1]))) {
+  execFileSync(process.execPath, ['scripts/data/package-geography.mjs', date, '--no-registry'])
+}
 const digest = bytes => createHash('sha256').update(bytes).digest('hex')
 afterEach(() => vi.unstubAllGlobals())
 async function serve(country, edit = () => {}) {

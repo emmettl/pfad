@@ -9,5 +9,6 @@
   "it": {"admin": "Italy", "bounds": [6, 35, 19, 48], "referenceLatitude": 42},
   "es": {"admin": "Spain", "bounds": [-19, 27, 5, 44], "referenceLatitude": 40},
   "fr": {"admin": "France", "bounds": [-6, 41, 10, 52], "referenceLatitude": 46.5},
-  "de": {"admin": "Germany", "bounds": [5, 47, 16, 56], "referenceLatitude": 51}
+  "de": {"admin": "Germany", "bounds": [5, 47, 16, 56], "referenceLatitude": 51},
+  "at": {"admin": "Austria", "bounds": [9, 46, 18, 50], "referenceLatitude": 47.6}
 }

@@ -1,0 +1,81 @@
+{
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/austria-260930.osm.pbf",
+    "sha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+    "md5": "74212346f51f564d78eda757b75e5abb",
+    "bytes": 811337470,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "scope": "Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.",
+  "road_classes": {
+    "tertiary": 57072,
+    "residential": 257346,
+    "secondary": 52562,
+    "motorway": 14419,
+    "service": 600274,
+    "unclassified": 94583,
+    "living_street": 5438,
+    "primary": 58738,
+    "motorway_link": 7368,
+    "trunk_link": 1038,
+    "primary_link": 3099,
+    "trunk": 2683,
+    "secondary_link": 400,
+    "tertiary_link": 329,
+    "road": 20
+  },
+  "excluded": {
+    "private": 114327,
+    "no": 9629,
+    "agricultural": 312,
+    "forestry": 240
+  },
+  "road_shape_nodes": 8114860,
+  "graph_nodes": 1736661,
+  "physical_edges": 1932755,
+  "directed_arcs": 3731957,
+  "profiles": 20831,
+  "restrictions": 15710,
+  "controls": 68166,
+  "graph": {
+    "json_bytes": 125270770,
+    "gzip_bytes": 40197224,
+    "brotli_q9_bytes": 38931062,
+    "sha256": "4423db7aaaec343960bf278f26e907c8bfccf45e16a46e710c11ead16151911c"
+  },
+  "variants": {
+    "0": {
+      "json_bytes": 52239480,
+      "gzip_bytes": 15044648,
+      "brotli_q9_bytes": 14099295,
+      "sha256": "88b6c610c8445da3dde2846d40da8c95a243ff186400e7176e3f3855f0673bf1",
+      "interior_vertices": 6378199,
+      "combined_gzip_bytes": 55241872,
+      "combined_brotli_bytes": 53030357
+    },
+    "5": {
+      "json_bytes": 22108488,
+      "gzip_bytes": 4218934,
+      "brotli_q9_bytes": 3877501,
+      "sha256": "3dc695977ec072f76f44de7e3c11d9519dd2deb715374979c11b0f347989c850",
+      "interior_vertices": 1212597,
+      "combined_gzip_bytes": 44416158,
+      "combined_brotli_bytes": 42808563
+    },
+    "15": {
+      "json_bytes": 16462117,
+      "gzip_bytes": 1883384,
+      "brotli_q9_bytes": 1710401,
+      "sha256": "ab5b0fa47fc99070df4b41ea44b37952ad06a7c1be9619155f381b800c4ce82f",
+      "interior_vertices": 460075,
+      "combined_gzip_bytes": 42080608,
+      "combined_brotli_bytes": 40641463
+    }
+  },
+  "elapsed_seconds": 113.55186825001147
+}

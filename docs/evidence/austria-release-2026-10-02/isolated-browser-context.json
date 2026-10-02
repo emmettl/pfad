@@ -1,0 +1,99 @@
+[
+  {
+    "country": "at",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4196/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Vienna→Innsbruck",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "3197605"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Vienna→Innsbruck",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "3105997"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Vienna→Innsbruck",
+        "canvas": {
+          "width": 603,
+          "height": 1311,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "60",
+          "event": "2494242"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Vienna→Krems70.5 kmA*",
+        "events": "244038"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Feldkirch→Zell am See292.0 kmBidirectional A*",
+        "events": "1071843"
+      },
+      {
+        "algorithm": "greedy-best-first/1",
+        "caption": "Innsbruck→Kufstein82.6 kmShortest route not guaranteedGreedy best-first",
+        "events": "6968"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Graz→Eisenstadt154.9 kmDijkstra",
+        "events": "2131918"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Dornbirn · Salzburg · LeobenThree-source Dijkstra",
+        "events": "7173114"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Steyr→Wels38.5 kmBidirectional Dijkstra",
+        "events": "295045"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Vienna→Kufstein413.5 kmA*",
+        "events": "4476396"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Klagenfurt→Bregenz505.6 kmBidirectional A*",
+        "events": "2145162"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "bidirectional-astar/1",
+      "recoveredStops": 0,
+      "after": "greedy-best-first/1",
+      "caption": "Steyr→BregenzShortest route not guaranteedGreedy best-first"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

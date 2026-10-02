@@ -1,0 +1,35 @@
+{
+  "schema": "pfad-release-validation/1",
+  "country": "at",
+  "road": "at-20260930-f66d15dd279a",
+  "geography": "geo-at-20261002-41fbae937a33",
+  "check": {
+    "command": "npm run check",
+    "passed": true,
+    "unitTests": 155,
+    "artifactBytes": 28952098
+  },
+  "browser": {
+    "command": "PFAD_PREVIEW_PORT=4191 npm run test:browser -- --workers=2",
+    "passed": 64,
+    "failed": 0,
+    "projects": [
+      "chromium",
+      "webkit-mobile"
+    ],
+    "note": "Fresh preview server after the build completed; no concurrent rebuild."
+  },
+  "ambientJourneys": 60,
+  "manualDirectedJourneys": 38,
+  "publishedObjectsVerified": 42,
+  "applicationRelease": "pending",
+  "physicalPhoneValidated": false,
+  "commitCandidate": {
+    "base": "d51b29cb1f8bbf9f557ba5dec29295a9f867ed69",
+    "checkPassed": true,
+    "unitTests": 106,
+    "artifactBytes": 28950977,
+    "austriaBrowserProof": "isolated-browser-context.json",
+    "unrelatedProfileWorkExcluded": true
+  }
+}

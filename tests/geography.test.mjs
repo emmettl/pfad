@@ -6,7 +6,7 @@ import { test } from 'vitest'
 test('geographic references retain reviewed source identities, attribution and closed rings', () => {
   const record = JSON.parse(readFileSync('data/geography-sources.json', 'utf8'))
   assert.equal(record.refreshPolicy, 'manual-versioned-snapshots')
-  assert.equal(record.assets.length, 26)
+  assert.equal(record.assets.length, 28)
   for (const asset of record.assets) {
     const bytes = readFileSync(asset.path), layer = JSON.parse(bytes)
     assert.equal(bytes.length, asset.bytes)

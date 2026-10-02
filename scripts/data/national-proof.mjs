@@ -42,6 +42,7 @@ window.run = async (algorithm) => {
  if(r.routeLengths.reduce((a,b)=>a+b,0)/100!==r.routeMetres) throw Error('Route length mismatch');
  const traceSha256=Array.from(new Uint8Array(await digest(r.trace)),v=>v.toString(16).padStart(2,'0')).join('');
  const record={algorithm:r.algorithm,tieBreak:r.tieBreak,dataset:r.dataset,start:r.start,goal:r.goal,searchMs:r.searchMs,snapMs:r.snapMs,snapping:r.snapping,heuristic:r.heuristic,events:r.trace.length,traceBytes:r.trace.byteLength,edgeTextureBytes:r.edgeTimes.byteLength+(r.backwardTimes?.byteLength??0),nodesSettled:r.exploredNodes,arcsExamined:r.examinedArcs,routeMetres:r.routeMetres,maxQueue:r.maxQueue,traceSha256};
+ if (!await scene.prepareResult(r)) throw Error('Drawing preparation cancelled');
  scene.setResult(r);
  // Warm GPU uploads before sampling playback of the actual national drawing.
  scene.setProgress(.2);await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
@@ -53,7 +54,8 @@ window.run = async (algorithm) => {
  record.integerEventTextures=r.edgeTimes instanceof Uint32Array;
  record.withinExactFloatEventRange=r.trace.length<=16777216;
  record.roundedFirstExaminationTimestamps=r.edgeTimes instanceof Uint32Array ? 0 : null;
- record.drawingVertices=scene.renderer.info.render.lines*2;
+ record.drawingVertices=Number(scene.renderer.domElement.dataset.roadVertices);
+ record.submittedDrawingVertices=scene.renderer.info.render.lines*2;
  record.maxFps=Number(scene.renderer.domElement.dataset.maxFps);record.pixelRatio=scene.renderer.getPixelRatio();
  record.traceBackingBytes=r.trace.buffer.byteLength;
  window.proof.runs.push(record);return record;

@@ -1,0 +1,27 @@
+{
+  "id": "at",
+  "name": "Austria",
+  "datasetPrefix": "at-20260930",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-09-30T20:22:42Z",
+    "data_timestamp": "2026-09-30T20:22:42Z",
+    "url": "https://download.geofabrik.de/europe/austria-260930.osm.pbf",
+    "sha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+    "md5": "74212346f51f564d78eda757b75e5abb",
+    "bytes": 811337470,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      13.3,
+      47.6
+    ],
+    "referenceLatitude": 47.6,
+    "scaleMetres": 580000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

@@ -28,6 +28,7 @@ coverage are retained in each immutable manifest.
 | `es` | Spain | 59.008 | 30 Sep 2026 | European Spain including Balearic Islands; no Canary Islands |
 | `fr` | France | 151.882 | 30 Sep 2026 | Metropolitan France including Corsica |
 | `de` | Germany | 140.876 | 29 Sep 2026 | German Geofabrik extract |
+| `at` | Austria | 23.349 | 30 Sep 2026 | Austrian Geofabrik extract |
 
 Each study has a versioned ambient pool and independently pinned geographic
 references. Iceland and Luxembourg's selected lake source has no features;
@@ -317,3 +318,25 @@ remains unverified. See [release evidence](evidence/europe-five-2026-10-01/READM
 Ignored caches can use an external volume through repository cache links. This
 release stores large sources and sizing intermediates under External Stick;
 ordinary builds and browser playback do not depend on that volume.
+
+## Austria · 2 October 2026
+
+Austria uses the immutable road release `at-20260930-f66d15dd279a`, with
+23,349,292 opening bytes, 1,736,661 routing nodes, 1,932,755 edges and
+6,290,704 drawing vertices. It opens directly, with Vienna–Innsbruck as the
+initial journey. The Vienna point is on a road near the city centre; the
+pedestrian-centre reference snapped to a directed dead end in this extract.
+All twenty authored places have validated journeys to and from Vienna.
+
+Its pinned 30 September Geofabrik source retains exact bytes, SHA-256 and
+replication timestamp in `data/countries/at.json`. The complete graph uses the
+existing connectivity compiler/profile and allocation guards. The ambient
+pool `at-places/1` covers all nine federal states; sixty accepted journeys
+exercise all four exact-distance algorithms and all three distance bands.
+
+Independent outline release `geo-at-20261002-41fbae937a33` contains 16,822
+layer bytes: one border ring and five reference lake features from the existing
+pinned Natural Earth snapshot. Outlines stay outside the application bundle.
+See [Austria release evidence](evidence/austria-release-2026-10-02/README.md)
+for route, source, drawing and browser validation. Physical-phone stability
+remains unverified.

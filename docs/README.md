@@ -8,7 +8,8 @@ artifact. Switzerland is the default; the catalogue also offers United Kingdom,
 Iceland, New Zealand, Luxembourg, Netherlands, whole-island Ireland and Scandinavia
 (Norway, Sweden and Denmark), Poland, Italy, Spain, metropolitan France with
 Corsica, and Germany. [COUNTRIES.md](COUNTRIES.md) records coverage,
-downloads and immutable releases.
+downloads and immutable releases. Austria joins the catalogue with a complete
+national graph; its [release evidence](evidence/austria-release-2026-10-02/README.md) records validation.
 
 Manual journeys offer Dijkstra, bidirectional Dijkstra, A* and bidirectional A*.
 The recorded computation drives roads, counters and colours; route completion

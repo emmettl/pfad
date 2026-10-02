@@ -310,4 +310,27 @@ export const DE_POOL: AmbientPool = { version: 'de-places/1', places: [
   {"id": "rostock", "name": "Rostock", "lon": 12.0991, "lat": 54.0924, "region": "mainland"},
 ] }
 
-export const AMBIENT_POOLS: Record<string, AmbientPool> = { ch: SWISS_POOL, uk: UK_POOL, is: IS_POOL, nl: NL_POOL, nz: NZ_POOL, lu: LU_POOL, ie: IE_POOL, sc: SC_POOL, pl: PL_POOL, it: IT_POOL, es: ES_POOL, fr: FR_POOL, de: DE_POOL }
+export const AT_POOL: AmbientPool = { version: 'at-places/1', places: [
+  {"id": "vienna", "name": "Vienna", "lon": 16.3698, "lat": 48.2028},
+  {"id": "innsbruck", "name": "Innsbruck", "lon": 11.4041, "lat": 47.2692},
+  {"id": "graz", "name": "Graz", "lon": 15.4395, "lat": 47.0707},
+  {"id": "linz", "name": "Linz", "lon": 14.2858, "lat": 48.3069},
+  {"id": "salzburg", "name": "Salzburg", "lon": 13.055, "lat": 47.8095},
+  {"id": "klagenfurt", "name": "Klagenfurt", "lon": 14.305, "lat": 46.6247},
+  {"id": "villach", "name": "Villach", "lon": 13.8506, "lat": 46.6111},
+  {"id": "bregenz", "name": "Bregenz", "lon": 9.7471, "lat": 47.5031},
+  {"id": "feldkirch", "name": "Feldkirch", "lon": 9.598, "lat": 47.237},
+  {"id": "dornbirn", "name": "Dornbirn", "lon": 9.7417, "lat": 47.4125},
+  {"id": "sankt-polten", "name": "Sankt Pölten", "lon": 15.6251, "lat": 48.2047},
+  {"id": "wiener-neustadt", "name": "Wiener Neustadt", "lon": 16.2426, "lat": 47.8151},
+  {"id": "eisenstadt", "name": "Eisenstadt", "lon": 16.5279, "lat": 47.8457},
+  {"id": "leoben", "name": "Leoben", "lon": 15.0902, "lat": 47.3764},
+  {"id": "wels", "name": "Wels", "lon": 14.028, "lat": 48.1575},
+  {"id": "steyr", "name": "Steyr", "lon": 14.4213, "lat": 48.0427},
+  {"id": "krems", "name": "Krems", "lon": 15.6142, "lat": 48.4108},
+  {"id": "lienz", "name": "Lienz", "lon": 12.769, "lat": 46.8299},
+  {"id": "zell-am-see", "name": "Zell am See", "lon": 12.7969, "lat": 47.3235},
+  {"id": "kufstein", "name": "Kufstein", "lon": 12.169, "lat": 47.5834},
+] }
+
+export const AMBIENT_POOLS: Record<string, AmbientPool> = { ch: SWISS_POOL, uk: UK_POOL, is: IS_POOL, nl: NL_POOL, nz: NZ_POOL, lu: LU_POOL, ie: IE_POOL, sc: SC_POOL, pl: PL_POOL, it: IT_POOL, es: ES_POOL, fr: FR_POOL, de: DE_POOL, at: AT_POOL }

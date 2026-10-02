@@ -1,0 +1,544 @@
+{
+  "measuredAt": "2026-10-02T07:29:47.296Z",
+  "host": {
+    "cpu": "Apple M4 Max",
+    "platform": "darwin"
+  },
+  "manifest": {
+    "id": "at-20260930-f66d15dd279a",
+    "counts": {
+      "nodes": 1736661,
+      "edges": 1932755,
+      "directedArcs": 3731957,
+      "vertices": 6290704
+    },
+    "downloadBytes": 23349292,
+    "source": {
+      "provider": "OpenStreetMap via Geofabrik",
+      "dataTimestamp": "2026-09-30T20:22:42Z",
+      "url": "https://download.geofabrik.de/europe/austria-260930.osm.pbf",
+      "sha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+      "attribution": "© OpenStreetMap contributors",
+      "licence": "ODbL-1.0",
+      "licenceUrl": "https://www.openstreetmap.org/copyright"
+    }
+  },
+  "note": "Production worker/engine/renderer with national manifest resource guards. Local Vite serving; no network simulation. WebKit viewport runs on desktop, not a physical phone. Outlines hidden. Timings exclude trace hashing. Byte accounting is retained buffers, not browser peak memory.",
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "errors": [],
+      "version": "153.0.8010.12",
+      "loadMs": 301.69999998807907,
+      "maxTextureSize": 16384,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Max, Unspecified Version)",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "f66d15dd279a28a8de052bd4e577dc5f0b078abedc3e7e2ff6a036dad443621f",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Bregenz",
+            "lon": 9.74835,
+            "lat": 47.50396,
+            "node": 1633709,
+            "snapMetres": 134.02007520536333
+          },
+          "goal": {
+            "name": "Vienna",
+            "lon": 16.37428,
+            "lat": 48.20857,
+            "node": 640010,
+            "snapMetres": 54.386332266413085
+          },
+          "searchMs": 251.7999999821186,
+          "snapMs": 106.80000001192093,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Bregenz",
+              "lon": 9.7471,
+              "lat": 47.5031
+            },
+            "requestedGoal": {
+              "name": "Vienna",
+              "lon": 16.3738,
+              "lat": 48.2082
+            }
+          },
+          "events": 6735326,
+          "traceBytes": 26941304,
+          "edgeTextureBytes": 15466496,
+          "nodesSettled": 1605164,
+          "arcsExamined": 3463417,
+          "routeMetres": 660519.55,
+          "maxQueue": 750,
+          "traceSha256": "ccfea8ff874139a9fef52142c872a91471cb53f3d377e857b26e109ac8213e8a",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.700000000000273,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 6290704,
+          "submittedDrawingVertices": 4705666,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 26941304
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "f66d15dd279a28a8de052bd4e577dc5f0b078abedc3e7e2ff6a036dad443621f",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Bregenz",
+            "lon": 9.74835,
+            "lat": 47.50396,
+            "node": 1633709,
+            "snapMetres": 134.02007520536333
+          },
+          "goal": {
+            "name": "Vienna",
+            "lon": 16.37428,
+            "lat": 48.20857,
+            "node": 640010,
+            "snapMetres": 54.386332266413085
+          },
+          "searchMs": 226.5,
+          "snapMs": 30,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Bregenz",
+              "lon": 9.7471,
+              "lat": 47.5031
+            },
+            "requestedGoal": {
+              "name": "Vienna",
+              "lon": 16.3738,
+              "lat": 48.2082
+            }
+          },
+          "events": 6735326,
+          "traceBytes": 26941304,
+          "edgeTextureBytes": 15466496,
+          "nodesSettled": 1605164,
+          "arcsExamined": 3463417,
+          "routeMetres": 660519.55,
+          "maxQueue": 750,
+          "traceSha256": "ccfea8ff874139a9fef52142c872a91471cb53f3d377e857b26e109ac8213e8a",
+          "frameIntervalMedianMs": 16.699999999999818,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 6290704,
+          "submittedDrawingVertices": 4705666,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 26941304
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "f66d15dd279a28a8de052bd4e577dc5f0b078abedc3e7e2ff6a036dad443621f",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Bregenz",
+            "lon": 9.74835,
+            "lat": 47.50396,
+            "node": 1633709,
+            "snapMetres": 134.02007520536333
+          },
+          "goal": {
+            "name": "Vienna",
+            "lon": 16.37428,
+            "lat": 48.20857,
+            "node": 640010,
+            "snapMetres": 54.386332266413085
+          },
+          "searchMs": 378,
+          "snapMs": 28.799999982118607,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Bregenz",
+              "lon": 9.7471,
+              "lat": 47.5031
+            },
+            "requestedGoal": {
+              "name": "Vienna",
+              "lon": 16.3738,
+              "lat": 48.2082
+            }
+          },
+          "events": 6942708,
+          "traceBytes": 27770832,
+          "edgeTextureBytes": 30932992,
+          "nodesSettled": 1651948,
+          "arcsExamined": 3572382,
+          "routeMetres": 660519.55,
+          "maxQueue": 1053,
+          "traceSha256": "3473ca8ae546ea0266dc5159ce632bbaab2fb8f81da1acf2278e675efed52dca",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 6290704,
+          "submittedDrawingVertices": 4754110,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 27770832
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "f66d15dd279a28a8de052bd4e577dc5f0b078abedc3e7e2ff6a036dad443621f",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Bregenz",
+            "lon": 9.74835,
+            "lat": 47.50396,
+            "node": 1633709,
+            "snapMetres": 134.02007520536333
+          },
+          "goal": {
+            "name": "Vienna",
+            "lon": 16.37428,
+            "lat": 48.20857,
+            "node": 640010,
+            "snapMetres": 54.386332266413085
+          },
+          "searchMs": 109.59999999403954,
+          "snapMs": 29.400000005960464,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Bregenz",
+              "lon": 9.7471,
+              "lat": 47.5031
+            },
+            "requestedGoal": {
+              "name": "Vienna",
+              "lon": 16.3738,
+              "lat": 48.2082
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 71.2000000178814,
+            "correctedNodes": 27998,
+            "longitudeScale": 0.6557587834121911,
+            "initialStartCm": 48945546,
+            "startLowerBoundCm": 48945546
+          },
+          "events": 2857054,
+          "traceBytes": 11428216,
+          "edgeTextureBytes": 15466496,
+          "nodesSettled": 683395,
+          "arcsExamined": 1459695,
+          "routeMetres": 660519.55,
+          "maxQueue": 2133,
+          "traceSha256": "9cf6ac40a89aa1cd7ad7c007c9bc25f50bd709cd7538bd608d6a232da0395cb3",
+          "frameIntervalMedianMs": 16.69999999999891,
+          "frameIntervalP95Ms": 16.799999999999272,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 6290704,
+          "submittedDrawingVertices": 1831464,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 11428216
+        }
+      ]
+    },
+    {
+      "name": "webkit-mobile-viewport",
+      "errors": [],
+      "version": "26.6",
+      "loadMs": 257,
+      "maxTextureSize": 16384,
+      "renderer": "Apple GPU",
+      "runs": [
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "f66d15dd279a28a8de052bd4e577dc5f0b078abedc3e7e2ff6a036dad443621f",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Bregenz",
+            "lon": 9.74835,
+            "lat": 47.50396,
+            "node": 1633709,
+            "snapMetres": 134.02007520536333
+          },
+          "goal": {
+            "name": "Vienna",
+            "lon": 16.37428,
+            "lat": 48.20857,
+            "node": 640010,
+            "snapMetres": 54.386332266413085
+          },
+          "searchMs": 191,
+          "snapMs": 80,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Bregenz",
+              "lon": 9.7471,
+              "lat": 47.5031
+            },
+            "requestedGoal": {
+              "name": "Vienna",
+              "lon": 16.3738,
+              "lat": 48.2082
+            }
+          },
+          "events": 6735326,
+          "traceBytes": 26941304,
+          "edgeTextureBytes": 15466496,
+          "nodesSettled": 1605164,
+          "arcsExamined": 3463417,
+          "routeMetres": 660519.55,
+          "maxQueue": 750,
+          "traceSha256": "ccfea8ff874139a9fef52142c872a91471cb53f3d377e857b26e109ac8213e8a",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 19,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 6290704,
+          "submittedDrawingVertices": 4705666,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 26941304
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "f66d15dd279a28a8de052bd4e577dc5f0b078abedc3e7e2ff6a036dad443621f",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Bregenz",
+            "lon": 9.74835,
+            "lat": 47.50396,
+            "node": 1633709,
+            "snapMetres": 134.02007520536333
+          },
+          "goal": {
+            "name": "Vienna",
+            "lon": 16.37428,
+            "lat": 48.20857,
+            "node": 640010,
+            "snapMetres": 54.386332266413085
+          },
+          "searchMs": 223,
+          "snapMs": 22,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Bregenz",
+              "lon": 9.7471,
+              "lat": 47.5031
+            },
+            "requestedGoal": {
+              "name": "Vienna",
+              "lon": 16.3738,
+              "lat": 48.2082
+            }
+          },
+          "events": 6735326,
+          "traceBytes": 26941304,
+          "edgeTextureBytes": 15466496,
+          "nodesSettled": 1605164,
+          "arcsExamined": 3463417,
+          "routeMetres": 660519.55,
+          "maxQueue": 750,
+          "traceSha256": "ccfea8ff874139a9fef52142c872a91471cb53f3d377e857b26e109ac8213e8a",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 6290704,
+          "submittedDrawingVertices": 4705666,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 26941304
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection",
+          "dataset": {
+            "identity": "f66d15dd279a28a8de052bd4e577dc5f0b078abedc3e7e2ff6a036dad443621f",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Bregenz",
+            "lon": 9.74835,
+            "lat": 47.50396,
+            "node": 1633709,
+            "snapMetres": 134.02007520536333
+          },
+          "goal": {
+            "name": "Vienna",
+            "lon": 16.37428,
+            "lat": 48.20857,
+            "node": 640010,
+            "snapMetres": 54.386332266413085
+          },
+          "searchMs": 355,
+          "snapMs": 23,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Bregenz",
+              "lon": 9.7471,
+              "lat": 47.5031
+            },
+            "requestedGoal": {
+              "name": "Vienna",
+              "lon": 16.3738,
+              "lat": 48.2082
+            }
+          },
+          "events": 6942708,
+          "traceBytes": 27770832,
+          "edgeTextureBytes": 30932992,
+          "nodesSettled": 1651948,
+          "arcsExamined": 3572382,
+          "routeMetres": 660519.55,
+          "maxQueue": 1053,
+          "traceSha256": "3473ca8ae546ea0266dc5159ce632bbaab2fb8f81da1acf2278e675efed52dca",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 6290704,
+          "submittedDrawingVertices": 4754110,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 27770832
+        },
+        {
+          "algorithm": "astar/1",
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order",
+          "dataset": {
+            "identity": "f66d15dd279a28a8de052bd4e577dc5f0b078abedc3e7e2ff6a036dad443621f",
+            "compiler": "pfad-study-compiler/3",
+            "profile": "road-connectivity-distance-v1",
+            "sourceSha256": "7eba15b6111909efb3008e523cce9ab43fa7dd50fe04ff13ad8de65e2f5e459a",
+            "sourceTimestamp": "2026-09-30T20:22:42Z"
+          },
+          "start": {
+            "name": "Bregenz",
+            "lon": 9.74835,
+            "lat": 47.50396,
+            "node": 1633709,
+            "snapMetres": 134.02007520536333
+          },
+          "goal": {
+            "name": "Vienna",
+            "lon": 16.37428,
+            "lat": 48.20857,
+            "node": 640010,
+            "snapMetres": 54.386332266413085
+          },
+          "searchMs": 120,
+          "snapMs": 10,
+          "snapping": {
+            "version": "nearby-shared-component/1",
+            "requestedStart": {
+              "name": "Bregenz",
+              "lon": 9.7471,
+              "lat": 47.5031
+            },
+            "requestedGoal": {
+              "name": "Vienna",
+              "lon": 16.3738,
+              "lat": 48.2082
+            }
+          },
+          "heuristic": {
+            "version": "feasible-planar-distance/1",
+            "preparationMs": 75,
+            "correctedNodes": 27998,
+            "longitudeScale": 0.6557587834121911,
+            "initialStartCm": 48945546,
+            "startLowerBoundCm": 48945546
+          },
+          "events": 2857054,
+          "traceBytes": 11428216,
+          "edgeTextureBytes": 15466496,
+          "nodesSettled": 683395,
+          "arcsExamined": 1459695,
+          "routeMetres": 660519.55,
+          "maxQueue": 2133,
+          "traceSha256": "9cf6ac40a89aa1cd7ad7c007c9bc25f50bd709cd7538bd608d6a232da0395cb3",
+          "frameIntervalMedianMs": 17,
+          "frameIntervalP95Ms": 18,
+          "webglError": 0,
+          "integerEventTextures": true,
+          "withinExactFloatEventRange": true,
+          "roundedFirstExaminationTimestamps": 0,
+          "drawingVertices": 6290704,
+          "submittedDrawingVertices": 1831464,
+          "maxFps": 60,
+          "pixelRatio": 1,
+          "traceBackingBytes": 11428216
+        }
+      ]
+    }
+  ],
+  "bufferAccounting": {
+    "workerGraphBytes": 84700806,
+    "reverseCsrBytes": 21874476,
+    "uploadedRoadAttributeBytes": 75488448,
+    "drawingCoordinateAndOffsetBytes": 58056732,
+    "note": "Drawing coordinates share the uploaded attribute array: do not sum that field twice. Road attributes are CPU buffers; GPU copies are additional. Excludes search working allocations, transient decoding, route ribbon, textures, GPU copies, application/browser overhead and music."
+  }
+}

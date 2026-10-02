@@ -1,0 +1,727 @@
+{
+  "dataset": "f66d15dd279a28a8de052bd4e577dc5f0b078abedc3e7e2ff6a036dad443621f",
+  "routes": [
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "innsbruck",
+        "name": "Innsbruck",
+        "lon": 11.40417,
+        "lat": 47.26949,
+        "node": 13482,
+        "snapMetres": 32.67624766271625
+      },
+      "routeMetres": 474215.84
+    },
+    {
+      "start": {
+        "id": "innsbruck",
+        "name": "Innsbruck",
+        "lon": 11.40417,
+        "lat": 47.26949,
+        "node": 13482,
+        "snapMetres": 32.67624766271625
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 473558.41
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "graz",
+        "name": "Graz",
+        "lon": 15.43778,
+        "lat": 47.07153,
+        "node": 826424,
+        "snapMetres": 159.64434241672777
+      },
+      "routeMetres": 176940.88
+    },
+    {
+      "start": {
+        "id": "graz",
+        "name": "Graz",
+        "lon": 15.43778,
+        "lat": 47.07153,
+        "node": 826424,
+        "snapMetres": 159.64434241672777
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 177720.61
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "linz",
+        "name": "Linz",
+        "lon": 14.28575,
+        "lat": 48.30685,
+        "node": 24686,
+        "snapMetres": 6.677289556780446
+      },
+      "routeMetres": 176541.81
+    },
+    {
+      "start": {
+        "id": "linz",
+        "name": "Linz",
+        "lon": 14.28575,
+        "lat": 48.30685,
+        "node": 24686,
+        "snapMetres": 6.677289556780446
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 176022.9
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "salzburg",
+        "name": "Salzburg",
+        "lon": 13.05501,
+        "lat": 47.80946,
+        "node": 1127751,
+        "snapMetres": 4.510059778493041
+      },
+      "routeMetres": 286538.37
+    },
+    {
+      "start": {
+        "id": "salzburg",
+        "name": "Salzburg",
+        "lon": 13.05501,
+        "lat": 47.80946,
+        "node": 1127751,
+        "snapMetres": 4.510059778493041
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 286565.34
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "klagenfurt",
+        "name": "Klagenfurt",
+        "lon": 14.30536,
+        "lat": 46.62474,
+        "node": 1633584,
+        "snapMetres": 27.849203500264014
+      },
+      "routeMetres": 290403.63
+    },
+    {
+      "start": {
+        "id": "klagenfurt",
+        "name": "Klagenfurt",
+        "lon": 14.30536,
+        "lat": 46.62474,
+        "node": 1633584,
+        "snapMetres": 27.849203500264014
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 291020.48
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "villach",
+        "name": "Villach",
+        "lon": 13.85013,
+        "lat": 46.61151,
+        "node": 144953,
+        "snapMetres": 58.028682930817425
+      },
+      "routeMetres": 321166.13
+    },
+    {
+      "start": {
+        "id": "villach",
+        "name": "Villach",
+        "lon": 13.85013,
+        "lat": 46.61151,
+        "node": 144953,
+        "snapMetres": 58.028682930817425
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 321693.05
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "bregenz",
+        "name": "Bregenz",
+        "lon": 9.74835,
+        "lat": 47.50396,
+        "node": 1633709,
+        "snapMetres": 134.02007520536333
+      },
+      "routeMetres": 659386.6
+    },
+    {
+      "start": {
+        "id": "bregenz",
+        "name": "Bregenz",
+        "lon": 9.74835,
+        "lat": 47.50396,
+        "node": 1633709,
+        "snapMetres": 134.02007520536333
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 658845.11
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "feldkirch",
+        "name": "Feldkirch",
+        "lon": 9.59814,
+        "lat": 47.23778,
+        "node": 37504,
+        "snapMetres": 87.37383185555245
+      },
+      "routeMetres": 627477.45
+    },
+    {
+      "start": {
+        "id": "feldkirch",
+        "name": "Feldkirch",
+        "lon": 9.59814,
+        "lat": 47.23778,
+        "node": 37504,
+        "snapMetres": 87.37383185555245
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 627395.55
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "dornbirn",
+        "name": "Dornbirn",
+        "lon": 9.74172,
+        "lat": 47.41257,
+        "node": 123785,
+        "snapMetres": 7.927809555186235
+      },
+      "routeMetres": 649191.21
+    },
+    {
+      "start": {
+        "id": "dornbirn",
+        "name": "Dornbirn",
+        "lon": 9.74172,
+        "lat": 47.41257,
+        "node": 123785,
+        "snapMetres": 7.927809555186235
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 649025.27
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "sankt-polten",
+        "name": "Sankt Pölten",
+        "lon": 15.62568,
+        "lat": 48.20568,
+        "node": 1544451,
+        "snapMetres": 117.14197212196709
+      },
+      "routeMetres": 60541.89
+    },
+    {
+      "start": {
+        "id": "sankt-polten",
+        "name": "Sankt Pölten",
+        "lon": 15.62568,
+        "lat": 48.20568,
+        "node": 1544451,
+        "snapMetres": 117.14197212196709
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 61000.48
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "wiener-neustadt",
+        "name": "Wiener Neustadt",
+        "lon": 16.24257,
+        "lat": 47.81536,
+        "node": 668718,
+        "snapMetres": 28.99737695458536
+      },
+      "routeMetres": 46700.04
+    },
+    {
+      "start": {
+        "id": "wiener-neustadt",
+        "name": "Wiener Neustadt",
+        "lon": 16.24257,
+        "lat": 47.81536,
+        "node": 668718,
+        "snapMetres": 28.99737695458536
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 46555.16
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "eisenstadt",
+        "name": "Eisenstadt",
+        "lon": 16.52735,
+        "lat": 47.8459,
+        "node": 87348,
+        "snapMetres": 46.6821365175086
+      },
+      "routeMetres": 50661.79
+    },
+    {
+      "start": {
+        "id": "eisenstadt",
+        "name": "Eisenstadt",
+        "lon": 16.52735,
+        "lat": 47.8459,
+        "node": 87348,
+        "snapMetres": 46.6821365175086
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 50218.8
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "leoben",
+        "name": "Leoben",
+        "lon": 15.09029,
+        "lat": 47.37649,
+        "node": 158557,
+        "snapMetres": 12.0862604938402
+      },
+      "routeMetres": 152991.34
+    },
+    {
+      "start": {
+        "id": "leoben",
+        "name": "Leoben",
+        "lon": 15.09029,
+        "lat": 47.37649,
+        "node": 158557,
+        "snapMetres": 12.0862604938402
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 153412.36
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "wels",
+        "name": "Wels",
+        "lon": 14.02837,
+        "lat": 48.15737,
+        "node": 499799,
+        "snapMetres": 31.019416663863925
+      },
+      "routeMetres": 195896.19
+    },
+    {
+      "start": {
+        "id": "wels",
+        "name": "Wels",
+        "lon": 14.02837,
+        "lat": 48.15737,
+        "node": 499799,
+        "snapMetres": 31.019416663863925
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 195521.4
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "steyr",
+        "name": "Steyr",
+        "lon": 14.42125,
+        "lat": 48.04283,
+        "node": 95645,
+        "snapMetres": 14.925630180380004
+      },
+      "routeMetres": 161936.59
+    },
+    {
+      "start": {
+        "id": "steyr",
+        "name": "Steyr",
+        "lon": 14.42125,
+        "lat": 48.04283,
+        "node": 95645,
+        "snapMetres": 14.925630180380004
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 161674.23
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "krems",
+        "name": "Krems",
+        "lon": 15.61455,
+        "lat": 48.41097,
+        "node": 108304,
+        "snapMetres": 32.0108270924445
+      },
+      "routeMetres": 70457.79
+    },
+    {
+      "start": {
+        "id": "krems",
+        "name": "Krems",
+        "lon": 15.61455,
+        "lat": 48.41097,
+        "node": 108304,
+        "snapMetres": 32.0108270924445
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 71038.48
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "lienz",
+        "name": "Lienz",
+        "lon": 12.76914,
+        "lat": 46.83004,
+        "node": 216814,
+        "snapMetres": 18.86205691763136
+      },
+      "routeMetres": 391474.01
+    },
+    {
+      "start": {
+        "id": "lienz",
+        "name": "Lienz",
+        "lon": 12.76914,
+        "lat": 46.83004,
+        "node": 216814,
+        "snapMetres": 18.86205691763136
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 393039.98
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "zell-am-see",
+        "name": "Zell am See",
+        "lon": 12.79666,
+        "lat": 47.32359,
+        "node": 512451,
+        "snapMetres": 20.673531857030568
+      },
+      "routeMetres": 347066.49
+    },
+    {
+      "start": {
+        "id": "zell-am-see",
+        "name": "Zell am See",
+        "lon": 12.79666,
+        "lat": 47.32359,
+        "node": 512451,
+        "snapMetres": 20.673531857030568
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 347241.76
+    },
+    {
+      "start": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "goal": {
+        "id": "kufstein",
+        "name": "Kufstein",
+        "lon": 12.16894,
+        "lat": 47.58427,
+        "node": 28093,
+        "snapMetres": 96.84433357323012
+      },
+      "routeMetres": 413459.56
+    },
+    {
+      "start": {
+        "id": "kufstein",
+        "name": "Kufstein",
+        "lon": 12.16894,
+        "lat": 47.58427,
+        "node": 28093,
+        "snapMetres": 96.84433357323012
+      },
+      "goal": {
+        "id": "vienna",
+        "name": "Vienna",
+        "lon": 16.36996,
+        "lat": 48.20284,
+        "node": 137293,
+        "snapMetres": 12.66450673822068
+      },
+      "routeMetres": 412613.91
+    }
+  ]
+}

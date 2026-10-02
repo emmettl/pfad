@@ -1,0 +1,12 @@
+{
+  "start": {
+    "name": "Bregenz",
+    "lon": 9.7471,
+    "lat": 47.5031
+  },
+  "goal": {
+    "name": "Vienna",
+    "lon": 16.3738,
+    "lat": 48.2082
+  }
+}
