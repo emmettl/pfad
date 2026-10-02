@@ -1,4 +1,5 @@
 import { prepareSpatialReplayDrawing, replayVertexCount } from './replayDrawing.ts'
+import { prepareReplayTextures, replayTextureBytes, type ReplayTextures } from './replayTextures.ts'
 import { unpackDrawing } from './drawing-codec.ts'
 import { longitudeOffset, normaliseLongitude } from '../search/projection.ts'
 import * as THREE from 'three'
@@ -95,6 +96,7 @@ export class RoadScene {
   private drawingGeneration = 0
   private drawingDisposed = false
   private lastResult?: SearchResult
+  private replayTextures?: ReplayTextures
   private restoredProgress = 0
   onDrawingError?: (message: string) => void
   events = 1
@@ -261,6 +263,8 @@ export class RoadScene {
     this.clearRoadBatches()
     this.drawing.chunks = []
     const chosen = new Set(result.routeEdges)
+    const textures = prepareReplayTextures(result)
+    this.replayTextures = textures
     let submitted = 0, yielded = performance.now()
     for (const chunk of this.storedDrawing) {
       const bytes = chunk.compressed ? await unpackDrawing(chunk.bytes, chunk.count) : chunk.bytes
@@ -284,7 +288,7 @@ export class RoadScene {
         const ids = new THREE.BufferAttribute(integerIds, 1)
         const selectedRoads = roads instanceof Uint32Array ? new Uint32Array(selected.bytes, selected.count * 8, selected.count) : new Float32Array(selected.bytes, selected.count * 8, selected.count)
         // Integer GPU attributes preserve exact IDs for national graphs of any size.
-        if (!(roads instanceof Uint32Array)) for (let i = 0; i < selected.count; i++) integerIds[i] = selectedRoads[i]
+        for (let i = 0; i < selected.count; i++) integerIds[i] = textures.lookup ? textures.lookup[selectedRoads[i]] : selectedRoads[i]
         ids.gpuType = THREE.IntType
         geometry.setAttribute('roadId', ids)
         const [left, bottom, right, top] = selected.bounds
@@ -306,6 +310,8 @@ export class RoadScene {
       if (performance.now() - yielded >= 16) { await new Promise<void>(resolve => setTimeout(resolve, 0)); yielded = performance.now() }
       if (this.drawingDisposed || generation !== this.drawingGeneration) return false
     }
+    textures.lookup = undefined
+    this.renderer.domElement.dataset.eventTextureBytes = String(replayTextureBytes(textures))
     this.renderer.domElement.dataset.roadBatches = String(this.roadBatches.length)
     this.renderer.domElement.dataset.replayVertices = String(submitted)
     this.renderer.domElement.dataset.roadUploads = 'resident'
@@ -343,10 +349,10 @@ export class RoadScene {
     if (this.geographyContext) this.setGeography(this.geographyContext)
     if (!result || !this.storedDrawing.length) return
     this.clearResult()
-    void this.prepareResult(result).then(restored => { if (restored && !this.drawingDisposed) { this.setResult(result); this.setProgress(this.restoredProgress) } }).catch(() => this.onDrawingError?.('Road drawing could not be restored. Please reload the study.'))
+    void this.prepareResult(result).then(restored => { if (restored && !this.drawingDisposed) { this.setResult(result); this.setProgress(this.restoredProgress); this.resize() } }).catch(() => this.onDrawingError?.('Road drawing could not be restored. Please reload the study.'))
   }
   clearResult() {
-    ++this.drawingGeneration; this.lastResult = undefined
+    ++this.drawingGeneration; this.lastResult = undefined; this.replayTextures = undefined
     this.drawing.chunks = []; this.clearRoadBatches()
     this.renderer.domElement.dataset.roadUploads = 'deferred'
     this.route?.geometry.dispose(); if (this.route) this.scene.remove(this.route); this.route = undefined
@@ -393,22 +399,23 @@ export class RoadScene {
       this.route.frustumCulled = false; this.route.renderOrder = 1; this.route.visible = false; this.scene.add(this.route)
     }
     if (this.storedDrawing.length) this.drawing.chunks = []
+    const textures = this.replayTextures ?? prepareReplayTextures(result)
     this.sourceTexture.dispose()
-    this.sourceTexture = new THREE.DataTexture(result.edgeSources ?? new Uint8Array([0]), result.edgeSources ? result.textureWidth : 1, result.edgeSources ? result.textureHeight : 1, THREE.RedFormat, THREE.UnsignedByteType)
+    this.sourceTexture = new THREE.DataTexture(textures.sources ?? new Uint8Array([0]), textures.sources ? textures.width : 1, textures.sources ? textures.height : 1, THREE.RedFormat, THREE.UnsignedByteType)
     this.sourceTexture.needsUpdate = true
     this.material.uniforms.uSources.value = this.sourceTexture; this.material.uniforms.uTerritories.value = result.sources ? 1 : 0
     this.texture.dispose()
-    this.texture = new THREE.DataTexture(result.edgeTimes, result.textureWidth, result.textureHeight, THREE.RGIntegerFormat, THREE.UnsignedIntType)
+    this.texture = new THREE.DataTexture(textures.forward, textures.width, textures.height, THREE.RGIntegerFormat, THREE.UnsignedIntType)
     this.texture.needsUpdate = true
     this.backwardTexture.dispose()
-    this.backwardTexture = new THREE.DataTexture(result.backwardTimes ?? new Uint32Array([0, 0]), result.backwardTimes ? result.textureWidth : 1, result.backwardTimes ? result.textureHeight : 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
+    this.backwardTexture = new THREE.DataTexture(textures.backward ?? new Uint32Array([0, 0]), textures.backward ? textures.width : 1, textures.backward ? textures.height : 1, THREE.RGIntegerFormat, THREE.UnsignedIntType)
     this.backwardTexture.needsUpdate = true
     this.material.uniforms.uBackwardTimes.value = this.backwardTexture; this.material.uniforms.uBidirectional.value = result.backwardTimes ? 1 : 0
     this.proximityTexture.dispose()
-    this.proximityTexture = new THREE.DataTexture(result.goalProximity ?? new Uint8Array([0]), result.goalProximity ? result.textureWidth : 1, result.goalProximity ? result.textureHeight : 1, THREE.RedFormat, THREE.UnsignedByteType)
+    this.proximityTexture = new THREE.DataTexture(textures.proximity ?? new Uint8Array([0]), textures.proximity ? textures.width : 1, textures.proximity ? textures.height : 1, THREE.RedFormat, THREE.UnsignedByteType)
     this.proximityTexture.needsUpdate = true
     this.material.uniforms.uGoalProximity.value = this.proximityTexture; this.material.uniforms.uAstar.value = result.goalProximity ? 1 : 0
-    this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uTextureSize.value.set(result.textureWidth, result.textureHeight)
+    this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uTextureSize.value.set(textures.width, textures.height)
     this.events = result.trace.length; this.material.uniforms.uTotal.value = this.events
     this.points = result.sources ?? [result.start, result.goal]; this.markers.replaceChildren()
     this.markers.classList.toggle('bidirectional', !!result.backwardTimes)
@@ -541,7 +548,7 @@ export class RoadScene {
   pointerCancel = (event: PointerEvent) => { this.pointers.delete(event.pointerId); this.moved = 0; this.lastPinch = 0 }
   dispose() {
     this.clearRoadBatches()
-    this.drawingDisposed = true; ++this.drawingGeneration; this.lastResult = undefined; this.storedDrawing = []
+    this.drawingDisposed = true; ++this.drawingGeneration; this.lastResult = undefined; this.replayTextures = undefined; this.storedDrawing = []
     this.renderer.domElement.removeEventListener('webglcontextlost', this.loseDrawing)
     this.renderer.domElement.removeEventListener('webglcontextrestored', this.restoreDrawing)
     cancelAnimationFrame(this.frame); this.observer.disconnect()
