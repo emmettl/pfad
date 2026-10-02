@@ -66,3 +66,4 @@ that time; its older counts and algorithm sets are not current feature limits.
 - [Germany bidirectional A* memory follow-up](evidence/balanced-memory-2026-10-02/README.md): exact Munich–Berlin traces, compact balanced potentials and one-shot worker cleanup.
 
 - [Exact spatial replay batches](evidence/spatial-drawing-2026-10-02/README.md): pixel-identical Germany/US rendering, spatial culling, measured preparation cost and unchanged real search traces.
+- [Exact replay pipeline improvements](evidence/replay-pipeline-2026-10-02/README.md): compact event textures, safe drawing chunk pruning, paired visual proof and worker/batch/heap experiments.

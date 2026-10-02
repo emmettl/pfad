@@ -1,0 +1,72 @@
+{
+  "variant": "leaf32",
+  "country": "de",
+  "engineName": "chromium",
+  "algorithm": "bidirectional",
+  "manifestIdentity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+  "errors": [],
+  "measurements": [
+    {
+      "zoom": 1,
+      "frames": 241,
+      "fps": 60.01593784232549,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.700000000000728,
+      "averageDraws": 448.13278008298755,
+      "averageVertices": 8808866.44813278
+    },
+    {
+      "zoom": 4,
+      "frames": 241,
+      "fps": 60.03387803897025,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.700000000000728,
+      "averageDraws": 276.8464730290456,
+      "averageVertices": 4728619.394190871
+    },
+    {
+      "zoom": 12,
+      "frames": 241,
+      "fps": 60.030887261406406,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.799999999999272,
+      "averageDraws": 172.28215767634856,
+      "averageVertices": 2681800.406639004
+    }
+  ],
+  "images": [
+    "zoom1-progress0.2.png",
+    "zoom1-progress0.5.png",
+    "zoom1-progress0.8.png",
+    "zoom1-progress1.png",
+    "zoom4-progress0.2.png",
+    "zoom4-progress0.5.png",
+    "zoom4-progress0.8.png",
+    "zoom4-progress1.png",
+    "zoom12-progress0.2.png",
+    "zoom12-progress0.5.png",
+    "zoom12-progress0.8.png",
+    "zoom12-progress1.png",
+    "start-zoom12-progress0.2.png",
+    "start-zoom12-progress0.5.png",
+    "start-zoom12-progress0.8.png",
+    "start-zoom12-progress1.png",
+    "goal-zoom12-progress0.2.png",
+    "goal-zoom12-progress0.5.png",
+    "goal-zoom12-progress0.8.png",
+    "goal-zoom12-progress1.png"
+  ],
+  "browserVersion": "153.0.8010.12",
+  "result": {
+    "sha": "90d65e026387126d788ed679a6b64380a7b9f607b6c0bc175f1c3e2812f850fd",
+    "routeMetres": 578130.91,
+    "events": 23512843,
+    "searchMs": 1622.9000000059605,
+    "preparationMs": 1213.4000000059605,
+    "replayVertices": "17510174",
+    "batches": 450,
+    "roadCpuBytes": "0",
+    "denseTextureBytes": 191627264
+  },
+  "glError": 0
+}

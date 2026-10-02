@@ -1,0 +1,81 @@
+{
+  "variant": "final",
+  "country": "us",
+  "engineName": "chromium",
+  "algorithm": "astar",
+  "manifestIdentity": "b72d1c0f671afad5af6963fd273a012b5374feaf79aabcf85b37758662a8826b",
+  "errors": [],
+  "measurements": [
+    {
+      "visibleGeometryBytes": 15295584,
+      "totalGeometryBytes": 15295584,
+      "zoom": 1,
+      "frames": 241,
+      "fps": 60.02490660007089,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.799999999995634,
+      "averageDraws": 511.86721991701245,
+      "averageVertices": 641696.1742738589
+    },
+    {
+      "visibleGeometryBytes": 15295584,
+      "totalGeometryBytes": 15295584,
+      "zoom": 4,
+      "frames": 241,
+      "fps": 60.030887261406455,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.700000000004366,
+      "averageDraws": 511.86721991701245,
+      "averageVertices": 641696.1742738589
+    },
+    {
+      "visibleGeometryBytes": 0,
+      "totalGeometryBytes": 15295584,
+      "zoom": 12,
+      "frames": 241,
+      "fps": 60.03238261302777,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 16.700000000004366,
+      "averageDraws": 0,
+      "averageVertices": 0
+    }
+  ],
+  "images": [
+    "zoom1-progress0.2.png",
+    "zoom1-progress0.5.png",
+    "zoom1-progress0.8.png",
+    "zoom1-progress1.png",
+    "zoom4-progress0.2.png",
+    "zoom4-progress0.5.png",
+    "zoom4-progress0.8.png",
+    "zoom4-progress1.png",
+    "zoom12-progress0.2.png",
+    "zoom12-progress0.5.png",
+    "zoom12-progress0.8.png",
+    "zoom12-progress1.png",
+    "start-zoom12-progress0.2.png",
+    "start-zoom12-progress0.5.png",
+    "start-zoom12-progress0.8.png",
+    "start-zoom12-progress1.png",
+    "goal-zoom12-progress0.2.png",
+    "goal-zoom12-progress0.5.png",
+    "goal-zoom12-progress0.8.png",
+    "goal-zoom12-progress1.png"
+  ],
+  "browserVersion": "153.0.8010.12",
+  "result": {
+    "sha": "2f71711b6c8bcdafcde6770bbc540cf5d19a0b8f820552f33d54730770170c7a",
+    "routeMetres": 139060.27,
+    "events": 1606249,
+    "searchMs": 197.19999998807907,
+    "preparationMs": 3899.600000023842,
+    "maxPreparationTimerGapMs": 19.900000005960464,
+    "replayVertices": "1274632",
+    "batches": 514,
+    "roadCpuBytes": "0",
+    "decodedChunks": "503",
+    "eventTextureBytes": "4165632",
+    "denseTextureBytes": 603979776
+  },
+  "glError": 0
+}

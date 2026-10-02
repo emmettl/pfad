@@ -1,0 +1,81 @@
+{
+  "variant": "final",
+  "country": "de",
+  "engineName": "webkit",
+  "algorithm": "bidirectional-astar",
+  "manifestIdentity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+  "errors": [],
+  "measurements": [
+    {
+      "visibleGeometryBytes": 78819744,
+      "totalGeometryBytes": 78819744,
+      "zoom": 1,
+      "frames": 239,
+      "fps": 59.75,
+      "medianMs": 17,
+      "p95Ms": 18,
+      "averageDraws": 259.907949790795,
+      "averageVertices": 3199541.0376569037
+    },
+    {
+      "visibleGeometryBytes": 57786144,
+      "totalGeometryBytes": 78819744,
+      "zoom": 4,
+      "frames": 240,
+      "fps": 60,
+      "medianMs": 17,
+      "p95Ms": 18,
+      "averageDraws": 187.21666666666667,
+      "averageVertices": 2181470.658333333
+    },
+    {
+      "visibleGeometryBytes": 23823864,
+      "totalGeometryBytes": 78819744,
+      "zoom": 12,
+      "frames": 241,
+      "fps": 60.00996015936255,
+      "medianMs": 17,
+      "p95Ms": 18,
+      "averageDraws": 76.6804979253112,
+      "averageVertices": 769397.2199170125
+    }
+  ],
+  "images": [
+    "zoom1-progress0.2.png",
+    "zoom1-progress0.5.png",
+    "zoom1-progress0.8.png",
+    "zoom1-progress1.png",
+    "zoom4-progress0.2.png",
+    "zoom4-progress0.5.png",
+    "zoom4-progress0.8.png",
+    "zoom4-progress1.png",
+    "zoom12-progress0.2.png",
+    "zoom12-progress0.5.png",
+    "zoom12-progress0.8.png",
+    "zoom12-progress1.png",
+    "start-zoom12-progress0.2.png",
+    "start-zoom12-progress0.5.png",
+    "start-zoom12-progress0.8.png",
+    "start-zoom12-progress1.png",
+    "goal-zoom12-progress0.2.png",
+    "goal-zoom12-progress0.5.png",
+    "goal-zoom12-progress0.8.png",
+    "goal-zoom12-progress1.png"
+  ],
+  "browserVersion": "26.6",
+  "result": {
+    "sha": "499db21b077d114a25610c85d764bc37a515dde186d7cf446565376e66f07b8c",
+    "routeMetres": 578130.91,
+    "events": 9147727,
+    "searchMs": 676,
+    "preparationMs": 779,
+    "maxPreparationTimerGapMs": 36,
+    "replayVertices": "6568312",
+    "batches": 261,
+    "roadCpuBytes": "0",
+    "decodedChunks": "120",
+    "eventTextureBytes": "39387136",
+    "denseTextureBytes": 191627264
+  },
+  "glError": 0
+}

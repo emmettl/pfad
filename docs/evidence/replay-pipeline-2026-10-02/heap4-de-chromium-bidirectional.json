@@ -1,0 +1,72 @@
+{
+  "variant": "heap4",
+  "country": "de",
+  "engineName": "chromium",
+  "algorithm": "bidirectional",
+  "manifestIdentity": "08358206061146a9950e97708e3f48a8c2095c537948a688f792802a59371555",
+  "errors": [],
+  "measurements": [
+    {
+      "zoom": 1,
+      "frames": 241,
+      "fps": 60.035373539685075,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.700000000000728,
+      "averageDraws": 896.2655601659751,
+      "averageVertices": 8808866.44813278
+    },
+    {
+      "zoom": 4,
+      "frames": 241,
+      "fps": 60.03686911446471,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.799999999999272,
+      "averageDraws": 477.0124481327801,
+      "averageVertices": 3710017.460580913
+    },
+    {
+      "zoom": 12,
+      "frames": 241,
+      "fps": 60.03537353950678,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 16.700000000000728,
+      "averageDraws": 180.24896265560167,
+      "averageVertices": 941372.3734439834
+    }
+  ],
+  "images": [
+    "zoom1-progress0.2.png",
+    "zoom1-progress0.5.png",
+    "zoom1-progress0.8.png",
+    "zoom1-progress1.png",
+    "zoom4-progress0.2.png",
+    "zoom4-progress0.5.png",
+    "zoom4-progress0.8.png",
+    "zoom4-progress1.png",
+    "zoom12-progress0.2.png",
+    "zoom12-progress0.5.png",
+    "zoom12-progress0.8.png",
+    "zoom12-progress1.png",
+    "start-zoom12-progress0.2.png",
+    "start-zoom12-progress0.5.png",
+    "start-zoom12-progress0.8.png",
+    "start-zoom12-progress1.png",
+    "goal-zoom12-progress0.2.png",
+    "goal-zoom12-progress0.5.png",
+    "goal-zoom12-progress0.8.png",
+    "goal-zoom12-progress1.png"
+  ],
+  "browserVersion": "153.0.8010.12",
+  "result": {
+    "sha": "90d65e026387126d788ed679a6b64380a7b9f607b6c0bc175f1c3e2812f850fd",
+    "routeMetres": 578130.91,
+    "events": 23512843,
+    "searchMs": 1689.2999999821186,
+    "preparationMs": 1347,
+    "replayVertices": "17510174",
+    "batches": 900,
+    "roadCpuBytes": "0",
+    "denseTextureBytes": 191627264
+  },
+  "glError": 0
+}

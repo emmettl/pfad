@@ -1,0 +1,266 @@
+{
+  "exactPairs": 60,
+  "cases": [
+    {
+      "country": "de",
+      "browser": "chromium",
+      "algorithm": "bidirectional-astar",
+      "frames": [
+        {
+          "frame": "goal-zoom12-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "goal-zoom12-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "goal-zoom12-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "goal-zoom12-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress1.png",
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "country": "de",
+      "browser": "webkit",
+      "algorithm": "bidirectional-astar",
+      "frames": [
+        {
+          "frame": "goal-zoom12-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "goal-zoom12-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "goal-zoom12-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "goal-zoom12-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress1.png",
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "country": "us",
+      "browser": "chromium",
+      "algorithm": "astar-local",
+      "frames": [
+        {
+          "frame": "goal-zoom12-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "goal-zoom12-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "goal-zoom12-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "goal-zoom12-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "start-zoom12-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom1-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom12-progress1.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress0.2.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress0.5.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress0.8.png",
+          "maximumChannelDifference": 0
+        },
+        {
+          "frame": "zoom4-progress1.png",
+          "maximumChannelDifference": 0
+        }
+      ]
+    }
+  ]
+}
