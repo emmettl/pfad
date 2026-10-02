@@ -158,9 +158,11 @@ allocation also grow; these figures are not total or peak browser memory.
 The normal Dijkstra startup does not build the reverse CSR. Device-budget work
 and physical-phone measurements remain open in R2.
 
-Normal playback closes with a 2.6-second origin-to-destination route reveal and
-a 0.7-second glow settle. This presentation clock begins after the final recorded
-event; counters and the event cutoff remain fixed. The overlay uses the same
+Normal playback reserves its final three seconds for an origin-to-destination
+route reveal and glow settle (the final tenth for replays shorter than 30 seconds).
+The search reaches its final recorded event at that boundary; counters and the
+event cutoff remain fixed during the reveal. Drawing and settling retain their
+2.6:0.7 proportions within this window. The overlay uses the same
 actual road curves, ordered and oriented by the reconstructed route. Original
 road lengths weight its progress, distributed along each simplified curve.
 A screen-space ribbon keeps its fine core and soft travelling halo legible at
@@ -168,9 +170,10 @@ different zoom levels. Swiss drawing offsets add about 5.6 MB; the curve coordin
 are shared with the existing drawing, and only the current route gets a ribbon.
 The preceding route ribbon is disposed when a new result arrives.
 
-Pause freezes the closing reveal; play resumes it. Seeking backwards removes
-the overlay, and seeking directly to completion shows the settled route without
-an animation. Restart clears both clocks. Reduced motion skips the flourish,
+Pause freezes the closing reveal; play resumes it. Seeking within the final
+window reconstructs the partial route and glow in either direction. Seeking
+before it removes the overlay; seeking to completion shows the settled route.
+Restart clears both phases. Reduced motion skips the flourish,
 including when the preference changes during it. Hidden pages do not advance
 the presentation clock. No vehicle, additional search activity or invented
 connections are implied by the travelling light.

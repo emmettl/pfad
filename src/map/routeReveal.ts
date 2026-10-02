@@ -1,3 +1,9 @@
+export function replayFrame(progress: number, duration: number, hasRoute: boolean) {
+  const window = hasRoute ? Math.min(3, duration * .1) / duration : 0
+  const searchEnd = 1 - window
+  return { search: Math.min(1, progress / searchEnd), route: window && progress >= searchEnd ? (progress >= 1 ? 1 : Math.min(1, (progress - searchEnd) / window)) : null }
+}
+
 // This clock presents a completed answer; it never advances the search record.
 export const ROUTE_DRAW_MS = 2600
 export const ROUTE_SETTLE_MS = 700
@@ -5,6 +11,10 @@ export class RouteReveal {
   elapsed = 0
   active = false
   visible = false
+  seek(progress: number) {
+    this.elapsed = Math.min(1, Math.max(0, progress)) * (ROUTE_DRAW_MS + ROUTE_SETTLE_MS)
+    this.visible = true; this.active = progress < 1
+  }
   start() { this.elapsed = 0; this.active = true; this.visible = true }
   finish() { this.elapsed = ROUTE_DRAW_MS + ROUTE_SETTLE_MS; this.active = false; this.visible = true }
   clear() { this.elapsed = 0; this.active = false; this.visible = false }

@@ -1,4 +1,5 @@
 import { AlgorithmPicker } from './AlgorithmPicker.tsx'
+import { replayFrame } from './map/routeReveal.ts'
 import { traceLength } from './search/trace.ts'
 import { archiveTrace, disposeTrace, cleanupTraceStorage } from './records/trace-storage.ts'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -82,10 +83,12 @@ export function App() {
   const [pick, setPick] = useState<'start' | 'goal' | null>(null)
   const chrome = useAmbientChrome(ambientState.active && ambientState.running && ambientState.phase !== 'still' && !error && !mapError)
 
+  const durationRef = useRef(duration); durationRef.current = duration
   const seek = useCallback((value: number, animate = false) => {
     const p = Math.min(1, Math.max(0, value)); progressRef.current = p; setProgress(p)
-    return scene.current?.setProgress(p, animate) ?? false
+    return scene.current?.setProgress(p, animate, durationRef.current) ?? false
   }, [])
+  useEffect(() => { seek(progressRef.current) }, [duration, seek])
   const togglePlayback = useCallback(() => {
     if (ambient.current!.state.active) {
       if (ambient.current!.state.phase === 'stopped') return
@@ -163,7 +166,7 @@ export function App() {
       map.onDrawingError = setMapError
       map.setGeographyVisible(outlinePreference.current)
       map.onRouteRevealChange = active => { revealingRef.current = active; setRevealing(active) }
-      map.onRouteRevealComplete = () => { setPlaying(false); ambient.current!.complete() }
+      map.onRouteRevealComplete = () => { seek(1); setPlaying(false); ambient.current!.complete() }
     }
     catch { setMapError('Map rendering is unavailable in this browser. The search record remains accessible.') }
     const releaseAfterSearch = country.large && window.matchMedia('(pointer: coarse)').matches
@@ -305,7 +308,8 @@ export function App() {
     activeSources.current = undefined; algorithmRef.current = 'dijkstra'; setAlgorithm('dijkstra')
     initialQuery.current = { start: COUNTRIES[0].places[0], goal: COUNTRIES[0].places[1] }; setStart(initialQuery.current.start); setGoal(initialQuery.current.goal); setCountry(COUNTRIES[0])
   }
-  const counts = result ? countsAt(result, progress) : [0, 0, 0]
+  const searchProgress = replayFrame(progress, duration, !!result?.routeEdges.length).search
+  const counts = result ? countsAt(result, searchProgress) : [0, 0, 0]
   const completed = progress >= 1 && result !== null
   const queryControl = (point: Point, update: (point: Point) => void, end: 'start' | 'goal') => (
     <div className={`endpoint-control ${pick === end ? 'picking' : ''}`}>
@@ -342,7 +346,7 @@ export function App() {
         <p>Estimated time uses Dijkstra with versioned road-class speed assumptions. It finds the fastest route under that model, retaining the actual distance. Posted limits, traffic, junction delays and driving restrictions are not included in this estimate.</p>
         <p>Prim’s tree grows from A until it reaches B, then reveals the path through its branches. Copper-gold marks accepted tree edges. Roads are treated as undirected; the journey is not guaranteed shortest and may traverse one-way roads in reverse.</p>
         <p>Three-source Dijkstra is an ambient territory study. It runs until no reachable nodes remain, using the recorded one-way directions. It measures distance outwards from the sources, and does not calculate a route connecting them.</p>
-        <p>Once a journey’s recorded search ends, a travelling light reveals the chosen route from origin to destination.</p>
+        <p>The final three seconds of a 30-second replay reveal the chosen route from origin to destination. Shorter replays reserve their final tenth; longer replays reserve three seconds. Scrubbing follows both the recorded search and the route reveal.</p>
         <p id="playback-shortcuts">Keyboard: Space plays or pauses the search replay; in ambient it pauses the whole sequence and Escape leaves ambient. Left/Right moves one second; hold Shift to move five seconds. Home/End jumps to the beginning or end. These shortcuts work on the map and timeline; place pickers and sound controls keep their own keys.</p>
         <p>Ambient chooses journeys from {country.ambient.places.length} curated places in {country.name} and cycles Dijkstra, bidirectional Dijkstra, A*, bidirectional A* and greedy best-first, beginning with the selected algorithm. After four journeys, three separated places seed a territory study in mint, amber and periwinkle. Every reached node has the shortest road distance from its nearest source; road colours identify the source of their first recorded examination. The completed territories hold without a route reveal. Their replay duration follows the furthest reached node’s nearest-source distance. Road distance sets both the selection band and replay duration (25–65 seconds), followed by a six-second hold and two seconds to darkness. Pause sequence pauses the score too; Next keeps it continuous. Reduced motion shows stills with deliberate Next. The sequence pauses when the page is hidden.</p>
         <p>This first study applies road lengths and one-way directions. Turn, barrier and time-dependent access rules are still being developed. Ferries are excluded, so land areas without road connections form separate components. Its route describes this connectivity model.</p>
@@ -402,7 +406,7 @@ export function App() {
       <div className="replay-controls">
         <button disabled={!result || busy} onClick={togglePlayback} title="Play / pause (Space)" aria-keyshortcuts="Space">{playing ? 'Pause' : 'Play'}</button>
         <button disabled={!result || busy} onClick={() => { seek(0); setPlaying(true) }} aria-label="Replay search from the beginning">↺</button>
-        <TimelineScrubber windowStart={0} windowEnd={duration} time={progress * duration} onSeek={time => { setPlaying(false); seek(time / duration) }} onScrubStart={() => setPlaying(false)} ariaLabel="Search replay" describedBy="playback-shortcuts" ariaValueText={`${(progress * duration).toFixed(1)} seconds of ${duration}; ${Math.floor(progress * (result ? traceLength(result) : 0))} recorded events`} step={.01} disabled={!result || busy} />
+        <TimelineScrubber windowStart={0} windowEnd={duration} time={progress * duration} onSeek={time => { setPlaying(false); seek(time / duration) }} onScrubStart={() => setPlaying(false)} ariaLabel="Search replay" describedBy="playback-shortcuts" ariaValueText={`${(progress * duration).toFixed(1)} seconds of ${duration}; ${Math.floor(searchProgress * (result ? traceLength(result) : 0))} recorded events`} step={.01} disabled={!result || busy} />
         <span className="replay-time">{(progress * duration).toFixed(1)}<small> / {Number(duration.toFixed(1))}s</small></span>
         <select aria-label="Replay duration" value={duration} onChange={event => setDuration(Number(event.target.value))}>{![5, 15, 30, 60, 120].includes(duration) && <option value={duration}>{duration.toFixed(1)}s</option>}{[5, 15, 30, 60, 120].map(value => <option key={value} value={value}>{value}s</option>)}</select>
       </div>

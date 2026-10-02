@@ -6,7 +6,7 @@ import { unpackDrawing } from './drawing-codec.ts'
 import { longitudeOffset, normaliseLongitude } from '../search/projection.ts'
 import * as THREE from 'three'
 import type { Chunk, Point, SearchResult, StudyManifest } from '../search/contracts.ts'
-import { RouteDrawing, RouteReveal } from './routeReveal.ts'
+import { replayFrame, RouteDrawing, RouteReveal } from './routeReveal.ts'
 import { createRouteGeometry, createRouteMaterial } from './routeMaterial.ts'
 import type { Geography } from './geography-loader.ts'
 import { createGeography, createGeographyFill, disposeGeography } from './geography.ts'
@@ -107,6 +107,7 @@ export class RoadScene {
   private lastResult?: SearchResult
   private replayTextures?: ReplayTextures
   private restoredProgress = 0
+  private replayProgress = 0
   onDrawingError?: (message: string) => void
   events = 1
   width = 1
@@ -185,11 +186,6 @@ export class RoadScene {
     this.previousFrame = performance.now()
     const draw = (now: number) => {
       if (this.flash.active && this.revealPlaying && !document.hidden) { this.flash.advance(Math.min(now - this.previousFrame, 100)); this.updateFlash() }
-      if (this.reveal.active && this.revealPlaying && !document.hidden) {
-        const finished = this.reveal.advance(Math.min(now - this.previousFrame, 100))
-        this.updateRoute()
-        if (finished) { this.onRouteRevealChange?.(false); this.onRouteRevealComplete?.() }
-      }
       this.advanceView(Math.min(now - this.previousFrame, 100))
       this.previousFrame = now
       if (this.dirty && now - this.lastRendered >= this.renderInterval - .5) {
@@ -357,7 +353,7 @@ export class RoadScene {
   }
   private loseDrawing = () => {
     const result = this.lastResult
-    this.restoredProgress = this.material.uniforms.uEvent.value / Math.max(1, this.events)
+    this.restoredProgress = this.replayProgress
     // Dispose while the context is lost, before Three replaces its resource
     // managers. Old geometry disposal listeners otherwise retain stale buffers.
     this.clearResult(); this.lastResult = result
@@ -456,7 +452,12 @@ export class RoadScene {
     }
     this.setProgress(0)
   }
-  setProgress(progress: number, animate = false) {
+  replayDuration = 30
+  setProgress(progress: number, animate = false, duration = this.replayDuration) {
+    this.replayProgress = progress
+    this.replayDuration = duration
+    const frame = replayFrame(progress, duration, !!this.route)
+    progress = frame.search
     const next = Math.floor(progress * this.events)
     this.material.uniforms.uTerritoryComplete.value = this.material.uniforms.uTerritories.value && progress >= 1 ? 1 : 0
     this.flash.cross(this.material.uniforms.uEvent.value, next, this.meetingEvent, animate, this.reducedMotion.matches); this.updateFlash()
@@ -473,9 +474,9 @@ export class RoadScene {
         this.tip.dataset.event = String(this.focusEvents[i])
       }
     }
-    if (progress < 1 || !this.route) this.reveal.clear()
-    else if (animate && !this.reducedMotion.matches) this.reveal.start()
-    else this.reveal.finish()
+    if (frame.route === null || !this.route) this.reveal.clear()
+    else if (this.reducedMotion.matches) this.reveal.finish()
+    else this.reveal.seek(frame.route)
     this.onRouteRevealChange?.(this.reveal.active); this.updateRoute()
     return this.reveal.active
   }

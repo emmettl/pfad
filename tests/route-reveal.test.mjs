@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'vitest'
-import { RouteDrawing, RouteReveal, ROUTE_DRAW_MS, ROUTE_SETTLE_MS } from '../src/map/routeReveal.ts'
+import { replayFrame, RouteDrawing, RouteReveal, ROUTE_DRAW_MS, ROUTE_SETTLE_MS } from '../src/map/routeReveal.ts'
 
 test('route drawing follows actual curves, reverse traversal and original road-length weights', () => {
   const drawing = new RouteDrawing()
@@ -40,4 +40,17 @@ test('completion draws before settling, and clearing or seeking produces a deter
   reveal.finish(); assert.deepEqual(reveal.sample(), { progress: 1, energy: 0 })
   assert.equal(reveal.active, false)
   reveal.start(); assert.deepEqual(reveal.sample(), { progress: 0, energy: 1 })
+})
+
+test('replay reserves a seekable final window only for journeys with a route', () => {
+  assert.deepEqual(replayFrame(.9, 30, true), { search: 1, route: 0 })
+  assert.ok(Math.abs(replayFrame(.95, 30, true).route - .5) < 1e-10)
+  assert.equal(replayFrame(1, 30, true).route, 1)
+  assert.equal(replayFrame(.9, 5, true).search, 1)
+  assert.equal(replayFrame(.95, 60, true).search, 1)
+  assert.deepEqual(replayFrame(.95, 30, false), { search: .95, route: null })
+  const reveal = new RouteReveal()
+  reveal.seek(.7); const ahead = reveal.sample().progress
+  reveal.seek(.2); assert.ok(reveal.sample().progress < ahead)
+  reveal.seek(1); assert.deepEqual(reveal.sample(), { progress: 1, energy: 0 })
 })

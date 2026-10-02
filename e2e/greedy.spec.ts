@@ -56,7 +56,7 @@ test('greedy naturally ends the search and reveals its route before resting', as
   // from its final segment instead of timing the whole search animation.
   await page.getByRole('button', { name: 'Pause', exact: true }).click()
   await expect(page.getByRole('combobox', { name: 'Replay duration' })).toHaveValue('5')
-  await page.getByRole('slider', { name: 'Search replay' }).fill('4.5')
+  await page.getByRole('slider', { name: 'Search replay' }).fill('4.4')
   await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'hidden')
   await page.getByRole('button', { name: 'Play', exact: true }).click()
   await expect(page.locator('canvas')).toHaveAttribute('data-route-phase', 'revealing', { timeout: 30000 })
