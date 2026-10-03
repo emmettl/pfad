@@ -202,3 +202,5 @@ footer a { text-decoration: none; pointer-events: auto; }
 @media (max-width: 600px) { .algorithm-picker > button, .algorithm-menu button { min-height: 44px; } }
 
 .study[data-algorithm='bidirectional-breadth-first/1'] .front-a { background: #d9c2ff; }
+
+.playback-panel:has(.algorithm-menu) { z-index: 6; }

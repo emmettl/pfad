@@ -271,13 +271,15 @@ export function App() {
       const timeline = !!target?.closest('.ms-timeline-scrubber')
       if (target?.closest('select, textarea, [contenteditable]:not([contenteditable="false"]), details, dialog, [role="dialog"], [role="combobox"], [role="listbox"], [role="menu"], [role="tree"], [role="radiogroup"]')) return
       if (target?.closest('input, [role="slider"], [role="spinbutton"]') && !timeline) return
-      if (!result || busy || error || pick !== null || pendingCountry !== null) return
+      if (error || pick !== null || pendingCountry !== null) return
       const space = event.code === 'Space' || event.key === ' '
       if (space) {
+        if (!ambient.current!.state.active && (!result || busy)) return
         if (target?.closest('button, a, [role="button"]')) return
         event.preventDefault()
         if (!event.repeat) togglePlayback()
       } else if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+        if (!result || busy) return
         event.preventDefault(); setPlaying(false)
         if (ambient.current!.state.active) { ambient.current!.inspect(); sound.current?.pauseSequence() }
         const next = event.key === 'Home' ? 0 : event.key === 'End' ? 1
