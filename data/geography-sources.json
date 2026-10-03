@@ -444,6 +444,36 @@
         170,
         -9
       ]
+    },
+    {
+      "path": "src/map/data/sea-border.json",
+      "bytes": 104066,
+      "sha256": "6006ce899bc8c09f9000f7abdfb32472fa190604c496ce48bd386f0c2a7c3907",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-country-geography.py sea",
+      "bounds": [
+        92,
+        1,
+        108.7,
+        29
+      ]
+    },
+    {
+      "path": "src/map/data/sea-lakes.json",
+      "bytes": 13496,
+      "sha256": "e9900cca8275de5b0f122cb4c93da8888bb8de0f103e53fe58eac6ca6d91d7f7",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py sea",
+      "bounds": [
+        92,
+        1,
+        108.7,
+        29
+      ]
     }
   ],
   "publishedCommit": "5910d68b2eb4c78376007b42639d1c4a17986b7b",

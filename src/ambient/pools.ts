@@ -375,4 +375,33 @@ export const AU_POOL: AmbientPool = { version: 'au-places/1', places: [
   {"id": "burnie", "name": "Burnie", "lon": 145.9069, "lat": -41.0529, "region": "tasmania"},
 ] }
 
-export const AMBIENT_POOLS: Record<string, AmbientPool> = { ch: SWISS_POOL, uk: UK_POOL, is: IS_POOL, nl: NL_POOL, nz: NZ_POOL, lu: LU_POOL, ie: IE_POOL, sc: SC_POOL, pl: PL_POOL, it: IT_POOL, es: ES_POOL, fr: FR_POOL, de: DE_POOL, at: AT_POOL, au: AU_POOL }
+export const SEA_POOL: AmbientPool = { version: 'sea-places/1', distance: { minimumKm: 30, regionalBelowKm: 300, interregionalBelowKm: 1000 }, places: [
+  {"id": "bangkok", "name": "Bangkok", "lon": 100.5018, "lat": 13.7563},
+  {"id": "yangon", "name": "Yangon", "lon": 96.1951, "lat": 16.8661},
+  {"id": "phnom-penh", "name": "Phnom Penh", "lon": 104.9282, "lat": 11.5564},
+  {"id": "vientiane", "name": "Vientiane", "lon": 102.6331, "lat": 17.9757},
+  {"id": "kuala-lumpur", "name": "Kuala Lumpur", "lon": 101.6869, "lat": 3.139},
+  {"id": "singapore", "name": "Singapore", "lon": 103.8198, "lat": 1.3521},
+  {"id": "chiang-mai", "name": "Chiang Mai", "lon": 98.9853, "lat": 18.7883},
+  {"id": "chiang-rai", "name": "Chiang Rai", "lon": 99.8325, "lat": 19.9105},
+  {"id": "ayutthaya", "name": "Ayutthaya", "lon": 100.5683, "lat": 14.3532},
+  {"id": "pattaya", "name": "Pattaya", "lon": 100.8825, "lat": 12.9236},
+  {"id": "nakhon-ratchasima", "name": "Nakhon Ratchasima", "lon": 102.0977, "lat": 14.9799},
+  {"id": "hat-yai", "name": "Hat Yai", "lon": 100.4747, "lat": 7.0084},
+  {"id": "mandalay", "name": "Mandalay", "lon": 96.0891, "lat": 21.9588},
+  {"id": "naypyidaw", "name": "Naypyidaw", "lon": 96.0785, "lat": 19.7633},
+  {"id": "bago", "name": "Bago", "lon": 96.481, "lat": 17.3367},
+  {"id": "mawlamyine", "name": "Mawlamyine", "lon": 97.6283, "lat": 16.4905},
+  {"id": "siem-reap", "name": "Siem Reap", "lon": 103.8558, "lat": 13.3633},
+  {"id": "battambang", "name": "Battambang", "lon": 103.1965, "lat": 13.0957},
+  {"id": "kampot", "name": "Kampot", "lon": 104.1816, "lat": 10.6104},
+  {"id": "luang-prabang", "name": "Luang Prabang", "lon": 102.135, "lat": 19.8834},
+  {"id": "savannakhet", "name": "Savannakhet", "lon": 104.7622, "lat": 16.556},
+  {"id": "pakse", "name": "Pakse", "lon": 105.797, "lat": 15.1202},
+  {"id": "george-town", "name": "George Town", "lon": 100.3327, "lat": 5.4141},
+  {"id": "ipoh", "name": "Ipoh", "lon": 101.0901, "lat": 4.5975},
+  {"id": "malacca", "name": "Malacca", "lon": 102.2501, "lat": 2.1896},
+  {"id": "johor-bahru", "name": "Johor Bahru", "lon": 103.7414, "lat": 1.4927},
+] }
+
+export const AMBIENT_POOLS: Record<string, AmbientPool> = { ch: SWISS_POOL, uk: UK_POOL, is: IS_POOL, nl: NL_POOL, nz: NZ_POOL, lu: LU_POOL, ie: IE_POOL, sc: SC_POOL, pl: PL_POOL, it: IT_POOL, es: ES_POOL, fr: FR_POOL, de: DE_POOL, at: AT_POOL, au: AU_POOL, sea: SEA_POOL }

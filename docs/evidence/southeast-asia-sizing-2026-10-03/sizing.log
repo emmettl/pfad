@@ -1,0 +1,5 @@
+186.14 extracted 4715722 ways 37616532 road shape nodes
+237.36 graph 8085252 nodes 9827240 edges 157714 restriction relations
+246.28 graph {'json_bytes': 620050496, 'sha256': '5b2866ba385e4f36af7411a5bc058157a5a7c4e5d841ebaa06697fa3234a4f6a'}
+279.3 geometry-5m {'json_bytes': 135700227, 'sha256': 'e75eadb1e688b10fdbef55ee4f0b55fae73550d52d97ab66d0c68f86b52f8988'}
+279.3 complete .cache/countries-sizing/sea-20261002/report.json

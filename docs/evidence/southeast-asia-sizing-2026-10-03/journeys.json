@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Bangkok\u2013Singapore",
+    "start": {
+      "name": "Bangkok",
+      "lon": 100.5018,
+      "lat": 13.7563
+    },
+    "goal": {
+      "name": "Singapore",
+      "lon": 103.8198,
+      "lat": 1.3521
+    }
+  },
+  {
+    "name": "Yangon\u2013Phnom Penh",
+    "start": {
+      "name": "Yangon",
+      "lon": 96.1951,
+      "lat": 16.8661
+    },
+    "goal": {
+      "name": "Phnom Penh",
+      "lon": 104.9282,
+      "lat": 11.5564
+    }
+  }
+]

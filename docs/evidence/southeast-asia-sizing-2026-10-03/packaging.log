@@ -1,0 +1,10 @@
+Verified source: southeast-asia-261002.osm.pbf
+{
+  "dataset": "sea-20261002-eecf8c542fab",
+  "downloadBytes": 116507200,
+  "sourceEvidenceBytes": 41325022,
+  "chunks": 182,
+  "nodes": 8085252,
+  "edges": 9827240,
+  "vertices": 36849592
+}

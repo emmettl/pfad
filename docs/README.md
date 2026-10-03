@@ -75,3 +75,6 @@ that time; its older counts and algorithm sets are not current feature limits.
 - [Exact trace archiving and streaming exports](evidence/trace-archive-2026-10-02/README.md): bounded recording storage, exact replay counters, exports and graphics recovery.
 
 - [Australia sizing and catalogue release](evidence/australia-release-2026-10-03/README.md): pinned 44.6 MB graph, 39-place ambient pool, independent outlines and normal-app validation.
+
+- [Southeast Asia release](evidence/southeast-asia-release-2026-10-03/README.md): six-country regional study, 116.5 MB complete graph, joined outlines, 26-place ambient pool and verified immutable R2 delivery.
+- [Southeast Asia sizing](evidence/southeast-asia-sizing-2026-10-03/README.md): complete-graph counts, five cross-border shortest-distance checks and desktop replay measurements.

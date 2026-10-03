@@ -1,0 +1,35 @@
+{
+  "dataset": "eecf8c542fabeec3cd8ecf2e33bac7666764ea14390b34b478eb0cbaa66c356f",
+  "crossBrowserTraceHashesMatch": true,
+  "runsPerBrowser": 5,
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "loadMs": 1750.800000011921,
+      "searchMsRange": [
+        934.8000000119209,
+        2009.199999988079
+      ],
+      "averageFpsRange": [
+        56.7159404449302,
+        60.001864652746335
+      ],
+      "peakProcessTreeRssBytes": 2180366336,
+      "errors": []
+    },
+    {
+      "name": "webkit-desktop",
+      "loadMs": 1921,
+      "searchMsRange": [
+        825,
+        1960
+      ],
+      "averageFpsRange": [
+        54.2052340680562,
+        59.88941442941842
+      ],
+      "peakProcessTreeRssBytes": 126173184,
+      "errors": []
+    }
+  ]
+}

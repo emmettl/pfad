@@ -1,0 +1,25 @@
+{
+  "measuredAt": "2026-10-03T16:40:07.844Z",
+  "browsers": [
+    {
+      "name": "chromium",
+      "errors": [],
+      "roadRequestsBeforeConsent": 0,
+      "openingMs": 16057,
+      "defaultRoute": "Bangkok→Yangon810.0 km (830 min)",
+      "singaporeRoute": "Bangkok→Singapore1795.2 km (1386 min)",
+      "ambientCaption": "Nakhon Ratchasima→George Town1388.0 km (1159 min)Dijkstra",
+      "roadRequests": 183
+    },
+    {
+      "name": "webkit-desktop",
+      "errors": [],
+      "roadRequestsBeforeConsent": 0,
+      "openingMs": 15993,
+      "defaultRoute": "Bangkok→Yangon810.0 km (830 min)",
+      "singaporeRoute": "Bangkok→Singapore1795.2 km (1386 min)",
+      "ambientCaption": "Nakhon Ratchasima→Pakse458.7 km (512 min)Dijkstra",
+      "roadRequests": 183
+    }
+  ]
+}

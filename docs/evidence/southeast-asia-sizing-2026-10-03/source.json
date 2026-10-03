@@ -1,0 +1,73 @@
+{
+  "provider": "OpenStreetMap via Geofabrik",
+  "dataTimestamp": "2026-10-02T20:21:34Z",
+  "data_timestamp": "2026-10-02T20:21:34Z",
+  "url": "https://download.geofabrik.de/asia.html",
+  "filename": "southeast-asia-261002.osm.pbf",
+  "sha256": "7277f5f560e2e8e890303f9c7d32dc7b0c830569feecb6b9521c4588bc6362d2",
+  "bytes": 895646029,
+  "attribution": "\u00a9 OpenStreetMap contributors",
+  "licence": "ODbL-1.0",
+  "licenceUrl": "https://www.openstreetmap.org/copyright",
+  "inputs": [
+    {
+      "country": "myanmar",
+      "url": "https://download.geofabrik.de/asia/myanmar-261002.osm.pbf",
+      "bytes": 283499907,
+      "sha256": "c4299a5ec193ef32d4b27be4e7d02bf1cef246daa60f2502ff914368309ce831",
+      "md5": "2172533b65116e99050f1d4b9f7104b8",
+      "dataTimestamp": "2026-10-02T20:21:34Z"
+    },
+    {
+      "country": "thailand",
+      "url": "https://download.geofabrik.de/asia/thailand-261002.osm.pbf",
+      "bytes": 328036559,
+      "sha256": "9d03975d314d89d79b22646d3df188dcccfcd645a27f43135724410559d77c66",
+      "md5": "cc2613d22f929cb05be26db6ef0eb999",
+      "dataTimestamp": "2026-10-02T20:21:34Z"
+    },
+    {
+      "country": "cambodia",
+      "url": "https://download.geofabrik.de/asia/cambodia-261002.osm.pbf",
+      "bytes": 41023404,
+      "sha256": "d0bd02d7f9f4217157d4ffa0b1f73fd0c3daa341e76704af7fcdc44bac2554f1",
+      "md5": "1d0e503ecc2c217a3a46e2b692ea2f83",
+      "dataTimestamp": "2026-10-02T20:21:34Z"
+    },
+    {
+      "country": "laos",
+      "url": "https://download.geofabrik.de/asia/laos-261002.osm.pbf",
+      "bytes": 53813518,
+      "sha256": "a5f906ac1e065e4ecdfb33c26a993bc8b853aff2837d0d625c99aa62ea071c3f",
+      "md5": "29ff3e5b913779d60492d495d4b43f76",
+      "dataTimestamp": "2026-10-02T20:21:34Z"
+    },
+    {
+      "country": "malaysia-singapore-brunei",
+      "url": "https://download.geofabrik.de/asia/malaysia-singapore-brunei-261002.osm.pbf",
+      "bytes": 251611456,
+      "sha256": "1a267ecfdbfab639ad2e540ad14873c68349442875828dc07659579052ff038d",
+      "md5": "0b34f15d87220001eb14d7aefeb113b3",
+      "dataTimestamp": "2026-10-02T20:21:34Z"
+    }
+  ],
+  "composition": {
+    "version": "pfad-composite-source/1",
+    "tool": "osmium-tool/1.19.1",
+    "libosmium": "2.23.1",
+    "generator": "pfad-composite-source/1",
+    "operation": "merge-same-snapshot-then-complete-ways-extract",
+    "bounds": [
+      92,
+      1,
+      108.7,
+      29
+    ],
+    "strategy": "complete_ways",
+    "deduplication": "OSM object type, ID and version",
+    "excludedTerritories": [
+      "Malaysian Borneo",
+      "Brunei"
+    ]
+  }
+}

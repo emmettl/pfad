@@ -30,6 +30,7 @@ coverage are retained in each immutable manifest.
 | `de` | Germany | 140.876 | 29 Sep 2026 | German Geofabrik extract |
 | `at` | Austria | 23.349 | 30 Sep 2026 | Austrian Geofabrik extract |
 | `au` | Australia | 44.568 | 2 Oct 2026 | Australian Geofabrik extract; Tasmania and offshore road components remain separate |
+| `sea` | Southeast Asia | 116.507 | 2 Oct 2026 | Myanmar, Thailand, Cambodia, Laos, Peninsular Malaysia and Singapore |
 
 Each study has a versioned ambient pool and independently pinned geographic
 references. Iceland and Luxembourg's selected lake source has no features;
@@ -362,3 +363,27 @@ bytes, 96 coastline rings and 31 Natural Earth lake features, including salt
 lakes and unnamed features. These generalized references do not affect routing.
 See [release evidence](evidence/australia-release-2026-10-03/README.md) and the
 earlier [sizing experiment](evidence/australia-sizing-2026-10-03/README.md).
+
+
+## Southeast Asia release
+
+The selected regional release is `sea-20261002-eecf8c542fab`: 116,507,200 road
+bytes, 8,085,252 routing nodes and 9,827,240 physical edges. The five dated source
+extracts are merged by OSM identity before complete-way extraction; Malaysian
+Borneo and Brunei are excluded. The immutable source and graph identities remain
+those validated in [sizing evidence](evidence/southeast-asia-sizing-2026-10-03/README.md).
+
+The catalogue requires the existing large-download acknowledgement. Desktop
+process-tree measurements observed about 2.2 GB, excluding complete graphics
+memory; physical-phone stability remains unverified. A versioned 26-place ambient
+pool covers all six countries. Sixty seeded real journeys passed route adjacency,
+one-way direction, exact cost sums and distance-band acceptance checks.
+
+Independent Natural Earth references provide 70 joined exterior rings and six
+major lakes. The 117,562 reference-layer bytes are served through R2 with pinned
+manifest identity; they never enter the routing graph. Regional IDs are supported
+by the same bounded, immutable data-Worker key rules as country IDs.
+
+[Release evidence](evidence/southeast-asia-release-2026-10-03/README.md) retains
+public delivery checksums, ambient audit and browser checks. Music uses the
+existing original Driftbox ambient repertoire.

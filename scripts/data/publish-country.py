@@ -57,9 +57,9 @@ def verify_geography(directory, m):
     payload = {key: m[key] for key in ['schema', 'country', 'border', 'lakes']}
     canonical = json.dumps(payload, separators=(',', ':'), ensure_ascii=False).encode()
     identity = hashlib.sha256(canonical).hexdigest()
-    assert re.fullmatch(r'[a-z]{2}', m['country']) and m['id'].startswith('geo-' + m['country'] + '-')
+    assert re.fullmatch(r'[a-z]{2,8}', m['country']) and m['id'].startswith('geo-' + m['country'] + '-')
     assert m['identity'] == identity and directory.name == m['id']
-    assert re.fullmatch(r'geo-[a-z]{2}-\d{8}-' + identity[:12], m['id'])
+    assert re.fullmatch(r'geo-[a-z]{2,8}-\d{8}-' + identity[:12], m['id'])
     files = []
     for kind in ['border', 'lakes']:
         ref = m[kind]

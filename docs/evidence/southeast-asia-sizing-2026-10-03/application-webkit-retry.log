@@ -1,0 +1,83 @@
+
+> pfad@0.0.0 test:browser
+> playwright test --workers=1 --project=webkit-mobile e2e/algorithm-menu.spec.ts e2e/ambient.spec.ts e2e/study.spec.ts
+
+[WebServer] (node:99811) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 9 tests using 1 worker
+
+(node:99812) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/9] [webkit-mobile] › e2e/algorithm-menu.spec.ts:2:1 › algorithm menu uses the dark palette and supports keyboard and outside dismissal
+  1) [webkit-mobile] › e2e/algorithm-menu.spec.ts:2:1 › algorithm menu uses the dark palette and supports keyboard and outside dismissal 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.goto: Test timeout of 30000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:4190/?algorithm=spanning-tree", waiting until "load"
+
+
+      1 | import { test, expect } from '@playwright/test'
+      2 | test('algorithm menu uses the dark palette and supports keyboard and outside dismissal', async ({ page }) => {
+    > 3 |   await page.goto('./?algorithm=spanning-tree')
+        |              ^
+      4 |   const picker = page.getByRole('combobox', { name: 'Search algorithm' })
+      5 |   await expect(picker).toBeEnabled({ timeout: 60000 })
+      6 |   await picker.click()
+        at /Users/louisemmett/Developer/Projects/pfad/e2e/algorithm-menu.spec.ts:3:14
+
+    Error Context: test-results/algorithm-menu-algorithm-m-9f286-board-and-outside-dismissal-webkit-mobile/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/algorithm-menu-algorithm-m-9f286-board-and-outside-dismissal-webkit-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/algorithm-menu-algorithm-m-9f286-board-and-outside-dismissal-webkit-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:99957) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/9] [webkit-mobile] › e2e/ambient.spec.ts:5:1 › ambient retreats without trapping touch or keyboard controls, and Escape restores the study
+  2) [webkit-mobile] › e2e/ambient.spec.ts:5:1 › ambient retreats without trapping touch or keyboard controls, and Escape restores the study 
+
+    Test was interrupted.
+
+    Error: page.goto: Test ended.
+    Call log:
+      - navigating to "http://127.0.0.1:4190/", waiting until "load"
+
+
+       5 | test('ambient retreats without trapping touch or keyboard controls, and Escape restores the study', async ({ page, isMobile }) => {
+       6 |   await page.clock.install()
+    >  7 |   await page.goto('./'); await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+         |              ^
+       8 |   await page.getByRole('button', { name: 'Ambient', exact: true }).click()
+       9 |   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'replay', { timeout: 45000 })
+      10 |   const controls = page.locator('.ambient-controls'), header = page.locator('.header-tools'), map = page.locator('main.map')
+        at /Users/louisemmett/Developer/Projects/pfad/e2e/ambient.spec.ts:7:14
+
+    Error Context: test-results/ambient-ambient-retreats-w-6c865-d-Escape-restores-the-study-webkit-mobile/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/ambient-ambient-retreats-w-6c865-d-Escape-restores-the-study-webkit-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/ambient-ambient-retreats-w-6c865-d-Escape-restores-the-study-webkit-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    [webkit-mobile] › e2e/algorithm-menu.spec.ts:2:1 › algorithm menu uses the dark palette and supports keyboard and outside dismissal 
+  1 interrupted
+    [webkit-mobile] › e2e/ambient.spec.ts:5:1 › ambient retreats without trapping touch or keyboard controls, and Escape restores the study 
+  7 did not run

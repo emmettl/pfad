@@ -1,0 +1,480 @@
+{
+  "dataset": "eecf8c542fabeec3cd8ecf2e33bac7666764ea14390b34b478eb0cbaa66c356f",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-10-02T20:21:34Z",
+    "url": "https://download.geofabrik.de/asia.html",
+    "sha256": "7277f5f560e2e8e890303f9c7d32dc7b0c830569feecb6b9521c4588bc6362d2",
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "inputs": [
+      {
+        "country": "myanmar",
+        "url": "https://download.geofabrik.de/asia/myanmar-261002.osm.pbf",
+        "bytes": 283499907,
+        "sha256": "c4299a5ec193ef32d4b27be4e7d02bf1cef246daa60f2502ff914368309ce831",
+        "md5": "2172533b65116e99050f1d4b9f7104b8",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "thailand",
+        "url": "https://download.geofabrik.de/asia/thailand-261002.osm.pbf",
+        "bytes": 328036559,
+        "sha256": "9d03975d314d89d79b22646d3df188dcccfcd645a27f43135724410559d77c66",
+        "md5": "cc2613d22f929cb05be26db6ef0eb999",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "cambodia",
+        "url": "https://download.geofabrik.de/asia/cambodia-261002.osm.pbf",
+        "bytes": 41023404,
+        "sha256": "d0bd02d7f9f4217157d4ffa0b1f73fd0c3daa341e76704af7fcdc44bac2554f1",
+        "md5": "1d0e503ecc2c217a3a46e2b692ea2f83",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "laos",
+        "url": "https://download.geofabrik.de/asia/laos-261002.osm.pbf",
+        "bytes": 53813518,
+        "sha256": "a5f906ac1e065e4ecdfb33c26a993bc8b853aff2837d0d625c99aa62ea071c3f",
+        "md5": "29ff3e5b913779d60492d495d4b43f76",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "malaysia-singapore-brunei",
+        "url": "https://download.geofabrik.de/asia/malaysia-singapore-brunei-261002.osm.pbf",
+        "bytes": 251611456,
+        "sha256": "1a267ecfdbfab639ad2e540ad14873c68349442875828dc07659579052ff038d",
+        "md5": "0b34f15d87220001eb14d7aefeb113b3",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      }
+    ],
+    "composition": {
+      "version": "pfad-composite-source/1",
+      "tool": "osmium-tool/1.19.1",
+      "libosmium": "2.23.1",
+      "generator": "pfad-composite-source/1",
+      "operation": "merge-same-snapshot-then-complete-ways-extract",
+      "bounds": [
+        92,
+        1,
+        108.7,
+        29
+      ],
+      "strategy": "complete_ways",
+      "deduplication": "OSM object type, ID and version",
+      "excludedTerritories": [
+        "Malaysian Borneo",
+        "Brunei"
+      ]
+    }
+  },
+  "compiler": "pfad-study-compiler/3",
+  "profile": "road-connectivity-distance-v1",
+  "counts": {
+    "nodes": 8085252,
+    "edges": 9827240,
+    "directedArcs": 18783168,
+    "vertices": 36849592
+  },
+  "downloadBytes": 116507200,
+  "weakComponents": 30418,
+  "largestWeakComponentNodes": 7896719,
+  "largestWeakComponentFraction": 0.9766818647087314,
+  "physicalRoadKm": 1523900.66641,
+  "boundsLonLat": [
+    92.13721,
+    1.19164,
+    107.82502,
+    28.37876
+  ],
+  "routes": [
+    {
+      "start": {
+        "country": "Thailand",
+        "name": "Bangkok",
+        "lon": 100.5018,
+        "lat": 13.7563
+      },
+      "goal": {
+        "country": "Myanmar",
+        "name": "Yangon",
+        "lon": 96.1951,
+        "lat": 16.8661
+      },
+      "snapping": {
+        "start": {
+          "country": "Thailand",
+          "name": "Bangkok",
+          "lon": 100.50197,
+          "lat": 13.75636,
+          "node": 28241,
+          "snapMetres": 19.535503773720915
+        },
+        "goal": {
+          "country": "Myanmar",
+          "name": "Yangon",
+          "lon": 96.19499,
+          "lat": 16.86617,
+          "node": 1751783,
+          "snapMetres": 14.057026402889477
+        },
+        "snapMs": 420.8072080000002,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Thailand",
+            "name": "Bangkok",
+            "lon": 100.5018,
+            "lat": 13.7563
+          },
+          "requestedGoal": {
+            "country": "Myanmar",
+            "name": "Yangon",
+            "lon": 96.1951,
+            "lat": 16.8661
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 809971.69,
+          "routeEdges": 3283,
+          "events": 9455197,
+          "traceSha256": "8f4a2046389111c0c91537ac3349fa85bb77c6082f4b9ff9f9be6d4b7c027b45",
+          "searchMs": 431.59749999999985,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 809971.69,
+          "routeEdges": 3283,
+          "events": 13693537,
+          "traceSha256": "6d82c6ebb194586e9e0bacc54a83c6660a12ee4e680021f11df5b62cad49b90e",
+          "searchMs": 729.9415840000001,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 809971.69,
+          "routeEdges": 3283,
+          "events": 20593079,
+          "traceSha256": "f5e6365390941998beb4f95cf0110cad9a98d23ad6272db67aa6774e7a869440",
+          "searchMs": 835.8597080000004,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Thailand",
+        "name": "Bangkok",
+        "lon": 100.5018,
+        "lat": 13.7563
+      },
+      "goal": {
+        "country": "Cambodia",
+        "name": "Phnom Penh",
+        "lon": 104.9282,
+        "lat": 11.5564
+      },
+      "snapping": {
+        "start": {
+          "country": "Thailand",
+          "name": "Bangkok",
+          "lon": 100.50197,
+          "lat": 13.75636,
+          "node": 28241,
+          "snapMetres": 19.535503773720915
+        },
+        "goal": {
+          "country": "Cambodia",
+          "name": "Phnom Penh",
+          "lon": 104.92852,
+          "lat": 11.55609,
+          "node": 15788,
+          "snapMetres": 49.025603409865006
+        },
+        "snapMs": 80.45091700000012,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Thailand",
+            "name": "Bangkok",
+            "lon": 100.5018,
+            "lat": 13.7563
+          },
+          "requestedGoal": {
+            "country": "Cambodia",
+            "name": "Phnom Penh",
+            "lon": 104.9282,
+            "lat": 11.5564
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 622874.26,
+          "routeEdges": 3387,
+          "events": 7181273,
+          "traceSha256": "6a035af9d846d23e5b1a5e92cba8a66fbecac03163fad9c27003a08aedcd0a40",
+          "searchMs": 364.80312500000036,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 622874.26,
+          "routeEdges": 3387,
+          "events": 11086463,
+          "traceSha256": "591c33cbb9cc10494d553d6c885c37881e38a59e1e98f75361330678925c360e",
+          "searchMs": 712.382791,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 622874.26,
+          "routeEdges": 3387,
+          "events": 16818112,
+          "traceSha256": "43eabe3738214728d61d224ea3ac77de23f0ff732fdb9c8b4faedd87dc025d5d",
+          "searchMs": 777.962125,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Thailand",
+        "name": "Bangkok",
+        "lon": 100.5018,
+        "lat": 13.7563
+      },
+      "goal": {
+        "country": "Laos",
+        "name": "Vientiane",
+        "lon": 102.6331,
+        "lat": 17.9757
+      },
+      "snapping": {
+        "start": {
+          "country": "Thailand",
+          "name": "Bangkok",
+          "lon": 100.50197,
+          "lat": 13.75636,
+          "node": 28241,
+          "snapMetres": 19.535503773720915
+        },
+        "goal": {
+          "country": "Laos",
+          "name": "Vientiane",
+          "lon": 102.63294,
+          "lat": 17.97551,
+          "node": 120572,
+          "snapMetres": 27.06904758135921
+        },
+        "snapMs": 100.21650000000045,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Thailand",
+            "name": "Bangkok",
+            "lon": 100.5018,
+            "lat": 13.7563
+          },
+          "requestedGoal": {
+            "country": "Laos",
+            "name": "Vientiane",
+            "lon": 102.6331,
+            "lat": 17.9757
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 622379.65,
+          "routeEdges": 4132,
+          "events": 9359402,
+          "traceSha256": "d5e672b1f8a458a7ccc85e384b7ec87a521e886f69e7a983c86b48b35806233d",
+          "searchMs": 540.7905000000001,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 622379.65,
+          "routeEdges": 4132,
+          "events": 12932949,
+          "traceSha256": "09c0e86d9b90296abf96669533678843fc5181e178e99ea87dab8f3cc482c770",
+          "searchMs": 752.7802090000005,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 622379.65,
+          "routeEdges": 4132,
+          "events": 16790007,
+          "traceSha256": "e1107de91481771f75d82bbe849281dd702ba2ee70ab569ac2b6a885121b928d",
+          "searchMs": 737.3817499999986,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Thailand",
+        "name": "Bangkok",
+        "lon": 100.5018,
+        "lat": 13.7563
+      },
+      "goal": {
+        "country": "Malaysia",
+        "name": "Kuala Lumpur",
+        "lon": 101.6869,
+        "lat": 3.139
+      },
+      "snapping": {
+        "start": {
+          "country": "Thailand",
+          "name": "Bangkok",
+          "lon": 100.50197,
+          "lat": 13.75636,
+          "node": 28241,
+          "snapMetres": 19.535503773720915
+        },
+        "goal": {
+          "country": "Malaysia",
+          "name": "Kuala Lumpur",
+          "lon": 101.68668,
+          "lat": 3.13859,
+          "node": 160025,
+          "snapMetres": 51.72123817723396
+        },
+        "snapMs": 73.01712499999849,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Thailand",
+            "name": "Bangkok",
+            "lon": 100.5018,
+            "lat": 13.7563
+          },
+          "requestedGoal": {
+            "country": "Malaysia",
+            "name": "Kuala Lumpur",
+            "lon": 101.6869,
+            "lat": 3.139
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 1449282.79,
+          "routeEdges": 7023,
+          "events": 12675535,
+          "traceSha256": "dcbf2ed499d35de5b5ac817ab03e655a86308784ba30bccc7d88ae4007a09317",
+          "searchMs": 569.8557500000006,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 1449282.79,
+          "routeEdges": 7023,
+          "events": 29036986,
+          "traceSha256": "b1b6e08fadbe599947c3a6dd16b217951824a15fa89e1b1c78b090aa4bedfef9",
+          "searchMs": 1722.731334,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 1449282.79,
+          "routeEdges": 7023,
+          "events": 29973027,
+          "traceSha256": "fd2bb74f2a7c48d6af7c166c5f273963b509bcccdff6e8d8ef2c719e7a8ad3d9",
+          "searchMs": 1160.2655410000007,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Thailand",
+        "name": "Bangkok",
+        "lon": 100.5018,
+        "lat": 13.7563
+      },
+      "goal": {
+        "country": "Singapore",
+        "name": "Singapore",
+        "lon": 103.8198,
+        "lat": 1.3521
+      },
+      "snapping": {
+        "start": {
+          "country": "Thailand",
+          "name": "Bangkok",
+          "lon": 100.50197,
+          "lat": 13.75636,
+          "node": 28241,
+          "snapMetres": 19.535503773720915
+        },
+        "goal": {
+          "country": "Singapore",
+          "name": "Singapore",
+          "lon": 103.82349,
+          "lat": 1.35605,
+          "node": 4749256,
+          "snapMetres": 600.9784837909231
+        },
+        "snapMs": 73.66087499999958,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Thailand",
+            "name": "Bangkok",
+            "lon": 100.5018,
+            "lat": 13.7563
+          },
+          "requestedGoal": {
+            "country": "Singapore",
+            "name": "Singapore",
+            "lon": 103.8198,
+            "lat": 1.3521
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 1795218.67,
+          "routeEdges": 8020,
+          "events": 19115540,
+          "traceSha256": "851987a6cae3782b5d16851eb147908a3ec2a891d0ff3e333396f3b04e99f08c",
+          "searchMs": 878.7969999999987,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 1795218.67,
+          "routeEdges": 8020,
+          "events": 30896941,
+          "traceSha256": "47c88fce1f45ac127d793acacb7e730e95dd6d7caa2f956dad6dea8e30c2978f",
+          "searchMs": 1762.853916,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 1795218.67,
+          "routeEdges": 8020,
+          "events": 34383499,
+          "traceSha256": "13a06033d0c1c79aadf0123ea298d0a051eff1f40d517be3d3d544fa3bd3fd46",
+          "searchMs": 1315.3422499999979,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    }
+  ],
+  "note": "Complete union; hashes and manifest limits validated. Weak components ignore direction. Five directed city journeys verify road connectivity across all six countries; route adjacency, one-way direction and exact cost checked across three algorithms. Basic access connectivity profile, not enforced turn/barrier/conditional navigation."
+}

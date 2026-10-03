@@ -187,3 +187,11 @@ distance determine acceptance and pacing. Sixty validated journeys accepted
 all 39 places in 63 attempts: ten regional, 23 interregional and 27 national.
 Manual selection still allows disconnected islands to be studied explicitly.
 [Release evidence](evidence/australia-release-2026-10-03/README.md).
+
+## Southeast Asia pool
+
+`sea-places/1` supplies 26 cities across Myanmar, Thailand, Cambodia, Laos,
+Peninsular Malaysia and Singapore. Its distance bands are 30–300 km, 300–1,000 km
+and 1,000 km or more. Actual route distance determines acceptance. Sixty seeded
+journeys passed with 63 attempts and covered every authored place; see the
+[regional ambient audit](evidence/southeast-asia-release-2026-10-03/ambient-audit.json).

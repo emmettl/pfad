@@ -73,5 +73,10 @@
     "url": "https://motionstudies.app/pfad-data/geo-au-20261003-57a53084a64d/manifest.json",
     "bytes": 495,
     "sha256": "415e0bdd53aa2f8c57886db92bde5442e0342f850bf9af4b2efe01be60e5fd1e"
+  },
+  "sea": {
+    "url": "https://motionstudies.app/pfad-data/geo-sea-20261003-36ee8b30792c/manifest.json",
+    "bytes": 497,
+    "sha256": "bdd702d9a1d8f5ff475190d0e484939abcc9e91288d59925f3fe3267d7323ef3"
   }
 }

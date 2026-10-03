@@ -1,0 +1,8 @@
+{
+  "baseCommit": "5b7e8247d2c2321c504793391091be0e62e6325b",
+  "scope": "Southeast Asia publication from an isolated committed-app worktree; unrelated routing-profile changes excluded.",
+  "sourceIdentity": "eecf8c542fabeec3cd8ecf2e33bac7666764ea14390b34b478eb0cbaa66c356f",
+  "roadRelease": "sea-20261002-eecf8c542fab",
+  "geographyRelease": "geo-sea-20261003-36ee8b30792c",
+  "deliveryWorkerVersion": "cce01c8a-72f9-4fdc-8b1d-0a935bbad644"
+}

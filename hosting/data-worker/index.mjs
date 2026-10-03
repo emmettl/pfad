@@ -1,6 +1,6 @@
 // Public, read-only delivery of manually selected immutable graph and outline releases.
 const PREFIX = '/pfad-data/'
-const GEOGRAPHY_KEY = /^geo-[a-z]{2}-\d{8}-[a-f0-9]{12}\/(?:manifest\.json|(?:border|lakes)-[a-f0-9]{12}\.json)$/
+const GEOGRAPHY_KEY = /^geo-[a-z]{2,8}-\d{8}-[a-f0-9]{12}\/(?:manifest\.json|(?:border|lakes)-[a-f0-9]{12}\.json)$/
 const KEY = /^[a-z]{2,8}-\d{8}-[a-f0-9]{12}\/(?:manifest\.json|(?:nodes|edges|geometry)-\d{3}-[a-f0-9]{12}\.bin\.gz\.bin|evidence-[a-f0-9]{12}\.json\.gz\.bin)$/
 function headers(extra = {}) {
   return new Headers({ 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Content-Length, Content-Range', 'X-Content-Type-Options': 'nosniff', ...extra })
