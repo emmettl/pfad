@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test'
+import { selectAlgorithm } from './algorithm-picker.ts'
+test('weighted A-star offers reversible focused exploration and both cost objectives',async({page})=>{
+ test.setTimeout(90000)
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message))
+ await page.goto('./?algorithm=weighted-astar')
+ const study=page.locator('.study'),slider=page.getByRole('slider',{name:'Search replay'})
+ await expect(study).toHaveAttribute('data-algorithm','weighted-astar/1',{timeout:60000})
+ await page.getByRole('button',{name:'Pause',exact:true}).click();await slider.fill('15')
+ const count=await page.getByTestId('examined-count').textContent()
+ await expect(page.locator('.search-tip')).toHaveClass(/weighted-tip/)
+ await page.screenshot({path:`test-results/weighted-astar-${test.info().project.name}.png`})
+ await slider.fill('30');await expect(page.locator('.replay-status')).toHaveText('Weighted A* route found')
+ await expect(page.locator('.greedy-note')).toContainText('Shortest route not guaranteed')
+ await slider.fill('15');await expect(page.getByTestId('examined-count')).toHaveText(count!)
+ await page.getByRole('button',{name:'Estimated time',exact:true}).click()
+ await expect(page).toHaveURL(/objective=time/);await expect(page.getByRole('button',{name:'Pause',exact:true})).toBeVisible()
+ await page.getByRole('button',{name:'Pause',exact:true}).click();await slider.fill('30')
+ await expect(page.locator('.replay-status')).toHaveText('Weighted A* route found')
+ await expect(page.locator('.route-caption')).toContainText('min)')
+ await selectAlgorithm(page,'astar');await expect(study).toHaveAttribute('data-algorithm','astar/1')
+ expect(errors).toEqual([])
+})

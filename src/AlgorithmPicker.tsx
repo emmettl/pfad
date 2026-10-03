@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import type { SearchAlgorithm } from './search/contracts.ts'
 export const algorithms: [SearchAlgorithm, string][] = [
-  ['dijkstra', 'Dijkstra'], ['bidirectional', 'Bidirectional Dijkstra'], ['astar', 'A*'], ['bidirectional-astar', 'Bidirectional A*'], ['greedy', 'Greedy best-first'], ['depth-first', 'Depth-first'], ['breadth-first', 'Breadth-first'], ['bidirectional-breadth-first', 'Bidirectional breadth-first'], ['spanning-tree', 'Spanning tree'],
+  ['dijkstra', 'Dijkstra'], ['bidirectional', 'Bidirectional Dijkstra'], ['astar', 'A*'], ['weighted-astar', 'Weighted A* · 2×'], ['bidirectional-astar', 'Bidirectional A*'], ['greedy', 'Greedy best-first'], ['depth-first', 'Depth-first'], ['breadth-first', 'Breadth-first'], ['bidirectional-breadth-first', 'Bidirectional breadth-first'], ['spanning-tree', 'Spanning tree'],
 ]
 export function AlgorithmPicker({ value, disabled, onChange }: { value: SearchAlgorithm; disabled: boolean; onChange: (value: SearchAlgorithm) => void }) {
   const [open, setOpen] = useState(false), [active, setActive] = useState(0)

@@ -70,9 +70,9 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
   return singleFrontSearch(graph, start, goal, snapMs)
 }
 
-export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0, estimate?: { potential: Float64Array | Uint32Array; record: HeuristicRecord; ordering?: 'astar' } | { potential: Float64Array; record: ProximityHeuristicRecord; ordering: 'greedy' }, releaseEstimate = false, edgeCost?: (edge: number) => number): SearchResult {
-  const begun = performance.now(), greedy = estimate?.ordering === 'greedy'
-  const focused = greedy || !!estimate && graph.routingObjective === 'time'
+export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0, estimate?: { potential: Float64Array | Uint32Array; record: HeuristicRecord; ordering?: 'astar'; weight?: number } | { potential: Float64Array; record: ProximityHeuristicRecord; ordering: 'greedy' }, releaseEstimate = false, edgeCost?: (edge: number) => number): SearchResult {
+  const begun = performance.now(), greedy = estimate?.ordering === 'greedy', weight = estimate && estimate.ordering !== 'greedy' ? estimate.weight ?? 1 : 1, weighted = weight > 1
+  const focused = greedy || weighted || !!estimate && graph.routingObjective === 'time'
   const n = graph.xy.length / 2, e = graph.from.length
   const distance = new Float64Array(n).fill(Infinity)
   const predecessor = new Int32Array(n).fill(-1), previousEdge = new Int32Array(n).fill(-1)
@@ -93,7 +93,7 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
     events.set(used++, id * 4 + kind)
     if (used % checkpointStride === 0) checkpoints.push(exploredNodes, examinedArcs, improvements)
   }
-  distance[start.node] = 0; heap.push(start.node, potential?.[start.node] ?? 0)
+  distance[start.node] = 0; heap.push(start.node, (potential?.[start.node] ?? 0) * weight)
   while (heap.size) {
     const u = heap.pop()
     if (settled[u]) continue
@@ -110,9 +110,9 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
       const candidate = distance[u] + (edgeCost ? edgeCost(road) : graph.length[road])
       // Greedy keeps its first-discovery tree. Replacing parents by lower
       // costs after expansion would make its stopped route cost inconsistent.
-      if (greedy ? distance[v] === Infinity : candidate < distance[v]) {
+      if ((!weighted || !settled[v]) && (greedy ? distance[v] === Infinity : candidate < distance[v])) {
         distance[v] = candidate; predecessor[v] = u; previousEdge[v] = road
-        heap.push(v, greedy ? potential![v] : candidate + (potential?.[v] ?? 0)); improvements++; record(2, a)
+        heap.push(v, greedy ? potential![v] : candidate + weight * (potential?.[v] ?? 0)); improvements++; record(2, a)
         if (!edgeTimes[road * 2 + 1]) edgeTimes[road * 2 + 1] = used
       }
     }
@@ -132,13 +132,14 @@ export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint,
   const routeMetres = Number.isFinite(distance[goal.node]) ? distance[goal.node] / 100 : null
   releaseBuffers(distance, predecessor, previousEdge, settled, heap.nodes, heap.scores, releaseEstimate ? potential : undefined)
   return {
-    algorithm: greedy ? 'greedy-best-first/1' : estimate ? 'astar/1' : 'dijkstra/1',
-    routeGuarantee: greedy ? 'first-found' : undefined,
+    algorithm: weighted ? 'weighted-astar/1' : greedy ? 'greedy-best-first/1' : estimate ? 'astar/1' : 'dijkstra/1',
+    weighting: weighted ? { version: 'fixed-heuristic-weight/1', weight, reopening: false } : undefined,
+    routeGuarantee: greedy || weighted ? 'first-found' : undefined,
     focusVersion: focused ? 'expanded-node-focus/1' : undefined,
     focusEvents: focused ? Uint32Array.from(focusEvents) : undefined,
     focusCoordinates: focused ? Int32Array.from(focusCoordinates) : undefined,
     proximityHeuristic: estimate?.ordering === 'greedy' ? estimate.record : undefined,
-    tieBreak: greedy ? 'great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded' : estimate ? 'cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order' : 'distance, then ascending node id; neighbours in compiler edge order',
+    tieBreak: weighted ? 'cost so far plus twice the feasible remaining-cost bound; ascending node id; compiler arc order; retain first equal-cost predecessor; closed nodes are not reopened; stop at goal expansion' : greedy ? 'great-circle proximity only, then ascending node id; neighbours in compiler edge order; retain first-discovery predecessor; stop when goal is expanded' : estimate ? 'cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order' : 'distance, then ascending node id; neighbours in compiler edge order',
     start, goal, searchMs, snapMs, routeMetres,
     routeNodes: Uint32Array.from(routeNodes), routeEdges: Uint32Array.from(routeEdges),
     routeReversed: Uint8Array.from(routeEdges, (edge, i) => Number(graph.from[edge] !== routeNodes[i])),

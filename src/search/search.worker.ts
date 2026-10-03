@@ -11,7 +11,7 @@ import { spanningTree } from './spanning-tree.ts'
 import { breadthFirst } from './breadth-first.ts'
 import { depthFirst } from './depth-first.ts'
 import { greedy } from './greedy.ts'
-import { astar } from './astar.ts'
+import { astar, weightedAstar } from './astar.ts'
 import { validateManifest, manifestIdentityPayload } from './manifest.ts'
 import { loadChunks, sha256 } from './chunks.ts'
 
@@ -109,7 +109,7 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
       if (request.algorithm === 'multisource' && !request.sources) throw new Error('Three sources are required for a territory study')
       const sourceEndpoints = request.sources ? snapSources(graph, request.sources) : undefined
       const endpoints = sourceEndpoints ? { start: sourceEndpoints.sources[0], goal: sourceEndpoints.sources[1], snapMs: sourceEndpoints.snapMs, snapping: undefined } : snapEndpoints(graph, request.start, request.goal)
-      if (request.algorithm === 'bidirectional' || request.algorithm === 'astar' || request.algorithm === 'bidirectional-astar' || request.algorithm === 'bidirectional-breadth-first') reverse ??= compileReverse(graph)
+      if (request.algorithm === 'bidirectional' || request.algorithm === 'astar' || request.algorithm === 'weighted-astar' || request.algorithm === 'bidirectional-astar' || request.algorithm === 'bidirectional-breadth-first') reverse ??= compileReverse(graph)
       if (disposable) {
         // Eligibility and weak components have served their snapping purpose;
         // the directed CSR and reverse graph already contain all routing arcs.
@@ -123,7 +123,7 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
       const searchGraph = weighted && optimizes ? weighted : graph
       const result = request.algorithm === 'spanning-tree' ? spanningTree(graph, endpoints.start, endpoints.snapMs, endpoints.goal) : request.algorithm === 'multisource' && sourceEndpoints ? multisource(searchGraph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar' || request.algorithm === 'bidirectional-breadth-first') && reverse
         ? bidirectional(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs, request.algorithm === 'bidirectional-astar', request.algorithm === 'bidirectional-breadth-first')
-        : request.algorithm === 'astar' && reverse ? astar(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
+        : request.algorithm === 'weighted-astar' && reverse ? weightedAstar(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'astar' && reverse ? astar(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
           : request.algorithm === 'time-dijkstra' ? timeDijkstra(searchGraph, manifest.classes, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'breadth-first' ? breadthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'depth-first' ? depthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'greedy' ? greedy(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : dijkstra(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs)
       if (weighted) { annotateTime(result, physicalGraph, weighted, optimizes); releaseBuffers(weighted.length) }
       if (!weighted && request.algorithm !== 'time-dijkstra' && request.algorithm !== 'spanning-tree') estimateRouteTime(result, physicalGraph, manifest.classes)

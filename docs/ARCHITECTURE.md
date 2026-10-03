@@ -387,3 +387,13 @@ is an upper bound; the sum of next frontier depths certifies the fewest
 connections before stopping. Physical lengths remain separate, and meeting
 metadata records `candidateConnections`. It is manual only; the time toggle
 is disabled. Lavender from A and gold from B reveal real examinations.
+
+### Weighted A* manual trial
+
+`weighted-astar/1` uses the checked A* lower bound with a fixed multiplier of
+2 in `g + 2h`. It shares the real single-front recorder, orders equal priorities
+by node ID, and freezes predecessors of expanded nodes without reopening.
+The exported `fixed-heuristic-weight/1` policy records weight and reopening;
+no shortest-route guarantee is claimed. Physical route costs remain unweighted.
+Both distance and estimated time are supported; rose focus follows recorded
+node expansions. This option is excluded from the ambient rotation.

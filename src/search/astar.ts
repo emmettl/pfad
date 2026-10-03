@@ -48,3 +48,7 @@ export function prepareHeuristic(graph: Graph, reverse: ReverseGraph, start: num
 export function astar(graph: Graph, reverse: ReverseGraph, start: Endpoint, goal: Endpoint, snapMs = 0) {
   return singleFrontSearch(graph, start, goal, snapMs, prepareHeuristic(graph, reverse, start.node, goal.node), true)
 }
+
+export function weightedAstar(graph: Graph, reverse: ReverseGraph, start: Endpoint, goal: Endpoint, snapMs = 0) {
+  return singleFrontSearch(graph, start, goal, snapMs, { ...prepareHeuristic(graph, reverse, start.node, goal.node), weight: 2 }, true)
+}
