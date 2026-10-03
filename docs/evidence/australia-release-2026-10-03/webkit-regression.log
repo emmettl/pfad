@@ -1,0 +1,54 @@
+
+> pfad@0.0.0 test:browser
+> playwright test --project=webkit-mobile --workers=1 --max-failures=1
+
+
+Running 39 tests using 1 worker
+
+(node:91613) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/39] [webkit-mobile] › e2e/algorithm-menu.spec.ts:2:1 › algorithm menu uses the dark palette and supports keyboard and outside dismissal
+[2/39] [webkit-mobile] › e2e/ambient.spec.ts:5:1 › ambient retreats without trapping touch or keyboard controls, and Escape restores the study
+[3/39] [webkit-mobile] › e2e/ambient.spec.ts:52:1 › ambient binds genuine journeys, reuses loaded chunks, and exits into the current study
+[4/39] [webkit-mobile] › e2e/ambient.spec.ts:97:1 › reduced-motion ambient presents completed stills and requires explicit Next
+[5/39] [webkit-mobile] › e2e/ambient.spec.ts:136:1 › sequence pause suspends one continuous score; hidden return needs explicit actions
+[6/39] [webkit-mobile] › e2e/astar.spec.ts:12:1 › A* reveals a real goal-directed search, restores paused frames and preserves the route across mode changes
+[7/39] [webkit-mobile] › e2e/bidirectional-breadth-first.spec.ts:3:1 › bidirectional breadth-first displays two genuine fronts, a connection-count route and shareable mode
+[8/39] [webkit-mobile] › e2e/bidirectional.spec.ts:19:1 › bidirectional Dijkstra: two real fronts render their meeting light, preserve a paused frame and honour reduced motion
+[9/39] [webkit-mobile] › e2e/bidirectional.spec.ts:19:1 › bidirectional A*: two real fronts render their meeting light, preserve a paused frame and honour reduced motion
+[10/39] [webkit-mobile] › e2e/breadth-first.spec.ts:3:1 › breadth-first replays real traversal, seeks reversibly and shares its mode
+[11/39] [webkit-mobile] › e2e/countries.spec.ts:4:1 › country downloads are opt-in, pinned, and switching back restores the bundled Swiss study
+[12/39] [webkit-mobile] › e2e/depth-first.spec.ts:3:1 › depth-first replays real traversal, seeks reversibly and shares its mode
+[13/39] [webkit-mobile] › e2e/drawing.spec.ts:3:1 › drawing restores its recorded frame and geographic context after GPU context loss
+[14/39] [webkit-mobile] › e2e/geography.spec.ts:5:3 › desktop outline controls › verified outlines can be toggled while roads are still downloading
+[15/39] [webkit-mobile] › e2e/geography.spec.ts:28:1 › failed external outlines leave genuine road searches available and can be retried
+[16/39] [webkit-mobile] › e2e/greedy.spec.ts:5:1 › greedy displays real coral exploration, reversible replay and an honest first-found route
+[17/39] [webkit-mobile] › e2e/greedy.spec.ts:51:1 › greedy naturally ends the search and reveals its route before resting
+[18/39] [webkit-mobile] › e2e/keyboard.spec.ts:16:1 › map shortcuts play once, scrub real events and respect duration
+[19/39] [webkit-mobile] › e2e/keyboard.spec.ts:53:1 › timeline shortcuts work without doubling native input and preserve other controls and busy states
+[20/39] [webkit-mobile] › e2e/loading.spec.ts:4:1 › verified chunks survive a failed opening and reload without chunk requests
+[21/39] [webkit-mobile] › e2e/music.spec.ts:26:1 › real audio is opt-in, bounded and independent of search replay
+[22/39] [webkit-mobile] › e2e/music.spec.ts:85:1 › failed music can be retried while the real map remains usable
+[23/39] [webkit-mobile] › e2e/music.spec.ts:98:1 › all encoded sketches and the three musical joins have headroom and no cut at the seam
+[24/39] [webkit-mobile] › e2e/records.spec.ts:9:1 › native URL follows journey and camera edits, stays fixed during replay, and reloads with autoplay
+[25/39] [webkit-mobile] › e2e/records.spec.ts:72:1 › shared journeys autoplay, legacy frames resume, reduced motion shows the result, and exports retain genuine events
+[26/39] [webkit-mobile] › e2e/records.spec.ts:127:1 › unavailable releases are explicit errors, and a UK link asks before any graph download
+[27/39] [webkit-mobile] › e2e/sharing-metadata.spec.ts:3:1 › a crawler receives the built sharing head and image without JavaScript or graph loading
+[28/39] [webkit-mobile] › e2e/spanning-tree.spec.ts:3:1 › spanning tree is a goal-directed manual journey with reversible real acceptance
+[29/39] [webkit-mobile] › e2e/study.spec.ts:10:1 › national search, reverse seeking and another pair of endpoints
+[30/39] [webkit-mobile] › e2e/study.spec.ts:55:1 › swapping endpoints binds Genève to Zürich to the real worker result
+[31/39] [webkit-mobile] › e2e/study.spec.ts:66:1 › reduced motion opens the completed trace without autoplay
+[32/39] [webkit-mobile] › e2e/study.spec.ts:75:1 › the completed route reveals, pauses and settles without advancing search events
+[33/39] [webkit-mobile] › e2e/territories.spec.ts:4:1 › ambient introduces three real territories, shares their sources and returns to journey controls
+[34/39] [webkit-mobile] › e2e/territories.spec.ts:47:1 › territories replay genuine events forward and backward, then hold without route animation
+[35/39] [webkit-mobile] › e2e/time.spec.ts:3:1 › estimated time retains distance, model labels and reversible replay
+[36/39] [webkit-mobile] › e2e/trace-storage.spec.ts:44:1 › exact archived traces stream exports and retire safely in browser storage
+[webkit-mobile] › e2e/trace-storage.spec.ts:44:1 › exact archived traces stream exports and retire safely in browser storage
+6:10:56 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+[37/39] [webkit-mobile] › e2e/trace-storage.spec.ts:50:1 › context recovery preserves the dark field without geographic fill
+[38/39] [webkit-mobile] › e2e/watch.spec.ts:5:3 › watch mode hides controls and restores focus
+[39/39] [webkit-mobile] › e2e/watch.spec.ts:5:3 › watch mode hides controls and restores focus without browser fullscreen
+  39 passed (2.4m)

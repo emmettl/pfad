@@ -52,6 +52,7 @@ has a pool. Manual picker places and ambient curation need not be identical.
 | Luxembourg | `lu-places/1` | 10 | One pool; smaller distance bands |
 | Ireland | `ie-places/1` | 18 | Whole island |
 | Scandinavia | `sc-places/1` | 29 | Connected mainland region |
+| Australia | `au-places/1` | 39 | Mainland / Tasmania |
 
 Candidates remain within one authored region; these labels avoid proposing known
 sea crossings, not proving connectivity. The complete directed graph decides
@@ -176,3 +177,13 @@ pacing, even though that route is not guaranteed shortest. Its quiet caption
 keeps that distinction visible. The coral/peach exploration and recorded focus
 glow follow the normal pause/seek, reduced-motion and route-reveal lifecycle.
 [Validation](evidence/greedy-2026-10-01/README.md).
+
+## Australia pool · 3 October 2026
+
+`au-places/1` covers all six states, the ACT and Northern Territory. Its 35
+mainland places and four Tasmanian places preserve separate road regions; no
+ferry crossing is proposed. The existing 30/100/220 km bands and actual road
+distance determine acceptance and pacing. Sixty validated journeys accepted
+all 39 places in 63 attempts: ten regional, 23 interregional and 27 national.
+Manual selection still allows disconnected islands to be studied explicitly.
+[Release evidence](evidence/australia-release-2026-10-03/README.md).

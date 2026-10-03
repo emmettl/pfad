@@ -378,3 +378,12 @@ existing direct-opening policy. Validation includes all authored endpoints in
 both directions, sixty accepted ambient journeys and deterministic national
 replay in Chromium and touch WebKit. See
 [release evidence](evidence/austria-release-2026-10-02/README.md).
+
+### Australia catalogue addition · 3 October 2026
+
+Australia adds its measured 44.6 MB complete graph, independent coastline/lake
+references and a 39-place ambient pool covering the mainland and Tasmania as
+separate road regions. Existing resource guards and connectivity assumptions
+remain unchanged. Desktop and touch-WebKit validation cover curated endpoints,
+long-distance searches, shared links and ambient replay; physical-phone memory
+remains unverified. [Release evidence](evidence/australia-release-2026-10-03/README.md).

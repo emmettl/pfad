@@ -414,6 +414,36 @@
         18,
         50
       ]
+    },
+    {
+      "path": "src/map/data/au-border.json",
+      "bytes": 195546,
+      "sha256": "44ccd1837a0328530bdc7bbc951e2f128758bd5116177c8c7981c663125d84c9",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-country-geography.py au",
+      "bounds": [
+        95,
+        -45,
+        170,
+        -9
+      ]
+    },
+    {
+      "path": "src/map/data/au-lakes.json",
+      "bytes": 64587,
+      "sha256": "92cba46ea4fafe630c81140e940556e749991b8d2a0a495f4a63cf1fa7642e95",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py au",
+      "bounds": [
+        95,
+        -45,
+        170,
+        -9
+      ]
     }
   ],
   "publishedCommit": "5910d68b2eb4c78376007b42639d1c4a17986b7b",

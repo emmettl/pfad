@@ -1,0 +1,26 @@
+{
+  "schema": "pfad-country-sizing-summary/1",
+  "sourceSha256": "80a111d6c1c2e93513313034e24c3e07789a13ebac5f76bea05c9f49d598906b",
+  "physicalRoadLengthKm": 973880.33141,
+  "boundsLonLat": [
+    96.81791,
+    -43.58819,
+    167.99208,
+    -9.22967
+  ],
+  "weakConnectedComponents": 7743,
+  "largestWeakComponentsNodes": [
+    2705657,
+    77907,
+    1399,
+    883,
+    878,
+    785,
+    647,
+    471,
+    443,
+    439
+  ],
+  "largestWeakComponentNodeShare": 0.9596093689041475,
+  "note": "Selected motor-road connectivity profile only. Physical lengths count each retained edge once regardless of direction. Weak components ignore travel direction and do not certify navigability. Roads outside the profile, including tracks, and ferries are excluded."
+}

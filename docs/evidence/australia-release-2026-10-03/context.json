@@ -1,0 +1,12 @@
+{
+  "base": "42e65291821918e9551f06f6fdfc1ec9d8079274",
+  "files": {
+    "src/countries.ts": "8b2f5824294ae9b57cc4a65c3556d0538dbf99123cbb82f6bc88bdb8720238bf",
+    "src/ambient/pools.ts": "3658998df6777be5ddb8eca9efde3124a7466b55ae7a2361c02259d79b3046cd",
+    "src/map/geography-releases.json": "586ce270e0b74380e6c5a683ec5ba3658f95cad6441b2c48f6ed4dc0711bfd2f",
+    "src/map/data/au-border.json": "44ccd1837a0328530bdc7bbc951e2f128758bd5116177c8c7981c663125d84c9",
+    "src/map/data/au-lakes.json": "92cba46ea4fafe630c81140e940556e749991b8d2a0a495f4a63cf1fa7642e95",
+    "scripts/data/country-browser-proof.mjs": "32fabc0437c489feba52f12d711d724c06bdf7bc5e58e46310209dc063bdd94b"
+  },
+  "note": "Clean isolated Australia integration. Graph bytes reuse the measured immutable candidate; unrelated primary workspace profile work is excluded."
+}

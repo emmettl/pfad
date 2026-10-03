@@ -1,0 +1,99 @@
+[
+  {
+    "country": "au",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Perth→Sydney",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "4557026"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Perth→Sydney",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "6119521"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Perth→Sydney",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2027110"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Cairns→Darwin2353.6 km (2407 min)A*",
+        "events": "389952"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Sydney→Newcastle152.5 km (132 min)Bidirectional A*",
+        "events": "791685"
+      },
+      {
+        "algorithm": "greedy-best-first/1",
+        "caption": "Devonport→Burnie56.2 km (54 min)Shortest route not guaranteedGreedy best-first",
+        "events": "2149"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Townsville→Melbourne2382.8 km (2645 min)Dijkstra",
+        "events": "7850432"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Townsville · Geraldton · AdelaideThree-source Dijkstra",
+        "events": "11503877"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Brisbane→Townsville1331.1 km (1073 min)Bidirectional Dijkstra",
+        "events": "2866933"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Katherine→Townsville2146.2 km (2359 min)A*",
+        "events": "226854"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Sunshine Coast→Gold Coast178.3 km (127 min)Bidirectional A*",
+        "events": "550241"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "bidirectional-astar/1",
+      "recoveredStops": 0,
+      "after": "greedy-best-first/1",
+      "caption": "Gawler→Victor HarborShortest route not guaranteedGreedy best-first"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

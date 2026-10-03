@@ -2,7 +2,7 @@
 
 Switzerland remains bundled and selected by default. The other selected immutable
 releases are hosted independently on Cloudflare R2. The UK, Scandinavia, Poland,
-Italy, Spain, France and Germany require a large-download acknowledgement on
+Italy, Spain, France, Germany and Australia require a large-download acknowledgement on
 first use, remembered per country/browser/site;
 the smaller releases open on selection.
 No country source is acquired by ordinary builds, CI or browser page requests.
@@ -29,6 +29,7 @@ coverage are retained in each immutable manifest.
 | `fr` | France | 151.882 | 30 Sep 2026 | Metropolitan France including Corsica |
 | `de` | Germany | 140.876 | 29 Sep 2026 | German Geofabrik extract |
 | `at` | Austria | 23.349 | 30 Sep 2026 | Austrian Geofabrik extract |
+| `au` | Australia | 44.568 | 2 Oct 2026 | Australian Geofabrik extract; Tasmania and offshore road components remain separate |
 
 Each study has a versioned ambient pool and independently pinned geographic
 references. Iceland and Luxembourg's selected lake source has no features;
@@ -340,3 +341,24 @@ pinned Natural Earth snapshot. Outlines stay outside the application bundle.
 See [Austria release evidence](evidence/austria-release-2026-10-02/README.md)
 for route, source, drawing and browser validation. Physical-phone stability
 remains unverified.
+
+## Australia catalogue addition · 3 October 2026
+
+Australia selects `au-20261002-72975ec9fdfa`: 44,568,336 road-download bytes,
+2,819,540 routing nodes, 3,498,445 physical edges and 13,605,504 drawing vertices.
+It retains the measured candidate identity and existing connectivity profile.
+Optional source evidence adds 17,656,782 bytes. The first selection asks for
+download acknowledgement because the complete graph needs substantial browser
+and graphics memory; physical-phone stability remains unverified.
+
+Perth–Sydney is the opening study. The `au-places/1` pool has 39 places covering
+all six states, the ACT and Northern Territory; mainland and Tasmanian journeys
+remain separate because ferries are excluded. All 1,241 same-region curated
+pairs passed directed reachability and reversal-stable snapping. Sixty real
+ambient journeys cover all places and distance bands.
+
+Independent outline release `geo-au-20261003-57a53084a64d` has 260,133 layer
+bytes, 96 coastline rings and 31 Natural Earth lake features, including salt
+lakes and unnamed features. These generalized references do not affect routing.
+See [release evidence](evidence/australia-release-2026-10-03/README.md) and the
+earlier [sizing experiment](evidence/australia-sizing-2026-10-03/README.md).

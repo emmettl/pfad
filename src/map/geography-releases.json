@@ -68,5 +68,10 @@
     "url": "https://motionstudies.app/pfad-data/geo-at-20261002-41fbae937a33/manifest.json",
     "bytes": 493,
     "sha256": "884519ffdae60d929cfe8ee9c6ec95af2800b8e98fc8a6a7836ddf3e0d23c107"
+  },
+  "au": {
+    "url": "https://motionstudies.app/pfad-data/geo-au-20261003-57a53084a64d/manifest.json",
+    "bytes": 495,
+    "sha256": "415e0bdd53aa2f8c57886db92bde5442e0342f850bf9af4b2efe01be60e5fd1e"
   }
 }

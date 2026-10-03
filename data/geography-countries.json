@@ -10,5 +10,6 @@
   "es": {"admin": "Spain", "bounds": [-19, 27, 5, 44], "referenceLatitude": 40},
   "fr": {"admin": "France", "bounds": [-6, 41, 10, 52], "referenceLatitude": 46.5},
   "de": {"admin": "Germany", "bounds": [5, 47, 16, 56], "referenceLatitude": 51},
-  "at": {"admin": "Austria", "bounds": [9, 46, 18, 50], "referenceLatitude": 47.6}
+  "at": {"admin": "Austria", "bounds": [9, 46, 18, 50], "referenceLatitude": 47.6},
+  "au": {"admin": "Australia", "bounds": [95, -45, 170, -9], "referenceLatitude": -27, "additionalComponents": [{"admin": "Norfolk Island", "bounds": [95, -45, 170, -9]}, {"admin": "Coral Sea Islands", "bounds": [95, -45, 170, -9]}, {"admin": "Ashmore and Cartier Islands", "bounds": [95, -45, 170, -9]}]}
 }

@@ -1,0 +1,99 @@
+[
+  {
+    "country": "au",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4197/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Perth→Sydney",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "4557026"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Perth→Sydney",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "6119521"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Perth→Sydney",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "2027110"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Albany→Tennant Creek3055.2 km (3353 min)A*",
+        "events": "1434726"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Melbourne→Bendigo147.4 km (166 min)Bidirectional A*",
+        "events": "813948"
+      },
+      {
+        "algorithm": "greedy-best-first/1",
+        "caption": "Wollongong→Cairns3135.4 km (4262 min)Shortest route not guaranteedGreedy best-first",
+        "events": "25644"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Ballarat→Melbourne109.9 km (83 min)Dijkstra",
+        "events": "944463"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Bendigo · Mandurah · DarwinThree-source Dijkstra",
+        "events": "11504064"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Bendigo→Geelong175.7 km (202 min)Bidirectional Dijkstra",
+        "events": "1312953"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Hobart→Devonport252.0 km (241 min)A*",
+        "events": "131006"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Bendigo→Kalgoorlie2729.2 km (2847 min)Bidirectional A*",
+        "events": "4446636"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "bidirectional-astar/1",
+      "recoveredStops": 0,
+      "after": "greedy-best-first/1",
+      "caption": "Burnie→LauncestonShortest route not guaranteedGreedy best-first"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

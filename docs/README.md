@@ -1,6 +1,6 @@
 # PFAD documentation
 
-Current state · 1 October 2026
+Current state · 3 October 2026
 
 PFAD is live on [Motion Studies](https://motionstudies.app/pfad/) and
 [GitHub Pages](https://emmettl.github.io/pfad/), using the same checked application
@@ -10,6 +10,8 @@ Iceland, New Zealand, Luxembourg, Netherlands, whole-island Ireland and Scandina
 Corsica, and Germany. [COUNTRIES.md](COUNTRIES.md) records coverage,
 downloads and immutable releases. Austria joins the catalogue with a complete
 national graph; its [release evidence](evidence/austria-release-2026-10-02/README.md) records validation.
+Australia adds a 44.6 MB complete graph with mainland/Tasmania ambient regions;
+see [Australia release evidence](evidence/australia-release-2026-10-03/README.md).
 
 Manual journeys offer Dijkstra, bidirectional Dijkstra, A*, bidirectional A*,
 greedy best-first, depth-first, breadth-first and a manual
@@ -71,3 +73,5 @@ that time; its older counts and algorithm sets are not current feature limits.
 - [US recording memory and search setup](evidence/recording-setup-2026-10-02/README.md): retained buffers, lossless compression tradeoffs and measured cold/repeated search phases.
 - [Recording blocks and exact endpoint index prototypes](evidence/recording-prototype-2026-10-02/README.md): storage recovery, counter parity and desktop query/memory tradeoffs.
 - [Exact trace archiving and streaming exports](evidence/trace-archive-2026-10-02/README.md): bounded recording storage, exact replay counters, exports and graphics recovery.
+
+- [Australia sizing and catalogue release](evidence/australia-release-2026-10-03/README.md): pinned 44.6 MB graph, 39-place ambient pool, independent outlines and normal-app validation.

@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Perth\u2013Sydney",
+    "start": {
+      "name": "Perth",
+      "lon": 115.8605,
+      "lat": -31.9505
+    },
+    "goal": {
+      "name": "Sydney",
+      "lon": 151.2093,
+      "lat": -33.8688
+    }
+  },
+  {
+    "name": "Darwin\u2013Adelaide",
+    "start": {
+      "name": "Darwin",
+      "lon": 130.8456,
+      "lat": -12.4634
+    },
+    "goal": {
+      "name": "Adelaide",
+      "lon": 138.6007,
+      "lat": -34.9285
+    }
+  }
+]
