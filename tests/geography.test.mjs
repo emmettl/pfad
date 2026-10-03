@@ -2,11 +2,12 @@ import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { test } from 'vitest'
+import { COUNTRIES } from '../src/countries.ts'
 
 test('geographic references retain reviewed source identities, attribution and closed rings', () => {
   const record = JSON.parse(readFileSync('data/geography-sources.json', 'utf8'))
   assert.equal(record.refreshPolicy, 'manual-versioned-snapshots')
-  assert.equal(record.assets.length, 34)
+  assert.equal(record.assets.length, COUNTRIES.length * 2)
   for (const asset of record.assets) {
     const bytes = readFileSync(asset.path), layer = JSON.parse(bytes)
     assert.equal(bytes.length, asset.bytes)

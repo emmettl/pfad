@@ -2,7 +2,7 @@ import { preview } from 'vite'
 import { webkit, expect } from '@playwright/test'
 import { writeFile } from 'node:fs/promises'
 const [country='uk',...urls]=process.argv.slice(2)
-const names={uk:'United Kingdom',is:'Iceland',nl:'Netherlands',nz:'New Zealand',lu:'Luxembourg',ie:'Ireland',sc:'Scandinavia',pl:'Poland',it:'Italy',es:'Spain',fr:'France',de:'Germany',at:'Austria',au:'Australia',sa:'Southern Africa'}
+const names={uk:'United Kingdom',is:'Iceland',nl:'Netherlands',nz:'New Zealand',lu:'Luxembourg',ie:'Ireland',sc:'Scandinavia',pl:'Poland',it:'Italy',es:'Spain',fr:'France',de:'Germany',at:'Austria',au:'Australia',sa:'Southern Africa',sam:'South America'}
 if(!names[country])throw Error('Unknown country')
 const port=Number(process.env.PFAD_PROOF_PORT??4197)
 const server=urls.length?null:await preview({build:{outDir:process.env.PFAD_PROOF_DIST??'dist'},preview:{host:'127.0.0.1',port,strictPort:true}})
