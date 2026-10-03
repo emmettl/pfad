@@ -1,6 +1,6 @@
 # PFAD documentation
 
-Current state · 3 October 2026
+Current state · 4 October 2026
 
 PFAD is live on [Motion Studies](https://motionstudies.app/pfad/) and
 [GitHub Pages](https://emmettl.github.io/pfad/), using the same checked application
@@ -81,3 +81,7 @@ that time; its older counts and algorithm sets are not current feature limits.
 
 - [Southern Africa release](evidence/southern-africa-release-2026-10-03/README.md): eleven-country union including Tanzania, 110.7 MB complete graph, 44 places, joined outlines and measured cross-border replay.
 - [Southern Africa ten-country baseline](evidence/southern-africa-sizing-2026-10-03/README.md): initial 80.3 MB sizing and connectivity comparison before Tanzania.
+
+[South America release](evidence/south-america-release-2026-10-04/README.md)
+adds nine connected mainland countries with complete source extracts, 37 audited
+places, ambient journeys and independent coastal/lake context.

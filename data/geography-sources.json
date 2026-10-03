@@ -504,6 +504,36 @@
         41,
         2
       ]
+    },
+    {
+      "path": "src/map/data/sam-border.json",
+      "bytes": 383726,
+      "sha256": "b42cb6ca19719bd1390e85e97969702b635c282e1183ee9793c0451bf53b6428",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-country-geography.py sam",
+      "bounds": [
+        -112,
+        -57,
+        -50,
+        14
+      ]
+    },
+    {
+      "path": "src/map/data/sam-lakes.json",
+      "bytes": 86048,
+      "sha256": "d8082daa381f6dafb53e572db4b6524d5e2c537293ad959f7f51f6f69e0f66f9",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py sam",
+      "bounds": [
+        -112,
+        -57,
+        -50,
+        14
+      ]
     }
   ],
   "publishedCommit": "5910d68b2eb4c78376007b42639d1c4a17986b7b",

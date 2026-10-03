@@ -1,0 +1,111 @@
+{
+  "id": "sam",
+  "name": "South America",
+  "datasetPrefix": "sam-20261002",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-10-02T20:21:34Z",
+    "data_timestamp": "2026-10-02T20:21:34Z",
+    "url": "https://download.geofabrik.de/south-america.html",
+    "filename": "sam-261002.osm.pbf",
+    "bytes": 1980749328,
+    "sha256": "754b54356eb53b755b449fe000c3fa4b5514c56fc8775b049e8d113853a75aaa",
+    "inputs": [
+      {
+        "country": "argentina",
+        "url": "https://download.geofabrik.de/south-america/argentina-261002.osm.pbf",
+        "bytes": 432051789,
+        "sha256": "96ba468a4596baf04ae352d3c1c3543bb98bb6e3a189da7b7ca641a6dfc72cfd",
+        "md5": "311f4869301ae4e63d7108d4a445a1c9",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "bolivia",
+        "url": "https://download.geofabrik.de/south-america/bolivia-261002.osm.pbf",
+        "bytes": 173935866,
+        "sha256": "6aaf0e081c89b3771e6f07e8596a4ba33feee5f63f48ef89b72718bf643f472c",
+        "md5": "9eb042277aaec234dc2008e662f25452",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "chile",
+        "url": "https://download.geofabrik.de/south-america/chile-261002.osm.pbf",
+        "bytes": 348511618,
+        "sha256": "c28e4f66a90b595dacc85b4b6fa8e4e908bfca3c1965916aa7065d093fbc6e27",
+        "md5": "ba81a204f524866dffefe082e37455c3",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "colombia",
+        "url": "https://download.geofabrik.de/south-america/colombia-261002.osm.pbf",
+        "bytes": 331015529,
+        "sha256": "fd50154655ed6f68abac4c125d85de7aacb2733ec3aa3a12a4afe7c7a47cb6d0",
+        "md5": "de448917db681dcff549abbf0f62b585",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "ecuador",
+        "url": "https://download.geofabrik.de/south-america/ecuador-261002.osm.pbf",
+        "bytes": 125539598,
+        "sha256": "ff70fe151946c6062264e7d88ba98fd35439184e469c9b3bf384e6bcc84f5d28",
+        "md5": "93628eb64cf3a68276d53f7634ca797b",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "paraguay",
+        "url": "https://download.geofabrik.de/south-america/paraguay-261002.osm.pbf",
+        "bytes": 154403812,
+        "sha256": "c3e0ee74db127375ffa3c503ddadc57ae2d737d069ca208ffaf356a5350b7b77",
+        "md5": "6a23ed5b33540530d63bf987eff129fb",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "peru",
+        "url": "https://download.geofabrik.de/south-america/peru-261002.osm.pbf",
+        "bytes": 256352838,
+        "sha256": "e06e4ad2dd9d8f7391e4d6fdc4a917a72dad58e3c65485860276a843aa424a78",
+        "md5": "6eef62f569ebf71618621563be2a6ee5",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "uruguay",
+        "url": "https://download.geofabrik.de/south-america/uruguay-261002.osm.pbf",
+        "bytes": 56110495,
+        "sha256": "234f48d38f53eb45bbd22544ea505994d4b40a2be4117e9318f1bae4aa6f32ee",
+        "md5": "77fa9443a070a77fee69bcaebcfdf811",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "venezuela",
+        "url": "https://download.geofabrik.de/south-america/venezuela-261002.osm.pbf",
+        "bytes": 127138618,
+        "sha256": "567fafe9db8b3b87fbd0bf92cee5a3e01d50a33086f989024bc61546b63fed15",
+        "md5": "803e58a747d7bdd04a1f43e8b854b98a",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      }
+    ],
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "composition": {
+      "version": "pfad-sa-feasibility/1",
+      "tool": "osmium-tool/1.19.1",
+      "libosmium": "2.23.1",
+      "operation": "merge-same-snapshot",
+      "deduplication": "OSM object type, ID and version",
+      "clipping": false,
+      "generator": "pfad-sa-feasibility/1"
+    }
+  },
+  "projection": {
+    "centre": [
+      -60,
+      -20
+    ],
+    "referenceLatitude": -20,
+    "scaleMetres": 6000000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  },
+  "coverage": "Nine complete country extracts: Argentina, Bolivia, Chile, Colombia, Ecuador, Paraguay, Peru, Uruguay and Venezuela; Brazil, Guyana and Suriname excluded. No clipping, tracks or ferry edges."
+}

@@ -1,0 +1,21 @@
+{
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-10-02T20:21:34Z",
+    "url": "https://download.geofabrik.de/south-america-261002.osm.pbf",
+    "bytes": 4132357038,
+    "sha256": "eb9dd33d7abf9bce3474d3106e6bab77c32bb3b138535901747ddf54d6f7f9c3",
+    "md5": "d0d9d9f0a412ad88918d67622d51d409",
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "compiler": "pfad-study-streaming-compiler/1",
+  "profile": "road-connectivity-distance-v1",
+  "completedEdgeChunks": 68,
+  "completedEdges": 13600000,
+  "routingNodesLowerBound": 11344591,
+  "nodeLimit": 11000000,
+  "lastChunk": "edges-067-41b4ededc09a.bin.gz.bin",
+  "note": "Partial compilation lower bounds, not complete graph totals."
+}
