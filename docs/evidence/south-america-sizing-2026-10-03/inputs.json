@@ -1,0 +1,90 @@
+[
+  {
+    "country": "argentina",
+    "url": "https://download.geofabrik.de/south-america/argentina-261002.osm.pbf",
+    "bytes": 432051789,
+    "sha256": "96ba468a4596baf04ae352d3c1c3543bb98bb6e3a189da7b7ca641a6dfc72cfd",
+    "md5": "311f4869301ae4e63d7108d4a445a1c9",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "bolivia",
+    "url": "https://download.geofabrik.de/south-america/bolivia-261002.osm.pbf",
+    "bytes": 173935866,
+    "sha256": "6aaf0e081c89b3771e6f07e8596a4ba33feee5f63f48ef89b72718bf643f472c",
+    "md5": "9eb042277aaec234dc2008e662f25452",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "chile",
+    "url": "https://download.geofabrik.de/south-america/chile-261002.osm.pbf",
+    "bytes": 348511618,
+    "sha256": "c28e4f66a90b595dacc85b4b6fa8e4e908bfca3c1965916aa7065d093fbc6e27",
+    "md5": "ba81a204f524866dffefe082e37455c3",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "colombia",
+    "url": "https://download.geofabrik.de/south-america/colombia-261002.osm.pbf",
+    "bytes": 331015529,
+    "sha256": "fd50154655ed6f68abac4c125d85de7aacb2733ec3aa3a12a4afe7c7a47cb6d0",
+    "md5": "de448917db681dcff549abbf0f62b585",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "ecuador",
+    "url": "https://download.geofabrik.de/south-america/ecuador-261002.osm.pbf",
+    "bytes": 125539598,
+    "sha256": "ff70fe151946c6062264e7d88ba98fd35439184e469c9b3bf384e6bcc84f5d28",
+    "md5": "93628eb64cf3a68276d53f7634ca797b",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "guyana",
+    "url": "https://download.geofabrik.de/south-america/guyana-261002.osm.pbf",
+    "bytes": 15554307,
+    "sha256": "f24c437e26c9d9067f030a5dab89b7c8218666fcc78b9929b028e218baa8d981",
+    "md5": "7b6ab58319398193a00bb63158cda0e1",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "paraguay",
+    "url": "https://download.geofabrik.de/south-america/paraguay-261002.osm.pbf",
+    "bytes": 154403812,
+    "sha256": "c3e0ee74db127375ffa3c503ddadc57ae2d737d069ca208ffaf356a5350b7b77",
+    "md5": "6a23ed5b33540530d63bf987eff129fb",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "peru",
+    "url": "https://download.geofabrik.de/south-america/peru-261002.osm.pbf",
+    "bytes": 256352838,
+    "sha256": "e06e4ad2dd9d8f7391e4d6fdc4a917a72dad58e3c65485860276a843aa424a78",
+    "md5": "6eef62f569ebf71618621563be2a6ee5",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "suriname",
+    "url": "https://download.geofabrik.de/south-america/suriname-261002.osm.pbf",
+    "bytes": 21390435,
+    "sha256": "ace5b6a03c3c31eb34b06c6bc59aa03daee4d518ceb5077bc711e265711de352",
+    "md5": "a0f1a72a06467412c1cdfe93e9bb1fc7",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "uruguay",
+    "url": "https://download.geofabrik.de/south-america/uruguay-261002.osm.pbf",
+    "bytes": 56110495,
+    "sha256": "234f48d38f53eb45bbd22544ea505994d4b40a2be4117e9318f1bae4aa6f32ee",
+    "md5": "77fa9443a070a77fee69bcaebcfdf811",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  },
+  {
+    "country": "venezuela",
+    "url": "https://download.geofabrik.de/south-america/venezuela-261002.osm.pbf",
+    "bytes": 127138618,
+    "sha256": "567fafe9db8b3b87fbd0bf92cee5a3e01d50a33086f989024bc61546b63fed15",
+    "md5": "803e58a747d7bdd04a1f43e8b854b98a",
+    "dataTimestamp": "2026-10-02T20:21:34Z"
+  }
+]

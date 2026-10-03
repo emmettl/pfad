@@ -32,6 +32,7 @@ coverage are retained in each immutable manifest.
 | `au` | Australia | 44.568 | 2 Oct 2026 | Australian Geofabrik extract; Tasmania and offshore road components remain separate |
 | `sea` | Southeast Asia | 116.507 | 2 Oct 2026 | Myanmar, Thailand, Cambodia, Laos, Peninsular Malaysia and Singapore |
 | `sa` | Southern Africa | 110.680 | 2 Oct 2026 | Eleven countries including Tanzania; complete merged extracts, ferry-only islands disconnected |
+| `sam` | South America | 143.124 | 2 Oct 2026 | Argentina, Bolivia, Chile, Colombia, Ecuador, Paraguay, Peru, Uruguay and Venezuela; complete extracts including offshore islands |
 
 Each study has a versioned ambient pool and independently pinned geographic
 references. Iceland and Luxembourg's selected lake source has no features;
@@ -402,3 +403,14 @@ ferry edges. The first selection requires the large-download acknowledgement.
 See [release evidence](evidence/southern-africa-release-2026-10-03/README.md) for
 source pins, cross-border audits, desktop replay and delivery checks. Physical
 phone support and enforced motorcar-profile feasibility remain unverified.
+
+## South America · 4 October 2026
+
+The nine-country study `sam-20261002-c47bad2cdf2e` opens with Buenos Aires–Santiago.
+It retains 7,972,087 routing nodes, 10,840,182 physical edges and 49,835,302
+drawing vertices in a 143.124 MB road download. All 37 authored places are
+mutually reachable; sixty ambient journeys and eight directed cross-country
+studies pass. Separate islands remain separate components. Brazil, Guyana and
+Suriname are excluded. A large-download acknowledgement is required.
+See [release evidence](evidence/south-america-release-2026-10-04/README.md).
+Physical-phone support and the newer enforced motorcar profile remain unvalidated.

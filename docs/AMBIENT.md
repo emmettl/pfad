@@ -201,3 +201,9 @@ across eleven countries including Tanzania. Its regional/interregional boundarie
 are 200/650 km with a 30 km minimum; acceptance and pacing use actual road
 distance. The sixty-journey audit accepts 60 of 62 attempts across all three
 bands. Ferry-only islands stay outside the ambient pool.
+
+South America uses `sam-places/1`, with 37 mutually reachable mainland places
+across the nine selected countries. Sixty real accepted journeys cover all three
+distance bands and the four exact-distance algorithms. Separate islands,
+including Easter Island, remain available as manual graph components. See the
+[South America release audit](evidence/south-america-release-2026-10-04/ambient-audit.json).

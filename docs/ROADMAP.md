@@ -397,3 +397,11 @@ directions; capital-route costs and complete desktop replay pass within unchange
 resource guards. The existing large-download and coarse-pointer policies apply.
 Physical-phone stability remains unverified.
 [Release evidence](evidence/southern-africa-release-2026-10-03/README.md).
+
+### South America regional release · 4 October 2026
+
+The author selected the nine countries with demonstrated road connections from
+the continental feasibility study. The `sam` catalogue entry retains complete
+extracts, audited places and journeys, independent context and existing resource
+guards. See [release evidence](evidence/south-america-release-2026-10-04/README.md).
+This does not close physical-device validation or enforced driving-profile work.
