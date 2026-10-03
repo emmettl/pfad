@@ -78,5 +78,10 @@
     "url": "https://motionstudies.app/pfad-data/geo-sea-20261003-36ee8b30792c/manifest.json",
     "bytes": 497,
     "sha256": "bdd702d9a1d8f5ff475190d0e484939abcc9e91288d59925f3fe3267d7323ef3"
+  },
+  "sa": {
+    "url": "https://motionstudies.app/pfad-data/geo-sa-20261003-2544fab79734/manifest.json",
+    "bytes": 495,
+    "sha256": "2d0fc71cdb261cdce7924055bf705ddcae50fe7d4900339f5b95ce1f2c65d841"
   }
 }

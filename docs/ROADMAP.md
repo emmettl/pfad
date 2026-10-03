@@ -387,3 +387,13 @@ separate road regions. Existing resource guards and connectivity assumptions
 remain unchanged. Desktop and touch-WebKit validation cover curated endpoints,
 long-distance searches, shared links and ambient replay; physical-phone memory
 remains unverified. [Release evidence](evidence/australia-release-2026-10-03/README.md).
+
+### Southern Africa catalogue addition · 3 October 2026
+
+The validated ten-country baseline extends to Tanzania: one complete eleven-country
+study with a 110.7 MB road download, 44 mainland places and joined Natural Earth
+coastline/lake context. All authored places are mutually reachable in both
+directions; capital-route costs and complete desktop replay pass within unchanged
+resource guards. The existing large-download and coarse-pointer policies apply.
+Physical-phone stability remains unverified.
+[Release evidence](evidence/southern-africa-release-2026-10-03/README.md).

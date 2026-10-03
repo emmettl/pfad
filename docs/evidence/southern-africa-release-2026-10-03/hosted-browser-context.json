@@ -1,0 +1,99 @@
+[
+  {
+    "country": "sa",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4228/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Cape Town→Dar es Salaam",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "14217306"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Cape Town→Dar es Salaam",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "14803106"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Cape Town→Dar es Salaam",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "11643180"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Pretoria→Windhoek1356.4 km (1221 min)A*",
+        "events": "4745197"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Bloemfontein→Maseru135.9 km (113 min)Bidirectional A*",
+        "events": "186355"
+      },
+      {
+        "algorithm": "greedy-best-first/1",
+        "caption": "Benguela→Luanda596.6 km (887 min)Shortest route not guaranteedGreedy best-first",
+        "events": "12260"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Kasane→Livingstone82.7 km (76 min)Dijkstra",
+        "events": "20805"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Mbombela · Blantyre · RustenburgThree-source Dijkstra",
+        "events": "28843281"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Blantyre→Beira588.8 km (723 min)Bidirectional Dijkstra",
+        "events": "1662456"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Johannesburg→Mbombela341.2 km (261 min)A*",
+        "events": "2161851"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Durban→Manzini476.6 km (601 min)Bidirectional A*",
+        "events": "1397965"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "bidirectional-astar/1",
+      "recoveredStops": 0,
+      "after": "greedy-best-first/1",
+      "caption": "Kasane→KimberleyShortest route not guaranteedGreedy best-first"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

@@ -1,6 +1,6 @@
 import { preview } from 'vite'
 import { webkit, expect } from '@playwright/test'
-import { writeFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 const [country='uk',...urls]=process.argv.slice(2)
 const names={uk:'United Kingdom',is:'Iceland',nl:'Netherlands',nz:'New Zealand',lu:'Luxembourg',ie:'Ireland',sc:'Scandinavia',pl:'Poland',it:'Italy',es:'Spain',fr:'France',de:'Germany',at:'Austria',au:'Australia',sa:'Southern Africa'}
 if(!names[country])throw Error('Unknown country')
@@ -12,6 +12,14 @@ try {
  for(const url of urls.length?urls:[`http://127.0.0.1:${port}/`]) {
   const page=await browser.newPage({viewport:{width:402,height:874},hasTouch:true,isMobile:true,deviceScaleFactor:3}),errors=[],analyticsErrors=[]
   activePage=page;activeErrors=errors
+  for(const directory of ['.cache/countries/sa-20261002-a9718f49cf14','.cache/geography/geo-sa-20261003-2544fab79734']){
+   const base=directory.split('/').at(-1)
+   await page.route('https://motionstudies.app/pfad-data/'+base+'/**',async route=>{
+    const name=new URL(route.request().url()).pathname.split('/').at(-1)
+    const body=await readFile(directory+'/'+name)
+    await route.fulfill({body,contentType:name.endsWith('.json')?'application/json':'application/octet-stream',headers:{'Access-Control-Allow-Origin':'*','Cache-Control':'public, max-age=31536000, immutable'}})
+   })
+  }
   page.on('pageerror',e=>(e.message.includes('cloudflareinsights.com/cdn-cgi/rum')?analyticsErrors:errors).push(e.message))
   await page.goto(url,{waitUntil:'domcontentloaded'})
   await page.locator('.study[data-state="ready"]').waitFor({timeout:90000})
@@ -103,7 +111,7 @@ try {
   reports.push({country,note:'Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.',url,runs,journeys,boundedStops,automaticTransition,outlinesToggle:true,sharedStudyRestored:true,errors,analyticsErrors,swissRestored:true});console.log(JSON.stringify(reports.at(-1)))
   await page.close()
  }
- await writeFile(`.cache/${country}-context-report.json`,JSON.stringify(reports,null,2)+'\n')
+ await writeFile(`.cache/${country}-local-context-report.json`,JSON.stringify(reports,null,2)+'\n')
 }catch(error){
  if(activePage&&!activePage.isClosed()){await writeFile(`.cache/${country}-context-failure.json`,JSON.stringify({message:String(error),errors:activeErrors,state:await activePage.locator('body').ariaSnapshot()},null,2)+'\n');await activePage.screenshot({path:`.cache/${country}-context-failure.png`})}
  throw error

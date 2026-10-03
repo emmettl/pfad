@@ -195,3 +195,9 @@ Peninsular Malaysia and Singapore. Its distance bands are 30–300 km, 300–1,0
 and 1,000 km or more. Actual route distance determines acceptance. Sixty seeded
 journeys passed with 63 attempts and covered every authored place; see the
 [regional ambient audit](evidence/southeast-asia-release-2026-10-03/ambient-audit.json).
+
+Southern Africa uses `sa-places/1`, with 44 mutually reachable mainland places
+across eleven countries including Tanzania. Its regional/interregional boundaries
+are 200/650 km with a 30 km minimum; acceptance and pacing use actual road
+distance. The sixty-journey audit accepts 60 of 62 attempts across all three
+bands. Ferry-only islands stay outside the ambient pool.

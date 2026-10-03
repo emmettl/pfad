@@ -1,0 +1,4 @@
+[
+  {"name":"Cape Town–Luanda","start":{"name":"Cape Town","lon":18.4241,"lat":-33.9249},"goal":{"name":"Luanda","lon":13.2344,"lat":-8.8383}},
+  {"name":"Cape Town–Lilongwe","start":{"name":"Cape Town","lon":18.4241,"lat":-33.9249},"goal":{"name":"Lilongwe","lon":33.7741,"lat":-13.9626}}
+]

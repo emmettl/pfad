@@ -78,3 +78,6 @@ that time; its older counts and algorithm sets are not current feature limits.
 
 - [Southeast Asia release](evidence/southeast-asia-release-2026-10-03/README.md): six-country regional study, 116.5 MB complete graph, joined outlines, 26-place ambient pool and verified immutable R2 delivery.
 - [Southeast Asia sizing](evidence/southeast-asia-sizing-2026-10-03/README.md): complete-graph counts, five cross-border shortest-distance checks and desktop replay measurements.
+
+- [Southern Africa release](evidence/southern-africa-release-2026-10-03/README.md): eleven-country union including Tanzania, 110.7 MB complete graph, 44 places, joined outlines and measured cross-border replay.
+- [Southern Africa ten-country baseline](evidence/southern-africa-sizing-2026-10-03/README.md): initial 80.3 MB sizing and connectivity comparison before Tanzania.

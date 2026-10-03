@@ -474,6 +474,36 @@
         108.7,
         29
       ]
+    },
+    {
+      "path": "src/map/data/sa-border.json",
+      "bytes": 74721,
+      "sha256": "2223616a1409d0b0abf3e6e61dc128aab05921e1ab0e1984916293e23ce85df4",
+      "source": "Natural Earth 1:10m ne_10m_admin_0_countries",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 300,
+      "preparation": "python3 scripts/data/prepare-country-geography.py sa",
+      "bounds": [
+        10,
+        -36,
+        41,
+        2
+      ]
+    },
+    {
+      "path": "src/map/data/sa-lakes.json",
+      "bytes": 100168,
+      "sha256": "e4d99bce5ff91e580ed178dc37f96c80014f3cb5e7c9d2b1c2bf7cb1505799a8",
+      "source": "Natural Earth 1:10m ne_10m_lakes",
+      "attribution": "Natural Earth \u00b7 public domain",
+      "simplificationToleranceMetres": 60,
+      "preparation": "python3 scripts/data/prepare-country-geography.py sa",
+      "bounds": [
+        10,
+        -36,
+        41,
+        2
+      ]
     }
   ],
   "publishedCommit": "5910d68b2eb4c78376007b42639d1c4a17986b7b",

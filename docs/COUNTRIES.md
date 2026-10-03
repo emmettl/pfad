@@ -2,8 +2,8 @@
 
 Switzerland remains bundled and selected by default. The other selected immutable
 releases are hosted independently on Cloudflare R2. The UK, Scandinavia, Poland,
-Italy, Spain, France, Germany and Australia require a large-download acknowledgement on
-first use, remembered per country/browser/site;
+Italy, Spain, France, Germany, Australia, Southeast Asia and Southern Africa require a
+large-download acknowledgement on first use, remembered per country/browser/site;
 the smaller releases open on selection.
 No country source is acquired by ordinary builds, CI or browser page requests.
 
@@ -31,6 +31,7 @@ coverage are retained in each immutable manifest.
 | `at` | Austria | 23.349 | 30 Sep 2026 | Austrian Geofabrik extract |
 | `au` | Australia | 44.568 | 2 Oct 2026 | Australian Geofabrik extract; Tasmania and offshore road components remain separate |
 | `sea` | Southeast Asia | 116.507 | 2 Oct 2026 | Myanmar, Thailand, Cambodia, Laos, Peninsular Malaysia and Singapore |
+| `sa` | Southern Africa | 110.680 | 2 Oct 2026 | Eleven countries including Tanzania; complete merged extracts, ferry-only islands disconnected |
 
 Each study has a versioned ambient pool and independently pinned geographic
 references. Iceland and Luxembourg's selected lake source has no features;
@@ -387,3 +388,17 @@ by the same bounded, immutable data-Worker key rules as country IDs.
 [Release evidence](evidence/southeast-asia-release-2026-10-03/README.md) retains
 public delivery checksums, ambient audit and browser checks. Music uses the
 existing original Driftbox ambient repertoire.
+
+## Southern Africa · 3 October 2026
+
+The eleven-country study adds Tanzania to the validated ten-country baseline.
+Its 110.7 MB complete graph has 6.25 million nodes, 8.26 million physical edges
+and 39.60 million drawing vertices, within unchanged capacity guards. Cape Town–Dar
+es Salaam opens the study; 44 mainland places supply manual and ambient journeys.
+Whole same-timestamp extracts are merged without clipping, with shared OSM
+objects deduplicated before compilation. Geographic context joins the eleven
+countries and retains major lakes; islands remain in the graph without invented
+ferry edges. The first selection requires the large-download acknowledgement.
+See [release evidence](evidence/southern-africa-release-2026-10-03/README.md) for
+source pins, cross-border audits, desktop replay and delivery checks. Physical
+phone support and enforced motorcar-profile feasibility remain unverified.
