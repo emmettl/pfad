@@ -1,0 +1,99 @@
+[
+  {
+    "country": "sa",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4226/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Cape Town→Dar es Salaam",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "14217306"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Cape Town→Dar es Salaam",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "14803106"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Cape Town→Dar es Salaam",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "11643180"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Maseru→Mbabane608.1 km (740 min)A*",
+        "events": "903442"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Francistown→Livingstone500.4 km (476 min)Bidirectional A*",
+        "events": "167677"
+      },
+      {
+        "algorithm": "greedy-best-first/1",
+        "caption": "Johannesburg→Mbombela398.0 km (514 min)Shortest route not guaranteedGreedy best-first",
+        "events": "6839"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Mbombela→Manzini183.0 km (194 min)Dijkstra",
+        "events": "1016226"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Mbeya · Gaborone · SwakopmundThree-source Dijkstra",
+        "events": "28843415"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Kimberley→Upington393.6 km (354 min)Bidirectional Dijkstra",
+        "events": "432001"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Maseru→Kimberley293.5 km (339 min)A*",
+        "events": "284275"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Pretoria→Maputo513.7 km (417 min)Bidirectional A*",
+        "events": "3317281"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "bidirectional-astar/1",
+      "recoveredStops": 0,
+      "after": "greedy-best-first/1",
+      "caption": "Johannesburg→PretoriaShortest route not guaranteedGreedy best-first"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

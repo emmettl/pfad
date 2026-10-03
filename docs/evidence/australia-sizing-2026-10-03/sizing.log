@@ -1,0 +1,5 @@
+88.34 extracted 1877941 ways 15070338 road shape nodes
+110.6 graph 2819540 nodes 3498445 edges 57895 restriction relations
+113.05 graph {'json_bytes': 233176746, 'sha256': '7cf0ec00241d288fa945505c2dedfdd87fa29cdce901e50d6d987ddd539df9d1'}
+125.51 geometry-5m {'json_bytes': 50408346, 'sha256': '1bdec60c89627e9dfb653dac47e81f93265d3c9ae6e6a104aaa58d892baeb547'}
+125.51 complete .cache/countries-sizing/au-20261002/report.json

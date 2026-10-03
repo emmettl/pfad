@@ -38,7 +38,10 @@ if not target.exists():
         options = ['--generator', composition['generator'], '--output-header', 'osmosis_replication_timestamp=' + source['dataTimestamp'], '--no-progress']
         result = subprocess.run([args.osmium, 'merge', *map(str, paths), *options, '-o', str(merged)], capture_output=True, text=True, check=True)
         assert not result.stderr.strip(), 'Merge reported inconsistent object versions: ' + result.stderr
-        subprocess.run([args.osmium, 'extract', str(merged), '--bbox=' + ','.join(map(str, composition['bounds'])), '--strategy=complete_ways', *options, '-o', str(output)], check=True)
+        if composition.get('clipping') is False:
+            merged.replace(output)
+        else:
+            subprocess.run([args.osmium, 'extract', str(merged), '--bbox=' + ','.join(map(str, composition['bounds'])), '--strategy=complete_ways', *options, '-o', str(output)], check=True)
         subprocess.run([args.osmium, 'check-refs', str(output)], check=True)
         with output.open('rb') as handle:
             assert hashlib.file_digest(handle, 'sha256').hexdigest() == source['sha256'], 'Reproduced source differs from pinned release'

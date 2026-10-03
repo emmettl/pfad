@@ -2,7 +2,7 @@ import { preview } from 'vite'
 import { webkit, expect } from '@playwright/test'
 import { writeFile } from 'node:fs/promises'
 const [country='uk',...urls]=process.argv.slice(2)
-const names={uk:'United Kingdom',is:'Iceland',nl:'Netherlands',nz:'New Zealand',lu:'Luxembourg',ie:'Ireland',sc:'Scandinavia',pl:'Poland',it:'Italy',es:'Spain',fr:'France',de:'Germany',at:'Austria'}
+const names={uk:'United Kingdom',is:'Iceland',nl:'Netherlands',nz:'New Zealand',lu:'Luxembourg',ie:'Ireland',sc:'Scandinavia',pl:'Poland',it:'Italy',es:'Spain',fr:'France',de:'Germany',at:'Austria',au:'Australia',sa:'Southern Africa',sam:'South America'}
 if(!names[country])throw Error('Unknown country')
 const port=Number(process.env.PFAD_PROOF_PORT??4197)
 const server=urls.length?null:await preview({build:{outDir:process.env.PFAD_PROOF_DIST??'dist'},preview:{host:'127.0.0.1',port,strictPort:true}})
@@ -22,13 +22,16 @@ try {
   if(await page.locator('.study').getAttribute('data-state')==='error')throw Error(await page.locator('.study').textContent())
   const runs=[]
   for(const mode of ['dijkstra','bidirectional','astar']) {
-   if(mode!=='dijkstra')await page.getByRole('combobox',{name:'Search algorithm'}).selectOption(mode)
+   if(mode!=='dijkstra'){
+    await page.getByRole('combobox',{name:'Search algorithm'}).click()
+    await page.getByRole('option',{name:mode==='astar'?'A*':'Bidirectional Dijkstra',exact:true}).click()
+   }
    await expect(page.locator('.study')).toHaveAttribute('data-algorithm',mode==='bidirectional'?'bidirectional-dijkstra/1':mode+'/1',{timeout:60000})
    await expect(page.getByRole('button',{name:'Search',exact:true})).toBeEnabled({timeout:60000})
    await page.getByRole('slider',{name:'Search replay'}).fill('30')
    await expect(page.locator('.route-caption em')).toBeVisible()
    await page.getByRole('slider',{name:'Search replay'}).fill('15')
-   if(['uk','sc','pl','it','es','fr','de'].includes(country))await expect(page.locator('canvas')).toHaveAttribute('data-max-fps','30')
+   if(['uk','sc','pl','it','es','fr','de','au','sa'].includes(country))await expect(page.locator('canvas')).toHaveAttribute('data-max-fps','30')
    const renderedEvent=(await page.getByRole('slider',{name:'Search replay'}).getAttribute('aria-valuetext')).match(/; (\d+) recorded events/)[1]
    await expect(page.locator('canvas')).toHaveAttribute('data-event',renderedEvent)
    runs.push({mode,caption:await page.locator('.route-caption').textContent(),canvas:await page.locator('canvas').evaluate(c=>({width:c.width,height:c.height,cssWidth:c.clientWidth,cssHeight:c.clientHeight,maxFps:c.dataset.maxFps,event:c.dataset.event}))})

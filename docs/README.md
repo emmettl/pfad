@@ -1,6 +1,6 @@
 # PFAD documentation
 
-Current state · 1 October 2026
+Current state · 4 October 2026
 
 PFAD is live on [Motion Studies](https://motionstudies.app/pfad/) and
 [GitHub Pages](https://emmettl.github.io/pfad/), using the same checked application
@@ -10,6 +10,8 @@ Iceland, New Zealand, Luxembourg, Netherlands, whole-island Ireland and Scandina
 Corsica, and Germany. [COUNTRIES.md](COUNTRIES.md) records coverage,
 downloads and immutable releases. Austria joins the catalogue with a complete
 national graph; its [release evidence](evidence/austria-release-2026-10-02/README.md) records validation.
+Australia adds a 44.6 MB complete graph with mainland/Tasmania ambient regions;
+see [Australia release evidence](evidence/australia-release-2026-10-03/README.md).
 
 Manual journeys offer Dijkstra, bidirectional Dijkstra, A*, bidirectional A*,
 greedy best-first, depth-first, breadth-first and a manual
@@ -71,3 +73,15 @@ that time; its older counts and algorithm sets are not current feature limits.
 - [US recording memory and search setup](evidence/recording-setup-2026-10-02/README.md): retained buffers, lossless compression tradeoffs and measured cold/repeated search phases.
 - [Recording blocks and exact endpoint index prototypes](evidence/recording-prototype-2026-10-02/README.md): storage recovery, counter parity and desktop query/memory tradeoffs.
 - [Exact trace archiving and streaming exports](evidence/trace-archive-2026-10-02/README.md): bounded recording storage, exact replay counters, exports and graphics recovery.
+
+- [Australia sizing and catalogue release](evidence/australia-release-2026-10-03/README.md): pinned 44.6 MB graph, 39-place ambient pool, independent outlines and normal-app validation.
+
+- [Southeast Asia release](evidence/southeast-asia-release-2026-10-03/README.md): six-country regional study, 116.5 MB complete graph, joined outlines, 26-place ambient pool and verified immutable R2 delivery.
+- [Southeast Asia sizing](evidence/southeast-asia-sizing-2026-10-03/README.md): complete-graph counts, five cross-border shortest-distance checks and desktop replay measurements.
+
+- [Southern Africa release](evidence/southern-africa-release-2026-10-03/README.md): eleven-country union including Tanzania, 110.7 MB complete graph, 44 places, joined outlines and measured cross-border replay.
+- [Southern Africa ten-country baseline](evidence/southern-africa-sizing-2026-10-03/README.md): initial 80.3 MB sizing and connectivity comparison before Tanzania.
+
+[South America release](evidence/south-america-release-2026-10-04/README.md)
+adds nine connected mainland countries with complete source extracts, 37 audited
+places, ambient journeys and independent coastal/lake context.

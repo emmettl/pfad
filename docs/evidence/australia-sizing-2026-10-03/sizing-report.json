@@ -1,0 +1,57 @@
+{
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-10-02T20:21:34Z",
+    "data_timestamp": "2026-10-02T20:21:34Z",
+    "url": "https://download.geofabrik.de/australia-oceania/australia-261002.osm.pbf",
+    "sha256": "80a111d6c1c2e93513313034e24c3e07789a13ebac5f76bea05c9f49d598906b",
+    "md5": "0046aca9f57ddd52b60823beadd6db0d",
+    "bytes": 966233948,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "scope": "Country extract, selected motor-road classes including residential/service; basic access filter. Not a validated routing profile. No ferries. Turn/conditional/barrier tags retained, not enforced. Original OSM way endpoints retained.",
+  "road_classes": {
+    "residential": 610989,
+    "tertiary": 171478,
+    "secondary": 117357,
+    "primary": 86140,
+    "service": 565477,
+    "unclassified": 200283,
+    "tertiary_link": 4677,
+    "trunk": 67694,
+    "primary_link": 7598,
+    "motorway_link": 14072,
+    "living_street": 3993,
+    "motorway": 14096,
+    "secondary_link": 5834,
+    "trunk_link": 8236,
+    "road": 17
+  },
+  "excluded": {
+    "no": 11595,
+    "private": 158435,
+    "agricultural": 29,
+    "forestry": 23
+  },
+  "road_shape_nodes": 15070338,
+  "graph_nodes": 2819540,
+  "physical_edges": 3498445,
+  "directed_arcs": 6153801,
+  "profiles": 21254,
+  "restrictions": 57895,
+  "controls": 200799,
+  "graph": {
+    "json_bytes": 233176746,
+    "sha256": "7cf0ec00241d288fa945505c2dedfdd87fa29cdce901e50d6d987ddd539df9d1"
+  },
+  "variants": {
+    "5": {
+      "json_bytes": 50408346,
+      "sha256": "1bdec60c89627e9dfb653dac47e81f93265d3c9ae6e6a104aaa58d892baeb547",
+      "interior_vertices": 3304307
+    }
+  },
+  "elapsed_seconds": 125.51266404194757
+}

@@ -1,0 +1,27 @@
+{
+  "id": "au",
+  "name": "Australia",
+  "datasetPrefix": "au-20261002",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-10-02T20:21:34Z",
+    "data_timestamp": "2026-10-02T20:21:34Z",
+    "url": "https://download.geofabrik.de/australia-oceania/australia-261002.osm.pbf",
+    "sha256": "80a111d6c1c2e93513313034e24c3e07789a13ebac5f76bea05c9f49d598906b",
+    "md5": "0046aca9f57ddd52b60823beadd6db0d",
+    "bytes": 966233948,
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": {
+    "centre": [
+      134,
+      -27
+    ],
+    "referenceLatitude": -27,
+    "scaleMetres": 6500000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  }
+}

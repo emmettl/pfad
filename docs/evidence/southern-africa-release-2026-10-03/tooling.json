@@ -1,0 +1,14 @@
+{
+  "baseCommit": "5b7e8247d2c2321c504793391091be0e62e6325b",
+  "sha256": {
+    "scripts/data/build-streamed-study.py": "e953dd2393ef9ba41f0d6edc83cc34300a7e64a37991a73f3aa854e80bb7ddfc",
+    "scripts/data/size-proof.py": "aa704b7f0814c7fad457d8c9e615cabb988eb852d80fc142bdf6956e71a0152b",
+    "scripts/data/prepare-composite-source.py": "0a9861b98dc425f8e25a4c0069a53cf4e01bed73aaecc6fd5b27af426606e90b",
+    "src/search/engine.ts": "62e97b4b0d3b2e8f7567390656dc6c95f79cda87ba90e11879699421d06e9863",
+    "src/search/astar.ts": "68dfa299877e5609bf65ed09ddb19a015fad5fcdbcafc4fee63a96b27e4c7e34",
+    "src/search/bidirectional.ts": "6d4cf278305c993ad351bd4d3bac7b5be5058812416da40e3ddcab1d844744bb",
+    "src/search/search.worker.ts": "43dd1ae7c5d02615eb9e96806362c06d7cbaa00ad9c8b8883a49395c28904295",
+    "src/map/RoadScene.ts": "fc57aa2f7703349e54982913b7dce983cf927a01bb2a28cca49453be343cdf7b",
+    "src/map/routeReveal.ts": "812cd4b9c1d230a4152658758c5cf5c73f9b4ede052e3dc9177de08cfa3b64fc"
+  }
+}

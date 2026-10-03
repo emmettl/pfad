@@ -1,0 +1,10 @@
+43.48 survey 1000000 selected ways 10339560 shape nodes
+82.47 survey 2000000 selected ways 25547074 shape nodes
+117.45 survey 3000000 selected ways 39674182 shape nodes
+151.33 survey 4000000 selected ways 50852743 shape nodes
+168.89 survey complete 4560746 ways 54318849 shape nodes
+260.34 packaged 1000000 ways 3424846 edges 3081105 nodes
+382.57 packaged 2000000 ways 6128802 edges 5065811 nodes
+495.9 packaged 3000000 ways 8195697 edges 6463229 nodes
+589.54 packaged 4000000 ways 9875485 edges 7488311 nodes
+708.09 complete .cache/south-america-nine/packaged/sa-20261002-c47bad2cdf2e/manifest.json {'nodes': 7972087, 'edges': 10840182, 'directedArcs': 19985956, 'vertices': 49835302} 143123558

@@ -1,0 +1,15 @@
+
+> pfad@0.0.0 test:browser
+> playwright test e2e/countries.spec.ts e2e/geography.spec.ts --project=chromium --workers=1
+
+
+Running 3 tests using 1 worker
+
+(node:7991) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/3] [chromium] › e2e/countries.spec.ts:4:1 › country downloads are opt-in, pinned, and switching back restores the bundled Swiss study
+[2/3] [chromium] › e2e/geography.spec.ts:5:3 › desktop outline controls › verified outlines can be toggled while roads are still downloading
+[3/3] [chromium] › e2e/geography.spec.ts:28:1 › failed external outlines leave genuine road searches available and can be retried
+  3 passed (8.6s)

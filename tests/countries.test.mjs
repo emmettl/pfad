@@ -57,13 +57,13 @@ test('data Worker handles conditional reads and byte ranges without caching part
 
 test('additional country manifests retain selected identities and verified layout', async () => {
   for (const country of COUNTRIES.filter(c => !['ch', 'uk'].includes(c.id))) {
-    const manifest = JSON.parse(await readFile(country.id === 'at' ? 'docs/evidence/austria-release-2026-10-02/manifest.json' : ['pl', 'it', 'es', 'fr', 'de'].includes(country.id) ? `docs/evidence/europe-five-2026-10-01/${country.id}/manifest.json` : country.id === 'sc' ? 'docs/evidence/scandinavia-release-2026-10-01/manifest.json' : country.id === 'ie' ? 'docs/evidence/ireland-release-2026-10-01/manifest.json' : `docs/evidence/countries-2026-10-01/${country.id}/manifest.json`))
+    const manifest = JSON.parse(await readFile(country.id === 'sam' ? 'docs/evidence/south-america-release-2026-10-04/manifest.json' : country.id === 'sa' ? 'docs/evidence/southern-africa-release-2026-10-03/manifest.json' : country.id === 'sea' ? 'docs/evidence/southeast-asia-sizing-2026-10-03/manifest.json' : country.id === 'au' ? 'docs/evidence/australia-sizing-2026-10-03/manifest.json' : country.id === 'at' ? 'docs/evidence/austria-release-2026-10-02/manifest.json' : ['pl', 'it', 'es', 'fr', 'de'].includes(country.id) ? `docs/evidence/europe-five-2026-10-01/${country.id}/manifest.json` : country.id === 'sc' ? 'docs/evidence/scandinavia-release-2026-10-01/manifest.json' : country.id === 'ie' ? 'docs/evidence/ireland-release-2026-10-01/manifest.json' : `docs/evidence/countries-2026-10-01/${country.id}/manifest.json`))
     validateManifest(manifest)
     assert.equal(manifest.identity, country.identity)
     assert.equal(createHash('sha256').update(manifestIdentityPayload(manifest)).digest('hex'), country.identity)
     assert.ok(country.outlines && country.ambient.places.length >= 10)
-    if (country.id === 'sc') {
-      const config = JSON.parse(await readFile('data/countries/sc.json'))
+    if (['sc', 'sa', 'sam'].includes(country.id)) {
+      const config = JSON.parse(await readFile(`data/countries/${country.id}.json`))
       assert.deepEqual(manifest.source.inputs, config.source.inputs)
       assert.deepEqual(manifest.source.composition, config.source.composition)
       assert.equal(manifest.source.sha256, config.source.sha256)

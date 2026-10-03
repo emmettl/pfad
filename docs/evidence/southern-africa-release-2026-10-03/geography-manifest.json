@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "sa",
+  "border": {
+    "path": "border-2223616a1409.json",
+    "bytes": 74721,
+    "sha256": "2223616a1409d0b0abf3e6e61dc128aab05921e1ab0e1984916293e23ce85df4"
+  },
+  "lakes": {
+    "path": "lakes-e4d99bce5ff9.json",
+    "bytes": 100168,
+    "sha256": "e4d99bce5ff91e580ed178dc37f96c80014f3cb5e7c9d2b1c2bf7cb1505799a8"
+  },
+  "id": "geo-sa-20261003-2544fab79734",
+  "identity": "2544fab79734bd1803f707fd26acae2c385b0ba660b4a02a6ae44798f0fdf428"
+}

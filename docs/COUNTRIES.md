@@ -2,8 +2,8 @@
 
 Switzerland remains bundled and selected by default. The other selected immutable
 releases are hosted independently on Cloudflare R2. The UK, Scandinavia, Poland,
-Italy, Spain, France and Germany require a large-download acknowledgement on
-first use, remembered per country/browser/site;
+Italy, Spain, France, Germany, Australia, Southeast Asia and Southern Africa require a
+large-download acknowledgement on first use, remembered per country/browser/site;
 the smaller releases open on selection.
 No country source is acquired by ordinary builds, CI or browser page requests.
 
@@ -29,6 +29,10 @@ coverage are retained in each immutable manifest.
 | `fr` | France | 151.882 | 30 Sep 2026 | Metropolitan France including Corsica |
 | `de` | Germany | 140.876 | 29 Sep 2026 | German Geofabrik extract |
 | `at` | Austria | 23.349 | 30 Sep 2026 | Austrian Geofabrik extract |
+| `au` | Australia | 44.568 | 2 Oct 2026 | Australian Geofabrik extract; Tasmania and offshore road components remain separate |
+| `sea` | Southeast Asia | 116.507 | 2 Oct 2026 | Myanmar, Thailand, Cambodia, Laos, Peninsular Malaysia and Singapore |
+| `sa` | Southern Africa | 110.680 | 2 Oct 2026 | Eleven countries including Tanzania; complete merged extracts, ferry-only islands disconnected |
+| `sam` | South America | 143.124 | 2 Oct 2026 | Argentina, Bolivia, Chile, Colombia, Ecuador, Paraguay, Peru, Uruguay and Venezuela; complete extracts including offshore islands |
 
 Each study has a versioned ambient pool and independently pinned geographic
 references. Iceland and Luxembourg's selected lake source has no features;
@@ -340,3 +344,73 @@ pinned Natural Earth snapshot. Outlines stay outside the application bundle.
 See [Austria release evidence](evidence/austria-release-2026-10-02/README.md)
 for route, source, drawing and browser validation. Physical-phone stability
 remains unverified.
+
+## Australia catalogue addition · 3 October 2026
+
+Australia selects `au-20261002-72975ec9fdfa`: 44,568,336 road-download bytes,
+2,819,540 routing nodes, 3,498,445 physical edges and 13,605,504 drawing vertices.
+It retains the measured candidate identity and existing connectivity profile.
+Optional source evidence adds 17,656,782 bytes. The first selection asks for
+download acknowledgement because the complete graph needs substantial browser
+and graphics memory; physical-phone stability remains unverified.
+
+Perth–Sydney is the opening study. The `au-places/1` pool has 39 places covering
+all six states, the ACT and Northern Territory; mainland and Tasmanian journeys
+remain separate because ferries are excluded. All 1,241 same-region curated
+pairs passed directed reachability and reversal-stable snapping. Sixty real
+ambient journeys cover all places and distance bands.
+
+Independent outline release `geo-au-20261003-57a53084a64d` has 260,133 layer
+bytes, 96 coastline rings and 31 Natural Earth lake features, including salt
+lakes and unnamed features. These generalized references do not affect routing.
+See [release evidence](evidence/australia-release-2026-10-03/README.md) and the
+earlier [sizing experiment](evidence/australia-sizing-2026-10-03/README.md).
+
+
+## Southeast Asia release
+
+The selected regional release is `sea-20261002-eecf8c542fab`: 116,507,200 road
+bytes, 8,085,252 routing nodes and 9,827,240 physical edges. The five dated source
+extracts are merged by OSM identity before complete-way extraction; Malaysian
+Borneo and Brunei are excluded. The immutable source and graph identities remain
+those validated in [sizing evidence](evidence/southeast-asia-sizing-2026-10-03/README.md).
+
+The catalogue requires the existing large-download acknowledgement. Desktop
+process-tree measurements observed about 2.2 GB, excluding complete graphics
+memory; physical-phone stability remains unverified. A versioned 26-place ambient
+pool covers all six countries. Sixty seeded real journeys passed route adjacency,
+one-way direction, exact cost sums and distance-band acceptance checks.
+
+Independent Natural Earth references provide 70 joined exterior rings and six
+major lakes. The 117,562 reference-layer bytes are served through R2 with pinned
+manifest identity; they never enter the routing graph. Regional IDs are supported
+by the same bounded, immutable data-Worker key rules as country IDs.
+
+[Release evidence](evidence/southeast-asia-release-2026-10-03/README.md) retains
+public delivery checksums, ambient audit and browser checks. Music uses the
+existing original Driftbox ambient repertoire.
+
+## Southern Africa · 3 October 2026
+
+The eleven-country study adds Tanzania to the validated ten-country baseline.
+Its 110.7 MB complete graph has 6.25 million nodes, 8.26 million physical edges
+and 39.60 million drawing vertices, within unchanged capacity guards. Cape Town–Dar
+es Salaam opens the study; 44 mainland places supply manual and ambient journeys.
+Whole same-timestamp extracts are merged without clipping, with shared OSM
+objects deduplicated before compilation. Geographic context joins the eleven
+countries and retains major lakes; islands remain in the graph without invented
+ferry edges. The first selection requires the large-download acknowledgement.
+See [release evidence](evidence/southern-africa-release-2026-10-03/README.md) for
+source pins, cross-border audits, desktop replay and delivery checks. Physical
+phone support and enforced motorcar-profile feasibility remain unverified.
+
+## South America · 4 October 2026
+
+The nine-country study `sam-20261002-c47bad2cdf2e` opens with Buenos Aires–Santiago.
+It retains 7,972,087 routing nodes, 10,840,182 physical edges and 49,835,302
+drawing vertices in a 143.124 MB road download. All 37 authored places are
+mutually reachable; sixty ambient journeys and eight directed cross-country
+studies pass. Separate islands remain separate components. Brazil, Guyana and
+Suriname are excluded. A large-download acknowledgement is required.
+See [release evidence](evidence/south-america-release-2026-10-04/README.md).
+Physical-phone support and the newer enforced motorcar profile remain unvalidated.

@@ -1,0 +1,17 @@
+{
+  "scripts/data/build-streamed-study.py": "e953dd2393ef9ba41f0d6edc83cc34300a7e64a37991a73f3aa854e80bb7ddfc",
+  "scripts/data/size-proof.py": "0595535876b38b8653087caee8586542a1b72ff887375c613b15858505be593b",
+  "scripts/data/manifest-identity.mjs": "40e51809528c57a5cf4ccac80c278aae5586b96df7059ed560e127b38b82fb20",
+  "src/search/engine.ts": "62e97b4b0d3b2e8f7567390656dc6c95f79cda87ba90e11879699421d06e9863",
+  "src/search/astar.ts": "68dfa299877e5609bf65ed09ddb19a015fad5fcdbcafc4fee63a96b27e4c7e34",
+  "src/search/bidirectional.ts": "6d4cf278305c993ad351bd4d3bac7b5be5058812416da40e3ddcab1d844744bb",
+  "src/search/manifest.ts": "4f0e8e703d146c8574ba5ccb99be8794e02627a9a5d7be0082f4fc1cae950181",
+  ".cache/southern-africa/acquire.py": "fae1addda6e426b1252c2ef6cd0f5634c5e5825ee8245893289dd8138da9bd67",
+  ".cache/southern-africa/build.py": "6483617b6983c5c2b7d0752c84bf058a6f35306752589b2c77193b5f6b0be649",
+  ".cache/southern-africa/audit.mjs": "0ae059faedc82850980371c8de4943c132f7f301a59e09e2344484429215bae2",
+  ".cache/southern-africa/desktop-proof.mjs": "73a9c2e1ba937897392befce12cb02c85c6ca96495893d17a4e9a04a64440982",
+  "scripts/data/desktop-country-proof.mjs": "84bbef5890e45fc60904791ca69bea22685e4cde626cde43b88841318f558839",
+  "src/map/routeReveal.ts": "812cd4b9c1d230a4152658758c5cf5c73f9b4ede052e3dc9177de08cfa3b64fc",
+  "src/map/RoadScene.ts": "fc57aa2f7703349e54982913b7dce983cf927a01bb2a28cca49453be343cdf7b",
+  "src/search/search.worker.ts": "ce7a5e149aa5a054a91a81eaa230cdd598b5eea7759dc7ab992272f7da688f20"
+}

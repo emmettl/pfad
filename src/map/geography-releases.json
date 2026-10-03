@@ -68,5 +68,25 @@
     "url": "https://motionstudies.app/pfad-data/geo-at-20261002-41fbae937a33/manifest.json",
     "bytes": 493,
     "sha256": "884519ffdae60d929cfe8ee9c6ec95af2800b8e98fc8a6a7836ddf3e0d23c107"
+  },
+  "au": {
+    "url": "https://motionstudies.app/pfad-data/geo-au-20261003-57a53084a64d/manifest.json",
+    "bytes": 495,
+    "sha256": "415e0bdd53aa2f8c57886db92bde5442e0342f850bf9af4b2efe01be60e5fd1e"
+  },
+  "sea": {
+    "url": "https://motionstudies.app/pfad-data/geo-sea-20261003-36ee8b30792c/manifest.json",
+    "bytes": 497,
+    "sha256": "bdd702d9a1d8f5ff475190d0e484939abcc9e91288d59925f3fe3267d7323ef3"
+  },
+  "sa": {
+    "url": "https://motionstudies.app/pfad-data/geo-sa-20261003-2544fab79734/manifest.json",
+    "bytes": 495,
+    "sha256": "2d0fc71cdb261cdce7924055bf705ddcae50fe7d4900339f5b95ce1f2c65d841"
+  },
+  "sam": {
+    "url": "https://motionstudies.app/pfad-data/geo-sam-20261004-06b3347611f6/manifest.json",
+    "bytes": 497,
+    "sha256": "4311a33c52ca995dc4bfb26dd56203a77459c8c0b0bee66e5e0347e360ae7503"
   }
 }

@@ -1,0 +1,727 @@
+{
+  "dataset": "c47bad2cdf2e04b63ce35642c2c6bdb66c88ab82bcbfed4064cf92121998e140",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-10-02T20:21:34Z",
+    "url": "https://download.geofabrik.de/south-america.html",
+    "sha256": "754b54356eb53b755b449fe000c3fa4b5514c56fc8775b049e8d113853a75aaa",
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "inputs": [
+      {
+        "country": "argentina",
+        "url": "https://download.geofabrik.de/south-america/argentina-261002.osm.pbf",
+        "bytes": 432051789,
+        "sha256": "96ba468a4596baf04ae352d3c1c3543bb98bb6e3a189da7b7ca641a6dfc72cfd",
+        "md5": "311f4869301ae4e63d7108d4a445a1c9",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "bolivia",
+        "url": "https://download.geofabrik.de/south-america/bolivia-261002.osm.pbf",
+        "bytes": 173935866,
+        "sha256": "6aaf0e081c89b3771e6f07e8596a4ba33feee5f63f48ef89b72718bf643f472c",
+        "md5": "9eb042277aaec234dc2008e662f25452",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "chile",
+        "url": "https://download.geofabrik.de/south-america/chile-261002.osm.pbf",
+        "bytes": 348511618,
+        "sha256": "c28e4f66a90b595dacc85b4b6fa8e4e908bfca3c1965916aa7065d093fbc6e27",
+        "md5": "ba81a204f524866dffefe082e37455c3",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "colombia",
+        "url": "https://download.geofabrik.de/south-america/colombia-261002.osm.pbf",
+        "bytes": 331015529,
+        "sha256": "fd50154655ed6f68abac4c125d85de7aacb2733ec3aa3a12a4afe7c7a47cb6d0",
+        "md5": "de448917db681dcff549abbf0f62b585",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "ecuador",
+        "url": "https://download.geofabrik.de/south-america/ecuador-261002.osm.pbf",
+        "bytes": 125539598,
+        "sha256": "ff70fe151946c6062264e7d88ba98fd35439184e469c9b3bf384e6bcc84f5d28",
+        "md5": "93628eb64cf3a68276d53f7634ca797b",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "paraguay",
+        "url": "https://download.geofabrik.de/south-america/paraguay-261002.osm.pbf",
+        "bytes": 154403812,
+        "sha256": "c3e0ee74db127375ffa3c503ddadc57ae2d737d069ca208ffaf356a5350b7b77",
+        "md5": "6a23ed5b33540530d63bf987eff129fb",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "peru",
+        "url": "https://download.geofabrik.de/south-america/peru-261002.osm.pbf",
+        "bytes": 256352838,
+        "sha256": "e06e4ad2dd9d8f7391e4d6fdc4a917a72dad58e3c65485860276a843aa424a78",
+        "md5": "6eef62f569ebf71618621563be2a6ee5",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "uruguay",
+        "url": "https://download.geofabrik.de/south-america/uruguay-261002.osm.pbf",
+        "bytes": 56110495,
+        "sha256": "234f48d38f53eb45bbd22544ea505994d4b40a2be4117e9318f1bae4aa6f32ee",
+        "md5": "77fa9443a070a77fee69bcaebcfdf811",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "venezuela",
+        "url": "https://download.geofabrik.de/south-america/venezuela-261002.osm.pbf",
+        "bytes": 127138618,
+        "sha256": "567fafe9db8b3b87fbd0bf92cee5a3e01d50a33086f989024bc61546b63fed15",
+        "md5": "803e58a747d7bdd04a1f43e8b854b98a",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      }
+    ],
+    "composition": {
+      "version": "pfad-sa-feasibility/1",
+      "tool": "osmium-tool/1.19.1",
+      "libosmium": "2.23.1",
+      "operation": "merge-same-snapshot",
+      "deduplication": "OSM object type, ID and version",
+      "clipping": false,
+      "generator": "pfad-sa-feasibility/1"
+    }
+  },
+  "compiler": "pfad-study-streaming-compiler/1",
+  "profile": "road-connectivity-distance-v1",
+  "counts": {
+    "nodes": 7972087,
+    "edges": 10840182,
+    "directedArcs": 19985956,
+    "vertices": 49835302
+  },
+  "downloadBytes": 143123558,
+  "weakComponents": 16572,
+  "largestWeakComponentNodes": 7814203,
+  "largestWeakComponentFraction": 0.9801953992724867,
+  "physicalRoadKm": 2653049.97429,
+  "routes": [
+    {
+      "start": {
+        "country": "Argentina",
+        "name": "Buenos Aires",
+        "lon": -58.3816,
+        "lat": -34.6037
+      },
+      "goal": {
+        "country": "Bolivia",
+        "name": "La Paz",
+        "lon": -68.1193,
+        "lat": -16.4897
+      },
+      "snapping": {
+        "start": {
+          "country": "Argentina",
+          "name": "Buenos Aires",
+          "lon": -58.38153,
+          "lat": -34.60382,
+          "node": 7458,
+          "snapMetres": 14.80178030506611
+        },
+        "goal": {
+          "country": "Bolivia",
+          "name": "La Paz",
+          "lon": -68.11941,
+          "lat": -16.49036,
+          "node": 5330590,
+          "snapMetres": 74.32001178567032
+        },
+        "snapMs": 591.4399170000002,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Argentina",
+            "name": "Buenos Aires",
+            "lon": -58.3816,
+            "lat": -34.6037
+          },
+          "requestedGoal": {
+            "country": "Bolivia",
+            "name": "La Paz",
+            "lon": -68.1193,
+            "lat": -16.4897
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 2571245.8,
+          "routeEdges": 5417,
+          "events": 9113175,
+          "traceSha256": "232fe7f15e4e6a2c898a5b8274d8dc57e680b13d3cd3ecea089521ddb5e54e95",
+          "searchMs": 543.5267920000001,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 2571245.8,
+          "routeEdges": 5417,
+          "events": 15468241,
+          "traceSha256": "44d5b151f3a6e372545ade30511626cf42f2637bac879b1dd7a8ba77e330c41c",
+          "searchMs": 1067.923042,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 2571245.8,
+          "routeEdges": 5417,
+          "events": 18389409,
+          "traceSha256": "d2896413038d37e0efb853c30c285e8fd74f0aaaca291839cbcd798e84b954fc",
+          "searchMs": 851.2337499999994,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Argentina",
+        "name": "Buenos Aires",
+        "lon": -58.3816,
+        "lat": -34.6037
+      },
+      "goal": {
+        "country": "Chile",
+        "name": "Santiago",
+        "lon": -70.6693,
+        "lat": -33.4489
+      },
+      "snapping": {
+        "start": {
+          "country": "Argentina",
+          "name": "Buenos Aires",
+          "lon": -58.38153,
+          "lat": -34.60382,
+          "node": 7458,
+          "snapMetres": 14.80178030506611
+        },
+        "goal": {
+          "country": "Chile",
+          "name": "Santiago",
+          "lon": -70.66921,
+          "lat": -33.44904,
+          "node": 64913,
+          "snapMetres": 17.665363426152865
+        },
+        "snapMs": 77.55470799999966,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Argentina",
+            "name": "Buenos Aires",
+            "lon": -58.3816,
+            "lat": -34.6037
+          },
+          "requestedGoal": {
+            "country": "Chile",
+            "name": "Santiago",
+            "lon": -70.6693,
+            "lat": -33.4489
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 1363439.14,
+          "routeEdges": 3428,
+          "events": 6054363,
+          "traceSha256": "0fab0c9464056d81891b24ad04e091ea0ef16c38bc84e90d94ef51a003327943",
+          "searchMs": 324.3214590000007,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 1363439.14,
+          "routeEdges": 3428,
+          "events": 9285170,
+          "traceSha256": "6dbcda73c73c9a38427ff990f3ac60bf0987bd4711ffd2c3340debf8604c0fdf",
+          "searchMs": 682.9435830000002,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 1363439.14,
+          "routeEdges": 3428,
+          "events": 11054074,
+          "traceSha256": "cebf03b6da9a3997fa095cf12059a0233eba75bd1f8466063b1cada14cd5de95",
+          "searchMs": 523.0692499999996,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Argentina",
+        "name": "Buenos Aires",
+        "lon": -58.3816,
+        "lat": -34.6037
+      },
+      "goal": {
+        "country": "Colombia",
+        "name": "Bogotá",
+        "lon": -74.0721,
+        "lat": 4.711
+      },
+      "snapping": {
+        "start": {
+          "country": "Argentina",
+          "name": "Buenos Aires",
+          "lon": -58.38153,
+          "lat": -34.60382,
+          "node": 7458,
+          "snapMetres": 14.80178030506611
+        },
+        "goal": {
+          "country": "Colombia",
+          "name": "Bogotá",
+          "lon": -74.07219,
+          "lat": 4.71088,
+          "node": 5219386,
+          "snapMetres": 16.65899849255674
+        },
+        "snapMs": 90.21279200000026,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Argentina",
+            "name": "Buenos Aires",
+            "lon": -58.3816,
+            "lat": -34.6037
+          },
+          "requestedGoal": {
+            "country": "Colombia",
+            "name": "Bogotá",
+            "lon": -74.0721,
+            "lat": 4.711
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 6588245.23,
+          "routeEdges": 16923,
+          "events": 28117293,
+          "traceSha256": "22257e83a8e09ed6e89df072afe75e2e67e9aa8f9c8f1fcdf8d934f884e05f45",
+          "searchMs": 1591.1952920000003,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 6588245.23,
+          "routeEdges": 16923,
+          "events": 35792884,
+          "traceSha256": "50a18e4e790d2070ecec67523b9f4032ec35e9b6ea5d5fdbfb3ec04bafe23a25",
+          "searchMs": 2514.6815419999984,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 6588245.23,
+          "routeEdges": 16923,
+          "events": 29459997,
+          "traceSha256": "1569a44b24538ff1da121c3d531f3e48faa93a0822c64d8b7a1b5f9982d4e372",
+          "searchMs": 1320.6027909999993,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Argentina",
+        "name": "Buenos Aires",
+        "lon": -58.3816,
+        "lat": -34.6037
+      },
+      "goal": {
+        "country": "Ecuador",
+        "name": "Quito",
+        "lon": -78.4678,
+        "lat": -0.1807
+      },
+      "snapping": {
+        "start": {
+          "country": "Argentina",
+          "name": "Buenos Aires",
+          "lon": -58.38153,
+          "lat": -34.60382,
+          "node": 7458,
+          "snapMetres": 14.80178030506611
+        },
+        "goal": {
+          "country": "Ecuador",
+          "name": "Quito",
+          "lon": -78.46769,
+          "lat": -0.17857,
+          "node": 59230,
+          "snapMetres": 237.1611431751683
+        },
+        "snapMs": 68.18912499999897,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Argentina",
+            "name": "Buenos Aires",
+            "lon": -58.3816,
+            "lat": -34.6037
+          },
+          "requestedGoal": {
+            "country": "Ecuador",
+            "name": "Quito",
+            "lon": -78.4678,
+            "lat": -0.1807
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 5532458.83,
+          "routeEdges": 13300,
+          "events": 23739801,
+          "traceSha256": "375bfc32b8258412e9af2e09a94dd42f62c4526fad59fe8f058f851f07d9dde0",
+          "searchMs": 1258.7852500000008,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 5532458.83,
+          "routeEdges": 13300,
+          "events": 35100106,
+          "traceSha256": "519c4a4cbc1cab71b07c03797098f188e91633072666239894cd7e23d7423203",
+          "searchMs": 2562.1879169999993,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 5532458.83,
+          "routeEdges": 13300,
+          "events": 26489093,
+          "traceSha256": "0edc6cc0c4d6c6144dcfaa880d610428490440dc46a8b2d0387561b00ae347f8",
+          "searchMs": 1206.8695829999997,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Argentina",
+        "name": "Buenos Aires",
+        "lon": -58.3816,
+        "lat": -34.6037
+      },
+      "goal": {
+        "country": "Paraguay",
+        "name": "Asunción",
+        "lon": -57.5759,
+        "lat": -25.2637
+      },
+      "snapping": {
+        "start": {
+          "country": "Argentina",
+          "name": "Buenos Aires",
+          "lon": -58.38153,
+          "lat": -34.60382,
+          "node": 7458,
+          "snapMetres": 14.80178030506611
+        },
+        "goal": {
+          "country": "Paraguay",
+          "name": "Asunción",
+          "lon": -57.57579,
+          "lat": -25.26334,
+          "node": 246677,
+          "snapMetres": 41.530438096810094
+        },
+        "snapMs": 67.79087499999878,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Argentina",
+            "name": "Buenos Aires",
+            "lon": -58.3816,
+            "lat": -34.6037
+          },
+          "requestedGoal": {
+            "country": "Paraguay",
+            "name": "Asunción",
+            "lon": -57.5759,
+            "lat": -25.2637
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 1236757.77,
+          "routeEdges": 2495,
+          "events": 3346568,
+          "traceSha256": "84283e88ab61a3e6b841e96cc1078a39537bc86713e80bc1d8ee5e1d3b495b82",
+          "searchMs": 191.64954099999886,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 1236757.77,
+          "routeEdges": 2495,
+          "events": 7495353,
+          "traceSha256": "07a9a94d4cde300e28a8e907510a72d03d595f1e273300ef841fe9aa160961ac",
+          "searchMs": 561.7657919999983,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 1236757.77,
+          "routeEdges": 2495,
+          "events": 9445248,
+          "traceSha256": "3d254e68459b6b9ace1579c0674497718462d0bd962fdef04c32092005cde63b",
+          "searchMs": 451.6907080000019,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Argentina",
+        "name": "Buenos Aires",
+        "lon": -58.3816,
+        "lat": -34.6037
+      },
+      "goal": {
+        "country": "Peru",
+        "name": "Lima",
+        "lon": -77.0428,
+        "lat": -12.0464
+      },
+      "snapping": {
+        "start": {
+          "country": "Argentina",
+          "name": "Buenos Aires",
+          "lon": -58.38153,
+          "lat": -34.60382,
+          "node": 7458,
+          "snapMetres": 14.80178030506611
+        },
+        "goal": {
+          "country": "Peru",
+          "name": "Lima",
+          "lon": -77.04313,
+          "lat": -12.04658,
+          "node": 3476474,
+          "snapMetres": 41.09054893103059
+        },
+        "snapMs": 68.934957999998,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Argentina",
+            "name": "Buenos Aires",
+            "lon": -58.3816,
+            "lat": -34.6037
+          },
+          "requestedGoal": {
+            "country": "Peru",
+            "name": "Lima",
+            "lon": -77.0428,
+            "lat": -12.0464
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 3794875.24,
+          "routeEdges": 7341,
+          "events": 16985811,
+          "traceSha256": "8c3f8b77ce612c5486c25ccdca53465df387b3aa20eec9b916dc9fe0e76455a6",
+          "searchMs": 978.9025829999991,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 3794875.24,
+          "routeEdges": 7341,
+          "events": 25579987,
+          "traceSha256": "85b602923240d0c4c5ad9e40351daa08d90a02ce801ffbb060a2f422841004db",
+          "searchMs": 2091.7232919999988,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 3794875.24,
+          "routeEdges": 7341,
+          "events": 21230016,
+          "traceSha256": "f48fcc1a7d56433e5d8a3b6c17bf7a3e6788f0d695d99cc6e7198d17dd2cd0e0",
+          "searchMs": 980.6707920000008,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Argentina",
+        "name": "Buenos Aires",
+        "lon": -58.3816,
+        "lat": -34.6037
+      },
+      "goal": {
+        "country": "Uruguay",
+        "name": "Montevideo",
+        "lon": -56.1645,
+        "lat": -34.9011
+      },
+      "snapping": {
+        "start": {
+          "country": "Argentina",
+          "name": "Buenos Aires",
+          "lon": -58.38153,
+          "lat": -34.60382,
+          "node": 7458,
+          "snapMetres": 14.80178030506611
+        },
+        "goal": {
+          "country": "Uruguay",
+          "name": "Montevideo",
+          "lon": -56.16439,
+          "lat": -34.90094,
+          "node": 819605,
+          "snapMetres": 20.42446176338563
+        },
+        "snapMs": 68.3415410000016,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Argentina",
+            "name": "Buenos Aires",
+            "lon": -58.3816,
+            "lat": -34.6037
+          },
+          "requestedGoal": {
+            "country": "Uruguay",
+            "name": "Montevideo",
+            "lon": -56.1645,
+            "lat": -34.9011
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 563427.55,
+          "routeEdges": 1740,
+          "events": 2320664,
+          "traceSha256": "01099715c9809ec71820803854d0691ed8cb290767813fea75eb0a33e9129a87",
+          "searchMs": 117.16729200000191,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 563427.55,
+          "routeEdges": 1740,
+          "events": 2773697,
+          "traceSha256": "24355e47723227c5c1b2d4535002b4a0b568421fc6ab1426ad137b558894881d",
+          "searchMs": 176.94833300000028,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 563427.55,
+          "routeEdges": 1740,
+          "events": 4462773,
+          "traceSha256": "33c651b7fd19e76ec2284beb84f40210a64b27976e2c361b0108930d51e5e930",
+          "searchMs": 208.58945799999856,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "Argentina",
+        "name": "Buenos Aires",
+        "lon": -58.3816,
+        "lat": -34.6037
+      },
+      "goal": {
+        "country": "Venezuela",
+        "name": "Caracas",
+        "lon": -66.9036,
+        "lat": 10.4806
+      },
+      "snapping": {
+        "start": {
+          "country": "Argentina",
+          "name": "Buenos Aires",
+          "lon": -58.38153,
+          "lat": -34.60382,
+          "node": 7458,
+          "snapMetres": 14.80178030506611
+        },
+        "goal": {
+          "country": "Venezuela",
+          "name": "Caracas",
+          "lon": -66.90364,
+          "lat": 10.48082,
+          "node": 4307526,
+          "snapMetres": 24.850808915058177
+        },
+        "snapMs": 68.35900000000038,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "Argentina",
+            "name": "Buenos Aires",
+            "lon": -58.3816,
+            "lat": -34.6037
+          },
+          "requestedGoal": {
+            "country": "Venezuela",
+            "name": "Caracas",
+            "lon": -66.9036,
+            "lat": 10.4806
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 7931213.95,
+          "routeEdges": 21255,
+          "events": 34520959,
+          "traceSha256": "9a920d6232a2583a89c8754c4f49eb3093f1ebf6888445fd16422d6fd6a7dbf0",
+          "searchMs": 1765.2260000000024,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 7931213.95,
+          "routeEdges": 21255,
+          "events": 35801827,
+          "traceSha256": "7bd7db868fdb4d5046dafbd1d16ee4705f288a4e7400fef6bd2808a472e94b69",
+          "searchMs": 2365.178250000001,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 7931213.95,
+          "routeEdges": 21255,
+          "events": 35152204,
+          "traceSha256": "ae89e126fde7e4622b991afccd904b87a118ef87c09426387b66da4ca2482fd3",
+          "searchMs": 1525.125957999997,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    }
+  ],
+  "note": "Complete union; hashes and manifest limits validated. Weak components ignore direction. Eight city pairs test country connectivity; unreachable pairs are disclosed; route adjacency, one-way direction and exact cost checked across three algorithms. Basic access connectivity profile, not enforced turn/barrier/conditional navigation."
+}

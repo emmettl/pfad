@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Bogot\u00e1\u2013Buenos Aires",
+    "start": {
+      "name": "Bogot\u00e1",
+      "lon": -74.0721,
+      "lat": 4.711
+    },
+    "goal": {
+      "name": "Buenos Aires",
+      "lon": -58.3816,
+      "lat": -34.6037
+    }
+  },
+  {
+    "name": "Montevideo\u2013Santiago",
+    "start": {
+      "name": "Montevideo",
+      "lon": -56.1645,
+      "lat": -34.9011
+    },
+    "goal": {
+      "name": "Santiago",
+      "lon": -70.6693,
+      "lat": -33.4489
+    }
+  }
+]

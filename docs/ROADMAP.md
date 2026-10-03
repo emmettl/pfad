@@ -378,3 +378,30 @@ existing direct-opening policy. Validation includes all authored endpoints in
 both directions, sixty accepted ambient journeys and deterministic national
 replay in Chromium and touch WebKit. See
 [release evidence](evidence/austria-release-2026-10-02/README.md).
+
+### Australia catalogue addition · 3 October 2026
+
+Australia adds its measured 44.6 MB complete graph, independent coastline/lake
+references and a 39-place ambient pool covering the mainland and Tasmania as
+separate road regions. Existing resource guards and connectivity assumptions
+remain unchanged. Desktop and touch-WebKit validation cover curated endpoints,
+long-distance searches, shared links and ambient replay; physical-phone memory
+remains unverified. [Release evidence](evidence/australia-release-2026-10-03/README.md).
+
+### Southern Africa catalogue addition · 3 October 2026
+
+The validated ten-country baseline extends to Tanzania: one complete eleven-country
+study with a 110.7 MB road download, 44 mainland places and joined Natural Earth
+coastline/lake context. All authored places are mutually reachable in both
+directions; capital-route costs and complete desktop replay pass within unchanged
+resource guards. The existing large-download and coarse-pointer policies apply.
+Physical-phone stability remains unverified.
+[Release evidence](evidence/southern-africa-release-2026-10-03/README.md).
+
+### South America regional release · 4 October 2026
+
+The author selected the nine countries with demonstrated road connections from
+the continental feasibility study. The `sam` catalogue entry retains complete
+extracts, audited places and journeys, independent context and existing resource
+guards. See [release evidence](evidence/south-america-release-2026-10-04/README.md).
+This does not close physical-device validation or enforced driving-profile work.

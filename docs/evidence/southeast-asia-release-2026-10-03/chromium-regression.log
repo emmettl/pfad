@@ -1,0 +1,26 @@
+
+> pfad@0.0.0 test:browser
+> playwright test --project=chromium --workers=1 e2e/countries.spec.ts e2e/geography.spec.ts e2e/ambient.spec.ts e2e/study.spec.ts
+
+[WebServer] (node:4078) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 11 tests using 1 worker
+
+(node:4079) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/11] [chromium] › e2e/ambient.spec.ts:5:1 › ambient retreats without trapping touch or keyboard controls, and Escape restores the study
+[2/11] [chromium] › e2e/ambient.spec.ts:52:1 › ambient binds genuine journeys, reuses loaded chunks, and exits into the current study
+[3/11] [chromium] › e2e/ambient.spec.ts:97:1 › reduced-motion ambient presents completed stills and requires explicit Next
+[4/11] [chromium] › e2e/ambient.spec.ts:136:1 › sequence pause suspends one continuous score; hidden return needs explicit actions
+[5/11] [chromium] › e2e/countries.spec.ts:4:1 › country downloads are opt-in, pinned, and switching back restores the bundled Swiss study
+[6/11] [chromium] › e2e/geography.spec.ts:5:3 › desktop outline controls › verified outlines can be toggled while roads are still downloading
+[7/11] [chromium] › e2e/geography.spec.ts:28:1 › failed external outlines leave genuine road searches available and can be retried
+[8/11] [chromium] › e2e/study.spec.ts:10:1 › national search, reverse seeking and another pair of endpoints
+[9/11] [chromium] › e2e/study.spec.ts:55:1 › swapping endpoints binds Genève to Zürich to the real worker result
+[10/11] [chromium] › e2e/study.spec.ts:66:1 › reduced motion opens the completed trace without autoplay
+[11/11] [chromium] › e2e/study.spec.ts:75:1 › the completed route reveals, pauses and settles without advancing search events
+  11 passed (51.5s)

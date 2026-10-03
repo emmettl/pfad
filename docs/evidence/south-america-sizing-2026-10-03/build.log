@@ -1,0 +1,10 @@
+50.04 survey 1000000 selected ways 10328527 shape nodes
+99.99 survey 2000000 selected ways 25524347 shape nodes
+142.7 survey 3000000 selected ways 39204466 shape nodes
+194.73 survey 4000000 selected ways 50880065 shape nodes
+222.84 survey complete 4604218 ways 54604014 shape nodes
+356.68 packaged 1000000 ways 3424677 edges 3085902 nodes
+491.24 packaged 2000000 ways 6135293 edges 5081096 nodes
+598.28 packaged 3000000 ways 8206696 edges 6479695 nodes
+687.12 packaged 4000000 ways 9898655 edges 7517479 nodes
+803.54 complete .cache/south-america-eleven/packaged/south-america-eleven-20261002-1ee0e0599fde/manifest.json {'nodes': 8046874, 'edges': 10932322, 'directedArcs': 20165377, 'vertices': 50169266} 144249082

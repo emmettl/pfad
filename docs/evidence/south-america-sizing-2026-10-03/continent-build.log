@@ -1,0 +1,23 @@
+138.25 survey 1000000 selected ways 9614031 shape nodes
+242.91 survey 2000000 selected ways 18922315 shape nodes
+370.67 survey 3000000 selected ways 31135039 shape nodes
+522.18 survey 4000000 selected ways 44171904 shape nodes
+606.66 survey 5000000 selected ways 57293363 shape nodes
+682.74 survey 6000000 selected ways 70636465 shape nodes
+752.26 survey 7000000 selected ways 91815948 shape nodes
+843.87 survey 8000000 selected ways 108083800 shape nodes
+979.06 survey 9000000 selected ways 118410391 shape nodes
+1095.69 survey 10000000 selected ways 127179656 shape nodes
+1196.78 survey complete 10920706 ways 133755274 shape nodes
+1330.24 packaged 1000000 ways 3359397 edges 3203970 nodes
+1444.19 packaged 2000000 ways 6594562 edges 5962103 nodes
+1596.54 packaged 3000000 ways 9557526 edges 8297069 nodes
+1811.45 packaged 4000000 ways 12236935 edges 10330216 nodes
+Traceback (most recent call last):
+  File "/Users/louisemmett/Developer/Projects/pfad/.cache/south-america/build.py", line 12, in <module>
+    subprocess.run(['.cache/uk-python/bin/python','scripts/data/build-streamed-study.py','--source',str(p),'--country',str(base/'country.json'),'--output',str(base/'packaged')],check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['.cache/uk-python/bin/python', 'scripts/data/build-streamed-study.py', '--source', '.cache/south-america/south-america-261002.osm.pbf', '--country', '.cache/south-america/country.json', '--output', '.cache/south-america/packaged']' died with <Signals.SIGTERM: 15>.

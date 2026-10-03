@@ -52,6 +52,7 @@ has a pool. Manual picker places and ambient curation need not be identical.
 | Luxembourg | `lu-places/1` | 10 | One pool; smaller distance bands |
 | Ireland | `ie-places/1` | 18 | Whole island |
 | Scandinavia | `sc-places/1` | 29 | Connected mainland region |
+| Australia | `au-places/1` | 39 | Mainland / Tasmania |
 
 Candidates remain within one authored region; these labels avoid proposing known
 sea crossings, not proving connectivity. The complete directed graph decides
@@ -176,3 +177,33 @@ pacing, even though that route is not guaranteed shortest. Its quiet caption
 keeps that distinction visible. The coral/peach exploration and recorded focus
 glow follow the normal pause/seek, reduced-motion and route-reveal lifecycle.
 [Validation](evidence/greedy-2026-10-01/README.md).
+
+## Australia pool · 3 October 2026
+
+`au-places/1` covers all six states, the ACT and Northern Territory. Its 35
+mainland places and four Tasmanian places preserve separate road regions; no
+ferry crossing is proposed. The existing 30/100/220 km bands and actual road
+distance determine acceptance and pacing. Sixty validated journeys accepted
+all 39 places in 63 attempts: ten regional, 23 interregional and 27 national.
+Manual selection still allows disconnected islands to be studied explicitly.
+[Release evidence](evidence/australia-release-2026-10-03/README.md).
+
+## Southeast Asia pool
+
+`sea-places/1` supplies 26 cities across Myanmar, Thailand, Cambodia, Laos,
+Peninsular Malaysia and Singapore. Its distance bands are 30–300 km, 300–1,000 km
+and 1,000 km or more. Actual route distance determines acceptance. Sixty seeded
+journeys passed with 63 attempts and covered every authored place; see the
+[regional ambient audit](evidence/southeast-asia-release-2026-10-03/ambient-audit.json).
+
+Southern Africa uses `sa-places/1`, with 44 mutually reachable mainland places
+across eleven countries including Tanzania. Its regional/interregional boundaries
+are 200/650 km with a 30 km minimum; acceptance and pacing use actual road
+distance. The sixty-journey audit accepts 60 of 62 attempts across all three
+bands. Ferry-only islands stay outside the ambient pool.
+
+South America uses `sam-places/1`, with 37 mutually reachable mainland places
+across the nine selected countries. Sixty real accepted journeys cover all three
+distance bands and the four exact-distance algorithms. Separate islands,
+including Easter Island, remain available as manual graph components. See the
+[South America release audit](evidence/south-america-release-2026-10-04/ambient-audit.json).

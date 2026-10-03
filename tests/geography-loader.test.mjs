@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto'
 import { loadGeography } from '../src/map/geography-loader.ts'
 import releases from '../src/map/geography-releases.json'
 import worker from '../hosting/data-worker/index.mjs'
-for (const date of new Set(Object.values(releases).map(reference => reference.url.match(/geo-[a-z]{2}-(\d{8})-/)[1]))) {
+for (const date of new Set(Object.values(releases).map(reference => reference.url.match(/geo-[a-z]{2,8}-(\d{8})-/)[1]))) {
   execFileSync(process.execPath, ['scripts/data/package-geography.mjs', date, '--no-registry'])
 }
 const digest = bytes => createHash('sha256').update(bytes).digest('hex')
@@ -45,11 +45,11 @@ test('country mismatches reject even when the manifest bytes are verified; cance
   await expect(loadGeography('is', controller.signal)).rejects.toThrow()
   expect(digest(await readFile('.cache/geography/' + new URL(releases.is.url).pathname.split('/').at(-2) + '/manifest.json'))).toBe(releases.is.sha256)
 })
-test('data Worker serves only immutable outline keys with JSON, CORS and read-only methods', async () => {
-  const key = new URL(releases.is.url).pathname
+test.each(['is', 'sea'])('data Worker serves only immutable outline keys with JSON, CORS and read-only methods: %s', async country => {
+  const key = new URL(releases[country].url).pathname
   const env = { DATA: { get: async () => ({ body: '{}', size: 2, uploaded: new Date(), httpEtag: '"hash"' }) } }
   const response = await worker.fetch(new Request('https://motionstudies.app' + key), env, { waitUntil() {} })
   expect(response.status).toBe(200); expect(response.headers.get('Content-Type')).toContain('application/json')
   expect(response.headers.get('Access-Control-Allow-Origin')).toBe('*')
-  for (const path of [key.replace(/geo-is-[^/]+/, 'geo-is-latest'), key.replace('manifest.json', 'private.json')]) expect((await worker.fetch(new Request('https://motionstudies.app' + path), env, {})).status).toBe(404)
+  for (const path of [key.replace(new RegExp('geo-' + country + '-[^/]+'), 'geo-' + country + '-latest'), key.replace('manifest.json', 'private.json')]) expect((await worker.fetch(new Request('https://motionstudies.app' + path), env, {})).status).toBe(404)
 })

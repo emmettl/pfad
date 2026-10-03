@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Cape Town\u2013Dar es Salaam",
+    "start": {
+      "name": "Cape Town",
+      "lon": 18.4241,
+      "lat": -33.9249
+    },
+    "goal": {
+      "name": "Dar es Salaam",
+      "lon": 39.2083,
+      "lat": -6.7924
+    }
+  },
+  {
+    "name": "Luanda\u2013Mwanza",
+    "start": {
+      "name": "Luanda",
+      "lon": 13.2344,
+      "lat": -8.8383
+    },
+    "goal": {
+      "name": "Mwanza",
+      "lon": 32.9,
+      "lat": -2.5167
+    }
+  }
+]

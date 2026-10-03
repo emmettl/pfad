@@ -1,0 +1,9 @@
+{
+  "dataset": "au-20261002-72975ec9fdfa",
+  "downloadBytes": 44568336,
+  "sourceEvidenceBytes": 17656782,
+  "chunks": 65,
+  "nodes": 2819540,
+  "edges": 3498445,
+  "vertices": 13605504
+}

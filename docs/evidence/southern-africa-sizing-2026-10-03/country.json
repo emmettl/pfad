@@ -1,0 +1,118 @@
+{
+  "id": "southern-africa",
+  "name": "Southern Africa",
+  "datasetPrefix": "southern-africa-20261002",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-10-02T20:21:34Z",
+    "data_timestamp": "2026-10-02T20:21:34Z",
+    "url": "https://download.geofabrik.de/africa.html",
+    "filename": "southern-africa-261002.osm.pbf",
+    "bytes": 1630312666,
+    "sha256": "751af15ca503225787fb8b2480f38e052fcaa2e61724581794cfca48baf45e17",
+    "inputs": [
+      {
+        "country": "south-africa",
+        "url": "https://download.geofabrik.de/africa/south-africa-261002.osm.pbf",
+        "bytes": 421640754,
+        "sha256": "e1e08344a0569c16e72cd6833a8e7a7ac1b7bcb1ada04f10656c3f75c66015c9",
+        "md5": "b183f81d5f83b0e78325d5f146e2c1ab",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "namibia",
+        "url": "https://download.geofabrik.de/africa/namibia-261002.osm.pbf",
+        "bytes": 54690815,
+        "sha256": "7124f88a472c55d45f5b89e35eecfeaa8fb24fcbef318d7905864616d7ccee7b",
+        "md5": "46d2b7694e985f74f82949c61f81cf9a",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "botswana",
+        "url": "https://download.geofabrik.de/africa/botswana-261002.osm.pbf",
+        "bytes": 88027563,
+        "sha256": "76cb8c1e0bef7e46a883293ad7ab8ddd60601b9fcfb18b80520e80e6b026dbf8",
+        "md5": "6f1b0469a2fe0cc3f0244377b715df25",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "lesotho",
+        "url": "https://download.geofabrik.de/africa/lesotho-261002.osm.pbf",
+        "bytes": 127113597,
+        "sha256": "426abdcab04739c0481f6fc4ca458ee245b894c89aea024f688af5be2a52fee5",
+        "md5": "d7ea9e0247024d0ce9546ea5938846ea",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "swaziland",
+        "url": "https://download.geofabrik.de/africa/swaziland-261002.osm.pbf",
+        "bytes": 30827445,
+        "sha256": "73d4d01bfc0f0040493a63fc825a5ab7c7fffbd6d2377f9eae94c46849642f8f",
+        "md5": "2051c9f2a30f3394e8ab9ea6785aad54",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "zimbabwe",
+        "url": "https://download.geofabrik.de/africa/zimbabwe-261002.osm.pbf",
+        "bytes": 179511345,
+        "sha256": "6858a9bf4f0f494523ad947ce1f88ffcf0cc54d2b36ee58781d1ea2ec875f368",
+        "md5": "eeaf4b43ecc2f2af6e4cb21995e0fe17",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "zambia",
+        "url": "https://download.geofabrik.de/africa/zambia-261002.osm.pbf",
+        "bytes": 251990401,
+        "sha256": "b4723c6cad3886afbb749a2b7fc3896f8b50f21bd870068c081da0b100906232",
+        "md5": "a3fd415ccab294c3c7336bba4de883fe",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "mozambique",
+        "url": "https://download.geofabrik.de/africa/mozambique-261002.osm.pbf",
+        "bytes": 255461533,
+        "sha256": "441f41e04fe9379a03e66f4ef503d039377afa8858cdfad5832be677402e6e02",
+        "md5": "fd93e20e4d78dea6d7023934075b7af6",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "malawi",
+        "url": "https://download.geofabrik.de/africa/malawi-261002.osm.pbf",
+        "bytes": 155118843,
+        "sha256": "c7e7f5d5b36291e9a762948421c857ceebef043e9075f15a157a1debd2785460",
+        "md5": "40fbebe1bc12750bf43ceefa508f4a23",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "angola",
+        "url": "https://download.geofabrik.de/africa/angola-261002.osm.pbf",
+        "bytes": 85291929,
+        "sha256": "224f81d663d710d9eba664519ef5dd4aeeededc409b087b51d972e9c8b81b8b4",
+        "md5": "c9aea60ebb71f81212aa8c2c3760c72f",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      }
+    ],
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "composition": {
+      "version": "pfad-southern-africa-feasibility/1",
+      "tool": "osmium-tool/1.19.1",
+      "libosmium": "2.23.1",
+      "operation": "merge-same-snapshot",
+      "deduplication": "OSM object type, ID and version",
+      "clipping": false
+    }
+  },
+  "projection": {
+    "centre": [
+      25,
+      -22
+    ],
+    "referenceLatitude": -22,
+    "scaleMetres": 3000000,
+    "quantisationMetres": 1.111950802,
+    "drawingPrecision": "float32-normalised/1"
+  },
+  "coverage": "Ten complete country extracts: South Africa, Namibia, Botswana, Lesotho, Eswatini, Zimbabwe, Zambia, Mozambique, Malawi and Angola. No clipping, tracks or ferry edges."
+}

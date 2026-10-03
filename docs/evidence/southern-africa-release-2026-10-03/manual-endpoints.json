@@ -1,0 +1,1968 @@
+{
+  "dataset": "a9718f49cf14137b2cf75ece27760b2bb1106d7a2270eda13a4dea15c7341d61",
+  "pool": "sa-places/1",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-10-02T20:21:34Z",
+    "data_timestamp": "2026-10-02T20:21:34Z",
+    "url": "https://download.geofabrik.de/africa.html",
+    "filename": "southern-africa-tanzania-261002.osm.pbf",
+    "bytes": 2339893968,
+    "sha256": "e350184fc4ccb660a03d57f7907fe29bfe579634f3ade45ee2f344efb43464d5",
+    "inputs": [
+      {
+        "country": "south-africa",
+        "url": "https://download.geofabrik.de/africa/south-africa-261002.osm.pbf",
+        "bytes": 421640754,
+        "sha256": "e1e08344a0569c16e72cd6833a8e7a7ac1b7bcb1ada04f10656c3f75c66015c9",
+        "md5": "b183f81d5f83b0e78325d5f146e2c1ab",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "namibia",
+        "url": "https://download.geofabrik.de/africa/namibia-261002.osm.pbf",
+        "bytes": 54690815,
+        "sha256": "7124f88a472c55d45f5b89e35eecfeaa8fb24fcbef318d7905864616d7ccee7b",
+        "md5": "46d2b7694e985f74f82949c61f81cf9a",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "botswana",
+        "url": "https://download.geofabrik.de/africa/botswana-261002.osm.pbf",
+        "bytes": 88027563,
+        "sha256": "76cb8c1e0bef7e46a883293ad7ab8ddd60601b9fcfb18b80520e80e6b026dbf8",
+        "md5": "6f1b0469a2fe0cc3f0244377b715df25",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "lesotho",
+        "url": "https://download.geofabrik.de/africa/lesotho-261002.osm.pbf",
+        "bytes": 127113597,
+        "sha256": "426abdcab04739c0481f6fc4ca458ee245b894c89aea024f688af5be2a52fee5",
+        "md5": "d7ea9e0247024d0ce9546ea5938846ea",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "swaziland",
+        "url": "https://download.geofabrik.de/africa/swaziland-261002.osm.pbf",
+        "bytes": 30827445,
+        "sha256": "73d4d01bfc0f0040493a63fc825a5ab7c7fffbd6d2377f9eae94c46849642f8f",
+        "md5": "2051c9f2a30f3394e8ab9ea6785aad54",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "zimbabwe",
+        "url": "https://download.geofabrik.de/africa/zimbabwe-261002.osm.pbf",
+        "bytes": 179511345,
+        "sha256": "6858a9bf4f0f494523ad947ce1f88ffcf0cc54d2b36ee58781d1ea2ec875f368",
+        "md5": "eeaf4b43ecc2f2af6e4cb21995e0fe17",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "zambia",
+        "url": "https://download.geofabrik.de/africa/zambia-261002.osm.pbf",
+        "bytes": 251990401,
+        "sha256": "b4723c6cad3886afbb749a2b7fc3896f8b50f21bd870068c081da0b100906232",
+        "md5": "a3fd415ccab294c3c7336bba4de883fe",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "mozambique",
+        "url": "https://download.geofabrik.de/africa/mozambique-261002.osm.pbf",
+        "bytes": 255461533,
+        "sha256": "441f41e04fe9379a03e66f4ef503d039377afa8858cdfad5832be677402e6e02",
+        "md5": "fd93e20e4d78dea6d7023934075b7af6",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "malawi",
+        "url": "https://download.geofabrik.de/africa/malawi-261002.osm.pbf",
+        "bytes": 155118843,
+        "sha256": "c7e7f5d5b36291e9a762948421c857ceebef043e9075f15a157a1debd2785460",
+        "md5": "40fbebe1bc12750bf43ceefa508f4a23",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "angola",
+        "url": "https://download.geofabrik.de/africa/angola-261002.osm.pbf",
+        "bytes": 85291929,
+        "sha256": "224f81d663d710d9eba664519ef5dd4aeeededc409b087b51d972e9c8b81b8b4",
+        "md5": "c9aea60ebb71f81212aa8c2c3760c72f",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "tanzania",
+        "url": "https://download.geofabrik.de/africa/tanzania-261002.osm.pbf",
+        "bytes": 706152347,
+        "sha256": "26b33424a0d696a2422dfda727151d87d8d710c0186a4eea82853368d4971d12",
+        "md5": "07dfd0fc08dcf806655aee58137a04cb",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      }
+    ],
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "composition": {
+      "version": "pfad-southern-africa-tanzania/1",
+      "tool": "osmium-tool/1.19.1",
+      "libosmium": "2.23.1",
+      "operation": "merge-same-snapshot",
+      "deduplication": "OSM object type, ID and version",
+      "clipping": false,
+      "generator": "pfad-southern-africa-tanzania/1"
+    }
+  },
+  "forwardReachableNodes": 6127704,
+  "reverseReachableNodes": 6127882,
+  "note": "All 44 authored mainland places have reversal-stable snaps within 2 km and directed reachability both to and from the same Cape Town node, proving mutual directed reachability for every pair.",
+  "checks": [
+    {
+      "place": {
+        "id": "cape-town",
+        "name": "Cape Town",
+        "lon": 18.4241,
+        "lat": -33.9249
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "snapMs": 324.79775000000006,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "dar-es-salaam",
+        "name": "Dar es Salaam",
+        "lon": 39.2083,
+        "lat": -6.7924
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "dar-es-salaam",
+          "name": "Dar es Salaam",
+          "lon": 39.20824,
+          "lat": -6.79243,
+          "node": 5277797,
+          "snapMetres": 7.417338670360202
+        },
+        "snapMs": 56.28741600000012,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "dar-es-salaam",
+            "name": "Dar es Salaam",
+            "lon": 39.2083,
+            "lat": -6.7924
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "pretoria",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "pretoria",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "snapMs": 56.4373750000002,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "pretoria",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "johannesburg",
+        "name": "Johannesburg",
+        "lon": 28.0473,
+        "lat": -26.2041
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "johannesburg",
+          "name": "Johannesburg",
+          "lon": 28.04731,
+          "lat": -26.20412,
+          "node": 93550,
+          "snapMetres": 2.437434681145298
+        },
+        "snapMs": 56.05979100000013,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "johannesburg",
+            "name": "Johannesburg",
+            "lon": 28.0473,
+            "lat": -26.2041
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "durban",
+        "name": "Durban",
+        "lon": 31.0218,
+        "lat": -29.8587
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "durban",
+          "name": "Durban",
+          "lon": 31.02183,
+          "lat": -29.85869,
+          "node": 4164467,
+          "snapMetres": 3.0993709894422485
+        },
+        "snapMs": 59.99037499999986,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "durban",
+            "name": "Durban",
+            "lon": 31.0218,
+            "lat": -29.8587
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "bloemfontein",
+        "name": "Bloemfontein",
+        "lon": 26.2299,
+        "lat": -29.0852
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "bloemfontein",
+          "name": "Bloemfontein",
+          "lon": 26.22908,
+          "lat": -29.08525,
+          "node": 661960,
+          "snapMetres": 79.87570165009728
+        },
+        "snapMs": 56.062374999999975,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "bloemfontein",
+            "name": "Bloemfontein",
+            "lon": 26.2299,
+            "lat": -29.0852
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "gqeberha",
+        "name": "Gqeberha",
+        "lon": 25.6022,
+        "lat": -33.9608
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "gqeberha",
+          "name": "Gqeberha",
+          "lon": 25.60213,
+          "lat": -33.96082,
+          "node": 1595974,
+          "snapMetres": 6.828223254511503
+        },
+        "snapMs": 56.805791,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "gqeberha",
+            "name": "Gqeberha",
+            "lon": 25.6022,
+            "lat": -33.9608
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "east-london",
+        "name": "East London",
+        "lon": 27.9116,
+        "lat": -33.0153
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "east-london",
+          "name": "East London",
+          "lon": 27.9123,
+          "lat": -33.01545,
+          "node": 6115981,
+          "snapMetres": 67.36540165234625
+        },
+        "snapMs": 56.877250000000004,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "east-london",
+            "name": "East London",
+            "lon": 27.9116,
+            "lat": -33.0153
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "polokwane",
+        "name": "Polokwane",
+        "lon": 29.4486,
+        "lat": -23.9045
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "polokwane",
+          "name": "Polokwane",
+          "lon": 29.44861,
+          "lat": -23.90488,
+          "node": 423528,
+          "snapMetres": 42.266357270462485
+        },
+        "snapMs": 56.15733299999988,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "polokwane",
+            "name": "Polokwane",
+            "lon": 29.4486,
+            "lat": -23.9045
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "mbombela",
+        "name": "Mbombela",
+        "lon": 30.9703,
+        "lat": -25.4753
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "mbombela",
+          "name": "Mbombela",
+          "lon": 30.97008,
+          "lat": -25.47524,
+          "node": 318631,
+          "snapMetres": 23.070169084241815
+        },
+        "snapMs": 56.47966700000006,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "mbombela",
+            "name": "Mbombela",
+            "lon": 30.9703,
+            "lat": -25.4753
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "rustenburg",
+        "name": "Rustenburg",
+        "lon": 27.2424,
+        "lat": -25.6676
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "rustenburg",
+          "name": "Rustenburg",
+          "lon": 27.24277,
+          "lat": -25.66791,
+          "node": 979590,
+          "snapMetres": 50.629188862586936
+        },
+        "snapMs": 56.89779200000021,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "rustenburg",
+            "name": "Rustenburg",
+            "lon": 27.2424,
+            "lat": -25.6676
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "upington",
+        "name": "Upington",
+        "lon": 21.2561,
+        "lat": -28.4478
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "upington",
+          "name": "Upington",
+          "lon": 21.25718,
+          "lat": -28.44776,
+          "node": 522945,
+          "snapMetres": 105.68354934117858
+        },
+        "snapMs": 56.13325000000032,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "upington",
+            "name": "Upington",
+            "lon": 21.2561,
+            "lat": -28.4478
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "kimberley",
+        "name": "Kimberley",
+        "lon": 24.7623,
+        "lat": -28.7282
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "kimberley",
+          "name": "Kimberley",
+          "lon": 24.76444,
+          "lat": -28.72759,
+          "node": 198103,
+          "snapMetres": 219.41462965249178
+        },
+        "snapMs": 56.086917000000085,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "kimberley",
+            "name": "Kimberley",
+            "lon": 24.7623,
+            "lat": -28.7282
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "george",
+        "name": "George",
+        "lon": 22.4617,
+        "lat": -33.9881
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "george",
+          "name": "George",
+          "lon": 22.46165,
+          "lat": -33.98803,
+          "node": 5301472,
+          "snapMetres": 9.0463465513126
+        },
+        "snapMs": 56.23020899999983,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "george",
+            "name": "George",
+            "lon": 22.4617,
+            "lat": -33.9881
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "windhoek",
+        "name": "Windhoek",
+        "lon": 17.0832,
+        "lat": -22.5597
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "windhoek",
+          "name": "Windhoek",
+          "lon": 17.08394,
+          "lat": -22.55997,
+          "node": 5244408,
+          "snapMetres": 81.70394437272716
+        },
+        "snapMs": 56.67887500000006,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "windhoek",
+            "name": "Windhoek",
+            "lon": 17.0832,
+            "lat": -22.5597
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "swakopmund",
+        "name": "Swakopmund",
+        "lon": 14.5258,
+        "lat": -22.6784
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "swakopmund",
+          "name": "Swakopmund",
+          "lon": 14.52643,
+          "lat": -22.67838,
+          "node": 1169506,
+          "snapMetres": 64.67490262024764
+        },
+        "snapMs": 58.096915999999965,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "swakopmund",
+            "name": "Swakopmund",
+            "lon": 14.5258,
+            "lat": -22.6784
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "walvis-bay",
+        "name": "Walvis Bay",
+        "lon": 14.5053,
+        "lat": -22.9576
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "walvis-bay",
+          "name": "Walvis Bay",
+          "lon": 14.505,
+          "lat": -22.95763,
+          "node": 2483494,
+          "snapMetres": 30.896929527845476
+        },
+        "snapMs": 56.867167000000336,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "walvis-bay",
+            "name": "Walvis Bay",
+            "lon": 14.5053,
+            "lat": -22.9576
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "oshakati",
+        "name": "Oshakati",
+        "lon": 15.6994,
+        "lat": -17.7883
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "oshakati",
+          "name": "Oshakati",
+          "lon": 15.6999,
+          "lat": -17.78814,
+          "node": 515253,
+          "snapMetres": 55.84908417077872
+        },
+        "snapMs": 57.28391699999975,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "oshakati",
+            "name": "Oshakati",
+            "lon": 15.6994,
+            "lat": -17.7883
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "gaborone",
+        "name": "Gaborone",
+        "lon": 25.9231,
+        "lat": -24.6282
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "gaborone",
+          "name": "Gaborone",
+          "lon": 25.92309,
+          "lat": -24.62803,
+          "node": 707339,
+          "snapMetres": 18.9301692470214
+        },
+        "snapMs": 56.94404199999963,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "gaborone",
+            "name": "Gaborone",
+            "lon": 25.9231,
+            "lat": -24.6282
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "francistown",
+        "name": "Francistown",
+        "lon": 27.5144,
+        "lat": -21.1661
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "francistown",
+          "name": "Francistown",
+          "lon": 27.51424,
+          "lat": -21.16653,
+          "node": 3401586,
+          "snapMetres": 50.61055223785036
+        },
+        "snapMs": 56.4326659999997,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "francistown",
+            "name": "Francistown",
+            "lon": 27.5144,
+            "lat": -21.1661
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "maun",
+        "name": "Maun",
+        "lon": 23.4189,
+        "lat": -19.9833
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "maun",
+          "name": "Maun",
+          "lon": 23.41888,
+          "lat": -19.98339,
+          "node": 722924,
+          "snapMetres": 10.223469304008688
+        },
+        "snapMs": 57.41045900000017,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "maun",
+            "name": "Maun",
+            "lon": 23.4189,
+            "lat": -19.9833
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "kasane",
+        "name": "Kasane",
+        "lon": 25.15,
+        "lat": -17.8167
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "kasane",
+          "name": "Kasane",
+          "lon": 25.15042,
+          "lat": -17.82094,
+          "node": 1593868,
+          "snapMetres": 473.55901883544504
+        },
+        "snapMs": 56.917541999999685,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "kasane",
+            "name": "Kasane",
+            "lon": 25.15,
+            "lat": -17.8167
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "maseru",
+        "name": "Maseru",
+        "lon": 27.4833,
+        "lat": -29.3167
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "maseru",
+          "name": "Maseru",
+          "lon": 27.48328,
+          "lat": -29.31658,
+          "node": 176158,
+          "snapMetres": 13.483568058518562
+        },
+        "snapMs": 56.88633299999992,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "maseru",
+            "name": "Maseru",
+            "lon": 27.4833,
+            "lat": -29.3167
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "mbabane",
+        "name": "Mbabane",
+        "lon": 31.1333,
+        "lat": -26.3167
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "mbabane",
+          "name": "Mbabane",
+          "lon": 31.13327,
+          "lat": -26.31677,
+          "node": 744183,
+          "snapMetres": 8.338230349606349
+        },
+        "snapMs": 57.831750000000284,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "mbabane",
+            "name": "Mbabane",
+            "lon": 31.1333,
+            "lat": -26.3167
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "manzini",
+        "name": "Manzini",
+        "lon": 31.3667,
+        "lat": -26.5
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "manzini",
+          "name": "Manzini",
+          "lon": 31.36681,
+          "lat": -26.49971,
+          "node": 1363650,
+          "snapMetres": 34.05384157968139
+        },
+        "snapMs": 57.03908300000012,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "manzini",
+            "name": "Manzini",
+            "lon": 31.3667,
+            "lat": -26.5
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "harare",
+        "name": "Harare",
+        "lon": 31.0522,
+        "lat": -17.8252
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "harare",
+          "name": "Harare",
+          "lon": 31.05185,
+          "lat": -17.8253,
+          "node": 1838996,
+          "snapMetres": 38.68263146402062
+        },
+        "snapMs": 57.216249999999945,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "harare",
+            "name": "Harare",
+            "lon": 31.0522,
+            "lat": -17.8252
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "bulawayo",
+        "name": "Bulawayo",
+        "lon": 28.5833,
+        "lat": -20.15
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "bulawayo",
+          "name": "Bulawayo",
+          "lon": 28.5833,
+          "lat": -20.15045,
+          "node": 148672,
+          "snapMetres": 50.03778609008091
+        },
+        "snapMs": 57.08333300000004,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "bulawayo",
+            "name": "Bulawayo",
+            "lon": 28.5833,
+            "lat": -20.15
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "mutare",
+        "name": "Mutare",
+        "lon": 32.65,
+        "lat": -18.9667
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "mutare",
+          "name": "Mutare",
+          "lon": 32.65053,
+          "lat": -18.96746,
+          "node": 961538,
+          "snapMetres": 101.23190250640138
+        },
+        "snapMs": 56.855790999999954,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "mutare",
+            "name": "Mutare",
+            "lon": 32.65,
+            "lat": -18.9667
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "lusaka",
+        "name": "Lusaka",
+        "lon": 28.3228,
+        "lat": -15.3875
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "lusaka",
+          "name": "Lusaka",
+          "lon": 28.32342,
+          "lat": -15.3883,
+          "node": 2004843,
+          "snapMetres": 111.04681490703403
+        },
+        "snapMs": 56.42808299999979,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "lusaka",
+            "name": "Lusaka",
+            "lon": 28.3228,
+            "lat": -15.3875
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "livingstone",
+        "name": "Livingstone",
+        "lon": 25.8544,
+        "lat": -17.8419
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "livingstone",
+          "name": "Livingstone",
+          "lon": 25.85425,
+          "lat": -17.84298,
+          "node": 164013,
+          "snapMetres": 121.13568741932689
+        },
+        "snapMs": 56.42170799999985,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "livingstone",
+            "name": "Livingstone",
+            "lon": 25.8544,
+            "lat": -17.8419
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "ndola",
+        "name": "Ndola",
+        "lon": 28.6367,
+        "lat": -12.9683
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "ndola",
+          "name": "Ndola",
+          "lon": 28.6369,
+          "lat": -12.96881,
+          "node": 174090,
+          "snapMetres": 60.70941525842319
+        },
+        "snapMs": 56.962375000000065,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "ndola",
+            "name": "Ndola",
+            "lon": 28.6367,
+            "lat": -12.9683
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "maputo",
+        "name": "Maputo",
+        "lon": 32.5732,
+        "lat": -25.9692
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "maputo",
+          "name": "Maputo",
+          "lon": 32.57337,
+          "lat": -25.96928,
+          "node": 1356297,
+          "snapMetres": 19.181891117015653
+        },
+        "snapMs": 56.63129200000003,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "maputo",
+            "name": "Maputo",
+            "lon": 32.5732,
+            "lat": -25.9692
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "beira",
+        "name": "Beira",
+        "lon": 34.8389,
+        "lat": -19.8436
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "beira",
+          "name": "Beira",
+          "lon": 34.83901,
+          "lat": -19.8434,
+          "node": 962421,
+          "snapMetres": 25.038833629108566
+        },
+        "snapMs": 57.189166000000114,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "beira",
+            "name": "Beira",
+            "lon": 34.8389,
+            "lat": -19.8436
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "nampula",
+        "name": "Nampula",
+        "lon": 39.2667,
+        "lat": -15.1167
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "nampula",
+          "name": "Nampula",
+          "lon": 39.26657,
+          "lat": -15.11644,
+          "node": 445187,
+          "snapMetres": 32.10258834159178
+        },
+        "snapMs": 56.88000000000011,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "nampula",
+            "name": "Nampula",
+            "lon": 39.2667,
+            "lat": -15.1167
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "lilongwe",
+        "name": "Lilongwe",
+        "lon": 33.7741,
+        "lat": -13.9626
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "lilongwe",
+          "name": "Lilongwe",
+          "lon": 33.77382,
+          "lat": -13.96305,
+          "node": 187127,
+          "snapMetres": 58.45261509711689
+        },
+        "snapMs": 56.933624999999665,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "lilongwe",
+            "name": "Lilongwe",
+            "lon": 33.7741,
+            "lat": -13.9626
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "blantyre",
+        "name": "Blantyre",
+        "lon": 35.0058,
+        "lat": -15.7861
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "blantyre",
+          "name": "Blantyre",
+          "lon": 35.00592,
+          "lat": -15.78593,
+          "node": 132187,
+          "snapMetres": 22.851674858641214
+        },
+        "snapMs": 57.00208300000031,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "blantyre",
+            "name": "Blantyre",
+            "lon": 35.0058,
+            "lat": -15.7861
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "luanda",
+        "name": "Luanda",
+        "lon": 13.2344,
+        "lat": -8.8383
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "luanda",
+          "name": "Luanda",
+          "lon": 13.23473,
+          "lat": -8.83859,
+          "node": 434662,
+          "snapMetres": 48.523521858402596
+        },
+        "snapMs": 56.64991699999973,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "luanda",
+            "name": "Luanda",
+            "lon": 13.2344,
+            "lat": -8.8383
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "benguela",
+        "name": "Benguela",
+        "lon": 13.4055,
+        "lat": -12.5763
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "benguela",
+          "name": "Benguela",
+          "lon": 13.40532,
+          "lat": -12.57698,
+          "node": 1268923,
+          "snapMetres": 78.09536128696989
+        },
+        "snapMs": 56.74904200000037,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "benguela",
+            "name": "Benguela",
+            "lon": 13.4055,
+            "lat": -12.5763
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "lubango",
+        "name": "Lubango",
+        "lon": 13.4925,
+        "lat": -14.9172
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "lubango",
+          "name": "Lubango",
+          "lon": 13.49252,
+          "lat": -14.91756,
+          "node": 4983075,
+          "snapMetres": 40.08786879992252
+        },
+        "snapMs": 56.788916999999856,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "lubango",
+            "name": "Lubango",
+            "lon": 13.4925,
+            "lat": -14.9172
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "dodoma",
+        "name": "Dodoma",
+        "lon": 35.7516,
+        "lat": -6.163
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "dodoma",
+          "name": "Dodoma",
+          "lon": 35.75118,
+          "lat": -6.1632,
+          "node": 767445,
+          "snapMetres": 51.48306809952117
+        },
+        "snapMs": 56.32225000000017,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "dodoma",
+            "name": "Dodoma",
+            "lon": 35.7516,
+            "lat": -6.163
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "mbeya",
+        "name": "Mbeya",
+        "lon": 33.45,
+        "lat": -8.9
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "mbeya",
+          "name": "Mbeya",
+          "lon": 33.45032,
+          "lat": -8.89936,
+          "node": 2523712,
+          "snapMetres": 79.37405354971719
+        },
+        "snapMs": 55.65558300000066,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "mbeya",
+            "name": "Mbeya",
+            "lon": 33.45,
+            "lat": -8.9
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "arusha",
+        "name": "Arusha",
+        "lon": 36.682,
+        "lat": -3.3869
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "arusha",
+          "name": "Arusha",
+          "lon": 36.68241,
+          "lat": -3.38688,
+          "node": 1291628,
+          "snapMetres": 45.56465767372574
+        },
+        "snapMs": 56.863499999999476,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "arusha",
+            "name": "Arusha",
+            "lon": 36.682,
+            "lat": -3.3869
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "mwanza",
+        "name": "Mwanza",
+        "lon": 32.9,
+        "lat": -2.5167
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "mwanza",
+          "name": "Mwanza",
+          "lon": 32.89951,
+          "lat": -2.51702,
+          "node": 1941556,
+          "snapMetres": 65.03125733875355
+        },
+        "snapMs": 57.712249999999585,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "mwanza",
+            "name": "Mwanza",
+            "lon": 32.9,
+            "lat": -2.5167
+          }
+        }
+      }
+    },
+    {
+      "place": {
+        "id": "mtwara",
+        "name": "Mtwara",
+        "lon": 40.1818,
+        "lat": -10.2736
+      },
+      "snapping": {
+        "start": {
+          "id": "cape-town",
+          "name": "Cape Town",
+          "lon": 18.4236,
+          "lat": -33.92484,
+          "node": 39394,
+          "snapMetres": 46.61309004787721
+        },
+        "goal": {
+          "id": "mtwara",
+          "name": "Mtwara",
+          "lon": 40.18173,
+          "lat": -10.27352,
+          "node": 1809642,
+          "snapMetres": 11.738398193822256
+        },
+        "snapMs": 56.826082999999926,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "id": "cape-town",
+            "name": "Cape Town",
+            "lon": 18.4241,
+            "lat": -33.9249
+          },
+          "requestedGoal": {
+            "id": "mtwara",
+            "name": "Mtwara",
+            "lon": 40.1818,
+            "lat": -10.2736
+          }
+        }
+      }
+    }
+  ]
+}

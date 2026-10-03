@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "au",
+  "border": {
+    "path": "border-44ccd1837a03.json",
+    "bytes": 195546,
+    "sha256": "44ccd1837a0328530bdc7bbc951e2f128758bd5116177c8c7981c663125d84c9"
+  },
+  "lakes": {
+    "path": "lakes-92cba46ea4fa.json",
+    "bytes": 64587,
+    "sha256": "92cba46ea4fafe630c81140e940556e749991b8d2a0a495f4a63cf1fa7642e95"
+  },
+  "id": "geo-au-20261003-57a53084a64d",
+  "identity": "57a53084a64d842299e6e8c876f35e33c8fc284509db620aa53aed8d48bda4f3"
+}

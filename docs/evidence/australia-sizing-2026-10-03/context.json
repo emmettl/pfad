@@ -1,0 +1,24 @@
+{
+  "gitHead": "42e65291821918e9551f06f6fdfc1ec9d8079274",
+  "files": {
+    "scripts/data/size-proof.py": "0595535876b38b8653087caee8586542a1b72ff887375c613b15858505be593b",
+    "scripts/data/build-study.py": "9ca7c805ddd04cfdb9776f6ef5ec55d040ffd2df8e033bd64118e0704894e9bf",
+    "scripts/data/publish-country.py": "78913e03de490206878ed5033bc907260eb1082c284b03df7bc1c6af142902f5",
+    "scripts/data/desktop-country-proof.mjs": "84bbef5890e45fc60904791ca69bea22685e4cde626cde43b88841318f558839",
+    ".cache/au-desktop-proof.mjs": "a070944dc746e1da231db059471aa8cbc0cd43414aab7e0aaa71604044fa8838",
+    "src/search/search.worker.ts": "ce7a5e149aa5a054a91a81eaa230cdd598b5eea7759dc7ab992272f7da688f20",
+    "src/search/manifest.ts": "4f0e8e703d146c8574ba5ccb99be8794e02627a9a5d7be0082f4fc1cae950181",
+    "src/search/engine.ts": "62e97b4b0d3b2e8f7567390656dc6c95f79cda87ba90e11879699421d06e9863",
+    "src/search/trace.ts": "9b4e7a9559688d33f0b695ade66a9fcb22d214166418bcaec0e0cc1ae5a5e986",
+    "src/map/RoadScene.ts": "fc57aa2f7703349e54982913b7dce983cf927a01bb2a28cca49453be343cdf7b",
+    "src/map/routeReveal.ts": "812cd4b9c1d230a4152658758c5cf5c73f9b4ede052e3dc9177de08cfa3b64fc",
+    "src/map/replayDrawing.ts": "c04d067bb248c7125b6e710224d5377b68478481a32043bdd7da2b37d13e34fe"
+  },
+  "pythonVersion": "3.14.7",
+  "packages": {
+    "osmium": "4.3.1",
+    "brotli": "1.2.0",
+    "shapely": "2.1.2"
+  },
+  "note": "Measured current workspace, which already contained routing-profile work. No production runtime or capacity limit was changed for Australia. The local harness updates its display labels and uses current replayFrame timing for seek checks."
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "pfad-geography/1",
+  "country": "sam",
+  "border": {
+    "path": "border-b42cb6ca1971.json",
+    "bytes": 383726,
+    "sha256": "b42cb6ca19719bd1390e85e97969702b635c282e1183ee9793c0451bf53b6428"
+  },
+  "lakes": {
+    "path": "lakes-d8082daa381f.json",
+    "bytes": 86048,
+    "sha256": "d8082daa381f6dafb53e572db4b6524d5e2c537293ad959f7f51f6f69e0f66f9"
+  },
+  "id": "geo-sam-20261004-06b3347611f6",
+  "identity": "06b3347611f69c997f2aedd6df4c470eeac9bebe728b1494211de93ebed60fcd"
+}

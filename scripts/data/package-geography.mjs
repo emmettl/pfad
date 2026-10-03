@@ -5,9 +5,12 @@ const date = process.argv[2]
 if (!/^\d{8}$/.test(date ?? '')) throw Error('Usage: node scripts/data/package-geography.mjs YYYYMMDD')
 const digest = bytes => createHash('sha256').update(bytes).digest('hex')
 const sources = JSON.parse(await readFile('data/geography-sources.json', 'utf8'))
-const registry = {}
+const selected = process.argv.includes('--country') ? process.argv[process.argv.indexOf('--country') + 1] : undefined
+if (selected !== undefined && !/^[a-z]{2,8}$/.test(selected)) throw Error('Invalid country ID')
+const registry = selected ? JSON.parse(await readFile('src/map/geography-releases.json', 'utf8')) : {}
 const countries = [...new Set(sources.assets.filter(a => a.path.endsWith('-border.json')).map(a => a.path.split('/').at(-1).replace('-border.json', '').replace('switzerland', 'ch')))]
-for (const country of countries) {
+if (selected && !countries.includes(selected)) throw Error('Unknown country: ' + selected)
+for (const country of countries.filter(country => !selected || country === selected)) {
   const prefix = country === 'ch' ? 'switzerland' : country
   const assets = []
   for (const kind of ['border', 'lakes']) {

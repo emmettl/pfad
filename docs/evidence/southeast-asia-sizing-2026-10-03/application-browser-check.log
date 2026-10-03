@@ -1,0 +1,202 @@
+
+> pfad@0.0.0 test:browser
+> playwright test --workers=1
+
+[WebServer] (node:93749) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 82 tests using 1 worker
+
+(node:93793) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/82] [chromium] › e2e/algorithm-menu.spec.ts:2:1 › algorithm menu uses the dark palette and supports keyboard and outside dismissal
+[2/82] [chromium] › e2e/ambient.spec.ts:5:1 › ambient retreats without trapping touch or keyboard controls, and Escape restores the study
+[3/82] [chromium] › e2e/ambient.spec.ts:52:1 › ambient binds genuine journeys, reuses loaded chunks, and exits into the current study
+[4/82] [chromium] › e2e/ambient.spec.ts:97:1 › reduced-motion ambient presents completed stills and requires explicit Next
+[5/82] [chromium] › e2e/ambient.spec.ts:136:1 › sequence pause suspends one continuous score; hidden return needs explicit actions
+[6/82] [chromium] › e2e/astar.spec.ts:12:1 › A* reveals a real goal-directed search, restores paused frames and preserves the route across mode changes
+[7/82] [chromium] › e2e/bidirectional-breadth-first.spec.ts:3:1 › bidirectional breadth-first displays two genuine fronts, a connection-count route and shareable mode
+[8/82] [chromium] › e2e/bidirectional.spec.ts:19:1 › bidirectional Dijkstra: two real fronts render their meeting light, preserve a paused frame and honour reduced motion
+[9/82] [chromium] › e2e/bidirectional.spec.ts:19:1 › bidirectional A*: two real fronts render their meeting light, preserve a paused frame and honour reduced motion
+[10/82] [chromium] › e2e/breadth-first.spec.ts:3:1 › breadth-first replays real traversal, seeks reversibly and shares its mode
+[11/82] [chromium] › e2e/countries.spec.ts:4:1 › country downloads are opt-in, pinned, and switching back restores the bundled Swiss study
+[12/82] [chromium] › e2e/depth-first.spec.ts:3:1 › depth-first replays real traversal, seeks reversibly and shares its mode
+[13/82] [chromium] › e2e/drawing.spec.ts:3:1 › drawing restores its recorded frame and geographic context after GPU context loss
+[14/82] [chromium] › e2e/geography.spec.ts:5:3 › desktop outline controls › verified outlines can be toggled while roads are still downloading
+[15/82] [chromium] › e2e/geography.spec.ts:28:1 › failed external outlines leave genuine road searches available and can be retried
+[16/82] [chromium] › e2e/greedy.spec.ts:5:1 › greedy displays real coral exploration, reversible replay and an honest first-found route
+[17/82] [chromium] › e2e/greedy.spec.ts:51:1 › greedy naturally ends the search and reveals its route before resting
+[18/82] [chromium] › e2e/keyboard.spec.ts:16:1 › map shortcuts play once, scrub real events and respect duration
+[19/82] [chromium] › e2e/keyboard.spec.ts:53:1 › timeline shortcuts work without doubling native input and preserve other controls and busy states
+[20/82] [chromium] › e2e/loading.spec.ts:4:1 › verified chunks survive a failed opening and reload without chunk requests
+[21/82] [chromium] › e2e/motorcar.spec.ts:40:1 › production worker enforces turns, records exact states, exports context and refuses unadapted modes
+[22/82] [chromium] › e2e/motorcar.spec.ts:79:1 › corrupt required rules fail loading before ready
+[23/82] [chromium] › e2e/music.spec.ts:26:1 › real audio is opt-in, bounded and independent of search replay
+[24/82] [chromium] › e2e/music.spec.ts:85:1 › failed music can be retried while the real map remains usable
+[25/82] [chromium] › e2e/music.spec.ts:98:1 › all encoded sketches and the three musical joins have headroom and no cut at the seam
+[26/82] [chromium] › e2e/records.spec.ts:9:1 › native URL follows journey and camera edits, stays fixed during replay, and reloads with autoplay
+[27/82] [chromium] › e2e/records.spec.ts:72:1 › shared journeys autoplay, legacy frames resume, reduced motion shows the result, and exports retain genuine events
+[28/82] [chromium] › e2e/records.spec.ts:127:1 › unavailable releases are explicit errors, and a UK link asks before any graph download
+[29/82] [chromium] › e2e/sharing-metadata.spec.ts:3:1 › a crawler receives the built sharing head and image without JavaScript or graph loading
+[30/82] [chromium] › e2e/spanning-tree.spec.ts:3:1 › spanning tree is a goal-directed manual journey with reversible real acceptance
+[31/82] [chromium] › e2e/study.spec.ts:10:1 › national search, reverse seeking and another pair of endpoints
+[32/82] [chromium] › e2e/study.spec.ts:55:1 › swapping endpoints binds Genève to Zürich to the real worker result
+[33/82] [chromium] › e2e/study.spec.ts:66:1 › reduced motion opens the completed trace without autoplay
+[34/82] [chromium] › e2e/study.spec.ts:75:1 › the completed route reveals, pauses and settles without advancing search events
+[35/82] [chromium] › e2e/territories.spec.ts:4:1 › ambient introduces three real territories, shares their sources and returns to journey controls
+[36/82] [chromium] › e2e/territories.spec.ts:47:1 › territories replay genuine events forward and backward, then hold without route animation
+[37/82] [chromium] › e2e/time.spec.ts:3:1 › estimated time retains distance, model labels and reversible replay
+[38/82] [chromium] › e2e/trace-storage.spec.ts:44:1 › exact archived traces stream exports and retire safely in browser storage
+[chromium] › e2e/trace-storage.spec.ts:44:1 › exact archived traces stream exports and retire safely in browser storage
+6:14:54 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+[39/82] [chromium] › e2e/trace-storage.spec.ts:50:1 › context recovery preserves the dark field without geographic fill
+[40/82] [chromium] › e2e/watch.spec.ts:5:3 › watch mode hides controls and restores focus
+[41/82] [chromium] › e2e/watch.spec.ts:5:3 › watch mode hides controls and restores focus without browser fullscreen
+(node:95549) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[42/82] [webkit-mobile] › e2e/algorithm-menu.spec.ts:2:1 › algorithm menu uses the dark palette and supports keyboard and outside dismissal
+  1) [webkit-mobile] › e2e/algorithm-menu.spec.ts:2:1 › algorithm menu uses the dark palette and supports keyboard and outside dismissal 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.goto: Test timeout of 30000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:4190/?algorithm=spanning-tree", waiting until "load"
+
+
+      1 | import { test, expect } from '@playwright/test'
+      2 | test('algorithm menu uses the dark palette and supports keyboard and outside dismissal', async ({ page }) => {
+    > 3 |   await page.goto('./?algorithm=spanning-tree')
+        |              ^
+      4 |   const picker = page.getByRole('combobox', { name: 'Search algorithm' })
+      5 |   await expect(picker).toBeEnabled({ timeout: 60000 })
+      6 |   await picker.click()
+        at /Users/louisemmett/Developer/Projects/pfad/e2e/algorithm-menu.spec.ts:3:14
+
+    Error Context: test-results/algorithm-menu-algorithm-m-9f286-board-and-outside-dismissal-webkit-mobile/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/algorithm-menu-algorithm-m-9f286-board-and-outside-dismissal-webkit-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/algorithm-menu-algorithm-m-9f286-board-and-outside-dismissal-webkit-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:95675) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[43/82] [webkit-mobile] › e2e/ambient.spec.ts:5:1 › ambient retreats without trapping touch or keyboard controls, and Escape restores the study
+  2) [webkit-mobile] › e2e/ambient.spec.ts:5:1 › ambient retreats without trapping touch or keyboard controls, and Escape restores the study 
+
+    Test timeout of 90000ms exceeded.
+
+    Error: page.goto: Test timeout of 90000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:4190/", waiting until "load"
+
+
+       5 | test('ambient retreats without trapping touch or keyboard controls, and Escape restores the study', async ({ page, isMobile }) => {
+       6 |   await page.clock.install()
+    >  7 |   await page.goto('./'); await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+         |              ^
+       8 |   await page.getByRole('button', { name: 'Ambient', exact: true }).click()
+       9 |   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'replay', { timeout: 45000 })
+      10 |   const controls = page.locator('.ambient-controls'), header = page.locator('.header-tools'), map = page.locator('main.map')
+        at /Users/louisemmett/Developer/Projects/pfad/e2e/ambient.spec.ts:7:14
+
+    Error Context: test-results/ambient-ambient-retreats-w-6c865-d-Escape-restores-the-study-webkit-mobile/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/ambient-ambient-retreats-w-6c865-d-Escape-restores-the-study-webkit-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/ambient-ambient-retreats-w-6c865-d-Escape-restores-the-study-webkit-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:96133) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[44/82] [webkit-mobile] › e2e/ambient.spec.ts:52:1 › ambient binds genuine journeys, reuses loaded chunks, and exits into the current study
+  3) [webkit-mobile] › e2e/ambient.spec.ts:52:1 › ambient binds genuine journeys, reuses loaded chunks, and exits into the current study 
+
+    Test timeout of 90000ms exceeded.
+
+    Error: page.goto: Test timeout of 90000ms exceeded.
+    Call log:
+      - navigating to "http://127.0.0.1:4190/", waiting until "load"
+
+
+      54 |   page.on('pageerror', error => errors.push(error.message))
+      55 |   page.on('request', request => { if (request.url().endsWith('.m4a')) music.push(request.url()); if (request.url().endsWith('.bin.gz.bin')) chunks.push(request.url()) })
+    > 56 |   await page.goto('./'); await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+         |              ^
+      57 |   await page.getByRole('button', { name: 'Ambient', exact: true }).click()
+      58 |   await expect(page.locator('.study')).toHaveAttribute('data-ambient-phase', 'replay', { timeout: 45000 })
+      59 |   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'dijkstra/1')
+        at /Users/louisemmett/Developer/Projects/pfad/e2e/ambient.spec.ts:56:14
+
+    Error Context: test-results/ambient-ambient-binds-genu-3a7c2-xits-into-the-current-study-webkit-mobile/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/ambient-ambient-binds-genu-3a7c2-xits-into-the-current-study-webkit-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/ambient-ambient-binds-genu-3a7c2-xits-into-the-current-study-webkit-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:96445) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[45/82] [webkit-mobile] › e2e/ambient.spec.ts:97:1 › reduced-motion ambient presents completed stills and requires explicit Next
+  4) [webkit-mobile] › e2e/ambient.spec.ts:97:1 › reduced-motion ambient presents completed stills and requires explicit Next 
+
+    Test was interrupted.
+
+    Error: page.goto: Test ended.
+    Call log:
+      - navigating to "http://127.0.0.1:4190/", waiting until "load"
+
+
+      105 |     }
+      106 |   })
+    > 107 |   await page.emulateMedia({ reducedMotion: 'reduce' }); await page.goto('./')
+          |                                                                    ^
+      108 |   await expect(page.locator('.study')).toHaveAttribute('data-state', 'ready', { timeout: 45000 })
+      109 |   await selectAlgorithm(page, 'astar')
+      110 |   await expect(page.locator('.study')).toHaveAttribute('data-algorithm', 'astar/1')
+        at /Users/louisemmett/Developer/Projects/pfad/e2e/ambient.spec.ts:107:68
+
+    Error Context: test-results/ambient-reduced-motion-amb-4ddbf--and-requires-explicit-Next-webkit-mobile/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/ambient-reduced-motion-amb-4ddbf--and-requires-explicit-Next-webkit-mobile/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/ambient-reduced-motion-amb-4ddbf--and-requires-explicit-Next-webkit-mobile/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  3 failed
+    [webkit-mobile] › e2e/algorithm-menu.spec.ts:2:1 › algorithm menu uses the dark palette and supports keyboard and outside dismissal 
+    [webkit-mobile] › e2e/ambient.spec.ts:5:1 › ambient retreats without trapping touch or keyboard controls, and Escape restores the study 
+    [webkit-mobile] › e2e/ambient.spec.ts:52:1 › ambient binds genuine journeys, reuses loaded chunks, and exits into the current study 
+  1 interrupted
+    [webkit-mobile] › e2e/ambient.spec.ts:97:1 › reduced-motion ambient presents completed stills and requires explicit Next 
+  37 did not run
+  41 passed (7.4m)

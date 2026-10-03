@@ -1,0 +1,99 @@
+[
+  {
+    "country": "sam",
+    "note": "Desktop touch WebKit, not a physical iPhone. Eight real reduced-motion journeys via Next; one real hold/fade transition with any bounded-attempt Next recoveries recorded, after seeking the completed trace with map End/Space controls.",
+    "url": "http://127.0.0.1:4218/",
+    "runs": [
+      {
+        "mode": "dijkstra",
+        "caption": "Buenos Aires→Santiago",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "6141152"
+        }
+      },
+      {
+        "mode": "bidirectional",
+        "caption": "Buenos Aires→Santiago",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "5158427"
+        }
+      },
+      {
+        "mode": "astar",
+        "caption": "Buenos Aires→Santiago",
+        "canvas": {
+          "width": 402,
+          "height": 874,
+          "cssWidth": 402,
+          "cssHeight": 874,
+          "maxFps": "30",
+          "event": "3363535"
+        }
+      }
+    ],
+    "journeys": [
+      {
+        "algorithm": "astar/1",
+        "caption": "Zipaquirá→Tunja109.7 km (134 min)A*",
+        "events": "160398"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Maracaibo→Paraguarí6939.1 km (6565 min)Bidirectional A*",
+        "events": "28789025"
+      },
+      {
+        "algorithm": "greedy-best-first/1",
+        "caption": "Huacho→Lima157.7 km (161 min)Shortest route not guaranteedGreedy best-first",
+        "events": "5315"
+      },
+      {
+        "algorithm": "dijkstra/1",
+        "caption": "Cayambe→Latacunga157.7 km (181 min)Dijkstra",
+        "events": "698616"
+      },
+      {
+        "algorithm": "multisource-dijkstra/1",
+        "caption": "Coroico · Tunja · CaacupéThree-source Dijkstra",
+        "events": "36128477"
+      },
+      {
+        "algorithm": "bidirectional-dijkstra/1",
+        "caption": "Maracaibo→Maracay559.0 km (500 min)Bidirectional Dijkstra",
+        "events": "2133993"
+      },
+      {
+        "algorithm": "astar/1",
+        "caption": "Montevideo→Santiago1754.5 km (1798 min)A*",
+        "events": "6638248"
+      },
+      {
+        "algorithm": "bidirectional-astar/1",
+        "caption": "Punta del Este→Canelones150.4 km (155 min)Bidirectional A*",
+        "events": "320834"
+      }
+    ],
+    "boundedStops": [],
+    "automaticTransition": {
+      "before": "bidirectional-astar/1",
+      "recoveredStops": 0,
+      "after": "greedy-best-first/1",
+      "caption": "Maracay→ChancayShortest route not guaranteedGreedy best-first"
+    },
+    "outlinesToggle": true,
+    "sharedStudyRestored": true,
+    "errors": [],
+    "analyticsErrors": [],
+    "swissRestored": true
+  }
+]

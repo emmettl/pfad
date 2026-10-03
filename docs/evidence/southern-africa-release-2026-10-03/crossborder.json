@@ -1,0 +1,900 @@
+{
+  "dataset": "a9718f49cf14137b2cf75ece27760b2bb1106d7a2270eda13a4dea15c7341d61",
+  "source": {
+    "provider": "OpenStreetMap via Geofabrik",
+    "dataTimestamp": "2026-10-02T20:21:34Z",
+    "data_timestamp": "2026-10-02T20:21:34Z",
+    "url": "https://download.geofabrik.de/africa.html",
+    "filename": "southern-africa-tanzania-261002.osm.pbf",
+    "bytes": 2339893968,
+    "sha256": "e350184fc4ccb660a03d57f7907fe29bfe579634f3ade45ee2f344efb43464d5",
+    "inputs": [
+      {
+        "country": "south-africa",
+        "url": "https://download.geofabrik.de/africa/south-africa-261002.osm.pbf",
+        "bytes": 421640754,
+        "sha256": "e1e08344a0569c16e72cd6833a8e7a7ac1b7bcb1ada04f10656c3f75c66015c9",
+        "md5": "b183f81d5f83b0e78325d5f146e2c1ab",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "namibia",
+        "url": "https://download.geofabrik.de/africa/namibia-261002.osm.pbf",
+        "bytes": 54690815,
+        "sha256": "7124f88a472c55d45f5b89e35eecfeaa8fb24fcbef318d7905864616d7ccee7b",
+        "md5": "46d2b7694e985f74f82949c61f81cf9a",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "botswana",
+        "url": "https://download.geofabrik.de/africa/botswana-261002.osm.pbf",
+        "bytes": 88027563,
+        "sha256": "76cb8c1e0bef7e46a883293ad7ab8ddd60601b9fcfb18b80520e80e6b026dbf8",
+        "md5": "6f1b0469a2fe0cc3f0244377b715df25",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "lesotho",
+        "url": "https://download.geofabrik.de/africa/lesotho-261002.osm.pbf",
+        "bytes": 127113597,
+        "sha256": "426abdcab04739c0481f6fc4ca458ee245b894c89aea024f688af5be2a52fee5",
+        "md5": "d7ea9e0247024d0ce9546ea5938846ea",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "swaziland",
+        "url": "https://download.geofabrik.de/africa/swaziland-261002.osm.pbf",
+        "bytes": 30827445,
+        "sha256": "73d4d01bfc0f0040493a63fc825a5ab7c7fffbd6d2377f9eae94c46849642f8f",
+        "md5": "2051c9f2a30f3394e8ab9ea6785aad54",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "zimbabwe",
+        "url": "https://download.geofabrik.de/africa/zimbabwe-261002.osm.pbf",
+        "bytes": 179511345,
+        "sha256": "6858a9bf4f0f494523ad947ce1f88ffcf0cc54d2b36ee58781d1ea2ec875f368",
+        "md5": "eeaf4b43ecc2f2af6e4cb21995e0fe17",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "zambia",
+        "url": "https://download.geofabrik.de/africa/zambia-261002.osm.pbf",
+        "bytes": 251990401,
+        "sha256": "b4723c6cad3886afbb749a2b7fc3896f8b50f21bd870068c081da0b100906232",
+        "md5": "a3fd415ccab294c3c7336bba4de883fe",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "mozambique",
+        "url": "https://download.geofabrik.de/africa/mozambique-261002.osm.pbf",
+        "bytes": 255461533,
+        "sha256": "441f41e04fe9379a03e66f4ef503d039377afa8858cdfad5832be677402e6e02",
+        "md5": "fd93e20e4d78dea6d7023934075b7af6",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "malawi",
+        "url": "https://download.geofabrik.de/africa/malawi-261002.osm.pbf",
+        "bytes": 155118843,
+        "sha256": "c7e7f5d5b36291e9a762948421c857ceebef043e9075f15a157a1debd2785460",
+        "md5": "40fbebe1bc12750bf43ceefa508f4a23",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "angola",
+        "url": "https://download.geofabrik.de/africa/angola-261002.osm.pbf",
+        "bytes": 85291929,
+        "sha256": "224f81d663d710d9eba664519ef5dd4aeeededc409b087b51d972e9c8b81b8b4",
+        "md5": "c9aea60ebb71f81212aa8c2c3760c72f",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      },
+      {
+        "country": "tanzania",
+        "url": "https://download.geofabrik.de/africa/tanzania-261002.osm.pbf",
+        "bytes": 706152347,
+        "sha256": "26b33424a0d696a2422dfda727151d87d8d710c0186a4eea82853368d4971d12",
+        "md5": "07dfd0fc08dcf806655aee58137a04cb",
+        "dataTimestamp": "2026-10-02T20:21:34Z"
+      }
+    ],
+    "attribution": "© OpenStreetMap contributors",
+    "licence": "ODbL-1.0",
+    "licenceUrl": "https://www.openstreetmap.org/copyright",
+    "composition": {
+      "version": "pfad-southern-africa-tanzania/1",
+      "tool": "osmium-tool/1.19.1",
+      "libosmium": "2.23.1",
+      "operation": "merge-same-snapshot",
+      "deduplication": "OSM object type, ID and version",
+      "clipping": false,
+      "generator": "pfad-southern-africa-tanzania/1"
+    }
+  },
+  "compiler": "pfad-study-streaming-compiler/1",
+  "profile": "road-connectivity-distance-v1",
+  "counts": {
+    "nodes": 6249625,
+    "edges": 8256124,
+    "directedArcs": 16160825,
+    "vertices": 39604500
+  },
+  "downloadBytes": 110680420,
+  "weakComponents": 15704,
+  "largestWeakComponentNodes": 6129673,
+  "largestWeakComponentFraction": 0.9808065283917035,
+  "physicalRoadKm": 2128968.74981,
+  "routes": [
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Namibia",
+        "name": "Windhoek",
+        "lon": 17.0832,
+        "lat": -22.5597
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Namibia",
+          "name": "Windhoek",
+          "lon": 17.08394,
+          "lat": -22.55997,
+          "node": 5244408,
+          "snapMetres": 81.70394437272716
+        },
+        "snapMs": 308.6334160000001,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Namibia",
+            "name": "Windhoek",
+            "lon": 17.0832,
+            "lat": -22.5597
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 1356439.52,
+          "routeEdges": 1779,
+          "events": 4745197,
+          "traceSha256": "4a15ed12c0592d24fb7dba23ac53f9bb246fa734694633b9596b80627fec05bc",
+          "searchMs": 192.78337499999998,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 1356439.52,
+          "routeEdges": 1779,
+          "events": 11335537,
+          "traceSha256": "3111dcdb24b481fd7d1d0e6770acc004279a38f445c3cfe4efc7c58dc75a9dbb",
+          "searchMs": 517.3908750000003,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 1356439.52,
+          "routeEdges": 1779,
+          "events": 14728920,
+          "traceSha256": "8be5512e4345ccb486183ff0d6eafda4ef0edb8ba011aa8aad23d0ab65e6b776",
+          "searchMs": 496.883417,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Botswana",
+        "name": "Gaborone",
+        "lon": 25.9231,
+        "lat": -24.6282
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Botswana",
+          "name": "Gaborone",
+          "lon": 25.92309,
+          "lat": -24.62803,
+          "node": 707339,
+          "snapMetres": 18.9301692470214
+        },
+        "snapMs": 58.04404199999999,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Botswana",
+            "name": "Gaborone",
+            "lon": 25.9231,
+            "lat": -24.6282
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 309648.34,
+          "routeEdges": 986,
+          "events": 1645768,
+          "traceSha256": "d02a7272bfdcde1169dc3dd5cbb9f5ed504b52be06eb5d0108561075a365bab4",
+          "searchMs": 72.80329200000006,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 309648.34,
+          "routeEdges": 986,
+          "events": 3676576,
+          "traceSha256": "2f4ba3eeea30cfca291249efb8bdefe242c372e6a975331ceb46aed54fa42d21",
+          "searchMs": 172.70712500000036,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 309648.34,
+          "routeEdges": 986,
+          "events": 4882473,
+          "traceSha256": "030f805e69ee150c36eb031c0a28e82e4c615af8f11f6ec7953c5c97105fb2f3",
+          "searchMs": 175.53637500000013,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Lesotho",
+        "name": "Maseru",
+        "lon": 27.4833,
+        "lat": -29.3167
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Lesotho",
+          "name": "Maseru",
+          "lon": 27.48328,
+          "lat": -29.31658,
+          "node": 176158,
+          "snapMetres": 13.483568058518562
+        },
+        "snapMs": 67.59591699999964,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Lesotho",
+            "name": "Maseru",
+            "lon": 27.4833,
+            "lat": -29.3167
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 446566.69,
+          "routeEdges": 756,
+          "events": 2216030,
+          "traceSha256": "c67b38737da2e399d112e9a5bb7a2228697d67ce94dab831ab6c48a04785f4b4",
+          "searchMs": 105.83533400000033,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 446566.69,
+          "routeEdges": 756,
+          "events": 4410284,
+          "traceSha256": "4ecda03ece442a1948ca30397cf0a972af6cae634df2e6b51580caf3a5b61d4a",
+          "searchMs": 230.00070799999958,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 446566.69,
+          "routeEdges": 756,
+          "events": 7627006,
+          "traceSha256": "fb0eb6d31e5fec2837e79b281bf7480f428dfb1f2d64395abb05a2f68b44f376",
+          "searchMs": 285.1549160000004,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Eswatini",
+        "name": "Mbabane",
+        "lon": 31.1333,
+        "lat": -26.3167
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Eswatini",
+          "name": "Mbabane",
+          "lon": 31.13327,
+          "lat": -26.31677,
+          "node": 744183,
+          "snapMetres": 8.338230349606349
+        },
+        "snapMs": 50.39204199999949,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Eswatini",
+            "name": "Mbabane",
+            "lon": 31.1333,
+            "lat": -26.3167
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 338475.37,
+          "routeEdges": 527,
+          "events": 1805843,
+          "traceSha256": "964a262bc607adae7f290f0923bba958ca58279edc799d8fa567633335c5e729",
+          "searchMs": 81.69191599999976,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 338475.37,
+          "routeEdges": 527,
+          "events": 3919450,
+          "traceSha256": "d9dee8e7d8ddb466c9389c7355a8145418842168cda5baa16615fb510dad585f",
+          "searchMs": 201.82670899999994,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 338475.37,
+          "routeEdges": 527,
+          "events": 5387316,
+          "traceSha256": "45d8bd3aa98adf5eddefe0e5549315a2b20cf729690263d0faca06cd54417676",
+          "searchMs": 200.17391700000007,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Zimbabwe",
+        "name": "Harare",
+        "lon": 31.0522,
+        "lat": -17.8252
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Zimbabwe",
+          "name": "Harare",
+          "lon": 31.05185,
+          "lat": -17.8253,
+          "node": 1838996,
+          "snapMetres": 38.68263146402062
+        },
+        "snapMs": 49.81162499999937,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Zimbabwe",
+            "name": "Harare",
+            "lon": 31.0522,
+            "lat": -17.8252
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 1031024.62,
+          "routeEdges": 1638,
+          "events": 3438967,
+          "traceSha256": "a68199db62eaf9c358eb0e96fa145cd8d2fa99eb2bc50d20f595a44ca6638f52",
+          "searchMs": 149.27620799999931,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 1031024.62,
+          "routeEdges": 1638,
+          "events": 10353068,
+          "traceSha256": "99c05435e9fcfdc291c5b6de84e3f0bfd5d8a2e20da93bc7ff71976a4e3a21b4",
+          "searchMs": 518.2905419999997,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 1031024.62,
+          "routeEdges": 1638,
+          "events": 13255504,
+          "traceSha256": "964d8dc563d4b2de5ced0ee90e09bb2d4bc33e7b36de3edaa89f5eae330ef33b",
+          "searchMs": 465.04554200000075,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Zambia",
+        "name": "Lusaka",
+        "lon": 28.3228,
+        "lat": -15.3875
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Zambia",
+          "name": "Lusaka",
+          "lon": 28.32342,
+          "lat": -15.3883,
+          "node": 2004843,
+          "snapMetres": 111.04681490703403
+        },
+        "snapMs": 52.123375000000124,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Zambia",
+            "name": "Lusaka",
+            "lon": 28.3228,
+            "lat": -15.3875
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 1480949.64,
+          "routeEdges": 2307,
+          "events": 6915085,
+          "traceSha256": "9fa6e130976d6dc68eb7b75382ec68a635238796d8c7a9fc50e3c7b87a5116b4",
+          "searchMs": 280.1681660000004,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 1480949.64,
+          "routeEdges": 2307,
+          "events": 13476342,
+          "traceSha256": "15e934722823473b63ea3da6a766a22ef65dd974643f9a24c4f494190762d24d",
+          "searchMs": 676.6379580000003,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 1480949.64,
+          "routeEdges": 2307,
+          "events": 16254660,
+          "traceSha256": "0d3240e9fd925aa5b57918e03793ea6b3cab34bd7d074cd272a66c6bf526cc81",
+          "searchMs": 569.933583,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Mozambique",
+        "name": "Maputo",
+        "lon": 32.5732,
+        "lat": -25.9692
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Mozambique",
+          "name": "Maputo",
+          "lon": 32.57337,
+          "lat": -25.96928,
+          "node": 1356297,
+          "snapMetres": 19.181891117015653
+        },
+        "snapMs": 51.38033399999949,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Mozambique",
+            "name": "Maputo",
+            "lon": 32.5732,
+            "lat": -25.9692
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 513726.2,
+          "routeEdges": 1103,
+          "events": 3374014,
+          "traceSha256": "8e87d79016cc6b5e1fe923c374c28aa33a8b05e1d4e4bfaec8c2f4da8a2029f6",
+          "searchMs": 141.91354200000023,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 513726.2,
+          "routeEdges": 1103,
+          "events": 5649198,
+          "traceSha256": "9166fe045cf3e0ad422e10529875f066d3ad90fe2312180b28ccefd8e2faac2b",
+          "searchMs": 276.0910409999997,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 513726.2,
+          "routeEdges": 1103,
+          "events": 8852394,
+          "traceSha256": "87d791f1eed7ed325c0410441a52f9ee47f00c6d47c29f85cd4f31d540971439",
+          "searchMs": 312.47683399999914,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Malawi",
+        "name": "Lilongwe",
+        "lon": 33.7741,
+        "lat": -13.9626
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Malawi",
+          "name": "Lilongwe",
+          "lon": 33.77382,
+          "lat": -13.96305,
+          "node": 187127,
+          "snapMetres": 58.45261509711689
+        },
+        "snapMs": 50.25158300000112,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Malawi",
+            "name": "Lilongwe",
+            "lon": 33.7741,
+            "lat": -13.9626
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 1685977.14,
+          "routeEdges": 2510,
+          "events": 6783199,
+          "traceSha256": "0a4c4ed147720d4f49a242c04ba9aac1d53025218bfb7e91fa80e9286dc9906c",
+          "searchMs": 272.81995800000004,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 1685977.14,
+          "routeEdges": 2510,
+          "events": 16388132,
+          "traceSha256": "f0b9d588f2cb8ce806491e03756f34287137ecb9d6b3efaaf88ef34fe78a70a8",
+          "searchMs": 824.1022499999999,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 1685977.14,
+          "routeEdges": 2510,
+          "events": 17738855,
+          "traceSha256": "71a8641b23a6754cae7059e795d9a8a0411ed76881f47f5a5a58bae3e5b39c5f",
+          "searchMs": 635.7524169999997,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Angola",
+        "name": "Luanda",
+        "lon": 13.2344,
+        "lat": -8.8383
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Angola",
+          "name": "Luanda",
+          "lon": 13.23473,
+          "lat": -8.83859,
+          "node": 434662,
+          "snapMetres": 48.523521858402596
+        },
+        "snapMs": 51.389790999999605,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Angola",
+            "name": "Luanda",
+            "lon": 13.2344,
+            "lat": -8.8383
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 3042926.05,
+          "routeEdges": 3486,
+          "events": 10606987,
+          "traceSha256": "dc58fe2ab677e9faed3154493474e673b0feecdd3785ecaf633005136f015acf",
+          "searchMs": 417.69416699999965,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 3042926.05,
+          "routeEdges": 3486,
+          "events": 18433561,
+          "traceSha256": "779b9ea2139e48df0be56aad9d5ab372f7edea1f17e490aefd800e7dd06884c8",
+          "searchMs": 857.2693330000002,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 3042926.05,
+          "routeEdges": 3486,
+          "events": 25175390,
+          "traceSha256": "49df6c289c0ca41a0e6fa43ff20abd235a602b1b9a04969412d1d729a215b8ce",
+          "searchMs": 901.666541999999,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    },
+    {
+      "start": {
+        "country": "South Africa",
+        "name": "Pretoria",
+        "lon": 28.1881,
+        "lat": -25.7461
+      },
+      "goal": {
+        "country": "Tanzania",
+        "name": "Dodoma",
+        "lon": 35.7516,
+        "lat": -6.163
+      },
+      "snapping": {
+        "start": {
+          "country": "South Africa",
+          "name": "Pretoria",
+          "lon": 28.1888,
+          "lat": -25.74581,
+          "node": 2591169,
+          "snapMetres": 77.1698813152144
+        },
+        "goal": {
+          "country": "Tanzania",
+          "name": "Dodoma",
+          "lon": 35.75118,
+          "lat": -6.1632,
+          "node": 767445,
+          "snapMetres": 51.48306809952117
+        },
+        "snapMs": 52.569290999999794,
+        "snapping": {
+          "version": "nearby-shared-component/1",
+          "requestedStart": {
+            "country": "South Africa",
+            "name": "Pretoria",
+            "lon": 28.1881,
+            "lat": -25.7461
+          },
+          "requestedGoal": {
+            "country": "Tanzania",
+            "name": "Dodoma",
+            "lon": 35.7516,
+            "lat": -6.163
+          }
+        }
+      },
+      "runs": [
+        {
+          "algorithm": "astar/1",
+          "routeMetres": 2912429.91,
+          "routeEdges": 5652,
+          "events": 14226902,
+          "traceSha256": "702114d4ede3dfe436a04340f746580945e33645c155f821ba7c477ea031e836",
+          "searchMs": 604.8559160000004,
+          "tieBreak": "cost so far plus feasible remaining-distance bound, then ascending node id; neighbours in compiler edge order"
+        },
+        {
+          "algorithm": "bidirectional-dijkstra/1",
+          "routeMetres": 2912429.91,
+          "routeEdges": 5652,
+          "events": 25424392,
+          "traceSha256": "fcfbcb44e197781a59572cbadde7190e53e3de22571b93c8d829fe2cd1db33af",
+          "searchMs": 1570.5812080000014,
+          "tieBreak": "smaller queue distance; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection"
+        },
+        {
+          "algorithm": "dijkstra/1",
+          "routeMetres": 2912429.91,
+          "routeEdges": 5652,
+          "events": 22415636,
+          "traceSha256": "5b6e8b5a4affe72cdff862fb1e7dc43e07296c422eed531be5d4b8d9a6858fa8",
+          "searchMs": 838.101375000002,
+          "tieBreak": "distance, then ascending node id; neighbours in compiler edge order"
+        }
+      ]
+    }
+  ],
+  "note": "Complete union; hashes and manifest limits validated. Weak components ignore direction. Nine directed capital journeys verify all ten countries share road connectivity; route adjacency, one-way direction and exact cost checked across three algorithms. Basic access connectivity profile, not enforced turn/barrier/conditional navigation."
+}

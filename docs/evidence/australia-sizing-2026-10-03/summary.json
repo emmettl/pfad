@@ -1,0 +1,50 @@
+{
+  "checks": {
+    "completeGeometry": true,
+    "exactRoadIds": true,
+    "repeatedTraces": true,
+    "crossBrowserTraces": true,
+    "matchingShortestDistanceCosts": true,
+    "seekReplay": true,
+    "webglErrors": false,
+    "runtimeFilesStableSinceContextCapture": true
+  },
+  "sourceBytes": 966233948,
+  "roadDownloadBytes": 44568336,
+  "optionalEvidenceBytes": 17656782,
+  "counts": {
+    "nodes": 2819540,
+    "edges": 3498445,
+    "directedArcs": 6153801,
+    "vertices": 13605504
+  },
+  "browsers": [
+    {
+      "name": "chromium-metal",
+      "loadMs": 745.1000000238419,
+      "searchMsRange": [
+        156.39999997615814,
+        822.6999999880791
+      ],
+      "replayFpsRange": [
+        60.00985733505615,
+        60.061861717538335
+      ],
+      "peakProcessTreeRssBytes": 1555365888
+    },
+    {
+      "name": "webkit-desktop",
+      "loadMs": 521,
+      "searchMsRange": [
+        127,
+        578
+      ],
+      "replayFpsRange": [
+        59.877447715465564,
+        60.02265005662514
+      ],
+      "peakProcessTreeRssBytes": 127156224
+    }
+  ],
+  "note": "Local desktop benchmark on M4 Max / 36 GiB, not internet transfer or physical phone testing. Chromium RSS is approximate; WebKit escaped the sampler."
+}
