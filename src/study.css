@@ -200,3 +200,5 @@ footer a { text-decoration: none; pointer-events: auto; }
 .algorithm-menu button.active, .algorithm-menu button:hover { background: #263c31; }
 .algorithm-menu button[aria-selected='true'] { color: #e0f4e7; }
 @media (max-width: 600px) { .algorithm-picker > button, .algorithm-menu button { min-height: 44px; } }
+
+.study[data-algorithm='bidirectional-breadth-first/1'] .front-a { background: #d9c2ff; }

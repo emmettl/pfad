@@ -74,6 +74,7 @@ const fragmentShader = `
     if (uTimeAstar > .5) { quiet = mix(vec3(.32, .57, .85), vec3(.55, .80, .92), vGoalProximity); bright = vec3(.85, .97, 1.); }
     if (uTree > .5) { quiet = vec3(.40, .25, .20); bright = vec3(1., .64, .40); }
     if (uBreadth > .5) { quiet = vec3(.65, .43, .12); bright = vec3(1., .87, .43); }
+    if (uBreadth > 1.5) { quiet = vec3(.48, .36, .68); bright = vec3(.85, .76, 1.); }
     if (uDepth > .5) { quiet = vec3(.55, .35, .75); bright = vec3(.90, .75, 1.); }
     if (uTerritories > .5) {
       if (vSource > 1.5) { quiet = vec3(.38, .35, .60); bright = vec3(.73, .70, 1.); }
@@ -402,7 +403,7 @@ export class RoadScene {
     this.tip.classList.toggle('time-astar-tip', timeAstar)
     this.routeMaterial.uniforms.uEmphasis.value = timeAstar ? 1.7 : 1
     const greedy = result.algorithm === 'greedy-best-first/1', depthFirst = result.algorithm === 'depth-first/1'
-    this.material.uniforms.uBreadth.value = result.algorithm === 'breadth-first/1' ? 1 : 0
+    this.material.uniforms.uBreadth.value = result.algorithm === 'bidirectional-breadth-first/1' ? 2 : result.algorithm === 'breadth-first/1' ? 1 : 0
     this.material.uniforms.uDepth.value = depthFirst ? 1 : 0
     this.tip.classList.toggle('depth-first-tip', depthFirst)
     this.focusEvents = result.focusEvents; this.focusCoordinates = result.focusCoordinates

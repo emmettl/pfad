@@ -25,7 +25,9 @@ test(`${guided ? 'bidirectional A*' : 'bidirectional Dijkstra'}: two real fronts
   const canvas = page.locator('canvas')
   const meeting = Number(await canvas.getAttribute('data-meeting-event')), total = Number(await canvas.getAttribute('data-total-events'))
   expect(meeting).toBeGreaterThan(0); expect(meeting).toBeLessThanOrEqual(total)
-  const before = Math.floor((meeting / total * 30 - .15) * 100) / 100
+  // The documented 30-second replay reserves its final three seconds for
+  // the completed route. The meeting belongs to the 27-second search clock.
+  const before = Math.floor((meeting / total * 27 - .15) * 100) / 100
   await seek(page, 15)
   await page.screenshot({ path: `test-results/${guided ? 'bidirectional-astar' : 'bidirectional'}-fronts-${test.info().project.name}.png` })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)

@@ -46,8 +46,8 @@ export interface Graph {
 export interface Point { name: string; lon: number; lat: number }
 export interface Endpoint extends Point { node: number; snapMetres: number }
 export interface SnappingRecord { version: 'nearby-shared-component/1'; requestedStart: Point; requestedGoal: Point }
-export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar' | 'bidirectional-astar' | 'multisource' | 'greedy' | 'depth-first' | 'breadth-first' | 'time-dijkstra' | 'spanning-tree'
-export interface Meeting { event: number; node: number; lon: number; lat: number; candidateMetres?: number; candidateMilliseconds?: number }
+export type SearchAlgorithm = 'dijkstra' | 'bidirectional' | 'astar' | 'bidirectional-astar' | 'multisource' | 'greedy' | 'depth-first' | 'breadth-first' | 'bidirectional-breadth-first' | 'time-dijkstra' | 'spanning-tree'
+export interface Meeting { event: number; node: number; lon: number; lat: number; candidateConnections?: number; candidateMetres?: number; candidateMilliseconds?: number }
 export interface HeuristicRecord {
   version: 'feasible-planar-distance/1'
   preparationMs: number
@@ -61,7 +61,7 @@ export interface ProximityHeuristicRecord { version: 'great-circle-proximity/1';
 
 export interface SearchResult {
   dataset?: { identity: string; compiler: string; profile: string; sourceSha256: string; sourceTimestamp: string }
-  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1' | 'astar/1' | 'bidirectional-astar/1' | 'multisource-dijkstra/1' | 'greedy-best-first/1' | 'depth-first/1' | 'breadth-first/1' | 'time-dijkstra/1' | 'spanning-tree/1'
+  algorithm: 'dijkstra/1' | 'bidirectional-dijkstra/1' | 'astar/1' | 'bidirectional-astar/1' | 'multisource-dijkstra/1' | 'greedy-best-first/1' | 'depth-first/1' | 'breadth-first/1' | 'bidirectional-breadth-first/1' | 'time-dijkstra/1' | 'spanning-tree/1'
   tieBreak: string
   start: Endpoint
   goal: Endpoint

@@ -376,3 +376,14 @@ destination node ID then physical road ID. Kind 2 records accepted roads, kind
 `undirected-prim-goal/1` preserve acceptance order and policy. The unique tree
 path from A to B is revealed after exploration; it is not guaranteed shortest.
 Copper-gold branches persist behind the route. No ambient insertion.
+
+### Bidirectional breadth-first manual trial
+
+`bidirectional-breadth-first/1` shares the two-front recorder with bidirectional
+Dijkstra, replacing weighted heaps with FIFO depth queues and charging one per
+compiled arc. Reverse expansion follows incoming legal arcs. The smaller
+frontier depth expands; equal depths alternate starting at A. A first contact
+is an upper bound; the sum of next frontier depths certifies the fewest
+connections before stopping. Physical lengths remain separate, and meeting
+metadata records `candidateConnections`. It is manual only; the time toggle
+is disabled. Lavender from A and gold from B reveal real examinations.

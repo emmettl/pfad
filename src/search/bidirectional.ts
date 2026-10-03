@@ -39,14 +39,24 @@ export function prepareBalancedHeuristic(graph: Graph, reverse: ReverseGraph, st
   return { potential, divisor, forward: forward.record, backward: backward.record, preparationMs: performance.now() - begun }
 }
 
-export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoint, goal: Endpoint, snapMs = 0, guided = false): SearchResult {
+/** FIFO frontier for unit-cost breadth-first layers; each node is discovered once. */
+class BreadthQueue {
+  nodes: Uint32Array; scores: Float64Array; size = 0; maximum = 0
+  private head = 0; private tail = 0
+  constructor(n: number) { this.nodes = new Uint32Array(n); this.scores = new Float64Array(n) }
+  push(node: number, depth: number) { this.nodes[this.tail] = node; this.scores[this.tail++] = depth; this.size++; this.maximum = Math.max(this.maximum, this.size) }
+  pop() { this.size--; return this.nodes[this.head++] }
+  minimum(_settled: Uint8Array) { return this.size ? this.scores[this.head] : Infinity }
+}
+
+export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoint, goal: Endpoint, snapMs = 0, guided = false, breadth = false): SearchResult {
   const balanced = guided ? prepareBalancedHeuristic(graph, reverse, start.node, goal.node) : undefined
   const potential = balanced?.potential, divisor = balanced?.divisor ?? 1
   const begun = performance.now(), n = graph.xy.length / 2, e = graph.from.length
   if (n >= 2 ** 29 || graph.arcTo.length >= 2 ** 29) throw new Error('Graph IDs exceed the bidirectional trace format')
   const distance = [new Float64Array(n).fill(Infinity), new Float64Array(n).fill(Infinity)]
   const parentEdge = [new Int32Array(n).fill(-1), new Int32Array(n).fill(-1)]
-  const settled = [new Uint8Array(n), new Uint8Array(n)], heap = [new Heap(), new Heap()]
+  const settled = [new Uint8Array(n), new Uint8Array(n)], heap = breadth ? [new BreadthQueue(n), new BreadthQueue(n)] : [new Heap(), new Heap()]
   const textureWidth = Math.min(2048, Math.max(1, e)), textureHeight = Math.max(1, Math.ceil(e / textureWidth))
   const times = [new Uint32Array(textureWidth * textureHeight * 2), new Uint32Array(textureWidth * textureHeight * 2)]
   const events = new EventTrace(2 * n + 4 * graph.arcTo.length)
@@ -61,7 +71,7 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
   function connect(node: number) {
     const candidate = distance[0][node] + distance[1][node]
     if (!Number.isFinite(candidate)) return
-    if (!meeting && start.node !== goal.node) meeting = { event: used, node, lon: graph.xy[node * 2] / 100000, lat: graph.xy[node * 2 + 1] / 100000, candidateMetres: candidate / 100 }
+    if (!meeting && start.node !== goal.node) meeting = { event: used, node, lon: graph.xy[node * 2] / 100000, lat: graph.xy[node * 2 + 1] / 100000, ...(breadth ? { candidateConnections: candidate } : { candidateMetres: candidate / 100 }) }
     if (candidate < best) { best = candidate; join = node }
   }
   distance[0][start.node] = 0; distance[1][goal.node] = 0
@@ -85,7 +95,7 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
       const a = side ? reverse.arc[i] : i, v = side ? arcSource(graph, a) : graph.arcTo[a], road = graph.arcEdge[a]
       examinedArcs++; record(side, 1, a)
       if (!times[side][road * 2]) { if (!times[1 - side][road * 2]) uniqueEdges++; times[side][road * 2] = used }
-      const candidate = distance[side][u] + graph.length[road]
+      const candidate = distance[side][u] + (breadth ? 1 : graph.length[road])
       if (candidate < distance[side][v]) {
         distance[side][v] = candidate; parentEdge[side][v] = road
         heap[side].push(v, priority(side, v, candidate)); improvements++; record(side, 2, a)
@@ -114,10 +124,11 @@ export function bidirectional(graph: Graph, reverse: ReverseGraph, start: Endpoi
   }
   releaseBuffers(...distance, ...parentEdge, ...settled, ...heap.flatMap(front => [front.nodes, front.scores]), potential)
   return {
-    algorithm: guided ? 'bidirectional-astar/1' : 'bidirectional-dijkstra/1',
+    algorithm: breadth ? 'bidirectional-breadth-first/1' : guided ? 'bidirectional-astar/1' : 'bidirectional-dijkstra/1',
+    routeGuarantee: breadth ? 'fewest-connections' : undefined,
     balancedHeuristic: balanced ? { version: 'balanced-feasible-planar-distance/1', preparationMs: balanced.preparationMs, forward: balanced.forward, backward: balanced.backward } : undefined,
-    tieBreak: `smaller queue ${guided ? 'normalised reduced cost' : 'distance'}; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection`,
-    start, goal, searchMs, snapMs, routeMetres: Number.isFinite(best) ? best / 100 : null,
+    tieBreak: breadth ? 'smaller frontier depth; equal depths alternate fronts starting forward; FIFO within each front; compiler forward arcs and source-ordered reverse arcs; first equal-length join; stop when frontier depth sum certifies fewest connections' : `smaller queue ${guided ? 'normalised reduced cost' : 'distance'}; equal distances alternate fronts starting forward; ascending node id within each front; forward compiler edge order, reverse ascending source node then original arc id; retain first equal-cost connection`,
+    start, goal, searchMs, snapMs, routeMetres: Number.isFinite(best) ? (breadth ? routeEdges.reduce((sum, edge) => sum + graph.length[edge], 0) : best) / 100 : null,
     routeNodes: Uint32Array.from(routeNodes), routeEdges: Uint32Array.from(routeEdges),
     routeReversed: Uint8Array.from(routeEdges, (edge, i) => Number(graph.from[edge] !== routeNodes[i])),
     routeLengths: Uint32Array.from(routeEdges, edge => graph.length[edge]),
