@@ -85,3 +85,5 @@ that time; its older counts and algorithm sets are not current feature limits.
 [South America release](evidence/south-america-release-2026-10-04/README.md)
 adds nine connected mainland countries with complete source extracts, 37 audited
 places, ambient journeys and independent coastal/lake context.
+
+- [ALT manual trial](ALT.md): deterministic Swiss landmarks, directed shortest-distance bounds, preparation and memory costs.

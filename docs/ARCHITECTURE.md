@@ -397,3 +397,12 @@ The exported `fixed-heuristic-weight/1` policy records weight and reopening;
 no shortest-route guarantee is claimed. Physical route costs remain unweighted.
 Both distance and estimated time are supported; rose focus follows recorded
 node expansions. This option is excluded from the ambient rotation.
+
+### ALT manual trial
+
+[ALT](ALT.md) records `alt/1` Swiss distance queries with four deterministic
+landmarks, exact forward/reverse centimetre tables and an arc-feasibility checked
+landmark bound. Tables remain in the worker and are invalidated by snapshot load;
+query replay and preprocessing stay separate. The index adds 32 bytes per node,
+with measured buffer costs and selection policy retained in exports. The trial
+is excluded from ambient and other countries; the objective toggle is disabled.

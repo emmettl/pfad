@@ -1,3 +1,4 @@
+import { alt, buildLandmarks, type LandmarkIndex } from './alt.ts'
 import { releaseBuffers } from './release-buffers.ts'
 import { packDrawing } from '../map/drawing-codec.ts'
 import { longitudeOffset } from './projection.ts'
@@ -100,16 +101,18 @@ async function load(url: string, expectedIdentity?: string, topologyOnly = false
   reply({ type: 'ready', measurements })
 }
 
+let landmarkIndex: LandmarkIndex | undefined
 self.addEventListener('message', async (event: MessageEvent<Request>) => {
   const request = event.data
   try {
-    if (request.type === 'load') { disposable = request.releaseAfterSearch ?? false; await load(request.manifestUrl, request.expectedIdentity, request.topologyOnly, request.compactDrawing) }
+    if (request.type === 'load') { landmarkIndex = undefined; disposable = request.releaseAfterSearch ?? false; await load(request.manifestUrl, request.expectedIdentity, request.topologyOnly, request.compactDrawing) }
     else {
       if (!graph || !manifest) throw new Error('The national graph has not finished loading')
+      if (request.algorithm === 'alt' && (!manifest.id.startsWith('ch-') || request.objective === 'time')) throw new Error('ALT trial supports the Swiss distance connectivity graph only')
       if (request.algorithm === 'multisource' && !request.sources) throw new Error('Three sources are required for a territory study')
       const sourceEndpoints = request.sources ? snapSources(graph, request.sources) : undefined
       const endpoints = sourceEndpoints ? { start: sourceEndpoints.sources[0], goal: sourceEndpoints.sources[1], snapMs: sourceEndpoints.snapMs, snapping: undefined } : snapEndpoints(graph, request.start, request.goal)
-      if (request.algorithm === 'bidirectional' || request.algorithm === 'astar' || request.algorithm === 'weighted-astar' || request.algorithm === 'bidirectional-astar' || request.algorithm === 'bidirectional-breadth-first') reverse ??= compileReverse(graph)
+      if (request.algorithm === 'bidirectional' || request.algorithm === 'astar' || request.algorithm === 'weighted-astar' || request.algorithm === 'alt' || request.algorithm === 'bidirectional-astar' || request.algorithm === 'bidirectional-breadth-first') reverse ??= compileReverse(graph)
       if (disposable) {
         // Eligibility and weak components have served their snapping purpose;
         // the directed CSR and reverse graph already contain all routing arcs.
@@ -121,7 +124,9 @@ self.addEventListener('message', async (event: MessageEvent<Request>) => {
       const weighted = timeObjective ? timeGraph(graph, manifest.classes) : undefined
       const optimizes = !['greedy', 'depth-first', 'breadth-first', 'bidirectional-breadth-first'].includes(request.algorithm)
       const searchGraph = weighted && optimizes ? weighted : graph
-      const result = request.algorithm === 'spanning-tree' ? spanningTree(graph, endpoints.start, endpoints.snapMs, endpoints.goal) : request.algorithm === 'multisource' && sourceEndpoints ? multisource(searchGraph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar' || request.algorithm === 'bidirectional-breadth-first') && reverse
+      const cachedLandmarks = !!landmarkIndex
+      if (request.algorithm === 'alt' && reverse) landmarkIndex ??= buildLandmarks(graph, reverse)
+      const result = request.algorithm === 'alt' && reverse && landmarkIndex ? alt(graph, reverse, landmarkIndex, endpoints.start, endpoints.goal, endpoints.snapMs, cachedLandmarks) : request.algorithm === 'spanning-tree' ? spanningTree(graph, endpoints.start, endpoints.snapMs, endpoints.goal) : request.algorithm === 'multisource' && sourceEndpoints ? multisource(searchGraph, sourceEndpoints.sources, sourceEndpoints.snapMs) : (request.algorithm === 'bidirectional' || request.algorithm === 'bidirectional-astar' || request.algorithm === 'bidirectional-breadth-first') && reverse
         ? bidirectional(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs, request.algorithm === 'bidirectional-astar', request.algorithm === 'bidirectional-breadth-first')
         : request.algorithm === 'weighted-astar' && reverse ? weightedAstar(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'astar' && reverse ? astar(searchGraph, reverse, endpoints.start, endpoints.goal, endpoints.snapMs)
           : request.algorithm === 'time-dijkstra' ? timeDijkstra(searchGraph, manifest.classes, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'breadth-first' ? breadthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'depth-first' ? depthFirst(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : request.algorithm === 'greedy' ? greedy(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs) : dijkstra(searchGraph, endpoints.start, endpoints.goal, endpoints.snapMs)

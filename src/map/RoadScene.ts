@@ -44,6 +44,7 @@ const fragmentShader = `
   uniform float uCompact;
   uniform float uDepth;
   uniform float uWeighted;
+  uniform float uAlt;
   uniform float uTree;
   uniform float uTimeAstar;
   uniform float uBreadth;
@@ -76,6 +77,7 @@ const fragmentShader = `
     if (uTree > .5) { quiet = vec3(.40, .25, .20); bright = vec3(1., .64, .40); }
     if (uBreadth > .5) { quiet = vec3(.65, .43, .12); bright = vec3(1., .87, .43); }
     if (uBreadth > 1.5) { quiet = vec3(.48, .36, .68); bright = vec3(.85, .76, 1.); }
+    if (uAlt > .5) { quiet = mix(vec3(.22, .50, .48), vec3(.42, .72, .64), vGoalProximity); bright = mix(vec3(.42, .95, .84), vec3(.88, 1., .95), vGoalProximity); }
     if (uWeighted > .5) { quiet = mix(vec3(.55, .26, .44), vec3(.76, .43, .63), vGoalProximity); bright = mix(vec3(1., .55, .75), vec3(1., .87, .94), vGoalProximity); }
     if (uDepth > .5) { quiet = vec3(.55, .35, .75); bright = vec3(.90, .75, 1.); }
     if (uTerritories > .5) {
@@ -170,7 +172,7 @@ export class RoadScene {
     this.proximityTexture.needsUpdate = true
     this.flashMaterial.uniforms.uPixelRatio.value = this.renderer.getPixelRatio()
     this.material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, glslVersion: THREE.GLSL3,
-      uniforms: { uWeighted: { value: 0 }, uTree: { value: 0 }, uTimeAstar: { value: 0 }, uBreadth: { value: 0 }, uDepth: { value: 0 }, uCompact: { value: 0 }, uGreedy: { value: 0 }, uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
+      uniforms: { uAlt: { value: 0 }, uWeighted: { value: 0 }, uTree: { value: 0 }, uTimeAstar: { value: 0 }, uBreadth: { value: 0 }, uDepth: { value: 0 }, uCompact: { value: 0 }, uGreedy: { value: 0 }, uSources: { value: this.sourceTexture }, uTerritories: { value: 0 }, uTerritoryComplete: { value: 0 }, uTimes: { value: this.texture }, uBackwardTimes: { value: this.backwardTexture }, uBidirectional: { value: 0 }, uGoalProximity: { value: this.proximityTexture }, uAstar: { value: 0 }, uTextureSize: { value: new THREE.Vector2(1, 1) }, uEvent: { value: 0 }, uTotal: { value: 1 } },
       transparent: true, blending: THREE.AdditiveBlending, depthTest: false, depthWrite: false,
     })
     host.appendChild(this.renderer.domElement)
@@ -387,7 +389,7 @@ export class RoadScene {
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uBackwardTimes.value = this.backwardTexture
     this.material.uniforms.uGoalProximity.value = this.proximityTexture
     this.material.uniforms.uSources.value = this.sourceTexture; this.material.uniforms.uTerritories.value = 0; this.material.uniforms.uTerritoryComplete.value = 0
-    this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0; this.material.uniforms.uGreedy.value = 0; this.material.uniforms.uWeighted.value = 0; this.material.uniforms.uDepth.value = 0; this.material.uniforms.uBreadth.value = 0; this.material.uniforms.uTree.value = 0; this.material.uniforms.uTimeAstar.value = 0; this.routeMaterial.uniforms.uEmphasis.value = 1
+    this.material.uniforms.uBidirectional.value = 0; this.material.uniforms.uAstar.value = 0; this.material.uniforms.uGreedy.value = 0; this.material.uniforms.uAlt.value = 0; this.material.uniforms.uWeighted.value = 0; this.material.uniforms.uDepth.value = 0; this.material.uniforms.uBreadth.value = 0; this.material.uniforms.uTree.value = 0; this.material.uniforms.uTimeAstar.value = 0; this.routeMaterial.uniforms.uEmphasis.value = 1
     this.material.uniforms.uTextureSize.value.set(1, 1); this.material.uniforms.uEvent.value = 0
     this.focusEvents = undefined; this.focusCoordinates = undefined; this.focusPoint = undefined; this.tip.hidden = true; this.tip.dataset.event = '0'
     this.points = []; this.markers.replaceChildren(); this.dirty = true
@@ -407,6 +409,8 @@ export class RoadScene {
     const greedy = result.algorithm === 'greedy-best-first/1', depthFirst = result.algorithm === 'depth-first/1'
     this.material.uniforms.uBreadth.value = result.algorithm === 'bidirectional-breadth-first/1' ? 2 : result.algorithm === 'breadth-first/1' ? 1 : 0
     this.material.uniforms.uDepth.value = depthFirst ? 1 : 0
+    this.material.uniforms.uAlt.value = result.landmarks ? 1 : 0
+    this.tip.classList.toggle('alt-tip', !!result.landmarks)
     this.material.uniforms.uWeighted.value = result.weighting ? 1 : 0
     this.tip.classList.toggle('weighted-tip', !!result.weighting)
     this.tip.classList.toggle('depth-first-tip', depthFirst)
@@ -444,13 +448,13 @@ export class RoadScene {
     this.material.uniforms.uGoalProximity.value = this.proximityTexture; this.material.uniforms.uAstar.value = result.goalProximity ? 1 : 0
     this.material.uniforms.uTimes.value = this.texture; this.material.uniforms.uTextureSize.value.set(textures.width, textures.height)
     this.events = traceLength(result); this.material.uniforms.uTotal.value = this.events
-    this.points = result.sources ?? [result.start, result.goal]; this.markers.replaceChildren()
+    this.points = result.sources ?? [result.start, result.goal, ...(result.landmarks?.nodes.map((point, i) => ({ ...point, name: `ALT landmark ${i + 1}` })) ?? [])]; this.markers.replaceChildren()
     this.markers.classList.toggle('bidirectional', !!result.backwardTimes)
     this.markers.classList.toggle('astar', !!result.goalProximity)
     this.markers.classList.toggle('territories', !!result.sources)
     this.markers.classList.toggle('greedy', greedy)
     for (const [i, point] of this.points.entries()) {
-      const element = document.createElement('div'); element.className = `map-marker marker-${i}`
+      const element = document.createElement('div'); element.className = `map-marker marker-${i}${result.landmarks && i >= 2 ? ' landmark-marker' : ''}`; element.title = point.name
       const dot = document.createElement('span'); dot.className = 'marker-dot'
       const label = document.createElement('span'); label.textContent = point.name
       element.append(dot, label); this.markers.appendChild(element)

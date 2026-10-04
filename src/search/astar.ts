@@ -3,23 +3,8 @@ import { arcSource, type ReverseGraph } from './bidirectional.ts'
 import { releaseBuffers } from './release-buffers.ts'
 import { Heap, singleFrontSearch } from './engine.ts'
 
-// Coordinates and costs have independent rounding. Enforce h(u) <= c(u,v)+h(v)
-// on the actual directed graph instead of assuming a geographic estimate is safe.
-export function prepareHeuristic(graph: Graph, reverse: ReverseGraph, start: number, goal: number, backwards = false, compact = false): { potential: Float64Array | Uint32Array; record: HeuristicRecord } {
-  const begun = performance.now(), n = graph.xy.length / 2
-  let latitude = 0, minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
-  for (let i = 0; i < n; i++) {
-    const x = graph.xy[i * 2], y = graph.xy[i * 2 + 1]
-    latitude = Math.max(latitude, Math.abs(y)); minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y)
-  }
-  const longitudeScale = Math.cos(latitude / 100000 * Math.PI / 180)
-  const units = 111.1950802, gx = graph.xy[goal * 2], gy = graph.xy[goal * 2 + 1]
-  // Bounds prove every integer estimate fits, including after corrections.
-  // Signed differences can then retain exact half-centimetres in balanced A*.
-  const maximum = Math.floor(Math.hypot(Math.max(Math.abs(minX - gx), Math.abs(maxX - gx)) * longitudeScale, Math.max(Math.abs(minY - gy), Math.abs(maxY - gy))) * units)
-  const potential = compact && maximum <= 0x7ffffffe ? new Uint32Array(n) : new Float64Array(n)
-  for (let i = 0; i < n; i++) potential[i] = Math.floor(Math.hypot((graph.xy[i * 2] - gx) * longitudeScale, graph.xy[i * 2 + 1] - gy) * units)
-  const initialStartCm = potential[start], changed = new Uint8Array(n), heap = new Heap()
+export function enforcePotential(graph: Graph, reverse: ReverseGraph, potential: Float64Array | Uint32Array, backwards = false) {
+  const n = graph.xy.length / 2, changed = new Uint8Array(n), heap = new Heap()
   let correctedNodes = 0
   function lower(node: number, candidate: number) {
     if (candidate >= potential[node]) return
@@ -42,6 +27,26 @@ export function prepareHeuristic(graph: Graph, reverse: ReverseGraph, start: num
     }
   }
   releaseBuffers(changed, heap.nodes, heap.scores)
+  return correctedNodes
+}
+
+// Coordinates and costs have independent rounding. Enforce h(u) <= c(u,v)+h(v)
+// on the actual directed graph instead of assuming a geographic estimate is safe.
+export function prepareHeuristic(graph: Graph, reverse: ReverseGraph, start: number, goal: number, backwards = false, compact = false): { potential: Float64Array | Uint32Array; record: HeuristicRecord } {
+  const begun = performance.now(), n = graph.xy.length / 2
+  let latitude = 0, minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  for (let i = 0; i < n; i++) {
+    const x = graph.xy[i * 2], y = graph.xy[i * 2 + 1]
+    latitude = Math.max(latitude, Math.abs(y)); minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y)
+  }
+  const longitudeScale = Math.cos(latitude / 100000 * Math.PI / 180)
+  const units = 111.1950802, gx = graph.xy[goal * 2], gy = graph.xy[goal * 2 + 1]
+  // Bounds prove every integer estimate fits, including after corrections.
+  // Signed differences can then retain exact half-centimetres in balanced A*.
+  const maximum = Math.floor(Math.hypot(Math.max(Math.abs(minX - gx), Math.abs(maxX - gx)) * longitudeScale, Math.max(Math.abs(minY - gy), Math.abs(maxY - gy))) * units)
+  const potential = compact && maximum <= 0x7ffffffe ? new Uint32Array(n) : new Float64Array(n)
+  for (let i = 0; i < n; i++) potential[i] = Math.floor(Math.hypot((graph.xy[i * 2] - gx) * longitudeScale, graph.xy[i * 2 + 1] - gy) * units)
+  const initialStartCm = potential[start], correctedNodes = enforcePotential(graph, reverse, potential, backwards)
   return { potential, record: { version: 'feasible-planar-distance/1', preparationMs: performance.now() - begun, correctedNodes, longitudeScale, initialStartCm, startLowerBoundCm: potential[start] } }
 }
 

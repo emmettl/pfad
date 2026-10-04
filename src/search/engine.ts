@@ -72,7 +72,7 @@ export function dijkstra(graph: Graph, start: Endpoint, goal: Endpoint, snapMs =
 
 export function singleFrontSearch(graph: Graph, start: Endpoint, goal: Endpoint, snapMs = 0, estimate?: { potential: Float64Array | Uint32Array; record: HeuristicRecord; ordering?: 'astar'; weight?: number } | { potential: Float64Array; record: ProximityHeuristicRecord; ordering: 'greedy' }, releaseEstimate = false, edgeCost?: (edge: number) => number): SearchResult {
   const begun = performance.now(), greedy = estimate?.ordering === 'greedy', weight = estimate && estimate.ordering !== 'greedy' ? estimate.weight ?? 1 : 1, weighted = weight > 1
-  const focused = greedy || weighted || !!estimate && graph.routingObjective === 'time'
+  const focused = greedy || weighted || estimate?.record.version === 'feasible-landmark-distance/1' || !!estimate && graph.routingObjective === 'time'
   const n = graph.xy.length / 2, e = graph.from.length
   const distance = new Float64Array(n).fill(Infinity)
   const predecessor = new Int32Array(n).fill(-1), previousEdge = new Int32Array(n).fill(-1)

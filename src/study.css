@@ -206,3 +206,8 @@ footer a { text-decoration: none; pointer-events: auto; }
 .playback-panel:has(.algorithm-menu) { z-index: 6; }
 
 .search-tip.weighted-tip { background: #ffe3ef; box-shadow: 0 0 8px 3px #f5a0c6, 0 0 25px 9px #e874a466; }
+
+.search-tip.alt-tip { background: #e0fff3; box-shadow: 0 0 8px 3px #83eccb, 0 0 25px 9px #4bdcaf66; }
+.landmark-marker { opacity: .55; }
+.landmark-marker .marker-dot { width: 4px; height: 4px; border-radius: 0; transform: rotate(45deg); background: #bdb0dd; border-color: #bdb0dd; box-shadow: none; }
+.landmark-marker span:last-child { display: none; }
