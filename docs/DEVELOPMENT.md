@@ -31,7 +31,7 @@ Use a separate `PFAD_PREVIEW_PORT` when another server already uses port 4188.
 [TESTING.md](TESTING.md) explains which checks need browser APIs and how local
 and CI concurrency are bounded.
 
-Public `@motionstudies/*` dependencies are pinned to `0.1.0-alpha.31` and consumed
+Public `@motionstudies/*` dependencies are pinned to `0.1.0-alpha.33` and consumed
 through declared exports. `@driftbox/rack@0.1.0` is a development dependency for
 rendering music. No sibling repository or copied shared implementation is used.
 The GitHub repository is public; npm's `private: true` prevents publishing the
