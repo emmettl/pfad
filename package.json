@@ -8,7 +8,7 @@
   "engines": {
     "node": ">=24.0.0"
   },
-  "packageManager": "npm@11.21.0",
+  "packageManager": "npm@11.21.1",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 4188",
     "build": "tsc -p . && vite build",
@@ -36,23 +36,23 @@
     "@motionstudies/core": "0.1.0-alpha.31",
     "@motionstudies/three": "0.1.0-alpha.31",
     "@motionstudies/web": "0.1.0-alpha.31",
-    "@react-three/fiber": "9.8.1",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
+    "@react-three/fiber": "9.8.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "three": "0.186.1"
   },
   "devDependencies": {
     "@babel/parser": "7.29.9",
     "@driftbox/rack": "0.1.0",
     "@motionstudies/data": "0.1.0-alpha.31",
-    "@playwright/test": "1.63.0",
+    "@playwright/test": "1.64.1",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@types/three": "0.186.0",
-    "@vitejs/plugin-react": "6.1.1",
-    "oxlint": "1.86.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "oxlint": "1.88.0",
     "typescript": "7.0.2",
-    "vite": "8.3.1",
-    "vitest": "5.0.3"
+    "vite": "8.3.4",
+    "vitest": "5.0.5"
   }
 }
