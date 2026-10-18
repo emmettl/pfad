@@ -20,7 +20,7 @@ PFAD is not a validated driving route planner.
 
 ## Run locally
 
-Use Node 24 and npm 11.21.0.
+Use Node 24 and npm 11.21.1.
 
 ```sh
 npm ci

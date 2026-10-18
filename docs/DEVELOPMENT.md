@@ -1,6 +1,6 @@
 # Development
 
-Use Node 24 and npm 11.21.0, as pinned by `.nvmrc` and `package.json`.
+Use Node 24 and npm 11.21.1, as pinned by `.nvmrc` and `package.json`.
 Offline data tools require Python 3.11 or newer and
 `scripts/data/requirements.txt`. Ordinary development does not download OSM.
 
