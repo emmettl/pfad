@@ -42,7 +42,6 @@
     "three": "0.186.1"
   },
   "devDependencies": {
-    "@babel/parser": "7.29.9",
     "@driftbox/rack": "0.1.0",
     "@motionstudies/data": "0.1.0-alpha.33",
     "@playwright/test": "1.64.1",
