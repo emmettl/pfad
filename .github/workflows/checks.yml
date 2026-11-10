@@ -1,7 +1,5 @@
 name: Check PFAD
 on:
-  push:
-    branches-ignore: [main]
   pull_request:
   workflow_dispatch:
   workflow_call:
@@ -17,8 +15,9 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm install --global npm@11.21.1 --ignore-scripts
+      - run: npm install --global npm@12.2.2 --ignore-scripts
       - run: npm ci
+      - run: npm run check:stack
       - run: npm run check
       - uses: actions/upload-artifact@v7
         with:
@@ -40,8 +39,9 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm install --global npm@11.21.1 --ignore-scripts
+      - run: npm install --global npm@12.2.2 --ignore-scripts
       - run: npm ci
+      - run: npm run check:stack
       - uses: actions/download-artifact@v8
         with:
           name: pfad-preview
