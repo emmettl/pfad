@@ -45,4 +45,4 @@ found route, which may be longer than the shortest route; that distinction is
 labelled in the study. It joins the ambient journey rotation while territory
 studies remain after every four journeys. [Greedy evidence](docs/evidence/greedy-2026-10-01/README.md).
 
-Development targets Node 26 and npm 12.2.2. Shared Motion Studies packages are pinned to 1.0.0; `npm run check:stack` validates the adopted baseline through `@motionstudies/tooling`. Edition-specific data, boundary and publication checks remain local.
+Development targets Node 26 and npm 12.2.2. Shared Motion Studies packages are pinned to 1.2.0; `npm run check:stack` validates the adopted baseline through `@motionstudies/tooling`. Edition-specific data, boundary and publication checks remain local.

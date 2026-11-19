@@ -1,15 +1,6 @@
-import type { Chunk, StudyManifest } from './contracts.ts'
+import type { Chunk, LoadMeasurements, StudyManifest } from './contracts.ts'
+export type { LoadMeasurements } from './contracts.ts'
 
-export interface LoadMeasurements {
-  version: 'verified-chunk-loader/1'
-  networkBytes: number
-  cachedBytes: number
-  cacheAvailable: boolean
-  verificationMs: number
-  decodeMs: number
-  compileMs: number
-  totalMs: number
-}
 export const ROAD_CACHE_NAME = 'pfad-road-chunks-v1'
 const CACHE_BUDGET = 256 * 1024 * 1024
 const CONCURRENCY = 2
